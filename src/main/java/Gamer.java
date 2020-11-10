@@ -8,7 +8,7 @@ public class Gamer extends Account {
 				 )
 	{
 		super(firstName, lastName, username,
-				accountID, password, email, phoneNumber, daysSinceRegistration, gamesLog, friends, friendsRequestlist,
+				accountID, password, email, phoneNumber
 				);
 
 		this.money = money;
