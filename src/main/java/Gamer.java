@@ -1,18 +1,19 @@
+import java.util.ArrayList;
+
 public class Gamer extends Account {
-    private String firstname, lastname, username, accountId, password, email, phoneNumber, daysSinceRegistration, friends;
-    private Gameslog gameslog;
+	private String firstname, lastname, username, accountId, password, email, phoneNumber;
+	private Gameslog gameslog; //fixme:add new()
 	private int score = 0;
 	private int money;
 	private int DaysSinceRegistration = 0;
+	private ArrayList<Account> friends = new ArrayList<>();
 
+	public Gamer( String firstname, String lastname, String username, String accountID, String password, String email, String phoneNumber,int money)
 
-	public Gamer(String firstName, String lastName, String username, String accountID, String password, String email, String phoneNumber, Gameslog gameslog, int daysSinceRegistration, int money, int score, String friends
-				 )
 	{
-		super(firstName, lastName, username,
-				accountID, password, email, phoneNumber
-				);
-
+		super( firstname, lastname, username, accountID, password, email, phoneNumber);
 		this.money = money;
 	}
+
 }
+
