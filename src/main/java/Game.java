@@ -12,6 +12,7 @@ public abstract class Game {
     public Game(int gameID, String name) {
         this.gameID = gameID;
         this.name = name;
+        listOfGames.add(this);
     }
 
     //getters and setters
