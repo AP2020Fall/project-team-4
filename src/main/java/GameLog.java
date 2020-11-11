@@ -1,18 +1,15 @@
 public class GameLog{
 
    //constructor
-    public GameLog(int logID) {
-        this.playedCount = playedCount;
-        this.winsCount = winsCount;
+    public GameLog(int logID){
         this.logID = logID;
-        this.point = point;
     }
 
     //attributes
-    private int playedCount;
-    private int winsCount;
+    private int playedCount = 0;
+    private int winsCount = 0;
     private int logID;
-    private double point;
+    private double point = 0;
 
     //methods
 

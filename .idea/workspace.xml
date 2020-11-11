@@ -22,9 +22,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c668f342-a54b-462c-b6ed-5d506defc71b" name="Default Changelist" comment="">
-      <changelist_data name="elahemrtz" email="62252751+elahemrtz@users.noreply.github.com" />
+    <list default="true" id="c668f342-a54b-462c-b6ed-5d506defc71b" name="Default Changelist" comment="moved AllGamesmenu and GameMenu methods to main">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AllGamesMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameMenu.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +43,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="elahemrtz &lt;62252751+elahemrtz@users.noreply.github.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
@@ -68,6 +77,28 @@
       <option name="presentableId" value="Default" />
       <updated>1605009567503</updated>
     </task>
+    <task id="LOCAL-00001" summary="added classes : Game , AllGamesMenu , GameLog and GameMenu">
+      <created>1605024435971</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1605024435973</updated>
+    </task>
+    <task id="LOCAL-00002" summary="made classes Game , AllGamesMenu and GameMenu abstract&#10;made method setScores abstract&#10;added method getGameByID in class Game">
+      <created>1605111182991</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1605111182991</updated>
+    </task>
+    <task id="LOCAL-00003" summary="moved AllGamesmenu and GameMenu methods to main">
+      <created>1605113818849</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1605113818849</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -81,14 +112,28 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added classes : Game , AllGamesMenu , GameLog and GameMenu" />
+    <MESSAGE value="made classes Game , AllGamesMenu and GameMenu abstract&#10;made method setScores abstract&#10;added method getGameByID in class Game" />
+    <MESSAGE value="moved AllGamesmenu and GameMenu methods to main" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved AllGamesmenu and GameMenu methods to main" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1605020017735">
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1605110554889">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1605020017735" />
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1605110554889" />
     <state x="163" y="0" key="SettingsEditor" timestamp="1605017944799">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1605017944799" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1605113822785">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605113822785" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605025522182">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1605025522182" />
   </component>
 </project>

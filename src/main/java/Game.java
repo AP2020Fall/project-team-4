@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-abstract class Game {
+public abstract class Game {
 
     //attributes
     public static ArrayList<Game> listOfGames = new ArrayList<Game>();
@@ -34,7 +34,7 @@ abstract class Game {
 
     //other methods
 
-    abstract void setScores(int gameID, String name);
+    public abstract void setScores(int gameID, String name);
 
     public void executeGame(int gameID, String name) {}
 
