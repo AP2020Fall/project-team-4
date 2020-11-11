@@ -1,4 +1,4 @@
-public class AllGamesMenu {
+abstract class AllGamesMenu {
 
     //methods
     public static void listGames(){}

@@ -1,4 +1,4 @@
-public class GameMenu {
+abstract class GameMenu {
 
 
     //methods

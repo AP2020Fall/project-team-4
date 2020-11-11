@@ -1,8 +1,11 @@
-class GameLog extends Game{
+public class GameLog{
 
-    //super constructor
-    public GameLog(int gameID, String name) {
-        super(gameID, name);
+   //constructor
+    public GameLog(int logID) {
+        this.playedCount = playedCount;
+        this.winsCount = winsCount;
+        this.logID = logID;
+        this.point = point;
     }
 
     //attributes
@@ -48,5 +51,4 @@ class GameLog extends Game{
         this.point = point;
     }
 
-    //TODO : getGameByLog method
 }

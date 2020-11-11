@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Game {
+abstract class Game {
 
     //attributes
     public static ArrayList<Game> listOfGames = new ArrayList<Game>();
@@ -34,9 +34,17 @@ public class Game {
 
     //other methods
 
-    public void setScores(int gameID, String name) {}
+    abstract void setScores(int gameID, String name);
 
     public void executeGame(int gameID, String name) {}
+
+    public Game getGameByID(int gameID){
+        for(Game game : listOfGames){
+            if(game.getGameID()==gameID){return game;}
+        }
+    return null;}
+
+    public boolean doesIDExist(int gameID){}
 
     //TODO : getGameByID method
 }
