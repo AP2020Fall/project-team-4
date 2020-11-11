@@ -35,9 +35,9 @@ public abstract class Game {
 
     //other methods
 
-    public abstract void setScores(int gameID, String name);
+    public abstract void setScores();
 
-    public void executeGame(int gameID, String name) {}
+    public abstract void executeGame();
 
     public Game getGameByID(int gameID){
         for(Game game : listOfGames){
