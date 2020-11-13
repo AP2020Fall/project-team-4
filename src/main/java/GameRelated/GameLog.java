@@ -1,3 +1,5 @@
+package GameRelated;
+
 public class GameLog{
 
    //constructor

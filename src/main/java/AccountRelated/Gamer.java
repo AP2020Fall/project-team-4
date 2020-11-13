@@ -1,4 +1,6 @@
-public class Gamer extends Account{
+package AccountRelated;
+
+public class Gamer extends Account {
 
 	private int score = 0;
 	private int money;
