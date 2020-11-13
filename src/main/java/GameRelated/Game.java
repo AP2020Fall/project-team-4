@@ -2,6 +2,8 @@ package GameRelated;
 
 import java.util.ArrayList;
 
+import src.main.java.IndependentClasses._Interactor.java
+
 public abstract class Game {
 
 	//attributes
@@ -11,8 +13,8 @@ public abstract class Game {
 
 	//constructor
 
-	public Game (int gameID, String name) {
-		this.gameID = gameID;
+	public Game (String name) {
+		this.gameID = IDGe;
 		this.name = name;
 		listOfGames.add(this);
 	}
