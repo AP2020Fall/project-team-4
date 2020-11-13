@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="520.25" y="539.0">GameRelated.Game1</node>
+    <node x="324.0" y="0.0">AccountRelated.Account</node>
+    <node x="595.0" y="192.0">GameRelated.Game</node>
+    <node x="318.0" y="291.5">AccountRelated.Gamer</node>
+    <node x="11.5" y="0.0">Menu</node>
+    <node x="-268.3636363636364" y="284.4342245989305">_Interactor</node>
+    <node x="1132.0" y="0.0">IDGenerator</node>
+    <node x="881.0" y="0.0">GameRelated.GameLog</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="_Interactor" target="Menu">
+      <point x="-68.25" y="-555.0" />
+      <point x="68.25" y="321.0" />
+      <point x="74.0" y="321.0" />
+      <point x="-62.5" y="148.0" />
+    </edge>
+    <edge source="AccountRelated.Gamer" target="AccountRelated.Account">
+      <point x="-64.25" y="-49.0" />
+      <point x="382.25" y="167.0" />
+      <point x="385.25" y="167.0" />
+      <point x="-61.25" y="71.0" />
+    </edge>
+    <edge source="GameRelated.Game1" target="GameRelated.Game">
+      <point x="0.0" y="-148.5" />
+      <point x="-60.25" y="148.5" />
+    </edge>
+    <edge source="GameRelated.Game1" target="AccountRelated.Gamer">
+      <point x="-90.0" y="-148.5" />
+      <point x="565.25" y="514.0" />
+      <point x="446.5" y="514.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6334688346883469" x="699.5" y="718.0" />
+  <SelectedNodes>
+    <node>_Interactor</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>Production</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
