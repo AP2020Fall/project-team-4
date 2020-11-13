@@ -1,53 +1,70 @@
 package GameRelated;
 
-public class GameLog{
+import java.util.LinkedList;
 
-   //constructor
-    public GameLog(int logID){
-        this.logID = logID;
-    }
+public class GameLog {
 
-    //attributes
-    private int playedCount = 0;
-    private int winsCount = 0;
-    private int logID;
-    private double point = 0;
+	private String logID;
+	private double point = 0;
 
-    //methods
+	private LinkedList<Game> games = new LinkedList<>();
 
-    public void showBoard(int gameID , int logID){}   //TODO : is name needed?
+	public GameLog () {
+		this.logID = IDG;
+	}
 
-    //setters and getters
-    public int getPlayedCount() {
-        return playedCount;
-    }
+	public void addToLog (Game game) {
+		games.addLast(game);
+	}
 
-    public void setPlayedCount(int playedCount) {
-        this.playedCount = playedCount;
-    }
+	public int getPlayedCount () {
+		return games.size();
+	}
 
-    public int getWinsCount() {
-        return winsCount;
-    }
+	public int getPlayedCount (String gameName) {
+		return (int) games.stream()
+				.filter(game -> game.getGameName().equals(gameName))
+				.count();
+	}
 
-    public void setWinsCount(int winsCount) {
-        this.winsCount = winsCount;
-    }
+	public int getWinsCount () {
+		return games.stream()
+				.filter(game ->) // FIXME: count games that the gamer w this log has won
+				.count();
+	}
 
-    public int getLogID() {
-        return logID;
-    }
+	public int getWinsCount (String gameName) {
+		return games.stream()
+				.filter(game -> game.getGameName().equals(gameName) && ) // FIXME: count games that the gamer w this log has won
+				.count();
+	}
 
-    public void setLogID(int logID) {
-        this.logID = logID;
-    }
+	public String getLogID () {
+		return logID;
+	}
 
-    public double getPoint() {
-        return point;
-    }
+	public double getPoint () {
+		return point;
+	}
 
-    public void setPoint(double point) {
-        this.point = point;
-    }
+	public double getPoints (String gameName) {
+		// TODO: 11/13/2020 AD
+		// finding the type of game based on name
+		// search in the scoreboard of the game for the gamer username
+		// calculte score based on the stats
+		return 0;
+	}
 
+	public int getLevel (String gameName) {
+		// TODO: 11/13/2020 AD
+		return 0;
+	}
+
+	public void setPoint (double point) {
+		this.point = point;
+	}
+
+	public LinkedList<Game> getGames () {
+		return games;
+	}
 }

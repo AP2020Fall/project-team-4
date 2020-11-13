@@ -11,5 +11,11 @@ public abstract class Account {
 		// TODO: 11/10/2020 AD
 	}
 
+	public void passDay () { // for adding to daysSinceRegistration
+		// TODO: 11/13/2020 AD
+	}
 
+	public String getUsername () {
+		return username;
+	}
 }

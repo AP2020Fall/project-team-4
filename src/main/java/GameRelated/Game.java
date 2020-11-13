@@ -1,40 +1,26 @@
 package GameRelated;
 
-import java.util.ArrayList;
+import AccountRelated.Gamer;
 
-import src.main.java.IndependentClasses._Interactor.java
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class Game {
 
 	//attributes
-	public static ArrayList<Game> listOfGames = new ArrayList<>();
-	private int gameID;
-	private String name;
+	private final int gameID;
+
+	private HashMap<Gamer, Integer> players_pts = new HashMap<>();
+	private int turn = 0;
+	private GameConclusion conclusion = GameConclusion.IN_SESSION;
+	private LocalDateTime dateGameEnded;
 
 	//constructor
 
-	public Game (String name) {
+	public Game (ArrayList<Gamer> players) {
 		this.gameID = IDGe;
-		this.name = name;
-		listOfGames.add(this);
-	}
-
-	//getters and setters
-
-	public int getGameID () {
-		return gameID;
-	}
-
-	public void setGameID (int gameID) {
-		this.gameID = gameID;
-	}
-
-	public String getName () {
-		return name;
-	}
-
-	public void setName (String name) {
-		this.name = name;
+		players.forEach(player -> this.players_pts.put(player, 0));
 	}
 
 	//other methods
@@ -43,14 +29,50 @@ public abstract class Game {
 
 	public abstract void executeGame ();
 
-	public Game getGameByID (int gameID) {
-		for (Game game : listOfGames) {
-			if (game.getGameID() == gameID) {return game;}
-		}
-		return null;
-	}
+	public abstract void concludeGame ();
+
+	public abstract boolean gameEnded ();
+
+	public abstract String[][] getBoard ();
 
 	public boolean doesIDExist (int gameID) {return false;}
 
-	//TODO : getGameByID method
+	//getters and setters
+
+	public abstract String getGameName ();
+
+	public int getGameID () {
+		return gameID;
+	}
+
+	public HashMap<Gamer, Integer> getPlayers_pts () {
+		return players_pts;
+	}
+
+	public boolean gameNameIsValid (String gameName) {
+		// TODO: 11/13/2020 AD
+		return false;
+	}
+
+	public GameConclusion getConclusion () {
+		return conclusion;
+	}
+
+	public Gamer getWinner () {
+		// TODO: 11/13/2020 AD
+		return null;
+	}
+
+	public boolean playerWUsernameWon (String username) {
+		if (conclusion == GameConclusion.IN_SESSION || conclusion == GameConclusion.DRAW) return false;
+
+		return getWinner().getUsername().equals(username);
+	}
+}
+
+enum GameConclusion {
+	IN_SESSION,
+	DRAW,
+	PLAYER1_WIN,
+	PLAYER2_WIN
 }

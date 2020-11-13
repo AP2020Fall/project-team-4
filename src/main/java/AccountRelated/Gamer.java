@@ -10,4 +10,6 @@ public class Gamer extends Account {
 		super(firstName, lastName, username);
 		this.money = money;
 	}
+
+	// FIXME: if needed add a method that gets the gamer account that a given gameLog belongs to
 }
