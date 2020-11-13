@@ -1,10 +1,14 @@
-import java.io.IOException;
+package IndependentClasses;
+
+import AccountRelated.Account;
+
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Interactor {
+public class _Interactor {
 
 	// regexes fixme
 	 static final String
@@ -61,21 +65,30 @@ public class Interactor {
 			showPtsGained = "Show points"; // todo
 
 	private static Menu currentMenu = Menu.REGISTER_LOGIN_MENU; // FIXME: initialize
+	private static Account accInUse = null;
 
 	// io stuff
 	private static String command;
 	private static Scanner scanner = new Scanner(System.in);
 
-	public static void main (String[] args) throws IOException {
+	public static void main (String[] args) {
 
 		while (scanner.hasNext()) {
 			command = scanner.nextLine().trim();
+
+			if (command.matches(gotoAccMenu)) gotoAccMenuCommand();
+			switch (currentMenu) {
+
+			}
 
 			// TODO bunch of ifs to check input
 		}
 	}
 
-
+	private static void gotoAccMenuCommand () {
+		if (accInUse == null)
+			System.out.println();
+	}
 
 	private static Matcher getMatcher (String text, String regex) {
 		return Pattern.compile(regex).matcher(text);
@@ -90,7 +103,7 @@ enum Menu {
 	FRIENDS_PAGE,
 	REGISTER_LOGIN_MENU,
 	GAME_MENU; // fixme might need adding one for each game
-	private static LinkedList<Menu> menuHistory = new LinkedList<>();
+	private static final LinkedList<Menu> menuHistory = new LinkedList<>();
 
 	public void newMenu () {
 		menuHistory.addLast(this);
@@ -99,6 +112,34 @@ enum Menu {
 	public static Menu backAndReturnBack () {
 		menuHistory.removeLast();
 		return menuHistory.getLast();
+	}
+
+	/**
+	 *
+	 * @return true if we are on our first menu
+	 */
+	public static boolean canBack () {
+		return menuHistory.size() !=0;
+	}
+
+}
+
+class IDGenerator {
+	private static final LinkedList<String> allIDsGenerated = new LinkedList<>();
+
+	public static String generateNext () {
+		String result;
+		// gets randomly generated numbers and if it hasnt been used before returns it
+		do {
+			result = String.format(
+					"%06d", // adds zeros before the random number if it has less than 6 digits
+					new Random(System.nanoTime()).nextInt((int) Math.pow(10, 6)));
+
+		} while (allIDsGenerated.contains(result));
+
+		allIDsGenerated.addLast(result);
+
+		return allIDsGenerated.getLast();
 	}
 
 }
