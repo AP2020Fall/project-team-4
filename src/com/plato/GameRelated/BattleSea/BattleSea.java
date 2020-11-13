@@ -1,7 +1,7 @@
-package GameRelated.BattleSea;
+package plato.GameRelated.BattleSea;
 
-import AccountRelated.Gamer;
-import GameRelated.Game;
+import plato.AccountRelated.Gamer;
+import plato.GameRelated.Game;
 
 import java.util.ArrayList;
 

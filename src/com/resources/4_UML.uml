@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="295.0" y="1216.0">plato.GameRelated.GameConclusion</node>
+    <node x="224.0" y="360.0">plato.GameRelated.Game</node>
+    <node x="504.0" y="0.0">plato.GameRelated.BattleSea.BattleSea</node>
+    <node x="0.0" y="1216.0">plato.Menu</node>
+    <node x="819.0" y="0.0">plato._Interactor</node>
+    <node x="1440.0" y="0.0">plato.GameRelated.GameLog</node>
+    <node x="1138.0" y="0.0">plato.AccountRelated.Gamer</node>
+    <node x="1137.0" y="198.0">plato.AccountRelated.Account</node>
+    <node x="0.0" y="852.0">plato.GameRelated.DotsAndBoxes.DotsAndBoxes</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="plato.GameRelated.BattleSea.BattleSea" target="plato.GameRelated.Game">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="plato.GameRelated.DotsAndBoxes.DotsAndBoxes" target="plato.GameRelated.Game">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="plato.AccountRelated.Gamer" target="plato.AccountRelated.Account">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Orthogonal" zoom="0.8921469284357187" x="929.5000000000001" y="504.01682402214817" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>Production</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

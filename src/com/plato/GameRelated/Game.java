@@ -1,6 +1,7 @@
-package GameRelated;
+package plato.GameRelated;
 
-import AccountRelated.Gamer;
+import plato.AccountRelated.Gamer;
+import plato.IDGenerator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 public abstract class Game {
 
 	//attributes
-	private final int gameID;
+	private final String gameID;
 
 	private HashMap<Gamer, Integer> players_pts = new HashMap<>();
 	private int turn = 0;
@@ -19,7 +20,7 @@ public abstract class Game {
 	//constructor
 
 	public Game (ArrayList<Gamer> players) {
-		this.gameID = IDGe;
+		this.gameID = IDGenerator.generateNext();
 		players.forEach(player -> this.players_pts.put(player, 0));
 	}
 
@@ -41,7 +42,7 @@ public abstract class Game {
 
 	public abstract String getGameName ();
 
-	public int getGameID () {
+	public String getGameID () {
 		return gameID;
 	}
 

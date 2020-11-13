@@ -1,4 +1,4 @@
-package AccountRelated;
+package plato.AccountRelated;
 
 public class Gamer extends Account {
 
