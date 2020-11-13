@@ -1,5 +1,7 @@
 package plato.GameRelated;
 
+import plato.IDGenerator;
+
 import java.util.LinkedList;
 
 public class GameLog {
@@ -10,7 +12,7 @@ public class GameLog {
 	private LinkedList<Game> games = new LinkedList<>();
 
 	public GameLog () {
-		this.logID = IDG;
+		this.logID = IDGenerator.generateNext();
 	}
 
 	public void addToLog (Game game) {
@@ -26,7 +28,7 @@ public class GameLog {
 				.filter(game -> game.getGameName().equals(gameName))
 				.count();
 	}
-
+/*
 	public int getWinsCount () {
 		return games.stream()
 				.filter(game ->) // FIXME: count games that the gamer w this log has won
@@ -38,7 +40,7 @@ public class GameLog {
 				.filter(game -> game.getGameName().equals(gameName) && ) // FIXME: count games that the gamer w this log has won
 				.count();
 	}
-
+*/
 	public String getLogID () {
 		return logID;
 	}

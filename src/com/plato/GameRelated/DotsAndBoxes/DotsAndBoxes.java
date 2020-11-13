@@ -9,6 +9,25 @@ public class DotsAndBoxes extends Game {
 	private static String details;
 	private static ArrayList<String> scoreboard = new ArrayList<>();
 
+	private static String[][] board = new String[][]{
+			{"   ", "(1)", " ", "(2)", " ", "(3)", " ", "(4)", " ", "(5)", " ", "(6)", " ", "(7)", " ", "(8)"},
+			{"(1)", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O "},
+			{"    ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " " },
+			{"(2)", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O "},
+			{"    ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " " },
+			{"(3)", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O "},
+			{"    ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " " },
+			{"(4)", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O "},
+			{"    ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " " },
+			{"(5)", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O "},
+			{"    ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " " },
+			{"(6)", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O "},
+			{"    ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " " },
+			{"(7)", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O "},
+			{"    ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " ", "   ", " " },
+			{"(8)", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O ", " ", " O "},
+			};
+
 	public DotsAndBoxes (ArrayList<Gamer> players) {
 		super(players);
 	}
@@ -20,7 +39,7 @@ public class DotsAndBoxes extends Game {
 
 	@Override
 	public void executeGame () {
-		// TODO: 11/13/2020 AD
+		// TODO: 11/14/2020 AD
 	}
 
 	@Override
@@ -28,6 +47,7 @@ public class DotsAndBoxes extends Game {
 		// TODO: 11/13/2020 AD
 		// set end time
 		// set Conclusion
+		// remove game from gamesInSession
 		// add to logs
 		// add to scoreboard
 	}
@@ -35,12 +55,6 @@ public class DotsAndBoxes extends Game {
 	@Override
 	public boolean gameEnded () {
 		return false;
-	}
-
-	@Override
-	public String[][] getBoard () {
-		// TODO: 11/13/2020 AD
-		return null;
 	}
 
 	public static void addToScoreBoard () {
@@ -66,4 +80,20 @@ public class DotsAndBoxes extends Game {
 		return "";
 	}
 
+	public static StringBuilder getBoardAsSB () {
+		StringBuilder result = new StringBuilder();
+
+		for (String[] row : board) {
+			for (String s : row)
+				result.append(s);
+			result.append("\n");
+		}
+
+		return result;
+	}
+
+	@Override
+	public String[][] getBoard () {
+		return board;
+	}
 }

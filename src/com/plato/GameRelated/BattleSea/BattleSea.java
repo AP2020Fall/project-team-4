@@ -28,6 +28,7 @@ public class BattleSea extends Game {
 		// TODO: 11/13/2020 AD
 		// set end time
 		// set Conclusion
+		// remove game from gamesInSession
 		// add to logs
 		// add to scoreboard
 	}

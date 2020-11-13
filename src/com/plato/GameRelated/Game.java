@@ -6,22 +6,24 @@ import plato.IDGenerator;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 public abstract class Game {
 
 	//attributes
 	private final String gameID;
 
-	private HashMap<Gamer, Integer> players_pts = new HashMap<>();
-	private int turn = 0;
-	private GameConclusion conclusion = GameConclusion.IN_SESSION;
+	private final HashMap<Gamer, Integer> players_pts = new HashMap<>();
+	private final int turn = 0;
+	private final GameConclusion conclusion = GameConclusion.IN_SESSION;
 	private LocalDateTime dateGameEnded;
+
+	private static ArrayList<Game> gamesInSession = new ArrayList<>();
 
 	//constructor
 
 	public Game (ArrayList<Gamer> players) {
 		this.gameID = IDGenerator.generateNext();
 		players.forEach(player -> this.players_pts.put(player, 0));
+		gamesInSession.add(this);
 	}
 
 	//other methods
