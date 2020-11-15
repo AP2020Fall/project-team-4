@@ -22,9 +22,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c668f342-a54b-462c-b6ed-5d506defc71b" name="Default Changelist" comment="moved AllGamesmenu and GameMenu methods to main">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c668f342-a54b-462c-b6ed-5d506defc71b" name="Default Changelist" comment="empty commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/GameRelated/Reversi/Reversi.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +106,28 @@
       <option name="project" value="LOCAL" />
       <updated>1605114204076</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="edited Game constructor">
+      <created>1605114523576</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605114523576</updated>
+    </task>
+    <task id="LOCAL-00006" summary="edited Game">
+      <created>1605114743209</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1605114743209</updated>
+    </task>
+    <task id="LOCAL-00007" summary="empty commit">
+      <created>1605116062240</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605116062240</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -126,24 +146,35 @@
     <MESSAGE value="added classes : Game , AllGamesMenu , GameLog and GameMenu" />
     <MESSAGE value="made classes Game , AllGamesMenu and GameMenu abstract&#10;made method setScores abstract&#10;added method getGameByID in class Game" />
     <MESSAGE value="moved AllGamesmenu and GameMenu methods to main" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved AllGamesmenu and GameMenu methods to main" />
+    <MESSAGE value="edited Game constructor" />
+    <MESSAGE value="edited Game" />
+    <MESSAGE value="empty commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="empty commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1605110554889">
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1605449099922">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1605110554889" />
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1605449099922" />
+    <state x="129" y="55" key="DiffContextDialog" timestamp="1605275243737">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1605275243737" />
+    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1605116214360">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1605116214360" />
     <state x="163" y="0" key="SettingsEditor" timestamp="1605017944799">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1605017944799" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1605114284570">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1605114777329">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605114284570" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605025522182">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605114777329" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605115560708">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1605025522182" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1605115560708" />
   </component>
 </project>
