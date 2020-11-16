@@ -19,17 +19,36 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c668f342-a54b-462c-b6ed-5d506defc71b" name="Default Changelist" comment="moved AllGamesmenu and GameMenu methods to main">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+    <list default="true" id="c668f342-a54b-462c-b6ed-5d506defc71b" name="Default Changelist" comment="added board for DotsAndBoxes.java">
+      <change afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Admin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Event.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/FriendRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/project-team-4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/project-team-4.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/plato/AccountRelated/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/plato/AccountRelated/Gamer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Gamer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/plato/_Interactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/plato/_Interactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/resources/4_UML.uml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/resources/4_UML.uml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -52,7 +71,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.1\plugins\maven\lib\maven3" />
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -65,10 +84,82 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="full.screen.before.presentation.mode" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/GameRelated" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="GameRelated.DotsAndBoxes" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/com/plato" />
+      <recent name="$PROJECT_DIR$/src/main/java/GameRelated" />
+      <recent name="$PROJECT_DIR$/src/main/java/AccountRelated" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.DotsAndBoxes">
+    <configuration name="DotsAndBoxes" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="plato.GameRelated.DotsAndBoxes.DotsAndBoxes" />
+      <module name="project-team-4" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plato.GameRelated.DotsAndBoxes.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="project-team-4" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="_Interactor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="plato._Interactor" />
+      <module name="project-team-4" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DotsAndBoxes" />
+        <item itemvalue="Application._Interactor" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -78,6 +169,14 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605009567503</updated>
+      <workItem from="1605265887279" duration="27548000" />
+      <workItem from="1605332149477" duration="1792000" />
+      <workItem from="1605355655491" duration="415000" />
+      <workItem from="1605384547538" duration="210000" />
+      <workItem from="1605419601028" duration="8000" />
+      <workItem from="1605469744085" duration="23000" />
+      <workItem from="1605526626150" duration="695000" />
+      <workItem from="1605528278004" duration="2993000" />
     </task>
     <task id="LOCAL-00001" summary="added classes : Game , AllGamesMenu , GameLog and GameMenu">
       <created>1605024435971</created>
@@ -107,8 +206,60 @@
       <option name="project" value="LOCAL" />
       <updated>1605114204076</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="deleted the .gitignore in .idea folder">
+      <created>1605120462323</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605120462323</updated>
+    </task>
+    <task id="LOCAL-00006" summary="deleted the .gitignore in .idea folder">
+      <created>1605120512629</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1605120512629</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added packages AccountRelated &amp; GameRelated&#10;added Interactor.java and Menu.java">
+      <created>1605266468643</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605266468643</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added IDGenerator.java">
+      <created>1605275950210</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1605275950210</updated>
+    </task>
+    <task id="LOCAL-00009" summary="changed abit Game.java &amp; children &amp; GameLog.java">
+      <created>1605284028445</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1605284028445</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fixed IDGenerator references">
+      <created>1605286127530</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1605286127530</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added board for DotsAndBoxes.java">
+      <created>1605300794250</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1605300794250</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -123,27 +274,84 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="added classes : Game , AllGamesMenu , GameLog and GameMenu" />
     <MESSAGE value="made classes Game , AllGamesMenu and GameMenu abstract&#10;made method setScores abstract&#10;added method getGameByID in class Game" />
     <MESSAGE value="moved AllGamesmenu and GameMenu methods to main" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved AllGamesmenu and GameMenu methods to main" />
+    <MESSAGE value="deleted the .gitignore in .idea folder" />
+    <MESSAGE value="added packages AccountRelated &amp; GameRelated&#10;added Interactor.java and Menu.java" />
+    <MESSAGE value="added IDGenerator.java and Message.java" />
+    <MESSAGE value="added IDGenerator.java" />
+    <MESSAGE value="changed abit Game.java &amp; children &amp; GameLog.java" />
+    <MESSAGE value="fixed IDGenerator references" />
+    <MESSAGE value="added board for DotsAndBoxes.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="added board for DotsAndBoxes.java" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1605110554889">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="2126" y="-362" key="#com.intellij.ide.util.MemberChooser" timestamp="1605530734433">
+      <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
     <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1605110554889" />
-    <state x="163" y="0" key="SettingsEditor" timestamp="1605017944799">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="2126" y="-362" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605530734433" />
+    <state x="2012" y="-15" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1605285338450">
+      <screen x="1440" y="-481" width="1920" height="1080" />
+    </state>
+    <state x="2012" y="-15" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605285338450" />
+    <state x="2652" y="-69" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1605121571906">
+      <screen x="1440" y="-481" width="1920" height="1080" />
+    </state>
+    <state x="2652" y="-69" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605121571906" />
+    <state x="1824" y="-312" width="1152" height="720" key="DiffContextDialog" timestamp="1605267679923">
+      <screen x="1440" y="-481" width="1920" height="1080" />
+    </state>
+    <state x="1824" y="-312" width="1152" height="720" key="DiffContextDialog/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605267679923" />
+    <state width="357" height="975" key="GridCell.Tab.0.bottom" timestamp="1605331170352">
+      <screen x="1440" y="-458" width="1920" height="1013" />
+    </state>
+    <state width="357" height="975" key="GridCell.Tab.0.bottom/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605300657183" />
+    <state width="357" height="975" key="GridCell.Tab.0.bottom/0.23.1440.877/1440.-458.1920.1013@1440.-458.1920.1013" timestamp="1605331170352" />
+    <state width="357" height="975" key="GridCell.Tab.0.center" timestamp="1605331170351">
+      <screen x="1440" y="-458" width="1920" height="1013" />
+    </state>
+    <state width="357" height="975" key="GridCell.Tab.0.center/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605300657182" />
+    <state width="357" height="975" key="GridCell.Tab.0.center/0.23.1440.877/1440.-458.1920.1013@1440.-458.1920.1013" timestamp="1605331170351" />
+    <state width="357" height="975" key="GridCell.Tab.0.left" timestamp="1605331170350">
+      <screen x="1440" y="-458" width="1920" height="1013" />
+    </state>
+    <state width="357" height="975" key="GridCell.Tab.0.left/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605300657181" />
+    <state width="357" height="975" key="GridCell.Tab.0.left/0.23.1440.877/1440.-458.1920.1013@1440.-458.1920.1013" timestamp="1605331170350" />
+    <state width="357" height="975" key="GridCell.Tab.0.right" timestamp="1605331170351">
+      <screen x="1440" y="-458" width="1920" height="1013" />
+    </state>
+    <state width="357" height="975" key="GridCell.Tab.0.right/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605300657182" />
+    <state width="357" height="975" key="GridCell.Tab.0.right/0.23.1440.877/1440.-458.1920.1013@1440.-458.1920.1013" timestamp="1605331170351" />
+    <state x="2318" y="-173" key="MultipleFileMergeDialog" timestamp="1605265913768">
+      <screen x="1440" y="-481" width="1920" height="1080" />
+    </state>
+    <state x="2318" y="-173" key="MultipleFileMergeDialog/0.23.1440.877/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605265913768" />
+    <state x="1669" y="-481" key="SettingsEditor" timestamp="1605528927187">
+      <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
     <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1605017944799" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1605114284570">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="1669" y="-481" key="SettingsEditor/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605528927187" />
+    <state x="2503" y="-23" key="VCS.ChangelistChooser" timestamp="1605266369011">
+      <screen x="1440" y="-481" width="1920" height="1080" />
+    </state>
+    <state x="2503" y="-23" key="VCS.ChangelistChooser/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605266369011" />
+    <state x="1828" y="-316" key="Vcs.Push.Dialog.v2" timestamp="1605300805224">
+      <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605114284570" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605025522182">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="1828" y="-316" key="Vcs.Push.Dialog.v2/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605300805224" />
+    <state x="2143" y="-69" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605286554543">
+      <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1605025522182" />
+    <state x="2143" y="-69" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605286554543" />
+    <state x="2143" y="-69" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605265899210" />
+    <state width="600" height="440" key="javadoc.popup" timestamp="1605282296390">
+      <screen x="1440" y="-481" width="1920" height="1080" />
+    </state>
+    <state width="600" height="440" key="javadoc.popup/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605282296390" />
   </component>
 </project>

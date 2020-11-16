@@ -3,14 +3,12 @@ package plato;
 import plato.AccountRelated.Account;
 
 import java.util.LinkedList;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class _Interactor {
 
-	// regexes fixme
 	 static final String
 			// for account menu
 			gotoAccMenu = "View account menu",
@@ -115,11 +113,58 @@ enum Menu {
 	}
 
 	/**
-	 *
 	 * @return true if we are on our first menu
 	 */
 	public static boolean canBack () {
-		return menuHistory.size() !=0;
+		return menuHistory.size() != 0;
+	}
+
+	public void getMenuOptions () {
+		StringBuilder result = new StringBuilder();
+		if (this != ACC_MENU) {
+			result.append("""
+					1. View account menu
+					""");
+		}
+		switch (this) {
+			case ACC_MENU -> result.append(// fixme is changing password and editing fields a submenu for viewing personal info
+					""" 
+							1. View personal info
+							2.￼View plato statistics
+							3. Games history
+							4. Game statistics <game_name>
+							5. Logout
+							""");
+
+			case MAIN_MENU_G -> result.append("""
+					2.
+					""");
+/*
+			case MAIN_MENU_A -> result.append("""
+					2.
+					""");
+
+			case REGISTER_LOGIN_MENU -> result.append("""
+					2.
+					""");
+
+			case FRIENDS_PAGE -> result.append("""
+					2.
+					""");
+
+			case GAMES_MENU -> result.append("""
+					2.
+					""");
+
+			case GAME_MENU -> result.append("""
+					2.
+					""");
+ */
+		}
+
+		result.append(
+				String.format("Please enter a number from the menu%s: ",
+						(canBack() ? " or \"back\" to go back" : "")));
 	}
 
 }
