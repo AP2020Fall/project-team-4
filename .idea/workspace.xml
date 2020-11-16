@@ -28,19 +28,16 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c668f342-a54b-462c-b6ed-5d506defc71b" name="Default Changelist" comment="added board for DotsAndBoxes.java">
-      <change afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Admin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/FriendRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/project-team-4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/project-team-4.iml" afterDir="false" />
+    <list default="true" id="c668f342-a54b-462c-b6ed-5d506defc71b" name="Default Changelist" comment="added Admin, Event, FriendRequest, Message;">
+      <change afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/AdminGameReco.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/plato/AccountRelated/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/plato/AccountRelated/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/plato/AccountRelated/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/plato/AccountRelated/FriendRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/FriendRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/plato/AccountRelated/Gamer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Gamer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/plato/AccountRelated/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/plato/AccountRelated/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/plato/_Interactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/plato/_Interactor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/resources/4_UML.uml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/resources/4_UML.uml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +91,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -176,7 +173,7 @@
       <workItem from="1605419601028" duration="8000" />
       <workItem from="1605469744085" duration="23000" />
       <workItem from="1605526626150" duration="695000" />
-      <workItem from="1605528278004" duration="2993000" />
+      <workItem from="1605528278004" duration="10273000" />
     </task>
     <task id="LOCAL-00001" summary="added classes : Game , AllGamesMenu , GameLog and GameMenu">
       <created>1605024435971</created>
@@ -255,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605300794250</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="added Admin, Event, FriendRequest, Message;">
+      <created>1605531322762</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1605531322762</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,14 +289,15 @@
     <MESSAGE value="changed abit Game.java &amp; children &amp; GameLog.java" />
     <MESSAGE value="fixed IDGenerator references" />
     <MESSAGE value="added board for DotsAndBoxes.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="added board for DotsAndBoxes.java" />
+    <MESSAGE value="added Admin, Event, FriendRequest, Message;" />
+    <option name="LAST_COMMIT_MESSAGE" value="added Admin, Event, FriendRequest, Message;" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2126" y="-362" key="#com.intellij.ide.util.MemberChooser" timestamp="1605530734433">
+    <state x="2126" y="-362" key="#com.intellij.ide.util.MemberChooser" timestamp="1605539263426">
       <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
     <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1605110554889" />
-    <state x="2126" y="-362" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605530734433" />
+    <state x="2126" y="-362" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605539263426" />
     <state x="2012" y="-15" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1605285338450">
       <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
@@ -301,6 +306,10 @@
       <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
     <state x="2652" y="-69" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605121571906" />
+    <state x="2433" y="-381" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1605532644232">
+      <screen x="1440" y="-481" width="1920" height="1080" />
+    </state>
+    <state x="2433" y="-381" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605532644232" />
     <state x="1824" y="-312" width="1152" height="720" key="DiffContextDialog" timestamp="1605267679923">
       <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
@@ -329,20 +338,20 @@
       <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
     <state x="2318" y="-173" key="MultipleFileMergeDialog/0.23.1440.877/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605265913768" />
-    <state x="1669" y="-481" key="SettingsEditor" timestamp="1605528927187">
+    <state x="1961" y="-410" key="SettingsEditor" timestamp="1605537252528">
       <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
     <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1605017944799" />
-    <state x="1669" y="-481" key="SettingsEditor/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605528927187" />
+    <state x="1961" y="-410" key="SettingsEditor/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605537252528" />
     <state x="2503" y="-23" key="VCS.ChangelistChooser" timestamp="1605266369011">
       <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
     <state x="2503" y="-23" key="VCS.ChangelistChooser/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605266369011" />
-    <state x="1828" y="-316" key="Vcs.Push.Dialog.v2" timestamp="1605300805224">
+    <state x="1828" y="-316" key="Vcs.Push.Dialog.v2" timestamp="1605531335100">
       <screen x="1440" y="-481" width="1920" height="1080" />
     </state>
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605114284570" />
-    <state x="1828" y="-316" key="Vcs.Push.Dialog.v2/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605300805224" />
+    <state x="1828" y="-316" key="Vcs.Push.Dialog.v2/0.0.1440.900/1440.-481.1920.1080@1440.-481.1920.1080" timestamp="1605531335100" />
     <state x="2143" y="-69" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605286554543">
       <screen x="1440" y="-481" width="1920" height="1080" />
     </state>

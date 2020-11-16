@@ -7,23 +7,29 @@ import java.util.stream.Collectors;
 public class Message {
 	private String text;
 	private final Gamer gamer;
-	private LocalDateTime time;
+	private LocalDateTime dateTime;
 
-	private LinkedList<Message> messages = new LinkedList<>();
+	private static LinkedList<Message> allMessages = new LinkedList<>();
 
 	public Message (String text, Gamer gamer) {
 		this.text = text;
 		this.gamer = gamer;
-		this.time = LocalDateTime.now();
+		this.dateTime = LocalDateTime.now();
 
-		messages.addLast(this);
+		allMessages.addLast(this);
 	}
 
-	private LinkedList<Message> getMessages (Gamer gamer) {
-		return (LinkedList<Message>) messages.stream()
+	public static LinkedList<Message> getMessages (Gamer gamer) {
+		return (LinkedList<Message>) allMessages.stream()
 				.filter(message -> message.gamer.getUsername().equals(gamer.getUsername()))
 				.collect(Collectors.toList());
+	}
 
+	public static LinkedList<Message> getAllMessages () {
+		return allMessages;
+	}
 
+	public LocalDateTime getDateTime () {
+		return dateTime;
 	}
 }

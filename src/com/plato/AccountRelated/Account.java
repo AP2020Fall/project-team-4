@@ -1,8 +1,10 @@
 package plato.AccountRelated;
 
 import plato.IDGenerator;
+import plato._Interactor;
 
 import java.util.LinkedList;
+import java.util.regex.Matcher;
 
 public abstract class Account {
 	private String firstName, lastName, username, password, userID, email, phoneNum;
@@ -37,7 +39,48 @@ public abstract class Account {
 		// TODO: 11/13/2020 AD
 	}
 
+	public boolean isEmailOK (String email) {
+		return email.toLowerCase().matches("[a-z0-9_.]+@[gmail|[yahoo|email]]\\.com");
+	}
+
+	public boolean isPhoneNumOK (String phoneNum) {
+		return phoneNum.matches("\\d{10,11}");
+	}
+
+	public static Account getAccount (String username) {
+		return accounts.stream()
+				.filter(account -> account.getUsername().equals(username))
+				.findAny().get();
+	}
+
+	public static boolean accountExists (String username) {
+		return accounts.stream()
+				.anyMatch(account -> account.getUsername().equals(username));
+	}
+
 	public String getUsername () {
 		return username;
 	}
+
+	public static LinkedList<Account> getAccounts () {
+		return accounts;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -88,7 +88,7 @@ public class _Interactor {
 			System.out.println();
 	}
 
-	private static Matcher getMatcher (String text, String regex) {
+	public static Matcher getMatcher (String text, String regex) {
 		return Pattern.compile(regex).matcher(text);
 	}
 }
