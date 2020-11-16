@@ -3,63 +3,51 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="355.0" y="1118.0">plato.GameRelated.GameConclusion</node>
-    <node x="314.0" y="604.0">plato.GameRelated.Game</node>
-    <node x="756.0" y="740.0">plato.GameRelated.BattleSea.BattleSea</node>
-    <node x="1710.0" y="20.0">plato.Menu</node>
-    <node x="1341.0" y="0.0">plato._Interactor</node>
-    <node x="698.0" y="600.0">plato.AccountRelated.Gamer</node>
-    <node x="855.0" y="372.0">plato.AccountRelated.Account</node>
-    <node x="0.0" y="647.0">plato.GameRelated.GameLog</node>
-    <node x="386.0" y="200.0">plato.GameRelated.DotsAndBoxes.DotsAndBoxes</node>
+    <node x="946.0" y="1199.0">plato.AccountRelated.AdminGameReco</node>
+    <node x="314.0" y="501.0">plato.AccountRelated.Gamer</node>
+    <node x="546.75" y="0.0">plato.AccountRelated.Account</node>
+    <node x="1166.0" y="523.0">plato.GameRelated.DotsAndBoxes.DotsAndBoxes</node>
+    <node x="760.0" y="721.5">plato.AccountRelated.Admin</node>
+    <node x="368.0" y="1673.0">plato.GameRelated.GameConclusion</node>
+    <node x="1417.0" y="1199.0">plato.AccountRelated.FriendRequest</node>
+    <node x="1281.0" y="0.0">plato.GameRelated.Game</node>
+    <node x="669.0" y="1673.0">plato.IDGenerator</node>
+    <node x="1453.0" y="545.0">plato.GameRelated.BattleSea.BattleSea</node>
+    <node x="0.0" y="0.0">plato._Interactor</node>
+    <node x="368.0" y="1199.0">plato.Menu</node>
+    <node x="659.0" y="1199.0">plato.GameRelated.GameLog</node>
+    <node x="0.0" y="1199.0">plato.AccountRelated.Event</node>
+    <node x="0.0" y="1673.0">plato.AccountRelated.Message</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="plato.GameRelated.DotsAndBoxes.DotsAndBoxes" target="plato.AccountRelated.Gamer">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
     <edge source="plato.GameRelated.BattleSea.BattleSea" target="plato.GameRelated.Game">
-      <point x="0.0" y="-5.0505190133659426" />
-      <point x="-5.6843418860808015E-14" y="-5.050519013365999" />
-    </edge>
-    <edge source="plato.GameRelated.Game" target="plato.GameRelated.GameConclusion">
-      <point x="4.998912265235845" y="-0.1042888511523472" />
-      <point x="4.998912265235845" y="-0.10428885115231878" />
-    </edge>
-    <edge source="plato._Interactor" target="plato.Menu">
-      <point x="-3.7197220134624445" y="-3.341207587469391" />
-      <point x="-3.7197220134623876" y="-3.3412075874693983" />
-    </edge>
-    <edge source="plato.GameRelated.Game" target="plato.AccountRelated.Gamer">
-      <point x="-2.402607169469377" y="-4.384914912425813" />
-      <point x="-2.402607169469377" y="-4.3849149124258275" />
-    </edge>
-    <edge source="plato._Interactor" target="plato.AccountRelated.Account">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="plato.GameRelated.GameLog" target="plato.GameRelated.Game">
-      <point x="0.47802623056475113" y="-4.9770966358804" />
-      <point x="0.478026230564808" y="-4.9770966358804" />
+      <point x="0.0" y="-159.5" />
+      <point x="1585.5" y="498.0" />
+      <point x="1523.25" y="498.0" />
+      <point x="80.75" y="236.5" />
     </edge>
     <edge source="plato.GameRelated.DotsAndBoxes.DotsAndBoxes" target="plato.GameRelated.Game">
-      <point x="-5.023443244872055" y="0.0" />
-      <point x="-5.023443244872055" y="0.0" />
+      <point x="0.0" y="-181.5" />
+      <point x="1299.5" y="498.0" />
+      <point x="1361.75" y="498.0" />
+      <point x="-80.75" y="236.5" />
     </edge>
     <edge source="plato.AccountRelated.Gamer" target="plato.AccountRelated.Account">
-      <point x="6.47523190110212" y="0.0" />
-      <point x="6.475231901102118" y="0.0" />
+      <point x="0.0" y="-280.5" />
+      <point x="527.0" y="476.0" />
+      <point x="640.25" y="476.0" />
+      <point x="-93.5" y="225.5" />
     </edge>
-    <edge source="plato.GameRelated.BattleSea.BattleSea" target="plato.AccountRelated.Gamer">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+    <edge source="plato.AccountRelated.Admin" target="plato.AccountRelated.Account">
+      <point x="0.0" y="-60.0" />
+      <point x="940.5" y="476.0" />
+      <point x="827.25" y="476.0" />
+      <point x="93.5" y="225.5" />
     </edge>
   </edges>
-  <settings layout="Orthogonal" zoom="0.8083279115159401" x="736.0" y="1005.5" />
-  <SelectedNodes>
-    <node>plato._Interactor</node>
-  </SelectedNodes>
+  <settings layout="Hierarchic Group" zoom="0.49158780231335436" x="901.5" y="941.0" />
+  <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>

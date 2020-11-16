@@ -22,14 +22,17 @@ public class Gamer extends Account {
 
 	public String getAccountStats () {
 		// TODO: 11/16/2020 AD
+		return null;
 	}
 
 	public String getGamingHistory () {
 		// TODO: 11/16/2020 AD
+		return null;
 	}
 
 	public String getGameStats (String gameName) {
 		// TODO: 11/16/2020 AD
+		return null;
 	}
 
 	public int getScore () {
@@ -90,6 +93,11 @@ public class Gamer extends Account {
 		return (LinkedList<AdminGameReco>) getAdminGameRecosGotten().stream()
 				.filter(reco -> reco.getGamer().getUsername().equals(getUsername()))
 				.collect(Collectors.toList());
+	}
+
+	public void addToFaveGames (String gameName) {
+		if (!faveGames.contains(gameName))
+			faveGames.addLast(gameName);
 	}
 
 	// FIXME: if needed add a method that gets the gamer account that a given gameLog belongs to
