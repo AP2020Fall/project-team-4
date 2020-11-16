@@ -92,5 +92,10 @@ public class Gamer extends Account {
 				.collect(Collectors.toList());
 	}
 
+	public void addToFaveGames (String gameName) {
+		if (!faveGames.contains(gameName))
+			faveGames.addLast(gameName);
+	}
+
 	// FIXME: if needed add a method that gets the gamer account that a given gameLog belongs to
 }
