@@ -32,18 +32,22 @@ public class Event {
 
 	public static Event getEvent (String eventID) {
 		// TODO: 11/16/2020 AD
+		return null;
 	}
 
 	public static boolean eventExists (String eventID) {
 		// TODO: 11/16/2020 AD
+		return false;
 	}
 
 	private boolean hasStarted () {
 		// TODO: 11/16/2020 AD
+		return false;
 	}
 
 	private boolean isDue () {
 		// TODO: 11/16/2020 AD
+		return false;
 	}
 
 	public boolean isInSession () {

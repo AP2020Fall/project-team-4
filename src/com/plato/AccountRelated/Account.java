@@ -24,10 +24,12 @@ public abstract class Account {
 	
 	public String getPersonalInfo () {
 		// TODO: 11/16/2020 AD  
+		return null;
 	}
 	
 	public boolean isPasswordCorrect (String pw) {
 		// TODO: 11/16/2020 AD  
+		return false;
 	}
 
 	public void editField (String field, String newVal) {

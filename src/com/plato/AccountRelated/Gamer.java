@@ -22,14 +22,17 @@ public class Gamer extends Account {
 
 	public String getAccountStats () {
 		// TODO: 11/16/2020 AD
+		return null;
 	}
 
 	public String getGamingHistory () {
 		// TODO: 11/16/2020 AD
+		return null;
 	}
 
 	public String getGameStats (String gameName) {
 		// TODO: 11/16/2020 AD
+		return null;
 	}
 
 	public int getScore () {
