@@ -85,6 +85,7 @@ class Player {
 
 	public String[][] getPlayerBoard () {
 		// TODO: 11/17/2020 AD
+		return new String[0][];
 	}
 
 	public String[][] getOpponentBoard () {
