@@ -1,6 +1,7 @@
-package GameRelated.Reversi;
-import AccountRelated.Gamer;
-import GameRelated.Game;
+package plato.GameRelated.Reversi;
+import plato.AccountRelated.Gamer;
+import plato.GameRelated.Game;
+
 import java.util.ArrayList;
 
 public class Reversi extends Game {
