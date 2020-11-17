@@ -3,30 +3,23 @@ package plato.GameRelated.BattleSea;
 import plato.AccountRelated.Gamer;
 import plato.GameRelated.Game;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 public class BattleSea extends Game {
-	private static String details;
-	private static ArrayList<String> scoreboard = new ArrayList<>();
 	private static LinkedList<Player> players = new LinkedList<>();
 
-	private static final int SHIPS_COUNT = 6;
+	private static String details;
+	private static ArrayList<String> scoreboard = new ArrayList<>();
 
 	public BattleSea (ArrayList<Gamer> gamers) {
 		super(gamers);
+		players = new LinkedList<>();
 		players.addLast(new Player(gamers.get(0)));
 		players.addLast(new Player(gamers.get(1)));
 	}
 
 	@Override
 	public void setScores () {
-		// TODO: 11/13/2020 AD
-	}
-
-	@Override
-	public void executeGame () {
 		// TODO: 11/13/2020 AD
 	}
 
@@ -73,17 +66,17 @@ public class BattleSea extends Game {
 		return "BattleSea";
 	}
 
-}
-
-class Player {
-	private final Gamer gamer;
-	private int score = 0;
-
-	public Player (Gamer gamer) {
-		this.gamer = gamer;
+	public static LinkedList<Ship[]> get5RandBoards () {
+		// TODO: 11/17/2020 AD
+		return null;
 	}
-}
 
-enum Ship {
+	public static Ship[] getRandBoard () {
+		// TODO: 11/17/2020 AD
+		return null;
+	}
 
+	public static LinkedList<Player> getPlayers () {
+		return players;
+	}
 }

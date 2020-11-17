@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 public abstract class Game {
 
-	//attributes
 	private final String gameID;
 
 	private final HashMap<Gamer, Integer> players_pts = new HashMap<>();
@@ -18,19 +17,13 @@ public abstract class Game {
 
 	private static ArrayList<Game> gamesInSession = new ArrayList<>();
 
-	//constructor
-
 	public Game (ArrayList<Gamer> players) {
 		this.gameID = IDGenerator.generateNext();
 		players.forEach(player -> this.players_pts.put(player, 0));
 		gamesInSession.add(this);
 	}
 
-	//other methods
-
 	public abstract void setScores ();
-
-	public abstract void executeGame ();
 
 	public abstract void concludeGame ();
 
@@ -38,11 +31,9 @@ public abstract class Game {
 
 	public abstract String[][] getBoard ();
 
-	public boolean doesIDExist (int gameID) {return false;}
-
-	//getters and setters
-
 	public abstract String getGameName ();
+
+	public boolean doesIDExist (int gameID) {return false;}
 
 	public String getGameID () {
 		return gameID;

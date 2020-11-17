@@ -16,11 +16,6 @@ public class Reversi extends Game {
     }
 
     @Override
-    public void executeGame() { //fixme we need method for starting the game
-
-    }
-
-    @Override
     public void concludeGame() {   //fixme need method for showing the result when game ends
 
     }
@@ -42,13 +37,13 @@ public class Reversi extends Game {
 
     public void showAvailableCoordinates(){}
 
-    public void nextTurn(){}
+    public void nextTurn(){} //
 
     public void placeDisk(int x , int y , Gamer gamer){}
 
     public void showDisks(){}
 
-    public void showNextTurn(){}
+    public void showNextTurn(){} //
 
     public void showScore(Gamer gamer){}
 }
