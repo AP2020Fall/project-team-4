@@ -14,7 +14,7 @@ class Ship {
 		this.isVertical = isVertical;
 	}
 
-	public boolean isDestroyed (Player shipOwner) {
+	public boolean isDestroyed ( shipOwner) {
 		return getAllCoords().size()
 				==
 				shipOwner.getOpponent().getBombsThrown().stream()
@@ -54,7 +54,7 @@ class Ship {
 		return false;
 	}
 
-	public Player getPlayer () {
+	public	PlayerBattleSea getPlayer () {
 		return BattleSea.getPlayers().stream()
 				.filter(player -> player.getShips().contains(this))
 				.findAny().get();

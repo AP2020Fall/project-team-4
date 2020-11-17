@@ -41,5 +41,9 @@ public class Reversi extends Game {
 
     public void showDisks(){}
 
-    public void showScore(Gamer gamer){}
+    public void getScore(){}
+
+
+
+
 }

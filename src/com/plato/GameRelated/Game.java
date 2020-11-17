@@ -11,8 +11,8 @@ public abstract class Game {
 	private final String gameID;
 
 	private final HashMap<Gamer, Integer> players_pts = new HashMap<>();
-	private final int turn = 0;
-	private final GameConclusion conclusion = GameConclusion.IN_SESSION;
+	private  int turn = 0;
+	private  GameConclusion conclusion = GameConclusion.IN_SESSION;
 	private LocalDateTime dateGameEnded;
 
 	private static ArrayList<Game> gamesInSession = new ArrayList<>();
@@ -69,6 +69,10 @@ public abstract class Game {
 		if (conclusion == GameConclusion.IN_SESSION || conclusion == GameConclusion.DRAW) return false;
 
 		return getWinner().getUsername().equals(username);
+	}
+	
+	public void addToScore(Gamer gamer ,Integer score){
+		//fixme players_pts.get(gamer) = players_pts.get(gamer) + score;
 	}
 }
 

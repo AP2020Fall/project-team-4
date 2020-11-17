@@ -1,20 +1,21 @@
 package plato.GameRelated.BattleSea;
 
 import plato.AccountRelated.Gamer;
+import plato.GameRelated.Player;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
-class Player {
-	private final Gamer gamer;
-	private int score = 0;
+class PlayerBattleSea extends Player {
+
 	private Ship[] ships = new Ship[6];
 	private LinkedList<Bomb> bombsThrown = new LinkedList<>();
 
-	public Player (Gamer gamer) {
-		this.gamer = gamer;
+	public PlayerBattleSea(Gamer gamer) {
+		super(gamer);
 	}
+
 
 	public void throwBomb (int x, int y) {
 		bombsThrown.add(Bomb.throwBomb(x, y, this));
