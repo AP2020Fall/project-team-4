@@ -12,7 +12,7 @@ class Bomb {
 
 	Bomb (int x, int y) {
 		this.x = x;
-		this.y = y; // fixme
+		this.y = y;
 	}
 
 	public static Bomb throwBomb (int x, int y, Player thrower) {
