@@ -4,13 +4,20 @@ import plato.AccountRelated.Gamer;
 import plato.GameRelated.Game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class BattleSea extends Game {
 	private static String details;
 	private static ArrayList<String> scoreboard = new ArrayList<>();
+	private static LinkedList<Player> players = new LinkedList<>();
 
-	public BattleSea (ArrayList<Gamer> players) {
-		super(players);
+	private static final int SHIPS_COUNT = 6;
+
+	public BattleSea (ArrayList<Gamer> gamers) {
+		super(gamers);
+		players.addLast(new Player(gamers.get(0)));
+		players.addLast(new Player(gamers.get(1)));
 	}
 
 	@Override
@@ -63,8 +70,20 @@ public class BattleSea extends Game {
 
 	@Override
 	public String getGameName () {
-		// TODO: 11/13/2020 AD
-		return "";
+		return "BattleSea";
 	}
+
+}
+
+class Player {
+	private final Gamer gamer;
+	private int score = 0;
+
+	public Player (Gamer gamer) {
+		this.gamer = gamer;
+	}
+}
+
+enum Ship {
 
 }
