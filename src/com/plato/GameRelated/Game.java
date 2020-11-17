@@ -23,6 +23,14 @@ public abstract class Game {
 		gamesInSession.add(this);
 	}
 
+	public void nextTurn(){
+		// TODO: 11/17/2020 AD  
+	}
+
+	public void showNextTurn(){
+		// TODO: 11/17/2020 AD  
+	}
+
 	public abstract void setScores ();
 
 	public abstract void concludeGame ();

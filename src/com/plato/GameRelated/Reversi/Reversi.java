@@ -37,13 +37,9 @@ public class Reversi extends Game {
 
     public void showAvailableCoordinates(){}
 
-    public void nextTurn(){} //
-
     public void placeDisk(int x , int y , Gamer gamer){}
 
     public void showDisks(){}
-
-    public void showNextTurn(){} //
 
     public void showScore(Gamer gamer){}
 }
