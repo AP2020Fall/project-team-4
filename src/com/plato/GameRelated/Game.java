@@ -1,6 +1,7 @@
 package plato.GameRelated;
 
 import plato.AccountRelated.Gamer;
+import plato.GameRelated.BattleSea.BattleSea;
 import plato.IDGenerator;
 
 import java.time.LocalDateTime;
@@ -39,7 +40,9 @@ public abstract class Game {
 
 	public abstract String[][] getBoard ();
 
-	public abstract String getGameName ();
+	public String getGameName () {
+		return getClass().getSimpleName();
+	}
 
 	public boolean doesIDExist (int gameID) {return false;}
 
