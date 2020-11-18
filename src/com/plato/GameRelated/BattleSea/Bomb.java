@@ -15,15 +15,15 @@ class Bomb {
 		this.y = y;
 	}
 
-	public static Bomb throwBomb (int x, int y, Player thrower) {
+	public static Bomb throwBomb (int x, int y, PlayerBattleSea thrower) {
 		Bomb bomb = new Bomb(x, y);
 		if (bomb.wasSuccessFul(thrower))
 			return new Bomb(x, y, true);
 		return new Bomb(x, y, false);
 	}
 
-	public boolean wasSuccessFul (Player thrower) {
-		Player thrownAt = thrower.getOpponent();
+	public boolean wasSuccessFul (PlayerBattleSea thrower) {
+		PlayerBattleSea thrownAt = thrower.getOpponent();
 
 		/* fixme get all ships of opponent player and check if any of their coordinates correlates to the coord of bomb
 		thrownAt.getShips().stream()

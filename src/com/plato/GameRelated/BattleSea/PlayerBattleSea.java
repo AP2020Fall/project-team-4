@@ -1,6 +1,7 @@
 package plato.GameRelated.BattleSea;
 
 import plato.AccountRelated.Gamer;
+import plato.GameRelated.Game;
 import plato.GameRelated.Player;
 
 import java.util.Arrays;
@@ -16,15 +17,8 @@ class PlayerBattleSea extends Player {
 		super(gamer);
 	}
 
-
 	public void throwBomb (int x, int y) {
 		bombsThrown.add(Bomb.throwBomb(x, y, this));
-	}
-
-	public Player getOpponent () {
-		return BattleSea.getPlayers().stream()
-				.filter(player -> !player.getUsername().equals(getUsername()))
-				.findAny().get();
 	}
 
 	public boolean hasBeenBombedBefore (int x, int y) {
@@ -38,12 +32,9 @@ class PlayerBattleSea extends Player {
 				.findAny().get();
 	}
 
-	public Gamer getGamer () {
-		return gamer;
-	}
-
-	public String getUsername () {
-		return getGamer().getUsername();
+	@Override
+	public PlayerBattleSea getOpponent () {
+		return (PlayerBattleSea) super.getOpponent();
 	}
 
 	public LinkedList<Bomb> getBombsThrown () {
