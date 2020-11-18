@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Reversi extends Game {
 
+    public static String[][] board = new String[8][8];
+
     public Reversi(ArrayList<Gamer> players) {
         super(players);
     }
@@ -27,7 +29,7 @@ public class Reversi extends Game {
 
     @Override
     public String[][] getBoard() {
-        return new String[0][];
+        return board;
     }
 
     @Override
@@ -37,11 +39,13 @@ public class Reversi extends Game {
 
     public void showAvailableCoordinates(){}
 
-    public void placeDisk(int x , int y , Gamer gamer){}
+    public void placeDisk(int x , int y , PlayerReversi player){}
 
     public void showDisks(){}
 
     public void getScore(){}
+
+    public boolean canPlayerPlaceDisk(PlayerReversi player){return true;}
 
 
 
