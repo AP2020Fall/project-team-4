@@ -23,7 +23,7 @@ class Bomb {
 	}
 
 	public boolean wasSuccessFul (PlayerBattleSea thrower) {
-		PlayerBattleSea thrownAt = thrower.getOpponent();
+		PlayerBattleSea thrownAt = thrower.getOpponent();e
 
 		/* fixme get all ships of opponent player and check if any of their coordinates correlates to the coord of bomb
 		thrownAt.getShips().stream()
