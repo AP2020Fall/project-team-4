@@ -32,11 +32,6 @@ public class Reversi extends Game {
         return board;
     }
 
-    @Override
-    public String getGameName() {
-        return null;
-    }
-
     public void showAvailableCoordinates(){}
 
     public void placeDisk(int x , int y , PlayerReversi player){}

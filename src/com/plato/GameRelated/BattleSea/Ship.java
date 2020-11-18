@@ -14,7 +14,7 @@ class Ship {
 		this.isVertical = isVertical;
 	}
 
-	public boolean isDestroyed ( shipOwner) {
+	public boolean isDestroyed (PlayerBattleSea shipOwner) {
 		return getAllCoords().size()
 				==
 				shipOwner.getOpponent().getBombsThrown().stream()
