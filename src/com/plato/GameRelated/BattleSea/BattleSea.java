@@ -6,7 +6,7 @@ import plato.GameRelated.Game;
 import java.util.*;
 
 public class BattleSea extends Game {
-	private static LinkedList<Player> players = new LinkedList<>();
+	private static LinkedList<PlayerBattleSea> players = new LinkedList<>();
 
 	private static String details;
 	private static ArrayList<String> scoreboard = new ArrayList<>();
@@ -14,8 +14,8 @@ public class BattleSea extends Game {
 	public BattleSea (ArrayList<Gamer> gamers) {
 		super(gamers);
 		players = new LinkedList<>();
-		players.addLast(new Player(gamers.get(0)));
-		players.addLast(new Player(gamers.get(1)));
+		players.addLast(new PlayerBattleSea(gamers.get(0)));
+		players.addLast(new PlayerBattleSea(gamers.get(1)));
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class BattleSea extends Game {
 		return null;
 	}
 
-	public static LinkedList<Player> getPlayers () {
+	public static LinkedList<PlayerBattleSea> getPlayers () {
 		return players;
 	}
 }
