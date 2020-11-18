@@ -11,6 +11,10 @@ abstract public class Player {
 		this.gamer = gamer;
 	}
 
+	public void addToScore(int score){
+		this.score +=score;
+	}
+
 	public abstract Player getPlayer(Gamer gamer);
 
 	public Gamer getGamer () {

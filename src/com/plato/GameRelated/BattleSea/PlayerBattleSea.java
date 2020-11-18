@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
-class PlayerBattleSea extends Player {
+public class PlayerBattleSea extends Player {
 
 	private Ship[] ships = new Ship[6];
 	private LinkedList<Bomb> bombsThrown = new LinkedList<>();
