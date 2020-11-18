@@ -17,6 +17,7 @@ class PlayerBattleSea extends Player {
 		super(gamer);
 	}
 
+
 	public void throwBomb (int x, int y) {
 		bombsThrown.add(Bomb.throwBomb(x, y, this));
 	}
@@ -31,6 +32,9 @@ class PlayerBattleSea extends Player {
 				.filter(bomb -> bomb.getX() == x && bomb.getY() == y)
 				.findAny().get();
 	}
+
+	@Override
+	public Player getPlayer(Gamer gamer){return null;}
 
 	@Override
 	public PlayerBattleSea getOpponent () {

@@ -9,7 +9,16 @@ import java.util.stream.Collectors;
 
 public class PlayerReversi extends Player {
 
-    protected PlayerReversi(Gamer gamer) {
+    private final String color;
+    public PlayerReversi(Gamer gamer , String color) {
         super(gamer);
+        this.color = color;
+    }
+
+    @Override
+    public Player getPlayer(Gamer gamer){return null;}
+
+    public String getColor() {
+        return color;
     }
 }

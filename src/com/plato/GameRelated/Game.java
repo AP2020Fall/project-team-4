@@ -2,6 +2,9 @@ package plato.GameRelated;
 
 import plato.AccountRelated.Gamer;
 import plato.GameRelated.BattleSea.BattleSea;
+import plato.GameRelated.BattleSea.PlayerBattleSea;
+import plato.GameRelated.Reversi.PlayerReversi;
+import plato.GameRelated.Reversi.Reversi;
 import plato.IDGenerator;
 
 import java.time.LocalDateTime;
@@ -11,7 +14,7 @@ public abstract class Game {
 
 	private final String gameID;
 
-	private final HashMap<Gamer, Integer> players_pts = new HashMap<>();
+	private final ArrayList<Player> listOfPlayers = new ArrayList<>();
 	private  int turn = 0;
 	private  GameConclusion conclusion = GameConclusion.IN_SESSION;
 	private LocalDateTime dateGameEnded;
@@ -20,7 +23,10 @@ public abstract class Game {
 
 	public Game (ArrayList<Gamer> players) {
 		this.gameID = IDGenerator.generateNext();
-		players.forEach(player -> this.players_pts.put(player, 0));
+		if (this instanceof BattleSea)
+			players.forEach(player -> listOfPlayers.add(new PlayerBattleSea(player)));
+		else if (this instanceof Reversi)
+			players.forEach(player -> listOfPlayers.add(new PlayerReversi(player)));// FIXME: 11/18/2020
 		gamesInSession.add(this);
 	}
 
@@ -28,9 +34,9 @@ public abstract class Game {
 		// TODO: 11/17/2020 AD  
 	}
 
-	public void showNextTurn(){
+	public Gamer getTurn(){
 		// TODO: 11/17/2020 AD  
-	}
+	return null;}
 
 	public abstract void setScores ();
 
@@ -59,9 +65,7 @@ public abstract class Game {
 		return false;
 	}
 
-	public GameConclusion getConclusion () {
-		return conclusion;
-	}
+
 
 	public Gamer getWinner () {
 		// TODO: 11/13/2020 AD
@@ -74,8 +78,20 @@ public abstract class Game {
 		return getWinner().getUsername().equals(username);
 	}
 	
-	public void addToScore(Gamer gamer ,Integer score){
+	public void addToScore(Player player ,Integer score){
 		//fixme players_pts.get(gamer) = players_pts.get(gamer) + score;
+	}
+
+	public boolean checkCoordinates(int number){
+		if(number>0 && number<9){ return true;}
+	return false;}
+
+	public GameConclusion getConclusion () {
+		return conclusion;
+	}
+
+	public void setConclusion(GameConclusion con){
+		conclusion = con;
 	}
 }
 
