@@ -11,6 +11,10 @@ abstract public class Player {
 		this.gamer = gamer;
 	}
 
+    public Gamer getGamer(){return gamer;}
+
+    public String getUsername(){return gamer.getUsername();}
+
 
 	public Gamer getGamer () {
 		return gamer;
