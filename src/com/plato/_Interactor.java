@@ -172,7 +172,34 @@ public class _Interactor {
 		}
 	}
 
-	private static void deleteAccCommand () {/*todo*/}
+	private static void deleteAccCommand () {/*fixme*/
+
+		// trying to get username
+		//		if account doesnt exists try asking for username again
+		String username = null;
+		do {
+			if (username != null)
+				System.out.println("No account exists with this username.");
+
+			System.out.print("Username: "); username = scanner.nextLine();
+
+		} while (!Account.accountExists(username));
+
+		// trying to get password
+		//		if password is incorrect try asking for username again
+		String password = null;
+		do {
+			if (password != null)
+				System.out.println("Password incorrect.");
+
+			System.out.print("Username: "); password = scanner.nextLine();
+
+		} while (!Account.getAccount(username).isPasswordCorrect(password));
+
+		Account.removeAccount(username);
+		if (accInUse.getUsername().equals(username))
+			logoutCommand();
+	}
 
 	private static void loginCommand () {/*fixme*/
 

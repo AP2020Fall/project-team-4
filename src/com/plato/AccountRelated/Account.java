@@ -22,6 +22,10 @@ public abstract class Account {
 		this.phoneNum = phoneNum;
 		accounts.add(this);
 	}
+
+	public static void removeAccount (String username) {
+		// TODO: 11/20/2020 AD  
+	}
 	
 	public String getPersonalInfo () {
 		// TODO: 11/16/2020 AD  
