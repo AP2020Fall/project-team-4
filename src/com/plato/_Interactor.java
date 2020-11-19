@@ -1,6 +1,7 @@
 package plato;
 
 import plato.AccountRelated.Account;
+import plato.AccountRelated.Gamer;
 
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -18,11 +19,15 @@ public class _Interactor {
 
 	public static void main (String[] args) {
 
-		while (scanner.hasNext()) {
+		while (true) {
+			System.out.println(currentMenu.getMenuOptions());
 			command = scanner.nextLine().trim();
 
-			// TODO bunch of ifs to check input
+			guideToCommandMethod();
 		}
+	}
+
+	private static void guideToCommandMethod () {
 	}
 
 	public static Matcher getMatcher (String text, String regex) {
@@ -33,7 +38,9 @@ public class _Interactor {
 
 	private static void backCommand () {/*todo*/}
 
-	private static void viewPersonalInfoCommand () {/*todo*/}
+	private static void viewPersonalInfoCommand () {/*fixme*/
+		System.out.println(accInUse.getPersonalInfo());
+	}
 
 	private static void changePWCommand () {/*todo*/}
 
@@ -173,7 +180,6 @@ public class _Interactor {
 enum Menu {
 	ACC_MENU,
 	MAIN_MENU_G,
-	MAIN_MENU_A,
 	GAMES_MENU,
 	FRIENDS_PAGE,
 	REGISTER_LOGIN_MENU,
@@ -190,7 +196,7 @@ enum Menu {
 	}
 
 	/**
-	 * @return true if we are on our first menu
+	 * @return false if we are on our first menu
 	 */
 	public static boolean canBack () {
 		return menuHistory.size() != 0;
