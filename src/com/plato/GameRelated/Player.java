@@ -26,9 +26,13 @@ abstract public class Player {
 	}
 
 	public Player getOpponent () {
-		return Game.getPlayers().stream()
-				.filter(player -> !player.getUsername().equals(getUsername()))
-				.findAny().get();
+//		return Game.getPlayers().stream()
+//				.filter(player -> !player.getUsername().equals(getUsername()))
+//				.findAny().get();
+		return null;
 	}
 
+	public int getScore () {
+		return score;
+	}
 }

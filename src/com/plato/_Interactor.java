@@ -9,59 +9,6 @@ import java.util.regex.Pattern;
 
 public class _Interactor {
 
-	 static final String
-			// for account menu
-			gotoAccMenu = "View account menu",
-			back = "back", // todo
-			viewPersonalInfo = "View personal info",
-			changePW = "Change password <current_pass>, <new_pass>",
-			editAccField = "Edit <field>, <new_value>",
-			viewStats = "View plato statistics",
-			viewGamingHistory = "Games history",
-			gameStatsForGame = "GameRelated.Game statistics <game_name>",
-			logout = "Logout",
-	// for gamer main menu
-	showPts = "Show Points",
-			viewFavGames = "View favorite games",
-			viewAdminMsgs = "View platobot’s messages",
-			lastGamePlayed = "View last played",
-			viewAdminRecos = "View admin’s suggestions",
-			chooseAdminReco = "Choose suggested game",
-			sendFrndReqFromMainMenu = "Add friend",
-	// for admin main menu
-	addEvent = "Add event <game_name>, <start_date>, <end_date>, <score>",
-			viewEvents = "View events",
-			editEvent = "Edit event <event_id>, <field>, <new_value>",
-			removeEvent = "Remove event <event_id>",
-			addReco = "Add suggestion <username>, <game_name>",
-			viewRecos = "View suggestions",
-			removeReco = "Remove suggestion <suggestion_id>",
-			viewAccs = "View users",
-			viewAcc = "View user profile <username>",
-	// for games menu
-	openGame = "Open <game_name>",
-	// for friends menu
-	showFrnds = "Show friends",
-			removeFrnd = "Remove <username>",
-			viewFrnd = "View user profile <username>",
-			sendFrndReqFromFrndMenu = "Add <username>",
-			showFrndReqs = "Show friend requests",
-			acceptFrndReq = "Accept <username>",
-			declineFrndReq = "Decline <username>",
-	// for register-login menu
-	register = "Register < username, password>",
-	deleteAcc = "￼Delete <username>",
-			login = "Login <username>",
-	// for game menu
-	scoreBoard = "Show scoreboard",
-			howToPlay = "Details",
-			showLog = "Show log", // todo
-			showWins = "Show wins count", // todo
-			showGameCount = "Show played count", // todo
-			addToFaves = "Add to favorites", // todo
-			play = "Run game", // todo
-			showPtsGained = "Show points"; // todo
-
 	private static Menu currentMenu = Menu.REGISTER_LOGIN_MENU; // FIXME: initialize
 	private static Account accInUse = null;
 
@@ -74,23 +21,153 @@ public class _Interactor {
 		while (scanner.hasNext()) {
 			command = scanner.nextLine().trim();
 
-			if (command.matches(gotoAccMenu)) gotoAccMenuCommand();
-			switch (currentMenu) {
-
-			}
-
 			// TODO bunch of ifs to check input
 		}
-	}
-
-	private static void gotoAccMenuCommand () {
-		if (accInUse == null)
-			System.out.println();
 	}
 
 	public static Matcher getMatcher (String text, String regex) {
 		return Pattern.compile(regex).matcher(text);
 	}
+
+	private static void gotoAccMenuCommand () {/*todo*/}
+
+	private static void backCommand () {/*todo*/}
+
+	private static void viewPersonalInfoCommand () {/*todo*/}
+
+	private static void changePWCommand () {/*todo*/}
+
+	private static void editAccFieldCommand () {/*todo*/}
+
+	private static void viewStatsCommand () {/*todo*/}
+
+	private static void viewGamingHistoryCommand () {/*todo*/}
+
+	private static void gameStatsForGameCommand () {/*todo*/}
+
+	private static void logoutCommand () {/*todo*/}
+
+	private static void showPtsCommand () {/*todo*/}
+
+	private static void viewFavGamesCommand () {/*todo*/}
+
+	private static void viewAdminMsgsCommand () {/*todo*/}
+
+	private static void lastGamePlayedCommand () {/*todo*/}
+
+	private static void viewAdminRecosCommand () {/*todo*/}
+
+	private static void chooseAdminRecoCommand () {/*todo*/}
+
+	private static void sendFrndReqFromMainMenuCommand () {/*todo*/}
+
+	private static void addEventCommand () {/*todo*/}
+
+	private static void viewEventsCommand () {/*todo*/}
+
+	private static void editEventCommand () {/*todo*/}
+
+	private static void removeEventCommand () {/*todo*/}
+
+	private static void addRecoCommand () {/*todo*/}
+
+	private static void viewRecosCommand () {/*todo*/}
+
+	private static void removeRecoCommand () {/*todo*/}
+
+	private static void viewAccsCommand () {/*todo*/}
+
+	private static void viewAccCommand () {/*todo*/}
+
+	private static void openGameCommand () {/*todo*/}
+
+	private static void showFrndsCommand () {/*todo*/}
+
+	private static void removeFrndCommand () {/*todo*/}
+
+	private static void viewFrndCommand () {/*todo*/}
+
+	private static void sendFrndReqFromFrndMenuCommand () {/*todo*/}
+
+	private static void showFrndReqsCommand () {/*todo*/}
+
+	private static void acceptFrndReqCommand () {/*todo*/}
+
+	private static void declineFrndReqCommand () {/*todo*/}
+
+	private static void registerCommand () {/*todo*/}
+
+	private static void deleteAccCommand () {/*todo*/}
+
+	private static void loginCommand () {/*todo*/}
+
+	private static void scoreBoardCommand () {/*todo*/}
+
+	private static void howToPlayCommand () {/*todo*/}
+
+	private static void showLogCommand () {/*todo*/}
+
+	private static void showWinsCommand () {/*todo*/}
+
+	private static void showGameCountCommand () {/*todo*/}
+
+	private static void addToFavesCommand () {/*todo*/}
+
+	private static void playCommand () {/*todo*/}
+
+	private static void showPtsGainedCommand () {/*todo*/}
+//	 static final String
+//			// for account menu
+//			gotoAccMenu = "View account menu",
+//			back = "back",
+//			viewPersonalInfo = "View personal info",
+//			changePW = "Change password <current_pass>, <new_pass>",
+//			editAccField = "Edit <field>, <new_value>",
+//			viewStats = "View plato statistics",
+//			viewGamingHistory = "Games history",
+//			gameStatsForGame = "GameRelated.Game statistics <game_name>",
+//			logout = "Logout",
+//	// for gamer main menu
+//	showPts = "Show Points",
+//			viewFavGames = "View favorite games",
+//			viewAdminMsgs = "View platobot’s messages",
+//			lastGamePlayed = "View last played",
+//			viewAdminRecos = "View admin’s suggestions",
+//			chooseAdminReco = "Choose suggested game",
+//			sendFrndReqFromMainMenu = "Add friend",
+//	// for admin main menu
+//	addEvent = "Add event <game_name>, <start_date>, <end_date>, <score>",
+//			viewEvents = "View events",
+//			editEvent = "Edit event <event_id>, <field>, <new_value>",
+//			removeEvent = "Remove event <event_id>",
+//			addReco = "Add suggestion <username>, <game_name>",
+//			viewRecos = "View suggestions",
+//			removeReco = "Remove suggestion <suggestion_id>",
+//			viewAccs = "View users",
+//			viewAcc = "View user profile <username>",
+//	// for games menu
+//	openGame = "Open <game_name>",
+//	// for friends menu
+//	showFrnds = "Show friends",
+//			removeFrnd = "Remove <username>",
+//			viewFrnd = "View user profile <username>",
+//			sendFrndReqFromFrndMenu = "Add <username>",
+//			showFrndReqs = "Show friend requests",
+//			acceptFrndReq = "Accept <username>",
+//			declineFrndReq = "Decline <username>",
+//	// for register-login menu
+//	register = "Register < username, password>",
+//			deleteAcc = "￼Delete <username>",
+//			login = "Login <username>",
+//	// for game menu
+//	scoreBoard = "Show scoreboard",
+//			howToPlay = "Details",
+//			showLog = "Show log",
+//			showWins = "Show wins count",
+//			showGameCount = "Show played count",
+//			addToFaves = "Add to favorites",
+//			play = "Run game",
+//			showPtsGained = "Show points";
 }
 
 enum Menu {
@@ -119,7 +196,7 @@ enum Menu {
 		return menuHistory.size() != 0;
 	}
 
-	public void getMenuOptions () {
+	public LinkedList<String> getMenuOptions () {
 		StringBuilder result = new StringBuilder();
 		if (this != ACC_MENU) {
 			result.append("""
@@ -165,6 +242,7 @@ enum Menu {
 		result.append(
 				String.format("Please enter a number from the menu%s: ",
 						(canBack() ? " or \"back\" to go back" : "")));
+		return new LinkedList<>(); // FIXME: 11/19/2020 AD
 	}
 
 }

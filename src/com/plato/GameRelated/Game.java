@@ -55,12 +55,6 @@ public abstract class Game {
 		return getClass().getSimpleName();
 	}
 
-	public boolean doesIDExist (int gameID) {return false;}
-
-	public String getGameID () {
-		return gameID;
-	}
-
 	public boolean gameNameIsValid (String gameName) {
 		// TODO: 11/13/2020 AD
 		return false;
@@ -85,8 +79,12 @@ public abstract class Game {
 		return conclusion;
 	}
 
-	public void setConclusion(GameConclusion con){
-		conclusion = con;
+	public void setConclusion (GameConclusion conclusion) {
+		this.conclusion = conclusion;
+	}
+
+	public int[] getScores () {
+		return new int[]{listOfPlayers.get(0).getScore(), listOfPlayers.get(1).getScore()};
 	}
 }
 

@@ -1,7 +1,6 @@
 package plato.GameRelated.BattleSea;
 
 import plato.AccountRelated.Gamer;
-import plato.GameRelated.Game;
 import plato.GameRelated.Player;
 
 import java.util.Arrays;
@@ -16,7 +15,6 @@ public class PlayerBattleSea extends Player {
 	public PlayerBattleSea(Gamer gamer) {
 		super(gamer);
 	}
-
 
 	public void throwBomb (int x, int y) {
 		bombsThrown.add(Bomb.throwBomb(x, y, this));
