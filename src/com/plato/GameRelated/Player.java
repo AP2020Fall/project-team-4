@@ -1,6 +1,6 @@
 package plato.GameRelated;
 
-import plato.AccountRelated.Gamer;z
+import plato.AccountRelated.Gamer;
 
 abstract public class Player {
 
