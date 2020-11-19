@@ -18,6 +18,7 @@ public class BattleSea extends Game {
 		players.addLast(new PlayerBattleSea(gamers.get(1)));
 	}
 
+
 	@Override
 	public void setScores () {
 		// TODO: 11/13/2020 AD

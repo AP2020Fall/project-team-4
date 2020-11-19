@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
-class PlayerBattleSea extends Player {
+public class PlayerBattleSea extends Player {
 
 	private Ship[] ships = new Ship[6];
 	private LinkedList<Bomb> bombsThrown = new LinkedList<>();
@@ -16,6 +16,7 @@ class PlayerBattleSea extends Player {
 	public PlayerBattleSea(Gamer gamer) {
 		super(gamer);
 	}
+
 
 	public void throwBomb (int x, int y) {
 		bombsThrown.add(Bomb.throwBomb(x, y, this));
@@ -31,6 +32,9 @@ class PlayerBattleSea extends Player {
 				.filter(bomb -> bomb.getX() == x && bomb.getY() == y)
 				.findAny().get();
 	}
+
+	@Override
+	public Player getPlayer(Gamer gamer){return null;}
 
 	@Override
 	public PlayerBattleSea getOpponent () {
