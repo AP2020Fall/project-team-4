@@ -103,7 +103,7 @@ public class _Interactor {
 
 	private static void declineFrndReqCommand () {/*todo*/}
 
-	private static void registerCommand () {/*fixme*/
+	private static void registerCommand () {/*fixme test*/
 
 		// trying to get username
 		//		if account already exists try asking for username again
@@ -172,7 +172,7 @@ public class _Interactor {
 		}
 	}
 
-	private static void deleteAccCommand () {/*fixme*/
+	private static void deleteAccCommand () {/*fixme test*/
 
 		// trying to get username
 		//		if account doesnt exists try asking for username again
@@ -201,7 +201,7 @@ public class _Interactor {
 			logoutCommand();
 	}
 
-	private static void loginCommand () {/*fixme*/
+	private static void loginCommand () {/*fixme test*/
 
 		// trying to get username
 		//		if account doesnt exists try asking for username again
@@ -253,9 +253,8 @@ public class _Interactor {
 		}
 	}
 
-	private static void writeToJSONFiles () {
+	private static void writeToJSONFiles () {/*todo*/}
 
-	}
 //	 static final String
 //			// for account menu
 //			gotoAccMenu = "View account menu",
