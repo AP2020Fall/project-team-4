@@ -1,6 +1,7 @@
 package plato;
 
 import plato.AccountRelated.Account;
+import plato.AccountRelated.Admin;
 import plato.AccountRelated.Gamer;
 
 import java.util.LinkedList;
@@ -102,7 +103,74 @@ public class _Interactor {
 
 	private static void declineFrndReqCommand () {/*todo*/}
 
-	private static void registerCommand () {/*todo*/}
+	private static void registerCommand () {/*fixme*/
+
+		// trying to get username
+		//		if account already exists try asking for username again
+		String username = null;
+		do {
+			if (username != null)
+				System.out.println("An Account already exists with this username.");
+
+			System.out.print("Username: "); username = scanner.nextLine();
+
+		} while (Account.accountExists(username));
+
+		// trying to ask for password and full name
+		System.out.print("Password: "); String password = scanner.nextLine();
+		System.out.print("First Name: "); String firstName = scanner.nextLine();
+		System.out.print("Last Name: "); String lastName = scanner.nextLine();
+
+		// trying to get email
+		//		if email format is invalid try asking for it again
+		String email = null;
+		do {
+			if (email != null)
+				System.out.println("Email Format is invalid.");
+
+			System.out.print("Email Address: "); email = scanner.nextLine();
+
+		} while (Account.isEmailOK(email));
+
+		// trying to get phoneNum
+		//		if phoneNumber format is invalid try asking for it again
+		String phoneNum = null;
+		do {
+			if (phoneNum != null)
+				System.out.println("Phone Format is invalid.");
+
+			System.out.print("Phone Number: "); phoneNum = scanner.nextLine();
+
+		} while (Account.isPhoneNumOK(phoneNum));
+
+		// if admin account hasnt already been created make admin account
+		// 		otherwise ask for initial money amount and make a gamer account
+		if (!Admin.adminHasBeenCreated())
+			accInUse = new Admin(firstName, lastName, username, password, email, phoneNum);
+		else {
+			// trying to get initial balance
+			//		if input is not a number or is negative try asking for it again
+			double initMoney;
+			while (true) {
+				System.out.print("Initial Balance: ");
+				try {
+					initMoney = Double.parseDouble(scanner.nextLine());
+
+					// initial balance cant be a negative amount
+					if (initMoney < 0)
+						System.out.println("Initial Balance must be a positive number.");
+
+					else
+						break;
+
+				} catch (NumberFormatException e) {
+					System.out.println("Initial Balance must be a number.");
+				}
+			}
+
+			accInUse = new Gamer(firstName, lastName, username, password, email, phoneNum, initMoney);
+		}
+	}
 
 	private static void deleteAccCommand () {/*todo*/}
 
@@ -180,6 +248,7 @@ public class _Interactor {
 enum Menu {
 	ACC_MENU,
 	MAIN_MENU_G,
+	MAIN_MENU_A,
 	GAMES_MENU,
 	FRIENDS_PAGE,
 	REGISTER_LOGIN_MENU,
@@ -203,52 +272,43 @@ enum Menu {
 	}
 
 	public LinkedList<String> getMenuOptions () {
-		StringBuilder result = new StringBuilder();
+		LinkedList<String> result = new LinkedList<>();
+
 		if (this != ACC_MENU) {
-			result.append("""
-					1. View account menu
-					""");
+			result.add("View account menu");
 		}
 		switch (this) {
-			case ACC_MENU -> result.append(// fixme is changing password and editing fields a submenu for viewing personal info
-					""" 
-							1. View personal info
-							2.￼View plato statistics
-							3. Games history
-							4. Game statistics <game_name>
-							5. Logout
-							""");
+			case ACC_MENU -> {// fixme is changing password and editing fields a submenu for viewing personal info
+				result.add("View personal info");
+				result.add("View plato statistics");
+				result.add("Games history");
+				result.add("Game statistics <game_name>");
+				result.add("Logout");
+			}
 
-			case MAIN_MENU_G -> result.append("""
-					2.
-					""");
-/*
-			case MAIN_MENU_A -> result.append("""
-					2.
-					""");
+			case MAIN_MENU_G -> result.add("");
 
-			case REGISTER_LOGIN_MENU -> result.append("""
-					2.
-					""");
+			case MAIN_MENU_A -> result.add("");
 
-			case FRIENDS_PAGE -> result.append("""
-					2.
-					""");
+			case REGISTER_LOGIN_MENU -> {
+				// user has to go to register menu from login menu after first registery
+				if (Admin.adminHasBeenCreated())
+					result.add("Register < username, password>");
 
-			case GAMES_MENU -> result.append("""
-					2.
-					""");
+				result.add(""); // FIXME: 11/19/2020 AD
+			}
 
-			case GAME_MENU -> result.append("""
-					2.
-					""");
- */
+			case FRIENDS_PAGE -> result.add("");
+
+			case GAMES_MENU -> result.add("");
+
+			case GAME_MENU -> result.add("");
 		}
 
-		result.append(
-				String.format("Please enter a number from the menu%s: ",
-						(canBack() ? " or \"back\" to go back" : "")));
-		return new LinkedList<>(); // FIXME: 11/19/2020 AD
+		if (canBack())
+			result.add("back");
+
+		return result;
 	}
 
 }

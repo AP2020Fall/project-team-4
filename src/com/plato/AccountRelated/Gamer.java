@@ -1,6 +1,5 @@
 package plato.AccountRelated;
 
-import plato.GameRelated.Game;
 import plato.GameRelated.GameLog;
 
 import java.util.LinkedList;

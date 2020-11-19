@@ -42,11 +42,11 @@ public abstract class Account {
 		// TODO: 11/13/2020 AD
 	}
 
-	public boolean isEmailOK (String email) {
+	public static boolean isEmailOK (String email) {
 		return email.toLowerCase().matches("[a-z0-9_.]+@[gmail|[yahoo|email]]\\.com");
 	}
 
-	public boolean isPhoneNumOK (String phoneNum) {
+	public static boolean isPhoneNumOK (String phoneNum) {
 		return phoneNum.matches("\\d{10,11}");
 	}
 
