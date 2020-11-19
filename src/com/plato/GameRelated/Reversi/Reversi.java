@@ -54,7 +54,7 @@ public class Reversi extends Game {
         }
     }
   
-    public ArrayList<String> showAvailableCoordinates(){return null;}
+    public ArrayList<String> getAvailableCoordinates(){return null;}
 
     public void placeDisk(int x , int y){}
 
@@ -70,15 +70,12 @@ public class Reversi extends Game {
     //gets start and destination and changes the color of in between disks
     private void changeColor(int startx , int starty , int destx , int desty){}
 
-    private void checkDirections(int x , int y){
-       for(Direction dir : Direction.values()){
-           if(doesAnyDiskChangeColor(x , y , dir)){changeColor(x ,y , x+dir.getDeltaX() , y+dir.getDeltaY());}
-       }
+    private void checkDirections(int x , int y) {
+        for (Direction dir : Direction.values()) {
+            if (doesAnyDiskChangeColor(x, y, dir)) {changeColor(x, y, x + dir.getDeltaX(), y + dir.getDeltaY());}
+        }
 
     }
-    public void showDisks(){}
-
-    public void getScore(){}
 
     public static LinkedList<PlayerReversi> getPlayers () {
         return players;

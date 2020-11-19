@@ -20,6 +20,7 @@ public abstract class Account {
 		this.password = password;
 		this.email = email;
 		this.phoneNum = phoneNum;
+		accounts.add(this);
 	}
 	
 	public String getPersonalInfo () {

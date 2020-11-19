@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class PlayerReversi extends Player {
 
     private final String color;
+
     public PlayerReversi(Gamer gamer , String color) {
         super(gamer);
         this.color = color;
