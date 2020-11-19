@@ -20,6 +20,7 @@ public class _Interactor {
 
 	public static void main (String[] args) {
 
+		//noinspection InfiniteLoopStatement
 		while (true) {
 			System.out.println(currentMenu.getMenuOptions());
 			command = scanner.nextLine().trim();
@@ -146,7 +147,7 @@ public class _Interactor {
 		// if admin account hasnt already been created make admin account
 		// 		otherwise ask for initial money amount and make a gamer account
 		if (!Admin.adminHasBeenCreated())
-			accInUse = new Admin(firstName, lastName, username, password, email, phoneNum);
+			new Admin(firstName, lastName, username, password, email, phoneNum);
 		else {
 			// trying to get initial balance
 			//		if input is not a number or is negative try asking for it again
@@ -168,7 +169,7 @@ public class _Interactor {
 				}
 			}
 
-			accInUse = new Gamer(firstName, lastName, username, password, email, phoneNum, initMoney);
+			new Gamer(firstName, lastName, username, password, email, phoneNum, initMoney);
 		}
 	}
 
@@ -191,6 +192,19 @@ public class _Interactor {
 	private static void playCommand () {/*todo*/}
 
 	private static void showPtsGainedCommand () {/*todo*/}
+
+	private static void endProgramCommand () {
+		System.out.print("Are you sure? [y/n]");
+
+		if (scanner.nextLine().toLowerCase().equals("y")) {
+			writeToJSONFiles();
+			System.exit(1);
+		}
+	}
+
+	private static void writeToJSONFiles () {
+
+	}
 //	 static final String
 //			// for account menu
 //			gotoAccMenu = "View account menu",
