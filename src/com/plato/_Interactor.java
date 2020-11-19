@@ -29,8 +29,7 @@ public class _Interactor {
 		}
 	}
 
-	private static void guideToCommandMethod () {
-	}
+	private static void guideToCommandMethod () {/*todo*/}
 
 	public static Matcher getMatcher (String text, String regex) {
 		return Pattern.compile(regex).matcher(text);
@@ -175,7 +174,32 @@ public class _Interactor {
 
 	private static void deleteAccCommand () {/*todo*/}
 
-	private static void loginCommand () {/*todo*/}
+	private static void loginCommand () {/*fixme*/
+
+		// trying to get username
+		//		if account doesnt exists try asking for username again
+		String username = null;
+		do {
+			if (username != null)
+				System.out.println("No account exists with this username.");
+
+			System.out.print("Username: "); username = scanner.nextLine();
+
+		} while (!Account.accountExists(username));
+
+		// trying to get password
+		//		if password is incorrect try asking for username again
+		String password = null;
+		do {
+			if (password != null)
+				System.out.println("Password incorrect.");
+
+			System.out.print("Username: "); password = scanner.nextLine();
+
+		} while (!Account.getAccount(username).isPasswordCorrect(password));
+
+		accInUse = Account.getAccount(username);
+	}
 
 	private static void scoreBoardCommand () {/*todo*/}
 
