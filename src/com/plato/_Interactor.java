@@ -31,7 +31,7 @@ public class _Interactor {
 
 	private static void guideToCommandMethod () {/*todo*/}
 
-	public static Matcher getMatcher (String text, String regex) {
+	private static Matcher getMatcher (String text, String regex) {
 		return Pattern.compile(regex).matcher(text);
 	}
 

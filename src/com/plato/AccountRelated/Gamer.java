@@ -99,5 +99,13 @@ public class Gamer extends Account {
 			faveGames.addLast(gameName);
 	}
 
+	public void participateInEvent (String eventID) {
+		// TODO: 11/20/2020 AD
+	}
+
+	public void stopParticipatingInEvent (String eventID) {
+		// TODO: 11/20/2020 AD
+	}
+
 	// FIXME: if needed add a method that gets the gamer account that a given gameLog belongs to
 }

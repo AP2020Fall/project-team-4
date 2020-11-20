@@ -10,6 +10,7 @@ public class Event {
 	private final String eventID, gameName;
 	private double eventScore;
 	private final LocalDate start, end;
+	private LinkedList<Gamer> participants = new LinkedList<>();
 
 	private static LinkedList<Event> events = new LinkedList<>();
 
@@ -70,5 +71,25 @@ public class Event {
 		return (LinkedList<Event>) getEvents().stream()
 				.filter(Event::isInSession)
 				.collect(Collectors.toList());
+	}
+
+	public void addParticipant (Gamer gamer) {
+		// TODO: 11/20/2020 AD
+	}
+	
+	public void removeParticipant (Gamer gamer) {
+		// TODO: 11/20/2020 AD  
+	}
+
+	public boolean participantExists (String username) {
+		// TODO: 11/20/2020 AD
+	}
+
+	public Gamer getParticipant (String username) {
+		// TODO: 11/20/2020 AD
+	}
+
+	public LinkedList<Gamer> getParticipants () {
+		return participants;
 	}
 }
