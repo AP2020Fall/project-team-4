@@ -173,7 +173,11 @@ public class _Interactor {
 
 	private static void gameStatsForGameCommand () {/*todo*/}
 
-	private static void logoutCommand () {/*todo*/}
+	private static void logoutCommand () {/*fixme test*/
+		accInUse = null;
+		currentMenu = Menu.REGISTER_LOGIN_MENU;
+		gameMenuName = null;
+	}
 
 	private static void showPtsCommand () {/*todo*/}
 
