@@ -47,7 +47,7 @@ public abstract class Account {
 	}
 
 	public static boolean isEmailOK (String email) {
-		return email.toLowerCase().matches("[a-z0-9_.]+@[gmail|[yahoo|email]]\\.com");
+		return email.matches("[a-z0-9_.]+@[a-z]+\\.com");
 	}
 
 	public static boolean isPhoneNumOK (String phoneNum) {

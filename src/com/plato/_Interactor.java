@@ -15,31 +15,59 @@ public class _Interactor {
 	private static Account accInUse = null;
 
 	// io stuff
-	private static String command;
+	private static int command;
 	private static Scanner scanner = new Scanner(System.in);
 
 	public static void main (String[] args) {
 
-		//noinspection InfiniteLoopStatement
 		while (true) {
-			System.out.println(currentMenu.getMenuOptions());
-			command = scanner.nextLine().trim();
+			System.out.println(currentMenu.getNumerizedMenuOptions());
+			command = Integer.parseInt(scanner.nextLine().trim());
 
 			guideToCommandMethod();
+
+			for (int i = 0; i < 3; i++) System.out.println();
 		}
 	}
 
-	private static void guideToCommandMethod () {/*todo*/}
+	private static void guideToCommandMethod () {/*todo*/
+		switch (currentMenu) {
+			case REGISTER_LOGIN_MENU -> {
+				if (!Admin.adminHasBeenCreated()) {
+					if (command == 1) registerCommand();
+				}
+				else {
+					if (command == 2) loginCommand();
+					else if (command == 3) deleteAccCommand();
+				}
+			}
+			default -> {
+
+				if (currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size())
+					gotoAccMenuCommand();
+
+				else if (Menu.canBack()) {
+					if (currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size() - 1)
+						backCommand();
+					else if (!currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size())
+						backCommand();
+				}
+			}
+		}
+	}
 
 	private static Matcher getMatcher (String text, String regex) {
 		return Pattern.compile(regex).matcher(text);
 	}
 
-	private static void gotoAccMenuCommand () {/*todo*/}
+	private static void gotoAccMenuCommand () {/*todo*/
+		currentMenu = Menu.ACC_MENU;
+		Menu.ACC_MENU.newMenu();
+	}
 
 	private static void backCommand () {/*todo*/}
 
-	private static void viewPersonalInfoCommand () {/*fixme*/
+	private static void viewPersonalInfoCommand () {/*fixme test*/
 		System.out.println(accInUse.getPersonalInfo());
 	}
 
@@ -130,7 +158,7 @@ public class _Interactor {
 
 			System.out.print("Email Address: "); email = scanner.nextLine();
 
-		} while (Account.isEmailOK(email));
+		} while (!Account.isEmailOK(email));
 
 		// trying to get phoneNum
 		//		if phoneNumber format is invalid try asking for it again
@@ -141,12 +169,14 @@ public class _Interactor {
 
 			System.out.print("Phone Number: "); phoneNum = scanner.nextLine();
 
-		} while (Account.isPhoneNumOK(phoneNum));
+		} while (!Account.isPhoneNumOK(phoneNum));
 
 		// if admin account hasnt already been created make admin account
 		// 		otherwise ask for initial money amount and make a gamer account
-		if (!Admin.adminHasBeenCreated())
+		if (!Admin.adminHasBeenCreated()) {
 			new Admin(firstName, lastName, username, password, email, phoneNum);
+			System.out.println("\tAdmin account created successfully.");
+		}
 		else {
 			// trying to get initial balance
 			//		if input is not a number or is negative try asking for it again
@@ -169,6 +199,7 @@ public class _Interactor {
 			}
 
 			new Gamer(firstName, lastName, username, password, email, phoneNum, initMoney);
+			System.out.println("\tGamer account created successfully.");
 		}
 	}
 
@@ -335,12 +366,12 @@ enum Menu {
 		return menuHistory.size() != 0;
 	}
 
+	public boolean canGoToAccMenu () {
+		return (this != ACC_MENU && this != REGISTER_LOGIN_MENU);
+	}
+
 	public LinkedList<String> getMenuOptions () {
 		LinkedList<String> result = new LinkedList<>();
-
-		if (this != ACC_MENU) {
-			result.add("View account menu");
-		}
 		switch (this) {
 			case ACC_MENU -> {// fixme is changing password and editing fields a submenu for viewing personal info
 				result.add("View personal info");
@@ -356,10 +387,12 @@ enum Menu {
 
 			case REGISTER_LOGIN_MENU -> {
 				// user has to go to register menu from login menu after first registery
-				if (Admin.adminHasBeenCreated())
-					result.add("Register < username, password>");
-
-				result.add(""); // FIXME: 11/19/2020 AD
+				//		if admin account has been created user can only register
+				result.add("Register");
+				if (Admin.adminHasBeenCreated()) {
+					result.add("Delete");
+					result.add("Login");
+				}
 			}
 
 			case FRIENDS_PAGE -> result.add("");
@@ -372,8 +405,35 @@ enum Menu {
 		if (canBack())
 			result.add("back");
 
+		if (canGoToAccMenu()) {
+			result.add("View account menu");
+		}
+
 		return result;
 	}
 
+	public String getNumerizedMenuOptions () {
+		StringBuilder result = new StringBuilder();
+		result.append(this.toString() + ":\n");
+		int i = 1;
+		getMenuOptions().forEach(option -> result.append(String.format("%d. %s%n", i, option)));
+
+		return result.toString();
+	}
+
+	@Override
+	public String toString () {
+		switch (this) {
+			case FRIENDS_PAGE -> {return "Friends Page";}
+			case REGISTER_LOGIN_MENU -> {
+				return (!Admin.adminHasBeenCreated() ? "Register Menu" : "Login Menu");
+			}
+			case MAIN_MENU_A, MAIN_MENU_G -> {return "Main Menu";}
+			case ACC_MENU -> {return "Account Page";}
+			case GAME_MENU -> {return "Game Page";}
+			case GAMES_MENU -> {return "Games Menu";}
+		}
+		return "";
+	}
 }
 

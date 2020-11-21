@@ -83,10 +83,12 @@ public class Event {
 
 	public boolean participantExists (String username) {
 		// TODO: 11/20/2020 AD
+		return false;
 	}
 
 	public Gamer getParticipant (String username) {
 		// TODO: 11/20/2020 AD
+		return null;
 	}
 
 	public LinkedList<Gamer> getParticipants () {
