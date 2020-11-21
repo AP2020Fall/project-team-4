@@ -55,7 +55,7 @@ public abstract class Game {
 		return getClass().getSimpleName();
 	}
 
-	public boolean gameNameIsValid (String gameName) {
+	public static boolean gameNameIsValid (String gameName) {
 		// TODO: 11/13/2020 AD
 		return false;
 	}

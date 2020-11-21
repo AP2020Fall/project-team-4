@@ -3,6 +3,9 @@ package plato;
 import plato.AccountRelated.Account;
 import plato.AccountRelated.Admin;
 import plato.AccountRelated.Gamer;
+import plato.GameRelated.BattleSea.BattleSea;
+import plato.GameRelated.Game;
+import plato.GameRelated.Reversi.Reversi;
 
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -13,6 +16,7 @@ public class _Interactor {
 
 	private static Menu currentMenu = Menu.REGISTER_LOGIN_MENU; // FIXME: initialize
 	private static Account accInUse = null;
+	private static Class gameMenuName = null;
 
 	// io stuff
 	private static int command;
@@ -41,6 +45,10 @@ public class _Interactor {
 					else if (command == 3) deleteAccCommand();
 				}
 			}
+			case GAMES_MENU -> {
+				if (command == 1)
+					openGameCommand();
+			}
 			default -> {
 
 				if (currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size())
@@ -61,11 +69,12 @@ public class _Interactor {
 	}
 
 	private static void gotoAccMenuCommand () {/*fixme test*/
-		currentMenu = Menu.ACC_MENU;
-		Menu.ACC_MENU.newMenu();
+		currentMenu = Menu.gotoMenu(Menu.ACC_MENU);
 	}
 
 	private static void backCommand () {/*fixme test*/
+		if (currentMenu == Menu.GAME_MENU)
+			gameMenuName = null;
 		currentMenu = Menu.backAndReturnBack();
 	}
 
@@ -117,7 +126,23 @@ public class _Interactor {
 
 	private static void viewAccCommand () {/*todo*/}
 
-	private static void openGameCommand () {/*todo*/}
+	private static void openGameCommand () {/*fixme test*/
+		String gameName = null;
+		do {
+			if (gameName != null)
+				System.out.println("Game name is invalid.");
+
+			System.out.print("Game name: "); gameName = scanner.nextLine();
+
+		} while (!Game.gameNameIsValid(gameName));
+
+		if (gameName.equals(BattleSea.class.getSimpleName()))
+			gameMenuName = BattleSea.class;
+		else
+			gameMenuName = Reversi.class;
+
+		currentMenu = Menu.gotoMenu(Menu.GAME_MENU);
+	}
 
 	private static void showFrndsCommand () {/*todo*/}
 
@@ -352,6 +377,11 @@ enum Menu {
 	GAME_MENU; // fixme might need adding one for each game
 	private static final LinkedList<Menu> menuHistory = new LinkedList<>();
 
+	public static Menu gotoMenu (Menu menu) {
+		menu.newMenu();
+		return menu;
+	}
+
 	public void newMenu () {
 		menuHistory.addLast(this);
 	}
@@ -399,7 +429,7 @@ enum Menu {
 
 			case FRIENDS_PAGE -> result.add("");
 
-			case GAMES_MENU -> result.add("");
+			case GAMES_MENU -> result.add("Open game");
 
 			case GAME_MENU -> result.add("");
 		}
