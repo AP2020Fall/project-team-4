@@ -2,9 +2,9 @@ package plato;
 
 import plato.AccountRelated.Account;
 import plato.AccountRelated.Admin;
+import plato.AccountRelated.AdminGameReco;
 import plato.AccountRelated.Gamer;
 import plato.GameRelated.BattleSea.BattleSea;
-import plato.GameRelated.Game;
 import plato.GameRelated.Reversi.Reversi;
 
 import java.util.Arrays;
@@ -174,9 +174,11 @@ public class _Interactor {
 	private static void gameStatsForGameCommand () {/*todo*/}
 
 	private static void logoutCommand () {/*fixme test*/
-		accInUse = null;
-		currentMenu = Menu.REGISTER_LOGIN_MENU;
-		gameMenuName = null;
+		if (accInUse instanceof Gamer) { // fixme check if this is necessary
+			accInUse = null;
+			currentMenu = Menu.REGISTER_LOGIN_MENU;
+			gameMenuName = null;
+		}
 	}
 
 	private static void showPtsCommand () {/*todo*/}
@@ -187,9 +189,27 @@ public class _Interactor {
 
 	private static void lastGamePlayedCommand () {/*todo*/}
 
-	private static void viewAdminRecosCommand () {/*todo*/}
+	private static void viewAdminRecosCommand () {/*fixme test*/
+		AtomicInteger count = new AtomicInteger(1);
+		for (AdminGameReco gameReco : AdminGameReco.getRecommendations((Gamer) accInUse)) {
+			System.out.printf("%d. %s%n", count.getAndIncrement(), gameReco.getGameName());
+		}
+	}
 
-	private static void chooseAdminRecoCommand () {/*todo*/}
+	private static void chooseAdminRecoCommand () {/*fixme test*/
+		String gameName = AdminGameReco.getRecommendations().get(command - 1).getGameName();
+
+		switch (gameName) {
+			case BattleSea.class.getSimpleName() -> {
+				gameMenuName = BattleSea.class;
+			}
+			case Reversi.class.getSimpleName() -> {
+				gameMenuName = Reversi.class;
+
+			}
+			default -> {return;}
+		}
+	}
 
 	private static void sendFrndReqFromMainMenuCommand () {/*todo*/}
 
@@ -212,19 +232,16 @@ public class _Interactor {
 	private static void viewAccCommand () {/*todo*/}
 
 	private static void openGameCommand () {/*fixme test*/
-		String gameName = null;
-		do {
-			if (gameName != null)
-				System.out.println("Game name is invalid.");
 
-			System.out.print("Game name: "); gameName = scanner.nextLine();
+		System.out.printf("1. %s%n", BattleSea.class.getSimpleName());
+		System.out.printf("2. %s%n", Reversi.class.getSimpleName());
 
-		} while (!Game.gameNameIsValid(gameName));
+		System.out.print("Choose Game: "); int game = Integer.parseInt(scanner.nextLine());
 
-		if (gameName.equals(BattleSea.class.getSimpleName()))
-			gameMenuName = BattleSea.class;
-		else
-			gameMenuName = Reversi.class;
+		switch (game) {
+			case 1 -> gameMenuName = BattleSea.class;
+			case 2 -> gameMenuName = Reversi.class;
+		}
 
 		currentMenu = Menu.gotoMenu(Menu.GAME_MENU);
 	}
