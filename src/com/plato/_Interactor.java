@@ -9,6 +9,7 @@ import plato.GameRelated.Reversi.Reversi;
 
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,6 +36,8 @@ public class _Interactor {
 	}
 
 	private static void guideToCommandMethod () {/*todo*/
+		if (command == currentMenu.getMenuOptions().size())
+			endProgramCommand();
 		switch (currentMenu) {
 			case REGISTER_LOGIN_MENU -> {
 				if (!Admin.adminHasBeenCreated()) {
@@ -51,13 +54,13 @@ public class _Interactor {
 			}
 			default -> {
 
-				if (currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size())
+				if (currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size()-1)
 					gotoAccMenuCommand();
 
 				else if (Menu.canBack()) {
-					if (currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size() - 1)
+					if (currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size() - 2)
 						backCommand();
-					else if (!currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size())
+					else if (!currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size()-1)
 						backCommand();
 				}
 			}
@@ -441,14 +444,19 @@ enum Menu {
 			result.add("View account menu");
 		}
 
+		result.add("Exit program");
+
 		return result;
 	}
 
 	public String getNumerizedMenuOptions () {
 		StringBuilder result = new StringBuilder();
 		result.append(this.toString() + ":\n");
-		int i = 1;
-		getMenuOptions().forEach(option -> result.append(String.format("%d. %s%n", i, option)));
+		AtomicInteger optionNum = new AtomicInteger(1);
+		getMenuOptions().forEach(option -> {
+			result.append(String.format("%d. %s%n", optionNum.get(), option));
+			optionNum.getAndIncrement();
+		});
 
 		return result.toString();
 	}
