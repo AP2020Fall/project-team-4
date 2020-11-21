@@ -1,12 +1,12 @@
 package plato;
 
-import plato.AccountRelated.Account;
-import plato.AccountRelated.Admin;
-import plato.AccountRelated.AdminGameReco;
-import plato.AccountRelated.Gamer;
+import plato.AccountRelated.*;
 import plato.GameRelated.BattleSea.BattleSea;
 import plato.GameRelated.Reversi.Reversi;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -213,7 +213,62 @@ public class _Interactor {
 
 	private static void sendFrndReqFromMainMenuCommand () {/*todo*/}
 
-	private static void addEventCommand () {/*todo*/}
+	private static void addEventCommand () {/*fixme test*/
+
+		System.out.printf("1. %s%n", BattleSea.class.getSimpleName());
+		System.out.printf("2. %s%n", Reversi.class.getSimpleName());
+		int game = -1;
+		do {
+			if (game != -1) System.out.println("Invalid input.");
+			System.out.print("Choose Game: "); game = Integer.parseInt(scanner.nextLine());
+		} while (game != 1 && game != 2);
+
+		String gameName = "";
+		switch (game) {
+			case 1 -> gameName = BattleSea.class.getSimpleName();
+			case 2 -> gameName = Reversi.class.getSimpleName();
+		}
+
+		LocalDate start;
+		while (true) {
+			try {
+				System.out.print("Start Date[d-MMM-yyyy]: ");
+				start = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("d-MMM-yyyy"));
+				if (!start.isBefore(LocalDate.now()))
+					break;
+				else
+					System.out.println("Start date has already passed.");
+			} catch (DateTimeParseException e) {
+				System.out.println("Invalid start date format.");
+			}
+		}
+
+		LocalDate end;
+		while (true) {
+			try {
+				System.out.print("End Date[d-MMM-yyyy]: ");
+				end = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("d-MMM-yyyy"));
+				if (end.isAfter(start)) // fixme check for end.isEqual(start) if needed
+					break;
+				else
+					System.out.println("End date must be after start date."); // fixme "or the same day as" if necessary
+			} catch (DateTimeParseException e) {
+				System.out.println("Invalid end date format.");
+			}
+		}
+
+		double eventPrize;
+		while (true) {
+			try {
+				System.out.print("Event Prize: "); eventPrize = Double.parseDouble(scanner.nextLine());
+				break;
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid format.");
+			}
+		}
+
+		new Event(gameName, eventPrize, start, end);
+	}
 
 	private static void viewEventsCommand () {/*todo*/}
 
