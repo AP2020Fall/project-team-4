@@ -48,6 +48,7 @@ public class _Interactor {
 					else if (command == 3) deleteAccCommand();
 				}
 			}
+
 			case GAMES_MENU -> {
 				if (command == 1)
 					openGameCommand();
@@ -85,7 +86,20 @@ public class _Interactor {
 		System.out.println(accInUse.getPersonalInfo());
 	}
 
-	private static void changePWCommand () {/*todo*/}
+	private static void changePWCommand () {/*fixme test*/
+		String oldPW = null;
+		do {
+			if (oldPW != null)
+				System.out.println("Password incorrect.");
+
+			System.out.print("Username: "); oldPW = scanner.nextLine();
+
+		} while (!accInUse.isPasswordCorrect(oldPW));
+
+		System.out.print("Username: "); String newPW = scanner.nextLine();
+
+		accInUse.editField("password", newPW);
+	}
 
 	private static void editAccFieldCommand () {/*todo*/}
 
@@ -253,7 +267,7 @@ public class _Interactor {
 			if (password != null)
 				System.out.println("Password incorrect.");
 
-			System.out.print("Username: "); password = scanner.nextLine();
+			System.out.print("Password: "); password = scanner.nextLine();
 
 		} while (!Account.getAccount(username).isPasswordCorrect(password));
 
@@ -282,7 +296,7 @@ public class _Interactor {
 			if (password != null)
 				System.out.println("Password incorrect.");
 
-			System.out.print("Username: "); password = scanner.nextLine();
+			System.out.print("Password: "); password = scanner.nextLine();
 
 		} while (!Account.getAccount(username).isPasswordCorrect(password));
 
