@@ -7,6 +7,7 @@ import plato.GameRelated.BattleSea.BattleSea;
 import plato.GameRelated.Game;
 import plato.GameRelated.Reversi.Reversi;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -92,16 +93,79 @@ public class _Interactor {
 			if (oldPW != null)
 				System.out.println("Password incorrect.");
 
-			System.out.print("Username: "); oldPW = scanner.nextLine();
+			System.out.print("Old password: "); oldPW = scanner.nextLine();
 
 		} while (!accInUse.isPasswordCorrect(oldPW));
 
-		System.out.print("Username: "); String newPW = scanner.nextLine();
+		System.out.print("New password: "); String newPW = scanner.nextLine();
 
 		accInUse.editField("password", newPW);
 	}
 
-	private static void editAccFieldCommand () {/*todo*/}
+	private static void editAccFieldCommand () {/*fixme test*/
+		LinkedList<String> availableFields = (LinkedList<String>) Arrays.asList(new String[]{
+				"First Name",
+				"Last Name",
+				"Username",
+				"Email",
+				"Phone Number"});
+		System.out.println("Choose field to edit:");
+		for (String field : availableFields) {
+			System.out.printf("%d. %s%n", availableFields.indexOf(field) + 1, field);
+		}
+
+		command = Integer.parseInt(scanner.nextLine().trim());
+
+		switch (command) {
+			case 1 -> {
+				System.out.print("New First name: "); accInUse.editField("first name", scanner.nextLine());
+				System.out.println("First name changed successfully.");
+			}
+			case 2 -> {
+				System.out.print("New Last name: "); accInUse.editField("last name", scanner.nextLine());
+				System.out.println("Last name changed successfully.");
+			}
+			case 3 -> {
+				String newUsername = null;
+				do {
+					if (newUsername != null)
+						System.out.println("An Account already exists with this newUsername.");
+
+					System.out.print("New Username: "); newUsername = scanner.nextLine();
+
+				} while (Account.accountExists(newUsername));
+
+				accInUse.editField("username", scanner.nextLine());
+				System.out.println("Username changed successfully.");
+			}
+			case 4 -> {
+				String newEmail = null;
+				do {
+					if (newEmail != null)
+						System.out.println("Email Format is invalid.");
+
+					System.out.print("New email address: "); newEmail = scanner.nextLine();
+
+				} while (!Account.isEmailOK(newEmail));
+				accInUse.editField("email", newEmail);
+				System.out.println("Email changed successfully.");
+			}
+			case 5 -> {
+				String newPhoneNum = null;
+				do {
+					if (newPhoneNum != null)
+						System.out.println("Phone Format is invalid.");
+
+					System.out.print("New phone Number: "); newPhoneNum = scanner.nextLine();
+
+				} while (!Account.isPhoneNumOK(newPhoneNum));
+				accInUse.editField("phone num", newPhoneNum);
+				System.out.println("Phone number changed successfully.");
+			}
+			default -> System.out.println("Invalid field.");
+		}
+
+	}
 
 	private static void viewStatsCommand () {/*todo*/}
 
@@ -219,7 +283,7 @@ public class _Interactor {
 		// 		otherwise ask for initial money amount and make a gamer account
 		if (!Admin.adminHasBeenCreated()) {
 			new Admin(firstName, lastName, username, password, email, phoneNum);
-			System.out.println("\tAdmin account created successfully.");
+			System.out.println("Admin account created successfully.");
 		}
 		else {
 			// trying to get initial balance
@@ -243,7 +307,7 @@ public class _Interactor {
 			}
 
 			new Gamer(firstName, lastName, username, password, email, phoneNum, initMoney);
-			System.out.println("\tGamer account created successfully.");
+			System.out.println("Gamer account created successfully.");
 		}
 	}
 
