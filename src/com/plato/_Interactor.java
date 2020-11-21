@@ -60,12 +60,14 @@ public class _Interactor {
 		return Pattern.compile(regex).matcher(text);
 	}
 
-	private static void gotoAccMenuCommand () {/*todo*/
+	private static void gotoAccMenuCommand () {/*fixme test*/
 		currentMenu = Menu.ACC_MENU;
 		Menu.ACC_MENU.newMenu();
 	}
 
-	private static void backCommand () {/*todo*/}
+	private static void backCommand () {/*fixme test*/
+		currentMenu = Menu.backAndReturnBack();
+	}
 
 	private static void viewPersonalInfoCommand () {/*fixme test*/
 		System.out.println(accInUse.getPersonalInfo());
