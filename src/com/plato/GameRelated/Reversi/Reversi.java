@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Reversi extends Game {
+    private static String details;
 
     private static String[][] board = new String[8][8];
     private static LinkedList<PlayerReversi> players = new LinkedList<>();
@@ -90,6 +91,14 @@ public class Reversi extends Game {
     private boolean isBoardFull(){return false;}
 
     private boolean hasPlayerMoved(){return true;}
+
+    public static String getDetails () {
+        return details;
+    }
+
+    public static void setDetails (String details) {
+        Reversi.details = details;
+    }
 }
 
 enum Direction{

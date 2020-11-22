@@ -451,7 +451,15 @@ public class _Interactor {
 
 	private static void scoreBoardCommand () {/*todo*/}
 
-	private static void howToPlayCommand () {/*todo*/}
+	private static void howToPlayCommand () {/*todo*/
+
+		if (BattleSea.class.equals(gameMenuName)) {
+			System.out.println(BattleSea.getDetails());
+		}
+		else if (Reversi.class.equals(gameMenuName)) {
+			System.out.println(Reversi.getDetails());
+		}
+	}
 
 	private static void showLogCommand () {/*todo*/}
 
