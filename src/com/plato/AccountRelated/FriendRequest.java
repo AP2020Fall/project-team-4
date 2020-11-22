@@ -17,6 +17,7 @@ public class FriendRequest {
 	public void conclude (boolean accepted) {
 		if (accepted) {
 			from.addFrnd(to);
+			to.addFrnd(from);
 		}
 		allfriendRequests.remove(this);
 	}
@@ -33,13 +34,13 @@ public class FriendRequest {
 		return allfriendRequests;
 	}
 
-	public static FriendRequest getFriendRequest (Gamer from, Gamer to) {
+	public static FriendRequest getFriendReqs (Gamer from, Gamer to) {
 		return allfriendRequests.stream()
 				.filter(friendRequest -> friendRequest.to.equals(to) && friendRequest.from.equals(from))
 				.findAny().get();
 	}
 
-	public static LinkedList<FriendRequest> getFriendRequest (Gamer to) {
+	public static LinkedList<FriendRequest> getFriendReqs (Gamer to) {
 		return (LinkedList<FriendRequest>) allfriendRequests.stream()
 				.filter(friendRequest -> friendRequest.to.equals(to))
 				.collect(Collectors.toList());

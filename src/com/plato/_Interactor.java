@@ -4,7 +4,6 @@ import plato.AccountRelated.*;
 import plato.GameRelated.BattleSea.BattleSea;
 import plato.GameRelated.Reversi.Reversi;
 
-import java.io.Console;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,7 +12,6 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.ToIntFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -330,7 +328,25 @@ public class _Interactor {
 
 	private static void viewFrndCommand () {/*todo*/}
 
-	private static void sendFrndReqFromFrndMenuCommand () {/*todo*/}
+	private static void sendFrndReqFromFrndMenuCommand () {/*fixme test*/
+		String usernameTo = null;
+
+		do {
+			if (usernameTo != null) {
+				if (((Gamer) accInUse).frndExists(usernameTo))
+					System.out.println("You already are friends with " + usernameTo);
+				else if (!(Account.accountExists(usernameTo) && Account.getAccount(usernameTo) instanceof Gamer))
+					System.out.println("Account doesn't exist.");
+			}
+
+			System.out.print("Username: "); usernameTo = scanner.nextLine();
+
+		} while (
+				((Gamer) accInUse).frndExists(usernameTo) ||
+						!(Account.accountExists(usernameTo) && Account.getAccount(usernameTo) instanceof Gamer)); // fixme forgot a condition add if remmebered
+
+		((Gamer) accInUse).sendFrndReq(usernameTo);
+	}
 
 	private static void showFrndReqsCommand () {/*todo*/}
 
