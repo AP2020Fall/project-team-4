@@ -62,11 +62,6 @@ public class BattleSea extends Game {
 		return details;
 	}
 
-	@Override
-	public String getGameName () {
-		return "BattleSea";
-	}
-
 	public static LinkedList<Ship[]> get5RandBoards () {
 		// TODO: 11/17/2020 AD
 		return null;

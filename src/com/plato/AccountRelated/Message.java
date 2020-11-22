@@ -32,4 +32,8 @@ public class Message {
 	public LocalDateTime getDateTime () {
 		return dateTime;
 	}
+
+	public String getText () {
+		return text;
+	}
 }

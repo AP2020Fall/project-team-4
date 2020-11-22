@@ -4,13 +4,16 @@ import plato.AccountRelated.*;
 import plato.GameRelated.BattleSea.BattleSea;
 import plato.GameRelated.Reversi.Reversi;
 
+import java.io.Console;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.ToIntFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -191,9 +194,18 @@ public class _Interactor {
 		}
 	}
 
-	private static void viewAdminMsgsCommand () {/*todo*/}
+	private static void viewAdminMsgsCommand () {/*fixme test*/
+		Message.getAllMessages().sort(Comparator.comparing(Message::getDateTime)); // fixme fix sort if necessary also try reversed
+		for (Message message : Message.getAllMessages())
+			System.out.printf("  >%s %s%n",
+					message.getDateTime().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
+					message.getText()
+			);
+	}
 
-	private static void lastGamePlayedCommand () {/*todo*/}
+	private static void lastGamePlayedCommand () {/*fixme test*/
+		System.out.println(((Gamer) accInUse).getLastPlayedGame() + " was the last game you played.");
+	}
 
 	private static void viewAdminRecosCommand () {/*fixme test*/
 		AtomicInteger count = new AtomicInteger(1);
@@ -203,18 +215,7 @@ public class _Interactor {
 	}
 
 	private static void chooseAdminRecoCommand () {/*fixme test*/
-		String gameName = AdminGameReco.getRecommendations().get(command - 1).getGameName();
-
-		switch (gameName) {
-			case BattleSea.class.getSimpleName() -> {
-				gameMenuName = BattleSea.class;
-			}
-			case Reversi.class.getSimpleName() -> {
-				gameMenuName = Reversi.class;
-
-			}
-			default -> {return;}
-		}
+		gameMenuName = AdminGameReco.getRecommendations().get(command - 1).getClass();
 	}
 
 	private static void sendFrndReqFromMainMenuCommand () {/*todo*/}
@@ -451,7 +452,7 @@ public class _Interactor {
 
 	private static void scoreBoardCommand () {/*todo*/}
 
-	private static void howToPlayCommand () {/*todo*/
+	private static void howToPlayCommand () {/*fixme test*/
 
 		if (BattleSea.class.equals(gameMenuName)) {
 			System.out.println(BattleSea.getDetails());
@@ -467,7 +468,9 @@ public class _Interactor {
 
 	private static void showGameCountCommand () {/*todo*/}
 
-	private static void addToFavesCommand () {/*todo*/}
+	private static void addToFavesCommand () {/*fixme test*/
+		((Gamer) accInUse).addToFaveGames(gameMenuName.getSimpleName());
+	}
 
 	private static void playCommand () {/*todo*/}
 
