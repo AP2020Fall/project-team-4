@@ -42,10 +42,6 @@ public class Gamer extends Account {
 		return faveGames;
 	}
 
-	public LinkedList<Message> getMessages () {
-		return Message.getMessages(this);
-	}
-
 	public static LinkedList<Gamer> getGamers () {
 		return ((LinkedList<Gamer>) getAccounts().stream()
 				.filter(account -> account instanceof Gamer)
@@ -61,12 +57,12 @@ public class Gamer extends Account {
 		new FriendRequest(this, (Gamer) getAccount(usernameTo));
 	}
 
-	public void addFrnd(Gamer account) {
-		frnds.addLast(account);
+	public void addFrnd(Gamer friend) {
+		frnds.addLast(friend);
 	}
 
-	public void removeFrnd(Gamer account) {
-		frnds.remove(account);
+	public void removeFrnd(Gamer friend) {
+		frnds.remove(friend);
 	}
 
 	public LinkedList<Gamer> getFrnds () {

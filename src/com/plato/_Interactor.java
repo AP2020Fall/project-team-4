@@ -308,9 +308,25 @@ public class _Interactor {
 		currentMenu = Menu.gotoMenu(Menu.GAME_MENU);
 	}
 
-	private static void showFrndsCommand () {/*todo*/}
+	private static void showFrndsCommand () {/*fixme test*/
+		for (Gamer frnd : ((Gamer) accInUse).getFrnds())
+			System.out.printf("%t%s%n", frnd.getUsername());
 
-	private static void removeFrndCommand () {/*todo*/}
+	}
+
+	private static void removeFrndCommand () {/*fixme test*/
+		String username = null;
+
+		do {
+			if (username != null)
+				System.out.println("You don't have a friend with this username.");
+
+			System.out.print("Username: "); username = scanner.nextLine();
+
+		} while (!((Gamer) accInUse).frndExists(username));
+
+		((Gamer) accInUse).removeFrnd(((Gamer) accInUse).getFrnd(username));
+	}
 
 	private static void viewFrndCommand () {/*todo*/}
 
