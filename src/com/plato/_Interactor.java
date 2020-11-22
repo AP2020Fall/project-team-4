@@ -341,18 +341,48 @@ public class _Interactor {
 
 			System.out.print("Username: "); usernameTo = scanner.nextLine();
 
-		} while (
-				((Gamer) accInUse).frndExists(usernameTo) ||
-						!(Account.accountExists(usernameTo) && Account.getAccount(usernameTo) instanceof Gamer)); // fixme forgot a condition add if remmebered
+		} while (((Gamer) accInUse).frndExists(usernameTo) ||
+				!(Account.accountExists(usernameTo) && Account.getAccount(usernameTo) instanceof Gamer)); // fixme forgot a condition add if remmebered
 
 		((Gamer) accInUse).sendFrndReq(usernameTo);
 	}
 
-	private static void showFrndReqsCommand () {/*todo*/}
+	private static void showFrndReqsCommand () {/*fixme test*/
 
-	private static void acceptFrndReqCommand () {/*todo*/}
+		for (FriendRequest friendRequest : ((Gamer) accInUse).getFriendRequestsGotten()) {
+			System.out.println("\t" + friendRequest.getFrom().getUsername());
+		}
+	}
 
-	private static void declineFrndReqCommand () {/*todo*/}
+	private static void acceptFrndReqCommand () {/*fixme test*/
+		String usernameFrom = null;
+
+		do {
+			if (usernameFrom != null)
+				System.out.println("You don't have a friend with this username.");
+
+			System.out.print("Username: "); usernameFrom = scanner.nextLine();
+
+		} while (!FriendRequest.frndReqExists(usernameFrom));
+
+		FriendRequest.getFriendReq(((Gamer) Account.getAccount(usernameFrom)), ((Gamer) accInUse))
+				.conclude(true);
+	}
+
+	private static void declineFrndReqCommand () {/*fixme test*/
+		String usernameFrom = null;
+
+		do {
+			if (usernameFrom != null)
+				System.out.println("You don't have a friend with this username.");
+
+			System.out.print("Username: "); usernameFrom = scanner.nextLine();
+
+		} while (!FriendRequest.frndReqExists(usernameFrom));
+
+		FriendRequest.getFriendReq(((Gamer) Account.getAccount(usernameFrom)), ((Gamer) accInUse))
+				.conclude(false);
+	}
 
 	private static void registerCommand () {/*fixme test*/
 

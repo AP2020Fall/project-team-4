@@ -34,15 +34,20 @@ public class FriendRequest {
 		return allfriendRequests;
 	}
 
-	public static FriendRequest getFriendReqs (Gamer from, Gamer to) {
+	public static FriendRequest getFriendReq (Gamer from, Gamer to) {
 		return allfriendRequests.stream()
 				.filter(friendRequest -> friendRequest.to.equals(to) && friendRequest.from.equals(from))
 				.findAny().get();
 	}
 
-	public static LinkedList<FriendRequest> getFriendReqs (Gamer to) {
+	public static LinkedList<FriendRequest> getFriendReq (Gamer to) {
 		return (LinkedList<FriendRequest>) allfriendRequests.stream()
 				.filter(friendRequest -> friendRequest.to.equals(to))
 				.collect(Collectors.toList());
+	}
+
+	public static boolean frndReqExists (String usernameFrom) {
+		return allfriendRequests.stream()
+				.anyMatch(friendRequest -> friendRequest.getFrom().getUsername().equals(usernameFrom));
 	}
 }

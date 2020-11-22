@@ -81,7 +81,7 @@ public class Gamer extends Account {
 	}
 
 	public LinkedList<FriendRequest> getFriendRequestsGotten () {
-		return FriendRequest.getFriendReqs(this);
+		return FriendRequest.getFriendReq(this);
 	}
 
 	public LinkedList<AdminGameReco> getAdminGameRecosGotten () {
