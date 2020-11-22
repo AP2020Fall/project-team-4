@@ -183,7 +183,13 @@ public class _Interactor {
 
 	private static void showPtsCommand () {/*todo*/}
 
-	private static void viewFavGamesCommand () {/*todo*/}
+	private static void viewFavGamesCommand () {/*fixme test*/
+
+		AtomicInteger count = new AtomicInteger(1);
+		for (String faveGameName : ((Gamer) accInUse).getFaveGames()) {
+			System.out.printf("%d. %s%n", count.getAndIncrement(), faveGameName);
+		}
+	}
 
 	private static void viewAdminMsgsCommand () {/*todo*/}
 
