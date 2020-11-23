@@ -46,11 +46,16 @@ public class Reversi extends Game {
         return board;
     }
 
+    //empties board , blank space is shown with -
     public void emptyBoard(){
         for(int i=0 ; i<8 ; i++){
             for(int j=0 ; j<8 ; j++){
                 //fixme 4 starting disks
-                board[i][j] = " ";
+                if(i==3 && j==3){board[i][j] = "w";}
+                else if(i==3 && j==4){board[i][j] = "b";}
+                else if(i==4 && j==3){board[i][j] = "b";}
+                else if(i==4 && j==3){board[i][j] = "w";}
+                else{board[i][j] = "-";}
             }
         }
     }
@@ -82,13 +87,21 @@ public class Reversi extends Game {
         return players;
     }
 
-    public void addMove(int x , int y , String color){}
+    public void addMove(int x , int y , String color){
+        moves.add(color + " placed disk in coordinate (" + x + "," + y + ")");
+    }
 
     public ArrayList<String> getMoves() {
         return moves;
     }
 
-    private boolean isBoardFull(){return false;}
+    private boolean isBoardFull(){
+        for(int i=0 ; i<8 ; i++){
+            for(int j=0 ; j<8 ; j++){
+                if(board[i][j].equals("-")){return false;}
+            }
+        }
+        return true;}
 
     private boolean hasPlayerMoved(){return true;}
 
