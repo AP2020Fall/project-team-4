@@ -35,13 +35,18 @@ public abstract class Game {
 		gamesInSession.add(this);
 	}
 
+	/**
+	 * if turn = 0 it is player one turn
+	 * if turn = 1 it is player two turn
+	 */
 	public void nextTurn(){
-		// TODO: 11/17/2020 AD  
+		if(turn==0){turn=1;}
+		else if(turn==1){turn=0;}
 	}
 
 	public Gamer getTurn(){
-		// TODO: 11/17/2020 AD  
-	return null;}
+		return listOfPlayers.get(turn).getGamer;
+	}
 
 	public abstract void setScores ();
 
@@ -62,6 +67,7 @@ public abstract class Game {
 
 	public Gamer getWinner () {
 		// TODO: 11/13/2020 AD
+
 		return null;
 	}
 

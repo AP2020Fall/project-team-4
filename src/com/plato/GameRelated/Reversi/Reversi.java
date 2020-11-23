@@ -62,7 +62,15 @@ public class Reversi extends Game {
   
     public ArrayList<String> getAvailableCoordinates(){return null;}
 
-    public void placeDisk(int x , int y){}
+    public void placeDisk(int x , int y){
+        if(canPlayerPlaceAnyDisks()){
+            if(canPlayerPlaceDiskHere(x,y)){
+                checkDirections(x,y);
+                if(Game.turn == 0){addMove(x,y,"black");}
+                else{addMove(x,y,"white");}
+            }
+        }
+    }
 
     //is called after next turn
     private boolean canPlayerPlaceAnyDisks(){return true;}
@@ -74,7 +82,20 @@ public class Reversi extends Game {
     private boolean doesAnyDiskChangeColor(int x , int y){return true;}
 
     //gets start and destination and changes the color of in between disks
-    private void changeColor(int startx , int starty , int destx , int desty){}
+    private void changeColor(int startx , int starty , int destx , int desty){
+        if(startx>=destx){
+            if(starty>=desty){for(int i=destx ; i<startx-1 ; i++){
+                for(int j=starty ; j<desty-1 ; i++){
+                    board[i][j] = PlayerReversi.getPlayer(Game.getTurn).getcolor;
+                }
+            }}
+            else{}
+        }
+        else{
+            if(starty>=desty){}
+            else{}
+        }
+    }
 
     private void checkDirections(int x , int y) {
         for (Direction dir : Direction.values()) {
