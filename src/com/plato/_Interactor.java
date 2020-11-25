@@ -81,7 +81,8 @@ public class _Interactor {
 						case 2 -> viewEventsCommand();
 						case 3 -> addRecoCommand();
 						case 4 -> viewAllRecosCommand();
-						case 5 -> viewAccsCommand();
+						case 5 -> sendMsgCommand();
+						case 6 -> viewAccsCommand();
 					}
 				else {
 					switch (Menu.getSubMenuNumber()) {
@@ -798,6 +799,7 @@ enum Menu {
 					result.add("View events");
 					result.add("Add suggestion");
 					result.add("View suggestions");
+					result.add("Send message");
 					result.add("View users");
 				}
 				else {
