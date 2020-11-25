@@ -33,8 +33,7 @@ public abstract class Account {
 	}
 	
 	public boolean isPasswordCorrect (String pw) {
-		// TODO: 11/16/2020 AD  
-		return false;
+		return this.password.equals(pw);
 	}
 
 	public void editField (String field, String newVal) {
