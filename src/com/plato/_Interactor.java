@@ -144,6 +144,19 @@ public class _Interactor {
 				if (command == 1)
 					openGameCommand();
 			}
+
+			case GAME_MENU -> {
+				switch (command) {
+					case 1 -> scoreBoardCommand();
+					case 2 -> howToPlayCommand();
+					case 3 -> showLogCommand();
+					case 4 -> showWinsCommand();
+					case 5 -> showGameCountCommand();
+					case 6 -> addToFavesCommand();
+					case 7 -> playCommand();
+					case 8 -> showPtsGainedCommand();
+				}
+			}
 		}
 	}
 
@@ -585,7 +598,7 @@ public class _Interactor {
 				if (!Account.accountExists(username))
 					System.out.println("No account exists with this username.");
 				else if (Account.getAccount(username) instanceof Admin)
-					System.out.println("Admin accounts can't be deleted.");
+					System.out.println("Admin account can't be deleted.");
 			}
 
 			System.out.print("Username: "); username = scanner.nextLine();
@@ -737,37 +750,9 @@ enum Menu {
 	GAMES_MENU,
 	FRIENDS_PAGE,
 	REGISTER_LOGIN_MENU,
-	GAME_MENU; // fixme might need adding one for each game
+	GAME_MENU;
 	private static final LinkedList<Menu> menuHistory = new LinkedList<>();
 	private static Integer subMenuNumber;
-
-	public static Menu gotoMenu (Menu menu) {
-		menu.newMenu();
-		return menu;
-	}
-
-	public void newMenu () {
-		menuHistory.addLast(this);
-	}
-
-	public static Menu backAndReturnBack () {
-		if (isInASubMenu())
-			outOfSubMenu();
-		else
-			menuHistory.removeLast();
-		return menuHistory.getLast();
-	}
-
-	/**
-	 * @return false if we are on our first menu
-	 */
-	public static boolean canBack () {
-		return menuHistory.size() != 0 || isInASubMenu();
-	}
-
-	public boolean canGoToAccMenu () {
-		return (this != ACC_MENU && this != REGISTER_LOGIN_MENU);
-	}
 
 	public LinkedList<String> getMenuOptions () {
 		LinkedList<String> result = new LinkedList<>();
@@ -819,8 +804,8 @@ enum Menu {
 				//		if admin account has been created user can only register
 				result.add("Register");
 				if (Admin.adminHasBeenCreated()) {
-					result.add("Delete");
 					result.add("Login");
+					result.add("Delete");
 				}
 			}
 
@@ -846,7 +831,16 @@ enum Menu {
 
 			case GAMES_MENU -> result.add("Open game");
 
-			case GAME_MENU -> result.add("");
+			case GAME_MENU -> {
+				result.add("Show scoreboard");
+				result.add("Details");
+				result.add("Show log");
+				result.add("Show wins count");
+				result.add("Show played count");
+				result.add("Add to favourites");
+				result.add("Run game");
+				result.add("Show points");
+			}
 		}
 
 		if (canBack())
@@ -859,6 +853,34 @@ enum Menu {
 		result.add("Exit program");
 
 		return result;
+	}
+
+	public static Menu gotoMenu (Menu menu) {
+		menu.newMenu();
+		return menu;
+	}
+
+	public void newMenu () {
+		menuHistory.addLast(this);
+	}
+
+	public static Menu backAndReturnBack () {
+		if (isInASubMenu())
+			outOfSubMenu();
+		else
+			menuHistory.removeLast();
+		return menuHistory.getLast();
+	}
+
+	/**
+	 * @return false if we are on our first menu
+	 */
+	public static boolean canBack () {
+		return menuHistory.size() != 0 || isInASubMenu();
+	}
+
+	public boolean canGoToAccMenu () {
+		return (this != ACC_MENU && this != REGISTER_LOGIN_MENU);
 	}
 
 	public String getNumerizedMenuOptions () {
