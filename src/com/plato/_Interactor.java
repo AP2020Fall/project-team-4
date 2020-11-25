@@ -675,7 +675,14 @@ public class _Interactor {
 		((Gamer) accInUse).addToFaveGames(gameMenuName.getSimpleName());
 	}
 
-	private static void playCommand () {/*todo*/}
+	private static void playCommand () {
+		if (gameMenuName.equals(BattleSea.class)) {/*todo*/
+
+		}
+		else if (gameMenuName.equals(Reversi.class)) {/*todo*/
+
+		}
+	}
 
 	private static void showPtsGainedCommand () {/*todo*/}
 
@@ -688,7 +695,9 @@ public class _Interactor {
 		}
 	}
 
-	private static void writeToJSONFiles () {/*todo*/}
+	private static void writeToJSONFiles () {/*todo*/
+
+	}
 //	 static final String
 //			// for account menu
 //			gotoAccMenu = "View account menu",
