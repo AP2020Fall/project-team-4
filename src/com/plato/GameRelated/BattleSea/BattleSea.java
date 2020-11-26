@@ -3,13 +3,27 @@ package plato.GameRelated.BattleSea;
 import plato.AccountRelated.Gamer;
 import plato.GameRelated.Game;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BattleSea extends Game {
 	private static LinkedList<PlayerBattleSea> players = new LinkedList<>();
 
 	private static String details;
 	private static ArrayList<String> scoreboard = new ArrayList<>();
+
+	private static final ArrayList<String> arrangement = new ArrayList<>(Arrays.asList(
+			"size l 2 s 1 count 2",
+			"size l 3 s 1 count 1",
+			"size l 4 s 1 count 1",
+			"size l 5 s 1 count 1",
+			"size l 5 s 2 count 1"
+	));
 
 	public BattleSea (ArrayList<Gamer> gamers) {
 		super(gamers);
@@ -62,16 +76,66 @@ public class BattleSea extends Game {
 	}
 
 	public static LinkedList<Ship[]> get5RandBoards () {
-		// TODO: 11/17/2020 AD
-		return null;
+		LinkedList<Ship[]> boards = new LinkedList<>();
+
+		for (int i = 0; i < 5; ) {
+			Ship[] board = getRandBoard();
+
+			if (boards.contains(board)) continue;
+
+			boards.addLast(board);
+			i++;
+		}
+
+		return boards;
 	}
 
 	public static Ship[] getRandBoard () {
-		// TODO: 11/17/2020 AD
-		return null;
+		Ship[] board = new Ship[arrangement.size() + 1];
+		AtomicInteger counter = new AtomicInteger(0);
+
+		final String arrangmentREGEX = "size l (<l>\\d) s (<s>\\d) count (<n>\\d)";
+
+		for (String s : arrangement) {
+			Matcher m = Pattern.compile(arrangmentREGEX).matcher(s); m.find();
+
+			for (int i = 0; i < Integer.parseInt(m.group("n")); ) {
+				Random random = new Random(System.currentTimeMillis());
+				Ship ship = new Ship(random.nextInt(10) + 1, random.nextInt(10) + 1
+						, random.nextInt(2) > 0,
+						Integer.parseInt(m.group("l")), Integer.parseInt(m.group("s")));
+				if (ship.isShipPosValid(board, ship.getLeftMostX(), ship.getTopMostY(), ship.isVertical())) {
+					board[counter.getAndIncrement()] = ship;
+					i++;
+				}
+			}
+		}
+
+		return board;
 	}
 
 	public static LinkedList<PlayerBattleSea> getPlayers () {
 		return players;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

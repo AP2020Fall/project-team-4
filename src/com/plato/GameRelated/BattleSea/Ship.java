@@ -9,11 +9,14 @@ class Ship {
 	private int leftMostX, topMostY;
 	private boolean isVertical;
 
-	private final int SIZE;
+	private final int L_SIZE, S_SIZE;
 
-	Ship (int SIZE, boolean isVertical) {
-		this.SIZE = SIZE;
+	public Ship (int leftMostX, int topMostY, boolean isVertical, int l_SIZE, int s_SIZE) {
+		this.leftMostX = leftMostX;
+		this.topMostY = topMostY;
 		this.isVertical = isVertical;
+		L_SIZE = l_SIZE;
+		S_SIZE = s_SIZE;
 	}
 
 	public boolean isDestroyed (PlayerBattleSea shipOwner) {
@@ -34,7 +37,7 @@ class Ship {
 					y0 = ship.getTopMostY(),
 					x = x0, y = y0;
 
-			for (int i = 0; i < ship.getSIZE(); i++) {
+			for (int i = 0; i < ship.getL_SIZE(); i++) {
 				coords.add(new int[]{x, y});
 				x += dx; y += dy;
 			}
@@ -65,7 +68,14 @@ class Ship {
 		}
 	}
 
-	private boolean isShipPosValid (Ship[] board, int newX, int newY, boolean newIsVertical) {
+	public boolean isShipPosValid (Ship[] board, int newX, int newY, boolean newIsVertical) {
+
+		if (newX < 1 || newY < 1 || newX > 10 || newY > 10) return false;
+
+		if ((newIsVertical ? newY:newX) + this.getL_SIZE() - 1 > 10) return false;
+
+		if ((newIsVertical ? newX:newY) + this.getS_SIZE() - 1 > 10) return false;
+
 		LinkedList<Ship> shipsExclThis = (LinkedList<Ship>) Arrays.stream(board)
 				.filter(ship -> !ship.equals(this))
 				.collect(Collectors.toList());
@@ -91,8 +101,12 @@ class Ship {
 		return topMostY;
 	}
 
-	private int getSIZE () {
-		return SIZE;
+	public int getL_SIZE () {
+		return L_SIZE;
+	}
+
+	public int getS_SIZE () {
+		return S_SIZE;
 	}
 
 	public boolean isVertical () {
