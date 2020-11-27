@@ -36,6 +36,7 @@ public abstract class Game {
 	}
 
 	/**
+	 * nextTurn methods
 	 * if turn = 0 it is player one turn
 	 * if turn = 1 it is player two turn
 	 */
