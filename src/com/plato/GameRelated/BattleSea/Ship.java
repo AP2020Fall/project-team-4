@@ -76,9 +76,11 @@ class Ship {
 
 		if ((newIsVertical ? newX:newY) + this.getS_SIZE() - 1 > 10) return false;
 
+		if (Arrays.stream(board).filter(ship -> ship == null).count() == board.length) return true;
+
 		LinkedList<Ship> shipsExclThis = (LinkedList<Ship>) Arrays.stream(board)
 				.filter(ship -> !ship.equals(this))
-				.collect(Collectors.toList());
+				. collect(Collectors.toList());
 
 		LinkedList<int[]> thisCoords =
 				getAllCoords(new LinkedList<>(Collections.singletonList(this)));

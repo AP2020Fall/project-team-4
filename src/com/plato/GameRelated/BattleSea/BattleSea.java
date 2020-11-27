@@ -18,11 +18,11 @@ public class BattleSea extends Game {
 	private static ArrayList<String> scoreboard = new ArrayList<>();
 
 	private static final ArrayList<String> arrangement = new ArrayList<>(Arrays.asList(
-			"size l 2 s 1 count 2",
-			"size l 3 s 1 count 1",
-			"size l 4 s 1 count 1",
-			"size l 5 s 1 count 1",
-			"size l 5 s 2 count 1"
+			"2 1 2", // l s n
+			"3 1 1",
+			"4 1 1",
+			"5 1 1",
+			"5 2 1"
 	));
 
 	public BattleSea (ArrayList<Gamer> gamers) {
@@ -94,16 +94,16 @@ public class BattleSea extends Game {
 		Ship[] board = new Ship[arrangement.size() + 1];
 		AtomicInteger counter = new AtomicInteger(0);
 
-		final String arrangmentREGEX = "size l (<l>\\d) s (<s>\\d) count (<n>\\d)";
-
 		for (String s : arrangement) {
-			Matcher m = Pattern.compile(arrangmentREGEX).matcher(s); m.find();
 
-			for (int i = 0; i < Integer.parseInt(m.group("n")); ) {
+			for (int i = 0; i < Integer.parseInt(s.split(" ")[2]); ) {
 				Random random = new Random(System.currentTimeMillis());
+
 				Ship ship = new Ship(random.nextInt(10) + 1, random.nextInt(10) + 1
 						, random.nextInt(2) > 0,
-						Integer.parseInt(m.group("l")), Integer.parseInt(m.group("s")));
+						Integer.parseInt(s.split(" ")[0]), // l size
+						Integer.parseInt(s.split(" ")[1])); // s size
+
 				if (ship.isShipPosValid(board, ship.getLeftMostX(), ship.getTopMostY(), ship.isVertical())) {
 					board[counter.getAndIncrement()] = ship;
 					i++;
@@ -116,6 +116,22 @@ public class BattleSea extends Game {
 
 	public static LinkedList<PlayerBattleSea> getPlayers () {
 		return players;
+	}
+
+	public static void main (String[] args) {
+		for (Ship[] board : get5RandBoards()) {
+			LinkedList<int[]> allCoords = Ship.getAllCoords(new LinkedList<>(Arrays.asList(board)));
+
+			for (int i = 0; i < 10; i++) {
+				for (int j = 0; j < 10; j++) {
+					if (allCoords.contains(new int[]{j + 1, i + 1}))
+						System.out.print("|X|");
+					else
+						System.out.print("| |");
+				}
+				System.out.println();
+			}
+		}
 	}
 }
 
