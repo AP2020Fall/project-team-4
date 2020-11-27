@@ -46,18 +46,31 @@ public class Reversi extends Game {
         return board;
     }
 
+    //empties board , blank space is shown with -
     public void emptyBoard(){
         for(int i=0 ; i<8 ; i++){
             for(int j=0 ; j<8 ; j++){
                 //fixme 4 starting disks
-                board[i][j] = " ";
+                if(i==3 && j==3){board[i][j] = "w";}
+                else if(i==3 && j==4){board[i][j] = "b";}
+                else if(i==4 && j==3){board[i][j] = "b";}
+                else if(i==4 && j==3){board[i][j] = "w";}
+                else{board[i][j] = "-";}
             }
         }
     }
   
     public ArrayList<String> getAvailableCoordinates(){return null;}
 
-    public void placeDisk(int x , int y){}
+    public void placeDisk(int x , int y){
+        if(canPlayerPlaceAnyDisks()){
+            if(canPlayerPlaceDiskHere(x,y)){
+                checkDirections(x,y);
+                if(Game.turn == 0){addMove(x,y,"black");}
+                else{addMove(x,y,"white");}
+            }
+        }
+    }
 
     //is called after next turn
     private boolean canPlayerPlaceAnyDisks(){return true;}
@@ -69,7 +82,20 @@ public class Reversi extends Game {
     private boolean doesAnyDiskChangeColor(int x , int y){return true;}
 
     //gets start and destination and changes the color of in between disks
-    private void changeColor(int startx , int starty , int destx , int desty){}
+    private void changeColor(int startx , int starty , int destx , int desty){
+        if(startx>=destx){
+            if(starty>=desty){for(int i=destx ; i<startx-1 ; i++){
+                for(int j=starty ; j<desty-1 ; i++){
+                    board[i][j] = PlayerReversi.getPlayer(Game.getTurn).getcolor;
+                }
+            }}
+            else{}
+        }
+        else{
+            if(starty>=desty){}
+            else{}
+        }
+    }
 
     private void checkDirections(int x , int y) {
         for (Direction dir : Direction.values()) {
@@ -82,13 +108,21 @@ public class Reversi extends Game {
         return players;
     }
 
-    public void addMove(int x , int y , String color){}
+    public void addMove(int x , int y , String color){
+        moves.add(color + " placed disk in coordinate (" + x + "," + y + ")");
+    }
 
     public ArrayList<String> getMoves() {
         return moves;
     }
 
-    private boolean isBoardFull(){return false;}
+    private boolean isBoardFull(){
+        for(int i=0 ; i<8 ; i++){
+            for(int j=0 ; j<8 ; j++){
+                if(board[i][j].equals("-")){return false;}
+            }
+        }
+        return true;}
 
     private boolean hasPlayerMoved(){return true;}
 
