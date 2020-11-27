@@ -24,19 +24,10 @@ class Bomb {
 
 	public boolean wasSuccessFul (PlayerBattleSea thrower) {
 		PlayerBattleSea thrownAt = thrower.getOpponent();
+		Bomb bomb = thrower.getBombsThrown().getLast();
 
-		/* fixme get all ships of opponent player and check if any of their coordinates correlates to the coord of bomb
-		thrownAt.getShips().stream()
-				.map(Ship::getAllCoords) // linked list of all coords
-				.anyMatch();
-		 thrownAt.getShips().stream()
-				.map(Ship::getAllCoords)
-				.forEach(shipCoords -> {
-					return shipCoords.stream()
-							.anyMatch(shipCoord -> shipCoord[0] == x && shipCoord[1] == y);
-				});
-		 */
-		return false;
+		return Ship.getAllCoords(thrownAt.getShips()).stream()
+				.anyMatch(coord -> coord[0] == bomb.getX() && coord[1] == bomb.getY());
 	}
 
 	public int getX () {

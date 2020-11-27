@@ -40,14 +40,103 @@ public class _Interactor {
 	private static void guideToCommandMethod () {/*todo*/
 		if (command == currentMenu.getMenuOptions().size())
 			endProgramCommand();
+
+		else if (currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size() - 1)
+			gotoAccMenuCommand();
+
+		else if (Menu.canBack()) {
+			if (currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size() - 2)
+				backCommand();
+			else if (!currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size() - 1)
+				backCommand();
+		}
+
 		switch (currentMenu) {
 			case REGISTER_LOGIN_MENU -> {
-				if (!Admin.adminHasBeenCreated()) {
-					if (command == 1) registerCommand();
-				}
-				else {
+				if (command == 1) registerCommand();
+				if (Admin.adminHasBeenCreated()) {
 					if (command == 2) loginCommand();
 					else if (command == 3) deleteAccCommand();
+				}
+			}
+
+			case MAIN_MENU_G -> {
+				if (!Menu.isInASubMenu())
+					switch (command) {
+						case 1 -> showPtsCommand();
+						case 2 -> viewFavGamesCommand();
+						case 3 -> viewAdminMsgsCommand();
+						case 4 -> lastGamePlayedCommand();
+						case 5 -> viewAdminRecosCommand();
+						case 6 -> sendFrndReqFromMainMenuCommand();
+					}
+				else if (command == 1)
+					chooseAdminRecoCommand();
+			}
+
+			case MAIN_MENU_A -> {
+				if (!Menu.isInASubMenu())
+					switch (command) {
+						case 1 -> addEventCommand();
+						case 2 -> viewEventsCommand();
+						case 3 -> addRecoCommand();
+						case 4 -> viewAllRecosCommand();
+						case 5 -> sendMsgCommand();
+						case 6 -> viewAccsCommand();
+					}
+				else {
+					switch (Menu.getSubMenuNumber()) {
+						case 1 -> {
+							switch (command) {
+								case 1 -> editEventCommand();
+								case 2 -> removeEventCommand();
+							}
+						}
+						case 2 -> { if (command == 1) removeRecoCommand(); }
+						case 3 -> { if (command == 1) viewAccCommand(); }
+					}
+				}
+			}
+
+			case FRIENDS_PAGE -> {
+				if (!Menu.isInASubMenu())
+					switch (command) {
+						case 1 -> showFrndsCommand();
+						case 2 -> sendFrndReqFromFrndMenuCommand();
+						case 3 -> showFrndReqsCommand();
+					}
+				else
+					switch (Menu.getSubMenuNumber()) {
+						case 1 -> {
+							switch (command) {
+								case 1 -> removeFrndCommand();
+								case 2 -> viewFrndCommand();
+							}
+						}
+						case 2 -> {
+							switch (command) {
+								case 1 -> acceptFrndReqCommand();
+								case 2 -> declineFrndReqCommand();
+							}
+						}
+					}
+
+			}
+
+			case ACC_MENU -> {
+				if (!Menu.isInASubMenu())
+					switch (command) {
+						case 1 -> viewAccCommand();
+						case 2 -> viewStatsCommand();
+						case 3 -> viewGamingHistoryCommand();
+						case 4 -> gameStatsForGameCommand();
+						case 5 -> logoutCommand();
+					}
+				else {
+					switch (command) {
+						case 1 -> changePWCommand();
+						case 2 -> editAccFieldCommand();
+					}
 				}
 			}
 
@@ -55,16 +144,17 @@ public class _Interactor {
 				if (command == 1)
 					openGameCommand();
 			}
-			default -> {
 
-				if (currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size()-1)
-					gotoAccMenuCommand();
-
-				else if (Menu.canBack()) {
-					if (currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size() - 2)
-						backCommand();
-					else if (!currentMenu.canGoToAccMenu() && command == currentMenu.getMenuOptions().size()-1)
-						backCommand();
+			case GAME_MENU -> {
+				switch (command) {
+					case 1 -> scoreBoardCommand();
+					case 2 -> howToPlayCommand();
+					case 3 -> showLogCommand();
+					case 4 -> showWinsCommand();
+					case 5 -> showGameCountCommand();
+					case 6 -> addToFavesCommand();
+					case 7 -> playCommand();
+					case 8 -> showPtsGainedCommand();
 				}
 			}
 		}
@@ -210,10 +300,12 @@ public class _Interactor {
 		for (AdminGameReco gameReco : AdminGameReco.getRecommendations((Gamer) accInUse)) {
 			System.out.printf("%d. %s%n", count.getAndIncrement(), gameReco.getGameName());
 		}
+		Menu.inSubMenu(1);
 	}
 
 	private static void chooseAdminRecoCommand () {/*fixme test*/
 		gameMenuName = AdminGameReco.getRecommendations().get(command - 1).getClass();
+		Menu.outOfSubMenu();
 	}
 
 	private static void sendFrndReqFromMainMenuCommand () {/*todo*/}
@@ -275,21 +367,54 @@ public class _Interactor {
 		new Event(gameName, eventPrize, start, end);
 	}
 
-	private static void viewEventsCommand () {/*todo*/}
+	private static void viewEventsCommand () {/*todo*/
+		Menu.inSubMenu(1);
+	}
 
-	private static void editEventCommand () {/*todo*/}
+	private static void editEventCommand () {/*todo*/
+		Menu.outOfSubMenu();
+	}
 
-	private static void removeEventCommand () {/*todo*/}
+	private static void removeEventCommand () {/*todo*/
+		Menu.outOfSubMenu();
+	}
 
 	private static void addRecoCommand () {/*todo*/}
 
-	private static void viewRecosCommand () {/*todo*/}
+	private static void viewAllRecosCommand () {/*todo*/
+		Menu.inSubMenu(2);
+	}
 
-	private static void removeRecoCommand () {/*todo*/}
+	private static void removeRecoCommand () {/*todo*/
+		Menu.outOfSubMenu();
+	}
 
-	private static void viewAccsCommand () {/*todo*/}
+	private static void sendMsgCommand () {/*fixme test*/
+		String text;
 
-	private static void viewAccCommand () {/*todo*/}
+		gettingMsgLoop:
+		while (true) {
+			text = scanner.nextLine();
+
+			while (true) {
+				System.out.print("Is this all good?[y/n] "); String yn = scanner.nextLine().trim();
+
+				if (yn.equalsIgnoreCase("y"))
+					break gettingMsgLoop;
+				else if (yn.equalsIgnoreCase("n"))
+					break;
+			}
+		}
+		Admin.sendMsg(text);
+	}
+
+	private static void viewAccsCommand () {/*todo*/
+		Menu.inSubMenu(3);
+	}
+
+	private static void viewAccCommand () {/*todo*/
+		Menu.outOfSubMenu();
+	}
 
 	private static void openGameCommand () {/*fixme test*/
 
@@ -309,7 +434,7 @@ public class _Interactor {
 	private static void showFrndsCommand () {/*fixme test*/
 		for (Gamer frnd : ((Gamer) accInUse).getFrnds())
 			System.out.printf("%t%s%n", frnd.getUsername());
-
+		Menu.inSubMenu(1);
 	}
 
 	private static void removeFrndCommand () {/*fixme test*/
@@ -324,6 +449,8 @@ public class _Interactor {
 		} while (!((Gamer) accInUse).frndExists(username));
 
 		((Gamer) accInUse).removeFrnd(((Gamer) accInUse).getFrnd(username));
+
+		Menu.outOfSubMenu();
 	}
 
 	private static void viewFrndCommand () {/*todo*/}
@@ -348,10 +475,11 @@ public class _Interactor {
 	}
 
 	private static void showFrndReqsCommand () {/*fixme test*/
-
 		for (FriendRequest friendRequest : ((Gamer) accInUse).getFriendRequestsGotten()) {
 			System.out.println("\t" + friendRequest.getFrom().getUsername());
 		}
+
+		Menu.inSubMenu(2);
 	}
 
 	private static void acceptFrndReqCommand () {/*fixme test*/
@@ -367,6 +495,8 @@ public class _Interactor {
 
 		FriendRequest.getFriendReq(((Gamer) Account.getAccount(usernameFrom)), ((Gamer) accInUse))
 				.conclude(true);
+
+		Menu.outOfSubMenu();
 	}
 
 	private static void declineFrndReqCommand () {/*fixme test*/
@@ -382,6 +512,8 @@ public class _Interactor {
 
 		FriendRequest.getFriendReq(((Gamer) Account.getAccount(usernameFrom)), ((Gamer) accInUse))
 				.conclude(false);
+
+		Menu.outOfSubMenu();
 	}
 
 	private static void registerCommand () {/*fixme test*/
@@ -462,12 +594,16 @@ public class _Interactor {
 		//		if account doesnt exists try asking for username again
 		String username = null;
 		do {
-			if (username != null)
-				System.out.println("No account exists with this username.");
+			if (username != null) {
+				if (!Account.accountExists(username))
+					System.out.println("No account exists with this username.");
+				else if (Account.getAccount(username) instanceof Admin)
+					System.out.println("Admin account can't be deleted.");
+			}
 
 			System.out.print("Username: "); username = scanner.nextLine();
 
-		} while (!Account.accountExists(username));
+		} while (!(Account.accountExists(username) && (Account.getAccount(username) instanceof Gamer)));
 
 		// trying to get password
 		//		if password is incorrect try asking for username again
@@ -510,6 +646,11 @@ public class _Interactor {
 		} while (!Account.getAccount(username).isPasswordCorrect(password));
 
 		accInUse = Account.getAccount(username);
+
+		if (accInUse instanceof Gamer)
+			currentMenu = Menu.gotoMenu(Menu.MAIN_MENU_G);
+		else
+			currentMenu = Menu.gotoMenu(Menu.MAIN_MENU_A);
 	}
 
 	private static void scoreBoardCommand () {/*todo*/}
@@ -534,7 +675,14 @@ public class _Interactor {
 		((Gamer) accInUse).addToFaveGames(gameMenuName.getSimpleName());
 	}
 
-	private static void playCommand () {/*todo*/}
+	private static void playCommand () {
+		if (gameMenuName.equals(BattleSea.class)) {/*todo*/
+
+		}
+		else if (gameMenuName.equals(Reversi.class)) {/*todo*/
+
+		}
+	}
 
 	private static void showPtsGainedCommand () {/*todo*/}
 
@@ -547,8 +695,9 @@ public class _Interactor {
 		}
 	}
 
-	private static void writeToJSONFiles () {/*todo*/}
+	private static void writeToJSONFiles () {/*todo*/
 
+	}
 //	 static final String
 //			// for account menu
 //			gotoAccMenu = "View account menu",
@@ -610,33 +759,9 @@ enum Menu {
 	GAMES_MENU,
 	FRIENDS_PAGE,
 	REGISTER_LOGIN_MENU,
-	GAME_MENU; // fixme might need adding one for each game
+	GAME_MENU;
 	private static final LinkedList<Menu> menuHistory = new LinkedList<>();
-
-	public static Menu gotoMenu (Menu menu) {
-		menu.newMenu();
-		return menu;
-	}
-
-	public void newMenu () {
-		menuHistory.addLast(this);
-	}
-
-	public static Menu backAndReturnBack () {
-		menuHistory.removeLast();
-		return menuHistory.getLast();
-	}
-
-	/**
-	 * @return false if we are on our first menu
-	 */
-	public static boolean canBack () {
-		return menuHistory.size() != 0;
-	}
-
-	public boolean canGoToAccMenu () {
-		return (this != ACC_MENU && this != REGISTER_LOGIN_MENU);
-	}
+	private static Integer subMenuNumber;
 
 	public LinkedList<String> getMenuOptions () {
 		LinkedList<String> result = new LinkedList<>();
@@ -649,25 +774,82 @@ enum Menu {
 				result.add("Logout");
 			}
 
-			case MAIN_MENU_G -> result.add("");
+			case MAIN_MENU_G -> {
+				if (!isInASubMenu()) {
+					result.add("Show Points");
+					result.add("View favorite games");
+					result.add("View platobot’s messages");
+					result.add("View last played");
+					result.add("View admin’s suggestions");
+					result.add("Add friend");
+				}
+				else
+					result.add("Choose suggested game");
+			}
 
-			case MAIN_MENU_A -> result.add("");
+			case MAIN_MENU_A -> {
+				if (!isInASubMenu()) {
+					result.add("Add event");
+					result.add("View events");
+					result.add("Add suggestion");
+					result.add("View suggestions");
+					result.add("Send message");
+					result.add("View users");
+				}
+				else {
+					switch (subMenuNumber) {
+						case 1 -> {
+							result.add("Edit event");
+							result.add("Remove event");
+						}
+						case 2 -> result.add("Remove suggestion");
+						case 3 -> result.add("View user profile");
+					}
+				}
+			}
 
 			case REGISTER_LOGIN_MENU -> {
 				// user has to go to register menu from login menu after first registery
 				//		if admin account has been created user can only register
 				result.add("Register");
 				if (Admin.adminHasBeenCreated()) {
-					result.add("Delete");
 					result.add("Login");
+					result.add("Delete");
 				}
 			}
 
-			case FRIENDS_PAGE -> result.add("");
+			case FRIENDS_PAGE -> {
+				if (!isInASubMenu()) {
+					result.add("Show friends");
+					result.add("Send friend request");
+					result.add("Show friend requests");
+				}
+				else {
+					switch (subMenuNumber) {
+						case 1 -> {
+							result.add("Remove Friend");
+							result.add("View user profile");
+						}
+						case 2 -> {
+							result.add("Accept Request");
+							result.add("Decline Request");
+						}
+					}
+				}
+			}
 
 			case GAMES_MENU -> result.add("Open game");
 
-			case GAME_MENU -> result.add("");
+			case GAME_MENU -> {
+				result.add("Show scoreboard");
+				result.add("Details");
+				result.add("Show log");
+				result.add("Show wins count");
+				result.add("Show played count");
+				result.add("Add to favourites");
+				result.add("Run game");
+				result.add("Show points");
+			}
 		}
 
 		if (canBack())
@@ -680,6 +862,34 @@ enum Menu {
 		result.add("Exit program");
 
 		return result;
+	}
+
+	public static Menu gotoMenu (Menu menu) {
+		menu.newMenu();
+		return menu;
+	}
+
+	public void newMenu () {
+		menuHistory.addLast(this);
+	}
+
+	public static Menu backAndReturnBack () {
+		if (isInASubMenu())
+			outOfSubMenu();
+		else
+			menuHistory.removeLast();
+		return menuHistory.getLast();
+	}
+
+	/**
+	 * @return false if we are on our first menu
+	 */
+	public static boolean canBack () {
+		return menuHistory.size() != 0 || isInASubMenu();
+	}
+
+	public boolean canGoToAccMenu () {
+		return (this != ACC_MENU && this != REGISTER_LOGIN_MENU);
 	}
 
 	public String getNumerizedMenuOptions () {
@@ -699,7 +909,7 @@ enum Menu {
 		switch (this) {
 			case FRIENDS_PAGE -> {return "Friends Page";}
 			case REGISTER_LOGIN_MENU -> {
-				return (!Admin.adminHasBeenCreated() ? "Register Menu" : "Login Menu");
+				return (!Admin.adminHasBeenCreated() ? "Register Menu" : "Register/Login Menu");
 			}
 			case MAIN_MENU_A, MAIN_MENU_G -> {return "Main Menu";}
 			case ACC_MENU -> {return "Account Page";}
@@ -707,6 +917,22 @@ enum Menu {
 			case GAMES_MENU -> {return "Games Menu";}
 		}
 		return "";
+	}
+
+	public static void inSubMenu (Integer subMenuNumber) {
+		Menu.subMenuNumber = subMenuNumber;
+	}
+
+	public static void outOfSubMenu () {
+		Menu.subMenuNumber = null;
+	}
+
+	public static boolean isInASubMenu () {
+		return subMenuNumber != null;
+	}
+
+	public static Integer getSubMenuNumber () {
+		return subMenuNumber;
 	}
 }
 

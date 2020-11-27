@@ -1,30 +1,46 @@
 package plato.GameRelated.BattleSea;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 class Ship {
 	private int leftMostX, topMostY;
 	private boolean isVertical;
 
-	private final int S_SIZE, L_SIZE;
+	private final int SIZE;
 
-	Ship (int sSize, int lSize, boolean isVertical) {
-		this.S_SIZE = sSize;
-		this.L_SIZE = lSize;
+	Ship (int SIZE, boolean isVertical) {
+		this.SIZE = SIZE;
 		this.isVertical = isVertical;
 	}
 
 	public boolean isDestroyed (PlayerBattleSea shipOwner) {
-		return getAllCoords().size()
+		return getAllCoords(getPlayer().getShips()).size()
 				==
 				shipOwner.getOpponent().getBombsThrown().stream()
 						.filter(bomb -> bomb.wasSuccessFul(shipOwner.getOpponent()))
 						.count();
 	}
 
-	public LinkedList<int[]> getAllCoords () {
-		// TODO: 11/17/2020 AD
-		return null;
+	public static LinkedList<int[]> getAllCoords (LinkedList<Ship> ships) {
+		LinkedList<int[]> coords = new LinkedList<>();
+
+		for (Ship ship : ships) {
+			int dx = (ship.isVertical() ? 0 : 1),
+					dy = (ship.isVertical() ? 1 : 0),
+					x0 = ship.getLeftMostX(),
+					y0 = ship.getTopMostY(),
+					x = x0, y = y0;
+
+			for (int i = 0; i < ship.getSIZE(); i++) {
+				coords.add(new int[]{x, y});
+				x += dx; y += dy;
+			}
+		}
+
+		return coords;
 	}
 
 	private void changeDir () {
@@ -50,20 +66,21 @@ class Ship {
 	}
 
 	private boolean isShipPosValid (Ship[] board, int newX, int newY, boolean newIsVertical) {
-		// TODO: 11/17/2020 AD
-		return false;
+		LinkedList<Ship> shipsExclThis = (LinkedList<Ship>) Arrays.stream(board)
+				.filter(ship -> !ship.equals(this))
+				.collect(Collectors.toList());
+
+		LinkedList<int[]> thisCoords =
+				getAllCoords(new LinkedList<>(Collections.singletonList(this)));
+
+		return getAllCoords(shipsExclThis).stream()
+				.noneMatch(coord -> thisCoords.contains(coord));
 	}
 
-	public	PlayerBattleSea getPlayer () {
+	public PlayerBattleSea getPlayer () {
 		return BattleSea.getPlayers().stream()
 				.filter(player -> player.getShips().contains(this))
 				.findAny().get();
-	}
-
-	public String getShipType () {
-		// TODO: 11/17/2020 AD
-		// get via size
-		return null;
 	}
 
 	public int getLeftMostX () {
@@ -74,12 +91,8 @@ class Ship {
 		return topMostY;
 	}
 
-	private int getL_SIZE () {
-		return L_SIZE;
-	}
-
-	private int getS_SIZE () {
-		return S_SIZE;
+	private int getSIZE () {
+		return SIZE;
 	}
 
 	public boolean isVertical () {

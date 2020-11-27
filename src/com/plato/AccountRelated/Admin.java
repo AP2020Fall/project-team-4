@@ -18,7 +18,7 @@ public class Admin extends Account {
 				.anyMatch(account -> account instanceof Admin);
 	}
 
-	public void sendMsg (String text, Gamer gamer) {
-		new Message(text, gamer);
+	public static void sendMsg (String text) {
+		new Message(text);
 	}
 }
