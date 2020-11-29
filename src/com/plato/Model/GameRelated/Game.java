@@ -10,6 +10,8 @@ import plato.Model.GameRelated.Reversi.Reversi;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 public abstract class Game {
 
@@ -20,9 +22,9 @@ public abstract class Game {
 	private GameConclusion conclusion = GameConclusion.IN_SESSION;
 	private LocalDateTime dateGameEnded;
 
-	private static ArrayList<Game> allGames = new ArrayList<>();
+	private static LinkedList<Game> allGames = new LinkedList<>();
 
-	public Game (ArrayList<Gamer> players) {
+	protected Game (ArrayList<Gamer> players) {
 		this.gameID = IDGenerator.generateNext();
 
 		Collections.shuffle(players);
@@ -34,7 +36,10 @@ public abstract class Game {
 			listOfPlayers.add(new PlayerReversi(this, players.get(0), "b"));
 			listOfPlayers.add(new PlayerReversi(this, players.get(1), "w"));
 		}
-		allGames.add(this);
+	}
+
+	public static void startGame (Game game) {
+		allGames.addLast(game);
 	}
 
 	private boolean gameHasEnded () {
@@ -107,5 +112,17 @@ public abstract class Game {
 
 	public ArrayList<Player> getListOfPlayers () {
 		return listOfPlayers;
+	}
+
+	public static LinkedList<Game> getAllGames () {
+		return allGames;
+	}
+
+	public static LinkedList<Game> getAllFinishedGames () {
+		return (LinkedList<Game>) allGames.stream().filter(Game::gameHasEnded).collect(Collectors.toList());
+	}
+
+	public LocalDateTime getDateGameEnded () {
+		return dateGameEnded;
 	}
 }

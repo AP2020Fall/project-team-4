@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class BattleSea extends Game {
 	private static String details;
-	private static ArrayList<String> scoreboard = new ArrayList<>(); // FIXME: remove if necessary because history of all games is there
+	private static LinkedList<String> scoreboard = new LinkedList<>(); // FIXME: remove if necessary because history of all games is there
 
 	private static final ArrayList<String> arrangement = new ArrayList<>(Arrays.asList(
 			"2 1 2", // l s n
@@ -34,7 +34,7 @@ public class BattleSea extends Game {
 	public void concludeGame () {
 		// set end time
 		// set Conclusion
-		// add to scoreboard fixme maybe not?
+		// add to scoreboard fixme maybe not? probably not. because we need to sort the scoreboard before displaying it
 	}
 
 	/**
@@ -90,7 +90,15 @@ public class BattleSea extends Game {
 		// TODO: 11/13/2020 AD
 	}
 
-	public static ArrayList<String> getScoreboard () {
+	/**
+	 1. list all finished games of this type
+	 2. get a list of all the players that played game with GameLog.getAllWhoPlayedGame
+	 3. use gamelog methods to determine how many times each player won, lost or tied and also all the points he/she earned and number of times they played it
+	 4. sort as follows -> (n:نزولی - s:صعودی)
+	 5. 			n - points , n - wins , s - loss , s - playCount , n - draws , abc - username(not case sensitive)
+	 6. format all this shite in string form and return	the string linkedlist result
+	 */
+	public static LinkedList<String> getScoreboard () {
 		// TODO: 11/13/2020 AD
 		return null;
 	}

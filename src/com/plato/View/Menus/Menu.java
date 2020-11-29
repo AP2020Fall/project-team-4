@@ -1,7 +1,12 @@
 package plato.View.Menus;
 
+import plato.View.Menus.AccountRelatedMenus.AccountMenu;
+import plato.View.Menus.AccountRelatedMenus.LoginRegisterMenu;
+import plato.View.Menus.AccountRelatedMenus.RegisterMenu;
+
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public abstract class Menu {
 	private final String menuTitle;
@@ -11,19 +16,25 @@ public abstract class Menu {
 
 	private static LinkedList<Menu> menus = new LinkedList<>();
 
+	protected static final Scanner scanner = new Scanner(System.in);
+
 	protected Menu (String menuTitle) {
 		this.menuTitle = menuTitle;
 	}
 
+	public static void displayAreYouSureMessage () {
+		System.out.print("Are you sure?[y/n]  ");
+	}
+
 	private static void initMenus () {
-		menus.add(new RegisterMenu());
+		// TODO: 11/29/2020 AD
 	}
 
 	public LinkedList<String> getOptions () {
 		LinkedList<String> options = new LinkedList<>();
 		if (canBack()) options.add("Back");
 		if (canGoToAccMenu()) options.add("View Account Menu");
-		options.add("Exit");
+		if (this instanceof LoginRegisterMenu || this instanceof RegisterMenu) options.add("Exit program");
 
 		return options;
 	}
@@ -31,16 +42,16 @@ public abstract class Menu {
 	public boolean canBack () {
 		return true;
 	}
-	
+
 	public void back () {
 		parent.enter();
 	}
 
 	public boolean canGoToAccMenu () {
-		return !(this instanceof AccountMenu || this instanceof LoginRegisterMenu || this instanceof RegisterMenu);
+		return !(this instanceof AccountMenu || this instanceof LoginRegisterMenu || this instanceof RegisterMenu || this.isFormType());
 	}
 
-	public void enter () {
+	protected void enter () {
 		getMenuIn().inMenu = false;
 		inMenu = true;
 	}
@@ -51,10 +62,18 @@ public abstract class Menu {
 
 	public void setParent (Menu parent) {
 		this.parent = parent;
-		parent.childMenus.put(parent.childMenus.size()+1, this);
+		parent.childMenus.put(parent.childMenus.size() + 1, this);
 	}
 
 	public boolean isFormType () {
 		return false;
+	}
+
+	public static Scanner getScanner () {
+		return scanner;
+	}
+
+	public static String getInputLine () {
+		return scanner.nextLine();
 	}
 }

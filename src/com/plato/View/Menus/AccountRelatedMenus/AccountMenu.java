@@ -1,8 +1,10 @@
-package plato.View.Menus;
+package plato.View.Menus.AccountRelatedMenus;
+
+import plato.View.Menus.Menu;
 
 import java.util.LinkedList;
 
-public class AccountMenu extends Menu{
+public class AccountMenu extends Menu {
 	private Menu entry;
 
 	protected AccountMenu () {
@@ -25,7 +27,7 @@ public class AccountMenu extends Menu{
 	}
 
 	@Override
-	public void enter () {
+	protected void enter () {
 		entry = getMenuIn(); // in case of back from account menu go to its entry menu aka menu that was used to enter account menu.
 		super.enter();
 	}

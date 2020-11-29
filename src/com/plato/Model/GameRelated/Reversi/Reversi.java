@@ -11,7 +11,7 @@ public class Reversi extends Game {
 	private static String details;
 
 	private static String[][] board = new String[8][8];
-	private static ArrayList<String> scoreboard = new ArrayList<>(); // FIXME: remove if necessary because history of all games is there
+	private static LinkedList<String> scoreboard = new LinkedList<>(); // FIXME: remove if necessary because history of all games is there
 	private ArrayList<String> moves = new ArrayList<>();
 	private int numberOfWhite = 2;
 	private int numberOfBlack = 2;
@@ -134,6 +134,19 @@ public class Reversi extends Game {
 
 	public static String[][] getBoard () {
 		return board;
+	}
+	
+	/**
+	 1. list all finished games of this type
+	 2. get a list of all the players that played game with GameLog.getAllWhoPlayedGame
+	 3. use gamelog methods to determine how many times each player won, lost or tied and also all the points he/she earned and number of times they played it
+	 4. sort as follows -> (n:نزولی - s:صعودی)
+	 5. 			n - points , n - wins , s - loss , s - playCount , n - draws , abc - username(not case sensitive)
+	 6. format all this shite in string form and return	the string linkedlist result
+	 */
+	public static LinkedList<String> getScoreboard () {
+		// TODO: 11/13/2020 AD
+		return null;
 	}
 }
 

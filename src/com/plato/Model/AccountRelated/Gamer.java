@@ -84,6 +84,4 @@ public class Gamer extends Account {
 	public void stopParticipatingInEvent (String eventID) {
 		// TODO: 11/20/2020 AD
 	}
-
-	// FIXME: if needed add a method that gets the gamer account that a given gameLog belongs to
 }
