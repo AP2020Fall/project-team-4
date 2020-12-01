@@ -30,12 +30,12 @@ public class GameController {
 		}
 	}
 
-	public static void showGameHowToPlay () {
-		GameView.showGameHowToPlay(GameMenu.getGameName());
+	public static void displayGameHowToPlay () {
+		GameView.displayGameHowToPlay(GameMenu.getGameName());
 	}
 
 	public static void showScoreboardOfGame () {
 		LinkedList<String> scoreBoard = GameMenu.getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getScoreboard(): Reversi.getScoreboard();
-		GameView.showScoreboardOfGame(GameMenu.getGameName(), scoreBoard);
+		GameView.displayScoreboardOfGame(GameMenu.getGameName(), scoreBoard);
 	}
 }

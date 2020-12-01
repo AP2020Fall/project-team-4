@@ -5,8 +5,8 @@ import plato.Model.AccountRelated.Account;
 import java.util.LinkedList;
 
 public class AccountView {
-	public static void diplayPersonalInfo (Account account) {
-		// TODO: 11/28/2020 AD
+	public static void displayPersonalInfo (Account account) {
+		// TODO: TODODODODOODODODOOD
 	}
 
 	public static void displayPtsPlayerGainedFromGameCommand (int points) {

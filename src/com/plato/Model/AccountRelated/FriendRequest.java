@@ -54,4 +54,9 @@ public class FriendRequest {
 		return allfriendRequests.stream()
 				.anyMatch(friendRequest -> friendRequest.getFrom().getUsername().equals(usernameFrom));
 	}
+
+	public static boolean frndReqExists (String usernameFrom, String usernameTo) {
+		return allfriendRequests.stream()
+				.anyMatch(friendRequest -> friendRequest.getFrom().getUsername().equals(usernameFrom) && friendRequest.getTo().getUsername().equals(usernameTo));
+	}
 }

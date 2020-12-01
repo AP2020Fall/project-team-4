@@ -203,11 +203,11 @@ public class AccountController {
 
 		switch (field) {
 			case 1 -> {
-				System.out.print("New First name: "); getCurrentAccLoggedIn().editField("first name", Menu.getInputLine());
+				System.out.print("New First name: "); getCurrentAccLoggedIn().editField("first name", Menu.getInputLine()); // FIXME: add cancel option
 				System.out.println("First name changed successfully.");
 			}
 			case 2 -> {
-				System.out.print("New Last name: "); getCurrentAccLoggedIn().editField("last name", Menu.getInputLine());
+				System.out.print("New Last name: "); getCurrentAccLoggedIn().editField("last name", Menu.getInputLine()); // FIXME: add cancel option
 				System.out.println("Last name changed successfully.");
 			}
 			case 3 -> {
@@ -269,7 +269,7 @@ public class AccountController {
 	}
 
 	public static void diplayPersonalInfo () {
-		AccountView.diplayPersonalInfo(AccountController.getCurrentAccLoggedIn());
+		AccountView.displayPersonalInfo(AccountController.getCurrentAccLoggedIn());
 	}
 
 	public static void logoutCommand () {
@@ -296,7 +296,7 @@ public class AccountController {
 		}
 	}
 
-	private static class NoAccountExistsWithUsernameException extends Exception {
+	static class NoAccountExistsWithUsernameException extends Exception {
 		public NoAccountExistsWithUsernameException () {
 			super("No account exists with this username.");
 		}

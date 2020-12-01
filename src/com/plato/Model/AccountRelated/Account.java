@@ -69,4 +69,20 @@ public abstract class Account {
 	public String getUsername () {
 		return username;
 	}
+
+	public String getFirstName () {
+		return firstName;
+	}
+
+	public String getLastName () {
+		return lastName;
+	}
+
+	public String getEmail () {
+		return email;
+	}
+
+	public String getPhoneNum () {
+		return phoneNum;
+	}
 }

@@ -8,7 +8,7 @@ import plato.View.Menus.Menu;
 import java.util.LinkedList;
 
 public class GameView {
-	public static void showTurn () {
+	public static void displayTurn () {
 		// TODO: 11/28/2020 AD  
 	}
 
@@ -20,11 +20,11 @@ public class GameView {
 		System.out.printf("%s was added to your fave games successfully%n", gameName);
 	}
 
-	public static void showGameHowToPlay (String gameName) {
+	public static void displayGameHowToPlay (String gameName) {
 		System.out.println(gameName.equals(BattleSea.class.getSimpleName()) ? BattleSea.getDetails(): Reversi.getDetails());
 	}
 
-	public static void showScoreboardOfGame (String gameName, LinkedList<String> scoreBoard) {
+	public static void displayScoreboardOfGame (String gameName, LinkedList<String> scoreBoard) {
 		System.out.printf("%s Scoreboard:%n", gameName);
 		scoreBoard.forEach(System.out::println);
 	}

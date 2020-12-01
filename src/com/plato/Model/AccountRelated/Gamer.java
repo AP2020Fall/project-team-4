@@ -1,6 +1,8 @@
 package plato.Model.AccountRelated;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
@@ -84,5 +86,9 @@ public class Gamer extends Account {
 
 	public void stopParticipatingInEvent (String eventID) {
 		// TODO: 11/20/2020 AD
+	}
+
+	public int getDaysSinceRegistration () {
+		return Math.toIntExact(ChronoUnit.DAYS.between(LocalDateTime.now(), accountStartDate));
 	}
 }
