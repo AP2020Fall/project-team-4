@@ -1,9 +1,7 @@
 package plato.View.GameRelated.BattleSea;
 
 import plato.Model.GameRelated.BattleSea.Ship;
-import plato.Model.GameRelated.Game;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class BattleSeaView  {
