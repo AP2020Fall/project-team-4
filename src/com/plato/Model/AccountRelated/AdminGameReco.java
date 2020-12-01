@@ -43,6 +43,11 @@ public class AdminGameReco {
 				.anyMatch(reco -> reco.recoID.equals(recoID));
 	}
 
+	public static boolean recommendationExists (Gamer gamer, String gameName) {
+		return recommendations.stream()
+				.anyMatch(reco -> reco.gamer.getUsername().equals(gamer.getUsername()) && reco.gameName.equals(gameName));
+	}
+
 	public static LinkedList<AdminGameReco> getRecommendations () {
 		return recommendations;
 	}
@@ -51,7 +56,15 @@ public class AdminGameReco {
 		return gamer;
 	}
 
+	public String getGamerUsername () {
+		return gamer.getUsername();
+	}
+
 	public String getGameName () {
 		return gameName;
+	}
+
+	public String getRecoID () {
+		return recoID;
 	}
 }

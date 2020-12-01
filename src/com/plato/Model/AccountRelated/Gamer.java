@@ -1,6 +1,7 @@
 package plato.Model.AccountRelated;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
@@ -12,7 +13,6 @@ public class Gamer extends Account {
 	// todo add gamelog if needed
 	private LinkedList<Gamer> frnds = new LinkedList<>();
 	private LinkedList<String> faveGames = new LinkedList<>();
-
 
 	protected Gamer (String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
 		super(firstName, lastName, username, password, email, phoneNum);
@@ -69,6 +69,7 @@ public class Gamer extends Account {
 	public LinkedList<AdminGameReco> getAdminGameRecosGotten () {
 		return (LinkedList<AdminGameReco>) getAdminGameRecosGotten().stream()
 				.filter(reco -> reco.getGamer().getUsername().equals(getUsername()))
+				.sorted(Comparator.comparing(AdminGameReco::getGameName))
 				.collect(Collectors.toList());
 	}
 

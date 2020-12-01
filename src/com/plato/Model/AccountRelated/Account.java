@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public abstract class Account {
 	private String firstName, lastName, username, password, userID, email, phoneNum;
 
-	private static LinkedList<Account> accounts = new LinkedList<>();
+	protected static LinkedList<Account> accounts = new LinkedList<>();
 
 	protected Account (String firstName, String lastName, String username, String password, String email, String phoneNum) {
 		this.firstName = firstName;

@@ -20,4 +20,12 @@ public class GameLogView {
 		System.out.printf("%tPlay count: %d%n", allPlayedCount);
 		gameHistory.forEach(entry -> System.out.println("\t\t" + entry));
 	}
+
+	public static void displayAllPointsOfPlayer (int points) {
+		System.out.printf("You have earned %d points from all you gameplay%n", points);
+	}
+
+	public static void displayLastGamePlayed (String gameName) {
+		System.out.printf("Last game you played was %s%n", gameName);
+	}
 }

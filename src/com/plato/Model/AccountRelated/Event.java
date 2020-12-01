@@ -3,6 +3,7 @@ package plato.Model.AccountRelated;
 import plato.Controller.IDGenerator;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,7 @@ public class Event {
 		this.eventID = IDGenerator.generateNext();
 	}
 
-	public void addEvent (String gameName, double eventScore, LocalDate start, LocalDate end) {
+	public static void addEvent (String gameName, double eventScore, LocalDate start, LocalDate end) {
 		events.addLast(new Event(gameName, eventScore, start, end));
 	}
 
@@ -64,6 +65,11 @@ public class Event {
 	public static LinkedList<Event> getInSessionEvents () {
 		return (LinkedList<Event>) getEvents().stream()
 				.filter(Event::isInSession)
+				.sorted(Comparator.comparing(Event::getGameName) 				// first battlesea then reversi events
+						.thenComparing(Event::getStart)			 				// from earliest starting
+						.thenComparing(Event::getEnd)							// from earliest ending
+						.thenComparingDouble(Event::getEventScore).reversed()	// from hishest prizes
+						.thenComparing(Event::getEventID))
 				.collect(Collectors.toList());
 	}
 
@@ -114,5 +120,25 @@ public class Event {
 
 	private void setEnd (LocalDate end) {
 		this.end = end;
+	}
+
+	public String getEventID () {
+		return eventID;
+	}
+
+	public String getGameName () {
+		return gameName;
+	}
+
+	public double getEventScore () {
+		return eventScore;
+	}
+
+	public LocalDate getStart () {
+		return start;
+	}
+
+	public LocalDate getEnd () {
+		return end;
 	}
 }

@@ -1,9 +1,10 @@
 package plato.Controller.GameRelated;
 
 import plato.Controller.AccountRelated.AccountController;
-import plato.Model.AccountRelated.Account;
 import plato.Model.AccountRelated.Gamer;
+import plato.Model.GameRelated.BattleSea.BattleSea;
 import plato.Model.GameRelated.GameLog;
+import plato.Model.GameRelated.Reversi.Reversi;
 import plato.View.GameRelated.GameLogView;
 import plato.View.Menus.GameRelatedMenus.GameMenu;
 
@@ -30,5 +31,19 @@ public class GameLogController {
 		LinkedList<String> gameHistory = GameLog.getGameHistory(GameMenu.getGameName());
 
 		GameLogView.displayLogOfGame(GameMenu.getGameName(), allPlayedCount, gameHistory);
+	}
+
+	public static void displayAllPointsOfPlayer () {
+		int points =
+				GameLog.getPoints(((Gamer) AccountController.getCurrentAccLoggedIn()), BattleSea.class.getSimpleName())			// all points from battlesea
+						+
+						GameLog.getPoints(((Gamer) AccountController.getCurrentAccLoggedIn()), Reversi.class.getSimpleName());	// all points from reversi
+
+		GameLogView.displayAllPointsOfPlayer(points);
+	}
+
+	public static void displayLastGamePlayed () {
+		String gameName = GameLog.getLastGamePlayed((Gamer) AccountController.getCurrentAccLoggedIn());
+		GameLogView.displayLastGamePlayed(gameName);
 	}
 }

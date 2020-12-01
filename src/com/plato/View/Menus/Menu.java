@@ -76,4 +76,8 @@ public abstract class Menu {
 	public static String getInputLine () {
 		return scanner.nextLine();
 	}
+
+	public static void printErrorMessage (String message) {
+		System.err.println(message);
+	}
 }
