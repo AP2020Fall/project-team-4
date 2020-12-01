@@ -110,4 +110,8 @@ public class BattleSea extends Game {
 	public static String getDetails () {
 		return details;
 	}
+
+	public static boolean checkCoordinates (int number) {
+		return number <= 10 && number >= 1;
+	}
 }

@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
-class Ship {
+public class Ship {
 	private Game game;
 	private int leftMostX, topMostY;
 	private boolean isVertical;
@@ -49,7 +49,7 @@ class Ship {
 		return coords;
 	}
 
-	private void changeDir () {
+	public void changeDir () {
 		if (canChangeDir())
 			isVertical = !isVertical;
 	}
@@ -64,7 +64,7 @@ class Ship {
 		return isShipPosValid(board, x, y, isVertical());
 	}
 
-	private void move (int x, int y) {
+	public void move (int x, int y) {
 		if (canMove(x, y)) {
 			this.leftMostX = x;
 			this.topMostY = y;

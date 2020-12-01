@@ -2,7 +2,7 @@ package plato.Model.GameRelated.BattleSea;
 
 import plato.Model.GameRelated.Game;
 
-class Bomb {
+public class Bomb {
 	private final Game game;
 	private final int x, y;
 	private Boolean wasSuccessful;

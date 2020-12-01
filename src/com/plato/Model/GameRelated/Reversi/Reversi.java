@@ -1,7 +1,6 @@
 package plato.Model.GameRelated.Reversi;
 
 import plato.Model.AccountRelated.Gamer;
-import plato.Model.GameRelated.BattleSea.PlayerBattleSea;
 import plato.Model.GameRelated.Game;
 
 import java.util.ArrayList;
@@ -147,6 +146,10 @@ public class Reversi extends Game {
 	public static LinkedList<String> getScoreboard () {
 		// TODO: 11/13/2020 AD
 		return null;
+	}
+
+	public static boolean checkCoordinates (int number) {
+		return number >= 1 && number <= 8;
 	}
 }
 

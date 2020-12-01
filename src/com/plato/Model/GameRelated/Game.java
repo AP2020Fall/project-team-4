@@ -59,6 +59,10 @@ public abstract class Game {
 		return listOfPlayers.get(turn).getGamer();
 	}
 
+	public Player getTurnPlayer () {
+		return listOfPlayers.get(turn);
+	}
+
 	public int getTurnNum () {
 		return turn;
 	}
@@ -91,11 +95,6 @@ public abstract class Game {
 
 	public String getGameName () {
 		return getClass().getSimpleName();
-	}
-
-	public boolean checkCoordinates (int number) {
-		if (number > 0 && number < 9) { return true;}
-		return false;
 	}
 
 	public GameConclusion getConclusion () {
