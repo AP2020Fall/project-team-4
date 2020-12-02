@@ -8,8 +8,7 @@ import java.util.LinkedList;
 
 public class Reversi extends Game {
 	private static String details;
-
-	private static String[][] board = new String[8][8];
+	private String[][] board = new String[8][8];
 	private static LinkedList<String> scoreboard = new LinkedList<>(); // FIXME: remove if necessary because history of all games is there
 	private ArrayList<String> moves = new ArrayList<>();
 
@@ -107,7 +106,7 @@ public class Reversi extends Game {
 		return true;
 	}
 
-	private boolean hasPlayerMoved () {return true;}
+	public boolean hasPlayerMoved () {return true;}
 
 	//empties board , blank space is shown with -
 	public void emptyBoard () {
