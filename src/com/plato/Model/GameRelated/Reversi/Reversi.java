@@ -88,14 +88,6 @@ public class Reversi extends Game {
 
 	private boolean hasPlayerMoved () {return true;}
 
-	public static String getDetails () {
-		return details;
-	}
-
-	public static void setDetails (String details) {
-		Reversi.details = details;
-	}
-
 	//empties board , blank space is shown with -
 	public void emptyBoard () {
 		for (int i = 0; i < 8; i++) {
@@ -150,6 +142,14 @@ public class Reversi extends Game {
 
 	public static boolean checkCoordinates (int number) {
 		return number >= 1 && number <= 8;
+	}
+
+	public static String getDetails () {
+		return details;
+	}
+
+	public static void setDetails (String details) {
+		Reversi.details = details;
 	}
 }
 

@@ -170,7 +170,6 @@ public class AccountController {
 			Account.addAccount(Gamer.class, firstName, lastName, username, password, email, phoneNum, initMoney);
 			Menu.printErrorMessage("Gamer account created successfully.");
 		}
-
 	}
 
 	public static void changePWCommand () {
