@@ -39,28 +39,35 @@ public class Reversi extends Game {
 
 	private boolean canPlayerPlaceDiskHere (int x, int y) {return true;}
 
-	private boolean doesAnyDiskChangeColor (int x, int y, Direction dir) {return true;}
+	/**
+	 * @param x start 0<x<7
+	 * @param y start 0<y<7
+	 * @param dir
+	 * @return checks current color at x,y
+	 * checks if there are disks with opposite color next to it
+	 * returns true if after disks with oppoite color there is a same color disk in given direction
+	 */
+	private boolean doesAnyDiskChangeColor (int x, int y, Direction dir){return true;}
 
 	private boolean doesAnyDiskChangeColor (int x, int y) {return true;}
 
-
-	//gets start and destination and changes the color of in between disks
+    /**
+     *
+     * @param startx from 0 to 7
+     * @param starty from 0 to 7
+     * @param destx from 0 to 7
+     * @param desty from 0 to 7
+     * s start and destination and changes the color of in between disk
+     * is called after in checkDirections after placing disk
+     */
 	private void changeColor (int startx, int starty, int destx, int desty) {
-		if (startx >= destx) {
-			if (starty >= desty) {
-				for (int i = destx; i < startx - 1; i++) {
-					for (int j = starty; j < desty - 1; i++) {
-						board[i][j] = ((PlayerReversi) getPlayer(getTurnGamer())).getColor();
+				for (int x = Math.min(startx,destx); x <= Math.max(startx,destx); x++) {
+					for (int y = Math.min(starty,desty) ; y <=Math.max(starty , desty); y++) {
+						board[y][x] = ((PlayerReversi) getPlayer(getTurnGamer())).getColor();
 					}
 				}
 			}
-			else {}
-		}
-		else {
-			if (starty >= desty) {}
-			else {}
-		}
-	}
+
 
 	private void checkDirections (int x, int y) {
 		for (Direction dir : Direction.values()) {
@@ -98,6 +105,12 @@ public class Reversi extends Game {
 				else if (i == 4 && j == 3) {board[i][j] = "b";}
 				else if (i == 4 && j == 4) {board[i][j] = "w";}
 				else {board[i][j] = "-";}
+				/*
+				. . ..
+				# . #
+				.
+				.
+				 */
 			}
 		}
 	}
