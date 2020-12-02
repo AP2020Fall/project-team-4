@@ -12,18 +12,24 @@ public class Reversi extends Game {
 	private static String[][] board = new String[8][8];
 	private static LinkedList<String> scoreboard = new LinkedList<>(); // FIXME: remove if necessary because history of all games is there
 	private ArrayList<String> moves = new ArrayList<>();
-	private int numberOfWhite = 2;
-	private int numberOfBlack = 2;
+
 
 	public Reversi (ArrayList<Gamer> gamers) {
 		super(gamers);
 	}
 
+	/**
+	 * @return new ArrayLiost() (size == 0)
+	 */
 	public ArrayList<String> getAvailableCoordinates () {
 		// TODO: 11/28/2020 AD  
 		return null;
 	}
 
+	/**
+	 * @param x from 0 to 7 inc
+	 * @param y from 0 to 7 inc
+	 */
 	public void placeDisk (int x, int y) {
 		if (canPlayerPlaceAnyDisks()) {
 			if (canPlayerPlaceDiskHere(x, y)) {
@@ -35,9 +41,16 @@ public class Reversi extends Game {
 	}
 
 	//is called after next turn
-	private boolean canPlayerPlaceAnyDisks () {return true;}
+	private boolean canPlayerPlaceAnyDisks(){
+		return getAvailableCoordinates().size() == 0;
+	}
 
-	private boolean canPlayerPlaceDiskHere (int x, int y) {return true;}
+	/**
+	 * @return true if x,y is blank "-"
+	 */
+	private boolean canPlayerPlaceDiskHere (int x, int y) {
+		return board[y][x].equals("-");
+	}
 
 	/**
 	 * @param x   start 0<=x<=7
@@ -49,8 +62,6 @@ public class Reversi extends Game {
 	 */
 	private boolean doesAnyDiskChangeColor (int x, int y, Direction dir){return true;} //todo
 
-	private boolean doesAnyDiskChangeColor (int x, int y) {return true;}
-
 	/**
 	 * @param startx from 0 to 7
 	 * @param starty from 0 to 7
@@ -60,13 +71,14 @@ public class Reversi extends Game {
 	 */
 	private void changeColor (int startx, int starty, int destx, int desty, Direction direction) {
 		board[desty][destx] = ((PlayerReversi) getPlayer(getTurnGamer())).getColor();
-
+		changeInGGameScore();
 		if (doesAnyDiskChangeColor(destx, desty, direction))
 			changeColor(destx, desty, destx + direction.getDeltaX(), desty + direction.getDeltaY(), direction);
 	}
 
+
 	/**
-	 * 		gets called after placeDisk() to check for color changes
+	 * gets called after placeDisk() to check for color changes
 	 */
 	private void checkDirections (int x, int y) {
 		for (Direction dir : Direction.values()) {
@@ -145,6 +157,16 @@ public class Reversi extends Game {
 	public static LinkedList<String> getScoreboard () {
 		// TODO: 11/13/2020 AD
 		return null;
+	}
+
+	private int getNumberOfBlack(){
+		int count = 0;
+		//TODO : straem for 2d array
+	}
+
+	private int getNumberOfWhite(){
+		int count = 0;
+		//TODO : straem for 2d array
 	}
 
 	public static boolean checkCoordinates (int number) {
