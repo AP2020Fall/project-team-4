@@ -1,7 +1,5 @@
 package plato.View.GameRelated.BattleSea;
 
-import plato.Model.GameRelated.BattleSea.Ship;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -11,7 +9,7 @@ public class ShipView {
 	/*
 	used for changing editing board
 	 */
-	public static void displayShipsWithNamesForEditing (Ship[] board) {
+	public static void displayShipsWithNamesForEditing (LinkedList<String> shipsAndTheirStartingCoords) { // every string is in form -> "startx starty"
 		LinkedList<Character> shipNames = new LinkedList<>() {{
 			add('A');
 			add('B');
@@ -23,22 +21,20 @@ public class ShipView {
 		Iterator<Character> shipNamesIt = shipNames.iterator();
 
 		System.out.println("Ships: ");
-		for (Ship ship : board)
-			System.out.printf("\t%s, StartX=%d StartY=%d%n", shipNamesIt.next(), ship.getLeftMostX(), ship.getTopMostY());
+		for (String shipInfo : shipsAndTheirStartingCoords)
+			System.out.printf("\t%s, StartX=%d StartY=%d%n", shipNamesIt.next(), shipInfo.split(" ")[0], shipInfo.split(" ")[1]);
 	}
 
 	/*
 	used for mid-gameplay
 	 */
-	public static void displayShips (LinkedList<Ship> ships) {
+	public static void displayShips (LinkedList<String> shipsSizes) { // every string is in form -> "L_size S_size"
 		HashMap<String, AtomicInteger> shipSizes_Count = new HashMap<>();
-		for (Ship ship : ships) {
-			String key = "%d %d".formatted(ship.getL_SIZE(), ship.getS_SIZE());
-
-			if (shipSizes_Count.containsKey(key))
-				shipSizes_Count.get(key).incrementAndGet();
+		for (String shipSizes : shipsSizes) {
+			if (shipSizes_Count.containsKey(shipSizes))
+				shipSizes_Count.get(shipSizes).incrementAndGet();
 			else
-				shipSizes_Count.put(key, new AtomicInteger(1));
+				shipSizes_Count.put(shipSizes, new AtomicInteger(1));
 		}
 
 		System.out.println("|L Size|S Size|Count|");

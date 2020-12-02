@@ -8,6 +8,7 @@ import plato.View.GameRelated.BattleSea.ShipView;
 import plato.View.Menus.Menu;
 
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 
 public class ShipController {
 
@@ -15,9 +16,13 @@ public class ShipController {
 	 * @param playernum if 1 => use trialboard1 otherwise use trialboard2
 	 */
 	public static void editShipCoords (int playernum) {
-		Ship[] ships = (playernum == 1 ? BattleSeaController.getTrialPlayerBoard1():BattleSeaController.getTrialPlayerBoard2());
+		Ship[] ships = (playernum == 1 ? BattleSeaController.getTrialPlayerBoard1() : BattleSeaController.getTrialPlayerBoard2());
 
-		ShipView.displayShipsWithNamesForEditing(ships);
+		ShipView.displayShipsWithNamesForEditing(new LinkedList<>() {{
+			for (Ship ship : ships)
+				add("%d %d".formatted(ship.getLeftMostX(), ship.getTopMostY()));
+
+		}});
 
 		String shipName; Ship chosenShip;
 		while (true) {
@@ -69,9 +74,13 @@ public class ShipController {
 	 * @param playernum if 1 => use trialboard1 otherwise use trialboard2
 	 */
 	public static void rotateShip (int playernum) {
-		Ship[] ships = (playernum == 1 ? BattleSeaController.getTrialPlayerBoard1():BattleSeaController.getTrialPlayerBoard2());
+		Ship[] ships = (playernum == 1 ? BattleSeaController.getTrialPlayerBoard1() : BattleSeaController.getTrialPlayerBoard2());
 
-		ShipView.displayShipsWithNamesForEditing(ships);
+		ShipView.displayShipsWithNamesForEditing(new LinkedList<>() {{
+			for (Ship ship : ships)
+				add("%d %d".formatted(ship.getLeftMostX(), ship.getTopMostY()));
+
+		}});
 
 		String shipName; Ship chosenShip;
 		while (true) {
@@ -104,27 +113,39 @@ public class ShipController {
 	}
 
 	public static void displayAllShipsOfCurrentPlayer () {
-		ShipView.displayShips(((PlayerBattleSea) GameController.getCurrentGame()
+		ShipView.displayShips(getShipsSizes(
+				((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
-				.getShips());
+				.getShips())
+		);
 	}
 
 	public static void displayDestroyedShipsOfCurrentPlayer () {
-		ShipView.displayShips(((PlayerBattleSea) GameController.getCurrentGame()
+		ShipView.displayShips(getShipsSizes(
+				((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
-				.getShips(true));
+				.getShips(true)));
 	}
 
 	public static void displayDestroyedShipsOfOpponent () {
-		ShipView.displayShips(((PlayerBattleSea) GameController.getCurrentGame()
+		ShipView.displayShips(getShipsSizes(
+				((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
-				.getOpponentShips(true));
+				.getOpponentShips(true)));
 	}
 
 	public static void displayHealthyShipsOfCurrentPlayer () {
-		ShipView.displayShips(((PlayerBattleSea) GameController.getCurrentGame()
+		ShipView.displayShips(getShipsSizes(
+				((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
-				.getShips(false));
+				.getShips(false)));
+	}
+
+	public static LinkedList<String> getShipsSizes (LinkedList<Ship> ships) {
+		return new LinkedList<>() {{
+			for (Ship ship : ships)
+				add("%d %d".formatted(ship.getL_SIZE(), ship.getS_SIZE()));
+		}};
 	}
 
 	private static class InvalidCoordinateException extends Exception {

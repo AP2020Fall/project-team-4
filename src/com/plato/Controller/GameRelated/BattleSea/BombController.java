@@ -2,9 +2,13 @@ package plato.Controller.GameRelated.BattleSea;
 
 import plato.Controller.GameRelated.GameController;
 import plato.Model.GameRelated.BattleSea.BattleSea;
+import plato.Model.GameRelated.BattleSea.Bomb;
 import plato.Model.GameRelated.BattleSea.PlayerBattleSea;
 import plato.View.GameRelated.BattleSea.BombView;
 import plato.View.Menus.Menu;
+
+import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 public class BombController {
 	public static void throwBomb () {
@@ -35,39 +39,45 @@ public class BombController {
 	}
 
 	public static void displayAllCurrentPlayerBombs () {
-		BombView.displayBombs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
-				.getBombsThrown());
+				.getBombsThrown()));
 	}
 
 	public static void displayAllOpponentBombs () {
-		BombView.displayBombs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
-				.getOpponentBombsThrown());
+				.getOpponentBombsThrown()));
 	}
 
 	public static void displayAllSuccessCurrentPlayerBombs () {
-		BombView.displayBombs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
-				.getBombsThrown(true));
+				.getBombsThrown(true)));
 	}
 
 	public static void displayAllSuccessOpponentBombs () {
-		BombView.displayBombs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
-				.getOpponentBombsThrown(true));
+				.getOpponentBombsThrown(true)));
 	}
 
 	public static void displayAllUnsuccessCurrentPlayerBombs () {
-		BombView.displayBombs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
-				.getBombsThrown(false));
+				.getBombsThrown(false)));
 	}
 
 	public static void displayAllUnsuccessOpponentBombs () {
-		BombView.displayBombs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
-				.getOpponentBombsThrown(false));
+				.getOpponentBombsThrown(false)));
+	}
+
+	private static LinkedList<String> getBombXYs (LinkedList<Bomb> bombs) {
+		return (LinkedList<String>) bombs.stream()
+				.map(bomb -> "%d %d".formatted(bomb.getX(), bomb.getY()))
+				.collect(Collectors.toList());
 	}
 
 	private static class InvalidCoordinateException extends Exception {

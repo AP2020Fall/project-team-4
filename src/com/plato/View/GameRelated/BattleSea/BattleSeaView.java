@@ -1,19 +1,13 @@
 package plato.View.GameRelated.BattleSea;
 
-import plato.Model.GameRelated.BattleSea.Ship;
-
 import java.util.LinkedList;
 
-public class BattleSeaView  {
-	public static void displayBoard (Ship[] board) {
+public class BattleSeaView {
+	public static void displayBoard (StringBuilder board) {
 		// TODO TOTOOTOTOTOOT
 	}
 
-	public static void displayBoard (LinkedList<Ship> ships, boolean boardIsForCurrentPlayer) {
-		// TODO: TOTOOTOTOTOOTOTO
-	}
-
-	public static void displayAll5RandomBoards (LinkedList<Ship[]> board) {
+	public static void displayAll5RandomBoards (LinkedList<StringBuilder> boards) {
 		// TODO TOOTOTOTOOTOT
 	}
 }

@@ -268,7 +268,8 @@ public class AccountController {
 	}
 
 	public static void diplayPersonalInfo () {
-		AccountView.displayPersonalInfo(AccountController.getCurrentAccLoggedIn());
+		Account account = AccountController.getCurrentAccLoggedIn();
+		AccountView.displayPersonalInfo(account.getUsername(), account.getFirstName(), account.getLastName(), account.getEmail(), account.getPhoneNum());
 	}
 
 	public static void logoutCommand () {

@@ -17,7 +17,7 @@ public class BattleSeaController {
 	public static void chooseBetween5RandomlyGeneratedBoards () {
 		LinkedList<Ship[]> fiveRandBoards = BattleSea.get5RandBoards();
 
-		BattleSeaView.displayAll5RandomBoards(fiveRandBoards);
+		displayAll5RandomBoards(fiveRandBoards);
 
 		int boardChoice;
 		while (true)
@@ -33,20 +33,44 @@ public class BattleSeaController {
 
 		Ship[] chosenBoard = fiveRandBoards.get(boardChoice - 1);
 
-		BattleSeaView.displayBoard(chosenBoard);
+		displayBoard(chosenBoard);
 		setTrialPlayerBoard(chosenBoard);
 	}
 
 	public static void displayRandomlyGeneratedBoard () {
-		BattleSeaView.displayBoard(BattleSea.getRandBoard());
+		displayBoard(BattleSea.getRandBoard());
 	}
 
 	public static void displayCurrentPlayerBoard () {
-		BattleSeaView.displayBoard(((PlayerBattleSea) GameController.getCurrentGame().getTurnPlayer()).getShips(), true);
+		displayBoard(((PlayerBattleSea) GameController.getCurrentGame().getTurnPlayer()).getShips(), true);
 	}
 
 	public static void displayOpponentBoard () {
-		BattleSeaView.displayBoard(((PlayerBattleSea) GameController.getCurrentGame().getTurnPlayer()).getShips(), false);
+		displayBoard(((PlayerBattleSea) GameController.getCurrentGame().getTurnPlayer()).getShips(), false);
+	}
+
+	public static void displayBoard (Ship[] board) {
+		StringBuilder boardStrBldr = new StringBuilder();
+
+		// TODO OTOTOTOTOTOTOOTOTOTOTOTO
+
+		BattleSeaView.displayBoard(boardStrBldr);
+	}
+
+	public static void displayBoard (LinkedList<Ship> ships, boolean boardIsForCurrentPlayer) {
+		StringBuilder boardStrBldr = new StringBuilder();
+
+		// TODO OTOTOTOTOTOTOOTOTOTOTOTO
+
+		BattleSeaView.displayBoard(boardStrBldr);
+	}
+
+	public static void displayAll5RandomBoards (LinkedList<Ship[]> board) {
+		LinkedList<StringBuilder> boardStrBldrs = new LinkedList<>();
+
+		// TODO OTOTOTOTOTOTOOTOTOTOTOTO
+
+		BattleSeaView.displayAll5RandomBoards(boardStrBldrs);
 	}
 
 	public static void setTrialPlayerBoard (Ship[] trialPlayerBoard) {

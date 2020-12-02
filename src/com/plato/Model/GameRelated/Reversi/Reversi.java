@@ -142,10 +142,6 @@ public class Reversi extends Game {
 	public boolean gameEnded () {
 		return false;
 	}
-
-	public static String[][] getBoard () {
-		return board;
-	}
 	
 	/**
 	 1. list all finished games of this type

@@ -7,6 +7,8 @@ import plato.Model.AccountRelated.Gamer;
 import plato.View.AccountRelated.FriendRequestView;
 import plato.View.Menus.Menu;
 
+import java.util.LinkedList;
+
 public class FriendRequestController {
 
 	public static void sendFrndRequest () {
@@ -34,7 +36,10 @@ public class FriendRequestController {
 	}
 
 	public static void displayFrndReqsPlayerGotten () {
-		FriendRequestView.displayFrndReqsPlayerGotten(((Gamer) AccountController.getCurrentAccLoggedIn()).getFriendRequestsGotten());
+		FriendRequestView.displayFrndReqsPlayerGotten(new LinkedList<>(){{
+			for (FriendRequest friendRequest : ((Gamer) AccountController.getCurrentAccLoggedIn()).getFriendRequestsGotten())
+				add(friendRequest.getFrom().getUsername());
+		}});
 		//todo enter submenu to be able to accept/decline friend requests
 	}
 

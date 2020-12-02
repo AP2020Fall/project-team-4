@@ -34,7 +34,7 @@ public class GameController {
 	}
 
 	public static void displayGameHowToPlay () {
-		GameView.displayGameHowToPlay(GameMenu.getGameName());
+		GameView.displayGameHowToPlay(GameMenu.getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getDetails() : Reversi.getDetails());
 	}
 
 	public static void showScoreboardOfGame () {

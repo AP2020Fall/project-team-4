@@ -2,7 +2,7 @@ package plato.Controller.AccountRelated;
 
 import plato.Model.AccountRelated.Account;
 import plato.Model.AccountRelated.Gamer;
-import plato.View.AccountRelated.AccountView;
+import plato.Model.GameRelated.GameLog;
 import plato.View.AccountRelated.GamerView;
 import plato.View.Menus.Menu;
 
@@ -20,7 +20,11 @@ public class GamerController {
 				.sorted(Comparator.comparing(Account::getUsername))
 				.collect(Collectors.toList());
 
-		GamerView.displayAllUsernames(allGamerAccounts);
+		GamerView.displayAllUsernames(new LinkedList<>() {{
+			for (Gamer gamerAccount : allGamerAccounts) {
+				add(gamerAccount.getUsername());
+			}
+		}});
 		// todo enter submenu to be able to view a certain account's personal info
 	}
 
@@ -29,7 +33,10 @@ public class GamerController {
 				.getFrnds().stream().sorted(Comparator.comparing(Account::getUsername))
 				.collect(Collectors.toList());
 
-		GamerView.displayFriendsUsernames(playersFriendsAccounts);
+		GamerView.displayFriendsUsernames(new LinkedList<>() {{
+			for (Gamer friendAccount : playersFriendsAccounts)
+				add(friendAccount.getUsername());
+		}});
 		// todo enter submenu to be able to view a certain friend's account's peronal info or remove friend
 	}
 
@@ -66,7 +73,15 @@ public class GamerController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		GamerView.displayFriendPersonalInfo(((Gamer) AccountController.getCurrentAccLoggedIn()).getFrnd(username));
+		Gamer frnd = ((Gamer) AccountController.getCurrentAccLoggedIn()).getFrnd(username);
+		GamerView.displayFriendPersonalInfo(
+				frnd.getUsername(), frnd.getFirstName(), frnd.getLastName(), frnd.getDaysSinceRegistration(),
+				frnd.getFaveGames(),
+				GameLog.getPoints(frnd, "BattleSea"), GameLog.getWinCount(frnd, "BattleSea"),
+				GameLog.getDrawCount(frnd, "BattleSea"), GameLog.getLossCount(frnd, "BattleSea"),
+				GameLog.getPoints(frnd, "Reversi"), GameLog.getWinCount(frnd, "Reversi"),
+				GameLog.getDrawCount(frnd, "Reversi"), GameLog.getLossCount(frnd, "Reversi")
+		);
 	}
 
 	private static class FriendDoesntExistException extends Exception {

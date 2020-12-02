@@ -17,7 +17,10 @@ public class AdminGameRecoController {
 	}
 
 	public static void displayAdminsRecosToPlayer () {
-		AdminGameRecoView.displayAdminsRecosToPlayer(((Gamer) AccountController.getCurrentAccLoggedIn()).getAdminGameRecosGotten());
+		AdminGameRecoView.displayAdminsRecosToPlayer(new LinkedList<>(){{
+			for (AdminGameReco adminGameReco : ((Gamer) AccountController.getCurrentAccLoggedIn()).getAdminGameRecosGotten())
+				add(adminGameReco.getGameName());
+		}});
 	}
 
 	public static void displayAllAdminRecos () {
@@ -27,7 +30,10 @@ public class AdminGameRecoController {
 				.thenComparing(AdminGameReco::getGameName)  // first battlesea recos then reversi
 				.thenComparing(AdminGameReco::getRecoID));
 
-		AdminGameRecoView.displayAllAdminRecos(allRecos);
+		AdminGameRecoView.displayAllAdminRecos(new LinkedList<>(){{
+			for (AdminGameReco reco : allRecos)
+				add("%s %s %s".formatted(reco.getRecoID(), reco.getGamerUsername(), reco.getGameName()));
+		}});
 		// todo enter submenu to be able to remove reco
 	}
 

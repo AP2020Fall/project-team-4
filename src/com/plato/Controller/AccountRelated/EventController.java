@@ -9,6 +9,7 @@ import plato.View.Menus.Menu;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.LinkedList;
 
 public class EventController {
 	public static void createEvent () {
@@ -80,7 +81,16 @@ public class EventController {
 	}
 
 	public static void displayInSessionEventsAndGotoSubmenu () {
-		EventView.displayInSessionEvents(Event.getInSessionEvents());
+		EventView.displayInSessionEvents(new LinkedList<>() {{
+			for (Event inSessionEvent : Event.getInSessionEvents()) {
+				add("%s %s %s %s %.01f".formatted(
+						inSessionEvent.getEventID(),
+						inSessionEvent.getGameName(),
+						inSessionEvent.getStart().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
+						inSessionEvent.getEnd().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
+						inSessionEvent.getEventScore()));
+			}
+		}});
 		// todo go to submenu to edit and remove event
 	}
 

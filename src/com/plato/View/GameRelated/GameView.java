@@ -1,10 +1,5 @@
 package plato.View.GameRelated;
 
-import plato.Model.GameRelated.BattleSea.BattleSea;
-import plato.Model.GameRelated.Reversi.Reversi;
-import plato.View.Menus.GameRelatedMenus.GameMenu;
-import plato.View.Menus.Menu;
-
 import java.util.LinkedList;
 
 public class GameView {
@@ -20,8 +15,8 @@ public class GameView {
 		System.out.printf("%s was added to your fave games successfully%n", gameName);
 	}
 
-	public static void displayGameHowToPlay (String gameName) {
-		System.out.println(gameName.equals(BattleSea.class.getSimpleName()) ? BattleSea.getDetails(): Reversi.getDetails());
+	public static void displayGameHowToPlay (String gameDetails) {
+		System.out.println(gameDetails);
 	}
 
 	public static void displayScoreboardOfGame (String gameName, LinkedList<String> scoreBoard) {

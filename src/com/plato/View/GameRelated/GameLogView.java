@@ -1,7 +1,5 @@
 package plato.View.GameRelated;
 
-import plato.Model.AccountRelated.Gamer;
-
 import java.util.LinkedList;
 
 public class GameLogView {

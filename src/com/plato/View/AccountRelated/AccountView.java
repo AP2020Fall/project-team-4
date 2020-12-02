@@ -1,11 +1,9 @@
 package plato.View.AccountRelated;
 
-import plato.Model.AccountRelated.Account;
-
 import java.util.LinkedList;
 
 public class AccountView {
-	public static void displayPersonalInfo (Account account) {
+	public static void displayPersonalInfo (String username, String firstName, String lastName, String email, String phoneNum) {
 		// TODO: TODODODODOODODODOOD
 	}
 
