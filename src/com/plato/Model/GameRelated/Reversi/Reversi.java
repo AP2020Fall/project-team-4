@@ -19,7 +19,8 @@ public class Reversi extends Game {
 	}
 
 	/**
-	 * @return new ArrayLiost() (size == 0)
+	 * if both scores of white and black are 32 or atleast one of them is 0 return new ArrayList()
+	 * otherwise check every blank coordinate and if player can place there add to arraylist and return the arraylist in the end
 	 */
 	public ArrayList<String> getAvailableCoordinates () {
 		// TODO: 11/28/2020 AD  
@@ -47,9 +48,11 @@ public class Reversi extends Game {
 
 	/**
 	 * @return true if x,y is blank "-"
+	 * @return true if atleast one disk changes color in any direction (not the check directions method)
 	 */
 	private boolean canPlayerPlaceDiskHere (int x, int y) {
-		return board[y][x].equals("-");
+		if (board[y][x].equals("-")) return true;
+		//todo sorry dont forget to write for second condition in javadoc
 	}
 
 	/**
@@ -71,7 +74,6 @@ public class Reversi extends Game {
 	 */
 	private void changeColor (int startx, int starty, int destx, int desty, Direction direction) {
 		board[desty][destx] = ((PlayerReversi) getPlayer(getTurnGamer())).getColor();
-		changeInGGameScore();
 		if (doesAnyDiskChangeColor(destx, desty, direction))
 			changeColor(destx, desty, destx + direction.getDeltaX(), desty + direction.getDeltaY(), direction);
 	}
