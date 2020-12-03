@@ -1,6 +1,6 @@
 package plato.Model.GameRelated;
 
-enum GameConclusion {
+public enum GameConclusion {
 	IN_SESSION,
 	DRAW,
 	PLAYER1_WIN,

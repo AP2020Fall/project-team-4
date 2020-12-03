@@ -17,21 +17,21 @@ public class ReversiController {
 
 	public void nextTurn () {
 		try {
-			if (GameController.getCurrentGame().gameEnded())
-				GameController.getCurrentGame().concludeGame();
+			if (GameController.getInstance().getCurrentGame().gameEnded())
+				GameController.getInstance().getCurrentGame().concludeGame();
 
-			if (!((Reversi) GameController.getCurrentGame()).hasPlayerMoved() && ((Reversi) GameController.getCurrentGame()).canPlayerPlaceAnyDisks())
+			if (!((Reversi) GameController.getInstance().getCurrentGame()).hasPlayerMoved() && ((Reversi) GameController.getInstance().getCurrentGame()).canPlayerPlaceAnyDisks())
 				throw new HasntMadeMoveInCurrentTurnException();
 		} catch (HasntMadeMoveInCurrentTurnException e) {
 			Menu.printErrorMessage(e.getMessage());
 			return;
 		}
-		GameController.getCurrentGame().nextTurn();
+		GameController.getInstance().getCurrentGame().nextTurn();
 	}
 
 	public void placeDisk () {
 
-		PlayerReversi currentPlayer = ((PlayerReversi) GameController.getCurrentGame().getTurnPlayer());
+		PlayerReversi currentPlayer = ((PlayerReversi) GameController.getInstance().getCurrentGame().getTurnPlayer());
 
 		String Xstr, Ystr; int x, y;
 		while (true) {
@@ -46,7 +46,7 @@ public class ReversiController {
 				if (!Reversi.checkCoordinates(x) || !Reversi.checkCoordinates(y))
 					throw new InvalidCoordinateException();
 
-				if (!((Reversi) GameController.getCurrentGame()).canPlayerPlaceDiskHere(x, y))
+				if (!((Reversi) GameController.getInstance().getCurrentGame()).canPlayerPlaceDiskHere(x, y))
 					throw new CantPlaceDiskHere();
 				break;
 			} catch (InvalidCoordinateException | CantPlaceDiskHere e) {
@@ -54,19 +54,19 @@ public class ReversiController {
 			}
 		}
 
-		((Reversi) GameController.getCurrentGame()).placeDisk(x, y);
+		((Reversi) GameController.getInstance().getCurrentGame()).placeDisk(x, y);
 	}
 
 	public void displayAvailableCoords () {
-		ReversiView.getInstance().displayAvailableCoords(((Reversi) GameController.getCurrentGame()).getAvailableCoordinates());
+		ReversiView.getInstance().displayAvailableCoords(((Reversi) GameController.getInstance().getCurrentGame()).getAvailableCoordinates());
 	}
 
 	public void displayGrid () {
-		ReversiView.getInstance().displayGrid(((Reversi) GameController.getCurrentGame()).getBoard());
+		ReversiView.getInstance().displayGrid(((Reversi) GameController.getInstance().getCurrentGame()).getBoard());
 	}
 
 	public void displayPrevMoves () {
-		ReversiView.getInstance().displayMoveHistory(((Reversi) GameController.getCurrentGame()).getMoves());
+		ReversiView.getInstance().displayMoveHistory(((Reversi) GameController.getInstance().getCurrentGame()).getMoves());
 	}
 
 	private static class HasntMadeMoveInCurrentTurnException extends Exception {

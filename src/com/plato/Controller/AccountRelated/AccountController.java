@@ -299,7 +299,7 @@ public class AccountController {
 		return currentAccLoggedIn != null;
 	}
 
-	private class RepeatedUsernameException extends Exception {
+	private static class RepeatedUsernameException extends Exception {
 		public RepeatedUsernameException () {
 			super("An account with this username already exists.");
 		}
