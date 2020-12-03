@@ -1,9 +1,5 @@
 package plato.View.Menus;
 
-import plato.View.Menus.AccountRelatedMenus.AccountMenu;
-import plato.View.Menus.AccountRelatedMenus.LoginRegisterMenu;
-import plato.View.Menus.AccountRelatedMenus.RegisterMenu;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -22,34 +18,30 @@ public abstract class Menu {
 		this.menuTitle = menuTitle;
 	}
 
-	public static void displayAreYouSureMessage () {
-		System.out.print("Are you sure?[y/n]  ");
-	}
-
 	private static void initMenus () {
 		// TODO: 11/29/2020 AD
+	}
+
+	public static void displayAreYouSureMessage () {
+		System.out.print("Are you sure?[y/n]  ");
 	}
 
 	public LinkedList<String> getOptions () {
 		LinkedList<String> options = new LinkedList<>();
 		if (canBack()) options.add("Back");
 		if (canGoToAccMenu()) options.add("View Account Menu");
-		if (this instanceof LoginRegisterMenu || this instanceof RegisterMenu) options.add("Exit program");
+		options.add("Exit program");
 
 		return options;
-	}
-
-	public boolean canBack () {
-		return true;
 	}
 
 	public void back () {
 		parent.enter();
 	}
 
-	public boolean canGoToAccMenu () {
-		return !(this instanceof AccountMenu || this instanceof LoginRegisterMenu || this instanceof RegisterMenu || this.isFormType());
-	}
+	public abstract boolean canBack ();
+
+	public abstract boolean canGoToAccMenu ();
 
 	protected void enter () {
 		getMenuIn().inMenu = false;
