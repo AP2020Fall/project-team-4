@@ -50,7 +50,9 @@ public class Reversi extends Game {
 	 * @return true if atleast one disk changes color in any direction (not the check directions method)
 	 */
 	public boolean canPlayerPlaceDiskHere (int x, int y) {
-		if (board[y][x].equals("-")) return true; // fixme can be replaced w isBoardFull()
+		if (board[y][x].equals("-")) return true;
+		else if(isBoardFull()) return false;
+		// fixme can be replaced w isBoardFull()
 		//todo sorry dont forget to write for second condition in javadoc
 	}
 
@@ -106,7 +108,13 @@ public class Reversi extends Game {
 		return true;
 	}
 
-	public boolean hasPlayerMoved () {return true;}
+	/**
+	 * should be called before changing turns
+	 */
+	public boolean hasPlayerMoved(){
+		String color = moves.getLast().substring(0,1);
+		if(color.equals(((PlayerReversi) getPlayer(getTurnGamer())).getColor())) return true;
+		else return false;}
 
 	//empties board , blank space is shown with -
 	public void emptyBoard () {
@@ -159,12 +167,18 @@ public class Reversi extends Game {
 	private int getNumberOfBlack(){
 		int count = 0;
 		//TODO : straem for 2d array
+		for(String string : moves){
+			if(string.substring(0,1).equals("b")) count++;
+		}
 		return count;
 	}
 
 	private int getNumberOfWhite(){
 		int count = 0;
-		//TODO : straem for 2d array
+		//TODO : straem for 2d array didnt find anything sorry
+		for(String string : moves){
+			if(string.substring(0,1).equals("w")) count++;
+		}
 		return count;
 	}
 

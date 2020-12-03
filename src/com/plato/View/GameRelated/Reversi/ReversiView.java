@@ -12,12 +12,28 @@ public class ReversiView {
 		return reversiView;
 	}
 
+	/**
+	 * displays game board
+	 * along with coordinates
+	 */
 	public void displayGrid (String[][] board) {
-		// TODO todoododoodod
+		for(int i=1 ; i<=8 ; i++){
+			if(i==8){System.out.println(" "+i);}
+			else{System.out.print(" "+i);}}
+		for(int i=0 ; i<8 ; i++){
+			System.out.print(i+1);  //for coordinates
+			for(int j=0 ; j<8 ; j++){
+				if(j==7){System.out.println(" "+board[i][j]);}
+				else{System.out.print(" "+board[i][j]);}
+			}}
 	}
 
+	/**
+	 * displays all game history
+	 */
 	public void displayMoveHistory (LinkedList<String> history) {
 		// TODO: totoototoodoododoodoo
+		for(String string : history){System.out.println(string);}
 	}
 
 	public void displayAvailableCoords (ArrayList<String> availableCoordinates) {
