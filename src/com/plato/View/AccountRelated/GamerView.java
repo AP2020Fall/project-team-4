@@ -3,24 +3,32 @@ package plato.View.AccountRelated;
 import java.util.LinkedList;
 
 public class GamerView {
-	public static void displayAccountStats () { // TODO: add Gamer obj if have to
+	private static GamerView gamerView;
+
+	public static GamerView getInstance () {
+		if (gamerView == null)
+			gamerView = new GamerView();
+		return gamerView;
+	}
+
+	public void displayAccountStats () { // TODO: add Gamer obj if have to
 		// TODO: 11/28/2020 AD
 	}
 
-	public static void displayGamingHistory () { // TODO: add Gamer obj if have to
+	public void displayGamingHistory () { // TODO: add Gamer obj if have to
 		// TODO: 11/16/2020 AD
 	}
 
-	public static void displayGameStats (String gameName) { // TODO: add Gamer obj if have to
+	public void displayGameStats (String gameName) { // TODO: add Gamer obj if have to
 		// TODO: 11/16/2020 AD
 	}
 
-	public static void displayAllUsernames (LinkedList<String> gamersUsernames) {
+	public void displayAllUsernames (LinkedList<String> gamersUsernames) {
 		System.out.println("Gamer usernames' list: ");
 		gamersUsernames.forEach(gamer -> System.out.printf("\t%s%n", gamer));
 	}
 
-	public static void displayFaveGamesForGamer (LinkedList<String> faveGames) {
+	public void displayFaveGamesForGamer (LinkedList<String> faveGames) {
 		System.out.print("Your favorite games: ");
 		if (faveGames.size() == 0) {
 			System.out.println("-");
@@ -31,15 +39,15 @@ public class GamerView {
 		System.out.println(list);
 	}
 
-	public static void displayFriendsUsernames (LinkedList<String> friendsUsernameList) {
+	public void displayFriendsUsernames (LinkedList<String> friendsUsernameList) {
 		System.out.println("Friends' usernames list: ");
 		friendsUsernameList.forEach(friend -> System.out.printf("\t%s%n", friend));
 	}
 
-	public static void displayFriendPersonalInfo (String frndUsername, String firstName, String frndLastName, int frndDaysSinceRegistration,
-												  LinkedList<String> frndFaveGames,
-												  int frndBattleseaPoints, int frndBattleseaWinCount, int frndBattleseaDrawCount, int frndBattleseaLossCount,
-												  int frndReversiPoints, int frndReversiWinCount, int frndReversiDrawCount, int frndReversiLossCount) {
+	public void displayFriendPersonalInfo (String frndUsername, String firstName, String frndLastName, int frndDaysSinceRegistration,
+										   LinkedList<String> frndFaveGames,
+										   int frndBattleseaPoints, int frndBattleseaWinCount, int frndBattleseaDrawCount, int frndBattleseaLossCount,
+										   int frndReversiPoints, int frndReversiWinCount, int frndReversiDrawCount, int frndReversiLossCount) {
 		System.out.printf("Username: %s%n", frndUsername);
 		System.out.printf("First name: %s\tLastname: %s%n", firstName, frndLastName);
 		System.out.printf("Days since registration: %dd\t", frndDaysSinceRegistration);

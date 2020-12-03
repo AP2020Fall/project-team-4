@@ -11,14 +11,21 @@ import java.util.InputMismatchException;
 import java.util.LinkedList;
 
 public class ShipController {
+	private static ShipController shipController;
+
+	public static ShipController getInstance () {
+		if (shipController == null)
+			shipController = new ShipController();
+		return shipController;
+	}
 
 	/**
 	 * @param playernum if 1 => use trialboard1 otherwise use trialboard2
 	 */
-	public static void editShipCoords (int playernum) {
-		Ship[] ships = (playernum == 1 ? BattleSeaController.getTrialPlayerBoard1() : BattleSeaController.getTrialPlayerBoard2());
+	public  void editShipCoords (int playernum) {
+		Ship[] ships = (playernum == 1 ? BattleSeaController.getInstance().getTrialPlayerBoard1() : BattleSeaController.getInstance().getTrialPlayerBoard2());
 
-		ShipView.displayShipsWithNamesForEditing(new LinkedList<>() {{
+		ShipView.getInstance().displayShipsWithNamesForEditing(new LinkedList<>() {{
 			for (Ship ship : ships)
 				add("%d %d".formatted(ship.getLeftMostX(), ship.getTopMostY()));
 
@@ -73,10 +80,10 @@ public class ShipController {
 	/**
 	 * @param playernum if 1 => use trialboard1 otherwise use trialboard2
 	 */
-	public static void rotateShip (int playernum) {
-		Ship[] ships = (playernum == 1 ? BattleSeaController.getTrialPlayerBoard1() : BattleSeaController.getTrialPlayerBoard2());
+	public  void rotateShip (int playernum) {
+		Ship[] ships = (playernum == 1 ? BattleSeaController.getInstance().getTrialPlayerBoard1() : BattleSeaController.getInstance().getTrialPlayerBoard2());
 
-		ShipView.displayShipsWithNamesForEditing(new LinkedList<>() {{
+		ShipView.getInstance().displayShipsWithNamesForEditing(new LinkedList<>() {{
 			for (Ship ship : ships)
 				add("%d %d".formatted(ship.getLeftMostX(), ship.getTopMostY()));
 
@@ -106,42 +113,42 @@ public class ShipController {
 		chosenShip.changeDir();
 	}
 
-	public static void editingBoardDone () {
-		((PlayerBattleSea) GameController.getCurrentGame().getListOfPlayers().get(0)).finalizeBoard(BattleSeaController.getTrialPlayerBoard1());
-		((PlayerBattleSea) GameController.getCurrentGame().getListOfPlayers().get(1)).finalizeBoard(BattleSeaController.getTrialPlayerBoard2());
-		BattleSeaController.resetTrialPlayerBoards();
+	public  void editingBoardDone () {
+		((PlayerBattleSea) GameController.getCurrentGame().getListOfPlayers().get(0)).finalizeBoard(BattleSeaController.getInstance().getTrialPlayerBoard1());
+		((PlayerBattleSea) GameController.getCurrentGame().getListOfPlayers().get(1)).finalizeBoard(BattleSeaController.getInstance().getTrialPlayerBoard2());
+		BattleSeaController.getInstance().resetTrialPlayerBoards();
 	}
 
-	public static void displayAllShipsOfCurrentPlayer () {
-		ShipView.displayShips(getShipsSizes(
+	public  void displayAllShipsOfCurrentPlayer () {
+		ShipView.getInstance().displayShips(getShipsSizes(
 				((PlayerBattleSea) GameController.getCurrentGame()
-				.getTurnPlayer())
-				.getShips())
+						.getTurnPlayer())
+						.getShips())
 		);
 	}
 
-	public static void displayDestroyedShipsOfCurrentPlayer () {
-		ShipView.displayShips(getShipsSizes(
+	public  void displayDestroyedShipsOfCurrentPlayer () {
+		ShipView.getInstance().displayShips(getShipsSizes(
 				((PlayerBattleSea) GameController.getCurrentGame()
-				.getTurnPlayer())
-				.getShips(true)));
+						.getTurnPlayer())
+						.getShips(true)));
 	}
 
-	public static void displayDestroyedShipsOfOpponent () {
-		ShipView.displayShips(getShipsSizes(
+	public  void displayDestroyedShipsOfOpponent () {
+		ShipView.getInstance().displayShips(getShipsSizes(
 				((PlayerBattleSea) GameController.getCurrentGame()
-				.getTurnPlayer())
-				.getOpponentShips(true)));
+						.getTurnPlayer())
+						.getOpponentShips(true)));
 	}
 
-	public static void displayHealthyShipsOfCurrentPlayer () {
-		ShipView.displayShips(getShipsSizes(
+	public  void displayHealthyShipsOfCurrentPlayer () {
+		ShipView.getInstance().displayShips(getShipsSizes(
 				((PlayerBattleSea) GameController.getCurrentGame()
-				.getTurnPlayer())
-				.getShips(false)));
+						.getTurnPlayer())
+						.getShips(false)));
 	}
 
-	public static LinkedList<String> getShipsSizes (LinkedList<Ship> ships) {
+	public  LinkedList<String> getShipsSizes (LinkedList<Ship> ships) {
 		return new LinkedList<>() {{
 			for (Ship ship : ships)
 				add("%d %d".formatted(ship.getL_SIZE(), ship.getS_SIZE()));

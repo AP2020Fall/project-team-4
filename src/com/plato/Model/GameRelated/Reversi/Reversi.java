@@ -10,7 +10,7 @@ public class Reversi extends Game {
 	private static String details;
 	private String[][] board = new String[8][8];
 	private static LinkedList<String> scoreboard = new LinkedList<>(); // FIXME: remove if necessary because history of all games is there
-	private ArrayList<String> moves = new ArrayList<>();
+	private LinkedList<String> moves = new LinkedList<>();
 
 
 	public Reversi (ArrayList<Gamer> gamers) {
@@ -18,7 +18,7 @@ public class Reversi extends Game {
 	}
 
 	/**
-	 * if both scores of white and black are 32 or atleast one of them is 0 return new ArrayList()
+	 * if board is full or atleast one of them is 0 return new ArrayList()
 	 * otherwise check every blank coordinate and if player can place there add to arraylist and return the arraylist in the end
 	 */
 	public ArrayList<String> getAvailableCoordinates () {
@@ -41,7 +41,7 @@ public class Reversi extends Game {
 	}
 
 	//is called after next turn
-	private boolean canPlayerPlaceAnyDisks(){
+	public boolean canPlayerPlaceAnyDisks(){
 		return getAvailableCoordinates().size() == 0;
 	}
 
@@ -49,8 +49,8 @@ public class Reversi extends Game {
 	 * @return true if x,y is blank "-"
 	 * @return true if atleast one disk changes color in any direction (not the check directions method)
 	 */
-	private boolean canPlayerPlaceDiskHere (int x, int y) {
-		if (board[y][x].equals("-")) return true;
+	public boolean canPlayerPlaceDiskHere (int x, int y) {
+		if (board[y][x].equals("-")) return true; // fixme can be replaced w isBoardFull()
 		//todo sorry dont forget to write for second condition in javadoc
 	}
 
@@ -90,10 +90,10 @@ public class Reversi extends Game {
 	}
 
 	public void addMove (int x, int y, String color) {
-		moves.add(color + " placed disk in coordinate (" + x + "," + y + ")");
+		moves.addLast(color + " placed disk in coordinate (" + x + "," + y + ")");
 	}
 
-	public ArrayList<String> getMoves () {
+	public LinkedList<String> getMoves () {
 		return moves;
 	}
 
@@ -136,11 +136,11 @@ public class Reversi extends Game {
 	}
 
 	/**
-	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended
+	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended :O
 	 */
 	@Override
 	public boolean gameEnded () {
-		return false;
+		return !canPlayerPlaceAnyDisks(); // fixme fix if needed
 	}
 	
 	/**
@@ -159,11 +159,13 @@ public class Reversi extends Game {
 	private int getNumberOfBlack(){
 		int count = 0;
 		//TODO : straem for 2d array
+		return count;
 	}
 
 	private int getNumberOfWhite(){
 		int count = 0;
 		//TODO : straem for 2d array
+		return count;
 	}
 
 	public static boolean checkCoordinates (int number) {
@@ -176,6 +178,10 @@ public class Reversi extends Game {
 
 	public static void setDetails (String details) {
 		Reversi.details = details;
+	}
+
+	public String[][] getBoard () {
+		return board;
 	}
 }
 

@@ -10,9 +10,17 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class AccountController {
-	private static Account currentAccLoggedIn = null;
+	private Account currentAccLoggedIn = null;
 
-	public static void login () {
+	private static AccountController accountController;
+
+	public static AccountController getInstance () {
+		if (accountController == null)
+			accountController = new AccountController();
+		return accountController;
+	}
+
+	public void login () {
 		String username;
 		while (true)
 			try {
@@ -46,7 +54,7 @@ public class AccountController {
 		// todo based on type of account loggedInAcc is go to admin or gamer main menu
 	}
 
-	public static void deleteAccount () {
+	public void deleteAccount () {
 		String username;
 		while (true)
 			try {
@@ -84,7 +92,7 @@ public class AccountController {
 			logoutCommand();
 	}
 
-	public static void register () {
+	public void register () {
 		// TODO: 11/30/2020 AD
 
 		String username;
@@ -172,12 +180,12 @@ public class AccountController {
 		}
 	}
 
-	public static void changePWCommand () {
+	public void changePWCommand () {
 		while (true)
 			try {
 				System.out.print("Old password:[/cancel to cancel filling form] "); String oldPW = Menu.getInputLine();
 
-				if (!AccountController.getCurrentAccLoggedIn().isPasswordCorrect(oldPW))
+				if (!AccountController.getInstance().getCurrentAccLoggedIn().isPasswordCorrect(oldPW))
 					throw new PaswordIncorrectException();
 				break;
 			} catch (PaswordIncorrectException e) {
@@ -186,23 +194,24 @@ public class AccountController {
 
 		System.out.print("New password: "); String newPW = Menu.getInputLine();
 
-		AccountController.getCurrentAccLoggedIn().editField("password", newPW);
+		AccountController.getInstance().getCurrentAccLoggedIn().editField("password", newPW);
 	}
 
-	public static void editAccFieldCommand () {
+	public void editAccFieldCommand () {
 		LinkedList<String> availableFields = (LinkedList<String>) Arrays.asList(new String[]{
 				"First Name",
 				"Last Name",
 				"Username",
 				"Email",
 				"Phone Number"});
-		AccountView.displayEditableFields(availableFields);
+		AccountView.getInstance().displayEditableFields(availableFields);
 
 		int field = Integer.parseInt(Menu.getInputLine());
 
 		switch (field) {
 			case 1 -> {
-				System.out.print("New First name: "); getCurrentAccLoggedIn().editField("first name", Menu.getInputLine()); // FIXME: add cancel option
+				System.out.print("New First name: ");
+				getCurrentAccLoggedIn().editField("first name", Menu.getInputLine()); // FIXME: add cancel option
 				System.out.println("First name changed successfully.");
 			}
 			case 2 -> {
@@ -267,30 +276,30 @@ public class AccountController {
 
 	}
 
-	public static void diplayPersonalInfo () {
-		Account account = AccountController.getCurrentAccLoggedIn();
-		AccountView.displayPersonalInfo(account.getUsername(), account.getFirstName(), account.getLastName(), account.getEmail(), account.getPhoneNum());
+	public void diplayPersonalInfo () {
+		Account account = AccountController.getInstance().getCurrentAccLoggedIn();
+		AccountView.getInstance().displayPersonalInfo(account.getUsername(), account.getFirstName(), account.getLastName(), account.getEmail(), account.getPhoneNum());
 	}
 
-	public static void logoutCommand () {
+	public void logoutCommand () {
 		logout();
 		// todo change the menu to login menu
 		// 		if was in game menu set current game name in game menu to null
 	}
 
-	public static Account getCurrentAccLoggedIn () {
+	public Account getCurrentAccLoggedIn () {
 		return currentAccLoggedIn;
 	}
 
-	public static void logout () {
+	public void logout () {
 		currentAccLoggedIn = null;
 	}
 
-	public static boolean isLoggedIn () {
+	public boolean isLoggedIn () {
 		return currentAccLoggedIn != null;
 	}
 
-	private static class RepeatedUsernameException extends Exception {
+	private class RepeatedUsernameException extends Exception {
 		public RepeatedUsernameException () {
 			super("An account with this username already exists.");
 		}
@@ -331,7 +340,6 @@ public class AccountController {
 			super("Phone number format is invalid.");
 		}
 	}
-
 
 	private static class NegativeMoneyException extends Throwable {
 		public NegativeMoneyException () {

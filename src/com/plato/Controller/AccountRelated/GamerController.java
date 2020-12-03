@@ -11,16 +11,24 @@ import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class GamerController {
-	public static void displayFaveGamesForGamer () {
-		GamerView.displayFaveGamesForGamer(((Gamer) AccountController.getCurrentAccLoggedIn()).getFaveGames());
+	private static GamerController gamerController;
+
+	public static GamerController getInstance () {
+		if (gamerController == null)
+			gamerController = new GamerController();
+		return gamerController;
 	}
 
-	public static void displayAllUsernames () {
+	public void displayFaveGamesForGamer () {
+		GamerView.getInstance().displayFaveGamesForGamer(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFaveGames());
+	}
+
+	public void displayAllUsernames () {
 		LinkedList<Gamer> allGamerAccounts = (LinkedList<Gamer>) Gamer.getGamers().stream()
 				.sorted(Comparator.comparing(Account::getUsername))
 				.collect(Collectors.toList());
 
-		GamerView.displayAllUsernames(new LinkedList<>() {{
+		GamerView.getInstance().displayAllUsernames(new LinkedList<>() {{
 			for (Gamer gamerAccount : allGamerAccounts) {
 				add(gamerAccount.getUsername());
 			}
@@ -28,19 +36,19 @@ public class GamerController {
 		// todo enter submenu to be able to view a certain account's personal info
 	}
 
-	public static void displayFriendsUsernames () {
-		LinkedList<Gamer> playersFriendsAccounts = (LinkedList<Gamer>) ((Gamer) AccountController.getCurrentAccLoggedIn())
+	public void displayFriendsUsernames () {
+		LinkedList<Gamer> playersFriendsAccounts = (LinkedList<Gamer>) ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn())
 				.getFrnds().stream().sorted(Comparator.comparing(Account::getUsername))
 				.collect(Collectors.toList());
 
-		GamerView.displayFriendsUsernames(new LinkedList<>() {{
+		GamerView.getInstance().displayFriendsUsernames(new LinkedList<>() {{
 			for (Gamer friendAccount : playersFriendsAccounts)
 				add(friendAccount.getUsername());
 		}});
 		// todo enter submenu to be able to view a certain friend's account's peronal info or remove friend
 	}
 
-	public static void removeFriend () {
+	public void removeFriend () {
 		String username;
 		while (true)
 			try {
@@ -48,17 +56,17 @@ public class GamerController {
 
 				if (username.trim().toLowerCase().equals("/cancel")) return;
 
-				if (!((Gamer) AccountController.getCurrentAccLoggedIn()).frndExists(username))
+				if (!((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(username))
 					throw new FriendDoesntExistException();
 				break;
 			} catch (FriendDoesntExistException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		((Gamer) AccountController.getCurrentAccLoggedIn()).removeFrnd(((Gamer) AccountController.getCurrentAccLoggedIn()).getFrnd(username));
+		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).removeFrnd(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFrnd(username));
 	}
 
-	public static void displayFriendPersonalInfo () {
+	public void displayFriendPersonalInfo () {
 		String username;
 		while (true)
 			try {
@@ -66,15 +74,15 @@ public class GamerController {
 
 				if (username.trim().toLowerCase().equals("/cancel")) return;
 
-				if (!((Gamer) AccountController.getCurrentAccLoggedIn()).frndExists(username))
+				if (!((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(username))
 					throw new FriendDoesntExistException();
 				break;
 			} catch (FriendDoesntExistException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		Gamer frnd = ((Gamer) AccountController.getCurrentAccLoggedIn()).getFrnd(username);
-		GamerView.displayFriendPersonalInfo(
+		Gamer frnd = ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFrnd(username);
+		GamerView.getInstance().displayFriendPersonalInfo(
 				frnd.getUsername(), frnd.getFirstName(), frnd.getLastName(), frnd.getDaysSinceRegistration(),
 				frnd.getFaveGames(),
 				GameLog.getPoints(frnd, "BattleSea"), GameLog.getWinCount(frnd, "BattleSea"),

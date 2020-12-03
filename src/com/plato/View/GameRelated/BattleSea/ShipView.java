@@ -6,10 +6,18 @@ import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ShipView {
+	private static ShipView shipView;
+
+	public static ShipView getInstance () {
+		if (shipView == null)
+			shipView = new ShipView();
+		return shipView;
+	}
+
 	/*
 	used for changing editing board
 	 */
-	public static void displayShipsWithNamesForEditing (LinkedList<String> shipsAndTheirStartingCoords) { // every string is in form -> "startx starty"
+	public void displayShipsWithNamesForEditing (LinkedList<String> shipsAndTheirStartingCoords) { // every string is in form -> "startx starty"
 		LinkedList<Character> shipNames = new LinkedList<>() {{
 			add('A');
 			add('B');
@@ -28,7 +36,7 @@ public class ShipView {
 	/*
 	used for mid-gameplay
 	 */
-	public static void displayShips (LinkedList<String> shipsSizes) { // every string is in form -> "L_size S_size"
+	public void displayShips (LinkedList<String> shipsSizes) { // every string is in form -> "L_size S_size"
 		HashMap<String, AtomicInteger> shipSizes_Count = new HashMap<>();
 		for (String shipSizes : shipsSizes) {
 			if (shipSizes_Count.containsKey(shipSizes))

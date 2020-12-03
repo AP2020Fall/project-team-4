@@ -12,8 +12,16 @@ import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 
 public class EventController {
-	public static void createEvent () {
-		EventView.displayAvailableGames();
+	private static EventController eventController;
+
+	public static EventController getInstance () {
+		if (eventController == null)
+			eventController = new EventController();
+		return eventController;
+	}
+
+	public void createEvent () {
+		EventView.getInstance().displayAvailableGames();
 
 		String gameNum;
 		while (true) {
@@ -80,8 +88,8 @@ public class EventController {
 		Event.addEvent(gameName, eventPrize, start, end);
 	}
 
-	public static void displayInSessionEventsAndGotoSubmenu () {
-		EventView.displayInSessionEvents(new LinkedList<>() {{
+	public void displayInSessionEventsAndGotoSubmenu () {
+		EventView.getInstance().displayInSessionEvents(new LinkedList<>() {{
 			for (Event inSessionEvent : Event.getInSessionEvents()) {
 				add("%s %s %s %s %.01f".formatted(
 						inSessionEvent.getEventID(),
@@ -94,27 +102,27 @@ public class EventController {
 		// todo go to submenu to edit and remove event
 	}
 
-	public static void editEvent () {
+	public void editEvent () {
 		// TODO TODODODODODODOODODOD
 	}
 
-	public static void removeEvent () {
+	public void removeEvent () {
 		// TODO TODODODODODODOODODOD
 	}
 
-	private static class StartDateTimeHasAlreadyPassedException extends Exception{
+	private static class StartDateTimeHasAlreadyPassedException extends Exception {
 		public StartDateTimeHasAlreadyPassedException () {
 			super("Start date has already passed.");
 		}
 	}
 
-	private static class StartDateTimeIsAfterEndException extends Exception{
+	private static class StartDateTimeIsAfterEndException extends Exception {
 		public StartDateTimeIsAfterEndException () {
 			super("End date must be after or on the same day as the start date.");
 		}
 	}
 
-	private static class EventDoesntExist extends Exception{
+	private static class EventDoesntExist extends Exception {
 		public EventDoesntExist () {
 			super("No event with this eventID exists.");
 		}

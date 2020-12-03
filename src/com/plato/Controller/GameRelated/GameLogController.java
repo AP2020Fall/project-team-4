@@ -11,39 +11,47 @@ import plato.View.Menus.GameRelatedMenus.GameMenu;
 import java.util.LinkedList;
 
 public class GameLogController {
-	public static void displayPtsLoggedInPlayerEarnedFromGame () {
-		int points = GameLog.getPoints(((Gamer) AccountController.getCurrentAccLoggedIn()), GameMenu.getGameName());
-		GameLogView.displayPtsPlayerEarnedFromGame(points, GameMenu.getGameName());
+	private static GameLogController gameLogController;
+
+	public static GameLogController getInstance () {
+		if (gameLogController == null)
+			gameLogController = new GameLogController();
+		return gameLogController;
 	}
 
-	public static void displayPlayedCountOfGameByLoggedInPlayer () {
-		int count = GameLog.getPlayedCount(((Gamer) AccountController.getCurrentAccLoggedIn()), GameMenu.getGameName());
-		GameLogView.displayCountForPlayerPlayingGame(count, GameMenu.getGameName());
+	public void displayPtsLoggedInPlayerEarnedFromGame () {
+		int points = GameLog.getPoints(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()), GameMenu.getGameName());
+		GameLogView.getInstance().displayPtsPlayerEarnedFromGame(points, GameMenu.getGameName());
 	}
 
-	public static void displayWinCountOfGameByLoggedInPlayer () {
-		int count = GameLog.getWinCount(((Gamer) AccountController.getCurrentAccLoggedIn()), GameMenu.getGameName());
-		GameLogView.displayCountForPlayerWinningGame(count, GameMenu.getGameName());
+	public void displayPlayedCountOfGameByLoggedInPlayer () {
+		int count = GameLog.getPlayedCount(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()), GameMenu.getGameName());
+		GameLogView.getInstance().displayCountForPlayerPlayingGame(count, GameMenu.getGameName());
 	}
 
-	public static void displayLogOfGame () {
+	public void displayWinCountOfGameByLoggedInPlayer () {
+		int count = GameLog.getWinCount(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()), GameMenu.getGameName());
+		GameLogView.getInstance().displayCountForPlayerWinningGame(count, GameMenu.getGameName());
+	}
+
+	public void displayLogOfGame () {
 		int allPlayedCount = GameLog.getPlayedCount(GameMenu.getGameName());
 		LinkedList<String> gameHistory = GameLog.getGameHistory(GameMenu.getGameName());
 
-		GameLogView.displayLogOfGame(GameMenu.getGameName(), allPlayedCount, gameHistory);
+		GameLogView.getInstance().displayLogOfGame(GameMenu.getGameName(), allPlayedCount, gameHistory);
 	}
 
-	public static void displayAllPointsOfPlayer () {
+	public void displayAllPointsOfPlayer () {
 		int points =
-				GameLog.getPoints(((Gamer) AccountController.getCurrentAccLoggedIn()), BattleSea.class.getSimpleName())			// all points from battlesea
+				GameLog.getPoints(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()), BattleSea.class.getSimpleName())            // all points from battlesea
 						+
-						GameLog.getPoints(((Gamer) AccountController.getCurrentAccLoggedIn()), Reversi.class.getSimpleName());	// all points from reversi
+						GameLog.getPoints(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()), Reversi.class.getSimpleName());    // all points from reversi
 
-		GameLogView.displayAllPointsOfPlayer(points);
+		GameLogView.getInstance().displayAllPointsOfPlayer(points);
 	}
 
-	public static void displayLastGamePlayed () {
-		String gameName = GameLog.getLastGamePlayed((Gamer) AccountController.getCurrentAccLoggedIn());
-		GameLogView.displayLastGamePlayed(gameName);
+	public void displayLastGamePlayed () {
+		String gameName = GameLog.getLastGamePlayed((Gamer) AccountController.getInstance().getCurrentAccLoggedIn());
+		GameLogView.getInstance().displayLastGamePlayed(gameName);
 	}
 }

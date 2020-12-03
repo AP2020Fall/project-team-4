@@ -3,11 +3,19 @@ package plato.View.GameRelated.BattleSea;
 import java.util.LinkedList;
 
 public class BattleSeaView {
-	public static void displayBoard (StringBuilder board) {
+	private static BattleSeaView battleSeaView;
+
+	public static BattleSeaView getInstance () {
+		if (battleSeaView == null)
+			battleSeaView = new BattleSeaView();
+		return battleSeaView;
+	}
+
+	public void displayBoard (StringBuilder board) {
 		// TODO TOTOOTOTOTOOT
 	}
 
-	public static void displayAll5RandomBoards (LinkedList<StringBuilder> boards) {
+	public void displayAll5RandomBoards (LinkedList<StringBuilder> boards) {
 		// TODO TOOTOTOTOOTOT
 	}
 }

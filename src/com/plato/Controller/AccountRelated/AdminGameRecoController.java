@@ -11,38 +11,45 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 public class AdminGameRecoController {
+	private static AdminGameRecoController adminGameRecoController;
 
-	public static void giveRecommendationToGamer () {
+	public static AdminGameRecoController getInstance () {
+		if (adminGameRecoController == null)
+			adminGameRecoController = new AdminGameRecoController();
+		return adminGameRecoController;
+	}
+
+	public void giveRecommendationToGamer () {
 		// TODO DOODODODODOODODOODODO
 	}
 
-	public static void displayAdminsRecosToPlayer () {
-		AdminGameRecoView.displayAdminsRecosToPlayer(new LinkedList<>(){{
-			for (AdminGameReco adminGameReco : ((Gamer) AccountController.getCurrentAccLoggedIn()).getAdminGameRecosGotten())
+	public void displayAdminsRecosToPlayer () {
+		AdminGameRecoView.getInstance().displayAdminsRecosToPlayer(new LinkedList<>() {{
+			for (AdminGameReco adminGameReco : ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getAdminGameRecosGotten())
 				add(adminGameReco.getGameName());
 		}});
 	}
 
-	public static void displayAllAdminRecos () {
+	public void displayAllAdminRecos () {
 		LinkedList<AdminGameReco> allRecos = AdminGameReco.getRecommendations();
 		allRecos.sort(Comparator
 				.comparing(AdminGameReco::getGamerUsername) // from a-z
 				.thenComparing(AdminGameReco::getGameName)  // first battlesea recos then reversi
 				.thenComparing(AdminGameReco::getRecoID));
 
-		AdminGameRecoView.displayAllAdminRecos(new LinkedList<>(){{
+		AdminGameRecoView.getInstance().displayAllAdminRecos(new LinkedList<>() {{
 			for (AdminGameReco reco : allRecos)
 				add("%s %s %s".formatted(reco.getRecoID(), reco.getGamerUsername(), reco.getGameName()));
 		}});
 		// todo enter submenu to be able to remove reco
 	}
 
-	public static void removeReco () {
+	public void removeReco () {
 		// TODO TOTOOTOTOTOOTOTO
 	}
 
-	public static void chooseRecoGame () {
-		LinkedList<AdminGameReco> recos = ((Gamer) AccountController.getCurrentAccLoggedIn()).getAdminGameRecosGotten();
+	public void chooseRecoGame () {
+		LinkedList<AdminGameReco> recos = ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getAdminGameRecosGotten();
 
 		int gameNum = Integer.parseInt(Menu.getInputLine());
 

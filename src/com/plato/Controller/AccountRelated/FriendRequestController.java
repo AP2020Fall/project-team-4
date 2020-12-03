@@ -10,8 +10,15 @@ import plato.View.Menus.Menu;
 import java.util.LinkedList;
 
 public class FriendRequestController {
+	private static FriendRequestController friendRequestController;
 
-	public static void sendFrndRequest () {
+	public static FriendRequestController getInstance () {
+		if (friendRequestController == null)
+			friendRequestController = new FriendRequestController();
+		return friendRequestController;
+	}
+
+	public void sendFrndRequest () {
 		String usernameTo;
 		while (true)
 			try {
@@ -19,7 +26,7 @@ public class FriendRequestController {
 
 				if (usernameTo.trim().toLowerCase().equals("/cancel")) return;
 
-				if (((Gamer) AccountController.getCurrentAccLoggedIn()).frndExists(usernameTo))
+				if (((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(usernameTo))
 					throw new CantSendFriendReqToAlreadyFriendException(usernameTo);
 
 				if (!Account.accountExists(usernameTo))
@@ -32,18 +39,18 @@ public class FriendRequestController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		((Gamer) AccountController.getCurrentAccLoggedIn()).sendFrndReq(usernameTo);
+		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).sendFrndReq(usernameTo);
 	}
 
-	public static void displayFrndReqsPlayerGotten () {
-		FriendRequestView.displayFrndReqsPlayerGotten(new LinkedList<>(){{
-			for (FriendRequest friendRequest : ((Gamer) AccountController.getCurrentAccLoggedIn()).getFriendRequestsGotten())
+	public void displayFrndReqsPlayerGotten () {
+		FriendRequestView.getInstance().displayFrndReqsPlayerGotten(new LinkedList<>() {{
+			for (FriendRequest friendRequest : ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFriendRequestsGotten())
 				add(friendRequest.getFrom().getUsername());
 		}});
 		//todo enter submenu to be able to accept/decline friend requests
 	}
 
-	public static void acceptFriendReq () {
+	public void acceptFriendReq () {
 		String usernameFrom;
 		while (true)
 			try {
@@ -54,7 +61,7 @@ public class FriendRequestController {
 				if (!Account.accountExists(usernameFrom))
 					throw new AccountController.NoAccountExistsWithUsernameException();
 
-				if (!FriendRequest.frndReqExists(usernameFrom, AccountController.getCurrentAccLoggedIn().getUsername()))
+				if (!FriendRequest.frndReqExists(usernameFrom, AccountController.getInstance().getCurrentAccLoggedIn().getUsername()))
 					throw new FriendRequestDoesntExistException();
 
 				break;
@@ -62,11 +69,11 @@ public class FriendRequestController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		FriendRequest.getFriendReq(((Gamer) Account.getAccount(usernameFrom)), ((Gamer) AccountController.getCurrentAccLoggedIn()))
+		FriendRequest.getFriendReq(((Gamer) Account.getAccount(usernameFrom)), ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()))
 				.conclude(true);
 	}
 
-	public static void declineFriendReq () {
+	public void declineFriendReq () {
 		String usernameFrom;
 		while (true)
 			try {
@@ -77,7 +84,7 @@ public class FriendRequestController {
 				if (!Account.accountExists(usernameFrom))
 					throw new AccountController.NoAccountExistsWithUsernameException();
 
-				if (!FriendRequest.frndReqExists(usernameFrom, AccountController.getCurrentAccLoggedIn().getUsername()))
+				if (!FriendRequest.frndReqExists(usernameFrom, AccountController.getInstance().getCurrentAccLoggedIn().getUsername()))
 					throw new FriendRequestDoesntExistException();
 
 				break;
@@ -85,7 +92,7 @@ public class FriendRequestController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		FriendRequest.getFriendReq(((Gamer) Account.getAccount(usernameFrom)), ((Gamer) AccountController.getCurrentAccLoggedIn()))
+		FriendRequest.getFriendReq(((Gamer) Account.getAccount(usernameFrom)), ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()))
 				.conclude(false);
 	}
 

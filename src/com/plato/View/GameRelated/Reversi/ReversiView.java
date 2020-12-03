@@ -1,11 +1,26 @@
 package plato.View.GameRelated.Reversi;
 
-public class ReversiView  {
+import java.util.ArrayList;
+import java.util.LinkedList;
 
-	/**
-	 * shows coordinates too
-	 */
-	public static void showBoard () {
-		// TODO: 11/28/2020 AD  
+public class ReversiView {
+	private static ReversiView reversiView;
+
+	public static ReversiView getInstance () {
+		if (reversiView == null)
+			reversiView = new ReversiView();
+		return reversiView;
+	}
+
+	public void displayGrid (String[][] board) {
+		// TODO todoododoodod
+	}
+
+	public void displayMoveHistory (LinkedList<String> history) {
+		// TODO: totoototoodoododoodoo
+	}
+
+	public void displayAvailableCoords (ArrayList<String> availableCoordinates) {
+		// TODO TOODODOODOD
 	}
 }

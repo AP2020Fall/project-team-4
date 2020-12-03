@@ -11,7 +11,15 @@ import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class BombController {
-	public static void throwBomb () {
+	private static BombController bombController;
+
+	public static BombController getInstance () {
+		if (bombController == null)
+			bombController = new BombController();
+		return bombController;
+	}
+
+	public void throwBomb () {
 		PlayerBattleSea currentPlayer = ((PlayerBattleSea) GameController.getCurrentGame().getTurnPlayer());
 
 		String Xstr, Ystr; int x, y;
@@ -27,7 +35,7 @@ public class BombController {
 				if (!BattleSea.checkCoordinates(x) || !BattleSea.checkCoordinates(y))
 					throw new InvalidCoordinateException();
 
-				if (currentPlayer.hasBeenBombedBefore(x,y))
+				if (currentPlayer.hasBeenBombedBefore(x, y))
 					throw new CoordinateAlreadyBombedException();
 				break;
 			} catch (InvalidCoordinateException | CoordinateAlreadyBombedException e) {
@@ -35,52 +43,52 @@ public class BombController {
 			}
 		}
 
-		currentPlayer.throwBomb(x,y);
+		currentPlayer.throwBomb(x, y);
 	}
 
-	public static void displayAllCurrentPlayerBombs () {
-		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+	public void displayAllCurrentPlayerBombs () {
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
 				.getBombsThrown()));
 	}
 
-	public static void displayAllOpponentBombs () {
-		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+	public void displayAllOpponentBombs () {
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
 				.getOpponentBombsThrown()));
 	}
 
-	public static void displayAllSuccessCurrentPlayerBombs () {
-		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+	public void displayAllSuccessCurrentPlayerBombs () {
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
 				.getBombsThrown(true)));
 	}
 
-	public static void displayAllSuccessOpponentBombs () {
-		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+	public void displayAllSuccessOpponentBombs () {
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
 				.getOpponentBombsThrown(true)));
 	}
 
-	public static void displayAllUnsuccessCurrentPlayerBombs () {
-		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+	public void displayAllUnsuccessCurrentPlayerBombs () {
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
 				.getBombsThrown(false)));
 	}
 
-	public static void displayAllUnsuccessOpponentBombs () {
-		BombView.displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+	public void displayAllUnsuccessOpponentBombs () {
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
 				.getTurnPlayer())
 				.getOpponentBombsThrown(false)));
 	}
 
-	private static LinkedList<String> getBombXYs (LinkedList<Bomb> bombs) {
+	private LinkedList<String> getBombXYs (LinkedList<Bomb> bombs) {
 		return (LinkedList<String>) bombs.stream()
 				.map(bomb -> "%d %d".formatted(bomb.getX(), bomb.getY()))
 				.collect(Collectors.toList());
 	}
 
-	private static class InvalidCoordinateException extends Exception {
+	public static class InvalidCoordinateException extends Exception {
 		public InvalidCoordinateException () {
 			super("Coordinate must be inside the grid");
 		}

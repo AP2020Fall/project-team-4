@@ -17,6 +17,7 @@ public class GameLog {
 	 */
 	public static int getPoints (Gamer gamer, String gameName) {
 		// TODO: 11/29/2020 AD
+		return 0;
 	}
 
 	/**
@@ -25,6 +26,7 @@ public class GameLog {
 	 */
 	public static int getPlayedCount (Gamer gamer, String gameName) {
 		// TODO: 11/29/2020 AD
+		return 0;
 	}
 
 	/**
@@ -33,6 +35,7 @@ public class GameLog {
 	 */
 	public static int getPlayedCount (String gameName) {
 		// TODO: 11/29/2020 AD
+		return 0;
 	}
 
 	/**
@@ -41,6 +44,7 @@ public class GameLog {
 	 */
 	public static int getWinCount (Gamer gamer, String gameName) {
 		// TODO: 11/29/2020 AD
+		return 0;
 	}
 
 	/**
@@ -49,6 +53,7 @@ public class GameLog {
 	 */
 	public static int getLossCount (Gamer gamer, String gameName) {
 		// TODO: 11/30/2020 AD  
+		return 0;
 	}
 
 	/**
@@ -57,6 +62,7 @@ public class GameLog {
 	 */
 	public static int getDrawCount (Gamer gamer, String gameName) {
 		// TODO: 11/30/2020 AD
+		return 0;
 	}
 
 	/**
@@ -64,6 +70,7 @@ public class GameLog {
 	 */
 	public static LinkedList<Gamer> getAllGamersWhoPlayedGame (String gameName) {
 		// TODO: 11/30/2020 AD
+		return null;
 	}
 
 	/**
@@ -95,5 +102,6 @@ public class GameLog {
 	 */
 	public static String getLastGamePlayed (Gamer gamer) {
 		// TODO: 12/1/2020 AD
+		return null;
 	}
 }

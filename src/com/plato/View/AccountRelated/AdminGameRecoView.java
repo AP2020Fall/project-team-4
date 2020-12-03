@@ -4,7 +4,15 @@ import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AdminGameRecoView {
-	public static void displayAdminsRecosToPlayer (LinkedList<String> gameRecosGotten) { // every string is in form -> "gameName"
+	private static AdminGameRecoView adminGameRecoView;
+
+	public static AdminGameRecoView getInstance () {
+		if (adminGameRecoView == null)
+			adminGameRecoView = new AdminGameRecoView();
+		return adminGameRecoView;
+	}
+
+	public void displayAdminsRecosToPlayer (LinkedList<String> gameRecosGotten) { // every string is in form -> "gameName"
 		System.out.print("Suggestions you've gotten from admin: ");
 
 		AtomicInteger i = new AtomicInteger(1);
@@ -15,7 +23,7 @@ public class AdminGameRecoView {
 		System.out.println(list);
 	}
 
-	public static void displayAllAdminRecos (LinkedList<String> allRecos) { // every string is in form -> "recoID gamerUsername gameName"
+	public void displayAllAdminRecos (LinkedList<String> allRecos) { // every string is in form -> "recoID gamerUsername gameName"
 		System.out.println(" | RecoID\t| Gamer\t| Game\t|");
 		allRecos.forEach(reco -> {
 			System.out.printf(" | %s\t| %s\t| %s\t|%n",
