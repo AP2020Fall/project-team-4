@@ -22,7 +22,7 @@ public class GameController {
 		return gameController;
 	}
 
-	// based on which menu GameMenu.getGameName() shows go to BattleSeaMenu or ReversiMenu
+	// based on which menu GameMenu.getGameName() shows go to GameplayBattleSeaMenu or ReversiMenu
 	public void runGame () {
 		// TODO: 11/30/2020 AD
 		// 		todo set currentGameInSession to the new game created

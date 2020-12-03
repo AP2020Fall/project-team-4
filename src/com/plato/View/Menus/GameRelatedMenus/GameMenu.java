@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public class GameMenu extends Menu {
 	private static String gameName = "";
 
-	public GameMenu (Class game) {
+	protected GameMenu (Class game) {
 		super("Game Menu");
 		gameName = game.getSimpleName();
 	}
@@ -16,12 +16,6 @@ public class GameMenu extends Menu {
 	public void back () {
 		super.back();
 		gameName = "";
-	}
-
-	@Override
-	public LinkedList<String> getOptions () {
-		// TODO: 11/29/2020 AD
-		return null;
 	}
 
 	public static String getGameName () {

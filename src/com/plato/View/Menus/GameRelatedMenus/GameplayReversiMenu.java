@@ -5,9 +5,8 @@ import plato.View.Menus.Menu;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class GamesMenu extends Menu {
-	protected GamesMenu () {
-		super("Games Menu");
+public class GameplayReversiMenu extends Menu {
+	protected GameplayReversiMenu () {
+		super("Reversi Gameplay Menu");
 	}
-
 }

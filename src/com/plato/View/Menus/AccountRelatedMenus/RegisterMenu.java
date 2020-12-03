@@ -13,17 +13,6 @@ public class RegisterMenu extends Menu {
 	}
 
 	@Override
-	public LinkedList<String> getOptions () {
-		LinkedList<String> options = new LinkedList<>();
-
-		options.add("Register");
-
-		options.addAll(super.getOptions());
-
-		return options;
-	}
-
-	@Override
 	public boolean canBack () {
 		return false;
 	}

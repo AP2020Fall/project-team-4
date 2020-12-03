@@ -6,24 +6,11 @@ import java.util.LinkedList;
 
 public class AccountMenu extends Menu {
 	private Menu entry;
+	private final boolean isForAdmin;
 
-	protected AccountMenu () {
+	protected AccountMenu (boolean isForAdmin) {
 		super("Account Menu");
-	}
-
-	@Override
-	public LinkedList<String> getOptions () {
-		LinkedList<String> options = new LinkedList<>();
-
-		options.add("View personal info");
-		options.add("View plato statistics");
-		options.add("Games history");
-		options.add("Game statistics <game_name>");
-		options.add("Logout");
-
-		options.addAll(super.getOptions());
-
-		return options;
+		this.isForAdmin = isForAdmin;
 	}
 
 	@Override
