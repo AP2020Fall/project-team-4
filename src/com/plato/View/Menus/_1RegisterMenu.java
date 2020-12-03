@@ -1,6 +1,4 @@
-package plato.View.Menus.AccountRelatedMenus;
-
-import plato.View.Menus.Menu;
+package plato.View.Menus;
 
 import java.util.LinkedList;
 

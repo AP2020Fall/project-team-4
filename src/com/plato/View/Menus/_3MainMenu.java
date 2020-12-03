@@ -1,4 +1,4 @@
-package plato.View.Menus.AccountRelatedMenus;
+package plato.View.Menus;
 
 import plato.View.Menus.Menu;
 

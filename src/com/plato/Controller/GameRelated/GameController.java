@@ -6,7 +6,7 @@ import plato.Model.GameRelated.BattleSea.BattleSea;
 import plato.Model.GameRelated.Game;
 import plato.Model.GameRelated.Reversi.Reversi;
 import plato.View.GameRelated.GameView;
-import plato.View.Menus.GameRelatedMenus.GameMenu;
+import plato.View.Menus._11GameMenu;
 import plato.View.Menus.Menu;
 
 import java.util.LinkedList;
@@ -22,7 +22,7 @@ public class GameController {
 		return gameController;
 	}
 
-	// based on which menu GameMenu.getGameName() shows go to GameplayBattleSeaMenu or ReversiMenu
+	// based on which menu _11GameMenu.getGameName() shows go to _12_1GameplayBattleSeaMenu or ReversiMenu
 	public void runGame () {
 		// TODO: 11/30/2020 AD
 		// 		todo set currentGameInSession to the new game created
@@ -36,13 +36,13 @@ public class GameController {
 	public void addGameToFavesOfLoggedInGamer () {
 		Menu.displayAreYouSureMessage();
 		if (Menu.getInputLine().toLowerCase().equals("y")) {
-			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(GameMenu.getGameName());
-			GameView.getInstance().displaySuccessfulFaveGameAdditionMessage(GameMenu.getGameName());
+			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(_11GameMenu.getGameName());
+			GameView.getInstance().displaySuccessfulFaveGameAdditionMessage(_11GameMenu.getGameName());
 		}
 	}
 
 	public void displayGameHowToPlay () {
-		GameView.getInstance().displayGameHowToPlay(GameMenu.getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getDetails() : Reversi.getDetails());
+		GameView.getInstance().displayGameHowToPlay(_11GameMenu.getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getDetails() : Reversi.getDetails());
 	}
 
 	public void displayTurn () {
@@ -84,8 +84,8 @@ public class GameController {
 	}
 
 	public void showScoreboardOfGame () {
-		LinkedList<String> scoreBoard = GameMenu.getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getScoreboard() : Reversi.getScoreboard();
-		GameView.getInstance().displayScoreboardOfGame(GameMenu.getGameName(), scoreBoard);
+		LinkedList<String> scoreBoard = _11GameMenu.getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getScoreboard() : Reversi.getScoreboard();
+		GameView.getInstance().displayScoreboardOfGame(_11GameMenu.getGameName(), scoreBoard);
 	}
 
 	public Game getCurrentGame () {
