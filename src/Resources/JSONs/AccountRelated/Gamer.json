@@ -1,0 +1,20 @@
+[
+  {
+    "score": 0,
+    "money": 50.0,
+    "accountStartDate": {
+      "year": 2020,
+      "month": 12,
+      "day": 5
+    },
+    "frnds": [],
+    "faveGames": [],
+    "firstName": "drew",
+    "lastName": "gooden",
+    "username": "drewisgooden",
+    "password": "drew123",
+    "userID": "178717",
+    "email": "drew.gooden@gmail.com",
+    "phoneNum": "00011144477"
+  }
+]

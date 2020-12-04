@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class IDGenerator {
-	private static final LinkedList<String> allIDsGenerated = new LinkedList<>();
+	private static LinkedList<String> allIDsGenerated = new LinkedList<>();
 
 	public static String generateNext () {
 		String result;
@@ -19,5 +19,13 @@ public class IDGenerator {
 		allIDsGenerated.addLast(result);
 
 		return allIDsGenerated.getLast();
+	}
+
+	public static LinkedList<String> getAllIDsGenerated () {
+		return allIDsGenerated;
+	}
+
+	public static void setAllIDsGenerated (LinkedList<String> allIDsGenerated) {
+		IDGenerator.allIDsGenerated = allIDsGenerated;
 	}
 }

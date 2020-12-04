@@ -145,6 +145,13 @@ public class MainController {
 			writer.write(gson.toJson(Reversi.getAllReversiGames()));
 			writer.flush();
 		}
+
+		// IDGenerator.json
+		if (IDGenerator.getAllIDsGenerated().size() > 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/IDGenerator.json"));
+			writer.write(gson.toJson(IDGenerator.getAllIDsGenerated()));
+			writer.flush();
+		}
 	}
 
 	private void deserialize () throws IOException {
@@ -226,7 +233,7 @@ public class MainController {
 			if (json.length() > 2)
 				Game.setAllGames(gson.fromJson(json, (Type) LinkedList.class));
 		}
-		// BattleSea list
+		// Reversi list
 		{
 			String json = "";
 			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi.json"));
@@ -236,6 +243,17 @@ public class MainController {
 
 			if (json.length() > 2)
 				Game.setAllGames(gson.fromJson(json, (Type) LinkedList.class));
+		}
+		// IDGenerator list
+		{
+			String json = "";
+			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/IDGenerator.json"));
+			while (reader.ready()) {
+				json += reader.readLine();
+			}
+
+			if (json.length() > 2)
+				IDGenerator.setAllIDsGenerated(gson.fromJson(json, (Type) LinkedList.class));
 		}
 
 		try {
@@ -259,6 +277,7 @@ public class MainController {
 		if (Menu.getInputLine().toLowerCase().equals("y")) {
 			try {
 				mainController.serialize();
+				AccountController.getInstance().logout();
 				System.exit(1);
 			} catch (IOException e) {
 				e.printStackTrace();

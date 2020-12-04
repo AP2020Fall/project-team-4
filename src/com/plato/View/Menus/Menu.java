@@ -39,7 +39,8 @@ public abstract class Menu {
 			case "10" -> menus.putIfAbsent(menuNumber, new _10GamesMenu());
 			case "11B" -> menus.putIfAbsent(menuNumber, new _11GameMenu("BattleSea"));
 			case "11R" -> menus.putIfAbsent(menuNumber, new _11GameMenu("Reversi"));
-			case "11" -> menus.putIfAbsent(menuNumber, new _11GameMenu()); // from the admin game recos menu -> set game name at selection time
+			case "11" -> menus.putIfAbsent(menuNumber, new _11GameMenu()); 	// from the admin game recos menu
+																					// -> remove this and set to 11B or 11R based on users decision
 			case "12B" -> menus.putIfAbsent(menuNumber, new _12_1GameplayBattleSeaMenu());
 			case "12R" -> menus.putIfAbsent(menuNumber, new _12_2GameplayReversiMenu());
 			case "13" -> menus.putIfAbsent(menuNumber, new _13UserInfoEditingMenu());

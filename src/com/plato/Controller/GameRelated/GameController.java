@@ -36,13 +36,13 @@ public class GameController {
 	public void addGameToFavesOfLoggedInGamer () {
 		Menu.displayAreYouSureMessage();
 		if (Menu.getInputLine().toLowerCase().equals("y")) {
-			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(_11GameMenu.getGameName());
-			GameView.getInstance().displaySuccessfulFaveGameAdditionMessage(_11GameMenu.getGameName());
+			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(((_11GameMenu) Menu.getMenuIn()).getGameName());
+			GameView.getInstance().displaySuccessfulFaveGameAdditionMessage(((_11GameMenu) Menu.getMenuIn()).getGameName());
 		}
 	}
 
 	public void displayGameHowToPlay () {
-		GameView.getInstance().displayGameHowToPlay(_11GameMenu.getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getBattleseaDetails() : Reversi.getReversiDetails());
+		GameView.getInstance().displayGameHowToPlay(((_11GameMenu) Menu.getMenuIn()).getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getBattleseaDetails() : Reversi.getReversiDetails());
 	}
 
 	public void displayTurn () {
@@ -84,8 +84,8 @@ public class GameController {
 	}
 
 	public void showScoreboardOfGame () {
-		LinkedList<String> scoreBoard = _11GameMenu.getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getScoreboard() : Reversi.getScoreboard();
-		GameView.getInstance().displayScoreboardOfGame(_11GameMenu.getGameName(), scoreBoard);
+		LinkedList<String> scoreBoard = ((_11GameMenu) Menu.getMenuIn()).getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getScoreboard() : Reversi.getScoreboard();
+		GameView.getInstance().displayScoreboardOfGame(((_11GameMenu) Menu.getMenuIn()).getGameName(), scoreBoard);
 	}
 
 	public Game getCurrentGame () {
