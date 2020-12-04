@@ -8,10 +8,10 @@ import java.util.LinkedList;
 
 public class Reversi extends Game {
 	private static String details;
-	private String[][] board = new String[8][8];
 	private static LinkedList<String> scoreboard = new LinkedList<>(); // FIXME: remove if necessary because history of all games is there
-	private LinkedList<String> moves = new LinkedList<>();
 
+	private String[][] board = new String[8][8];
+	private LinkedList<String> moves = new LinkedList<>();
 
 	public Reversi (ArrayList<Gamer> gamers) {
 		super(gamers);
@@ -54,6 +54,7 @@ public class Reversi extends Game {
 		else if(isBoardFull()) return false;
 		// fixme can be replaced w isBoardFull()
 		//todo sorry dont forget to write for second condition in javadoc
+		return Boolean.parseBoolean(null); // todo remove after method is done
 	}
 
 	/**

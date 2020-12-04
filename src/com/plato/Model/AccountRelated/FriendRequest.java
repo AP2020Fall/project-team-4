@@ -26,18 +26,6 @@ public class FriendRequest {
 		allfriendRequests.remove(this);
 	}
 
-	public Gamer getFrom () {
-		return from;
-	}
-
-	public Gamer getTo () {
-		return to;
-	}
-
-	public LinkedList<FriendRequest> getAllfriendRequests () {
-		return allfriendRequests;
-	}
-
 	public static FriendRequest getFriendReq (Gamer from, Gamer to) {
 		return allfriendRequests.stream()
 				.filter(friendRequest -> friendRequest.to.equals(to) && friendRequest.from.equals(from))
@@ -58,5 +46,17 @@ public class FriendRequest {
 	public static boolean frndReqExists (String usernameFrom, String usernameTo) {
 		return allfriendRequests.stream()
 				.anyMatch(friendRequest -> friendRequest.getFrom().getUsername().equals(usernameFrom) && friendRequest.getTo().getUsername().equals(usernameTo));
+	}
+
+	public Gamer getFrom () {
+		return from;
+	}
+
+	public Gamer getTo () {
+		return to;
+	}
+
+	public static LinkedList<FriendRequest> getAllfriendRequests () {
+		return allfriendRequests;
 	}
 }

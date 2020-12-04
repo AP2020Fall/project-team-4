@@ -50,11 +50,11 @@ public class BattleSeaController {
 	}
 
 	public void displayCurrentPlayerBoard () {
-		displayBoard(((PlayerBattleSea) GameController.getCurrentGame().getTurnPlayer()).getShips(), true);
+		displayBoard(((PlayerBattleSea) GameController.getInstance().getCurrentGame().getTurnPlayer()).getShips(), true);
 	}
 
 	public void displayOpponentBoard () {
-		displayBoard(((PlayerBattleSea) GameController.getCurrentGame().getTurnPlayer()).getShips(), false);
+		displayBoard(((PlayerBattleSea) GameController.getInstance().getCurrentGame().getTurnPlayer()).getShips(), false);
 	}
 
 	public void displayBoard (Ship[] board) {
