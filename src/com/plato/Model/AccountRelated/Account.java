@@ -66,6 +66,10 @@ public abstract class Account {
 		return accounts;
 	}
 
+	public static void setAccounts (LinkedList<Account> accounts) {
+		Account.accounts = accounts;
+	}
+
 	public String getUsername () {
 		return username;
 	}

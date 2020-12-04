@@ -21,6 +21,10 @@ public class Message {
 		return allMessages;
 	}
 
+	public static void setAllMessages (LinkedList<Message> allMessages) {
+		Message.allMessages = allMessages;
+	}
+
 	public LocalDateTime getDateTime () {
 		return dateTime;
 	}

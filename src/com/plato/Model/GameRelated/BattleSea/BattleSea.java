@@ -2,6 +2,7 @@ package plato.Model.GameRelated.BattleSea;
 
 import plato.Model.AccountRelated.Gamer;
 import plato.Model.GameRelated.Game;
+import plato.Model.GameRelated.Reversi.Reversi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +11,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BattleSea extends Game {
-	private static String details;
+	private static String battleseaDetails;
 	private static LinkedList<String> scoreboard = new LinkedList<>(); // FIXME: remove if necessary because history of all games is there
 
 	private static final ArrayList<String> arrangement = new ArrayList<>(Arrays.asList(
@@ -23,6 +24,7 @@ public class BattleSea extends Game {
 
 	public BattleSea (ArrayList<Gamer> gamers) {
 		super(gamers);
+		details = battleseaDetails;
 	}
 
 	@Override
@@ -103,12 +105,19 @@ public class BattleSea extends Game {
 		return null;
 	}
 
-	public static void setDetails (String details) {
-		BattleSea.details = details;
+	public static void setScoreboard (LinkedList<String> scoreboard) {
+		BattleSea.scoreboard = scoreboard;
 	}
 
 	public static String getDetails () {
-		return details;
+		return battleseaDetails;
+	}
+
+	public static void setDetailsForBattlesea (String details) {
+		battleseaDetails = details;
+		getAllGames().stream()
+				.filter(game -> game instanceof Reversi)
+				.forEach(game -> game.setDetails(battleseaDetails));
 	}
 
 	public static boolean checkCoordinates (int number) {
