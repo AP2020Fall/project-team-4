@@ -114,14 +114,14 @@ public class ShipController {
 	}
 
 	public  void editingBoardDone () {
-		((PlayerBattleSea) GameController.getCurrentGame().getListOfPlayers().get(0)).finalizeBoard(BattleSeaController.getInstance().getTrialPlayerBoard1());
-		((PlayerBattleSea) GameController.getCurrentGame().getListOfPlayers().get(1)).finalizeBoard(BattleSeaController.getInstance().getTrialPlayerBoard2());
+		((PlayerBattleSea) GameController.getInstance().getCurrentGame().getListOfPlayers().get(0)).finalizeBoard(BattleSeaController.getInstance().getTrialPlayerBoard1());
+		((PlayerBattleSea) GameController.getInstance().getCurrentGame().getListOfPlayers().get(1)).finalizeBoard(BattleSeaController.getInstance().getTrialPlayerBoard2());
 		BattleSeaController.getInstance().resetTrialPlayerBoards();
 	}
 
 	public  void displayAllShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
 						.getTurnPlayer())
 						.getShips())
 		);
@@ -129,21 +129,21 @@ public class ShipController {
 
 	public  void displayDestroyedShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
 						.getTurnPlayer())
 						.getShips(true)));
 	}
 
 	public  void displayDestroyedShipsOfOpponent () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
 						.getTurnPlayer())
 						.getOpponentShips(true)));
 	}
 
 	public  void displayHealthyShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
 						.getTurnPlayer())
 						.getShips(false)));
 	}

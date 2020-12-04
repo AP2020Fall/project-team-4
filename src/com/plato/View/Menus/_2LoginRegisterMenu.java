@@ -1,12 +1,12 @@
 package plato.View.Menus;
 
-import plato.View.Menus.Menu;
-
 import java.util.LinkedList;
 
 public class _2LoginRegisterMenu extends Menu {
-	protected _2LoginRegisterMenu () {
+	protected _2LoginRegisterMenu (boolean adminHasBeenCreated) {
 		super("Login/Registry Menu");
+		if (adminHasBeenCreated)
+			this.inMenu = true;
 	}
 
 	@Override

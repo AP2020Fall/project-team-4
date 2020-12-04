@@ -20,7 +20,7 @@ public class BombController {
 	}
 
 	public void throwBomb () {
-		PlayerBattleSea currentPlayer = ((PlayerBattleSea) GameController.getCurrentGame().getTurnPlayer());
+		PlayerBattleSea currentPlayer = ((PlayerBattleSea) GameController.getInstance().getCurrentGame().getTurnPlayer());
 
 		String Xstr, Ystr; int x, y;
 		while (true) {
@@ -47,37 +47,37 @@ public class BombController {
 	}
 
 	public void displayAllCurrentPlayerBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
 				.getTurnPlayer())
 				.getBombsThrown()));
 	}
 
 	public void displayAllOpponentBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
 				.getTurnPlayer())
 				.getOpponentBombsThrown()));
 	}
 
 	public void displayAllSuccessCurrentPlayerBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
 				.getTurnPlayer())
 				.getBombsThrown(true)));
 	}
 
 	public void displayAllSuccessOpponentBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
 				.getTurnPlayer())
 				.getOpponentBombsThrown(true)));
 	}
 
 	public void displayAllUnsuccessCurrentPlayerBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
 				.getTurnPlayer())
 				.getBombsThrown(false)));
 	}
 
 	public void displayAllUnsuccessOpponentBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
 				.getTurnPlayer())
 				.getOpponentBombsThrown(false)));
 	}

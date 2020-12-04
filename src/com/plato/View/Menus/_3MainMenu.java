@@ -46,7 +46,7 @@ public class _3MainMenu extends Menu {
 
 	@Override
 	public boolean canBack () {
-		return true;
+		return false;
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import plato.Model.GameRelated.Reversi.Reversi;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
@@ -123,5 +124,13 @@ public abstract class Game {
 
 	public LocalDateTime getDateGameEnded () {
 		return dateGameEnded;
+	}
+
+	// for json
+	public static HashMap<Character, String> getBothGamesDetails () {
+		return new HashMap<>(){{
+			put('B', BattleSea.getDetails());
+			put('R', Reversi.getDetails());
+		}};
 	}
 }

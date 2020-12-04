@@ -38,7 +38,7 @@ public class _14AccountMenu extends Menu {
 	}
 
 	@Override
-	protected void enter () {
+	public void enter () {
 		entry = getMenuIn(); // in case of back from account menu go to its entry menu aka menu that was used to enter account menu.
 		super.enter();
 	}

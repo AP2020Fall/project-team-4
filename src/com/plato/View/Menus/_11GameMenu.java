@@ -6,9 +6,8 @@ import java.util.LinkedList;
 public class _11GameMenu extends Menu {
 	private static String gameName = "";
 
-	protected _11GameMenu (Class game) {
+	protected _11GameMenu () {
 		super("Game Menu");
-		gameName = game.getSimpleName();
 	}
 
 	@Override

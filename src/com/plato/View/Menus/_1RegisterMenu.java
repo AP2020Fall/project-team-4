@@ -3,16 +3,15 @@ package plato.View.Menus;
 import java.util.LinkedList;
 
 public class _1RegisterMenu extends Menu {
-	protected _1RegisterMenu () {
+	protected _1RegisterMenu (boolean adminHasBeenCreated) {
 		super("Registry Menu");
-		this.inMenu = true;
-
-		new _2LoginRegisterMenu().setParent(this);
+		if (!adminHasBeenCreated)
+			this.inMenu = true;
 	}
 
 	@Override
 	public LinkedList<String> getOptions () {
-		LinkedList<String> options = new LinkedList<>(){{
+		LinkedList<String> options = new LinkedList<>() {{
 			add("Register Admin");
 		}};
 
