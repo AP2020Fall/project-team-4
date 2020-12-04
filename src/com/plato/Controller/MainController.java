@@ -121,6 +121,8 @@ public class MainController {
 			// events menu
 			case "view event info" -> EventController.getInstance().displayEventInfo();
 			case "participate in event" -> EventController.getInstance().participateInEvent();
+			case "Show Events participating in" -> EventController.getInstance().displayInSessionEventsParticipatingIn();
+			case "Stop participating in Event" -> EventController.getInstance().stopParticipatingInEvent();
 			case "edit event" -> EventController.getInstance().editEvent();
 			case "remove event" -> EventController.getInstance().removeEvent();
 

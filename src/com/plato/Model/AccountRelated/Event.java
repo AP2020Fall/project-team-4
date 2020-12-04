@@ -32,6 +32,11 @@ public class Event {
 		// TODO: 11/16/2020 AD
 	}
 
+	public static LinkedList<Event> getInSessionEventsParticipatingIn (Gamer gamer) {
+		// TODO: 12/5/2020 AD
+		return null;
+	}
+
 	public void editField () {
 		// TODO: 11/16/2020 AD
 	}

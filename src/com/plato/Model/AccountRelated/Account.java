@@ -39,10 +39,6 @@ public abstract class Account {
 		// also check if the entered field is valid
 	}
 
-	public static void passDay () { // for adding to daysSinceRegistration
-		// TODO: 11/13/2020 AD
-	}
-
 	public static boolean isEmailOK (String email) {
 		return email.matches("[a-z0-9_.]+@[a-z]+\\.com");
 	}

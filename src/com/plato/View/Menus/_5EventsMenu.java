@@ -1,7 +1,5 @@
 package plato.View.Menus;
 
-import plato.View.Menus.Menu;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -20,7 +18,9 @@ public class _5EventsMenu extends Menu {
 		if (!isForAdmin) // for gamer account
 			options = new LinkedList<>(Arrays.asList(
 					"View event info",
-					"Participate in event"
+					"Participate in event",
+					"Show Events participating in",
+					"Stop participating in Event"
 			));
 
 		else // for admin account

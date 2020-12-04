@@ -90,8 +90,21 @@ public class EventController {
 	}
 
 	public void displayInSessionEvents () {
-		EventView.getInstance().displayInSessionEvents(new LinkedList<>() {{
+		EventView.getInstance().displayEvents(new LinkedList<>() {{
 			for (Event inSessionEvent : Event.getInSessionEvents()) {
+				add("%s %s %s %s %.01f".formatted(
+						inSessionEvent.getEventID(),
+						inSessionEvent.getGameName(),
+						inSessionEvent.getStart().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
+						inSessionEvent.getEnd().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
+						inSessionEvent.getEventScore()));
+			}
+		}});
+	}
+
+	public void displayInSessionEventsParticipatingIn () {
+		EventView.getInstance().displayEvents(new LinkedList<>() {{
+			for (Event inSessionEvent : Event.getInSessionEventsParticipatingIn(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()))) {
 				add("%s %s %s %s %.01f".formatted(
 						inSessionEvent.getEventID(),
 						inSessionEvent.getGameName(),
@@ -111,10 +124,10 @@ public class EventController {
 				if (eventid.trim().equalsIgnoreCase("/cancel")) return;
 
 				if (Event.eventInSessionExists(eventid))
-					throw new EventDoesntExist();
+					throw new EventDoesntExistException();
 
 				break;
-			} catch (EventDoesntExist eventDoesntExist) {
+			} catch (EventDoesntExistException eventDoesntExist) {
 				eventDoesntExist.printStackTrace();
 			}
 		Event event = Event.getEvent(eventid);
@@ -135,15 +148,38 @@ public class EventController {
 				if (eventid.trim().equalsIgnoreCase("/cancel")) return;
 
 				if (Event.eventInSessionExists(eventid))
-					throw new EventDoesntExist();
+					throw new EventDoesntExistException();
 
 				break;
-			} catch (EventDoesntExist eventDoesntExist) {
+			} catch (EventDoesntExistException eventDoesntExist) {
 				eventDoesntExist.printStackTrace();
 			}
 		Event event = Event.getEvent(eventid);
 
 		event.addParticipant(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()));
+	}
+
+	public void stopParticipatingInEvent () {
+		Event event;
+		while (true)
+			try {
+				System.out.print("Event ID:[/cancel to cancel filling form] "); String eventid = Menu.getInputLine();
+
+				if (eventid.trim().equalsIgnoreCase("/cancel")) return;
+
+				if (Event.eventInSessionExists(eventid))
+					throw new EventDoesntExistException();
+
+				event = Event.getEvent(eventid);
+				if (!event.participantExists(AccountController.getInstance().getCurrentAccLoggedIn().getUsername()))
+					throw new NotParticipatingInEventException();
+
+				break;
+			} catch (EventDoesntExistException | NotParticipatingInEventException e) {
+				e.printStackTrace();
+			}
+
+		event.removeParticipant(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()));
 	}
 
 	public void editEvent () {
@@ -158,11 +194,11 @@ public class EventController {
 				if (eventid.trim().equalsIgnoreCase("/cancel")) return;
 
 				if (Event.eventInSessionExists(eventid))
-					throw new EventDoesntExist();
+					throw new EventDoesntExistException();
 
 				Event.removeEvent(eventid);
 				break;
-			} catch (EventDoesntExist eventDoesntExist) {
+			} catch (EventDoesntExistException eventDoesntExist) {
 				eventDoesntExist.printStackTrace();
 			}
 	}
@@ -179,9 +215,15 @@ public class EventController {
 		}
 	}
 
-	private static class EventDoesntExist extends Exception {
-		public EventDoesntExist () {
+	private static class EventDoesntExistException extends Exception {
+		public EventDoesntExistException () {
 			super("No event with this eventID exists.");
+		}
+	}
+
+	private static class NotParticipatingInEventException extends Exception {
+		public NotParticipatingInEventException () {
+			super("You are not participating in event");
 		}
 	}
 }
