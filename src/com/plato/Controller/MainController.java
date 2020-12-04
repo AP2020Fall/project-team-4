@@ -79,7 +79,7 @@ public class MainController {
 		}
 
 		else {
-			if (menuOpts.get(command).equalsIgnoreCase("register admin"))
+			if (menuOpts.get(command).toLowerCase().contains("register"))
 				AccountController.getInstance().register();
 
 			if (menuOpts.get(command).equalsIgnoreCase("login"))

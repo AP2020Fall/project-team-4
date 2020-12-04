@@ -4,9 +4,14 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class _11GameMenu extends Menu {
-	private static String gameName = "";
+	private String gameName;
 
-	protected _11GameMenu () {
+	protected _11GameMenu (String gameName) {
+		super("Game Menu");
+		this.gameName = gameName;
+	}
+
+	public _11GameMenu () {
 		super("Game Menu");
 	}
 
@@ -36,8 +41,9 @@ public class _11GameMenu extends Menu {
 		gameName = "";
 	}
 
-	public static String getGameName () {
-		return gameName;
+	public void enter (String gameName) {
+		super.enter();
+		setGameName(gameName);
 	}
 
 	@Override
@@ -48,5 +54,13 @@ public class _11GameMenu extends Menu {
 	@Override
 	public boolean canGoToAccMenu () {
 		return true;
+	}
+
+	public String getGameName () {
+		return gameName;
+	}
+
+	public void setGameName (String gameName) {
+		this.gameName = gameName;
 	}
 }
