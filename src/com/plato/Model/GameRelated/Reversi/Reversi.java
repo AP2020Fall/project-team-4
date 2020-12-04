@@ -156,7 +156,7 @@ public class Reversi extends Game {
 	private int getNumberOfBlack(){
 		int count = 0;
 		//TODO : straem for 2d array
-		for(String string : moves){
+		for(String string : moves){ // fixme board disks should be counted instead
 			if(string.substring(0,1).equals("b")) count++;
 		}
 		return count;
@@ -165,7 +165,7 @@ public class Reversi extends Game {
 	private int getNumberOfWhite(){
 		int count = 0;
 		//TODO : straem for 2d array didnt find anything sorry
-		for(String string : moves){
+		for(String string : moves){ // fixme board disks should be counted instead
 			if(string.substring(0,1).equals("w")) count++;
 		}
 		return count;
