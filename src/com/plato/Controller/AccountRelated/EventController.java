@@ -1,6 +1,7 @@
 package plato.Controller.AccountRelated;
 
 import plato.Model.AccountRelated.Event;
+import plato.Model.AccountRelated.Gamer;
 import plato.Model.GameRelated.BattleSea.BattleSea;
 import plato.Model.GameRelated.Reversi.Reversi;
 import plato.View.AccountRelated.EventView;
@@ -101,12 +102,69 @@ public class EventController {
 		}});
 	}
 
+	public void displayEventInfo () {
+		String eventid;
+		while (true)
+			try {
+				System.out.print("Event ID:[/cancel to cancel filling form] "); eventid = Menu.getInputLine();
+
+				if (eventid.trim().equalsIgnoreCase("/cancel")) return;
+
+				if (Event.eventInSessionExists(eventid))
+					throw new EventDoesntExist();
+
+				break;
+			} catch (EventDoesntExist eventDoesntExist) {
+				eventDoesntExist.printStackTrace();
+			}
+		Event event = Event.getEvent(eventid);
+
+		EventView.getInstance().displayEventInfo(
+				event.getGameName(),
+				event.getStart().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
+				event.getEnd().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
+				event.getEventScore());
+	}
+
+	public void participateInEvent () {
+		String eventid;
+		while (true)
+			try {
+				System.out.print("Event ID:[/cancel to cancel filling form] "); eventid = Menu.getInputLine();
+
+				if (eventid.trim().equalsIgnoreCase("/cancel")) return;
+
+				if (Event.eventInSessionExists(eventid))
+					throw new EventDoesntExist();
+
+				break;
+			} catch (EventDoesntExist eventDoesntExist) {
+				eventDoesntExist.printStackTrace();
+			}
+		Event event = Event.getEvent(eventid);
+
+		event.addParticipant(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()));
+	}
+
 	public void editEvent () {
 		// TODO TODODODODODODOODODOD
 	}
 
 	public void removeEvent () {
-		// TODO TODODODODODODOODODOD
+		while (true)
+			try {
+				System.out.print("Event ID:[/cancel to cancel filling form] "); String eventid = Menu.getInputLine();
+
+				if (eventid.trim().equalsIgnoreCase("/cancel")) return;
+
+				if (Event.eventInSessionExists(eventid))
+					throw new EventDoesntExist();
+
+				Event.removeEvent(eventid);
+				break;
+			} catch (EventDoesntExist eventDoesntExist) {
+				eventDoesntExist.printStackTrace();
+			}
 	}
 
 	private static class StartDateTimeHasAlreadyPassedException extends Exception {

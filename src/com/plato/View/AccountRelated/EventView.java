@@ -27,4 +27,13 @@ public class EventView {
 			);
 		});
 	}
+
+	public void displayEventInfo (String gameName, String start, String end, double prizeScore) {
+		System.out.printf("Game = %s\tStart = %s\tEnd = %s\tPrize = %.01f\t%n",
+				gameName,
+				start,
+				end,
+				prizeScore
+		);
+	}
 }

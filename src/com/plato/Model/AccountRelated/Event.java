@@ -96,7 +96,7 @@ public class Event {
 		return null;
 	}
 
-	public static boolean eventExists (String eventID) {
+	public static boolean eventInSessionExists (String eventID) {
 		// TODO: 11/16/2020 AD
 		return false;
 	}
