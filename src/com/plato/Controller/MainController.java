@@ -3,12 +3,14 @@ package plato.Controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import plato.Controller.AccountRelated.AccountController;
+import plato.Controller.AccountRelated.*;
+import plato.Controller.GameRelated.GameLogController;
 import plato.Model.AccountRelated.*;
 import plato.Model.GameRelated.BattleSea.BattleSea;
 import plato.Model.GameRelated.Game;
 import plato.Model.GameRelated.Reversi.Reversi;
 import plato.View.Menus.Menu;
+import plato.View.Menus._3MainMenu;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -68,23 +70,51 @@ public class MainController {
 		LinkedList<String> menuOpts = Menu.getMenuIn().getOptions();
 
 		command--; // to use for accessing menuOpts indexes
+		String commandOption = menuOpts.get(command).toLowerCase();
 
-		if (menuOpts.get(command).equalsIgnoreCase("exit program")) tryToExitProgram();
+		switch (commandOption) {
+			case "exit program" -> tryToExitProgram();
+			case "back" -> Menu.getMenuIn().back();
+			case "go to account menu" -> {
+				String menuId = "14" + (AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A");
+				Menu.addMenu(menuId);
+				Menu.getMenu(menuId).enter();
+			}
 
-		else if (menuOpts.get(command).equalsIgnoreCase("back")) Menu.getMenuIn().back();
+			// main menu
+			case "register" -> AccountController.getInstance().register();
+			case "login" -> AccountController.getInstance().login();
+			case "delete account" -> AccountController.getInstance().deleteAccount();
+			case "show points" -> {
+				if (Menu.getMenuIn() instanceof _3MainMenu)
+					GameLogController.getInstance().displayAllPointsOfPlayer();
+			}
+			case "view favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
+			case "view platobot's messages" -> MessageController.getInstance().displayAdminMessages();
+			case "view last played" -> GameLogController.getInstance().displayLastGamePlayed();
+			case "view admin's suggestions" -> AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
+			case "go to friends menu" -> Menu.getMenuIn().getChildMenus().get(6).enter();
+			case "view events" -> {
+				EventController.getInstance().displayInSessionEvents();
 
-		else if (menuOpts.get(command).toLowerCase().contains("go to account menu")) {
-			String menuId = "14" + (AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A");
-			Menu.addMenu(menuId);
-			Menu.getMenuIn().getMenu(menuId).enter();
-		}
+				if (!((_3MainMenu) Menu.getMenuIn()).isForAdmin())
+					Menu.getMenuIn().getChildMenus().get(7).enter();
+				else
+					Menu.getMenuIn().getChildMenus().get(2).enter();
+			}
+			case "add event" -> EventController.getInstance().createEvent();
+			case "add suggestions" -> AdminGameRecoController.getInstance().addReco();
+			case "view suggestions" -> {
+				AdminGameRecoController.getInstance().displayAllAdminRecos();
+				Menu.getMenuIn().getChildMenus().get(4).enter();
+			}
+			case "send message" -> MessageController.getInstance().sendMsg();
+			case "view users" -> {
+				GamerController.getInstance().displayAllUsernames();
+				Menu.getMenuIn().getChildMenus().get(6).enter();
+			}
 
-		else {
-			if (menuOpts.get(command).toLowerCase().contains("register"))
-				AccountController.getInstance().register();
 
-			if (menuOpts.get(command).equalsIgnoreCase("login"))
-				AccountController.getInstance().login();
 		}
 	}
 
@@ -177,7 +207,8 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				Gamer.setGamers(gson.fromJson(json, new TypeToken<LinkedList<Gamer>>(){}.getType()));
+				Gamer.setGamers(gson.fromJson(json, new TypeToken<LinkedList<Gamer>>() {
+				}.getType()));
 		}
 		// admin game recommendations
 		{
@@ -188,7 +219,8 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				AdminGameReco.setRecommendations(gson.fromJson(json, new TypeToken<LinkedList<AdminGameReco>>(){}.getType()));
+				AdminGameReco.setRecommendations(gson.fromJson(json, new TypeToken<LinkedList<AdminGameReco>>() {
+				}.getType()));
 		}
 		// events
 		{

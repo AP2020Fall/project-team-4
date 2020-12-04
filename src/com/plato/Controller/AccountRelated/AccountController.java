@@ -5,6 +5,7 @@ import plato.Model.AccountRelated.Admin;
 import plato.Model.AccountRelated.Gamer;
 import plato.View.AccountRelated.AccountView;
 import plato.View.Menus.Menu;
+import plato.View.Menus._11GameMenu;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -288,8 +289,7 @@ public class AccountController {
 
 	public void logoutCommand () {
 		logout();
-		// todo change the menu to login menu
-		// 		if was in game menu set current game name in game menu to null
+		Menu.getMenuIn().getChildMenus().get(3).enter();
 	}
 
 	public Account getCurrentAccLoggedIn () {
@@ -302,12 +302,6 @@ public class AccountController {
 
 	public boolean isLoggedIn () {
 		return currentAccLoggedIn != null;
-	}
-
-	private static class RepeatedUsernameException extends Exception {
-		public RepeatedUsernameException () {
-			super("An account with this username already exists.");
-		}
 	}
 
 	static class NoAccountExistsWithUsernameException extends Exception {

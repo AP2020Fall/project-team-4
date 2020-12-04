@@ -16,7 +16,7 @@ public class MessageController {
 		return messageController;
 	}
 
-	public static void displayAdminMessages () {
+	public void displayAdminMessages () {
 		LinkedList<Message> messages = Message.getAllMessages();
 		messages.sort(Comparator.comparing(Message::getDateTime));
 
@@ -27,5 +27,9 @@ public class MessageController {
 						message.getText())
 				);
 		}});
+	}
+
+	public void sendMsg() {
+		// TODO TOTOOTOTOTOOTOTOTOTOOTOT
 	}
 }

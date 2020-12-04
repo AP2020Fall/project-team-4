@@ -86,6 +86,7 @@ public class Reversi extends Game {
 			case UP_LEFT:
 				break;
 		}
+	return new Boolean(null); // fixme sorry gives error when trying to run
 	} //todo
 
 	/**

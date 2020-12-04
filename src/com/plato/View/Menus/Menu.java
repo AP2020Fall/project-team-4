@@ -208,4 +208,8 @@ public abstract class Menu {
 
 		return "";
 	}
+
+	public HashMap<Integer, Menu> getChildMenus () {
+		return childMenus;
+	}
 }

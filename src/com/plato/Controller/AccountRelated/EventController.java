@@ -88,7 +88,7 @@ public class EventController {
 		Event.addEvent(gameName, eventPrize, start, end);
 	}
 
-	public void displayInSessionEventsAndGotoSubmenu () {
+	public void displayInSessionEvents () {
 		EventView.getInstance().displayInSessionEvents(new LinkedList<>() {{
 			for (Event inSessionEvent : Event.getInSessionEvents()) {
 				add("%s %s %s %s %.01f".formatted(
@@ -99,7 +99,6 @@ public class EventController {
 						inSessionEvent.getEventScore()));
 			}
 		}});
-		// todo go to submenu to edit and remove event
 	}
 
 	public void editEvent () {

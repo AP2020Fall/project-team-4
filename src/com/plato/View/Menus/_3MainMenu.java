@@ -53,4 +53,8 @@ public class _3MainMenu extends Menu {
 	public boolean canGoToAccMenu () {
 		return true;
 	}
+
+	public boolean isForAdmin () {
+		return isForAdmin;
+	}
 }

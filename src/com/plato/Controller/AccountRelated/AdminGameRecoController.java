@@ -28,6 +28,7 @@ public class AdminGameRecoController {
 			for (AdminGameReco adminGameReco : ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getAdminGameRecosGotten())
 				add(adminGameReco.getGameName());
 		}});
+		Menu.getMenuIn().getChildMenus().get(5).enter();
 	}
 
 	public void displayAllAdminRecos () {
@@ -42,6 +43,10 @@ public class AdminGameRecoController {
 				add("%s %s %s".formatted(reco.getRecoID(), reco.getGamerUsername(), reco.getGameName()));
 		}});
 		// todo enter submenu to be able to remove reco
+	}
+
+	public void addReco () {
+		//TODO TODOODODOOD
 	}
 
 	public void removeReco () {
