@@ -98,65 +98,51 @@ public class MainController {
 		}
 
 		// Gamer.json
-		if (Gamer.getGamers().size() != 0) {
+		if (Gamer.getGamers().size() > 0) {
 			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Gamer.json"));
 			writer.write(gson.toJson(Gamer.getGamers()));
 			writer.flush();
 		}
 
 		// AdminGameReco.json
-		if (AdminGameReco.getRecommendations().size() != 0) {
+		if (AdminGameReco.getRecommendations().size() > 0) {
 			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/AdminGameReco.json"));
 			writer.write(gson.toJson(AdminGameReco.getRecommendations()));
 			writer.flush();
 		}
 
 		// Event.json
-		if (Event.getEvents().size() != 0) {
+		if (Event.getEvents().size() > 0) {
 			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Event.json"));
 			writer.write(gson.toJson(Event.getEvents()));
 			writer.flush();
 		}
 
 		// FriendRequest.json
-		if (FriendRequest.getAllfriendRequests().size() != 0) {
+		if (FriendRequest.getAllfriendRequests().size() > 0) {
 			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/FriendRequest.json"));
 			writer.write(gson.toJson(FriendRequest.getAllfriendRequests()));
 			writer.flush();
 		}
 
 		// Message.json
-		if (Message.getAllMessages().size() != 0) {
+		if (Message.getAllMessages().size() > 0) {
 			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Message.json"));
 			writer.write(gson.toJson(Message.getAllMessages()));
 			writer.flush();
 		}
 
-		// BattleSeaGameList.json
-		if (BattleSea.getAllBattleSeaGames().size() != 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSeaGameList.json"));
+		// BattleSea.json
+		if (BattleSea.getAllBattleSeaGames().size() > 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea.json"));
 			writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
 			writer.flush();
 		}
 
-		// ReversiGameList.json
-		if (Reversi.getAllReversiGames().size() != 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/ReversiGameList.json"));
+		// Reversi.json
+		if (Reversi.getAllReversiGames().size() > 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi.json"));
 			writer.write(gson.toJson(Reversi.getAllReversiGames()));
-			writer.flush();
-		}
-
-		// BattleSeaScoreboard.json
-		if (BattleSea.getScoreboard().size() != 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea/BattleSeaScoreboard.json"));
-			writer.write(gson.toJson(BattleSea.getScoreboard()));
-			writer.flush();
-		}
-
-		// ReversiScoreboard.json
-		if (Reversi.getScoreboard().size() != 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi/ReversiScoreboard.json"));
-			writer.write(gson.toJson(Reversi.getScoreboard()));
 			writer.flush();
 		}
 	}
@@ -171,7 +157,7 @@ public class MainController {
 				json += reader.readLine();
 			}
 
-			if (json.length() != 0)
+			if (json.length() > 2)
 				Gamer.setGamers(gson.fromJson(json, (Type) LinkedList.class));
 		}
 		// admins
@@ -182,7 +168,7 @@ public class MainController {
 				json += reader.readLine();
 			}
 
-			if (json.length() != 0)
+			if (json.length() > 2)
 				Admin.setAdmin(gson.fromJson(json, (Type) Admin.class));
 		}
 		// admin game recommendations
@@ -193,7 +179,7 @@ public class MainController {
 				json += reader.readLine();
 			}
 
-			if (json.length() != 0)
+			if (json.length() > 2)
 				AdminGameReco.setRecommendations(gson.fromJson(json, (Type) LinkedList.class));
 		}
 		// events
@@ -204,7 +190,7 @@ public class MainController {
 				json += reader.readLine();
 			}
 
-			if (json.length() != 0)
+			if (json.length() > 2)
 				Event.setEvents(gson.fromJson(json, (Type) LinkedList.class));
 		}
 		// frnd req's
@@ -215,7 +201,7 @@ public class MainController {
 				json += reader.readLine();
 			}
 
-			if (json.length() != 0)
+			if (json.length() > 2)
 				FriendRequest.setAllfriendRequests(gson.fromJson(json, (Type) LinkedList.class));
 		}
 		// messages
@@ -226,41 +212,30 @@ public class MainController {
 				json += reader.readLine();
 			}
 
-			if (json.length() != 0)
+			if (json.length() > 2)
 				Message.setAllMessages(gson.fromJson(json, (Type) LinkedList.class));
 		}
-		// game list
+		// BattleSea list
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSeaGameList.json"));
+			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSea.json"));
 			while (reader.ready()) {
 				json += reader.readLine();
 			}
 
-			if (json.length() != 0)
+			if (json.length() > 2)
 				Game.setAllGames(gson.fromJson(json, (Type) LinkedList.class));
 		}
-		// battlesea scoreboard
+		// BattleSea list
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSea/BattleSeaScoreboard.json"));
+			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi.json"));
 			while (reader.ready()) {
 				json += reader.readLine();
 			}
 
-			if (json.length() != 0)
-				BattleSea.setScoreboard(gson.fromJson(json, (Type) LinkedList.class));
-		}
-		// reversi scoreboard
-		{
-			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi/ReversiScoreboard.json"));
-			while (reader.ready()) {
-				json += reader.readLine();
-			}
-
-			if (json.length() != 0)
-				Reversi.setScoreboard(gson.fromJson(json, (Type) LinkedList.class));
+			if (json.length() > 2)
+				Game.setAllGames(gson.fromJson(json, (Type) LinkedList.class));
 		}
 
 		try {
@@ -276,7 +251,6 @@ public class MainController {
 
 	private void initGsonAndItsBuilder () {
 		gsonBuilder.setDateFormat("yyyy-MMM-dd HH:mm:ss");
-		gsonBuilder.excludeFieldsWithoutExposeAnnotation();
 		gson = gsonBuilder.create();
 	}
 

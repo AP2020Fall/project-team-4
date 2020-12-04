@@ -190,8 +190,8 @@ public class Reversi extends Game {
 		return board;
 	}
 
-	public static LinkedList<Reversi> getAllReversiGames () {
-		return (LinkedList<Reversi>) getAllGames().stream()
+	public static ArrayList<Reversi> getAllReversiGames () {
+		return (ArrayList<Reversi>) getAllGames().stream()
 				.filter(game -> game instanceof Reversi)
 				.map(game -> ((Reversi) game))
 				.collect(Collectors.toList());

@@ -104,8 +104,8 @@ public class BattleSea extends Game {
 		return number <= 10 && number >= 1;
 	}
 
-	public static LinkedList<BattleSea> getAllBattleSeaGames () {
-		return (LinkedList<BattleSea>) getAllGames().stream()
+	public static ArrayList<BattleSea> getAllBattleSeaGames () {
+		return (ArrayList<BattleSea>) getAllGames().stream()
 				.filter(game -> game instanceof BattleSea)
 				.map(game -> ((BattleSea) game))
 				.collect(Collectors.toList());

@@ -37,6 +37,8 @@ public abstract class Game {
 			listOfPlayers.add(new PlayerReversi(this, players.get(0), "b"));
 			listOfPlayers.add(new PlayerReversi(this, players.get(1), "w"));
 		}
+
+		allGames.add(this);
 	}
 
 	public static void startGame (Game game) {
@@ -120,7 +122,7 @@ public abstract class Game {
 	}
 
 	public static void setAllGames (LinkedList<Game> allGames) {
-		Game.allGames = allGames;
+		Game.allGames.addAll(allGames);
 	}
 
 	public String getDetails () {

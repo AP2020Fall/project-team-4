@@ -1,13 +1,11 @@
 package plato.Model.AccountRelated;
 
-import plato.Model.GameRelated.Game;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class Gamer extends Account {
@@ -15,7 +13,6 @@ public class Gamer extends Account {
 	private int score = 0;
 	private double money;
 	private LocalDate accountStartDate;
-	// todo add gamelog if needed
 	private LinkedList<Gamer> frnds = new LinkedList<>();
 	private LinkedList<String> faveGames = new LinkedList<>();
 
@@ -33,11 +30,11 @@ public class Gamer extends Account {
 		return faveGames;
 	}
 
-	public static LinkedList<Gamer> getGamers () {
-		return ((LinkedList<Gamer>) getAccounts().stream()
+	public static ArrayList<Gamer> getGamers () {
+		return (ArrayList<Gamer>) getAccounts().stream()
 				.filter(account -> account instanceof Gamer)
 				.map(account -> ((Gamer) account))
-				.collect(Collectors.toList()));
+				.collect(Collectors.toList());
 	}
 
 	public void sendFrndReq (String usernameTo) {
