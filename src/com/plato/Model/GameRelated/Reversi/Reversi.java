@@ -41,7 +41,10 @@ public class Reversi extends Game {
 		}
 	}
 
-	//is called after next turn
+	/**
+	 * checks for available coordinates
+	 * @return true if there are possible coordinates and false if there are no coordinates available
+	 */
 	public boolean canPlayerPlaceAnyDisks(){
 		return getAvailableCoordinates().size() == 0;
 	}
@@ -52,10 +55,8 @@ public class Reversi extends Game {
 	 */
 	public boolean canPlayerPlaceDiskHere (int x, int y) {
 		if (board[y][x].equals("-")) return true;
-		else if(isBoardFull()) return false;
-		// fixme can be replaced w isBoardFull()
-		//todo sorry dont forget to write for second condition in javadoc
-		return Boolean.parseBoolean(null); // todo remove after method is done
+		else if(canPlayerPlaceAnyDisks()) return true;
+		else return isBoardFull();
 	}
 
 	/**
@@ -66,7 +67,26 @@ public class Reversi extends Game {
 	 * checks if there are disks with opposite color next to it
 	 * returns true if after disks with oppoite color there is a same color disk in given direction
 	 */
-	private boolean doesAnyDiskChangeColor (int x, int y, Direction dir){return true;} //todo
+	private boolean doesAnyDiskChangeColor (int x, int y, Direction dir){
+		switch (dir){
+			case UP:
+				break;
+			case UP_RIGHT:
+				break;
+			case RIGHT:
+				break;
+			case DOWN_RIGHT:
+				break;
+			case DOWN:
+				break;
+			case DOWN_LEFT:
+				break;
+			case LEFT:
+				break;
+			case UP_LEFT:
+				break;
+		}
+	} //todo
 
 	/**
 	 * @param startx from 0 to 7
@@ -137,7 +157,9 @@ public class Reversi extends Game {
 	 */
 	@Override
 	public boolean gameEnded () {
-		return !canPlayerPlaceAnyDisks(); // fixme fix if needed
+		if(getNumberOfBlack()==0) return true;
+		else if(getNumberOfWhite()==0) return true;
+		else return isBoardFull();
 	}
 	
 	/**
@@ -156,8 +178,10 @@ public class Reversi extends Game {
 	private int getNumberOfBlack(){
 		int count = 0;
 		//TODO : straem for 2d array
-		for(String string : moves){ // fixme board disks should be counted instead
-			if(string.substring(0,1).equals("b")) count++;
+		for(int i=0 ; i<8 ; i++){
+			for(int j=0 ; j<8 ; j++){
+				if(board[i][j].equals("b")) count++;
+			}
 		}
 		return count;
 	}
@@ -165,8 +189,10 @@ public class Reversi extends Game {
 	private int getNumberOfWhite(){
 		int count = 0;
 		//TODO : straem for 2d array didnt find anything sorry
-		for(String string : moves){ // fixme board disks should be counted instead
-			if(string.substring(0,1).equals("w")) count++;
+		for(int i=0 ; i<8 ; i++){
+			for(int j=0 ; j<8 ; j++){
+				if(board[i][j].equals("w")) count++;
+			}
 		}
 		return count;
 	}
