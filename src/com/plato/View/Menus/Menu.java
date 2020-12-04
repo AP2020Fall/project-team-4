@@ -135,7 +135,7 @@ public abstract class Menu {
 	public LinkedList<String> getOptions () {
 		LinkedList<String> options = new LinkedList<>();
 		if (canBack()) options.add("Back");
-		if (canGoToAccMenu()) options.add("View Account Menu");
+		if (canGoToAccMenu()) options.add("Go to Account Menu");
 		options.add("Exit program");
 
 		return options;
