@@ -59,4 +59,8 @@ public class FriendRequest {
 	public static LinkedList<FriendRequest> getAllfriendRequests () {
 		return allfriendRequests;
 	}
+
+	public static void setAllfriendRequests (LinkedList<FriendRequest> allfriendRequests) {
+		FriendRequest.allfriendRequests = allfriendRequests;
+	}
 }

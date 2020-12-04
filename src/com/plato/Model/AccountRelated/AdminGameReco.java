@@ -52,6 +52,10 @@ public class AdminGameReco {
 		return recommendations;
 	}
 
+	public static void setRecommendations (LinkedList<AdminGameReco> recommendations) {
+		AdminGameReco.recommendations = recommendations;
+	}
+
 	public Gamer getGamer () {
 		return gamer;
 	}

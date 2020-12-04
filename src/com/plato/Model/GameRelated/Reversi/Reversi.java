@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Reversi extends Game {
-	private static String details;
+	private static String reversiDetails;
 	private static LinkedList<String> scoreboard = new LinkedList<>(); // FIXME: remove if necessary because history of all games is there
 
 	private String[][] board = new String[8][8];
@@ -15,6 +15,7 @@ public class Reversi extends Game {
 
 	public Reversi (ArrayList<Gamer> gamers) {
 		super(gamers);
+		details = reversiDetails;
 	}
 
 	/**
@@ -157,6 +158,10 @@ public class Reversi extends Game {
 		return null;
 	}
 
+	public static void setScoreboard (LinkedList<String> scoreboard) {
+		Reversi.scoreboard = scoreboard;
+	}
+
 	private int getNumberOfBlack(){
 		int count = 0;
 		//TODO : straem for 2d array
@@ -174,11 +179,14 @@ public class Reversi extends Game {
 	}
 
 	public static String getDetails () {
-		return details;
+		return reversiDetails;
 	}
 
-	public static void setDetails (String details) {
-		Reversi.details = details;
+	public static void setDetailsForReversi (String details) {
+		reversiDetails = details;
+		getAllGames().stream()
+				.filter(game -> game instanceof Reversi)
+				.forEach(game -> game.setDetails(reversiDetails));
 	}
 
 	public String[][] getBoard () {

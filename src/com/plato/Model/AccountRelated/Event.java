@@ -105,6 +105,9 @@ public class Event {
 		return participants;
 	}
 
+	public static void setEvents (LinkedList<Event> events) {
+		Event.events = events;
+	}
 
 	private void setGameName (String gameName) {
 		this.gameName = gameName;

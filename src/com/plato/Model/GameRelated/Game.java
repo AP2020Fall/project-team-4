@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public abstract class Game {
 
 	private final String gameID;
+	protected String details;
 
 	private final ArrayList<Player> listOfPlayers = new ArrayList<>();
 	private int turn = 0;
@@ -118,6 +119,14 @@ public abstract class Game {
 		return allGames;
 	}
 
+	public static void setAllGames (LinkedList<Game> allGames) {
+		Game.allGames = allGames;
+	}
+
+	public String getDetails () {
+		return details;
+	}
+
 	public static LinkedList<Game> getAllFinishedGames () {
 		return (LinkedList<Game>) allGames.stream().filter(Game::gameHasEnded).collect(Collectors.toList());
 	}
@@ -126,11 +135,10 @@ public abstract class Game {
 		return dateGameEnded;
 	}
 
-	// for json
-	public static HashMap<Character, String> getBothGamesDetails () {
-		return new HashMap<>(){{
-			put('B', BattleSea.getDetails());
-			put('R', Reversi.getDetails());
-		}};
+	public void setDetails (String details) {
+		if (this instanceof Reversi)
+			Reversi.setDetailsForReversi(details);
+		else
+			BattleSea.setDetailsForBattlesea(details);
 	}
 }
