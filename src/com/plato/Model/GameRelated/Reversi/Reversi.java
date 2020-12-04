@@ -46,14 +46,14 @@ public class Reversi extends Game {
 	 * @return true if there are possible coordinates and false if there are no coordinates available
 	 */
 	public boolean canPlayerPlaceAnyDisks(){
-		return getAvailableCoordinates().size() == 0;
+		return getAvailableCoordinates().size() != 0;
 	}
 
 	/**
 	 * @return true if x,y is blank "-"
 	 * @return true if atleast one disk changes color in any direction (not the check directions method)
 	 */
-	public boolean canPlayerPlaceDiskHere (int x, int y) {
+	public boolean canPlayerPlaceDiskHere (int x, int y) { // fixme only checking if it is an available coordinate is good. the detailed check should be done in getAvailableCoordinates
 		if (board[y][x].equals("-")) return true;
 		else if(canPlayerPlaceAnyDisks()) return true;
 		else return isBoardFull();
@@ -156,7 +156,7 @@ public class Reversi extends Game {
 	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended :O
 	 */
 	@Override
-	public boolean gameEnded () {
+	public boolean gameEnded () { // fixme is true if getAvailableCoordinates list size =0
 		if(getNumberOfBlack()==0) return true;
 		else if(getNumberOfWhite()==0) return true;
 		else return isBoardFull();
