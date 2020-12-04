@@ -59,13 +59,14 @@ public abstract class Menu {
 			switch (i) {
 				case 3, 4, 5, 14 -> addMenu(i + aORg);
 
-				case 12, 11 -> {
+				case 11, 12 -> {
 					addMenu(i + "B");
 					addMenu(i + "R");
 				}
 
 				default -> addMenu(String.valueOf(i));
 			}
+		addMenu("11");
 
 		getMenu("2").addChildMenu(2, getMenu(3 + aORg));
 
@@ -81,6 +82,23 @@ public abstract class Menu {
 				getMenu("4G").addChildMenu(3, getMenu("14G"));
 				// for menu 5
 				getMenu("5G").addChildMenu(4, getMenu("14G"));
+				// for menu 6
+				getMenu("6").addChildMenu(1, getMenu("8"));
+				getMenu("6").addChildMenu(3, getMenu("9"));
+				getMenu("6").addChildMenu(5, getMenu("14G"));
+				// for menu 8
+				getMenu("8").addChildMenu(4, getMenu("14G"));
+				// for menu 9
+				getMenu("9").addChildMenu(4, getMenu("14G"));
+				// for menu 10
+				getMenu("10").addChildMenu(1, getMenu("11B"));
+				getMenu("10").addChildMenu(2, getMenu("11R"));
+				getMenu("10").addChildMenu(4, getMenu("14G"));
+				// for menu 11
+				getMenu("11B").addChildMenu(8, getMenu("12B"));
+				getMenu("11R").addChildMenu(8, getMenu("12R"));
+				getMenu("11B").addChildMenu(10, getMenu("14G"));
+				getMenu("11R").addChildMenu(10, getMenu("14G"));
 				// for menu 14
 				getMenu("14G").addChildMenu(1, getMenu("13"));
 				getMenu("14G").addChildMenu(6, getMenu("2"));
@@ -96,30 +114,13 @@ public abstract class Menu {
 				getMenu("4A").addChildMenu(3, getMenu("14A"));
 				// for menu 5
 				getMenu("5A").addChildMenu(4, getMenu("14A"));
+				// for menu 7
+				getMenu("7").addChildMenu(3, getMenu("14A"));
 				// for menu 14
 				getMenu("14A").addChildMenu(1, getMenu("13"));
 				getMenu("14A").addChildMenu(2, getMenu("2"));
 			}
 		}
-		// for menu 6
-		getMenu("6").addChildMenu(1, getMenu("8"));
-		getMenu("6").addChildMenu(3, getMenu("9"));
-		getMenu("6").addChildMenu(5, getMenu("14G"));
-		// for menu 7
-		getMenu("7").addChildMenu(3, getMenu("14A"));
-		// for menu 8
-		getMenu("8").addChildMenu(4, getMenu("14G"));
-		// for menu 9
-		getMenu("9").addChildMenu(4, getMenu("14G"));
-		// for menu 10
-		getMenu("10").addChildMenu(1, getMenu("11B"));
-		getMenu("10").addChildMenu(2, getMenu("11R"));
-		getMenu("10").addChildMenu(4, getMenu("14G"));
-		// for menu 11
-		getMenu("11B").addChildMenu(8, getMenu("12B"));
-		getMenu("11R").addChildMenu(8, getMenu("12R"));
-		getMenu("11B").addChildMenu(10, getMenu("14G"));
-		getMenu("11R").addChildMenu(10, getMenu("14G"));
 	}
 
 	public void addChildMenu (int index, Menu child) {

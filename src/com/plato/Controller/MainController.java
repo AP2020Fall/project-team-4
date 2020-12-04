@@ -2,6 +2,7 @@ package plato.Controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import plato.Controller.AccountRelated.AccountController;
 import plato.Model.AccountRelated.*;
 import plato.Model.GameRelated.BattleSea.BattleSea;
@@ -156,17 +157,6 @@ public class MainController {
 
 	private void deserialize () throws IOException {
 		initGsonAndItsBuilder();
-		// gamers
-		{
-			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Gamer.json"));
-			while (reader.ready()) {
-				json += reader.readLine();
-			}
-
-			if (json.length() > 2)
-				Gamer.setGamers(gson.fromJson(json, (Type) LinkedList.class));
-		}
 		// admins
 		{
 			String json = "";
@@ -178,6 +168,17 @@ public class MainController {
 			if (json.length() > 2)
 				Admin.setAdmin(gson.fromJson(json, (Type) Admin.class));
 		}
+		// gamers
+		{
+			String json = "";
+			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Gamer.json"));
+			while (reader.ready()) {
+				json += reader.readLine();
+			}
+
+			if (json.length() > 2)
+				Gamer.setGamers(gson.fromJson(json, new TypeToken<LinkedList<Gamer>>(){}.getType()));
+		}
 		// admin game recommendations
 		{
 			String json = "";
@@ -187,7 +188,7 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				AdminGameReco.setRecommendations(gson.fromJson(json, (Type) LinkedList.class));
+				AdminGameReco.setRecommendations(gson.fromJson(json, new TypeToken<LinkedList<AdminGameReco>>(){}.getType()));
 		}
 		// events
 		{
@@ -198,7 +199,7 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				Event.setEvents(gson.fromJson(json, (Type) LinkedList.class));
+				Event.setEvents(gson.fromJson(json, new TypeToken<LinkedList<Event>>(){}.getType()));
 		}
 		// frnd req's
 		{
@@ -209,7 +210,7 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				FriendRequest.setAllfriendRequests(gson.fromJson(json, (Type) LinkedList.class));
+				FriendRequest.setAllfriendRequests(gson.fromJson(json, new TypeToken<LinkedList<FriendRequest>>(){}.getType()));
 		}
 		// messages
 		{
@@ -220,7 +221,7 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				Message.setAllMessages(gson.fromJson(json, (Type) LinkedList.class));
+				Message.setAllMessages(gson.fromJson(json,  new TypeToken<LinkedList<Message>>(){}.getType()));
 		}
 		// BattleSea list
 		{
@@ -231,7 +232,7 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				Game.setAllGames(gson.fromJson(json, (Type) LinkedList.class));
+				Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<BattleSea>>(){}.getType()));
 		}
 		// Reversi list
 		{
@@ -242,7 +243,7 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				Game.setAllGames(gson.fromJson(json, (Type) LinkedList.class));
+				Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<Reversi>>(){}.getType()));
 		}
 		// IDGenerator list
 		{
@@ -253,7 +254,7 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				IDGenerator.setAllIDsGenerated(gson.fromJson(json, (Type) LinkedList.class));
+				IDGenerator.setAllIDsGenerated(gson.fromJson(json, new TypeToken<LinkedList<String>>(){}.getType()));
 		}
 
 		try {
