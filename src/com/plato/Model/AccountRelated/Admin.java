@@ -1,7 +1,5 @@
 package plato.Model.AccountRelated;
 
-import java.util.LinkedList;
-
 public class Admin extends Account {
 	protected Admin (String firstName, String lastName, String username, String password, String email, String phoneNum) {
 		super(firstName, lastName, username, password, email, phoneNum);
@@ -20,7 +18,7 @@ public class Admin extends Account {
 				.anyMatch(account -> account instanceof Admin);
 	}
 
-	public static void setAdmins (LinkedList<Admin> admins) {
-		getAccounts().addAll(admins);
+	public static void setAdmin (Admin admin) {
+		getAccounts().add(admin);
 	}
 }

@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class Reversi extends Game {
 	private static String reversiDetails;
-	private static LinkedList<String> scoreboard = new LinkedList<>(); // FIXME: remove if necessary because history of all games is there
 
 	private String[][] board = new String[8][8];
 	private LinkedList<String> moves = new LinkedList<>();
@@ -125,19 +124,6 @@ public class Reversi extends Game {
 		}
 	}
 
-
-	@Override
-	public void setScores () {
-		// TODO: 11/28/2020 AD
-	}
-
-	@Override
-	public void concludeGame () {
-		// set end time
-		// set Conclusion
-		// add to scoreboard fixme maybe not?
-	}
-
 	/**
 	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended :O
 	 */
@@ -157,10 +143,6 @@ public class Reversi extends Game {
 	public static LinkedList<String> getScoreboard () {
 		// TODO: 11/13/2020 AD
 		return null;
-	}
-
-	public static void setScoreboard (LinkedList<String> scoreboard) {
-		Reversi.scoreboard = scoreboard;
 	}
 
 	private int getNumberOfBlack(){

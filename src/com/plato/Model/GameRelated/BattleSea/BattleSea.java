@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 public class BattleSea extends Game {
 	private static String battleseaDetails;
-	private static LinkedList<String> scoreboard = new LinkedList<>(); // FIXME: remove if necessary because history of all games is there
 
 	private static final ArrayList<String> arrangement = new ArrayList<>(Arrays.asList(
 			"2 1 2", // l s n
@@ -26,18 +25,6 @@ public class BattleSea extends Game {
 	public BattleSea (ArrayList<Gamer> gamers) {
 		super(gamers);
 		details = battleseaDetails;
-	}
-
-	@Override
-	public void setScores () {
-		// TODO: 11/28/2020 AD
-	}
-
-	@Override
-	public void concludeGame () {
-		// set end time
-		// set Conclusion
-		// add to scoreboard fixme maybe not? probably not. because we need to sort the scoreboard before displaying it
 	}
 
 	/**
@@ -89,10 +76,6 @@ public class BattleSea extends Game {
 		return board;
 	}
 
-	public static void addToScoreBoard () {
-		// TODO: 11/13/2020 AD
-	}
-
 	/**
 	 1. list all finished games of this type
 	 2. get a list of all the players that played game with GameLog.getAllWhoPlayedGame
@@ -104,10 +87,6 @@ public class BattleSea extends Game {
 	public static LinkedList<String> getScoreboard () {
 		// TODO: 11/13/2020 AD
 		return null;
-	}
-
-	public static void setScoreboard (LinkedList<String> scoreboard) {
-		BattleSea.scoreboard = scoreboard;
 	}
 
 	public static void setDetailsForBattlesea (String details) {

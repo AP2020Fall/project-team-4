@@ -10,7 +10,6 @@ import plato.Model.GameRelated.Reversi.Reversi;
 import plato.View.Menus.Menu;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -89,55 +88,77 @@ public class MainController {
 	}
 
 	private void serialize () throws IOException {
+		BufferedWriter writer;
+
 		// Admin.json
-		BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Admin.json"));
-		writer.write(gson.toJson(Admin.getAdmin()));
-		writer.flush();
+		if (Admin.adminHasBeenCreated()) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Admin.json"));
+			writer.write(gson.toJson(Admin.getAdmin()));
+			writer.flush();
+		}
 
 		// Gamer.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Gamer.json"));
-		writer.write(gson.toJson(Gamer.getGamers()));
-		writer.flush();
+		if (Gamer.getGamers().size() != 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Gamer.json"));
+			writer.write(gson.toJson(Gamer.getGamers()));
+			writer.flush();
+		}
 
 		// AdminGameReco.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/AdminGameReco.json"));
-		writer.write(gson.toJson(AdminGameReco.getRecommendations()));
-		writer.flush();
+		if (AdminGameReco.getRecommendations().size() != 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/AdminGameReco.json"));
+			writer.write(gson.toJson(AdminGameReco.getRecommendations()));
+			writer.flush();
+		}
 
 		// Event.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Event.json"));
-		writer.write(gson.toJson(Event.getEvents()));
-		writer.flush();
+		if (Event.getEvents().size() != 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Event.json"));
+			writer.write(gson.toJson(Event.getEvents()));
+			writer.flush();
+		}
 
 		// FriendRequest.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/FriendRequest.json"));
-		writer.write(gson.toJson(FriendRequest.getAllfriendRequests()));
-		writer.flush();
+		if (FriendRequest.getAllfriendRequests().size() != 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/FriendRequest.json"));
+			writer.write(gson.toJson(FriendRequest.getAllfriendRequests()));
+			writer.flush();
+		}
 
 		// Message.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Message.json"));
-		writer.write(gson.toJson(Message.getAllMessages()));
-		writer.flush();
+		if (Message.getAllMessages().size() != 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Message.json"));
+			writer.write(gson.toJson(Message.getAllMessages()));
+			writer.flush();
+		}
 
 		// BattleSeaGameList.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSeaGameList.json"));
-		writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
-		writer.flush();
+		if (BattleSea.getAllBattleSeaGames().size() != 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSeaGameList.json"));
+			writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
+			writer.flush();
+		}
 
 		// ReversiGameList.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/ReversiGameList.json"));
-		writer.write(gson.toJson(Reversi.getAllReversiGames()));
-		writer.flush();
+		if (Reversi.getAllReversiGames().size() != 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/ReversiGameList.json"));
+			writer.write(gson.toJson(Reversi.getAllReversiGames()));
+			writer.flush();
+		}
 
 		// BattleSeaScoreboard.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea/BattleSeaScoreboard.json"));
-		writer.write(gson.toJson(BattleSea.getScoreboard()));
-		writer.flush();
+		if (BattleSea.getScoreboard().size() != 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea/BattleSeaScoreboard.json"));
+			writer.write(gson.toJson(BattleSea.getScoreboard()));
+			writer.flush();
+		}
 
 		// ReversiScoreboard.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi/ReversiScoreboard.json"));
-		writer.write(gson.toJson(Reversi.getScoreboard()));
-		writer.flush();
+		if (Reversi.getScoreboard().size() != 0) {
+			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi/ReversiScoreboard.json"));
+			writer.write(gson.toJson(Reversi.getScoreboard()));
+			writer.flush();
+		}
 	}
 
 	private void deserialize () throws IOException {
@@ -162,7 +183,7 @@ public class MainController {
 			}
 
 			if (json.length() != 0)
-				Admin.setAdmins(gson.fromJson(json, (Type) LinkedList.class));
+				Admin.setAdmin(gson.fromJson(json, (Type) Admin.class));
 		}
 		// admin game recommendations
 		{

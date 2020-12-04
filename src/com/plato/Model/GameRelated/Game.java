@@ -77,9 +77,10 @@ public abstract class Game {
 		return listOfPlayers.stream().filter(player -> player.getGamer().equals(gamer)).findAny().get();
 	}
 
-	public abstract void setScores ();
-
-	public abstract void concludeGame ();
+	public void concludeGame () {
+		// set end time
+		// set Conclusion
+	}
 
 	public abstract boolean gameEnded ();
 
