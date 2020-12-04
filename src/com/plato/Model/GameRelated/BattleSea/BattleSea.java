@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class BattleSea extends Game {
 	private static String battleseaDetails;
@@ -109,10 +110,6 @@ public class BattleSea extends Game {
 		BattleSea.scoreboard = scoreboard;
 	}
 
-	public static String getDetails () {
-		return battleseaDetails;
-	}
-
 	public static void setDetailsForBattlesea (String details) {
 		battleseaDetails = details;
 		getAllGames().stream()
@@ -120,7 +117,18 @@ public class BattleSea extends Game {
 				.forEach(game -> game.setDetails(battleseaDetails));
 	}
 
+	public static String getBattleseaDetails () {
+		return battleseaDetails;
+	}
+
 	public static boolean checkCoordinates (int number) {
 		return number <= 10 && number >= 1;
+	}
+
+	public static LinkedList<BattleSea> getAllBattleSeaGames () {
+		return (LinkedList<BattleSea>) getAllGames().stream()
+				.filter(game -> game instanceof BattleSea)
+				.map(game -> ((BattleSea) game))
+				.collect(Collectors.toList());
 	}
 }

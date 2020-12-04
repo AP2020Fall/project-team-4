@@ -10,8 +10,10 @@ import plato.Model.GameRelated.Reversi.Reversi;
 import plato.View.Menus.Menu;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 public class MainController {
 	private static MainController mainController;
@@ -33,6 +35,8 @@ public class MainController {
 
 		if (!Admin.adminHasBeenCreated())
 			Menu.addMenu("1");
+		else
+			Menu.addMenu("2");
 
 		while (true) {
 
@@ -85,9 +89,14 @@ public class MainController {
 	}
 
 	private void serialize () throws IOException {
-		// Account.json
-		BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Account.json"));
-		writer.write(gson.toJson(Account.getAccounts()));
+		// Admin.json
+		BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Admin.json"));
+		writer.write(gson.toJson(Admin.getAdmin()));
+		writer.flush();
+
+		// Gamer.json
+		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Gamer.json"));
+		writer.write(gson.toJson(Gamer.getGamers()));
 		writer.flush();
 
 		// AdminGameReco.json
@@ -110,33 +119,50 @@ public class MainController {
 		writer.write(gson.toJson(Message.getAllMessages()));
 		writer.flush();
 
-		// Game.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Game.json"));
-		writer.write(gson.toJson(Game.getAllGames()));
+		// BattleSeaGameList.json
+		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSeaGameList.json"));
+		writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
 		writer.flush();
 
-		// BattleSea.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea/BattleSea.json"));
+		// ReversiGameList.json
+		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/ReversiGameList.json"));
+		writer.write(gson.toJson(Reversi.getAllReversiGames()));
+		writer.flush();
+
+		// BattleSeaScoreboard.json
+		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea/BattleSeaScoreboard.json"));
 		writer.write(gson.toJson(BattleSea.getScoreboard()));
 		writer.flush();
 
-		// Reversi.json
-		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi/Reversi.json"));
+		// ReversiScoreboard.json
+		writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi/ReversiScoreboard.json"));
 		writer.write(gson.toJson(Reversi.getScoreboard()));
 		writer.flush();
 	}
 
 	private void deserialize () throws IOException {
 		initGsonAndItsBuilder();
-		// accounts
+		// gamers
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Account.json"));
+			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Gamer.json"));
 			while (reader.ready()) {
 				json += reader.readLine();
 			}
 
-			Account.setAccounts(gson.fromJson(json, (Type) LinkedList.class));
+			if (json.length() != 0)
+				Gamer.setGamers(gson.fromJson(json, (Type) LinkedList.class));
+		}
+		// admins
+		{
+			String json = "";
+			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Admin.json"));
+			while (reader.ready()) {
+				json += reader.readLine();
+			}
+
+			if (json.length() != 0)
+				Admin.setAdmins(gson.fromJson(json, (Type) LinkedList.class));
 		}
 		// admin game recommendations
 		{
@@ -146,7 +172,8 @@ public class MainController {
 				json += reader.readLine();
 			}
 
-			AdminGameReco.setRecommendations(gson.fromJson(json, (Type) LinkedList.class));
+			if (json.length() != 0)
+				AdminGameReco.setRecommendations(gson.fromJson(json, (Type) LinkedList.class));
 		}
 		// events
 		{
@@ -156,7 +183,8 @@ public class MainController {
 				json += reader.readLine();
 			}
 
-			Event.setEvents(gson.fromJson(json, (Type) LinkedList.class));
+			if (json.length() != 0)
+				Event.setEvents(gson.fromJson(json, (Type) LinkedList.class));
 		}
 		// frnd req's
 		{
@@ -166,7 +194,8 @@ public class MainController {
 				json += reader.readLine();
 			}
 
-			FriendRequest.setAllfriendRequests(gson.fromJson(json, (Type) LinkedList.class));
+			if (json.length() != 0)
+				FriendRequest.setAllfriendRequests(gson.fromJson(json, (Type) LinkedList.class));
 		}
 		// messages
 		{
@@ -176,43 +205,52 @@ public class MainController {
 				json += reader.readLine();
 			}
 
-			Message.setAllMessages(gson.fromJson(json, (Type) LinkedList.class));
+			if (json.length() != 0)
+				Message.setAllMessages(gson.fromJson(json, (Type) LinkedList.class));
 		}
 		// game list
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Game.json"));
+			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSeaGameList.json"));
 			while (reader.ready()) {
 				json += reader.readLine();
 			}
 
-			Game.setAllGames(gson.fromJson(json, (Type) LinkedList.class));
+			if (json.length() != 0)
+				Game.setAllGames(gson.fromJson(json, (Type) LinkedList.class));
 		}
 		// battlesea scoreboard
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSea/BattleSea.json"));
+			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSea/BattleSeaScoreboard.json"));
 			while (reader.ready()) {
 				json += reader.readLine();
 			}
 
-			BattleSea.setScoreboard(gson.fromJson(json, (Type) LinkedList.class));
+			if (json.length() != 0)
+				BattleSea.setScoreboard(gson.fromJson(json, (Type) LinkedList.class));
 		}
 		// reversi scoreboard
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi/Reversi.json"));
+			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi/ReversiScoreboard.json"));
 			while (reader.ready()) {
 				json += reader.readLine();
 			}
 
-			Reversi.setScoreboard(gson.fromJson(json, (Type) LinkedList.class));
+			if (json.length() != 0)
+				Reversi.setScoreboard(gson.fromJson(json, (Type) LinkedList.class));
 		}
-		String battleSeaDetails = Game.getAllGames().stream().filter(game -> game instanceof BattleSea).findFirst().get().getDetails();
-		BattleSea.setDetailsForBattlesea(battleSeaDetails);
 
-		String reversiDetails = Game.getAllGames().stream().filter(game -> game instanceof Reversi).findFirst().get().getDetails();
-		Reversi.setDetailsForReversi(reversiDetails);
+		try {
+			String battleSeaDetails = Game.getAllGames().stream().filter(game -> game instanceof BattleSea).findFirst().get().getDetails();
+			BattleSea.setDetailsForBattlesea(battleSeaDetails);
+
+			String reversiDetails = Game.getAllGames().stream().filter(game -> game instanceof Reversi).findFirst().get().getDetails();
+			Reversi.setDetailsForReversi(reversiDetails);
+		} catch (NoSuchElementException | NullPointerException e) {
+			return;
+		}
 	}
 
 	private void initGsonAndItsBuilder () {

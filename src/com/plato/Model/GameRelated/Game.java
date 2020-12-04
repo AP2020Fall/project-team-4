@@ -10,7 +10,6 @@ import plato.Model.GameRelated.Reversi.Reversi;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 

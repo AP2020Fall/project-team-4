@@ -182,6 +182,7 @@ public class AccountController {
 		}
 
 		Menu.addMenu("2");
+		Menu.getMenu("2").enter();
 	}
 
 	public void changePWCommand () {

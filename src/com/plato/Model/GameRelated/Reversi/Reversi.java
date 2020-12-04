@@ -5,6 +5,7 @@ import plato.Model.GameRelated.Game;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 public class Reversi extends Game {
 	private static String reversiDetails;
@@ -178,10 +179,6 @@ public class Reversi extends Game {
 		return number >= 1 && number <= 8;
 	}
 
-	public static String getDetails () {
-		return reversiDetails;
-	}
-
 	public static void setDetailsForReversi (String details) {
 		reversiDetails = details;
 		getAllGames().stream()
@@ -189,8 +186,19 @@ public class Reversi extends Game {
 				.forEach(game -> game.setDetails(reversiDetails));
 	}
 
+	public static String getReversiDetails () {
+		return reversiDetails;
+	}
+
 	public String[][] getBoard () {
 		return board;
+	}
+
+	public static LinkedList<Reversi> getAllReversiGames () {
+		return (LinkedList<Reversi>) getAllGames().stream()
+				.filter(game -> game instanceof Reversi)
+				.map(game -> ((Reversi) game))
+				.collect(Collectors.toList());
 	}
 }
 

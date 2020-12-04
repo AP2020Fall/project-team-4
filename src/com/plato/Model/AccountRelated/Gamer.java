@@ -1,10 +1,13 @@
 package plato.Model.AccountRelated;
 
+import plato.Model.GameRelated.Game;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Gamer extends Account {
@@ -90,5 +93,9 @@ public class Gamer extends Account {
 
 	public int getDaysSinceRegistration () {
 		return Math.toIntExact(ChronoUnit.DAYS.between(LocalDateTime.now(), accountStartDate));
+	}
+
+	public static void setGamers (LinkedList<Gamer> gamers) {
+		getAccounts().addAll(gamers);
 	}
 }

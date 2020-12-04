@@ -42,7 +42,7 @@ public class GameController {
 	}
 
 	public void displayGameHowToPlay () {
-		GameView.getInstance().displayGameHowToPlay(_11GameMenu.getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getDetails() : Reversi.getDetails());
+		GameView.getInstance().displayGameHowToPlay(_11GameMenu.getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getBattleseaDetails() : Reversi.getReversiDetails());
 	}
 
 	public void displayTurn () {
