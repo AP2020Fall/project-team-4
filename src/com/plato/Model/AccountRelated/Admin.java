@@ -1,4 +1,4 @@
-package plato.Model.AccountRelated;
+package Model.AccountRelated;
 
 public class Admin extends Account {
 	protected Admin (String firstName, String lastName, String username, String password, String email, String phoneNum) {

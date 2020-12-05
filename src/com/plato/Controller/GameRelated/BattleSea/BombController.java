@@ -1,11 +1,11 @@
-package plato.Controller.GameRelated.BattleSea;
+package Controller.GameRelated.BattleSea;
 
-import plato.Controller.GameRelated.GameController;
-import plato.Model.GameRelated.BattleSea.BattleSea;
-import plato.Model.GameRelated.BattleSea.Bomb;
-import plato.Model.GameRelated.BattleSea.PlayerBattleSea;
-import plato.View.GameRelated.BattleSea.BombView;
-import plato.View.Menus.Menu;
+import Controller.GameRelated.GameController;
+import Model.GameRelated.BattleSea.BattleSea;
+import Model.GameRelated.BattleSea.Bomb;
+import Model.GameRelated.BattleSea.PlayerBattleSea;
+import View.GameRelated.BattleSea.BombView;
+import View.Menus.Menu;
 
 import java.util.LinkedList;
 import java.util.stream.Collectors;

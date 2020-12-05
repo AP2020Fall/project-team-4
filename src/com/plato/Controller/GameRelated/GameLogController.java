@@ -1,13 +1,13 @@
-package plato.Controller.GameRelated;
+package Controller.GameRelated;
 
-import plato.Controller.AccountRelated.AccountController;
-import plato.Model.AccountRelated.Gamer;
-import plato.Model.GameRelated.BattleSea.BattleSea;
-import plato.Model.GameRelated.GameLog;
-import plato.Model.GameRelated.Reversi.Reversi;
-import plato.View.GameRelated.GameLogView;
-import plato.View.Menus.Menu;
-import plato.View.Menus._11GameMenu;
+import Controller.AccountRelated.AccountController;
+import Model.AccountRelated.Gamer;
+import Model.GameRelated.BattleSea.BattleSea;
+import Model.GameRelated.GameLog;
+import Model.GameRelated.Reversi.Reversi;
+import View.GameRelated.GameLogView;
+import View.Menus.Menu;
+import View.Menus._11GameMenu;
 
 import java.util.LinkedList;
 

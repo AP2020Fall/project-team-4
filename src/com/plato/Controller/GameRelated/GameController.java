@@ -1,14 +1,16 @@
-package plato.Controller.GameRelated;
+package Controller.GameRelated;
 
-import plato.Controller.AccountRelated.AccountController;
-import plato.Model.AccountRelated.Gamer;
-import plato.Model.GameRelated.BattleSea.BattleSea;
-import plato.Model.GameRelated.Game;
-import plato.Model.GameRelated.Reversi.Reversi;
-import plato.View.GameRelated.GameView;
-import plato.View.Menus._11GameMenu;
-import plato.View.Menus.Menu;
+import Controller.AccountRelated.AccountController;
+import Model.AccountRelated.Account;
+import Model.AccountRelated.Gamer;
+import Model.GameRelated.BattleSea.BattleSea;
+import Model.GameRelated.Game;
+import Model.GameRelated.Reversi.Reversi;
+import View.GameRelated.GameView;
+import View.Menus.Menu;
+import View.Menus._11GameMenu;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class GameController {
@@ -26,6 +28,42 @@ public class GameController {
 	public void runGame () {
 		// TODO: 11/30/2020 AD
 		// 		todo set currentGameInSession to the new game created
+		Gamer player2;
+		while (true)
+			try {
+				System.out.print("Second Player's username:[/cancel to cancel filling form] "); String username = Menu.getInputLine();
+
+				if (username.trim().equalsIgnoreCase("/cancel")) return;
+
+				if (!Account.accountExists(username))
+					throw new AccountController.NoAccountExistsWithUsernameException();
+				player2 = (Gamer) Account.getAccount(username);
+
+				break;
+			} catch (AccountController.NoAccountExistsWithUsernameException e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
+
+
+		Gamer finalPlayer2 = player2;
+		ArrayList<Gamer> players = new ArrayList<>() {{
+			add(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()));
+			add(finalPlayer2);
+		}};
+
+		Game game;
+		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
+			case "battlesea" ->
+					game = new BattleSea(players);
+			case "reversi" ->
+					game = new Reversi(players);
+			default -> throw new IllegalStateException("Unexpected value: " + ((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase());
+		}
+
+		Game.startGame(game);
+		currentGameInSession = game;
+
+		Menu.getMenuIn().getChildMenus().get(8).enter();
 	}
 
 	// based on which game input points to change to menu corresponding to that game
@@ -83,7 +121,7 @@ public class GameController {
 		);
 	}
 
-	public void showScoreboardOfGame () {
+	public void displayScoreboardOfGame () {
 		LinkedList<String> scoreBoard = ((_11GameMenu) Menu.getMenuIn()).getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getScoreboard() : Reversi.getScoreboard();
 		GameView.getInstance().displayScoreboardOfGame(((_11GameMenu) Menu.getMenuIn()).getGameName(), scoreBoard);
 	}

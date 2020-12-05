@@ -1,10 +1,10 @@
-package plato.Controller.GameRelated.Reversi;
+package Controller.GameRelated.Reversi;
 
-import plato.Controller.GameRelated.GameController;
-import plato.Model.GameRelated.Reversi.PlayerReversi;
-import plato.Model.GameRelated.Reversi.Reversi;
-import plato.View.GameRelated.Reversi.ReversiView;
-import plato.View.Menus.Menu;
+import Controller.GameRelated.GameController;
+import Model.GameRelated.Reversi.PlayerReversi;
+import Model.GameRelated.Reversi.Reversi;
+import View.GameRelated.Reversi.ReversiView;
+import View.Menus.Menu;
 
 public class ReversiController {
 	private static ReversiController reversiController;

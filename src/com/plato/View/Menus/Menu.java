@@ -1,6 +1,6 @@
-package plato.View.Menus;
+package View.Menus;
 
-import plato.Model.AccountRelated.Admin;
+import Model.AccountRelated.Admin;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -125,7 +125,6 @@ public abstract class Menu {
 
 	public void addChildMenu (int index, Menu child) {
 		childMenus.put(index, child);
-		child.parent = this;
 	}
 
 	public static void displayAreYouSureMessage () {
@@ -162,8 +161,9 @@ public abstract class Menu {
 	public abstract boolean canGoToAccMenu ();
 
 	public void enter () {
+		this.parent = getMenuIn();
 		getMenuIn().inMenu = false;
-		inMenu = true;
+		this.inMenu = true;
 	}
 
 	public static Menu getMenuIn () {

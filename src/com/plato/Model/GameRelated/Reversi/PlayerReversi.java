@@ -1,8 +1,8 @@
-package plato.Model.GameRelated.Reversi;
+package Model.GameRelated.Reversi;
 
-import plato.Model.AccountRelated.Gamer;
-import plato.Model.GameRelated.Game;
-import plato.Model.GameRelated.Player;
+import Model.AccountRelated.Gamer;
+import Model.GameRelated.Game;
+import Model.GameRelated.Player;
 
 public class PlayerReversi extends Player {
 	private final String color;

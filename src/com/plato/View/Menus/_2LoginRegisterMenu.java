@@ -1,4 +1,4 @@
-package plato.View.Menus;
+package View.Menus;
 
 import java.util.LinkedList;
 

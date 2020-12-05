@@ -1,11 +1,11 @@
-package plato.Model.GameRelated;
+package Model.GameRelated;
 
-import plato.Controller.IDGenerator;
-import plato.Model.AccountRelated.Gamer;
-import plato.Model.GameRelated.BattleSea.BattleSea;
-import plato.Model.GameRelated.BattleSea.PlayerBattleSea;
-import plato.Model.GameRelated.Reversi.PlayerReversi;
-import plato.Model.GameRelated.Reversi.Reversi;
+import Controller.IDGenerator;
+import Model.AccountRelated.Gamer;
+import Model.GameRelated.BattleSea.BattleSea;
+import Model.GameRelated.BattleSea.PlayerBattleSea;
+import Model.GameRelated.Reversi.PlayerReversi;
+import Model.GameRelated.Reversi.Reversi;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package plato.Model.AccountRelated;
+package Model.AccountRelated;
 
-import plato.Controller.IDGenerator;
+import Controller.IDGenerator;
 
 import java.util.LinkedList;
 
@@ -80,6 +80,10 @@ public abstract class Account {
 
 	public String getEmail () {
 		return email;
+	}
+
+	public String getPassword () {
+		return password;
 	}
 
 	public String getPhoneNum () {

@@ -1,4 +1,4 @@
-package plato.View.GameRelated.BattleSea;
+package View.GameRelated.BattleSea;
 
 import java.util.LinkedList;
 

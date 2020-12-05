@@ -1,8 +1,8 @@
-package plato.Model.GameRelated.BattleSea;
+package Model.GameRelated.BattleSea;
 
-import plato.Model.AccountRelated.Gamer;
-import plato.Model.GameRelated.Game;
-import plato.Model.GameRelated.Player;
+import Model.AccountRelated.Gamer;
+import Model.GameRelated.Game;
+import Model.GameRelated.Player;
 
 import java.util.Arrays;
 import java.util.LinkedList;

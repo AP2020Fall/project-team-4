@@ -1,11 +1,11 @@
-package plato.Controller.GameRelated.BattleSea;
+package Controller.GameRelated.BattleSea;
 
-import plato.Controller.GameRelated.GameController;
-import plato.Model.GameRelated.BattleSea.BattleSea;
-import plato.Model.GameRelated.BattleSea.PlayerBattleSea;
-import plato.Model.GameRelated.BattleSea.Ship;
-import plato.View.GameRelated.BattleSea.BattleSeaView;
-import plato.View.Menus.Menu;
+import Controller.GameRelated.GameController;
+import Model.GameRelated.BattleSea.BattleSea;
+import Model.GameRelated.BattleSea.PlayerBattleSea;
+import Model.GameRelated.BattleSea.Ship;
+import View.GameRelated.BattleSea.BattleSeaView;
+import View.Menus.Menu;
 
 import java.util.InputMismatchException;
 import java.util.LinkedList;

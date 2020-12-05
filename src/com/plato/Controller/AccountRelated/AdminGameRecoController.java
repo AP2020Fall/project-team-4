@@ -1,12 +1,12 @@
-package plato.Controller.AccountRelated;
+package Controller.AccountRelated;
 
-import plato.Model.AccountRelated.AdminGameReco;
-import plato.Model.AccountRelated.Gamer;
-import plato.Model.GameRelated.BattleSea.BattleSea;
-import plato.Model.GameRelated.Reversi.Reversi;
-import plato.View.AccountRelated.AdminGameRecoView;
-import plato.View.Menus.Menu;
-import plato.View.Menus._11GameMenu;
+import Model.AccountRelated.AdminGameReco;
+import Model.AccountRelated.Gamer;
+import Model.GameRelated.BattleSea.BattleSea;
+import Model.GameRelated.Reversi.Reversi;
+import View.AccountRelated.AdminGameRecoView;
+import View.Menus.Menu;
+import View.Menus._11GameMenu;
 
 import java.util.Comparator;
 import java.util.InputMismatchException;

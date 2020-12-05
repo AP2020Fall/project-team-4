@@ -1,4 +1,4 @@
-package plato.View.AccountRelated;
+package View.AccountRelated;
 
 import java.util.LinkedList;
 
@@ -26,6 +26,10 @@ public class GamerView {
 	public void displayAllUsernames (LinkedList<String> gamersUsernames) {
 		System.out.println("Gamer usernames' list: ");
 		gamersUsernames.forEach(gamer -> System.out.printf("\t%s%n", gamer));
+	}
+
+	public void displayUserProfileToAdmin (String username, String email) {
+		System.out.printf("Username: %s\t\tEmail: %s%n", username, email);
 	}
 
 	public void displayFaveGamesForGamer (LinkedList<String> faveGames) {

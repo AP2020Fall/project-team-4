@@ -1,6 +1,6 @@
-package plato.Model.GameRelated.BattleSea;
+package Model.GameRelated.BattleSea;
 
-import plato.Model.GameRelated.Game;
+import Model.GameRelated.Game;
 
 import java.util.Arrays;
 import java.util.Collections;

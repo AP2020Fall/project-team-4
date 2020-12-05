@@ -1,4 +1,4 @@
-package plato.View.GameRelated.Reversi;
+package View.GameRelated.Reversi;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
