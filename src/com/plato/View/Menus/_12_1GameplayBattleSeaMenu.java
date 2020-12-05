@@ -1,5 +1,7 @@
 package View.Menus;
 
+import Controller.GameRelated.BattleSea.BattleSeaController;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -20,14 +22,21 @@ public class _12_1GameplayBattleSeaMenu extends Menu {
 		LinkedList<String> options;
 
 		switch (phase) {
-			case 1 -> options = new LinkedList<>(Arrays.asList(
-					"Generate a Random Board",
-					"Choose between 5 randomly generated boards",
-					"Display on-trial Board",
-					"Move ship",
-					"Change ship direction",
-					"Finalize Board"
-			));
+			case 1 -> {
+				boolean trialBoardExists = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard() != null;
+
+				options = new LinkedList<>(Arrays.asList(
+						"Generate a Random Board",
+						"Choose between 5 randomly generated boards"
+				));
+				if (trialBoardExists) {
+					options.addAll(new LinkedList<>(Arrays.asList(
+							"Display on-trial Board",
+							"Move ship",
+							"Change ship direction",
+							"Finalize Board")));
+				}
+			}
 			case 2 -> options = new LinkedList<>(Arrays.asList(
 					"Boom (Throw Bomb)",
 					"Display all my ships",
@@ -59,5 +68,9 @@ public class _12_1GameplayBattleSeaMenu extends Menu {
 	@Override
 	public boolean canGoToAccMenu () {
 		return false;
+	}
+
+	public void nextPhase () {
+		phase = 2;
 	}
 }

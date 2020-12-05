@@ -19,11 +19,8 @@ public class ShipController {
 		return shipController;
 	}
 
-	/**
-	 * @param playernum if 1 => use trialboard1 otherwise use trialboard2
-	 */
-	public  void editShipCoords (int playernum) {
-		Ship[] ships = (playernum == 1 ? BattleSeaController.getInstance().getTrialPlayerBoard1() : BattleSeaController.getInstance().getTrialPlayerBoard2());
+	public void editShipCoords () {
+		Ship[] ships = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
 
 		ShipView.getInstance().displayShipsWithNamesForEditing(new LinkedList<>() {{
 			for (Ship ship : ships)
@@ -77,11 +74,8 @@ public class ShipController {
 		chosenShip.move(newXInt, newYInt);
 	}
 
-	/**
-	 * @param playernum if 1 => use trialboard1 otherwise use trialboard2
-	 */
-	public  void rotateShip (int playernum) {
-		Ship[] ships = (playernum == 1 ? BattleSeaController.getInstance().getTrialPlayerBoard1() : BattleSeaController.getInstance().getTrialPlayerBoard2());
+	public  void rotateShip () {
+		Ship[] ships = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
 
 		ShipView.getInstance().displayShipsWithNamesForEditing(new LinkedList<>() {{
 			for (Ship ship : ships)

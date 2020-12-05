@@ -1,6 +1,9 @@
 package Controller;
 
 import Controller.AccountRelated.*;
+import Controller.GameRelated.BattleSea.BattleSeaController;
+import Controller.GameRelated.BattleSea.BombController;
+import Controller.GameRelated.BattleSea.ShipController;
 import Controller.GameRelated.GameController;
 import Controller.GameRelated.GameLogController;
 import Controller.GameRelated.Reversi.ReversiController;
@@ -10,6 +13,7 @@ import Model.GameRelated.Game;
 import Model.GameRelated.Reversi.Reversi;
 import View.Menus.Menu;
 import View.Menus._11GameMenu;
+import View.Menus._12_1GameplayBattleSeaMenu;
 import View.Menus._3MainMenu;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -160,7 +164,30 @@ public class MainController {
 			case "run game" -> GameController.getInstance().runGame();
 
 			// gameplay battlesea menu
-			// TODO: 12/5/2020 AD
+			//		phase 1
+			case "generate a random board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
+			case "choose between 5 randomly generated boards" -> BattleSeaController.getInstance().chooseBetween5RandomlyGeneratedBoards();
+			case "display on-trial board" -> BattleSeaController.getInstance().displayTrialBoard();
+			case "move ship" -> ShipController.getInstance().editShipCoords();
+			case "change ship direction" -> ShipController.getInstance().rotateShip();
+			case "finalize board" -> {
+				BattleSeaController.getInstance().finalizeTrialBoard();
+				((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
+			}
+			//		phase 2
+			case "boom (throw bomb)" -> BombController.getInstance().throwBomb();
+			case "display all my ships" -> ShipController.getInstance().displayAllShipsOfCurrentPlayer();
+			case "display all my booms" -> BombController.getInstance().displayAllCurrentPlayerBombs();
+			case "display all my opponent’s booms" -> BombController.getInstance().displayAllOpponentBombs();
+			case "display all my correct booms" -> BombController.getInstance().displayAllSuccessCurrentPlayerBombs();
+			case "display all my opponent’s correct booms" -> BombController.getInstance().displayAllSuccessOpponentBombs();
+			case "display all my incorrect booms" -> BombController.getInstance().displayAllUnsuccessCurrentPlayerBombs();
+			case "display all my opponent’s incorrect booms" -> BombController.getInstance().displayAllUnsuccessOpponentBombs();
+			case "display all my boomed ships" -> ShipController.getInstance().displayDestroyedShipsOfCurrentPlayer();
+			case "display all my opponent’s boomed ships" -> ShipController.getInstance().displayDestroyedShipsOfOpponent();
+			case "display all my unboomed ships" -> ShipController.getInstance().displayHealthyShipsOfCurrentPlayer();
+			case "display my board" -> BattleSeaController.getInstance().displayCurrentPlayerBoard();
+			case "display my opponent’s board" -> BattleSeaController.getInstance().displayOpponentBoard();
 
 			// gameplay reversi menu
 			case "place disks" -> ReversiController.getInstance().placeDisk();
