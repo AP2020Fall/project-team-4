@@ -180,7 +180,7 @@ public class MainController {
 			// account menu
 			case "view personal info (w/ money)" -> {
 				AccountController.getInstance().diplayPersonalInfo();
-				Menu.getMenuIn().getChildMenus().get(command).enter();
+				Menu.getMenuIn().getChildMenus().get(command+1).enter();
 			}
 			case "view plato statistics" -> GamerController.getInstance().displayAccountStats();
 			case "view gaming history" -> GamerController.getInstance().displayGamingHistory();
@@ -188,7 +188,7 @@ public class MainController {
 			case "view gaming history in reversi" -> GamerController.getInstance().displayGamingHistory("reversi");
 			case "logout" -> {
 				AccountController.getInstance().logoutCommand();
-				Menu.getMenuIn().getChildMenus().get(command).enter();
+				Menu.getMenuIn().getChildMenus().get(command+1).enter();
 			}
 		}
 	}

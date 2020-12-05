@@ -8,6 +8,8 @@
     <artifactId>project-team-4</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
+        <testSourceDirectory>src/com/Tests</testSourceDirectory>
+        <sourceDirectory>src/com/plato</sourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
