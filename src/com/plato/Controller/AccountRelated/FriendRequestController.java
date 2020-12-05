@@ -47,7 +47,7 @@ public class FriendRequestController {
 			for (FriendRequest friendRequest : ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFriendRequestsGotten())
 				add(friendRequest.getFrom().getUsername());
 		}});
-		//todo enter submenu to be able to accept/decline friend requests
+		Menu.getMenuIn().getChildMenus().get(3).enter();
 	}
 
 	public void acceptFriendReq () {

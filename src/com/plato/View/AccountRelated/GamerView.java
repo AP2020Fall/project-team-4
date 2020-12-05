@@ -28,6 +28,10 @@ public class GamerView {
 		gamersUsernames.forEach(gamer -> System.out.printf("\t%s%n", gamer));
 	}
 
+	public void displayUserProfileToAdmin (String username, String email) {
+		System.out.printf("Username: %s\t\tEmail: %s%n", username, email);
+	}
+
 	public void displayFaveGamesForGamer (LinkedList<String> faveGames) {
 		System.out.print("Your favorite games: ");
 		if (faveGames.size() == 0) {

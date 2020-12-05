@@ -4,12 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import plato.Controller.AccountRelated.*;
+import plato.Controller.GameRelated.GameController;
 import plato.Controller.GameRelated.GameLogController;
 import plato.Model.AccountRelated.*;
 import plato.Model.GameRelated.BattleSea.BattleSea;
 import plato.Model.GameRelated.Game;
 import plato.Model.GameRelated.Reversi.Reversi;
 import plato.View.Menus.Menu;
+import plato.View.Menus._11GameMenu;
 import plato.View.Menus._3MainMenu;
 
 import java.io.*;
@@ -88,6 +90,8 @@ public class MainController {
 			case "show points" -> {
 				if (Menu.getMenuIn() instanceof _3MainMenu)
 					GameLogController.getInstance().displayAllPointsOfPlayer();
+				if (Menu.getMenuIn() instanceof _11GameMenu)
+					GameLogController.getInstance().displayPtsLoggedInPlayerEarnedFromGame();
 			}
 			case "view favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
 			case "view platobot's messages" -> MessageController.getInstance().displayAdminMessages();
@@ -126,6 +130,44 @@ public class MainController {
 			case "edit event" -> EventController.getInstance().editEvent();
 			case "remove event" -> EventController.getInstance().removeEvent();
 
+			// friend menu
+			case "show friends" -> GamerController.getInstance().displayFriendsUsernames();
+			case "send friend request" -> FriendRequestController.getInstance().sendFrndRequest();
+			case "show friend requests" -> FriendRequestController.getInstance().displayFrndReqsPlayerGotten();
+
+			// gamer user management menu
+			case "view user profile" -> GamerController.getInstance().displayUserProfileToAdmin();
+
+			// friend management menu
+			case "view friend profile" -> GamerController.getInstance().displayFriendPersonalInfo();
+			case "remove friend" -> GamerController.getInstance().removeFriend();
+
+			// friend request management menu
+			case "accept friend request" -> FriendRequestController.getInstance().acceptFriendReq();
+			case "decline friend request" -> FriendRequestController.getInstance().declineFriendReq();
+
+			// games menu
+			case "open battlesea game menu" -> Menu.getMenuIn().getChildMenus().get(1).enter();
+			case "open reversi game menu" -> Menu.getMenuIn().getChildMenus().get(2).enter();
+
+			// game menu
+			case "show scoreboard" -> GameController.getInstance().displayScoreboardOfGame();
+			case "details" -> GameController.getInstance().displayGameHowToPlay();
+			case "show log of game" -> GameLogController.getInstance().displayLogOfGame();
+			case "show wins count" -> GameLogController.getInstance().displayWinCountOfGameByLoggedInPlayer();
+			case "show played count" -> GameLogController.getInstance().displayPlayedCountOfGameByLoggedInPlayer();
+			case "add to favorites" -> GameController.getInstance().addGameToFavesOfLoggedInGamer();
+			case "run game" -> GameController.getInstance().runGame();
+
+			// gameplay battlesea menu
+			// TODO: 12/5/2020 AD
+
+			// gameplay reversi menu
+			// TODO: 12/5/2020 AD
+
+			// user editing menu
+			case "change password" -> AccountController.getInstance().changePWCommand();
+			case "edit personal info" -> AccountController.getInstance().editAccFieldCommand();
 		}
 	}
 

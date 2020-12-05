@@ -304,7 +304,7 @@ public class AccountController {
 		return currentAccLoggedIn != null;
 	}
 
-	static class NoAccountExistsWithUsernameException extends Exception {
+	public static class NoAccountExistsWithUsernameException extends Exception {
 		public NoAccountExistsWithUsernameException () {
 			super("No account exists with this username.");
 		}

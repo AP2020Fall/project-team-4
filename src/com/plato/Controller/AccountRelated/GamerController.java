@@ -45,7 +45,30 @@ public class GamerController {
 			for (Gamer friendAccount : playersFriendsAccounts)
 				add(friendAccount.getUsername());
 		}});
-		// todo enter submenu to be able to view a certain friend's account's peronal info or remove friend
+		Menu.getMenuIn().getChildMenus().get(1).enter();
+	}
+
+	public void displayUserProfileToAdmin () {
+		String username;
+		while (true)
+			try {
+				System.out.print("Username:[/cancel to cancel filling form] "); username = Menu.getInputLine();
+
+				if (username.trim().toLowerCase().equals("/cancel")) return;
+
+				if (!Account.accountExists(username))
+					throw new AccountController.NoAccountExistsWithUsernameException();
+				break;
+			} catch (AccountController.NoAccountExistsWithUsernameException e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
+
+		Gamer user = ((Gamer) Account.getAccount(username));
+
+		GamerView.getInstance().displayUserProfileToAdmin(
+				user.getUsername(),
+				user.getEmail()
+		);
 	}
 
 	public void removeFriend () {
