@@ -27,7 +27,7 @@ public abstract class Account {
 	}
 
 	public static void removeAccount (String username) {
-		// TODO: 11/20/2020 AD
+
 	}
 
 	public boolean isPasswordCorrect (String pw) {
