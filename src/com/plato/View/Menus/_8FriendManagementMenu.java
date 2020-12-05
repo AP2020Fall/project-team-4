@@ -1,6 +1,6 @@
-package plato.View.Menus;
+package View.Menus;
 
-import plato.View.Menus.Menu;
+import View.Menus.Menu;
 
 import java.util.Arrays;
 import java.util.LinkedList;

@@ -1,4 +1,4 @@
-package plato.View.AccountRelated;
+package View.AccountRelated;
 
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;

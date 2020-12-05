@@ -1,18 +1,18 @@
-package plato.Controller;
+package Controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import plato.Controller.AccountRelated.*;
-import plato.Controller.GameRelated.GameController;
-import plato.Controller.GameRelated.GameLogController;
-import plato.Model.AccountRelated.*;
-import plato.Model.GameRelated.BattleSea.BattleSea;
-import plato.Model.GameRelated.Game;
-import plato.Model.GameRelated.Reversi.Reversi;
-import plato.View.Menus.Menu;
-import plato.View.Menus._11GameMenu;
-import plato.View.Menus._3MainMenu;
+import Controller.AccountRelated.*;
+import Controller.GameRelated.GameController;
+import Controller.GameRelated.GameLogController;
+import Model.AccountRelated.*;
+import Model.GameRelated.BattleSea.BattleSea;
+import Model.GameRelated.Game;
+import Model.GameRelated.Reversi.Reversi;
+import View.Menus.Menu;
+import View.Menus._11GameMenu;
+import View.Menus._3MainMenu;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -171,7 +171,7 @@ public class MainController {
 		}
 	}
 
-	private void serialize () throws IOException {
+	public void serialize () throws IOException {
 		BufferedWriter writer;
 
 		// Admin.json
@@ -238,7 +238,7 @@ public class MainController {
 		}
 	}
 
-	private void deserialize () throws IOException {
+	public void deserialize () throws IOException {
 		initGsonAndItsBuilder();
 		// admins
 		{

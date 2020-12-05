@@ -1,10 +1,10 @@
-package plato.Controller.AccountRelated;
+package Controller.AccountRelated;
 
-import plato.Model.AccountRelated.Account;
-import plato.Model.AccountRelated.Gamer;
-import plato.Model.GameRelated.GameLog;
-import plato.View.AccountRelated.GamerView;
-import plato.View.Menus.Menu;
+import Model.AccountRelated.Account;
+import Model.AccountRelated.Gamer;
+import Model.GameRelated.GameLog;
+import View.AccountRelated.GamerView;
+import View.Menus.Menu;
 
 import java.util.Comparator;
 import java.util.LinkedList;

@@ -1,11 +1,10 @@
-package plato.Controller.AccountRelated;
+package Controller.AccountRelated;
 
-import plato.Model.AccountRelated.Account;
-import plato.Model.AccountRelated.Admin;
-import plato.Model.AccountRelated.Gamer;
-import plato.View.AccountRelated.AccountView;
-import plato.View.Menus.Menu;
-import plato.View.Menus._11GameMenu;
+import Model.AccountRelated.Account;
+import Model.AccountRelated.Admin;
+import Model.AccountRelated.Gamer;
+import View.AccountRelated.AccountView;
+import View.Menus.Menu;
 
 import java.util.Arrays;
 import java.util.LinkedList;

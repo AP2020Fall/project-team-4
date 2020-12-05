@@ -1,6 +1,6 @@
-package plato.Model.AccountRelated;
+package Model.AccountRelated;
 
-import plato.Controller.IDGenerator;
+import Controller.IDGenerator;
 
 import java.time.LocalDate;
 import java.util.Comparator;

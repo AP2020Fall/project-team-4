@@ -1,4 +1,4 @@
-package plato.View.GameRelated;
+package View.GameRelated;
 
 import java.util.LinkedList;
 

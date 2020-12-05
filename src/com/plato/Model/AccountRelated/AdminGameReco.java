@@ -1,6 +1,6 @@
-package plato.Model.AccountRelated;
+package Model.AccountRelated;
 
-import plato.Controller.IDGenerator;
+import Controller.IDGenerator;
 
 import java.util.LinkedList;
 import java.util.stream.Collectors;

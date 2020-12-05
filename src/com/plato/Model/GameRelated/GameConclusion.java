@@ -1,4 +1,4 @@
-package plato.Model.GameRelated;
+package Model.GameRelated;
 
 public enum GameConclusion {
 	IN_SESSION,

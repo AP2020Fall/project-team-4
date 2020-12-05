@@ -1,6 +1,6 @@
-package plato.Model.GameRelated;
+package Model.GameRelated;
 
-import plato.Model.AccountRelated.Gamer;
+import Model.AccountRelated.Gamer;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;

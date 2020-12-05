@@ -1,4 +1,4 @@
-package plato.Model.AccountRelated;
+package Model.AccountRelated;
 
 
 import java.time.LocalDateTime;

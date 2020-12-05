@@ -1,11 +1,11 @@
-package plato.Controller.AccountRelated;
+package Controller.AccountRelated;
 
-import plato.Model.AccountRelated.Account;
-import plato.Model.AccountRelated.Admin;
-import plato.Model.AccountRelated.FriendRequest;
-import plato.Model.AccountRelated.Gamer;
-import plato.View.AccountRelated.FriendRequestView;
-import plato.View.Menus.Menu;
+import Model.AccountRelated.Account;
+import Model.AccountRelated.Admin;
+import Model.AccountRelated.FriendRequest;
+import Model.AccountRelated.Gamer;
+import View.AccountRelated.FriendRequestView;
+import View.Menus.Menu;
 
 import java.util.LinkedList;
 

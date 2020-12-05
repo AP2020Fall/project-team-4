@@ -1,7 +1,7 @@
-package plato.Model.GameRelated.Reversi;
+package Model.GameRelated.Reversi;
 
-import plato.Model.AccountRelated.Gamer;
-import plato.Model.GameRelated.Game;
+import Model.AccountRelated.Gamer;
+import Model.GameRelated.Game;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

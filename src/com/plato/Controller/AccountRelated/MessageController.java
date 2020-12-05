@@ -1,7 +1,7 @@
-package plato.Controller.AccountRelated;
+package Controller.AccountRelated;
 
-import plato.Model.AccountRelated.Message;
-import plato.View.AccountRelated.MessageView;
+import Model.AccountRelated.Message;
+import View.AccountRelated.MessageView;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;

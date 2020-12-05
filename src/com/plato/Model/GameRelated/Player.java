@@ -1,6 +1,6 @@
-package plato.Model.GameRelated;
+package Model.GameRelated;
 
-import plato.Model.AccountRelated.Gamer;
+import Model.AccountRelated.Gamer;
 
 public abstract class Player {
 	private final Game game;

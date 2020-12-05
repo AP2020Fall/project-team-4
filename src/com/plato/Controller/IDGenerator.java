@@ -1,4 +1,4 @@
-package plato.Controller;
+package Controller;
 
 import java.util.LinkedList;
 import java.util.Random;

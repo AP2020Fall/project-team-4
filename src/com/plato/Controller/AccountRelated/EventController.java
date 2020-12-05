@@ -1,11 +1,11 @@
-package plato.Controller.AccountRelated;
+package Controller.AccountRelated;
 
-import plato.Model.AccountRelated.Event;
-import plato.Model.AccountRelated.Gamer;
-import plato.Model.GameRelated.BattleSea.BattleSea;
-import plato.Model.GameRelated.Reversi.Reversi;
-import plato.View.AccountRelated.EventView;
-import plato.View.Menus.Menu;
+import Model.AccountRelated.Event;
+import Model.AccountRelated.Gamer;
+import Model.GameRelated.BattleSea.BattleSea;
+import Model.GameRelated.Reversi.Reversi;
+import View.AccountRelated.EventView;
+import View.Menus.Menu;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

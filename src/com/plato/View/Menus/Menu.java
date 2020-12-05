@@ -1,6 +1,6 @@
-package plato.View.Menus;
+package View.Menus;
 
-import plato.Model.AccountRelated.Admin;
+import Model.AccountRelated.Admin;
 
 import java.util.HashMap;
 import java.util.LinkedList;

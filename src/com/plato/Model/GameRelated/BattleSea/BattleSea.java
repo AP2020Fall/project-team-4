@@ -1,8 +1,8 @@
-package plato.Model.GameRelated.BattleSea;
+package Model.GameRelated.BattleSea;
 
-import plato.Model.AccountRelated.Gamer;
-import plato.Model.GameRelated.Game;
-import plato.Model.GameRelated.Reversi.Reversi;
+import Model.AccountRelated.Gamer;
+import Model.GameRelated.Game;
+import Model.GameRelated.Reversi.Reversi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
