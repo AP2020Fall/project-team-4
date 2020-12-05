@@ -288,7 +288,6 @@ public class AccountController {
 
 	public void logoutCommand () {
 		logout();
-		Menu.getMenuIn().getChildMenus().get(3).enter();
 	}
 
 	public Account getCurrentAccLoggedIn () {

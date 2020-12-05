@@ -1,11 +1,9 @@
 package Controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import Controller.AccountRelated.*;
 import Controller.GameRelated.GameController;
 import Controller.GameRelated.GameLogController;
+import Controller.GameRelated.Reversi.ReversiController;
 import Model.AccountRelated.*;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
@@ -13,6 +11,9 @@ import Model.GameRelated.Reversi.Reversi;
 import View.Menus.Menu;
 import View.Menus._11GameMenu;
 import View.Menus._3MainMenu;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -163,11 +164,32 @@ public class MainController {
 			// TODO: 12/5/2020 AD
 
 			// gameplay reversi menu
-			// TODO: 12/5/2020 AD
+			case "place disks" -> ReversiController.getInstance().placeDisk();
+			case "next turn" -> ReversiController.getInstance().nextTurn();
+			case "whose turn now?" -> GameController.getInstance().displayTurn();
+			case "display available coordinates" -> ReversiController.getInstance().displayAvailableCoords();
+			case "display board (grid)" -> ReversiController.getInstance().displayGrid();
+			case "display disks" -> ReversiController.getInstance().displayPrevMoves();
+			case "display scores" -> GameController.getInstance().displayInGameScores();
+			case "display final result" -> GameController.getInstance().displayGameConclusion();
 
 			// user editing menu
 			case "change password" -> AccountController.getInstance().changePWCommand();
 			case "edit personal info" -> AccountController.getInstance().editAccFieldCommand();
+
+			// account menu
+			case "view personal info (w/ money)" -> {
+				AccountController.getInstance().diplayPersonalInfo();
+				Menu.getMenuIn().getChildMenus().get(command).enter();
+			}
+			case "view plato statistics" -> GamerController.getInstance().displayAccountStats();
+			case "view gaming history" -> GamerController.getInstance().displayGamingHistory();
+			case "view gaming history in battlesea" -> GamerController.getInstance().displayGamingHistory("battlesea");
+			case "view gaming history in reversi" -> GamerController.getInstance().displayGamingHistory("reversi");
+			case "logout" -> {
+				AccountController.getInstance().logoutCommand();
+				Menu.getMenuIn().getChildMenus().get(command).enter();
+			}
 		}
 	}
 

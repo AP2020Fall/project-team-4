@@ -11,15 +11,15 @@ public class GamerView {
 		return gamerView;
 	}
 
-	public void displayAccountStats () { // TODO: add Gamer obj if have to
+	public void displayAccountStats () {
 		// TODO: 11/28/2020 AD
 	}
 
-	public void displayGamingHistory () { // TODO: add Gamer obj if have to
+	public void displayGamingHistory () {
 		// TODO: 11/16/2020 AD
 	}
 
-	public void displayGameStats (String gameName) { // TODO: add Gamer obj if have to
+	public void displayGamingHistory (String gameName) {
 		// TODO: 11/16/2020 AD
 	}
 

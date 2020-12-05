@@ -25,7 +25,8 @@ public class _12_1GameplayBattleSeaMenu extends Menu {
 					"Choose between 5 randomly generated boards",
 					"Display on-trial Board",
 					"Move ship",
-					"Change ship direction"
+					"Change ship direction",
+					"Finalize Board"
 			));
 			case 2 -> options = new LinkedList<>(Arrays.asList(
 					"Boom (Throw Bomb)",
