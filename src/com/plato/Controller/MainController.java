@@ -78,16 +78,14 @@ public class MainController {
 		switch (commandOption) {
 			case "exit program" -> tryToExitProgram();
 			case "back" -> Menu.getMenuIn().back();
-			case "go to account menu" -> {
-				String menuId = "14" + (AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A");
-				Menu.addMenu(menuId);
-				Menu.getMenu(menuId).enter();
-			}
+			case "go to account menu" -> Menu.getMenuIn().getChildMenus().get(command + 1).enter();
 
-			// main menu
-			case "register" -> AccountController.getInstance().register();
+			// register-login menu
+			case "register gamer", "register admin" -> AccountController.getInstance().register();
 			case "login" -> AccountController.getInstance().login();
 			case "delete account" -> AccountController.getInstance().deleteAccount();
+
+			// main menu
 			case "show points" -> {
 				if (Menu.getMenuIn() instanceof _3MainMenu)
 					GameLogController.getInstance().displayAllPointsOfPlayer();
@@ -95,6 +93,7 @@ public class MainController {
 					GameLogController.getInstance().displayPtsLoggedInPlayerEarnedFromGame();
 			}
 			case "view favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
+			case "go to games menu" -> Menu.getMenuIn().getChildMenus().get(3).enter();
 			case "view platobot's messages" -> MessageController.getInstance().displayAdminMessages();
 			case "view last played" -> GameLogController.getInstance().displayLastGamePlayed();
 			case "view admin's suggestions" -> AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();

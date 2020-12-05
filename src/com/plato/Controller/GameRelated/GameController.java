@@ -66,11 +66,6 @@ public class GameController {
 		Menu.getMenuIn().getChildMenus().get(8).enter();
 	}
 
-	// based on which game input points to change to menu corresponding to that game
-	public void goToGameMenu () {
-		// TODO: 11/30/2020 AD
-	}
-
 	public void addGameToFavesOfLoggedInGamer () {
 		Menu.displayAreYouSureMessage();
 		if (Menu.getInputLine().toLowerCase().equals("y")) {

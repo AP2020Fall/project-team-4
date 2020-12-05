@@ -64,11 +64,11 @@ public class AccountController {
 
 				if (username.trim().equalsIgnoreCase("/cancel")) return;
 
-				if (Account.getAccount(username) instanceof Admin)
-					throw new AdminAccountCantBeDeletedException();
-
 				if (!Account.accountExists(username))
 					throw new NoAccountExistsWithUsernameException();
+
+				if (Account.getAccount(username) instanceof Admin)
+					throw new AdminAccountCantBeDeletedException();
 
 				break;
 			} catch (AdminAccountCantBeDeletedException | NoAccountExistsWithUsernameException e) {

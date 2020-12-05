@@ -73,10 +73,11 @@ public abstract class Menu {
 		switch (aORg) {
 			case "G" -> {
 				// for menu 3
-				getMenu("3G").addChildMenu(5, getMenu("4G"));
-				getMenu("3G").addChildMenu(6, getMenu("6"));
-				getMenu("3G").addChildMenu(7, getMenu("5G"));
-				getMenu("3G").addChildMenu(8, getMenu("14G"));
+				getMenu("3G").addChildMenu(3, getMenu("10"));
+				getMenu("3G").addChildMenu(6, getMenu("4G"));
+				getMenu("3G").addChildMenu(7, getMenu("6"));
+				getMenu("3G").addChildMenu(8, getMenu("5G"));
+				getMenu("3G").addChildMenu(9, getMenu("14G"));
 				// for menu 4
 				getMenu("4G").addChildMenu(1, getMenu("11"));
 				getMenu("4G").addChildMenu(3, getMenu("14G"));
