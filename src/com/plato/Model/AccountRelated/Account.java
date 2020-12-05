@@ -27,6 +27,7 @@ public abstract class Account {
 	}
 
 	public static void removeAccount (String username) {
+		accounts.remove(getAccount (username));
 
 	}
 
