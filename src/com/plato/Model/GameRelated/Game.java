@@ -9,9 +9,12 @@ import Model.GameRelated.Reversi.Reversi;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
+
+import static java.lang.Integer.compare;
 
 public abstract class Game {
 
@@ -88,13 +91,14 @@ public abstract class Game {
 	public abstract boolean gameEnded ();
 
 	public Gamer getWinner () {
-		// TODO: 11/13/2020 AD
-		return null;
+		if(listOfPlayers.get(0).getScore()>listOfPlayers.get(1).getScore()) return listOfPlayers.get(0).getGamer();
+		else if(listOfPlayers.get(1).getScore()>listOfPlayers.get(0).getScore()) return listOfPlayers.get(1).getGamer();
+		else return null;
 	}
+
 
 	public boolean playerWUsernameWon (String username) {
 		if (conclusion == GameConclusion.IN_SESSION || conclusion == GameConclusion.DRAW) return false;
-
 		return getWinner().getUsername().equals(username);
 	}
 

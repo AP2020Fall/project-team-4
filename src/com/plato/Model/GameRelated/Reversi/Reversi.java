@@ -23,8 +23,9 @@ public class Reversi extends Game {
 	 * otherwise check every blank coordinate and if player can place there add to arraylist and return the arraylist in the end
 	 */
 	public ArrayList<String> getAvailableCoordinates() {
-		// TODO: 11/28/2020 AD  
-		return null;
+		ArrayList<String> availableCoordinates = new ArrayList<>();
+
+		return availableCoordinates;
 	}
 
 	/**
@@ -69,25 +70,39 @@ public class Reversi extends Game {
 	 */
 	private boolean doesAnyDiskChangeColor (int x, int y, Direction dir){
 		switch (dir){
-			case UP:
+			case UP: if(!board[y-1][x].equals(board[y][x])) for(int i=y ; i>=0 ; i--){if(board[i][x].equals(board[y][x])) return true;}
 				break;
-			case UP_RIGHT:
+			case UP_RIGHT: if(!board[y-1][x+1].equals(board[y][x]))
+				for(int i=y ; i>=0 ; i--)
+					for(int j=x ; j<8 ; j++)
+						if(board[i][j].equals(board[y][x])) return true;
 				break;
-			case RIGHT:
+			case RIGHT: if(!board[y][x+1].equals(board[y][x]))
+				for(int i=x ; i<8 ; i++)
+					if(board[y][i].equals(board[y][x])) return true;
 				break;
-			case DOWN_RIGHT:
+			case DOWN_RIGHT: if(!board[y+1][x+1].equals(board[y][x]))
+				for(int i=y ; i<8 ; i++)
+					for(int j=x ; j<8 ; j++) if(board[i][j].equals(board[y][x])) return true;
 				break;
-			case DOWN:
+			case DOWN: if(!board[y+1][x].equals(board[y][x]))
+				for(int i=y ; i<8 ; i++) if(board[i][x].equals(board[y][x])) return true;
 				break;
-			case DOWN_LEFT:
+			case DOWN_LEFT: if(!board[y+1][x-1].equals(board[y][x]))
+				for(int i=y ; i<8 ; i++)
+					for(int j=x ; j>=0 ; j--) if(board[i][j].equals(board[y][x])) return true;
 				break;
 			case LEFT:
+				if(!board[y][x-1].equals(board[y][x]))
+					for(int i=x ; i>=0 ; i--) if(board[y][i].equals(board[y][x])) return true;
 				break;
 			case UP_LEFT:
+				if(!board[y-1][x-1].equals(board[y][x]))
+					for(int i=y ; i>=0 ; i--)
+						for(int j=x ; j>=0 ; j--) if(board[i][j].equals(board[y][x])) return true;
 				break;
 		}
-	return new Boolean(null); // fixme sorry gives error when trying to run
-	} //todo
+	return false;}
 
 	/**
 	 * @param startx from 0 to 7
