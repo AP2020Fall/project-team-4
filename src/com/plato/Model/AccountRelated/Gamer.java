@@ -22,21 +22,6 @@ public class Gamer extends Account {
 		this.money = money;
 	}
 
-	public int getScore () {
-		return score;
-	}
-
-	public LinkedList<String> getFaveGames () {
-		return faveGames;
-	}
-
-	public static ArrayList<Gamer> getGamers () {
-		return (ArrayList<Gamer>) getAccounts().stream()
-				.filter(account -> account instanceof Gamer)
-				.map(account -> ((Gamer) account))
-				.collect(Collectors.toList());
-	}
-
 	public void sendFrndReq (String usernameTo) {
 		FriendRequest.addFriendReq(this, (Gamer) getAccount(usernameTo));
 	}
@@ -94,5 +79,24 @@ public class Gamer extends Account {
 
 	public static void setGamers (LinkedList<Gamer> gamers) {
 		getAccounts().addAll(gamers);
+	}
+
+	public int getScore () {
+		return score;
+	}
+
+	public LinkedList<String> getFaveGames () {
+		return faveGames;
+	}
+
+	public static ArrayList<Gamer> getGamers () {
+		return (ArrayList<Gamer>) getAccounts().stream()
+				.filter(account -> account instanceof Gamer)
+				.map(account -> ((Gamer) account))
+				.collect(Collectors.toList());
+	}
+
+	public double getMoney () {
+		return money;
 	}
 }

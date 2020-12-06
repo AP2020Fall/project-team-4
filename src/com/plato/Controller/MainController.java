@@ -214,8 +214,8 @@ public class MainController {
 			case "edit personal info" -> AccountController.getInstance().editAccFieldCommand();
 
 			// account menu
-			case "view personal info (w/ money)" -> {
-				AccountController.getInstance().diplayPersonalInfo();
+			case "view personal info (w/ money)", "View personal info (w/o money)" -> {
+				AccountController.getInstance().displayPersonalInfo(); // for admin
 				Menu.getMenuIn().getChildMenus().get(command + 1).enter();
 			}
 			case "view plato statistics" -> GamerController.getInstance().displayAccountStats();
