@@ -36,8 +36,8 @@ public abstract class Account {
 	}
 
 	public void editField (String field, String newVal) {
-		// TODO: 11/16/2020 AD
-		// also check if the entered field is valid
+		String input = "field";
+		scanner  =new scanner(system.in);
 	}
 
 	public static boolean isEmailOK (String email) {
