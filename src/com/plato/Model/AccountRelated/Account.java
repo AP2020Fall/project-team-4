@@ -38,19 +38,23 @@ public abstract class Account {
 	public void editField (String field, String newVal) {
 		switch (field) {
 			case "first name":
-				firstName = newVal; break;
+				firstName = newVal;
+				break;
 			case "last name":
-				lastName = newVal; break;
+				lastName = newVal;
+				break;
 			case "username":
-				username = newVal; break;
+				username = newVal;
+				break;
 			case "password":
-				password = newVal; break;
-			case "userID":
-				userID = newVal; break;
+				password = newVal;
+				break;
 			case "email":
-				email = newVal; break;
-			case "phoneNum":
-				phoneNum = newVal; break;
+				email = newVal;
+				break;
+			case "phone Num":
+				phoneNum = newVal;
+				break;
 		}
 	}
 
