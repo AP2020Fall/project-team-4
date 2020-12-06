@@ -18,7 +18,8 @@ public class BattleSeaView {
 	}
 
 	public void displayAll5RandomBoards (LinkedList<StringBuilder> boards) {
-		// TODO TOOTOTOTOOTOT
+		for (StringBuilder board : boards)
+			displayBoard(board);
 	}
 
 	public void displayRemainingTime (int seconds) {
@@ -26,6 +27,6 @@ public class BattleSeaView {
 	}
 
 	public void displayOutOfTimeMessage (String otherPlayer) {
-		Menu.println("Sorry you ran out of time. Now it's %s's turn.".formatted(otherPlayer));
+		Menu.println("%nSorry you ran out of time. Now it's %s's turn.".formatted(otherPlayer));
 	}
 }

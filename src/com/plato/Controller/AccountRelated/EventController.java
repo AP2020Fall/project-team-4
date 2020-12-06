@@ -26,9 +26,9 @@ public class EventController {
 
 		String gameNum;
 		while (true) {
-			System.out.print("Choose Game:[/cancel to cancel filling form] "); gameNum = String.valueOf(Integer.parseInt(Menu.getInputLine()));
+			System.out.print("Choose Game:[/c to cancel] "); gameNum = String.valueOf(Integer.parseInt(Menu.getInputLine()));
 
-			if (gameNum.trim().toLowerCase().equals("/cancel")) return;
+			if (gameNum.trim().toLowerCase().equals("/c")) return;
 
 			if (gameNum.equals(1) || gameNum.equals(2))
 				break;
@@ -40,9 +40,9 @@ public class EventController {
 		LocalDate start;
 		while (true) {
 			try {
-				System.out.print("Start Date[d-MMM-yyyy][/cancel to cancel filling form]: "); start = LocalDate.parse(Menu.getInputLine(), DateTimeFormatter.ofPattern("d-MMM-yyyy"));
+				System.out.print("Start Date[d-MMM-yyyy][/c to cancel]: "); start = LocalDate.parse(Menu.getInputLine(), DateTimeFormatter.ofPattern("d-MMM-yyyy"));
 
-				if (gameNum.trim().toLowerCase().equals("/cancel")) return;
+				if (gameNum.trim().toLowerCase().equals("/c")) return;
 
 				if (start.isBefore(LocalDate.now()))
 					throw new StartDateTimeHasAlreadyPassedException();
@@ -57,9 +57,9 @@ public class EventController {
 		LocalDate end;
 		while (true) {
 			try {
-				System.out.print("End Date[d-MMM-yyyy][/cancel to cancel filling form]: "); end = LocalDate.parse(Menu.getInputLine(), DateTimeFormatter.ofPattern("d-MMM-yyyy"));
+				System.out.print("End Date[d-MMM-yyyy][/c to cancel]: "); end = LocalDate.parse(Menu.getInputLine(), DateTimeFormatter.ofPattern("d-MMM-yyyy"));
 
-				if (gameNum.trim().toLowerCase().equals("/cancel")) return;
+				if (gameNum.trim().toLowerCase().equals("/c")) return;
 
 				if (end.isBefore(LocalDate.now()))
 					throw new StartDateTimeHasAlreadyPassedException();
@@ -76,9 +76,9 @@ public class EventController {
 		double eventPrize;
 		while (true) {
 			try {
-				System.out.print("Event Prize[/cancel to cancel filling form]: "); eventPrize = Double.parseDouble(Menu.getInputLine());
+				System.out.print("Event Prize[/c to cancel]: "); eventPrize = Double.parseDouble(Menu.getInputLine());
 
-				if (gameNum.trim().toLowerCase().equals("/cancel")) return;
+				if (gameNum.trim().toLowerCase().equals("/c")) return;
 
 				break;
 			} catch (NumberFormatException e) {
@@ -119,9 +119,9 @@ public class EventController {
 		String eventid;
 		while (true)
 			try {
-				System.out.print("Event ID:[/cancel to cancel filling form] "); eventid = Menu.getInputLine();
+				System.out.print("Event ID:[/c to cancel] "); eventid = Menu.getInputLine();
 
-				if (eventid.trim().equalsIgnoreCase("/cancel")) return;
+				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
 				if (Event.eventInSessionExists(eventid))
 					throw new EventDoesntExistException();
@@ -143,9 +143,9 @@ public class EventController {
 		String eventid;
 		while (true)
 			try {
-				System.out.print("Event ID:[/cancel to cancel filling form] "); eventid = Menu.getInputLine();
+				System.out.print("Event ID:[/c to cancel] "); eventid = Menu.getInputLine();
 
-				if (eventid.trim().equalsIgnoreCase("/cancel")) return;
+				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
 				if (Event.eventInSessionExists(eventid))
 					throw new EventDoesntExistException();
@@ -163,9 +163,9 @@ public class EventController {
 		Event event;
 		while (true)
 			try {
-				System.out.print("Event ID:[/cancel to cancel filling form] "); String eventid = Menu.getInputLine();
+				System.out.print("Event ID:[/c to cancel] "); String eventid = Menu.getInputLine();
 
-				if (eventid.trim().equalsIgnoreCase("/cancel")) return;
+				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
 				if (Event.eventInSessionExists(eventid))
 					throw new EventDoesntExistException();
@@ -189,9 +189,9 @@ public class EventController {
 	public void removeEvent () {
 		while (true)
 			try {
-				System.out.print("Event ID:[/cancel to cancel filling form] "); String eventid = Menu.getInputLine();
+				System.out.print("Event ID:[/c to cancel] "); String eventid = Menu.getInputLine();
 
-				if (eventid.trim().equalsIgnoreCase("/cancel")) return;
+				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
 				if (Event.eventInSessionExists(eventid))
 					throw new EventDoesntExistException();

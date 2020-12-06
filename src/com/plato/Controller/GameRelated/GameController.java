@@ -30,9 +30,9 @@ public class GameController {
 		Gamer player2;
 		while (true)
 			try {
-				System.out.print("Second Player's username:[/cancel to cancel filling form] "); String username = Menu.getInputLine();
+				System.out.print("Second Player's username:[/c to cancel] "); String username = Menu.getInputLine();
 
-				if (username.trim().equalsIgnoreCase("/cancel")) return;
+				if (username.trim().equalsIgnoreCase("/c")) return;
 
 				if (!Account.accountExists(username))
 					throw new AccountController.NoAccountExistsWithUsernameException();

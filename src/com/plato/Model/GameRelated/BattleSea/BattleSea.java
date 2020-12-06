@@ -4,10 +4,7 @@ import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import Model.GameRelated.Reversi.Reversi;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class BattleSea extends Game {
@@ -110,7 +107,7 @@ public class BattleSea extends Game {
 	}
 
 	public boolean canStartBombing () {
-		return ((PlayerBattleSea) getListOfPlayers().get(0)).getBoard() != null &&
-				((PlayerBattleSea) getListOfPlayers().get(1)).getBoard() != null;
+		return ((PlayerBattleSea) getListOfPlayers().get(0)).getShips() != null &&
+				((PlayerBattleSea) getListOfPlayers().get(1)).getShips() != null;
 	}
 }
