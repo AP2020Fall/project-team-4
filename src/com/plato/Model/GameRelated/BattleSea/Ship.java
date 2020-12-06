@@ -2,7 +2,6 @@ package Model.GameRelated.BattleSea;
 
 import Model.GameRelated.Game;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
@@ -40,9 +39,18 @@ public class Ship {
 					y0 = ship.getTopMostY(),
 					x = x0, y = y0;
 
-			for (int i = 0; i < ship.getL_SIZE(); i++) {
-				coords.add(new int[]{x, y});
-				x += dx; y += dy;
+			for (int s = 0; s < ship.getS_SIZE(); s++) {
+				for (int l = 0; l < ship.getL_SIZE(); l++) {
+					coords.add(new int[]{x, y});
+					if (ship.isVertical())
+						y += dy;
+					else
+						x += dx;
+				}
+				if (ship.isVertical())
+					y += dy;
+				else
+					x += dx;
 			}
 		}
 
@@ -55,12 +63,12 @@ public class Ship {
 	}
 
 	public boolean canChangeDir () {
-		Ship[] board = (Ship[]) getPlayer().getShips().toArray();
+		LinkedList<Ship> board = getPlayer().getShips();
 		return isShipPosValid(board, leftMostX, topMostY, !isVertical());
 	}
 
 	public boolean canMove (int x, int y) {
-		Ship[] board = (Ship[]) getPlayer().getShips().toArray();
+		LinkedList<Ship> board = getPlayer().getShips();
 		return isShipPosValid(board, x, y, isVertical());
 	}
 
@@ -71,19 +79,17 @@ public class Ship {
 		}
 	}
 
-	public boolean isShipPosValid (Ship[] board, int newX, int newY, boolean newIsVertical) {
+	public boolean isShipPosValid (LinkedList<Ship> board, int newX, int newY, boolean newIsVertical) {
 
 		if (newX < 1 || newY < 1 || newX > 10 || newY > 10) return false;
 
-		if ((newIsVertical ? newY:newX) + this.getL_SIZE() - 1 > 10) return false;
+		if ((newIsVertical ? newY : newX) + this.getL_SIZE() - 1 > 10) return false;
 
-		if ((newIsVertical ? newX:newY) + this.getS_SIZE() - 1 > 10) return false;
+		if ((newIsVertical ? newX : newY) + this.getS_SIZE() - 1 > 10) return false;
 
-		if (Arrays.stream(board).filter(ship -> ship == null).count() == board.length) return true;
-
-		LinkedList<Ship> shipsExclThis = (LinkedList<Ship>) Arrays.stream(board)
+		LinkedList<Ship> shipsExclThis = board.stream()
 				.filter(ship -> !ship.equals(this))
-				. collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 
 		LinkedList<int[]> thisCoords =
 				getAllCoords(new LinkedList<>(Collections.singletonList(this)));

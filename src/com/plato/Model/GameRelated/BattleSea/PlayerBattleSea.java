@@ -4,16 +4,15 @@ import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import Model.GameRelated.Player;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class PlayerBattleSea extends Player {
 
-	private Ship[] ships = new Ship[6];
+	private LinkedList<Ship> ships;
 	private LinkedList<Bomb> bombsThrown = new LinkedList<>();
 
-	public PlayerBattleSea(Game game, Gamer gamer) {
+	public PlayerBattleSea (Game game, Gamer gamer) {
 		super(game, gamer);
 	}
 
@@ -21,7 +20,7 @@ public class PlayerBattleSea extends Player {
 		bombsThrown.add(Bomb.throwBomb(getGame(), x, y, this));
 	}
 
-	public void finalizeBoard (Ship[] ships) { // todo dont forget to call before start of game
+	public void finalizeBoard (LinkedList<Ship> ships) {
 		this.ships = ships;
 
 		for (Ship ship : this.ships)
@@ -58,7 +57,7 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public LinkedList<Ship> getShips () {
-		return new LinkedList<>(Arrays.asList(ships));
+		return ships;
 	}
 
 	public LinkedList<Ship> getShips (boolean destroyed) {
@@ -68,7 +67,7 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public LinkedList<Ship> getOpponentShips () {
-		return new LinkedList<>(Arrays.asList(((PlayerBattleSea) getGame().getOpponentOf(this)).ships));
+		return new LinkedList<>(((PlayerBattleSea) getGame().getOpponentOf(this)).ships);
 	}
 
 	public LinkedList<Ship> getOpponentShips (boolean destroyed) {
@@ -77,12 +76,7 @@ public class PlayerBattleSea extends Player {
 				.collect(Collectors.toList());
 	}
 
-	public String[][] getPlayerBoard () {
-		// TODO: 11/17/2020 AD
-		return new String[0][];
-	}
-
-	public String[][] getOpponentBoard () {
-		return ((PlayerBattleSea) getGame().getOpponentOf(this)).getPlayerBoard();
+	public LinkedList<Ship> getBoard () {
+		return ships;
 	}
 }

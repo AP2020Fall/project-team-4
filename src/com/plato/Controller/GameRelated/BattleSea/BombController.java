@@ -44,6 +44,7 @@ public class BombController {
 		}
 
 		currentPlayer.throwBomb(x, y);
+		GameController.getInstance().getCurrentGame().nextTurn();
 	}
 
 	public void displayAllCurrentPlayerBombs () {
