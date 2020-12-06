@@ -1,5 +1,6 @@
 package Model.GameRelated.BattleSea;
 
+import Controller.GameRelated.BattleSea.BattleSeaController;
 import Model.GameRelated.Game;
 
 import java.util.Collections;
@@ -33,24 +34,25 @@ public class Ship {
 		LinkedList<int[]> coords = new LinkedList<>();
 
 		for (Ship ship : ships) {
-			int dx = (ship.isVertical() ? 0 : 1),
-					dy = (ship.isVertical() ? 1 : 0),
-					x0 = ship.getLeftMostX(),
-					y0 = ship.getTopMostY(),
-					x = x0, y = y0;
+			int x = ship.getLeftMostX(),
+					y = ship.getTopMostY();
 
 			for (int s = 0; s < ship.getS_SIZE(); s++) {
 				for (int l = 0; l < ship.getL_SIZE(); l++) {
 					coords.add(new int[]{x, y});
 					if (ship.isVertical())
-						y += dy;
+						y++;
 					else
-						x += dx;
+						x++;
 				}
-				if (ship.isVertical())
-					y += dy;
-				else
-					x += dx;
+				if (ship.isVertical()) {
+					x++;
+					y = ship.getTopMostY();
+				}
+				else {
+					y++;
+					x = ship.getLeftMostX();
+				}
 			}
 		}
 
@@ -63,12 +65,12 @@ public class Ship {
 	}
 
 	public boolean canChangeDir () {
-		LinkedList<Ship> board = getPlayer().getShips();
+		LinkedList<Ship> board = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
 		return isShipPosValid(board, leftMostX, topMostY, !isVertical());
 	}
 
 	public boolean canMove (int x, int y) {
-		LinkedList<Ship> board = getPlayer().getShips();
+		LinkedList<Ship> board = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
 		return isShipPosValid(board, x, y, isVertical());
 	}
 
