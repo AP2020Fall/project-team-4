@@ -27,7 +27,7 @@ public abstract class Account {
 	}
 
 	public static void removeAccount (String username) {
-		accounts.remove(getAccount (username));
+		accounts.remove(getAccount(username));
 
 	}
 
@@ -36,15 +36,22 @@ public abstract class Account {
 	}
 
 	public void editField (String field, String newVal) {
-		switch (field){
-			case "first name" :firstName=newVal ;break;
-			case "last name" :lastName=newVal ; break;
-			case "username" :username=newVal ;break;
-			case "password" :password=newVal ;break;
-			case "userID" :userID=newVal ;break;
-			case "email" :email=newVal ;break;
-			case "phoneNum" :phoneNum=newVal ;break;
-
+		switch (field) {
+			case "first name":
+				firstName = newVal; break;
+			case "last name":
+				lastName = newVal; break;
+			case "username":
+				username = newVal; break;
+			case "password":
+				password = newVal; break;
+			case "userID":
+				userID = newVal; break;
+			case "email":
+				email = newVal; break;
+			case "phoneNum":
+				phoneNum = newVal; break;
+		}
 	}
 
 	public static boolean isEmailOK (String email) {
