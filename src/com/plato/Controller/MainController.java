@@ -196,7 +196,7 @@ public class MainController {
 			case "display available coordinates" -> ReversiController.getInstance().displayAvailableCoords();
 			case "display board (grid)" -> ReversiController.getInstance().displayGrid();
 			case "display disks" -> ReversiController.getInstance().displayPrevMoves();
-			case "display scores" -> GameController.getInstance().displayInGameScores();
+			case "display scores" -> ReversiController.getInstance().displayInGameScores();
 			case "display final result" -> GameController.getInstance().displayGameConclusion();
 
 			// user editing menu

@@ -5,6 +5,7 @@ import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
+import Model.GameRelated.Reversi.PlayerReversi;
 import Model.GameRelated.Reversi.Reversi;
 import View.GameRelated.GameView;
 import View.Menus.Menu;
@@ -69,7 +70,7 @@ public class GameController {
 
 	public void addGameToFavesOfLoggedInGamer () {
 		Menu.displayAreYouSureMessage();
-		if (Menu.getInputLine().toLowerCase().equals("y")) {
+		if (Menu.getInputLine().equalsIgnoreCase("y")) {
 			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(((_11GameMenu) Menu.getMenuIn()).getGameName());
 			GameView.getInstance().displaySuccessfulFaveGameAdditionMessage(((_11GameMenu) Menu.getMenuIn()).getGameName());
 		}
@@ -98,18 +99,6 @@ public class GameController {
 
 		GameView.getInstance().displayGameConclusion(
 				conclusion,
-				player1Gamer.getUsername(),
-				player2Gamer.getUsername(),
-				gameController.getCurrentGame().getPlayer(player1Gamer).getScore(),
-				gameController.getCurrentGame().getPlayer(player2Gamer).getScore()
-		);
-	}
-
-	public void displayInGameScores () {
-		Gamer player1Gamer = gameController.getCurrentGame().getListOfPlayers().get(0).getGamer(),
-				player2Gamer = gameController.getCurrentGame().getListOfPlayers().get(1).getGamer();
-
-		GameView.getInstance().displayInGameScores(
 				player1Gamer.getUsername(),
 				player2Gamer.getUsername(),
 				gameController.getCurrentGame().getPlayer(player1Gamer).getScore(),
