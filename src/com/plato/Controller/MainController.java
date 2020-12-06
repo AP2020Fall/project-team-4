@@ -184,10 +184,7 @@ public class MainController {
 				}
 			}
 			//		phase 2
-			case "boom (throw bomb)" -> {
-				BombController.getInstance().throwBomb();
-				// todo reset timer
-			}
+			case "boom (throw bomb)" -> BombController.getInstance().throwBomb();
 			case "time?" -> BattleSeaController.getInstance().displayRemainingTime();
 			case "display all my ships" -> ShipController.getInstance().displayAllShipsOfCurrentPlayer();
 			case "display all my booms" -> BombController.getInstance().displayAllCurrentPlayerBombs();

@@ -25,10 +25,10 @@ public class BombController {
 		String Xstr, Ystr; int x, y;
 		while (true) {
 			try {
-				System.out.print("X [/cancel to cancel filling form: "); Xstr = Menu.getInputLine();
-				System.out.print("Y [/cancel to cancel filling form: "); Ystr = Menu.getInputLine();
+				System.out.print("X [/c to cancel]: "); Xstr = Menu.getInputLine();
+				System.out.print("Y [/c to cancel]: "); Ystr = Menu.getInputLine();
 
-				if (Xstr.toLowerCase().trim().equals("/cancel") || Ystr.toLowerCase().trim().equals("/cancel")) return;
+				if (Xstr.toLowerCase().trim().equals("/c") || Ystr.toLowerCase().trim().equals("/c")) return;
 
 				x = Integer.parseInt(Xstr); y = Integer.parseInt(Ystr);
 

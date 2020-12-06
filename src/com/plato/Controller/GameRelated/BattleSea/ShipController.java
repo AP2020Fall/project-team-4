@@ -32,9 +32,9 @@ public class ShipController {
 
 		String shipName; Ship chosenShip;
 		while (true) {
-			System.out.print("Choose ship[/cancel to cancel filling form]: "); shipName = Menu.getInputLine();
+			System.out.print("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
 
-			if (shipName.toLowerCase().trim().equals("/cancel")) return;
+			if (shipName.toLowerCase().trim().equals("/c")) return;
 
 			if (shipName.matches("[A-F]")) {
 				chosenShip = ships.get("ABCDEF".indexOf(shipName));
@@ -47,10 +47,10 @@ public class ShipController {
 		String newX, newY; int newXInt, newYInt;
 		while (true)
 			try {
-				System.out.print("New x [/cancel to cancel filling form, /s to use previous value]: "); newX = Menu.getInputLine();
-				System.out.print("New y [/cancel to cancel filling form, /s to use previous value]: "); newY = Menu.getInputLine();
+				System.out.print("New x [/c to cancel , /s to use prev val]: "); newX = Menu.getInputLine();
+				System.out.print("New y [/c to cancel , /s to use prev val]: "); newY = Menu.getInputLine();
 
-				if (newX.toLowerCase().trim().equals("/cancel") || newY.toLowerCase().trim().equals("/cancel")) return;
+				if (newX.toLowerCase().trim().equals("/c") || newY.toLowerCase().trim().equals("/c")) return;
 
 				boolean X_Same = newX.toLowerCase().trim().equals("/s"),
 						Y_Same = newY.toLowerCase().trim().equals("/s");
@@ -87,9 +87,9 @@ public class ShipController {
 
 		String shipName; Ship chosenShip;
 		while (true) {
-			System.out.print("Choose ship[/cancel to cancel filling form]: "); shipName = Menu.getInputLine();
+			System.out.print("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
 
-			if (shipName.toLowerCase().trim().equals("/cancel")) return;
+			if (shipName.toLowerCase().trim().equals("/c")) return;
 
 			if (shipName.matches("[A-F]")) {
 				chosenShip = ships.get("ABCDEF".indexOf(shipName));

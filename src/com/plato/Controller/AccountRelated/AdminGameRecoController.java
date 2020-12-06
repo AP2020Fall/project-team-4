@@ -35,9 +35,9 @@ public class AdminGameRecoController {
 
 		while (true)
 			try {
-				Menu.print("Choose game:[/cancel to cancel filling form] "); String command = Menu.getInputLine();
+				Menu.print("Choose game:[/c to cancel] "); String command = Menu.getInputLine();
 
-				if (command.trim().equalsIgnoreCase("/cancel")) return;
+				if (command.trim().equalsIgnoreCase("/c")) return;
 
 				int choice = Integer.parseInt(command);
 

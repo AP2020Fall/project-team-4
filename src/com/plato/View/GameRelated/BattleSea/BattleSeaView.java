@@ -18,7 +18,8 @@ public class BattleSeaView {
 	}
 
 	public void displayAll5RandomBoards (LinkedList<StringBuilder> boards) {
-		// TODO TOOTOTOTOOTOT
+		for (StringBuilder board : boards)
+			displayBoard(board);
 	}
 
 	public void displayRemainingTime (int seconds) {

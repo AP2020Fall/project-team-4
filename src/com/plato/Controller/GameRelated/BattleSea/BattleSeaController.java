@@ -58,8 +58,9 @@ public class BattleSeaController {
 
 	public void chooseBetween5RandomlyGeneratedBoards () {
 		LinkedList<LinkedList<Ship>> fiveRandBoards = BattleSea.get5RandBoards();
-
-		displayAll5RandomBoards(fiveRandBoards);
+		BattleSeaView.getInstance().displayAll5RandomBoards(
+				getBoardAsLinkedListOfStringBuilders(fiveRandBoards)
+		);
 
 		int boardChoice;
 		while (true)
@@ -75,7 +76,9 @@ public class BattleSeaController {
 
 		LinkedList<Ship> chosenBoard = fiveRandBoards.get(boardChoice - 1);
 
-		displayBoard(chosenBoard);
+		BattleSeaView.getInstance().displayBoard(
+				this.getBoardAsStringBuilder(chosenBoard)
+		);
 		setTrialPlayerBoard(chosenBoard);
 	}
 
@@ -93,35 +96,35 @@ public class BattleSeaController {
 
 	public void displayRandomlyGeneratedBoard () {
 		LinkedList<Ship> randBoard = BattleSea.getRandBoard();
-		displayBoard(randBoard);
+		BattleSeaView.getInstance().displayBoard(
+				this.getBoardAsStringBuilder(randBoard)
+		);
 		setTrialPlayerBoard(randBoard);
 	}
 
 	public void displayCurrentPlayerBoard () {
-		displayBoard(((PlayerBattleSea) GameController.getInstance().getCurrentGame().getTurnPlayer()).getShips(), true);
+		BattleSeaView.getInstance().displayBoard(
+				getBoardAsStringBuilder(((PlayerBattleSea) GameController.getInstance().getCurrentGame().getTurnPlayer()).getShips(), true)
+		);
 	}
 
 	public void displayOpponentBoard () {
-		displayBoard(((PlayerBattleSea) GameController.getInstance().getCurrentGame().getTurnPlayer()).getShips(), false);
+		BattleSeaView.getInstance().displayBoard(
+				getBoardAsStringBuilder(((PlayerBattleSea) GameController.getInstance().getCurrentGame().getTurnPlayer()).getShips(), false)
+		);
 	}
 
-	// only used in editing phase -> no need to display bombs
-	public void displayBoard (LinkedList<Ship> board) {
+	// only used in editing phase therefore no need to display bombs
+	public StringBuilder getBoardAsStringBuilder (LinkedList<Ship> board) {
 		StringBuilder boardStrBldr = new StringBuilder();
 
 		for (int y = 0; y <= 10; y++) {
 			boardStrBldr.append("\t| ");
 			for (int x = 0; x <= 10; x++) {
 
-				if (x == 0 && y == 0)
-					boardStrBldr.append(" ");
-
-				else if (y == 0)
-					boardStrBldr.append(x);
-
-				else if (x == 0)
-					boardStrBldr.append(y);
-
+				if (x == 0 && y == 0) boardStrBldr.append(" ");
+				else if (y == 0) boardStrBldr.append(x);
+				else if (x == 0) boardStrBldr.append(y);
 				else {
 					int finalY = y, finalX = x;
 
@@ -135,29 +138,44 @@ public class BattleSeaController {
 			boardStrBldr.append("|\n");
 		}
 
-		BattleSeaView.getInstance().displayBoard(boardStrBldr);
+		return boardStrBldr;
 	}
 
-	public void displayBoard (LinkedList<Ship> ships, boolean boardIsForCurrentPlayer) {
+	public StringBuilder getBoardAsStringBuilder (LinkedList<Ship> ships, boolean boardIsForCurrentPlayer) {
 		StringBuilder boardStrBldr = new StringBuilder();
 
-		// TODO OTOTOTOTOTOTOOTOTOTOTOTO
+		if (boardIsForCurrentPlayer) {
+			// TODO: 12/6/2020 AD
+		}
+		else {
+			// TODO: 12/6/2020 AD
+		}
 
-		BattleSeaView.getInstance().displayBoard(boardStrBldr);
+		return boardStrBldr;
 	}
 
-	public void displayAll5RandomBoards (LinkedList<LinkedList<Ship>> board) {
+	public LinkedList<StringBuilder> getBoardAsLinkedListOfStringBuilders (LinkedList<LinkedList<Ship>> fiveBoards) {
 		LinkedList<StringBuilder> boardStrBldrs = new LinkedList<>();
 
-		// TODO OTOTOTOTOTOTOOTOTOTOTOTO
+		for (int i = 0; i < 5; i++) {
+			boardStrBldrs.add(new StringBuilder());
 
-		BattleSeaView.getInstance().displayAll5RandomBoards(boardStrBldrs);
+			boardStrBldrs.getLast().append("%n%d. %n%n".formatted(i + 1));
+
+			boardStrBldrs.getLast().append(getBoardAsStringBuilder(fiveBoards.get(i)));
+
+			boardStrBldrs.getLast().append("\n");
+		}
+
+		return boardStrBldrs;
 	}
 
 	public void displayTrialBoard () {
 		if (getCurrentlyEditingTrialBoard() == null) return;
 
-		BattleSeaController.getInstance().displayBoard(getCurrentlyEditingTrialBoard());
+		BattleSeaView.getInstance().displayBoard(
+				getBoardAsStringBuilder(getCurrentlyEditingTrialBoard())
+		);
 	}
 
 	public void setTrialPlayerBoard (LinkedList<Ship> trialPlayerBoard) {
@@ -200,53 +218,4 @@ public class BattleSeaController {
 		return turnTimerTask;
 	}
 
-//	// testing timer
-//	public static void main (String[] args) {
-//		final String[] command = {""};
-//		Scanner scanner = new Scanner(System.in);
-//		final boolean[] firstPersonsTurn = {true};
-//
-//		Timer timer = new Timer();
-//
-//		TimerTask task = new TimerTask() {
-//			int seconds = 0;
-//
-//			@Override
-//			public void run () {
-//				seconds++;
-//
-//				if (command[0].equals("/time")) {
-//					System.out.printf("%n%ds remaining%n", 10 - seconds);
-//					command[0] = "";
-//				}
-//				else if (command[0].equals("/turn")) {
-//					System.out.printf("%n%d turn%n", (firstPersonsTurn[0] ? 1 : 2));
-//					command[0] = "";
-//				}
-//
-//				if (seconds == 10 && command[0].equals("")) {
-//
-//					System.out.println("\nTime out.");
-//					seconds = 0;
-//					command[0] = "";
-//					firstPersonsTurn[0] = !firstPersonsTurn[0];
-//				}
-//				else if (seconds <= 10 && !command[0].equals("") && !command[0].equals("/time")) {
-//					seconds = 0;
-//					command[0] = "";
-//					firstPersonsTurn[0] = !firstPersonsTurn[0];
-//				}
-//			}
-//		};
-//
-//		timer.scheduleAtFixedRate(task, 1000, 1000);
-//
-//		while (true) {
-//			if (scanner.hasNextLine()) {
-//				command[0] = scanner.nextLine();
-//			}
-//			if (command[0].equals("/end"))
-//				break;
-//		}
-//	}
 }
