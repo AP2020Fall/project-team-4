@@ -16,6 +16,40 @@ public class BattleSeaController {
 
 	private static BattleSeaController battleSeaController;
 
+	private TurnTimerTask turnTimerTask = new TurnTimerTask();
+	private Timer turnTimer = new Timer();
+
+	static class TurnTimerTask extends TimerTask {
+		private final int MAX_SECONDS = 30;
+		private int secondsRemaining = MAX_SECONDS;
+		private String command = "";
+
+		@Override
+		public void run () {
+			secondsRemaining--;
+
+			if (secondsRemaining == -1) {
+				if (command.equals(""))
+					BattleSeaView.getInstance().displayOutOfTimeMessage(GameController.getInstance().getCurrentGame().getTurnGamer().getUsername());
+				resetTimer();
+			}
+		}
+
+		public void resetTimer () {
+			secondsRemaining = MAX_SECONDS;
+			command = "";
+			GameController.getInstance().getCurrentGame().nextTurn();
+		}
+
+		public int getSecondsRemaining () {
+			return secondsRemaining;
+		}
+
+		public void bomb () {
+			this.command = "bomb";
+		}
+	}
+
 	public static BattleSeaController getInstance () {
 		if (battleSeaController == null)
 			battleSeaController = new BattleSeaController();
@@ -53,21 +87,9 @@ public class BattleSeaController {
 		resetTrialPlayerBoards();
 	}
 
-//	public void checkForTimeOut () {
-//		if (LocalTime.now().getSecond() - localTime.getSecond() > 30) {
-//			GameController.getInstance().getCurrentGame().nextTurn();
-//			BattleSeaView.getInstance().displayOutOfTimeMessage(GameController.getInstance().getCurrentGame().getTurnGamer().getUsername());
-//			resetTimer();
-//		}
-//	}
-
 	public void displayRemainingTime () {
-//		BattleSeaView.getInstance().displayRemainingTime(30 - (LocalTime.now().getSecond() - localTime.getSecond()));
+		BattleSeaView.getInstance().displayRemainingTime(turnTimerTask.getSecondsRemaining());
 	}
-
-//	public void resetTimer () {
-//		localTime = LocalTime.now();
-//	}
 
 	public void displayRandomlyGeneratedBoard () {
 		LinkedList<Ship> randBoard = BattleSea.getRandBoard();
@@ -170,4 +192,61 @@ public class BattleSeaController {
 		trialPlayerBoard1 = null; trialPlayerBoard2 = null;
 	}
 
+	public void initTurnTimerStuff () {
+		turnTimer.scheduleAtFixedRate(turnTimerTask, 1 * 1000, 1 * 1000);
+	}
+
+	public TurnTimerTask getTurnTimerTask () {
+		return turnTimerTask;
+	}
+
+//	// testing timer
+//	public static void main (String[] args) {
+//		final String[] command = {""};
+//		Scanner scanner = new Scanner(System.in);
+//		final boolean[] firstPersonsTurn = {true};
+//
+//		Timer timer = new Timer();
+//
+//		TimerTask task = new TimerTask() {
+//			int seconds = 0;
+//
+//			@Override
+//			public void run () {
+//				seconds++;
+//
+//				if (command[0].equals("/time")) {
+//					System.out.printf("%n%ds remaining%n", 10 - seconds);
+//					command[0] = "";
+//				}
+//				else if (command[0].equals("/turn")) {
+//					System.out.printf("%n%d turn%n", (firstPersonsTurn[0] ? 1 : 2));
+//					command[0] = "";
+//				}
+//
+//				if (seconds == 10 && command[0].equals("")) {
+//
+//					System.out.println("\nTime out.");
+//					seconds = 0;
+//					command[0] = "";
+//					firstPersonsTurn[0] = !firstPersonsTurn[0];
+//				}
+//				else if (seconds <= 10 && !command[0].equals("") && !command[0].equals("/time")) {
+//					seconds = 0;
+//					command[0] = "";
+//					firstPersonsTurn[0] = !firstPersonsTurn[0];
+//				}
+//			}
+//		};
+//
+//		timer.scheduleAtFixedRate(task, 1000, 1000);
+//
+//		while (true) {
+//			if (scanner.hasNextLine()) {
+//				command[0] = scanner.nextLine();
+//			}
+//			if (command[0].equals("/end"))
+//				break;
+//		}
+//	}
 }

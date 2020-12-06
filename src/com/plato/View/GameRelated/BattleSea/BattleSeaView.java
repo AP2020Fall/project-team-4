@@ -26,6 +26,6 @@ public class BattleSeaView {
 	}
 
 	public void displayOutOfTimeMessage (String otherPlayer) {
-		Menu.println("Sorry you ran out of time. Now it's %s's turn.".formatted(otherPlayer));
+		Menu.println("%nSorry you ran out of time. Now it's %s's turn.".formatted(otherPlayer));
 	}
 }

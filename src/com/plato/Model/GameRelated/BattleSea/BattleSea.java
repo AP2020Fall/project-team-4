@@ -4,10 +4,7 @@ import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import Model.GameRelated.Reversi.Reversi;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class BattleSea extends Game {

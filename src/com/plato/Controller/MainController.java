@@ -180,7 +180,7 @@ public class MainController {
 				BattleSeaController.getInstance().finalizeTrialBoard();
 				if (((BattleSea) GameController.getInstance().getCurrentGame()).canStartBombing()) {
 					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
-//					BattleSeaController.getInstance().resetTimer();
+					BattleSeaController.getInstance().initTurnTimerStuff();
 				}
 			}
 			//		phase 2
