@@ -47,28 +47,33 @@ public class MainController {
 		else
 			Menu.addMenu("2");
 
+		Menu.getMenuIn().displayMenu();
+
 		while (true) {
 
-			Menu.getMenuIn().displayMenu();
+			if (Menu.getMenuIn() instanceof _12_1GameplayBattleSeaMenu && ((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).getPhase() == 2)
+				BattleSeaController.getInstance().checkForTimeOut();
 
-			int command;
-			try {
-				String comStr = Menu.getInputLine();
+			if (Menu.getScanner().hasNextLine()) {
+				int command;
+				try {
+					String comStr = Menu.getInputLine();
 
-				if (!comStr.matches("[0-9]+"))
-					throw new InvalidInputException();
+					if (!comStr.matches("[0-9]+"))
+						throw new InvalidInputException();
 
-				command = Integer.parseInt(comStr);
+					command = Integer.parseInt(comStr);
 
-				if (command < 1 || command > Menu.getMenuIn().getOptions().size())
-					throw new InvalidInputException();
+					if (command < 1 || command > Menu.getMenuIn().getOptions().size())
+						throw new InvalidInputException();
 
-				getInstance().dealWithInput(command);
+					getInstance().dealWithInput(command);
 
-//				Menu.getMenuIn().displayMenu();
+				} catch (InvalidInputException e) {
+					Menu.printErrorMessage(e.getMessage());
+				}
 
-			} catch (InvalidInputException e) {
-				Menu.printErrorMessage(e.getMessage());
+				Menu.getMenuIn().displayMenu();
 			}
 		}
 	}
@@ -172,10 +177,14 @@ public class MainController {
 			case "change ship direction" -> ShipController.getInstance().rotateShip();
 			case "finalize board" -> {
 				BattleSeaController.getInstance().finalizeTrialBoard();
-				((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
+				if (((BattleSea) GameController.getInstance().getCurrentGame()).canStartBombing()) {
+					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
+					BattleSeaController.getInstance().resetTimer();
+				}
 			}
 			//		phase 2
 			case "boom (throw bomb)" -> BombController.getInstance().throwBomb();
+			case "time?" -> BattleSeaController.getInstance().displayRemainingTime();
 			case "display all my ships" -> ShipController.getInstance().displayAllShipsOfCurrentPlayer();
 			case "display all my booms" -> BombController.getInstance().displayAllCurrentPlayerBombs();
 			case "display all my opponent’s booms" -> BombController.getInstance().displayAllOpponentBombs();

@@ -19,11 +19,14 @@ public class ReversiController {
 
 	public void nextTurn () {
 		try {
-			if (GameController.getInstance().getCurrentGame().gameEnded())
+			if (GameController.getInstance().getCurrentGame().gameEnded()) {
 				GameController.getInstance().getCurrentGame().concludeGame();
+				return;
+			}
 
 			if (!((Reversi) GameController.getInstance().getCurrentGame()).hasPlayerMoved() && ((Reversi) GameController.getInstance().getCurrentGame()).canPlayerPlaceAnyDisks())
 				throw new HasntMadeMoveInCurrentTurnException();
+
 		} catch (HasntMadeMoveInCurrentTurnException e) {
 			Menu.printErrorMessage(e.getMessage());
 			return;
@@ -85,7 +88,7 @@ public class ReversiController {
 
 	private static class HasntMadeMoveInCurrentTurnException extends Exception {
 		public HasntMadeMoveInCurrentTurnException () {
-			super(""); // todo
+			super("In your turn you should place the disk");
 		}
 	}
 

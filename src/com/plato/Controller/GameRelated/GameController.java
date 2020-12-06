@@ -27,8 +27,6 @@ public class GameController {
 
 	// based on which menu _11GameMenu.getGameName() shows go to _12_1GameplayBattleSeaMenu or ReversiMenu
 	public void runGame () {
-		// TODO: 11/30/2020 AD
-		// 		todo set currentGameInSession to the new game created
 		Gamer player2;
 		while (true)
 			try {

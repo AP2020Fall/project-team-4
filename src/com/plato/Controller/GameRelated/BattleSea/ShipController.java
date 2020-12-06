@@ -20,7 +20,7 @@ public class ShipController {
 	}
 
 	public void editShipCoords () {
-		Ship[] ships = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
+		LinkedList<Ship> ships = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
 
 		ShipView.getInstance().displayShipsWithNamesForEditing(new LinkedList<>() {{
 			for (Ship ship : ships)
@@ -35,7 +35,7 @@ public class ShipController {
 			if (shipName.toLowerCase().trim().equals("/cancel")) return;
 
 			if (shipName.matches("[A-F]")) {
-				chosenShip = ships["ABCDEF".indexOf(shipName)];
+				chosenShip = ships.get("ABCDEF".indexOf(shipName));
 				break;
 			}
 
@@ -75,7 +75,7 @@ public class ShipController {
 	}
 
 	public  void rotateShip () {
-		Ship[] ships = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
+		LinkedList<Ship> ships = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
 
 		ShipView.getInstance().displayShipsWithNamesForEditing(new LinkedList<>() {{
 			for (Ship ship : ships)
@@ -90,7 +90,7 @@ public class ShipController {
 			if (shipName.toLowerCase().trim().equals("/cancel")) return;
 
 			if (shipName.matches("[A-F]")) {
-				chosenShip = ships["ABCDEF".indexOf(shipName)];
+				chosenShip = ships.get("ABCDEF".indexOf(shipName));
 				break;
 			}
 
@@ -105,12 +105,6 @@ public class ShipController {
 		}
 
 		chosenShip.changeDir();
-	}
-
-	public  void editingBoardDone () {
-		((PlayerBattleSea) GameController.getInstance().getCurrentGame().getListOfPlayers().get(0)).finalizeBoard(BattleSeaController.getInstance().getTrialPlayerBoard1());
-		((PlayerBattleSea) GameController.getInstance().getCurrentGame().getListOfPlayers().get(1)).finalizeBoard(BattleSeaController.getInstance().getTrialPlayerBoard2());
-		BattleSeaController.getInstance().resetTrialPlayerBoards();
 	}
 
 	public  void displayAllShipsOfCurrentPlayer () {
