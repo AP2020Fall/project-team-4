@@ -134,10 +134,12 @@ public class Reversi extends Game {
 	/**
 	 * should be called before changing turns
 	 */
-	public boolean hasPlayerMoved(){
-		String color = moves.getLast().substring(0,1);
-		if(color.equals(((PlayerReversi) getPlayer(getTurnGamer())).getColor())) return true;
-		else return false;}
+	public boolean hasPlayerMoved() {
+		// FIXME: add a شرط here to return false if moves is empty
+		String color = moves.getLast().substring(0, 1);
+		if (color.equals(((PlayerReversi) getPlayer(getTurnGamer())).getColor())) return true;
+		else return false;
+	}
 
 	//empties board , blank space is shown with -
 	public void emptyBoard () {
@@ -176,26 +178,38 @@ public class Reversi extends Game {
 		return null;
 	}
 
-	private int getNumberOfBlack(){
+	private int getNumberOfBlack() {
 		int count = 0;
 		//TODO : straem for 2d array
-		for(int i=0 ; i<8 ; i++){
-			for(int j=0 ; j<8 ; j++){
-				if(board[i][j].equals("b")) count++;
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[i][j].equals("b")) count++;
 			}
 		}
 		return count;
 	}
 
-	private int getNumberOfWhite(){
+	private int getNumberOfWhite () {
 		int count = 0;
 		//TODO : straem for 2d array didnt find anything sorry
-		for(int i=0 ; i<8 ; i++){
-			for(int j=0 ; j<8 ; j++){
-				if(board[i][j].equals("w")) count++;
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[i][j].equals("w")) count++;
 			}
 		}
 		return count;
+	}
+
+	/**
+	 * @return getNumberOfBlack if playerNum=1
+	 * getNumberOfWhite if playerNum=2
+	 */
+	public int getInGameScore (int playerNum) {
+		switch (playerNum) {
+			case 1 -> {return getNumberOfBlack();}
+			case 2 -> {return getNumberOfWhite();}
+		}
+		return -1; // should never happen
 	}
 
 	public static boolean checkCoordinates (int number) {

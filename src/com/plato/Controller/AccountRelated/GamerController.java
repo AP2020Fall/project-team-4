@@ -115,6 +115,18 @@ public class GamerController {
 		);
 	}
 
+	public void displayAccountStats () {
+		GamerView.getInstance().displayAccountStats();
+	}
+
+	public void displayGamingHistory () {
+		GamerView.getInstance().displayGamingHistory();
+	}
+
+	public void displayGamingHistory (String gamename) {
+		GamerView.getInstance().displayGamingHistory(gamename);
+	}
+
 	private static class FriendDoesntExistException extends Exception {
 		public FriendDoesntExistException () {
 			super("You don't have a friend with this username.");

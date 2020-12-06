@@ -1,18 +1,23 @@
 package Controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import Controller.AccountRelated.*;
+import Controller.GameRelated.BattleSea.BattleSeaController;
+import Controller.GameRelated.BattleSea.BombController;
+import Controller.GameRelated.BattleSea.ShipController;
 import Controller.GameRelated.GameController;
 import Controller.GameRelated.GameLogController;
+import Controller.GameRelated.Reversi.ReversiController;
 import Model.AccountRelated.*;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
 import Model.GameRelated.Reversi.Reversi;
 import View.Menus.Menu;
 import View.Menus._11GameMenu;
+import View.Menus._12_1GameplayBattleSeaMenu;
 import View.Menus._3MainMenu;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -72,21 +77,19 @@ public class MainController {
 		LinkedList<String> menuOpts = Menu.getMenuIn().getOptions();
 
 		command--; // to use for accessing menuOpts indexes
-		String commandOption = menuOpts.get(command).toLowerCase();
+		String commandOption = menuOpts.get(command).toLowerCase().trim();
 
 		switch (commandOption) {
 			case "exit program" -> tryToExitProgram();
 			case "back" -> Menu.getMenuIn().back();
-			case "go to account menu" -> {
-				String menuId = "14" + (AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A");
-				Menu.addMenu(menuId);
-				Menu.getMenu(menuId).enter();
-			}
+			case "go to account menu" -> Menu.getMenuIn().getChildMenus().get(command + 1).enter();
 
-			// main menu
-			case "register" -> AccountController.getInstance().register();
+			// register-login menu
+			case "register gamer", "register admin" -> AccountController.getInstance().register();
 			case "login" -> AccountController.getInstance().login();
 			case "delete account" -> AccountController.getInstance().deleteAccount();
+
+			// main menu
 			case "show points" -> {
 				if (Menu.getMenuIn() instanceof _3MainMenu)
 					GameLogController.getInstance().displayAllPointsOfPlayer();
@@ -94,6 +97,7 @@ public class MainController {
 					GameLogController.getInstance().displayPtsLoggedInPlayerEarnedFromGame();
 			}
 			case "view favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
+			case "go to games menu" -> Menu.getMenuIn().getChildMenus().get(3).enter();
 			case "view platobot's messages" -> MessageController.getInstance().displayAdminMessages();
 			case "view last played" -> GameLogController.getInstance().displayLastGamePlayed();
 			case "view admin's suggestions" -> AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
@@ -160,14 +164,58 @@ public class MainController {
 			case "run game" -> GameController.getInstance().runGame();
 
 			// gameplay battlesea menu
-			// TODO: 12/5/2020 AD
+			//		phase 1
+			case "generate a random board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
+			case "choose between 5 randomly generated boards" -> BattleSeaController.getInstance().chooseBetween5RandomlyGeneratedBoards();
+			case "display on-trial board" -> BattleSeaController.getInstance().displayTrialBoard();
+			case "move ship" -> ShipController.getInstance().editShipCoords();
+			case "change ship direction" -> ShipController.getInstance().rotateShip();
+			case "finalize board" -> {
+				BattleSeaController.getInstance().finalizeTrialBoard();
+				((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
+			}
+			//		phase 2
+			case "boom (throw bomb)" -> BombController.getInstance().throwBomb();
+			case "display all my ships" -> ShipController.getInstance().displayAllShipsOfCurrentPlayer();
+			case "display all my booms" -> BombController.getInstance().displayAllCurrentPlayerBombs();
+			case "display all my opponent’s booms" -> BombController.getInstance().displayAllOpponentBombs();
+			case "display all my correct booms" -> BombController.getInstance().displayAllSuccessCurrentPlayerBombs();
+			case "display all my opponent’s correct booms" -> BombController.getInstance().displayAllSuccessOpponentBombs();
+			case "display all my incorrect booms" -> BombController.getInstance().displayAllUnsuccessCurrentPlayerBombs();
+			case "display all my opponent’s incorrect booms" -> BombController.getInstance().displayAllUnsuccessOpponentBombs();
+			case "display all my boomed ships" -> ShipController.getInstance().displayDestroyedShipsOfCurrentPlayer();
+			case "display all my opponent’s boomed ships" -> ShipController.getInstance().displayDestroyedShipsOfOpponent();
+			case "display all my unboomed ships" -> ShipController.getInstance().displayHealthyShipsOfCurrentPlayer();
+			case "display my board" -> BattleSeaController.getInstance().displayCurrentPlayerBoard();
+			case "display my opponent’s board" -> BattleSeaController.getInstance().displayOpponentBoard();
 
 			// gameplay reversi menu
-			// TODO: 12/5/2020 AD
+			case "place disks" -> ReversiController.getInstance().placeDisk();
+			case "next turn" -> ReversiController.getInstance().nextTurn();
+			case "whose turn now?" -> GameController.getInstance().displayTurn();
+			case "display available coordinates" -> ReversiController.getInstance().displayAvailableCoords();
+			case "display board (grid)" -> ReversiController.getInstance().displayGrid();
+			case "display disks" -> ReversiController.getInstance().displayPrevMoves();
+			case "display scores" -> ReversiController.getInstance().displayInGameScores();
+			case "display final result" -> GameController.getInstance().displayGameConclusion();
 
 			// user editing menu
 			case "change password" -> AccountController.getInstance().changePWCommand();
 			case "edit personal info" -> AccountController.getInstance().editAccFieldCommand();
+
+			// account menu
+			case "view personal info (w/ money)" -> {
+				AccountController.getInstance().diplayPersonalInfo();
+				Menu.getMenuIn().getChildMenus().get(command+1).enter();
+			}
+			case "view plato statistics" -> GamerController.getInstance().displayAccountStats();
+			case "view gaming history" -> GamerController.getInstance().displayGamingHistory();
+			case "view gaming history in battlesea" -> GamerController.getInstance().displayGamingHistory("battlesea");
+			case "view gaming history in reversi" -> GamerController.getInstance().displayGamingHistory("reversi");
+			case "logout" -> {
+				AccountController.getInstance().logoutCommand();
+				Menu.getMenuIn().getChildMenus().get(command+1).enter();
+			}
 		}
 	}
 

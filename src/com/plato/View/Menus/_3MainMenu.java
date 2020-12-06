@@ -23,6 +23,7 @@ public class _3MainMenu extends Menu {
 			options = new LinkedList<>(Arrays.asList(
 					"Show Points",
 					"View Favorite games",
+					"Go to Games Menu",
 					"View Platobot’s messages",
 					"View last played",
 					"View admin’s suggestions",

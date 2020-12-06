@@ -45,6 +45,15 @@ public class BattleSeaController {
 		setTrialPlayerBoard(chosenBoard);
 	}
 
+	public void finalizeTrialBoard () {
+
+		((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+				.getListOfPlayers().get(getCurrentlyEditingTrialBoardNum() - 1))
+				.finalizeBoard(getCurrentlyEditingTrialBoard());
+
+		resetTrialPlayerBoards();
+	}
+
 	public void displayRandomlyGeneratedBoard () {
 		displayBoard(BattleSea.getRandBoard());
 	}
@@ -81,9 +90,36 @@ public class BattleSeaController {
 		BattleSeaView.getInstance().displayAll5RandomBoards(boardStrBldrs);
 	}
 
+	public void displayTrialBoard () {
+		if (getCurrentlyEditingTrialBoard() == null) return;
+
+		BattleSeaController.getInstance().displayBoard(getCurrentlyEditingTrialBoard());
+	}
+
 	public void setTrialPlayerBoard (Ship[] trialPlayerBoard) {
 		if (trialPlayerBoard1 == null) trialPlayerBoard1 = trialPlayerBoard;
 		else if (trialPlayerBoard2 == null) trialPlayerBoard2 = trialPlayerBoard;
+	}
+
+	public Ship[] getCurrentlyEditingTrialBoard () {
+
+		if (trialPlayerBoard1 != null)
+			return trialPlayerBoard1;
+
+		else if (trialPlayerBoard2 != null)
+			return trialPlayerBoard2;
+
+		return null;
+	}
+
+	private int getCurrentlyEditingTrialBoardNum () {
+		if (trialPlayerBoard1 == null && trialPlayerBoard2 == null)
+			return 0;
+		if (trialPlayerBoard1 != null)
+			return 1;
+		if (trialPlayerBoard2 != null)
+			return 2;
+		return 0;
 	}
 
 	public void resetTrialPlayerBoards () {

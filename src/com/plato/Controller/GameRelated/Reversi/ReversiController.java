@@ -1,8 +1,10 @@
 package Controller.GameRelated.Reversi;
 
 import Controller.GameRelated.GameController;
+import Model.AccountRelated.Gamer;
 import Model.GameRelated.Reversi.PlayerReversi;
 import Model.GameRelated.Reversi.Reversi;
+import View.GameRelated.GameView;
 import View.GameRelated.Reversi.ReversiView;
 import View.Menus.Menu;
 
@@ -67,6 +69,18 @@ public class ReversiController {
 
 	public void displayPrevMoves () {
 		ReversiView.getInstance().displayMoveHistory(((Reversi) GameController.getInstance().getCurrentGame()).getMoves());
+	}
+
+	public void displayInGameScores () {
+		Gamer player1Gamer = GameController.getInstance().getCurrentGame().getListOfPlayers().get(0).getGamer(),
+				player2Gamer = GameController.getInstance().getCurrentGame().getListOfPlayers().get(1).getGamer();
+
+		GameView.getInstance().displayInGameScores(
+				player1Gamer.getUsername(),
+				player2Gamer.getUsername(),
+				((Reversi) GameController.getInstance().getCurrentGame()).getInGameScore(1),
+				((Reversi) GameController.getInstance().getCurrentGame()).getInGameScore(2)
+		);
 	}
 
 	private static class HasntMadeMoveInCurrentTurnException extends Exception {
