@@ -77,7 +77,7 @@ public class MainController {
 		LinkedList<String> menuOpts = Menu.getMenuIn().getOptions();
 
 		command--; // to use for accessing menuOpts indexes
-		String commandOption = menuOpts.get(command).toLowerCase();
+		String commandOption = menuOpts.get(command).toLowerCase().trim();
 
 		switch (commandOption) {
 			case "exit program" -> tryToExitProgram();

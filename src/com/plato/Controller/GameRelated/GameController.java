@@ -53,10 +53,11 @@ public class GameController {
 
 		Game game;
 		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
-			case "battlesea" ->
-					game = new BattleSea(players);
-			case "reversi" ->
-					game = new Reversi(players);
+			case "battlesea" -> game = new BattleSea(players);
+			case "reversi" -> {
+				game = new Reversi(players);
+				((Reversi) game).emptyBoard();
+			}
 			default -> throw new IllegalStateException("Unexpected value: " + ((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase());
 		}
 
