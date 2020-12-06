@@ -45,7 +45,6 @@ public class Event {
 		// TODO: 11/16/2020 AD
 		return false;
 	}
-
 	private boolean isDue () {
 		// TODO: 11/16/2020 AD
 		return false;

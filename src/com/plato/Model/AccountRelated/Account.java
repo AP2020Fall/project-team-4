@@ -27,7 +27,8 @@ public abstract class Account {
 	}
 
 	public static void removeAccount (String username) {
-		// TODO: 11/20/2020 AD
+		accounts.remove(getAccount (username));
+
 	}
 
 	public boolean isPasswordCorrect (String pw) {
@@ -35,8 +36,15 @@ public abstract class Account {
 	}
 
 	public void editField (String field, String newVal) {
-		// TODO: 11/16/2020 AD
-		// also check if the entered field is valid
+		switch (field){
+			case "first name" :firstName=newVal ;break;
+			case "last name" :lastName=newVal ; break;
+			case "username" :username=newVal ;break;
+			case "password" :password=newVal ;break;
+			case "userID" :userID=newVal ;break;
+			case "email" :email=newVal ;break;
+			case "phoneNum" :phoneNum=newVal ;break;
+
 	}
 
 	public static boolean isEmailOK (String email) {
