@@ -29,6 +29,8 @@ public class MainController {
 	private GsonBuilder gsonBuilder = new GsonBuilder();
 	private Gson gson;
 
+	static int command;
+
 	public static MainController getInstance () {
 		if (mainController == null)
 			mainController = new MainController();
@@ -51,11 +53,10 @@ public class MainController {
 
 		while (true) {
 
-			if (Menu.getMenuIn() instanceof _12_1GameplayBattleSeaMenu && ((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).getPhase() == 2)
-				BattleSeaController.getInstance().checkForTimeOut();
+//			if (Menu.getMenuIn() instanceof _12_1GameplayBattleSeaMenu && ((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).getPhase() == 2)
+//				BattleSeaController.getInstance().checkForTimeOut();
 
 			if (Menu.getScanner().hasNextLine()) {
-				int command;
 				try {
 					String comStr = Menu.getInputLine();
 
@@ -179,11 +180,14 @@ public class MainController {
 				BattleSeaController.getInstance().finalizeTrialBoard();
 				if (((BattleSea) GameController.getInstance().getCurrentGame()).canStartBombing()) {
 					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
-					BattleSeaController.getInstance().resetTimer();
+//					BattleSeaController.getInstance().resetTimer();
 				}
 			}
 			//		phase 2
-			case "boom (throw bomb)" -> BombController.getInstance().throwBomb();
+			case "boom (throw bomb)" -> {
+				BombController.getInstance().throwBomb();
+				// todo reset timer
+			}
 			case "time?" -> BattleSeaController.getInstance().displayRemainingTime();
 			case "display all my ships" -> ShipController.getInstance().displayAllShipsOfCurrentPlayer();
 			case "display all my booms" -> BombController.getInstance().displayAllCurrentPlayerBombs();
@@ -215,7 +219,7 @@ public class MainController {
 			// account menu
 			case "view personal info (w/ money)" -> {
 				AccountController.getInstance().diplayPersonalInfo();
-				Menu.getMenuIn().getChildMenus().get(command+1).enter();
+				Menu.getMenuIn().getChildMenus().get(command + 1).enter();
 			}
 			case "view plato statistics" -> GamerController.getInstance().displayAccountStats();
 			case "view gaming history" -> GamerController.getInstance().displayGamingHistory();
@@ -223,7 +227,7 @@ public class MainController {
 			case "view gaming history in reversi" -> GamerController.getInstance().displayGamingHistory("reversi");
 			case "logout" -> {
 				AccountController.getInstance().logoutCommand();
-				Menu.getMenuIn().getChildMenus().get(command+1).enter();
+				Menu.getMenuIn().getChildMenus().get(command + 1).enter();
 			}
 		}
 	}
@@ -341,7 +345,8 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				Event.setEvents(gson.fromJson(json, new TypeToken<LinkedList<Event>>(){}.getType()));
+				Event.setEvents(gson.fromJson(json, new TypeToken<LinkedList<Event>>() {
+				}.getType()));
 		}
 		// frnd req's
 		{
@@ -352,7 +357,8 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				FriendRequest.setAllfriendRequests(gson.fromJson(json, new TypeToken<LinkedList<FriendRequest>>(){}.getType()));
+				FriendRequest.setAllfriendRequests(gson.fromJson(json, new TypeToken<LinkedList<FriendRequest>>() {
+				}.getType()));
 		}
 		// messages
 		{
@@ -363,7 +369,8 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				Message.setAllMessages(gson.fromJson(json,  new TypeToken<LinkedList<Message>>(){}.getType()));
+				Message.setAllMessages(gson.fromJson(json, new TypeToken<LinkedList<Message>>() {
+				}.getType()));
 		}
 		// BattleSea list
 		{
@@ -374,7 +381,8 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<BattleSea>>(){}.getType()));
+				Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<BattleSea>>() {
+				}.getType()));
 		}
 		// Reversi list
 		{
@@ -385,7 +393,8 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<Reversi>>(){}.getType()));
+				Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<Reversi>>() {
+				}.getType()));
 		}
 		// IDGenerator list
 		{
@@ -396,7 +405,8 @@ public class MainController {
 			}
 
 			if (json.length() > 2)
-				IDGenerator.setAllIDsGenerated(gson.fromJson(json, new TypeToken<LinkedList<String>>(){}.getType()));
+				IDGenerator.setAllIDsGenerated(gson.fromJson(json, new TypeToken<LinkedList<String>>() {
+				}.getType()));
 		}
 
 		try {

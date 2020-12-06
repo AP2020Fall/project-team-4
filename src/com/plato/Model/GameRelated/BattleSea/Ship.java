@@ -1,5 +1,6 @@
 package Model.GameRelated.BattleSea;
 
+import Controller.GameRelated.BattleSea.BattleSeaController;
 import Model.GameRelated.Game;
 
 import java.util.Collections;
@@ -44,10 +45,14 @@ public class Ship {
 					else
 						x++;
 				}
-				if (ship.isVertical())
+				if (ship.isVertical()) {
 					x++;
-				else
+					y = ship.getTopMostY();
+				}
+				else {
 					y++;
+					x = ship.getLeftMostX();
+				}
 			}
 		}
 
@@ -60,12 +65,12 @@ public class Ship {
 	}
 
 	public boolean canChangeDir () {
-		LinkedList<Ship> board = getPlayer().getShips();
+		LinkedList<Ship> board = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
 		return isShipPosValid(board, leftMostX, topMostY, !isVertical());
 	}
 
 	public boolean canMove (int x, int y) {
-		LinkedList<Ship> board = getPlayer().getShips();
+		LinkedList<Ship> board = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
 		return isShipPosValid(board, x, y, isVertical());
 	}
 

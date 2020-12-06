@@ -110,7 +110,7 @@ public class BattleSea extends Game {
 	}
 
 	public boolean canStartBombing () {
-		return ((PlayerBattleSea) getListOfPlayers().get(0)).getBoard() != null &&
-				((PlayerBattleSea) getListOfPlayers().get(1)).getBoard() != null;
+		return ((PlayerBattleSea) getListOfPlayers().get(0)).getShips() != null &&
+				((PlayerBattleSea) getListOfPlayers().get(1)).getShips() != null;
 	}
 }

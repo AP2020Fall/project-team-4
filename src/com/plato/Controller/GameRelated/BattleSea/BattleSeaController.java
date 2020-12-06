@@ -4,17 +4,15 @@ import Controller.GameRelated.GameController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
+import Model.GameRelated.Player;
 import View.GameRelated.BattleSea.BattleSeaView;
 import View.Menus.Menu;
 
-import java.time.LocalTime;
-import java.util.InputMismatchException;
-import java.util.LinkedList;
+import java.util.*;
 
 public class BattleSeaController {
 	private static LinkedList<Ship> trialPlayerBoard1;
 	private static LinkedList<Ship> trialPlayerBoard2;
-	private LocalTime localTime;
 
 	private static BattleSeaController battleSeaController;
 
@@ -55,30 +53,26 @@ public class BattleSeaController {
 		resetTrialPlayerBoards();
 	}
 
-	public void checkForTimeOut () {
-		if (LocalTime.now().getSecond() - localTime.getSecond() > 30) {
-			GameController.getInstance().getCurrentGame().nextTurn();
-			BattleSeaView.getInstance().displayOutOfTimeMessage(GameController.getInstance().getCurrentGame().getTurnGamer().getUsername());
-			resetTimer();
-		}
-	}
+//	public void checkForTimeOut () {
+//		if (LocalTime.now().getSecond() - localTime.getSecond() > 30) {
+//			GameController.getInstance().getCurrentGame().nextTurn();
+//			BattleSeaView.getInstance().displayOutOfTimeMessage(GameController.getInstance().getCurrentGame().getTurnGamer().getUsername());
+//			resetTimer();
+//		}
+//	}
 
 	public void displayRemainingTime () {
-		BattleSeaView.getInstance().displayRemainingTime(30 - (LocalTime.now().getSecond() - localTime.getSecond()));
+//		BattleSeaView.getInstance().displayRemainingTime(30 - (LocalTime.now().getSecond() - localTime.getSecond()));
 	}
 
-	public void resetTimer () {
-		localTime = LocalTime.now();
-	}
+//	public void resetTimer () {
+//		localTime = LocalTime.now();
+//	}
 
 	public void displayRandomlyGeneratedBoard () {
 		LinkedList<Ship> randBoard = BattleSea.getRandBoard();
 		displayBoard(randBoard);
 		setTrialPlayerBoard(randBoard);
-	}
-
-	public static void main (String[] args) {
-		BattleSeaController.getInstance().displayBoard(BattleSea.getRandBoard());
 	}
 
 	public void displayCurrentPlayerBoard () {
@@ -145,8 +139,10 @@ public class BattleSeaController {
 	}
 
 	public void setTrialPlayerBoard (LinkedList<Ship> trialPlayerBoard) {
-		if (trialPlayerBoard1 == null) trialPlayerBoard1 = trialPlayerBoard;
-		else if (trialPlayerBoard2 == null) trialPlayerBoard2 = trialPlayerBoard;
+		ArrayList<Player> players = GameController.getInstance().getCurrentGame().getListOfPlayers();
+
+		if (((PlayerBattleSea) players.get(0)).getShips() == null) trialPlayerBoard1 = trialPlayerBoard;
+		else if (((PlayerBattleSea) players.get(1)).getShips() == null) trialPlayerBoard2 = trialPlayerBoard;
 	}
 
 	public LinkedList<Ship> getCurrentlyEditingTrialBoard () {
@@ -174,11 +170,4 @@ public class BattleSeaController {
 		trialPlayerBoard1 = null; trialPlayerBoard2 = null;
 	}
 
-	public LinkedList<Ship> getTrialPlayerBoard1 () {
-		return trialPlayerBoard1;
-	}
-
-	public LinkedList<Ship> getTrialPlayerBoard2 () {
-		return trialPlayerBoard2;
-	}
 }

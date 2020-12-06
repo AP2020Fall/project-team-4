@@ -56,10 +56,6 @@ public class PlayerBattleSea extends Player {
 		return ((PlayerBattleSea) getGame().getOpponentOf(this)).getBombsThrown(successBombs);
 	}
 
-	public LinkedList<Ship> getShips () {
-		return ships;
-	}
-
 	public LinkedList<Ship> getShips (boolean destroyed) {
 		return (LinkedList<Ship>) getShips().stream()
 				.filter(ship -> ship.isDestroyed(this) == destroyed)
@@ -76,7 +72,7 @@ public class PlayerBattleSea extends Player {
 				.collect(Collectors.toList());
 	}
 
-	public LinkedList<Ship> getBoard () {
+	public LinkedList<Ship> getShips () {
 		return ships;
 	}
 }
