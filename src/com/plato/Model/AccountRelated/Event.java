@@ -64,7 +64,6 @@ public class Event {
 		for (int i=0;i<events.size();i++)
 			if (events.get(i).isDue()){
 				events.get(i).giveAwardsOfOverdueEvents()
-
 			}
 
 	}
