@@ -63,7 +63,7 @@ public class Event {
 	public static void dealWOverdueEvents () {
 		for (int i=0;i<events.size();i++)
 			if (events.get(i).isDue()){
-				events.get(i).giveAwardsOfOwerdueEvents()
+				events.get(i).giveAwardsOfOverdueEvents()
 
 			}
 
