@@ -33,24 +33,21 @@ public class Ship {
 		LinkedList<int[]> coords = new LinkedList<>();
 
 		for (Ship ship : ships) {
-			int dx = (ship.isVertical() ? 0 : 1),
-					dy = (ship.isVertical() ? 1 : 0),
-					x0 = ship.getLeftMostX(),
-					y0 = ship.getTopMostY(),
-					x = x0, y = y0;
+			int x = ship.getLeftMostX(),
+					y = ship.getTopMostY();
 
 			for (int s = 0; s < ship.getS_SIZE(); s++) {
 				for (int l = 0; l < ship.getL_SIZE(); l++) {
 					coords.add(new int[]{x, y});
 					if (ship.isVertical())
-						y += dy;
+						y++;
 					else
-						x += dx;
+						x++;
 				}
 				if (ship.isVertical())
-					y += dy;
+					x++;
 				else
-					x += dx;
+					y++;
 			}
 		}
 

@@ -68,20 +68,19 @@ public class BattleSea extends Game {
 					board.add(ship);
 					i++;
 				}
-
 			}
 		}
 
-			return board;
+		return board;
 	}
 
 	/**
-	 1. list all finished games of this type
-	 2. get a list of all the players that played game with GameLog.getAllWhoPlayedGame
-	 3. use gamelog methods to determine how many times each player won, lost or tied and also all the points he/she earned and number of times they played it
-	 4. sort as follows -> (n:نزولی - s:صعودی)
-	 5. 			n - points , n - wins , s - loss , s - playCount , n - draws , abc - username(not case sensitive)
-	 6. format all this shite in string form and return	the string linkedlist result
+	 * 1. list all finished games of this type
+	 * 2. get a list of all the players that played game with GameLog.getAllWhoPlayedGame
+	 * 3. use gamelog methods to determine how many times each player won, lost or tied and also all the points he/she earned and number of times they played it
+	 * 4. sort as follows -> (n:نزولی - s:صعودی)
+	 * 5. 			n - points , n - wins , s - loss , s - playCount , n - draws , abc - username(not case sensitive)
+	 * 6. format all this shite in string form and return	the string linkedlist result
 	 */
 	public static LinkedList<String> getScoreboard () {
 		// TODO: 11/13/2020 AD
