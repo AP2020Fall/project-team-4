@@ -24,7 +24,7 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/cancel to cancel filling form] "); username = Menu.getInputLine();
+				- System.out.print("Username:[/cancel to cancel filling form] "); username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/cancel")) return;
 
