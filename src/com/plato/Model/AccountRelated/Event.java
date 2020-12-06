@@ -29,7 +29,7 @@ public class Event {
 	}
 
 	public static void removeEvent (String eventID) {
-		// TODO: 11/16/2020 AD
+		events.remove(getEvent(eventID))
 	}
 
 	public static LinkedList<Event> getInSessionEventsParticipatingIn (Gamer gamer) {
@@ -37,8 +37,14 @@ public class Event {
 		return null;
 	}
 
-	public void editField () {
-		// TODO: 11/16/2020 AD
+	public void editField (String field, String newval) {
+		switch (field){
+			case "game name":gameName=newval; break;
+			case "eventscore":eventScore=Double.parseDouble(newval);break;
+			case "start":start=newval;break; // FIXME: 12/6/2020
+			case "end":end=newval;break; // FIXME: 12/6/2020
+		}
+
 	}
 
 	private boolean hasStarted () {
@@ -54,13 +60,18 @@ public class Event {
 		return hasStarted() && !isDue();
 	}
 
-	public void dealWOverdueEvents () {
-		// TODO: 11/16/2020 AD
+	public static void dealWOverdueEvents () {
+		for (int i=0;i<events.size();i++)
+			if (events.get(i).isDue()){
+				events.get(i).giveAwardsOfOwerdueEvents()
+
+			}
+
 	}
 
-	public void giveAwardsOfOverdueEvents () {
-		// TODO: 11/16/2020 AD
+	public static void giveAwardsOfOverdueEvents () {
 	}
+	// TODO: 12/6/2020
 
 	public static LinkedList<Event> getEvents () {
 		return events;
