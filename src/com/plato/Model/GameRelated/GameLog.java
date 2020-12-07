@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
-import static Model.GameRelated.Game.getAllGames;
+import static Model.GameRelated.Game.getAllFinishedGames;
 
 public class GameLog {
 	/**
@@ -31,7 +31,7 @@ public class GameLog {
 	public static int getPlayedCount (Gamer gamer, String gameName) {
 		// TODO: 11/29/2020 AD
 		int count = 0;
-		for(Game game : getAllGames()){
+		for(Game game : getAllFinishedGames()){
 			if(game.getGameName().equals(gameName))
 			    if(game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
 			    	count++;
@@ -45,7 +45,7 @@ public class GameLog {
 	 */
 	public static int getPlayedCount (String gameName) {
 		int count = 0;
-		for(Game game : getAllGames()){
+		for(Game game : getAllFinishedGames()){
 			if(game.getGameName().equals(gameName)) count++;
 		}
 		return count;
@@ -57,7 +57,7 @@ public class GameLog {
 	 */
 	public static int getWinCount (Gamer gamer, String gameName) {
 		int count = 0;
-		for(Game game : getAllGames()){
+		for(Game game : getAllFinishedGames()){
 			if(game.getGameName().equals(gameName) && game.getWinner().equals(gamer))
 				count++;
 		}
@@ -70,7 +70,7 @@ public class GameLog {
 	 */
 	public static int getLossCount (Gamer gamer, String gameName) {
 		int count = 0;
-		for(Game game : getAllGames()){
+		for(Game game : getAllFinishedGames()){
 			if(game.getGameName().equals(gameName))
 				if(game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
 					if(!game.getWinner().equals(gamer))
@@ -85,7 +85,7 @@ public class GameLog {
 	 */
 	public static int getDrawCount (Gamer gamer, String gameName) {
 		int count = 0;
-		for(Game game : getAllGames()) {
+		for(Game game : getAllFinishedGames()) {
 			if (game.getGameName().equals(gameName))
 				if(game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
 					if(game.getConclusion().equals(GameConclusion.DRAW))
@@ -99,10 +99,10 @@ public class GameLog {
 	 */
 	public static LinkedList<Gamer> getAllGamersWhoPlayedGame (String gameName) {
 		LinkedList<Gamer> listOfGamers = new LinkedList<>();
-		for(Game game : getAllGames()){
-			if(game.getGameName().equals(gameName))
+		for(Game game : getAllFinishedGames()){
+			if(game.getGameName().equals(gameName)){
 				listOfGamers.add(game.getListOfPlayers().get(0).getGamer());
-			listOfGamers.add(game.getListOfPlayers().get(1).getGamer());
+			listOfGamers.add(game.getListOfPlayers().get(1).getGamer());}
 		}
 		return listOfGamers;
 	}
@@ -136,8 +136,8 @@ public class GameLog {
 	 */
 	public static String getLastGamePlayed (Gamer gamer) {
 		// TODO: 12/1/2020 AD
-		LinkedList<Game> gamesReversed = getAllGames();
-		Collections.reverse(getAllGames());
+		LinkedList<Game> gamesReversed = getAllFinishedGames();
+		Collections.reverse(getAllFinishedGames());
 		for(Game game : gamesReversed){
 			if(game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
 				return game.getGameName();

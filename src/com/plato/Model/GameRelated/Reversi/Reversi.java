@@ -25,7 +25,9 @@ public class Reversi extends Game {
 	 */
 	public ArrayList<String> getAvailableCoordinates() {
 		ArrayList<String> availableCoordinates = new ArrayList<>();
-		String color = getTurnPlayer()
+		String color;
+		if(getTurnNum()==0)  //color is black
+
 		return availableCoordinates;
 	}
 
