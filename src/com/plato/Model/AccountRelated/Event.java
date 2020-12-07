@@ -88,7 +88,7 @@ public class Event {
 	}
 
 	public void addParticipant (Gamer gamer) {
-		// TODO: 11/20/2020 AD
+		participants.add(gamer);
 	}
 
 	public void removeParticipant (Gamer gamer) {
