@@ -17,9 +17,11 @@ public class PlayerReversi extends Player {
 		return color;
 	}
 
-	public int getReversiPoints() {
+	/*public int getReversiPoints() {
 		return reversiPoints;
 	}
 
-	public void addReversiPoints(int add){reversiPoints+=add;}
+	public void addReversiPoints(int add){reversiPoints+=add;}*/
+
+
 }

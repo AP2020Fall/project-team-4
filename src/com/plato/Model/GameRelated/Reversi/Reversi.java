@@ -24,7 +24,6 @@ public class Reversi extends Game {
 	 */
 	public ArrayList<String> getAvailableCoordinates() {
 		ArrayList<String> availableCoordinates = new ArrayList<>();
-
 		return availableCoordinates;
 	}
 
