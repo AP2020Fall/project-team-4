@@ -40,6 +40,7 @@ public class _12_1GameplayBattleSeaMenu extends Menu {
 			case 2 -> options = new LinkedList<>(Arrays.asList(
 					"Boom (Throw Bomb)",
 					"Time?",
+					"Whose turn?",
 					"Display all my ships",
 					"Display all my booms",
 					"Display all my opponent’s booms",

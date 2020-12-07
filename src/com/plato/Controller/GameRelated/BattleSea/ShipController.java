@@ -7,8 +7,6 @@ import Model.GameRelated.BattleSea.Ship;
 import View.GameRelated.BattleSea.ShipView;
 import View.Menus.Menu;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 
@@ -111,7 +109,7 @@ public class ShipController {
 
 	public  void displayAllShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
 						.getShips())
 		);
@@ -119,21 +117,21 @@ public class ShipController {
 
 	public  void displayDestroyedShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
 						.getShips(true)));
 	}
 
 	public  void displayDestroyedShipsOfOpponent () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
 						.getOpponentShips(true)));
 	}
 
 	public  void displayHealthyShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
 						.getShips(false)));
 	}

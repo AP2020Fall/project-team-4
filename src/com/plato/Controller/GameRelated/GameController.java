@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class GameController {
-	private static Game currentGameInSession = null;
-
 	private static GameController gameController;
+
+	private Game currentGameInSession = null;
 
 	public static GameController getInstance () {
 		if (gameController == null)
@@ -60,7 +60,9 @@ public class GameController {
 
 		Game game;
 		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
-			case "battlesea" -> game = new BattleSea(players);
+			case "battlesea" -> {
+				game = new BattleSea(players);
+			}
 			case "reversi" -> {
 				game = new Reversi(players);
 				((Reversi) game).emptyBoard();
@@ -69,7 +71,7 @@ public class GameController {
 		}
 
 		Game.startGame(game);
-		currentGameInSession = game;
+		getInstance().setCurrentGameInSession(game);
 
 		Menu.getMenuIn().getChildMenus().get(8).enter();
 	}
@@ -87,12 +89,12 @@ public class GameController {
 	}
 
 	public void displayTurn () {
-		GameView.getInstance().displayTurn(gameController.getCurrentGame().getTurnGamer().getUsername());
+		GameView.getInstance().displayTurn(gameController.getCurrentGameInSession().getTurnGamer().getUsername());
 	}
 
 	public void displayGameConclusion () {
 		String conclusion;
-		switch (gameController.getCurrentGame().getConclusion()) {
+		switch (gameController.getCurrentGameInSession().getConclusion()) {
 			case DRAW -> conclusion = "D";
 			case PLAYER1_WIN -> conclusion = "1W";
 			case PLAYER2_WIN -> conclusion = "2W";
@@ -100,15 +102,15 @@ public class GameController {
 			default -> conclusion = "";
 		}
 
-		Gamer player1Gamer = gameController.getCurrentGame().getListOfPlayers().get(0).getGamer(),
-				player2Gamer = gameController.getCurrentGame().getListOfPlayers().get(1).getGamer();
+		Gamer player1Gamer = gameController.getCurrentGameInSession().getListOfPlayers().get(0).getGamer(),
+				player2Gamer = gameController.getCurrentGameInSession().getListOfPlayers().get(1).getGamer();
 
 		GameView.getInstance().displayGameConclusion(
 				conclusion,
 				player1Gamer.getUsername(),
 				player2Gamer.getUsername(),
-				gameController.getCurrentGame().getPlayer(player1Gamer).getScore(),
-				gameController.getCurrentGame().getPlayer(player2Gamer).getScore()
+				gameController.getCurrentGameInSession().getPlayer(player1Gamer).getScore(),
+				gameController.getCurrentGameInSession().getPlayer(player2Gamer).getScore()
 		);
 	}
 
@@ -117,12 +119,12 @@ public class GameController {
 		GameView.getInstance().displayScoreboardOfGame(((_11GameMenu) Menu.getMenuIn()).getGameName(), scoreBoard);
 	}
 
-	public Game getCurrentGame () {
+	public Game getCurrentGameInSession () {
 		return currentGameInSession;
 	}
 
 	public void setCurrentGameInSession (Game currentGameInSession) {
-		GameController.currentGameInSession = currentGameInSession;
+		getInstance().currentGameInSession = currentGameInSession;
 	}
 
 	private static class CantPlayWithYourselfException extends Exception {

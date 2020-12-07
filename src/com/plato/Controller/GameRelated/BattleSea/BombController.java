@@ -20,25 +20,25 @@ public class BombController {
 	}
 
 	public void throwBomb () {
-		PlayerBattleSea currentPlayer = ((PlayerBattleSea) GameController.getInstance().getCurrentGame().getTurnPlayer());
+		PlayerBattleSea currentPlayer = ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getTurnPlayer());
 
 		String Xstr, Ystr; int x, y;
 		while (true) {
 			try {
 				// for x
 				System.out.print("X [/c to cancel]: ");
-				Xstr = Menu.getInputLine();
+				Xstr = Menu.getInputLine().trim();
 
-				if (Xstr.trim().equalsIgnoreCase("/c")) return;
+				if (Xstr.equalsIgnoreCase("/c")) return;
 
 				if (!BattleSea.checkCoordinates(Integer.parseInt(Xstr)))
 					throw new InvalidCoordinateException();
 
 				// for y
 				System.out.print("Y [/c to cancel]: ");
-				Ystr = Menu.getInputLine();
+				Ystr = Menu.getInputLine().trim();
 
-				if (Ystr.trim().equalsIgnoreCase("/c")) return;
+				if (Ystr.equalsIgnoreCase("/c")) return;
 
 				if (!BattleSea.checkCoordinates(Integer.parseInt(Ystr)))
 					throw new InvalidCoordinateException();
@@ -59,37 +59,37 @@ public class BombController {
 	}
 
 	public void displayAllCurrentPlayerBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getBombsThrown()));
 	}
 
 	public void displayAllOpponentBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getOpponentBombsThrown()));
 	}
 
 	public void displayAllSuccessCurrentPlayerBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getBombsThrown(true)));
 	}
 
 	public void displayAllSuccessOpponentBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getOpponentBombsThrown(true)));
 	}
 
 	public void displayAllUnsuccessCurrentPlayerBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getBombsThrown(false)));
 	}
 
 	public void displayAllUnsuccessOpponentBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getOpponentBombsThrown(false)));
 	}
