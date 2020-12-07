@@ -117,7 +117,7 @@ public class MainController {
 					Menu.getMenuIn().getChildMenus().get(2).enter();
 			}
 			case "add event" -> EventController.getInstance().createEvent();
-			case "add suggestions" -> AdminGameRecoController.getInstance().addReco();
+			case "add suggestions" -> AdminGameRecoController.getInstance().giveRecommendationToGamer();
 			case "view suggestions" -> {
 				AdminGameRecoController.getInstance().displayAllAdminRecos();
 				Menu.getMenuIn().getChildMenus().get(4).enter();
@@ -129,7 +129,7 @@ public class MainController {
 			}
 
 			// suggestions menu
-			case "choose suggested game" -> AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
+			case "choose suggested game" -> AdminGameRecoController.getInstance().chooseRecoGame();
 			case "remove suggestion" -> AdminGameRecoController.getInstance().removeReco();
 
 			// events menu

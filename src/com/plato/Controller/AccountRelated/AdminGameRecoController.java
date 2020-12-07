@@ -22,7 +22,7 @@ public class AdminGameRecoController {
 	}
 
 	public void giveRecommendationToGamer () {
-		// TODO DOODODODODOODODOODODO
+		// TODO: TOTOTOTOOTOTOTOTOTOOTOTOT
 	}
 
 	public void displayAdminsRecosToPlayer () {
@@ -66,11 +66,6 @@ public class AdminGameRecoController {
 			for (AdminGameReco reco : allRecos)
 				add("%s %s %s".formatted(reco.getRecoID(), reco.getGamerUsername(), reco.getGameName()));
 		}});
-		// todo enter submenu to be able to remove reco
-	}
-
-	public void addReco () {
-		//TODO TODOODODOOD
 	}
 
 	public void removeReco () {
@@ -88,11 +83,11 @@ public class AdminGameRecoController {
 			default -> {return;}
 		}
 
-		if (BattleSea.class.getSimpleName().equals(recos.get(gameNum - 1))) {
-			// TODO: enter game menu for battlesea
-		}
-		else if (Reversi.class.getSimpleName().equals(recos.get(gameNum - 1))) {
-			// TODO: enter game menu for reversi
+		switch (recos.get(gameNum - 1).getGameName().toLowerCase()) {
+
+			case "battlesea" -> Menu.getMenu("11B").enter();
+
+			case "reversi" -> Menu.getMenu("11R").enter();
 		}
 	}
 

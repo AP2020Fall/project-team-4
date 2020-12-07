@@ -1,5 +1,6 @@
 package Model.GameRelated;
 
+import Controller.GameRelated.GameController;
 import Controller.IDGenerator;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
@@ -83,6 +84,7 @@ public abstract class Game {
 	public void concludeGame () {
 		// set end time
 		// set Conclusion
+		// GameController.getInstance().setCurrentGameInSession(null);
 	}
 
 	public abstract boolean gameEnded ();

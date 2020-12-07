@@ -33,7 +33,6 @@ public class GamerController {
 				add(gamerAccount.getUsername());
 			}
 		}});
-		// todo enter submenu to be able to view a certain account's personal info
 	}
 
 	public void displayFriendsUsernames () {

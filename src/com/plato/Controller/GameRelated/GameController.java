@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class GameController {
-	private static Game currentGameInSession = null; // todo set back to null at the end of any game
+	private static Game currentGameInSession = null;
 
 	private static GameController gameController;
 
@@ -111,5 +111,9 @@ public class GameController {
 
 	public Game getCurrentGame () {
 		return currentGameInSession;
+	}
+
+	public void setCurrentGameInSession (Game currentGameInSession) {
+		GameController.currentGameInSession = currentGameInSession;
 	}
 }
