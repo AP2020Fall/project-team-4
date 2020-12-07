@@ -52,9 +52,9 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/cancel to cancel filling form] "); username = Menu.getInputLine();
+				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
-				if (username.trim().toLowerCase().equals("/cancel")) return;
+				if (username.trim().toLowerCase().equals("/c")) return;
 
 				if (!Account.accountExists(username))
 					throw new AccountController.NoAccountExistsWithUsernameException();
@@ -75,9 +75,9 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/cancel to cancel filling form] "); username = Menu.getInputLine();
+				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
-				if (username.trim().toLowerCase().equals("/cancel")) return;
+				if (username.trim().toLowerCase().equals("/c")) return;
 
 				if (!((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(username))
 					throw new FriendDoesntExistException();
@@ -93,9 +93,9 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/cancel to cancel filling form] "); username = Menu.getInputLine();
+				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
-				if (username.trim().toLowerCase().equals("/cancel")) return;
+				if (username.trim().toLowerCase().equals("/c")) return;
 
 				if (!((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(username))
 					throw new FriendDoesntExistException();

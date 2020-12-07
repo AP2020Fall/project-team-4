@@ -22,9 +22,9 @@ public class FriendRequestController {
 		String usernameTo;
 		while (true)
 			try {
-				System.out.print("Username:[/cancel to cancel filling form] "); usernameTo = Menu.getInputLine();
+				System.out.print("Username:[/c to cancel] "); usernameTo = Menu.getInputLine();
 
-				if (usernameTo.trim().toLowerCase().equals("/cancel")) return;
+				if (usernameTo.trim().toLowerCase().equals("/c")) return;
 
 				if (((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(usernameTo))
 					throw new CantSendFriendReqToAlreadyFriendException(usernameTo);
@@ -54,9 +54,9 @@ public class FriendRequestController {
 		String usernameFrom;
 		while (true)
 			try {
-				System.out.print("Username:[/cancel to cancel filling form] "); usernameFrom = Menu.getInputLine();
+				System.out.print("Username:[/c to cancel] "); usernameFrom = Menu.getInputLine();
 
-				if (usernameFrom.trim().toLowerCase().equals("/cancel")) return;
+				if (usernameFrom.trim().toLowerCase().equals("/c")) return;
 
 				if (!Account.accountExists(usernameFrom))
 					throw new AccountController.NoAccountExistsWithUsernameException();
@@ -77,9 +77,9 @@ public class FriendRequestController {
 		String usernameFrom;
 		while (true)
 			try {
-				System.out.print("Username:[/cancel to cancel filling form] "); usernameFrom = Menu.getInputLine();
+				System.out.print("Username:[/c to cancel] "); usernameFrom = Menu.getInputLine();
 
-				if (usernameFrom.trim().toLowerCase().equals("/cancel")) return;
+				if (usernameFrom.trim().toLowerCase().equals("/c")) return;
 
 				if (!Account.accountExists(usernameFrom))
 					throw new AccountController.NoAccountExistsWithUsernameException();

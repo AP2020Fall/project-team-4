@@ -24,9 +24,9 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				 System.out.print("Username:[/cancel to cancel filling form] "); username = Menu.getInputLine();
+				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
-				if (username.trim().equalsIgnoreCase("/cancel")) return;
+				if (username.trim().equalsIgnoreCase("/c")) return;
 
 				if (!Account.accountExists(username))
 					throw new NoAccountExistsWithUsernameException();
@@ -37,9 +37,9 @@ public class AccountController {
 
 		while (true)
 			try {
-				System.out.print("Password:[/cancel to cancel filling form] "); String password = Menu.getInputLine();
+				System.out.print("Password:[/c to cancel] "); String password = Menu.getInputLine();
 
-				if (password.trim().equalsIgnoreCase("/cancel")) return;
+				if (password.trim().equalsIgnoreCase("/c")) return;
 
 				if (!Account.getAccount(username).isPasswordCorrect(password))
 					throw new PaswordIncorrectException();
@@ -60,9 +60,9 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/cancel to cancel filling form] "); username = Menu.getInputLine();
+				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
-				if (username.trim().equalsIgnoreCase("/cancel")) return;
+				if (username.trim().equalsIgnoreCase("/c")) return;
 
 				if (!Account.accountExists(username))
 					throw new NoAccountExistsWithUsernameException();
@@ -77,9 +77,9 @@ public class AccountController {
 
 		while (true)
 			try {
-				System.out.print("Password:[/cancel to cancel filling form] "); String password = Menu.getInputLine();
+				System.out.print("Password:[/c to cancel] "); String password = Menu.getInputLine();
 
-				if (password.trim().equalsIgnoreCase("/cancel")) return;
+				if (password.trim().equalsIgnoreCase("/c")) return;
 
 				if (!Account.getAccount(username).isPasswordCorrect(password))
 					throw new PaswordIncorrectException();
@@ -100,9 +100,9 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				Menu.print("Username:[/cancel to cancel filling form] "); username = Menu.getInputLine();
+				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
-				if (username.trim().equalsIgnoreCase("/cancel")) return;
+				if (username.trim().equalsIgnoreCase("/c")) return;
 
 				if (Account.accountExists(username))
 					throw new AccountWithUsernameAlreadyExistsException();
@@ -113,21 +113,21 @@ public class AccountController {
 
 
 		// trying to ask for password and full name
-		Menu.print("Password:[/cancel to cancel filling form] "); String password = Menu.getInputLine();
-		if (password.trim().equalsIgnoreCase("/cancel")) return;
+		Menu.print("Password:[/c to cancel] "); String password = Menu.getInputLine();
+		if (password.trim().equalsIgnoreCase("/c")) return;
 
-		Menu.print("First Name:[/cancel to cancel filling form] "); String firstName = Menu.getInputLine();
-		if (firstName.trim().equalsIgnoreCase("/cancel")) return;
+		Menu.print("First Name:[/c to cancel] "); String firstName = Menu.getInputLine();
+		if (firstName.trim().equalsIgnoreCase("/c")) return;
 
-		Menu.print("Last Name:[/cancel to cancel filling form] "); String lastName = Menu.getInputLine();
-		if (lastName.trim().equalsIgnoreCase("/cancel")) return;
+		Menu.print("Last Name:[/c to cancel] "); String lastName = Menu.getInputLine();
+		if (lastName.trim().equalsIgnoreCase("/c")) return;
 
 		String email;
 		while (true)
 			try {
-				Menu.print("Email Address:[/cancel to cancel filling form] "); email = Menu.getInputLine();
+				Menu.print("Email Address:[/c to cancel] "); email = Menu.getInputLine();
 
-				if (email.trim().equalsIgnoreCase("/cancel")) return;
+				if (email.trim().equalsIgnoreCase("/c")) return;
 
 				if (!Account.isEmailOK(email))
 					throw new InvalidEmailFormatException();
@@ -139,9 +139,9 @@ public class AccountController {
 		String phoneNum;
 		while (true)
 			try {
-				Menu.print("Phone Number:[/cancel to cancel filling form] "); phoneNum = Menu.getInputLine();
+				Menu.print("Phone Number:[/c to cancel] "); phoneNum = Menu.getInputLine();
 
-				if (phoneNum.trim().equalsIgnoreCase("/cancel")) return;
+				if (phoneNum.trim().equalsIgnoreCase("/c")) return;
 
 				if (!Account.isPhoneNumOK(phoneNum))
 					throw new InvalidPhoneNumFormatException();
@@ -162,9 +162,9 @@ public class AccountController {
 			double initMoney;
 			while (true) {
 				try {
-					Menu.print("Initial Balance:[/cancel to cancel filling form] "); initMoney = Double.parseDouble(Menu.getInputLine());
+					Menu.print("Initial Balance:[/c to cancel] "); initMoney = Double.parseDouble(Menu.getInputLine());
 
-					if (phoneNum.trim().equalsIgnoreCase("/cancel")) return;
+					if (phoneNum.trim().equalsIgnoreCase("/c")) return;
 
 					if (initMoney < 0)
 						throw new NegativeMoneyException();
@@ -188,7 +188,7 @@ public class AccountController {
 	public void changePWCommand () {
 		while (true)
 			try {
-				Menu.print("Old password:[/cancel to cancel filling form] "); String oldPW = Menu.getInputLine();
+				Menu.print("Old password:[/c to cancel] "); String oldPW = Menu.getInputLine();
 
 				if (!AccountController.getInstance().getCurrentAccLoggedIn().isPasswordCorrect(oldPW))
 					throw new PaswordIncorrectException();
@@ -227,9 +227,9 @@ public class AccountController {
 				String username;
 				while (true)
 					try {
-						Menu.print("New Username:[/cancel to cancel filling form] "); username = Menu.getInputLine();
+						Menu.print("New Username:[/c to cancel] "); username = Menu.getInputLine();
 
-						if (username.trim().equalsIgnoreCase("/cancel")) return;
+						if (username.trim().equalsIgnoreCase("/c")) return;
 
 						if (Account.accountExists(username))
 							throw new AccountWithUsernameAlreadyExistsException();
@@ -245,9 +245,9 @@ public class AccountController {
 				String newEmail;
 				while (true)
 					try {
-						Menu.print("Email Address:[/cancel to cancel filling form] "); newEmail = Menu.getInputLine();
+						Menu.print("Email Address:[/c to cancel] "); newEmail = Menu.getInputLine();
 
-						if (newEmail.trim().equalsIgnoreCase("/cancel")) return;
+						if (newEmail.trim().equalsIgnoreCase("/c")) return;
 
 						if (!Account.isEmailOK(newEmail))
 							throw new InvalidEmailFormatException();
@@ -262,9 +262,9 @@ public class AccountController {
 				String newPhoneNum;
 				while (true)
 					try {
-						Menu.print("Phone Number:[/cancel to cancel filling form] "); newPhoneNum = Menu.getInputLine();
+						Menu.print("Phone Number:[/c to cancel] "); newPhoneNum = Menu.getInputLine();
 
-						if (newPhoneNum.trim().equalsIgnoreCase("/cancel")) return;
+						if (newPhoneNum.trim().equalsIgnoreCase("/c")) return;
 
 						if (!Account.isPhoneNumOK(newPhoneNum))
 							throw new InvalidPhoneNumFormatException();
@@ -281,9 +281,26 @@ public class AccountController {
 
 	}
 
-	public void diplayPersonalInfo () {
+	public void displayPersonalInfo () {
 		Account account = AccountController.getInstance().getCurrentAccLoggedIn();
-		AccountView.getInstance().displayPersonalInfo(account.getUsername(), account.getFirstName(), account.getLastName(), account.getEmail(), account.getPhoneNum());
+
+		if (account instanceof Admin)
+			AccountView.getInstance().displayPersonalInfo(
+					account.getUsername(),
+					account.getFirstName(),
+					account.getLastName(),
+					account.getEmail(),
+					account.getPhoneNum()
+			);
+		else
+			AccountView.getInstance().displayPersonalInfo(
+					account.getUsername(),
+					account.getFirstName(),
+					account.getLastName(),
+					account.getEmail(),
+					account.getPhoneNum(),
+					((Gamer) account).getMoney()
+			);
 	}
 
 	public void logoutCommand () {

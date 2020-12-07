@@ -30,7 +30,7 @@ public class ShipView {
 
 		System.out.println("Ships: ");
 		for (String shipInfo : shipsAndTheirStartingCoords)
-			System.out.printf("\t%s, StartX=%d StartY=%d%n", shipNamesIt.next(), shipInfo.split(" ")[0], shipInfo.split(" ")[1]);
+			System.out.printf("\t%s: StartX=%s StartY=%s%n", shipNamesIt.next(), shipInfo.split(" ")[0], shipInfo.split(" ")[1]);
 	}
 
 	/*

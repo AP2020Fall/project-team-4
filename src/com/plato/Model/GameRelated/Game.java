@@ -71,8 +71,9 @@ public abstract class Game {
 	}
 
 	public Player getOpponentOf (Player player) {
-		// TODO: 11/28/2020 AD
-		return null;
+		if(player.equals(listOfPlayers.get(0))) return listOfPlayers.get(1);
+		else if(player.equals(listOfPlayers.get(1))) return listOfPlayers.get(0);
+		else return null;
 	}
 
 	public Player getPlayer (Gamer gamer) {
