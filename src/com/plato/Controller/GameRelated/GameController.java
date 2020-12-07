@@ -2,10 +2,10 @@ package Controller.GameRelated;
 
 import Controller.AccountRelated.AccountController;
 import Model.AccountRelated.Account;
+import Model.AccountRelated.Admin;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
-import Model.GameRelated.Reversi.PlayerReversi;
 import Model.GameRelated.Reversi.Reversi;
 import View.GameRelated.GameView;
 import View.Menus.Menu;
@@ -30,16 +30,24 @@ public class GameController {
 		Gamer player2;
 		while (true)
 			try {
-				System.out.print("Second Player's username:[/c to cancel] "); String username = Menu.getInputLine();
+				System.out.print("Second Player's username:[/c to cancel] ");
+				String username2 = Menu.getInputLine();
 
-				if (username.trim().equalsIgnoreCase("/c")) return;
+				if (username2.trim().equalsIgnoreCase("/c")) return;
 
-				if (!Account.accountExists(username))
+				if (!Account.accountExists(username2))
 					throw new AccountController.NoAccountExistsWithUsernameException();
-				player2 = (Gamer) Account.getAccount(username);
+
+				if (username2.equals(Admin.getAdmin().getUsername()))
+					throw new CantPlayWithAdminException();
+
+				if (AccountController.getInstance().getCurrentAccLoggedIn().getUsername().equals(username2))
+					throw new CantPlayWithYourselfException();
+
+				player2 = (Gamer) Account.getAccount(username2);
 
 				break;
-			} catch (AccountController.NoAccountExistsWithUsernameException e) {
+			} catch (AccountController.NoAccountExistsWithUsernameException | CantPlayWithAdminException | CantPlayWithYourselfException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
@@ -115,5 +123,17 @@ public class GameController {
 
 	public void setCurrentGameInSession (Game currentGameInSession) {
 		GameController.currentGameInSession = currentGameInSession;
+	}
+
+	private static class CantPlayWithYourselfException extends Exception {
+		public CantPlayWithYourselfException () {
+			super("You should select another gamer's username than yourself to play with");
+		}
+	}
+
+	private static class CantPlayWithAdminException extends Exception {
+		public CantPlayWithAdminException () {
+			super("You can't play with Admin");
+		}
 	}
 }

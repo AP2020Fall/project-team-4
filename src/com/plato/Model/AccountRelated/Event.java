@@ -83,12 +83,12 @@ public class Event {
 	public static LinkedList<Event> getInSessionEvents () {
 		return (LinkedList<Event>) getEvents().stream()
 				.filter(Event::isInSession)
-				.sorted(Comparator.comparing(Event::getGameName) 				// first battlesea then reversi events
-						.thenComparing(Event::getStart)			 				// from earliest starting
-						.thenComparing(Event::getEnd)							// from earliest ending
-						.thenComparingDouble(Event::getEventScore).reversed()	// from hishest prizes
+				.sorted(Comparator.comparing(Event::getGameName)                // first battlesea then reversi events
+						.thenComparing(Event::getStart)                            // from earliest starting
+						.thenComparing(Event::getEnd)                            // from earliest ending
+						.thenComparingDouble(Event::getEventScore).reversed()    // from hishest prizes
 						.thenComparing(Event::getEventID))
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public void addParticipant (Gamer gamer) {

@@ -24,9 +24,9 @@ public class GamerController {
 	}
 
 	public void displayAllUsernames () {
-		LinkedList<Gamer> allGamerAccounts = (LinkedList<Gamer>) Gamer.getGamers().stream()
+		LinkedList<Gamer> allGamerAccounts = Gamer.getGamers().stream()
 				.sorted(Comparator.comparing(Account::getUsername))
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 
 		GamerView.getInstance().displayAllUsernames(new LinkedList<>() {{
 			for (Gamer gamerAccount : allGamerAccounts) {
@@ -38,7 +38,7 @@ public class GamerController {
 	public void displayFriendsUsernames () {
 		LinkedList<Gamer> playersFriendsAccounts = (LinkedList<Gamer>) ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn())
 				.getFrnds().stream().sorted(Comparator.comparing(Account::getUsername))
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 
 		GamerView.getInstance().displayFriendsUsernames(new LinkedList<>() {{
 			for (Gamer friendAccount : playersFriendsAccounts)

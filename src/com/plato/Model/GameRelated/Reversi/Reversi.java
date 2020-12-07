@@ -231,11 +231,11 @@ public class Reversi extends Game {
 		return board;
 	}
 
-	public static ArrayList<Reversi> getAllReversiGames () {
-		return (ArrayList<Reversi>) getAllGames().stream()
+	public static LinkedList<Reversi> getAllReversiGames () {
+		return getAllGames().stream()
 				.filter(game -> game instanceof Reversi)
 				.map(game -> ((Reversi) game))
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 }
 

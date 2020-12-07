@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Menu {
 	private final String menuTitle;
-	private Menu parent;
+	private static final LinkedList<Menu> entryHistory = new LinkedList<>();
 	private HashMap<Integer, Menu> childMenus = new HashMap<>();
 	protected boolean inMenu = false;
 
@@ -129,7 +129,7 @@ public abstract class Menu {
 	}
 
 	public static void displayAreYouSureMessage () {
-		System.out.print("Are you sure?[y/n]  ");
+		System.out.print(Color.RED.getVal() + "Are you sure?[y/n]  " + Color.RESET.getVal());
 	}
 
 	public LinkedList<String> getOptions () {
@@ -141,38 +141,35 @@ public abstract class Menu {
 		return options;
 	}
 
+	public static void printErrorMessage (String message) {
+		if (message.endsWith("."))
+			message = message.substring(0, message.length() - 1);
+		System.out.println(Color.RED.getVal() + "*%s*".formatted(message) + Color.RESET.getVal());
+	}
+
 	public void displayMenu () {
 		for (int i = 0; i < 2; i++) System.out.println();
 
-		System.out.println(menuTitle + ":");
+		System.out.println(Color.PURPLE.getVal() + menuTitle + ":" + Color.GREEN.getVal());
 
 		AtomicInteger optionCounter = new AtomicInteger(1);
-		getOptions().forEach(opt -> System.out.printf("%d. %s%n", optionCounter.getAndIncrement(), opt));
+		getOptions().forEach(opt -> System.out.printf("%s%d.%s %s%n", Color.WHITE.getVal(), optionCounter.getAndIncrement(), Color.GREEN.getVal(), opt));
 
-		System.out.println();
-		System.out.print("Your choice:  ");
-	}
-
-	public void back () {
-		parent.enter();
+		System.out.println(Color.YELLOW.getVal());
+		System.out.print("Your choice:  " + Color.RESET.getVal());
 	}
 
 	public abstract boolean canBack ();
 
 	public abstract boolean canGoToAccMenu ();
 
-	public void enter () {
-		this.parent = getMenuIn();
-		getMenuIn().inMenu = false;
-		this.inMenu = true;
+	public void back () {
+		entryHistory.removeLast();
+		entryHistory.getLast().enter();
 	}
 
 	public static Menu getMenuIn () {
 		return menus.values().stream().filter(menu -> menu.inMenu).findAny().get();
-	}
-
-	public boolean isFormType () {
-		return false;
 	}
 
 	public static Scanner getScanner () {
@@ -183,9 +180,10 @@ public abstract class Menu {
 		return scanner.nextLine();
 	}
 
-	public static void printErrorMessage (String message) {
-		System.err.println(message);
-		System.err.flush();
+	public void enter () {
+		entryHistory.addLast(this);
+		getMenuIn().inMenu = false;
+		this.inMenu = true;
 	}
 
 	public static void print(String text) {

@@ -10,14 +10,14 @@ import java.util.stream.Collectors;
 public class PlayerBattleSea extends Player {
 
 	private LinkedList<Ship> ships;
-	private LinkedList<Bomb> bombsThrown = new LinkedList<>();
+	private final LinkedList<Bomb> bombsThrown = new LinkedList<>();
 
 	public PlayerBattleSea (Game game, Gamer gamer) {
 		super(game, gamer);
 	}
 
 	public void throwBomb (int x, int y) {
-		bombsThrown.add(Bomb.throwBomb(getGame(), x, y, this));
+		bombsThrown.addLast(Bomb.throwBomb(getGame(), x, y, this));
 	}
 
 	public void finalizeBoard (LinkedList<Ship> ships) {
@@ -43,9 +43,9 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public LinkedList<Bomb> getBombsThrown (boolean successBombs) {
-		return (LinkedList<Bomb>) getBombsThrown().stream()
+		return getBombsThrown().stream()
 				.filter(bomb -> bomb.getWasSuccessful() == successBombs)
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public LinkedList<Bomb> getOpponentBombsThrown () {
@@ -57,9 +57,9 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public LinkedList<Ship> getShips (boolean destroyed) {
-		return (LinkedList<Ship>) getShips().stream()
+		return getShips().stream()
 				.filter(ship -> ship.isDestroyed(this) == destroyed)
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public LinkedList<Ship> getOpponentShips () {
@@ -67,9 +67,9 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public LinkedList<Ship> getOpponentShips (boolean destroyed) {
-		return (LinkedList<Ship>) ((PlayerBattleSea) getGame().getOpponentOf(this)).getShips().stream()
+		return ((PlayerBattleSea) getGame().getOpponentOf(this)).getShips().stream()
 				.filter(ship -> ship.isDestroyed(this) == destroyed)
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public LinkedList<Ship> getShips () {

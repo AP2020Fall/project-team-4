@@ -3,7 +3,6 @@ package Model.AccountRelated;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
@@ -53,11 +52,11 @@ public class Gamer extends Account {
 		return FriendRequest.getFriendReq(this);
 	}
 
-	public LinkedList<AdminGameReco> getAdminGameRecosGotten () {
-		return (LinkedList<AdminGameReco>) getAdminGameRecosGotten().stream()
-				.filter(reco -> reco.getGamer().getUsername().equals(getUsername()))
-				.sorted(Comparator.comparing(AdminGameReco::getGameName))
-				.collect(Collectors.toList());
+	public static LinkedList<Gamer> getGamers () {
+		return getAccounts().stream()
+				.filter(account -> account instanceof Gamer)
+				.map(account -> ((Gamer) account))
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public void addToFaveGames (String gameName) {
@@ -89,11 +88,11 @@ public class Gamer extends Account {
 		return faveGames;
 	}
 
-	public static ArrayList<Gamer> getGamers () {
-		return (ArrayList<Gamer>) getAccounts().stream()
-				.filter(account -> account instanceof Gamer)
-				.map(account -> ((Gamer) account))
-				.collect(Collectors.toList());
+	public LinkedList<AdminGameReco> getAdminGameRecosGotten () {
+		return AdminGameReco.getRecommendations().stream()
+				.filter(reco -> reco.getGamer().getUsername().equals(getUsername()))
+				.sorted(Comparator.comparing(AdminGameReco::getGameName))
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public double getMoney () {

@@ -14,40 +14,15 @@ public class BattleSeaController {
 	private static LinkedList<Ship> trialPlayerBoard1;
 	private static LinkedList<Ship> trialPlayerBoard2;
 
+	private static boolean inTheMiddleOfMenu = false;
+
 	private static BattleSeaController battleSeaController;
 
 	private TurnTimerTask turnTimerTask = new TurnTimerTask();
 	private Timer turnTimer = new Timer();
 
-	static class TurnTimerTask extends TimerTask {
-		private final int MAX_SECONDS = 30;
-		private int secondsRemaining = MAX_SECONDS;
-		private String command = "";
-
-		@Override
-		public void run () {
-			secondsRemaining--;
-
-			if (secondsRemaining == -1) {
-				if (command.equals(""))
-					BattleSeaView.getInstance().displayOutOfTimeMessage(GameController.getInstance().getCurrentGame().getTurnGamer().getUsername());
-				resetTimer();
-			}
-		}
-
-		public void resetTimer () {
-			secondsRemaining = MAX_SECONDS;
-			command = "";
-			GameController.getInstance().getCurrentGame().nextTurn();
-		}
-
-		public int getSecondsRemaining () {
-			return secondsRemaining;
-		}
-
-		public void bomb () {
-			this.command = "bomb";
-		}
+	public static boolean isInTheMiddleOfMenu () {
+		return inTheMiddleOfMenu;
 	}
 
 	public static BattleSeaController getInstance () {
@@ -218,4 +193,39 @@ public class BattleSeaController {
 		return turnTimerTask;
 	}
 
+	public static void setInTheMiddleOfMenu (boolean inTheMiddleOfMenu) {
+		BattleSeaController.inTheMiddleOfMenu = inTheMiddleOfMenu;
+	}
+
+	static class TurnTimerTask extends TimerTask {
+		private final int MAX_SECONDS = 30;
+		private int secondsRemaining = MAX_SECONDS;
+		private String command = "";
+
+		@Override
+		public void run () {
+			secondsRemaining--;
+
+			if (secondsRemaining == -1) {
+				if (command.equals(""))
+					BattleSeaView.getInstance().displayOutOfTimeMessage(GameController.getInstance().getCurrentGame().getTurnGamer().getUsername());
+				resetTimer();
+			}
+		}
+
+		public void resetTimer () {
+			secondsRemaining = MAX_SECONDS;
+			command = "";
+			GameController.getInstance().getCurrentGame().nextTurn();
+			BattleSeaController.inTheMiddleOfMenu = false;
+		}
+
+		public int getSecondsRemaining () {
+			return secondsRemaining;
+		}
+
+		public void bomb () {
+			this.command = "bomb";
+		}
+	}
 }
