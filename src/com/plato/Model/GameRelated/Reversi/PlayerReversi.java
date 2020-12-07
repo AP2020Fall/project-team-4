@@ -24,4 +24,5 @@ public class PlayerReversi extends Player {
 	public void addReversiPoints(int add){reversiPoints+=add;}*/
 
 
+
 }

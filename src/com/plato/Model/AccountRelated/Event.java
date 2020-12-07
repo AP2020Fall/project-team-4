@@ -29,7 +29,7 @@ public class Event {
 	}
 
 	public static void removeEvent (String eventID) {
-		events.remove(getEvent(eventID));
+		events.remove(getEvent(eventID))
 	}
 
 	public static LinkedList<Event> getInSessionEventsParticipatingIn (Gamer gamer) {
@@ -63,7 +63,7 @@ public class Event {
 	public static void dealWOverdueEvents () {
 		for (int i=0;i<events.size();i++)
 			if (events.get(i).isDue()){
-				events.get(i).giveAwardsOfOverdueEvents();
+				events.get(i).giveAwardsOfOverdueEvents()
 			}
 
 	}

@@ -19,11 +19,13 @@ public class Reversi extends Game {
 	}
 
 	/**
+	 * should be called after next turn
 	 * if board is full or atleast one of them is 0 return new ArrayList()
 	 * otherwise check every blank coordinate and if player can place there add to arraylist and return the arraylist in the end
 	 */
 	public ArrayList<String> getAvailableCoordinates() {
 		ArrayList<String> availableCoordinates = new ArrayList<>();
+		String color = getTurnPlayer()
 		return availableCoordinates;
 	}
 
