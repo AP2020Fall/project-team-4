@@ -95,8 +95,6 @@ public class AccountController {
 	}
 
 	public void register () {
-		// TODO: 11/30/2020 AD
-
 		String username;
 		while (true)
 			try {
@@ -216,11 +214,12 @@ public class AccountController {
 		switch (field) {
 			case 1 -> {
 				Menu.print("New First name: ");
-				getCurrentAccLoggedIn().editField("first name", Menu.getInputLine()); // FIXME: add cancel option
+				getCurrentAccLoggedIn().editField("first name", Menu.getInputLine());
+
 				Menu.println("First name changed successfully.");
 			}
 			case 2 -> {
-				Menu.print("New Last name: "); getCurrentAccLoggedIn().editField("last name", Menu.getInputLine()); // FIXME: add cancel option
+				Menu.print("New Last name:[/c to cancel] "); getCurrentAccLoggedIn().editField("last name", Menu.getInputLine());
 				Menu.println("Last name changed successfully.");
 			}
 			case 3 -> {
@@ -245,7 +244,7 @@ public class AccountController {
 				String newEmail;
 				while (true)
 					try {
-						Menu.print("Email Address:[/c to cancel] "); newEmail = Menu.getInputLine();
+						Menu.print("New email address:[/c to cancel] "); newEmail = Menu.getInputLine();
 
 						if (newEmail.trim().equalsIgnoreCase("/c")) return;
 
@@ -281,9 +280,26 @@ public class AccountController {
 
 	}
 
-	public void diplayPersonalInfo () {
+	public void displayPersonalInfo () {
 		Account account = AccountController.getInstance().getCurrentAccLoggedIn();
-		AccountView.getInstance().displayPersonalInfo(account.getUsername(), account.getFirstName(), account.getLastName(), account.getEmail(), account.getPhoneNum());
+
+		if (account instanceof Admin)
+			AccountView.getInstance().displayPersonalInfo(
+					account.getUsername(),
+					account.getFirstName(),
+					account.getLastName(),
+					account.getEmail(),
+					account.getPhoneNum()
+			);
+		else
+			AccountView.getInstance().displayPersonalInfo(
+					account.getUsername(),
+					account.getFirstName(),
+					account.getLastName(),
+					account.getEmail(),
+					account.getPhoneNum(),
+					((Gamer) account).getMoney()
+			);
 	}
 
 	public void logoutCommand () {

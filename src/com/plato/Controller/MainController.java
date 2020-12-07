@@ -52,10 +52,6 @@ public class MainController {
 		Menu.getMenuIn().displayMenu();
 
 		while (true) {
-
-//			if (Menu.getMenuIn() instanceof _12_1GameplayBattleSeaMenu && ((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).getPhase() == 2)
-//				BattleSeaController.getInstance().checkForTimeOut();
-
 			if (Menu.getScanner().hasNextLine()) {
 				try {
 					String comStr = Menu.getInputLine();
@@ -117,7 +113,7 @@ public class MainController {
 					Menu.getMenuIn().getChildMenus().get(2).enter();
 			}
 			case "add event" -> EventController.getInstance().createEvent();
-			case "add suggestions" -> AdminGameRecoController.getInstance().addReco();
+			case "add suggestions" -> AdminGameRecoController.getInstance().giveRecommendationToGamer();
 			case "view suggestions" -> {
 				AdminGameRecoController.getInstance().displayAllAdminRecos();
 				Menu.getMenuIn().getChildMenus().get(4).enter();
@@ -129,7 +125,7 @@ public class MainController {
 			}
 
 			// suggestions menu
-			case "choose suggested game" -> AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
+			case "choose suggested game" -> AdminGameRecoController.getInstance().chooseRecoGame();
 			case "remove suggestion" -> AdminGameRecoController.getInstance().removeReco();
 
 			// events menu
@@ -214,8 +210,8 @@ public class MainController {
 			case "edit personal info" -> AccountController.getInstance().editAccFieldCommand();
 
 			// account menu
-			case "view personal info (w/ money)" -> {
-				AccountController.getInstance().diplayPersonalInfo();
+			case "view personal info (w/ money)", "View personal info (w/o money)" -> {
+				AccountController.getInstance().displayPersonalInfo(); // for admin
 				Menu.getMenuIn().getChildMenus().get(command + 1).enter();
 			}
 			case "view plato statistics" -> GamerController.getInstance().displayAccountStats();
@@ -424,7 +420,7 @@ public class MainController {
 
 	public void tryToExitProgram () {
 		Menu.displayAreYouSureMessage();
-		if (Menu.getInputLine().toLowerCase().equals("y")) {
+		if (Menu.getInputLine().equalsIgnoreCase("y")) {
 			try {
 				mainController.serialize();
 				AccountController.getInstance().logout();
@@ -435,7 +431,7 @@ public class MainController {
 		}
 	}
 
-	private static class InvalidInputException extends Exception {
+	public static class InvalidInputException extends Exception {
 		public InvalidInputException () {
 			super("Invalid Input");
 		}
