@@ -281,9 +281,26 @@ public class AccountController {
 
 	}
 
-	public void diplayPersonalInfo () {
+	public void displayPersonalInfo () {
 		Account account = AccountController.getInstance().getCurrentAccLoggedIn();
-		AccountView.getInstance().displayPersonalInfo(account.getUsername(), account.getFirstName(), account.getLastName(), account.getEmail(), account.getPhoneNum());
+
+		if (account instanceof Admin)
+			AccountView.getInstance().displayPersonalInfo(
+					account.getUsername(),
+					account.getFirstName(),
+					account.getLastName(),
+					account.getEmail(),
+					account.getPhoneNum()
+			);
+		else
+			AccountView.getInstance().displayPersonalInfo(
+					account.getUsername(),
+					account.getFirstName(),
+					account.getLastName(),
+					account.getEmail(),
+					account.getPhoneNum(),
+					((Gamer) account).getMoney()
+			);
 	}
 
 	public void logoutCommand () {
