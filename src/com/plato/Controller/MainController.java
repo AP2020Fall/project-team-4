@@ -52,10 +52,6 @@ public class MainController {
 		Menu.getMenuIn().displayMenu();
 
 		while (true) {
-
-//			if (Menu.getMenuIn() instanceof _12_1GameplayBattleSeaMenu && ((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).getPhase() == 2)
-//				BattleSeaController.getInstance().checkForTimeOut();
-
 			if (Menu.getScanner().hasNextLine()) {
 				try {
 					String comStr = Menu.getInputLine();
@@ -424,7 +420,7 @@ public class MainController {
 
 	public void tryToExitProgram () {
 		Menu.displayAreYouSureMessage();
-		if (Menu.getInputLine().toLowerCase().equals("y")) {
+		if (Menu.getInputLine().equalsIgnoreCase("y")) {
 			try {
 				mainController.serialize();
 				AccountController.getInstance().logout();
@@ -435,7 +431,7 @@ public class MainController {
 		}
 	}
 
-	private static class InvalidInputException extends Exception {
+	public static class InvalidInputException extends Exception {
 		public InvalidInputException () {
 			super("Invalid Input");
 		}

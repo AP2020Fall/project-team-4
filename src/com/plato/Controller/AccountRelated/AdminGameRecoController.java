@@ -1,16 +1,19 @@
 package Controller.AccountRelated;
 
+import Controller.MainController;
+import Model.AccountRelated.Account;
+import Model.AccountRelated.Admin;
 import Model.AccountRelated.AdminGameReco;
 import Model.AccountRelated.Gamer;
-import Model.GameRelated.BattleSea.BattleSea;
-import Model.GameRelated.Reversi.Reversi;
 import View.AccountRelated.AdminGameRecoView;
 import View.Menus.Menu;
 import View.Menus._11GameMenu;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AdminGameRecoController {
 	private static AdminGameRecoController adminGameRecoController;
@@ -22,7 +25,48 @@ public class AdminGameRecoController {
 	}
 
 	public void giveRecommendationToGamer () {
-		// TODO: TOTOTOTOOTOTOTOTOTOOTOTOT
+		String gamerUN;
+		while (true)
+			try {
+				Menu.println("Gamer username:[/c to cancel] "); gamerUN = Menu.getInputLine();
+
+				if (gamerUN.trim().equalsIgnoreCase("/c")) return;
+
+				if (!Account.accountExists(gamerUN))
+					throw new AccountController.NoAccountExistsWithUsernameException();
+
+				if (!(Account.getAccount(gamerUN) instanceof Admin))
+					throw new CantRecommendToYourselfException();
+				break;
+			} catch (AccountController.NoAccountExistsWithUsernameException | CantRecommendToYourselfException e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
+
+		String gamechoice = "";
+		LinkedList<String> recoChoices = new LinkedList<>(Arrays.asList("BattleSea", "Reversi"));
+
+		while (true) {
+			try {
+				AtomicInteger count = new AtomicInteger(1);
+				recoChoices.forEach(game -> Menu.println("%d. %s".formatted(count.getAndIncrement(), game)));
+
+				Menu.println("Your game choice:[/c to cancel] "); gamechoice = Menu.getInputLine();
+
+				if (gamechoice.trim().equalsIgnoreCase("/c")) return;
+
+				if (!gamechoice.matches("[1-2]"))
+					throw new MainController.InvalidInputException();
+
+				if (AdminGameReco.recommendationExists((Gamer) Account.getAccount(gamerUN), recoChoices.get(Integer.parseInt(gamechoice))))
+					throw new AdminGameRecoAlreadyExists();
+
+				break;
+			} catch (MainController.InvalidInputException | AdminGameRecoAlreadyExists e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
+
+			AdminGameReco.addReco(recoChoices.get(Integer.parseInt(gamechoice)), ((Gamer) Account.getAccount(gamerUN)));
+		}
 	}
 
 	public void displayAdminsRecosToPlayer () {
@@ -69,7 +113,22 @@ public class AdminGameRecoController {
 	}
 
 	public void removeReco () {
-		// TODO TOTOOTOTOTOOTOTO
+		String recoID;
+		while (true)
+			try {
+				Menu.println("Suggestion ID:[/c to cancel] "); recoID = Menu.getInputLine();
+
+				if (recoID.trim().equalsIgnoreCase("/c")) return;
+
+				if (!AdminGameReco.recommendationExists(recoID))
+					throw new AdminGameRecoDoesntExistException();
+
+				break;
+			} catch (AdminGameRecoDoesntExistException e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
+
+		AdminGameReco.removeReco(recoID);
 	}
 
 	public void chooseRecoGame () {
@@ -94,6 +153,18 @@ public class AdminGameRecoController {
 	private static class AdminGameRecoAlreadyExists extends Exception {
 		public AdminGameRecoAlreadyExists () {
 			super("You have already recommended this game to this gamer.");
+		}
+	}
+
+	private static class CantRecommendToYourselfException extends Exception {
+		public CantRecommendToYourselfException () {
+			super("You cannot enter your own username.");
+		}
+	}
+
+	private static class AdminGameRecoDoesntExistException extends Exception {
+		public AdminGameRecoDoesntExistException () {
+			super("Suggestion does not exist.");
 		}
 	}
 }
