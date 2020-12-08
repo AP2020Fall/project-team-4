@@ -69,10 +69,12 @@ public class Event
 		return hasStarted() && !isDue();
 	}
 
-	public static void dealWOverdueEvents () {
+	public static void dealWOverdueEvents ()
+	{
 		for (int i=0;i<events.size();i++)
 			if (events.get(i).isDue()){
 				events.get(i).giveAwardsOfOverdueEvents();
+
 				// FIXME: 12/7/2020 AD
 			}
 
@@ -83,6 +85,7 @@ public class Event
 	}
 
 	public static LinkedList<Event> getEvents ()
+
 	{
 		return events;
 	}
