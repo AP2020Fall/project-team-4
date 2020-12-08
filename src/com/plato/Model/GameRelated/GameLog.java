@@ -19,7 +19,7 @@ public class GameLog {
 	 * 				don't use ingame points. just the points determined for win, loss or draw.
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
-	public static int getPoints (Gamer gamer, String gameName) {
+	public static Integer getPoints (Gamer gamer, String gameName) {
 		// TODO: 11/29/2020 AD
 		return 0;
 	}
@@ -28,7 +28,7 @@ public class GameLog {
 	 * @return number of times said gamer played said game
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
-	public static int getPlayedCount (Gamer gamer, String gameName) {
+	public static Integer getPlayedCount (Gamer gamer, String gameName) {
 		// TODO: 11/29/2020 AD
 		int count = 0;
 		for(Game game : getAllFinishedGames()){
@@ -43,7 +43,7 @@ public class GameLog {
 	 * @return number of times said game was played by anyone
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
-	public static int getPlayedCount (String gameName) {
+	public static Integer getPlayedCount (String gameName) {
 		int count = 0;
 		for(Game game : getAllFinishedGames()){
 			if(game.getGameName().equals(gameName)) count++;
@@ -55,7 +55,7 @@ public class GameLog {
 	 * @return number of times said gamer won said game
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
-	public static int getWinCount (Gamer gamer, String gameName) {
+	public static Integer getWinCount (Gamer gamer, String gameName) {
 		int count = 0;
 		for(Game game : getAllFinishedGames()){
 			if(game.getGameName().equals(gameName) && game.getWinner().equals(gamer))
@@ -68,7 +68,7 @@ public class GameLog {
 	 * @return number of times said gamer lost said game
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
-	public static int getLossCount (Gamer gamer, String gameName) {
+	public static Integer getLossCount (Gamer gamer, String gameName) {
 		int count = 0;
 		for(Game game : getAllFinishedGames()){
 			if(game.getGameName().equals(gameName))
@@ -83,7 +83,7 @@ public class GameLog {
 	 * @return number of times said gamer tied said game
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
-	public static int getDrawCount (Gamer gamer, String gameName) {
+	public static Integer getDrawCount (Gamer gamer, String gameName) {
 		int count = 0;
 		for(Game game : getAllFinishedGames()) {
 			if (game.getGameName().equals(gameName))
@@ -112,9 +112,9 @@ public class GameLog {
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
 	public static LinkedList<String> getGameHistory (String gameName) {
-		LinkedList<Game> gamesHistory = (LinkedList<Game>) Game.getAllFinishedGames().stream()
+		LinkedList<Game> gamesHistory = Game.getAllFinishedGames().stream()
 				.sorted(Comparator.comparing(Game::getDateGameEnded).reversed())
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 
 		LinkedList<String> gamesHitoryAsStrings = new LinkedList<>();
 

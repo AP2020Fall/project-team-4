@@ -6,6 +6,7 @@ import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
 import Model.GameRelated.Player;
 import View.GameRelated.BattleSea.BattleSeaView;
+import View.Menus.Color;
 import View.Menus.Menu;
 
 import java.util.*;
@@ -14,46 +15,27 @@ public class BattleSeaController {
 	private static LinkedList<Ship> trialPlayerBoard1;
 	private static LinkedList<Ship> trialPlayerBoard2;
 
+	private static boolean inTheMiddleOfMenu = false;
+
 	private static BattleSeaController battleSeaController;
 
 	private TurnTimerTask turnTimerTask = new TurnTimerTask();
 	private Timer turnTimer = new Timer();
 
-	static class TurnTimerTask extends TimerTask {
-		private final int MAX_SECONDS = 30;
-		private int secondsRemaining = MAX_SECONDS;
-		private String command = "";
-
-		@Override
-		public void run () {
-			secondsRemaining--;
-
-			if (secondsRemaining == -1) {
-				if (command.equals(""))
-					BattleSeaView.getInstance().displayOutOfTimeMessage(GameController.getInstance().getCurrentGame().getTurnGamer().getUsername());
-				resetTimer();
-			}
-		}
-
-		public void resetTimer () {
-			secondsRemaining = MAX_SECONDS;
-			command = "";
-			GameController.getInstance().getCurrentGame().nextTurn();
-		}
-
-		public int getSecondsRemaining () {
-			return secondsRemaining;
-		}
-
-		public void bomb () {
-			this.command = "bomb";
-		}
+	public static boolean isInTheMiddleOfMenu () {
+		return inTheMiddleOfMenu;
 	}
 
 	public static BattleSeaController getInstance () {
 		if (battleSeaController == null)
 			battleSeaController = new BattleSeaController();
 		return battleSeaController;
+	}
+
+	public static void main (String[] args) {
+		for (Color color : Color.values()) {
+			System.out.println(color.getVal() + color + Color.RESET.getVal());
+		}
 	}
 
 	public void chooseBetween5RandomlyGeneratedBoards () {
@@ -65,7 +47,7 @@ public class BattleSeaController {
 		int boardChoice;
 		while (true)
 			try {
-				System.out.print("Your board choice: "); boardChoice = Integer.parseInt(Menu.getInputLine());
+				Menu.printAskingForInput("Your board choice: "); boardChoice = Integer.parseInt(Menu.getInputLine());
 
 				if (boardChoice < 1 || boardChoice > 5)
 					throw new InputMismatchException();
@@ -83,7 +65,7 @@ public class BattleSeaController {
 	}
 
 	public void finalizeTrialBoard () {
-		((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getListOfPlayers().get(getCurrentlyEditingTrialBoardNum() - 1))
 				.finalizeBoard(getCurrentlyEditingTrialBoard());
 
@@ -104,13 +86,13 @@ public class BattleSeaController {
 
 	public void displayCurrentPlayerBoard () {
 		BattleSeaView.getInstance().displayBoard(
-				getBoardAsStringBuilder(((PlayerBattleSea) GameController.getInstance().getCurrentGame().getTurnPlayer()).getShips(), true)
+				getBoardAsStringBuilder(true)
 		);
 	}
 
 	public void displayOpponentBoard () {
 		BattleSeaView.getInstance().displayBoard(
-				getBoardAsStringBuilder(((PlayerBattleSea) GameController.getInstance().getCurrentGame().getTurnPlayer()).getShips(), false)
+				getBoardAsStringBuilder(false)
 		);
 	}
 
@@ -141,14 +123,61 @@ public class BattleSeaController {
 		return boardStrBldr;
 	}
 
-	public StringBuilder getBoardAsStringBuilder (LinkedList<Ship> ships, boolean boardIsForCurrentPlayer) {
+	public StringBuilder getBoardAsStringBuilder (boolean boardIsForCurrentPlayer) {
 		StringBuilder boardStrBldr = new StringBuilder();
 
-		if (boardIsForCurrentPlayer) {
-			// TODO: 12/6/2020 AD
-		}
-		else {
-			// TODO: 12/6/2020 AD
+		BattleSea currentGame = (BattleSea) GameController.getInstance().getCurrentGameInSession();
+		PlayerBattleSea curentPlayer = ((PlayerBattleSea) currentGame.getTurnPlayer()),
+				currentOpponent = (PlayerBattleSea) currentGame.getOpponentOf(curentPlayer);
+
+		Menu.println("%s%s board%s".formatted(Color.BLACK_BRIGHT.getVal(), (boardIsForCurrentPlayer ? "Your" : "Opponent's"), Color.RESET.getVal()));
+
+		for (int y = 0; y <= 10; y++) {
+			boardStrBldr.append("\t| ");
+			for (int x = 0; x <= 10; x++) {
+
+				if (x == 0 && y == 0) boardStrBldr.append(" ");
+				else if (y == 0) boardStrBldr.append(x);
+				else if (x == 0) boardStrBldr.append(y);
+				else {
+					String symbol = " ";
+
+					// if there was a destroyed ship here
+					int finalX = x;
+					int finalY = y;
+					if (Ship.getAllCoords(currentOpponent.getShips(true)).stream()
+							.anyMatch(coord -> finalX == coord[0] && finalY == coord[1])) {
+						symbol = Color.RED_BOLD.getVal() + "*";
+					}
+
+					// if there was a successful bomb but not a destroyed ship here
+					else if (curentPlayer
+							.getBombsThrown(true).stream()
+							.anyMatch(bomb -> bomb.getX() == finalX && bomb.getY() == finalY)) {
+						symbol = Color.YELLOW_BOLD.getVal() + "+";
+					}
+
+					// if there was an unsuccessful bomb here
+					else if (curentPlayer
+							.getBombsThrown(false).stream()
+							.anyMatch(bomb -> bomb.getX() == finalX && bomb.getY() == finalY)) {
+						symbol = Color.GREEN_BOLD.getVal() + "-";
+					}
+
+					// if there is a (partly) healthy ship here -> only for currentplayer's board
+					else if (boardIsForCurrentPlayer && Ship.getAllCoords(currentOpponent.getShips(true)).stream()
+							.anyMatch(coord -> finalX == coord[0] && finalY == coord[1])) {
+						symbol = Color.BLUE.getVal() + "#";
+					}
+
+					boardStrBldr.append(symbol + Color.RESET.getVal());
+				}
+				boardStrBldr.append(((x == 0 && y == 10) || (x == 10 && y == 0)) ? "" : " ");
+
+				if (x != 10)
+					boardStrBldr.append("|");
+			}
+			boardStrBldr.append("|\n");
 		}
 
 		return boardStrBldr;
@@ -179,7 +208,7 @@ public class BattleSeaController {
 	}
 
 	public void setTrialPlayerBoard (LinkedList<Ship> trialPlayerBoard) {
-		ArrayList<Player> players = GameController.getInstance().getCurrentGame().getListOfPlayers();
+		ArrayList<Player> players = GameController.getInstance().getCurrentGameInSession().getListOfPlayers();
 
 		if (((PlayerBattleSea) players.get(0)).getShips() == null) trialPlayerBoard1 = trialPlayerBoard;
 		else if (((PlayerBattleSea) players.get(1)).getShips() == null) trialPlayerBoard2 = trialPlayerBoard;
@@ -218,4 +247,42 @@ public class BattleSeaController {
 		return turnTimerTask;
 	}
 
+	public static void setInTheMiddleOfMenu (boolean inTheMiddleOfMenu) {
+		BattleSeaController.inTheMiddleOfMenu = inTheMiddleOfMenu;
+	}
+
+	static class TurnTimerTask extends TimerTask {
+		private final int MAX_SECONDS = 30;
+		private int secondsRemaining = MAX_SECONDS;
+		private String command = "";
+
+		@Override
+		public void run () {
+			secondsRemaining--;
+
+			if (command.equals("bomb"))
+				resetTimer();
+
+			if (secondsRemaining == -1) {
+				if (command.equals(""))
+					BattleSeaView.getInstance().displayOutOfTimeMessage(GameController.getInstance().getCurrentGameInSession().getTurnGamer().getUsername());
+				resetTimer();
+			}
+		}
+
+		public void resetTimer () {
+			secondsRemaining = MAX_SECONDS;
+			command = "";
+			GameController.getInstance().getCurrentGameInSession().nextTurn();
+			BattleSeaController.inTheMiddleOfMenu = false;
+		}
+
+		public int getSecondsRemaining () {
+			return secondsRemaining;
+		}
+
+		public void bomb () {
+			this.command = "bomb";
+		}
+	}
 }

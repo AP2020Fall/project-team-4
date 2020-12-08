@@ -2,10 +2,11 @@ package Controller.GameRelated;
 
 import Controller.AccountRelated.AccountController;
 import Model.AccountRelated.Account;
+import Model.AccountRelated.Admin;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
-import Model.GameRelated.Reversi.PlayerReversi;
+import Model.GameRelated.GameLog;
 import Model.GameRelated.Reversi.Reversi;
 import View.GameRelated.GameView;
 import View.Menus.Menu;
@@ -15,9 +16,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class GameController {
-	private static Game currentGameInSession = null;
-
 	private static GameController gameController;
+
+	private Game currentGameInSession = null;
 
 	public static GameController getInstance () {
 		if (gameController == null)
@@ -30,16 +31,24 @@ public class GameController {
 		Gamer player2;
 		while (true)
 			try {
-				System.out.print("Second Player's username:[/c to cancel] "); String username = Menu.getInputLine();
+				Menu.printAskingForInput("Second Player's username:[/c to cancel] ");
+				String username2 = Menu.getInputLine();
 
-				if (username.trim().equalsIgnoreCase("/c")) return;
+				if (username2.trim().equalsIgnoreCase("/c")) return;
 
-				if (!Account.accountExists(username))
+				if (!Account.accountExists(username2))
 					throw new AccountController.NoAccountExistsWithUsernameException();
-				player2 = (Gamer) Account.getAccount(username);
+
+				if (username2.equals(Admin.getAdmin().getUsername()))
+					throw new CantPlayWithAdminException();
+
+				if (AccountController.getInstance().getCurrentAccLoggedIn().getUsername().equals(username2))
+					throw new CantPlayWithYourselfException();
+
+				player2 = (Gamer) Account.getAccount(username2);
 
 				break;
-			} catch (AccountController.NoAccountExistsWithUsernameException e) {
+			} catch (AccountController.NoAccountExistsWithUsernameException | CantPlayWithAdminException | CantPlayWithYourselfException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
@@ -52,7 +61,9 @@ public class GameController {
 
 		Game game;
 		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
-			case "battlesea" -> game = new BattleSea(players);
+			case "battlesea" -> {
+				game = new BattleSea(players);
+			}
 			case "reversi" -> {
 				game = new Reversi(players);
 				((Reversi) game).emptyBoard();
@@ -61,7 +72,7 @@ public class GameController {
 		}
 
 		Game.startGame(game);
-		currentGameInSession = game;
+		getInstance().setCurrentGameInSession(game);
 
 		Menu.getMenuIn().getChildMenus().get(8).enter();
 	}
@@ -79,12 +90,12 @@ public class GameController {
 	}
 
 	public void displayTurn () {
-		GameView.getInstance().displayTurn(gameController.getCurrentGame().getTurnGamer().getUsername());
+		GameView.getInstance().displayTurn(gameController.getCurrentGameInSession().getTurnGamer().getUsername());
 	}
 
 	public void displayGameConclusion () {
 		String conclusion;
-		switch (gameController.getCurrentGame().getConclusion()) {
+		switch (gameController.getCurrentGameInSession().getConclusion()) {
 			case DRAW -> conclusion = "D";
 			case PLAYER1_WIN -> conclusion = "1W";
 			case PLAYER2_WIN -> conclusion = "2W";
@@ -92,15 +103,15 @@ public class GameController {
 			default -> conclusion = "";
 		}
 
-		Gamer player1Gamer = gameController.getCurrentGame().getListOfPlayers().get(0).getGamer(),
-				player2Gamer = gameController.getCurrentGame().getListOfPlayers().get(1).getGamer();
+		Gamer player1Gamer = gameController.getCurrentGameInSession().getListOfPlayers().get(0).getGamer(),
+				player2Gamer = gameController.getCurrentGameInSession().getListOfPlayers().get(1).getGamer();
 
 		GameView.getInstance().displayGameConclusion(
 				conclusion,
 				player1Gamer.getUsername(),
 				player2Gamer.getUsername(),
-				gameController.getCurrentGame().getPlayer(player1Gamer).getScore(),
-				gameController.getCurrentGame().getPlayer(player2Gamer).getScore()
+				gameController.getCurrentGameInSession().getPlayer(player1Gamer).getScore(),
+				gameController.getCurrentGameInSession().getPlayer(player2Gamer).getScore()
 		);
 	}
 
@@ -109,11 +120,23 @@ public class GameController {
 		GameView.getInstance().displayScoreboardOfGame(((_11GameMenu) Menu.getMenuIn()).getGameName(), scoreBoard);
 	}
 
-	public Game getCurrentGame () {
+	public Game getCurrentGameInSession () {
 		return currentGameInSession;
 	}
 
 	public void setCurrentGameInSession (Game currentGameInSession) {
-		GameController.currentGameInSession = currentGameInSession;
+		getInstance().currentGameInSession = currentGameInSession;
+	}
+
+	private static class CantPlayWithYourselfException extends Exception {
+		public CantPlayWithYourselfException () {
+			super("You should select another gamer's username than yourself to play with");
+		}
+	}
+
+	private static class CantPlayWithAdminException extends Exception {
+		public CantPlayWithAdminException () {
+			super("You can't play with Admin");
+		}
 	}
 }

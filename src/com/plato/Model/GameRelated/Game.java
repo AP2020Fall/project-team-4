@@ -1,6 +1,5 @@
 package Model.GameRelated;
 
-import Controller.GameRelated.GameController;
 import Controller.IDGenerator;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
@@ -137,7 +136,7 @@ public abstract class Game {
 	}
 
 	public static LinkedList<Game> getAllFinishedGames () {
-		return (LinkedList<Game>) allGames.stream().filter(Game::gameHasEnded).collect(Collectors.toList());
+		return allGames.stream().filter(Game::gameHasEnded).collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public LocalDateTime getDateGameEnded () {

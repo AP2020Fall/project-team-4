@@ -3,14 +3,13 @@ package Model.AccountRelated;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class Gamer extends Account {
 
-	private int score = 0;
+	private int awardsFromEvents = 0;
 	private double money;
 	private LocalDate accountStartDate;
 	private LinkedList<Gamer> frnds = new LinkedList<>();
@@ -53,11 +52,11 @@ public class Gamer extends Account {
 		return FriendRequest.getFriendReq(this);
 	}
 
-	public LinkedList<AdminGameReco> getAdminGameRecosGotten () {
-		return (LinkedList<AdminGameReco>) getAdminGameRecosGotten().stream()
-				.filter(reco -> reco.getGamer().getUsername().equals(getUsername()))
-				.sorted(Comparator.comparing(AdminGameReco::getGameName))
-				.collect(Collectors.toList());
+	public static LinkedList<Gamer> getGamers () {
+		return getAccounts().stream()
+				.filter(account -> account instanceof Gamer)
+				.map(account -> ((Gamer) account))
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public void addToFaveGames (String gameName) {
@@ -66,11 +65,11 @@ public class Gamer extends Account {
 	}
 
 	public void participateInEvent (String eventID) {
-		// TODO: 11/20/2020 AD
+		Event.getEvent(eventID).addParticipant(this);
 	}
 
 	public void stopParticipatingInEvent (String eventID) {
-		// TODO: 11/20/2020 AD
+		Event.getEvent(eventID).removeParticipant(this);
 	}
 
 	public int getDaysSinceRegistration () {
@@ -81,22 +80,26 @@ public class Gamer extends Account {
 		getAccounts().addAll(gamers);
 	}
 
-	public int getScore () {
-		return score;
-	}
-
 	public LinkedList<String> getFaveGames () {
 		return faveGames;
 	}
 
-	public static ArrayList<Gamer> getGamers () {
-		return (ArrayList<Gamer>) getAccounts().stream()
-				.filter(account -> account instanceof Gamer)
-				.map(account -> ((Gamer) account))
-				.collect(Collectors.toList());
+	public LinkedList<AdminGameReco> getAdminGameRecosGotten () {
+		return AdminGameReco.getRecommendations().stream()
+				.filter(reco -> reco.getGamer().getUsername().equals(getUsername()))
+				.sorted(Comparator.comparing(AdminGameReco::getGameName))
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public double getMoney () {
 		return money;
+	}
+
+	private void giveEventAward (int award) {
+		awardsFromEvents += award;
+	}
+
+	public int getAwardsFromEvents () {
+		return awardsFromEvents;
 	}
 }

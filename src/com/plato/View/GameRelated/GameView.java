@@ -17,10 +17,6 @@ public class GameView {
 		Menu.println("It it currently %s's turn to play".formatted(currentTurnGamerUsername));
 	}
 
-	public void displayPtsPlayerGainedFromGame (int points, String gameName) {
-		System.out.println("You have earned %d points from %s.".formatted(points, gameName));
-	}
-
 	public void displaySuccessfulFaveGameAdditionMessage (String gameName) {
 		System.out.printf("%s was added to your fave games successfully%n", gameName);
 	}

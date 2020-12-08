@@ -2,9 +2,13 @@ package Model.GameRelated.BattleSea;
 
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
+import Model.GameRelated.GameLog;
 import Model.GameRelated.Reversi.Reversi;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class BattleSea extends Game {
@@ -77,11 +81,51 @@ public class BattleSea extends Game {
 	 * 3. use gamelog methods to determine how many times each player won, lost or tied and also all the points he/she earned and number of times they played it
 	 * 4. sort as follows -> (n:نزولی - s:صعودی)
 	 * 5. 			n - points , n - wins , s - loss , s - playCount , n - draws , abc - username(not case sensitive)
-	 * 6. format all this shite in string form and return	the string linkedlist result
+	 * 6. format all this shite in string form and return the string linkedlist result
 	 */
 	public static LinkedList<String> getScoreboard () {
-		// TODO: 11/13/2020 AD
-		return null;
+		String gameName = BattleSea.class.getSimpleName();
+		LinkedList<String> scoreBoard = new LinkedList<>();
+		LinkedList<Gamer> allPlayersOfBattleSea = GameLog.getAllGamersWhoPlayedGame(gameName);
+
+		allPlayersOfBattleSea.sort((gamer1, gamer2) -> {
+			int cmp;
+
+			cmp = -GameLog.getPoints(gamer1, gameName).compareTo(GameLog.getPoints(gamer2, gameName));
+			if (cmp != 0) return cmp;
+
+			cmp = -GameLog.getWinCount(gamer1, gameName).compareTo(GameLog.getWinCount(gamer2, gameName));
+			if (cmp != 0) return cmp;
+
+			cmp = GameLog.getLossCount(gamer1, gameName).compareTo(GameLog.getLossCount(gamer2, gameName));
+			if (cmp != 0) return cmp;
+
+			cmp = GameLog.getPlayedCount(gamer1, gameName).compareTo(GameLog.getPlayedCount(gamer2, gameName));
+			if (cmp != 0) return cmp;
+
+			cmp = -GameLog.getDrawCount(gamer1, gameName).compareTo(GameLog.getDrawCount(gamer2, gameName));
+			if (cmp != 0) return cmp;
+
+			return gamer1.getUsername().compareToIgnoreCase(gamer2.getUsername());
+		});
+
+		if (allPlayersOfBattleSea.size() == 0)
+			scoreBoard.addLast("No one has played %s until now.".formatted(gameName));
+		else
+			allPlayersOfBattleSea.forEach(gamer -> {
+				String username = gamer.getUsername();
+				int pts = (GameLog.getPoints(gamer, gameName)),
+						wins = (GameLog.getWinCount(gamer, gameName)),
+						losses = (GameLog.getLossCount(gamer, gameName)),
+						draws = (GameLog.getDrawCount(gamer, gameName)),
+						playCount = (GameLog.getPlayedCount(gamer, gameName));
+
+				scoreBoard.addLast("Username: %s,\tPoints: %d,\tWins: %d,\tLosses: %d,\tDraws: %d,\tPlayed Count: %d".formatted(
+						username, pts, wins, losses, draws, playCount
+				));
+			});
+
+		return scoreBoard;
 	}
 
 	public static void setDetailsForBattlesea (String details) {
@@ -99,11 +143,11 @@ public class BattleSea extends Game {
 		return number <= 10 && number >= 1;
 	}
 
-	public static ArrayList<BattleSea> getAllBattleSeaGames () {
-		return (ArrayList<BattleSea>) getAllGames().stream()
+	public static LinkedList<BattleSea> getAllBattleSeaGames () {
+		return getAllGames().stream()
 				.filter(game -> game instanceof BattleSea)
 				.map(game -> ((BattleSea) game))
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public boolean canStartBombing () {

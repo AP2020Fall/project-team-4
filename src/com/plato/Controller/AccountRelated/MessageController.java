@@ -35,7 +35,7 @@ public class MessageController {
 		String msg;
 		while (true)
 			try {
-				Menu.print("Your message[/c to cancel] -> "); msg = Menu.getInputLine();
+				Menu.printAskingForInput("Your message[/c to cancel] -> "); msg = Menu.getInputLine();
 
 				if (msg.trim().equalsIgnoreCase("/c")) return;
 

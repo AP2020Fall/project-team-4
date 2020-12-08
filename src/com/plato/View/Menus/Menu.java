@@ -1,5 +1,6 @@
 package View.Menus;
 
+import Controller.AccountRelated.AccountController;
 import Model.AccountRelated.Admin;
 
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Menu {
 	private final String menuTitle;
-	private Menu parent;
+	private static final LinkedList<Menu> entryHistory = new LinkedList<>();
 	private HashMap<Integer, Menu> childMenus = new HashMap<>();
 	protected boolean inMenu = false;
 
@@ -119,7 +120,7 @@ public abstract class Menu {
 				getMenu("7").addChildMenu(3, getMenu("14A"));
 				// for menu 14
 				getMenu("14A").addChildMenu(1, getMenu("13"));
-				getMenu("14A").addChildMenu(2, getMenu("2"));
+				getMenu("14A").addChildMenu(6, getMenu("2"));
 			}
 		}
 	}
@@ -129,7 +130,7 @@ public abstract class Menu {
 	}
 
 	public static void displayAreYouSureMessage () {
-		System.out.print("Are you sure?[y/n]  ");
+		System.out.print(Color.YELLOW.getVal() + "Are you sure?[y/n]  " + Color.RESET.getVal());
 	}
 
 	public LinkedList<String> getOptions () {
@@ -144,35 +145,58 @@ public abstract class Menu {
 	public void displayMenu () {
 		for (int i = 0; i < 2; i++) System.out.println();
 
-		System.out.println(menuTitle + ":");
+		System.out.println(Color.BLACK_BRIGHT.getVal() + menuTitle + ":" + Color.RESET.getVal());
 
 		AtomicInteger optionCounter = new AtomicInteger(1);
 		getOptions().forEach(opt -> System.out.printf("%d. %s%n", optionCounter.getAndIncrement(), opt));
 
-		System.out.println();
-		System.out.print("Your choice:  ");
-	}
-
-	public void back () {
-		parent.enter();
+		System.out.println(Color.YELLOW.getVal());
+		System.out.print("Your choice:  " + Color.RESET.getVal());
 	}
 
 	public abstract boolean canBack ();
 
 	public abstract boolean canGoToAccMenu ();
 
+	public void back () {
+		entryHistory.removeLast();
+		entryHistory.getLast().enter();
+	}
+
+	public static Menu getMenuIn () {
+		if (entryHistory.size() != 0) return entryHistory.getLast();
+
+		if (AccountController.getInstance().getCurrentAccLoggedIn() == null) return getMenu("2");
+
+		return getMenu(3 + (AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "A" : "G"));
+	}
+
 	public void enter () {
-		this.parent = getMenuIn();
+		entryHistory.addLast(this);
 		getMenuIn().inMenu = false;
 		this.inMenu = true;
 	}
 
-	public static Menu getMenuIn () {
-		return menus.values().stream().filter(menu -> menu.inMenu).findAny().get();
+	public static void printErrorMessage (String message) {
+		if (message.endsWith("."))
+			message = message.substring(0, message.length() - 1);
+		Menu.println(Color.RED.getVal() + "*%s*".formatted(message) + Color.RESET.getVal());
 	}
 
-	public boolean isFormType () {
-		return false;
+	public static void print(String text) {
+		System.out.print(text);
+	}
+
+	public static void println(String text) {
+		System.out.println(text);
+	}
+
+	public static void printSuccessfulOperation (String text) {
+		Menu.println(Color.GREEN.getVal() + text + Color.RESET.getVal());
+	}
+
+	public static void printAskingForInput(String text) {
+		Menu.print(Color.YELLOW.getVal() + text + Color.RESET.getVal());
 	}
 
 	public static Scanner getScanner () {
@@ -181,21 +205,6 @@ public abstract class Menu {
 
 	public static String getInputLine () {
 		return scanner.nextLine();
-	}
-
-	public static void printErrorMessage (String message) {
-		System.err.println(message);
-		System.err.flush();
-	}
-
-	public static void print(String text) {
-		System.out.print(text);
-		System.out.flush();
-	}
-
-	public static void println(String text) {
-		System.out.println(text);
-		System.out.flush();
 	}
 
 	public static Menu getMenu (String menuid) {

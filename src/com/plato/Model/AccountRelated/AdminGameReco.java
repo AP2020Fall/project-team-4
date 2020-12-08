@@ -29,7 +29,7 @@ public class AdminGameReco {
 	public static LinkedList<AdminGameReco> getRecommendations (Gamer gamer) {
 		return (LinkedList<AdminGameReco>) recommendations.stream()
 				.filter(recommendations -> recommendations.getGamer().getUsername().equals(gamer.getUsername()))
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public static AdminGameReco getRecommendation (String recoID) {
