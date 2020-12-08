@@ -7,7 +7,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
-public class Event {
+public class Event
+{
 	private final String eventID;
 	private String gameName;
 	private double eventScore;
@@ -16,7 +17,8 @@ public class Event {
 
 	private static LinkedList<Event> events = new LinkedList<>();
 
-	private Event (String gameName, double eventScore, LocalDate start, LocalDate end) {
+	private Event (String gameName, double eventScore, LocalDate start, LocalDate end)
+	{
 		this.gameName = gameName;
 		this.eventScore = eventScore;
 		this.start = start;
@@ -24,7 +26,9 @@ public class Event {
 		this.eventID = IDGenerator.generateNext();
 	}
 
-	public static void addEvent (String gameName, double eventScore, LocalDate start, LocalDate end) {
+
+	public static void addEvent (String gameName, double eventScore, LocalDate start, LocalDate end)
+	{
 		events.addLast(new Event(gameName, eventScore, start, end));
 	}
 
@@ -37,18 +41,22 @@ public class Event {
 		return null;
 	}
 
-	public void editField (String field, String newval) {
-		switch (field){
-			case "game name":gameName=newval; break;
-			case "eventscore":eventScore=Double.parseDouble(newval);break;
-			case "start":start=newval;break; // FIXME: 12/6/2020
-			case "end":end=newval;break; // FIXME: 12/6/2020
+	public void editField (String field, String newval)
+	{
+		switch (field) {
+			case "game name":
+				gameName = newval; break;
+			case "eventscore":
+				eventScore = Double.parseDouble(newval); break;
+			case "start":
+				start = LocalDate.parse(newval); break;
+			case "end":
+				end = LocalDate.parse(newval); break;
 		}
-
 	}
 
 	private boolean hasStarted () {
-		// TODO: 11/16/2020 AD
+		// TODO: 12/8/2020
 		return false;
 	}
 	private boolean isDue () {
@@ -60,10 +68,13 @@ public class Event {
 		return hasStarted() && !isDue();
 	}
 
-	public static void dealWOverdueEvents () {
+	public static void dealWOverdueEvents ()
+	{
 		for (int i=0;i<events.size();i++)
 			if (events.get(i).isDue()){
-				events.get(i).giveAwardsOfOverdueEvents()
+				events.get(i).giveAwardsOfOverdueEvents();
+
+				// FIXME: 12/7/2020 AD
 			}
 
 	}
@@ -72,7 +83,9 @@ public class Event {
 	}
 	// TODO: 12/6/2020
 
-	public static LinkedList<Event> getEvents () {
+	public static LinkedList<Event> getEvents ()
+
+	{
 		return events;
 	}
 
@@ -87,31 +100,44 @@ public class Event {
 				.collect(Collectors.toList());
 	}
 
-	public void addParticipant (Gamer gamer) {
+	public void addParticipant (Gamer gamer)
+
+	{
 		participants.add(gamer);
 	}
 
-	public void removeParticipant (Gamer gamer) {
-		// TODO: 11/20/2020 AD
+	public void removeParticipant (Gamer gamer)
+	{
+		participants.remove(gamer);
 	}
 
-	public boolean participantExists (String username) {
-		// TODO: 11/20/2020 AD
+	public boolean participantExists (String username)
+	{
+		for (int i=0;i<participants.size();i++)
+		{if (participants.get(i).getUsername().equals(username))
+		return true;}
+
 		return false;
 	}
 
 	public Gamer getParticipant (String username) {
-		// TODO: 11/20/2020 AD
+
+		// TODO: 12/8/2020
+
 		return null;
 	}
 
-	public static Event getEvent (String eventID) {
-		// TODO: 11/16/2020 AD
-		return null;
+	public static Event getEvent (String eventID)
+	{
+
+			return events.stream()
+					.filter(event -> event.getEventID().equals(eventID))
+					.findAny().get();
 	}
 
 	public static boolean eventInSessionExists (String eventID) {
-		// TODO: 11/16/2020 AD
+
+		// TODO: 12/8/2020
 		return false;
 	}
 

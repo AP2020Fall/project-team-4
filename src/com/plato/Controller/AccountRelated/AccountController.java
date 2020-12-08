@@ -218,6 +218,8 @@ public class AccountController {
 
 				Menu.println("First name changed successfully.");
 			}
+
+
 			case 2 -> {
 				Menu.print("New Last name:[/c to cancel] "); getCurrentAccLoggedIn().editField("last name", Menu.getInputLine());
 				Menu.println("Last name changed successfully.");
