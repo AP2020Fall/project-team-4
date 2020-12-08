@@ -1,5 +1,7 @@
 package View.AccountRelated;
 
+import View.Menus.Menu;
+
 import java.util.LinkedList;
 
 public class AccountView {
@@ -25,7 +27,7 @@ public class AccountView {
 	}
 
 	public void displayEditableFields (LinkedList<String> editableFields) {
-		System.out.println("Choose field to edit:");
+		Menu.printAskingForInput("Choose field to edit:\n");
 		for (String field : editableFields) {
 			System.out.printf("%d. %s%n", editableFields.indexOf(field) + 1, field);
 		}

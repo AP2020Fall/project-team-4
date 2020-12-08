@@ -26,7 +26,7 @@ public class BombController {
 		while (true) {
 			try {
 				// for x
-				Menu.print("X [/c to cancel]: ");
+				Menu.printAskingForInput("X [/c to cancel]: ");
 				Xstr = Menu.getInputLine().trim();
 
 				if (Xstr.equalsIgnoreCase("/c")) return;
@@ -35,7 +35,7 @@ public class BombController {
 					throw new InvalidCoordinateException();
 
 				// for y
-				Menu.print("Y [/c to cancel]: ");
+				Menu.printAskingForInput("Y [/c to cancel]: ");
 				Ystr = Menu.getInputLine().trim();
 
 				if (Ystr.equalsIgnoreCase("/c")) return;

@@ -22,7 +22,7 @@ public class FriendRequestController {
 		String usernameTo;
 		while (true)
 			try {
-				Menu.print("Username:[/c to cancel] "); usernameTo = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] "); usernameTo = Menu.getInputLine();
 
 				if (usernameTo.trim().toLowerCase().equals("/c")) return;
 
@@ -54,7 +54,7 @@ public class FriendRequestController {
 		String usernameFrom;
 		while (true)
 			try {
-				Menu.print("Username:[/c to cancel] "); usernameFrom = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] "); usernameFrom = Menu.getInputLine();
 
 				if (usernameFrom.trim().toLowerCase().equals("/c")) return;
 
@@ -77,7 +77,7 @@ public class FriendRequestController {
 		String usernameFrom;
 		while (true)
 			try {
-				Menu.print("Username:[/c to cancel] "); usernameFrom = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] "); usernameFrom = Menu.getInputLine();
 
 				if (usernameFrom.trim().toLowerCase().equals("/c")) return;
 

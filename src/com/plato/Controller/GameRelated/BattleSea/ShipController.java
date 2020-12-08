@@ -30,7 +30,7 @@ public class ShipController {
 
 		String shipName; Ship chosenShip;
 		while (true) {
-			Menu.print("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
+			Menu.printAskingForInput("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
 
 			if (shipName.toLowerCase().trim().equals("/c")) return;
 
@@ -45,8 +45,8 @@ public class ShipController {
 		String newX, newY; int newXInt, newYInt;
 		while (true)
 			try {
-				Menu.print("New x [/c to cancel , /s to use prev val]: "); newX = Menu.getInputLine();
-				Menu.print("New y [/c to cancel , /s to use prev val]: "); newY = Menu.getInputLine();
+				Menu.printAskingForInput("New x [/c to cancel , /s to use prev val]: "); newX = Menu.getInputLine();
+				Menu.printAskingForInput("New y [/c to cancel , /s to use prev val]: "); newY = Menu.getInputLine();
 
 				if (newX.toLowerCase().trim().equals("/c") || newY.toLowerCase().trim().equals("/c")) return;
 
@@ -85,7 +85,7 @@ public class ShipController {
 
 		String shipName; Ship chosenShip;
 		while (true) {
-			Menu.print("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
+			Menu.printAskingForInput("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
 
 			if (shipName.toLowerCase().trim().equals("/c")) return;
 

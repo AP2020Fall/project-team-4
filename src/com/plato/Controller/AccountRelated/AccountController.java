@@ -26,7 +26,7 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -39,7 +39,7 @@ public class AccountController {
 
 		while (true)
 			try {
-				System.out.print("Password:[/c to cancel] "); String password = Menu.getInputLine();
+				Menu.printAskingForInput("Password:[/c to cancel] "); String password = Menu.getInputLine();
 
 				if (password.trim().equalsIgnoreCase("/c")) return;
 
@@ -53,7 +53,7 @@ public class AccountController {
 
 		currentAccLoggedIn = Account.getAccount(username);
 
-		Menu.print(Color.YELLOW.getVal() + "Remember me?[y/n] " + Color.RESET.getVal());
+		Menu.printAskingForInput("Remember me?[y/n] ");
 		saveLoginInfo = Menu.getInputLine().trim().equalsIgnoreCase("y");
 
 		Menu.addMenusForAdminOrGamer(currentAccLoggedIn instanceof Gamer ? "G" : "A");
@@ -65,7 +65,7 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -82,7 +82,7 @@ public class AccountController {
 
 		while (true)
 			try {
-				Menu.print("Password:[/c to cancel] "); String password = Menu.getInputLine();
+				Menu.printAskingForInput("Password:[/c to cancel] "); String password = Menu.getInputLine();
 
 				if (password.trim().equalsIgnoreCase("/c")) return;
 
@@ -97,7 +97,7 @@ public class AccountController {
 		Menu.displayAreYouSureMessage();
 		if (Menu.getInputLine().equalsIgnoreCase("y")) {
 			Account.removeAccount(username);
-			Menu.println(Color.GREEN.getVal() + "Removed account successfully." + Color.RESET.getVal());
+			Menu.printSuccessfulOperation("Removed account successfully.");
 		}
 	}
 
@@ -105,7 +105,7 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -118,19 +118,19 @@ public class AccountController {
 
 
 		// trying to ask for password and full name
-		Menu.print("Password:[/c to cancel] "); String password = Menu.getInputLine();
+		Menu.printAskingForInput("Password:[/c to cancel] "); String password = Menu.getInputLine();
 		if (password.trim().equalsIgnoreCase("/c")) return;
 
-		Menu.print("First Name:[/c to cancel] "); String firstName = Menu.getInputLine();
+		Menu.printAskingForInput("First Name:[/c to cancel] "); String firstName = Menu.getInputLine();
 		if (firstName.trim().equalsIgnoreCase("/c")) return;
 
-		Menu.print("Last Name:[/c to cancel] "); String lastName = Menu.getInputLine();
+		Menu.printAskingForInput("Last Name:[/c to cancel] "); String lastName = Menu.getInputLine();
 		if (lastName.trim().equalsIgnoreCase("/c")) return;
 
 		String email;
 		while (true)
 			try {
-				Menu.print("Email Address:[/c to cancel] "); email = Menu.getInputLine();
+				Menu.printAskingForInput("Email Address:[/c to cancel] "); email = Menu.getInputLine();
 
 				if (email.trim().equalsIgnoreCase("/c")) return;
 
@@ -144,7 +144,7 @@ public class AccountController {
 		String phoneNum;
 		while (true)
 			try {
-				Menu.print("Phone Number:[/c to cancel] "); phoneNum = Menu.getInputLine();
+				Menu.printAskingForInput("Phone Number:[/c to cancel] "); phoneNum = Menu.getInputLine();
 
 				if (phoneNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -159,7 +159,7 @@ public class AccountController {
 		// 		otherwise ask for initial money amount and make a gamer account
 		if (!Admin.adminHasBeenCreated()) {
 			Account.addAccount(Admin.class, firstName, lastName, username, password, email, phoneNum, 0);
-			Menu.println(Color.GREEN.getVal() + "Admin account created successfully." + Color.RESET.getVal());
+			Menu.printSuccessfulOperation("Admin account created successfully.");
 		}
 		else {
 			// trying to get initial balance
@@ -167,7 +167,7 @@ public class AccountController {
 			double initMoney;
 			while (true) {
 				try {
-					Menu.print("Initial Balance:[/c to cancel] "); initMoney = Double.parseDouble(Menu.getInputLine());
+					Menu.printAskingForInput("Initial Balance:[/c to cancel] "); initMoney = Double.parseDouble(Menu.getInputLine());
 
 					if (phoneNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -183,7 +183,7 @@ public class AccountController {
 			}
 
 			Account.addAccount(Gamer.class, firstName, lastName, username, password, email, phoneNum, initMoney);
-			Menu.println(Color.GREEN.getVal() + "Gamer account created successfully." + Color.RESET.getVal());
+			Menu.printSuccessfulOperation( "Gamer account created successfully." );
 		}
 
 		Menu.addMenu("2");
@@ -193,7 +193,7 @@ public class AccountController {
 	public void changePWCommand () {
 		while (true)
 			try {
-				Menu.print("Old password:[/c to cancel] "); String oldPW = Menu.getInputLine();
+				Menu.printAskingForInput("Old password:[/c to cancel] "); String oldPW = Menu.getInputLine();
 
 				if (oldPW.trim().equalsIgnoreCase("/c")) return;
 
@@ -204,7 +204,7 @@ public class AccountController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		Menu.print("New password: "); String newPW = Menu.getInputLine();
+		Menu.printAskingForInput("New password: "); String newPW = Menu.getInputLine();
 
 		Menu.displayAreYouSureMessage();
 		if (Menu.getInputLine().trim().equalsIgnoreCase("y"))
@@ -224,34 +224,34 @@ public class AccountController {
 
 		switch (field) {
 			case 1 -> {
-				Menu.print("New First name:[/c to cancel] "); String new1name = Menu.getInputLine();
+				Menu.printAskingForInput("New First name:[/c to cancel] "); String new1name = Menu.getInputLine();
 
 				if (new1name.trim().equalsIgnoreCase("/c")) return;
 
 				Menu.displayAreYouSureMessage();
 				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
 					getCurrentAccLoggedIn().editField("first name", new1name);
-					Menu.println("First name changed successfully.");
+					Menu.printSuccessfulOperation("First name changed successfully.");
 				}
 			}
 
 
 			case 2 -> {
-				Menu.print("New Last name:[/c to cancel] "); String new2name = Menu.getInputLine();
+				Menu.printAskingForInput("New Last name:[/c to cancel] "); String new2name = Menu.getInputLine();
 
 				if (new2name.trim().equalsIgnoreCase("/c")) return;
 
 				Menu.displayAreYouSureMessage();
 				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
 					getCurrentAccLoggedIn().editField("last name", new2name);
-					Menu.println("Last name changed successfully.");
+					Menu.printSuccessfulOperation("Last name changed successfully.");
 				}
 			}
 			case 3 -> {
 				String username;
 				while (true)
 					try {
-						Menu.print("New Username:[/c to cancel] "); username = Menu.getInputLine();
+						Menu.printAskingForInput("New Username:[/c to cancel] "); username = Menu.getInputLine();
 
 						if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -265,14 +265,14 @@ public class AccountController {
 				Menu.displayAreYouSureMessage();
 				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
 					getCurrentAccLoggedIn().editField("username", Menu.getInputLine());
-					Menu.println("Username changed successfully.");
+					Menu.printSuccessfulOperation("Username changed successfully.");
 				}
 			}
 			case 4 -> {
 				String newEmail;
 				while (true)
 					try {
-						Menu.print("New email address:[/c to cancel] "); newEmail = Menu.getInputLine();
+						Menu.printAskingForInput("New email address:[/c to cancel] "); newEmail = Menu.getInputLine();
 
 						if (newEmail.trim().equalsIgnoreCase("/c")) return;
 
@@ -282,14 +282,18 @@ public class AccountController {
 					} catch (InvalidEmailFormatException e) {
 						Menu.printErrorMessage(e.getMessage());
 					}
-				getCurrentAccLoggedIn().editField("email", newEmail);
-				Menu.println("Email changed successfully.");
+
+				Menu.displayAreYouSureMessage();
+				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+					getCurrentAccLoggedIn().editField("email", newEmail);
+					Menu.printSuccessfulOperation("Email changed successfully.");
+				}
 			}
 			case 5 -> {
 				String newPhoneNum;
 				while (true)
 					try {
-						Menu.print("Phone Number:[/c to cancel] "); newPhoneNum = Menu.getInputLine();
+						Menu.printAskingForInput("Phone Number:[/c to cancel] "); newPhoneNum = Menu.getInputLine();
 
 						if (newPhoneNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -300,8 +304,11 @@ public class AccountController {
 						Menu.printErrorMessage(e.getMessage());
 					}
 
-				getCurrentAccLoggedIn().editField("phone num", newPhoneNum);
-				Menu.println("Phone number changed successfully.");
+				Menu.displayAreYouSureMessage();
+				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+					getCurrentAccLoggedIn().editField("phone num", newPhoneNum);
+					Menu.printSuccessfulOperation("Phone number changed successfully.");
+				}
 			}
 			default -> Menu.printErrorMessage("Invalid field.");
 		}

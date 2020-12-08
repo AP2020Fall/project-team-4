@@ -142,12 +142,6 @@ public abstract class Menu {
 		return options;
 	}
 
-	public static void printErrorMessage (String message) {
-		if (message.endsWith("."))
-			message = message.substring(0, message.length() - 1);
-		System.out.println(Color.RED.getVal() + "*%s*".formatted(message) + Color.RESET.getVal());
-	}
-
 	public void displayMenu () {
 		for (int i = 0; i < 2; i++) System.out.println();
 
@@ -177,28 +171,40 @@ public abstract class Menu {
 		return getMenu(3 + (AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "A" : "G"));
 	}
 
-	public static Scanner getScanner () {
-		return scanner;
-	}
-
-	public static String getInputLine () {
-		return scanner.nextLine();
-	}
-
 	public void enter () {
 		entryHistory.addLast(this);
 		getMenuIn().inMenu = false;
 		this.inMenu = true;
 	}
 
+	public static void printErrorMessage (String message) {
+		if (message.endsWith("."))
+			message = message.substring(0, message.length() - 1);
+		Menu.println(Color.RED.getVal() + "*%s*".formatted(message) + Color.RESET.getVal());
+	}
+
 	public static void print(String text) {
 		System.out.print(text);
-		System.out.flush();
 	}
 
 	public static void println(String text) {
 		System.out.println(text);
-		System.out.flush();
+	}
+
+	public static void printSuccessfulOperation (String text) {
+		Menu.println(Color.GREEN.getVal() + text + Color.RESET.getVal());
+	}
+
+	public static void printAskingForInput(String text) {
+		Menu.print(Color.YELLOW.getVal() + text + Color.RESET.getVal());
+	}
+
+	public static Scanner getScanner () {
+		return scanner;
+	}
+
+	public static String getInputLine () {
+		return scanner.nextLine();
 	}
 
 	public static Menu getMenu (String menuid) {

@@ -41,7 +41,7 @@ public class BattleSeaController {
 		int boardChoice;
 		while (true)
 			try {
-				Menu.print("Your board choice: "); boardChoice = Integer.parseInt(Menu.getInputLine());
+				Menu.printAskingForInput("Your board choice: "); boardChoice = Integer.parseInt(Menu.getInputLine());
 
 				if (boardChoice < 1 || boardChoice > 5)
 					throw new InputMismatchException();

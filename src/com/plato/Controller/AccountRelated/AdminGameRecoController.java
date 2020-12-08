@@ -28,7 +28,7 @@ public class AdminGameRecoController {
 		String gamerUN;
 		while (true)
 			try {
-				Menu.println("Gamer username:[/c to cancel] "); gamerUN = Menu.getInputLine();
+				Menu.printAskingForInput("Gamer username:[/c to cancel] "); gamerUN = Menu.getInputLine();
 
 				if (gamerUN.trim().equalsIgnoreCase("/c")) return;
 
@@ -50,7 +50,7 @@ public class AdminGameRecoController {
 				AtomicInteger count = new AtomicInteger(1);
 				recoChoices.forEach(game -> Menu.println("%d. %s".formatted(count.getAndIncrement(), game)));
 
-				Menu.println("Your game choice:[/c to cancel] "); gamechoice = Menu.getInputLine();
+				Menu.printAskingForInput("Your game choice:[/c to cancel] "); gamechoice = Menu.getInputLine();
 
 				if (gamechoice.trim().equalsIgnoreCase("/c")) return;
 
@@ -79,7 +79,7 @@ public class AdminGameRecoController {
 
 		while (true)
 			try {
-				Menu.print("Choose game:[/c to cancel] "); String command = Menu.getInputLine();
+				Menu.printAskingForInput("Choose game:[/c to cancel] "); String command = Menu.getInputLine();
 
 				if (command.trim().equalsIgnoreCase("/c")) return;
 
@@ -116,7 +116,7 @@ public class AdminGameRecoController {
 		String recoID;
 		while (true)
 			try {
-				Menu.println("Suggestion ID:[/c to cancel] "); recoID = Menu.getInputLine();
+				Menu.printAskingForInput("Suggestion ID:[/c to cancel] "); recoID = Menu.getInputLine();
 
 				if (recoID.trim().equalsIgnoreCase("/c")) return;
 

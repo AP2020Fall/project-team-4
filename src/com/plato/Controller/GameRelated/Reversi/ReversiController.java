@@ -41,8 +41,8 @@ public class ReversiController {
 		String Xstr, Ystr; int x, y;
 		while (true) {
 			try {
-				Menu.print("X [/c to cancel]: "); Xstr = Menu.getInputLine();
-				Menu.print("Y [/c to cancel]: "); Ystr = Menu.getInputLine();
+				Menu.printAskingForInput("X [/c to cancel]: "); Xstr = Menu.getInputLine();
+				Menu.printAskingForInput("Y [/c to cancel]: "); Ystr = Menu.getInputLine();
 
 				if (Xstr.toLowerCase().trim().equals("/c") || Ystr.toLowerCase().trim().equals("/c")) return;
 

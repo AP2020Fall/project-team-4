@@ -31,7 +31,7 @@ public class GameController {
 		Gamer player2;
 		while (true)
 			try {
-				Menu.print("Second Player's username:[/c to cancel] ");
+				Menu.printAskingForInput("Second Player's username:[/c to cancel] ");
 				String username2 = Menu.getInputLine();
 
 				if (username2.trim().equalsIgnoreCase("/c")) return;
