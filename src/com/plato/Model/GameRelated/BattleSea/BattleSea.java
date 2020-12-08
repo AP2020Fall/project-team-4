@@ -5,7 +5,10 @@ import Model.GameRelated.Game;
 import Model.GameRelated.GameLog;
 import Model.GameRelated.Reversi.Reversi;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class BattleSea extends Game {
@@ -140,11 +143,11 @@ public class BattleSea extends Game {
 		return number <= 10 && number >= 1;
 	}
 
-	public static ArrayList<BattleSea> getAllBattleSeaGames () {
-		return (ArrayList<BattleSea>) getAllGames().stream()
+	public static LinkedList<BattleSea> getAllBattleSeaGames () {
+		return getAllGames().stream()
 				.filter(game -> game instanceof BattleSea)
 				.map(game -> ((BattleSea) game))
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public boolean canStartBombing () {

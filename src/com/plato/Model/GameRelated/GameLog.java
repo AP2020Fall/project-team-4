@@ -112,9 +112,9 @@ public class GameLog {
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
 	public static LinkedList<String> getGameHistory (String gameName) {
-		LinkedList<Game> gamesHistory = (LinkedList<Game>) Game.getAllFinishedGames().stream()
+		LinkedList<Game> gamesHistory = Game.getAllFinishedGames().stream()
 				.sorted(Comparator.comparing(Game::getDateGameEnded).reversed())
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 
 		LinkedList<String> gamesHitoryAsStrings = new LinkedList<>();
 

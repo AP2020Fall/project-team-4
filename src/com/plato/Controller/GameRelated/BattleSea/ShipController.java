@@ -7,8 +7,6 @@ import Model.GameRelated.BattleSea.Ship;
 import View.GameRelated.BattleSea.ShipView;
 import View.Menus.Menu;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 
@@ -32,7 +30,7 @@ public class ShipController {
 
 		String shipName; Ship chosenShip;
 		while (true) {
-			System.out.print("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
+			Menu.print("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
 
 			if (shipName.toLowerCase().trim().equals("/c")) return;
 
@@ -47,8 +45,8 @@ public class ShipController {
 		String newX, newY; int newXInt, newYInt;
 		while (true)
 			try {
-				System.out.print("New x [/c to cancel , /s to use prev val]: "); newX = Menu.getInputLine();
-				System.out.print("New y [/c to cancel , /s to use prev val]: "); newY = Menu.getInputLine();
+				Menu.print("New x [/c to cancel , /s to use prev val]: "); newX = Menu.getInputLine();
+				Menu.print("New y [/c to cancel , /s to use prev val]: "); newY = Menu.getInputLine();
 
 				if (newX.toLowerCase().trim().equals("/c") || newY.toLowerCase().trim().equals("/c")) return;
 
@@ -87,7 +85,7 @@ public class ShipController {
 
 		String shipName; Ship chosenShip;
 		while (true) {
-			System.out.print("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
+			Menu.print("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
 
 			if (shipName.toLowerCase().trim().equals("/c")) return;
 
@@ -111,7 +109,7 @@ public class ShipController {
 
 	public  void displayAllShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
 						.getShips())
 		);
@@ -119,21 +117,21 @@ public class ShipController {
 
 	public  void displayDestroyedShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
 						.getShips(true)));
 	}
 
 	public  void displayDestroyedShipsOfOpponent () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
 						.getOpponentShips(true)));
 	}
 
 	public  void displayHealthyShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
-				((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
 						.getShips(false)));
 	}

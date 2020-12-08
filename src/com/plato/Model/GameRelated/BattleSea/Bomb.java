@@ -22,17 +22,15 @@ public class Bomb {
 
 	public static Bomb throwBomb (Game game, int x, int y, PlayerBattleSea thrower) {
 		Bomb bomb = new Bomb(game, x, y);
-		if (bomb.wasSuccessFul(thrower))
-			return new Bomb(game, x, y, true);
-		return new Bomb(game, x, y, false);
+		bomb.setWasSuccessful(bomb.wasSuccessFul(thrower));
+		return bomb;
 	}
 
 	public boolean wasSuccessFul (PlayerBattleSea thrower) {
 		PlayerBattleSea thrownAt = (PlayerBattleSea) game.getOpponentOf(thrower);
-		Bomb bomb = thrower.getBombsThrown().getLast();
 
 		return Ship.getAllCoords(thrownAt.getShips()).stream()
-				.anyMatch(coord -> coord[0] == bomb.getX() && coord[1] == bomb.getY());
+				.anyMatch(coord -> coord[0] == this.getX() && coord[1] == this.getY());
 	}
 
 	public int getX () {
@@ -45,5 +43,9 @@ public class Bomb {
 
 	public Boolean getWasSuccessful () {
 		return wasSuccessful;
+	}
+
+	public void setWasSuccessful (Boolean wasSuccessful) {
+		this.wasSuccessful = wasSuccessful;
 	}
 }

@@ -177,7 +177,7 @@ public class MainController {
 			case "change ship direction" -> ShipController.getInstance().rotateShip();
 			case "finalize board" -> {
 				BattleSeaController.getInstance().finalizeTrialBoard();
-				if (((BattleSea) GameController.getInstance().getCurrentGame()).canStartBombing()) {
+				if (((BattleSea) GameController.getInstance().getCurrentGameInSession()).canStartBombing()) {
 					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
 					BattleSeaController.getInstance().initTurnTimerStuff();
 				}
@@ -185,6 +185,7 @@ public class MainController {
 			//		phase 2
 			case "boom (throw bomb)" -> BombController.getInstance().throwBomb();
 			case "time?" -> BattleSeaController.getInstance().displayRemainingTime();
+			case "whose turn?" -> GameController.getInstance().displayTurn();
 			case "display all my ships" -> ShipController.getInstance().displayAllShipsOfCurrentPlayer();
 			case "display all my booms" -> BombController.getInstance().displayAllCurrentPlayerBombs();
 			case "display all my opponent’s booms" -> BombController.getInstance().displayAllOpponentBombs();

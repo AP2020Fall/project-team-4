@@ -35,7 +35,7 @@ public class FriendRequest {
 	public static LinkedList<FriendRequest> getFriendReq (Gamer to) {
 		return (LinkedList<FriendRequest>) allfriendRequests.stream()
 				.filter(friendRequest -> friendRequest.to.equals(to))
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public static boolean frndReqExists (String usernameFrom) {

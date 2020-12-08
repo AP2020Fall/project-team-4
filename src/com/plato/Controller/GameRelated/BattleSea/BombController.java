@@ -20,23 +20,34 @@ public class BombController {
 	}
 
 	public void throwBomb () {
-		PlayerBattleSea currentPlayer = ((PlayerBattleSea) GameController.getInstance().getCurrentGame().getTurnPlayer());
+		PlayerBattleSea currentPlayer = ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getTurnPlayer());
 
 		String Xstr, Ystr; int x, y;
 		while (true) {
 			try {
-				System.out.print("X [/c to cancel]: "); Xstr = Menu.getInputLine();
-				System.out.print("Y [/c to cancel]: "); Ystr = Menu.getInputLine();
+				// for x
+				Menu.print("X [/c to cancel]: ");
+				Xstr = Menu.getInputLine().trim();
 
-				if (Xstr.toLowerCase().trim().equals("/c") || Ystr.toLowerCase().trim().equals("/c")) return;
+				if (Xstr.equalsIgnoreCase("/c")) return;
 
-				x = Integer.parseInt(Xstr); y = Integer.parseInt(Ystr);
-
-				if (!BattleSea.checkCoordinates(x) || !BattleSea.checkCoordinates(y))
+				if (!BattleSea.checkCoordinates(Integer.parseInt(Xstr)))
 					throw new InvalidCoordinateException();
 
-				if (currentPlayer.hasBeenBombedBefore(x, y))
+				// for y
+				Menu.print("Y [/c to cancel]: ");
+				Ystr = Menu.getInputLine().trim();
+
+				if (Ystr.equalsIgnoreCase("/c")) return;
+
+				if (!BattleSea.checkCoordinates(Integer.parseInt(Ystr)))
+					throw new InvalidCoordinateException();
+
+				if (currentPlayer.hasBeenBombedBefore(Integer.parseInt(Xstr), Integer.parseInt(Ystr)))
 					throw new CoordinateAlreadyBombedException();
+
+				x = Integer.parseInt(Xstr);
+				y = Integer.parseInt(Ystr);
 				break;
 			} catch (InvalidCoordinateException | CoordinateAlreadyBombedException e) {
 				Menu.printErrorMessage(e.getMessage());
@@ -48,45 +59,45 @@ public class BombController {
 	}
 
 	public void displayAllCurrentPlayerBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getBombsThrown()));
 	}
 
 	public void displayAllOpponentBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getOpponentBombsThrown()));
 	}
 
 	public void displayAllSuccessCurrentPlayerBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getBombsThrown(true)));
 	}
 
 	public void displayAllSuccessOpponentBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getOpponentBombsThrown(true)));
 	}
 
 	public void displayAllUnsuccessCurrentPlayerBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getBombsThrown(false)));
 	}
 
 	public void displayAllUnsuccessOpponentBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGame()
+		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 				.getTurnPlayer())
 				.getOpponentBombsThrown(false)));
 	}
 
 	private LinkedList<String> getBombXYs (LinkedList<Bomb> bombs) {
-		return (LinkedList<String>) bombs.stream()
+		return bombs.stream()
 				.map(bomb -> "%d %d".formatted(bomb.getX(), bomb.getY()))
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public static class InvalidCoordinateException extends Exception {

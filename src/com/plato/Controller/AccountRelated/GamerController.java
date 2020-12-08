@@ -24,9 +24,9 @@ public class GamerController {
 	}
 
 	public void displayAllUsernames () {
-		LinkedList<Gamer> allGamerAccounts = (LinkedList<Gamer>) Gamer.getGamers().stream()
+		LinkedList<Gamer> allGamerAccounts = Gamer.getGamers().stream()
 				.sorted(Comparator.comparing(Account::getUsername))
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 
 		GamerView.getInstance().displayAllUsernames(new LinkedList<>() {{
 			for (Gamer gamerAccount : allGamerAccounts) {
@@ -38,7 +38,7 @@ public class GamerController {
 	public void displayFriendsUsernames () {
 		LinkedList<Gamer> playersFriendsAccounts = (LinkedList<Gamer>) ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn())
 				.getFrnds().stream().sorted(Comparator.comparing(Account::getUsername))
-				.collect(Collectors.toList());
+				.collect(Collectors.toCollection(LinkedList::new));
 
 		GamerView.getInstance().displayFriendsUsernames(new LinkedList<>() {{
 			for (Gamer friendAccount : playersFriendsAccounts)
@@ -51,7 +51,7 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
 				if (username.trim().toLowerCase().equals("/c")) return;
 
@@ -74,7 +74,7 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
 				if (username.trim().toLowerCase().equals("/c")) return;
 
@@ -92,7 +92,7 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
 				if (username.trim().toLowerCase().equals("/c")) return;
 
