@@ -108,7 +108,8 @@ public class Event
 		participants.remove(gamer);
 	}
 
-	public boolean participantExists (String username) {
+	public boolean participantExists (String username)
+	{
 		for (int i=0;i<participants.size();i++)
 		{if (participants.get(i).getUsername().equals(username))
 		return true;}
@@ -122,7 +123,8 @@ public class Event
 		return null;
 	}
 
-	public static Event getEvent (String eventID) {
+	public static Event getEvent (String eventID)
+	{
 
 			return events.stream()
 					.filter(event -> event.getEventID().equals(eventID))
