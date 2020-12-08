@@ -44,6 +44,52 @@ public abstract class Game {
 		allGames.add(this);
 	}
 
+	public static LinkedList<String> getScoreboard(String gameName){
+		LinkedList<String> scoreBoard = new LinkedList<>();
+		if(gameName.equals("BattleSea")){
+			LinkedList<Gamer> allPlayersOfBattleSea = GameLog.getAllGamersWhoPlayedGame(gameName);
+			allPlayersOfBattleSea.sort((gamer1, gamer2) -> {
+				int cmp;
+
+				cmp = -GameLog.getPoints(gamer1, gameName).compareTo(GameLog.getPoints(gamer2, gameName));
+				if (cmp != 0) return cmp;
+
+				cmp = -GameLog.getWinCount(gamer1, gameName).compareTo(GameLog.getWinCount(gamer2, gameName));
+				if (cmp != 0) return cmp;
+
+				cmp = GameLog.getLossCount(gamer1, gameName).compareTo(GameLog.getLossCount(gamer2, gameName));
+				if (cmp != 0) return cmp;
+
+				cmp = GameLog.getPlayedCount(gamer1, gameName).compareTo(GameLog.getPlayedCount(gamer2, gameName));
+				if (cmp != 0) return cmp;
+
+				cmp = -GameLog.getDrawCount(gamer1, gameName).compareTo(GameLog.getDrawCount(gamer2, gameName));
+				if (cmp != 0) return cmp;
+
+				return gamer1.getUsername().compareToIgnoreCase(gamer2.getUsername());
+			});
+
+			if (allPlayersOfBattleSea.size() == 0)
+				scoreBoard.addLast("No one has played %s until now.".formatted(gameName));
+			else
+				allPlayersOfBattleSea.forEach(gamer -> {
+					String username = gamer.getUsername();
+					int pts = (GameLog.getPoints(gamer, gameName)),
+							wins = (GameLog.getWinCount(gamer, gameName)),
+							losses = (GameLog.getLossCount(gamer, gameName)),
+							draws = (GameLog.getDrawCount(gamer, gameName)),
+							playCount = (GameLog.getPlayedCount(gamer, gameName));
+
+					scoreBoard.addLast("Username: %s,\tPoints: %d,\tWins: %d,\tLosses: %d,\tDraws: %d,\tPlayed Count: %d".formatted(
+							username, pts, wins, losses, draws, playCount
+					));
+				});
+		}
+
+		else if(gameName.equals("Reversi")){//will be added
+			 }
+	return scoreBoard;}
+
 	public static void startGame (Game game) {
 		allGames.addLast(game);
 	}
