@@ -219,6 +219,8 @@ public class AccountController {
 				getCurrentAccLoggedIn().editField("first name", Menu.getInputLine()); // FIXME: add cancel option
 				Menu.println("First name changed successfully.");
 			}
+
+
 			case 2 -> {
 				Menu.print("New Last name: "); getCurrentAccLoggedIn().editField("last name", Menu.getInputLine()); // FIXME: add cancel option
 				Menu.println("Last name changed successfully.");

@@ -91,16 +91,19 @@ public class Event {
 				.collect(Collectors.toList());
 	}
 
-	public void addParticipant (Gamer gamer) {
+	public void addParticipant (Gamer gamer)
+	{
 		participants.add(gamer);
 	}
 
 	public void removeParticipant (Gamer gamer) {
-		// TODO: 11/20/2020 AD
+		participants.remove(gamer);
 	}
 
 	public boolean participantExists (String username) {
-		// TODO: 11/20/2020 AD
+		for (int i=0;i<participants.size();i++)
+		{if (participants.get(i).getUsername().equals(username))
+		return true;}
 		return false;
 	}
 
@@ -110,12 +113,13 @@ public class Event {
 	}
 
 	public static Event getEvent (String eventID) {
-		// TODO: 11/16/2020 AD
-		return null;
+			return events.stream()
+					.filter(event -> event.getEventID().equals(eventID))
+					.findAny().get();
 	}
 
 	public static boolean eventInSessionExists (String eventID) {
-		// TODO: 11/16/2020 AD
+// TODO: 12/7/2020  
 		return false;
 	}
 
