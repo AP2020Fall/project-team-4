@@ -15,6 +15,8 @@ import View.Menus._11GameMenu;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import static Model.GameRelated.Game.getScoreboard;
+
 public class GameController {
 	private static GameController gameController;
 
@@ -116,7 +118,7 @@ public class GameController {
 	}
 
 	public void displayScoreboardOfGame () {
-		LinkedList<String> scoreBoard = ((_11GameMenu) Menu.getMenuIn()).getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getScoreboard() : Reversi.getScoreboard();
+		LinkedList<String> scoreBoard = getScoreboard(((_11GameMenu) Menu.getMenuIn()).getGameName());
 		GameView.getInstance().displayScoreboardOfGame(((_11GameMenu) Menu.getMenuIn()).getGameName(), scoreBoard);
 	}
 

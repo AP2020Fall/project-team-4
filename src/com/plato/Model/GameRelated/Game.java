@@ -1,5 +1,6 @@
 package Model.GameRelated;
 
+import Controller.GameRelated.GameController;
 import Controller.IDGenerator;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
@@ -46,9 +47,8 @@ public abstract class Game {
 
 	public static LinkedList<String> getScoreboard(String gameName){
 		LinkedList<String> scoreBoard = new LinkedList<>();
-		if(gameName.equals("BattleSea")){
-			LinkedList<Gamer> allPlayersOfBattleSea = GameLog.getAllGamersWhoPlayedGame(gameName);
-			allPlayersOfBattleSea.sort((gamer1, gamer2) -> {
+			LinkedList<Gamer> allPlayersOfGameName = GameLog.getAllGamersWhoPlayedGame(gameName);
+			allPlayersOfGameName.sort((gamer1, gamer2) -> {
 				int cmp;
 
 				cmp = -GameLog.getPoints(gamer1, gameName).compareTo(GameLog.getPoints(gamer2, gameName));
@@ -69,10 +69,10 @@ public abstract class Game {
 				return gamer1.getUsername().compareToIgnoreCase(gamer2.getUsername());
 			});
 
-			if (allPlayersOfBattleSea.size() == 0)
+			if (allPlayersOfGameName.size() == 0)
 				scoreBoard.addLast("No one has played %s until now.".formatted(gameName));
 			else
-				allPlayersOfBattleSea.forEach(gamer -> {
+				allPlayersOfGameName.forEach(gamer -> {
 					String username = gamer.getUsername();
 					int pts = (GameLog.getPoints(gamer, gameName)),
 							wins = (GameLog.getWinCount(gamer, gameName)),
@@ -84,11 +84,8 @@ public abstract class Game {
 							username, pts, wins, losses, draws, playCount
 					));
 				});
-		}
-
-		else if(gameName.equals("Reversi")){//will be added
-			 }
 	return scoreBoard;}
+
 
 	public static void startGame (Game game) {
 		allGames.addLast(game);
@@ -130,9 +127,14 @@ public abstract class Game {
 	}
 
 	public void concludeGame () {
-		// set end time
+		// set end time  //fixme : i dunno what to do with this sorry
 		// set Conclusion
-		// GameController.getInstance().setCurrentGameInSession(null);
+		if(gameHasEnded()){
+		if(getWinner().equals(null)) setConclusion(GameConclusion.DRAW);
+		else if(getWinner().equals(listOfPlayers.get(0).getGamer())) setConclusion(GameConclusion.PLAYER1_WIN);
+		else if(getWinner().equals(listOfPlayers.get(1).getGamer())) setConclusion(GameConclusion.PLAYER2_WIN);}
+		else {setConclusion(GameConclusion.IN_SESSION);}
+		//GameController.getInstance().setCurrentGameInSession(null);
 	}
 
 	public abstract boolean gameEnded ();
@@ -144,6 +146,7 @@ public abstract class Game {
 	}
 
 
+	//fixme : do we need this at all?
 	public boolean playerWUsernameWon (String username) {
 		if (conclusion == GameConclusion.IN_SESSION || conclusion == GameConclusion.DRAW) return false;
 		return getWinner().getUsername().equals(username);

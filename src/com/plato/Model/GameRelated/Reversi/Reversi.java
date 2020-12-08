@@ -200,10 +200,12 @@ public class Reversi extends Game {
 	 * should be called before changing turns
 	 */
 	public boolean hasPlayerMoved() {
-		// FIXME: add a شرط here to return false if moves is empty
+		if(moves.size()==0) return false;
+		else{
 		String color = moves.getLast().substring(0, 1);
+
 		if (color.equals(((PlayerReversi) getPlayer(getTurnGamer())).getColor())) return true;
-		else return false;
+		else return false;}
 	}
 
 	//empties board , blank space is shown with -
@@ -224,26 +226,14 @@ public class Reversi extends Game {
 	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended :O
 	 */
 	@Override
-	public boolean gameEnded () { // fixme is true if getAvailableCoordinates list size =0
+	public boolean gameEnded () {
 		if(getNumberOfBlack()==0) return true;
 		else if(getNumberOfWhite()==0) return true;
 		else return isBoardFull();
 	}
 	
-	/**
-	 1. list all finished games of this type
-	 2. get a list of all the players that played game with GameLog.getAllWhoPlayedGame
-	 3. use gamelog methods to determine how many times each player won, lost or tied and also all the points he/she earned and number of times they played it
-	 4. sort as follows -> (n:نزولی - s:صعودی)
-	 5. 			n - points , n - wins , s - loss , s - playCount , n - draws , abc - username(not case sensitive)
-	 6. format all this shite in string form and return	the string linkedlist result
-	 */
-	public static LinkedList<String> getScoreboard () {
-		// TODO: 11/13/2020 AD
-		return null;
-	}
 
-	private int getNumberOfBlack() {
+	public int getNumberOfBlack() {
 		int count = 0;
 		//TODO : straem for 2d array
 		for (int i = 0; i < 8; i++) {
@@ -254,7 +244,7 @@ public class Reversi extends Game {
 		return count;
 	}
 
-	private int getNumberOfWhite () {
+	public int getNumberOfWhite () {
 		int count = 0;
 		//TODO : straem for 2d array didnt find anything sorry
 		for (int i = 0; i < 8; i++) {
