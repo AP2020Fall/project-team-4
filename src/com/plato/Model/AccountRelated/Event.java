@@ -33,7 +33,7 @@ public class Event
 	}
 
 	public static void removeEvent (String eventID) {
-		events.remove(getEvent(eventID))
+		events.remove(getEvent(eventID));
 	}
 
 	public static LinkedList<Event> getInSessionEventsParticipatingIn (Gamer gamer) {
