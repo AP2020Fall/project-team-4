@@ -7,7 +7,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
-public class Event {
+public class Event
+{
 	private final String eventID;
 	private String gameName;
 	private double eventScore;
@@ -16,7 +17,8 @@ public class Event {
 
 	private static LinkedList<Event> events = new LinkedList<>();
 
-	private Event (String gameName, double eventScore, LocalDate start, LocalDate end) {
+	private Event (String gameName, double eventScore, LocalDate start, LocalDate end)
+	{
 		this.gameName = gameName;
 		this.eventScore = eventScore;
 		this.start = start;
@@ -24,7 +26,9 @@ public class Event {
 		this.eventID = IDGenerator.generateNext();
 	}
 
-	public static void addEvent (String gameName, double eventScore, LocalDate start, LocalDate end) {
+
+	public static void addEvent (String gameName, double eventScore, LocalDate start, LocalDate end)
+	{
 		events.addLast(new Event(gameName, eventScore, start, end));
 	}
 
@@ -37,7 +41,8 @@ public class Event {
 		return null;
 	}
 
-	public void editField (String field, String newval) {
+	public void editField (String field, String newval)
+	{
 		switch (field) {
 			case "game name":
 				gameName = newval; break;
@@ -52,7 +57,7 @@ public class Event {
 	}
 
 	private boolean hasStarted () {
-		// TODO: 11/16/2020 AD
+		// TODO: 12/8/2020
 		return false;
 	}
 	private boolean isDue () {
@@ -67,7 +72,8 @@ public class Event {
 	public static void dealWOverdueEvents () {
 		for (int i=0;i<events.size();i++)
 			if (events.get(i).isDue()){
-				events.get(i).giveAwardsOfOverdueEvents();// FIXME: 12/7/2020 AD
+				events.get(i).giveAwardsOfOverdueEvents();
+				// FIXME: 12/7/2020 AD
 			}
 
 	}
@@ -97,7 +103,8 @@ public class Event {
 		participants.add(gamer);
 	}
 
-	public void removeParticipant (Gamer gamer) {
+	public void removeParticipant (Gamer gamer)
+	{
 		participants.remove(gamer);
 	}
 
@@ -111,6 +118,7 @@ public class Event {
 	public Gamer getParticipant (String username) {
 
 		// TODO: 12/8/2020
+
 		return null;
 	}
 
