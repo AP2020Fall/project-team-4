@@ -129,7 +129,7 @@ public abstract class Menu {
 	}
 
 	public static void displayAreYouSureMessage () {
-		System.out.print(Color.RED.getVal() + "Are you sure?[y/n]  " + Color.RESET.getVal());
+		System.out.print(Color.YELLOW.getVal() + "Are you sure?[y/n]  " + Color.RESET.getVal());
 	}
 
 	public LinkedList<String> getOptions () {
@@ -150,10 +150,10 @@ public abstract class Menu {
 	public void displayMenu () {
 		for (int i = 0; i < 2; i++) System.out.println();
 
-		System.out.println(Color.PURPLE.getVal() + menuTitle + ":" + Color.GREEN.getVal());
+		System.out.println(Color.BLACK_BRIGHT.getVal() + menuTitle + ":" + Color.RESET.getVal());
 
 		AtomicInteger optionCounter = new AtomicInteger(1);
-		getOptions().forEach(opt -> System.out.printf("%s%d.%s %s%n", Color.WHITE.getVal(), optionCounter.getAndIncrement(), Color.GREEN.getVal(), opt));
+		getOptions().forEach(opt -> System.out.printf("%d. %s%n", optionCounter.getAndIncrement(), opt));
 
 		System.out.println(Color.YELLOW.getVal());
 		System.out.print("Your choice:  " + Color.RESET.getVal());

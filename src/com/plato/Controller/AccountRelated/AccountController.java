@@ -4,6 +4,7 @@ import Model.AccountRelated.Account;
 import Model.AccountRelated.Admin;
 import Model.AccountRelated.Gamer;
 import View.AccountRelated.AccountView;
+import View.Menus.Color;
 import View.Menus.Menu;
 
 import java.util.Arrays;
@@ -89,9 +90,11 @@ public class AccountController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		Account.removeAccount(username);
-		if (currentAccLoggedIn.getUsername().equals(username))
-			logoutCommand();
+		Menu.displayAreYouSureMessage();
+		if (Menu.getInputLine().equalsIgnoreCase("y")) {
+			Account.removeAccount(username);
+			Menu.println(Color.GREEN.getVal() + "Removed account successfully." + Color.RESET.getVal());
+		}
 	}
 
 	public void register () {
@@ -152,7 +155,7 @@ public class AccountController {
 		// 		otherwise ask for initial money amount and make a gamer account
 		if (!Admin.adminHasBeenCreated()) {
 			Account.addAccount(Admin.class, firstName, lastName, username, password, email, phoneNum, 0);
-			Menu.printErrorMessage("Admin account created successfully.");
+			Menu.println(Color.GREEN.getVal() + "Admin account created successfully." + Color.RESET.getVal());
 		}
 		else {
 			// trying to get initial balance
@@ -176,7 +179,7 @@ public class AccountController {
 			}
 
 			Account.addAccount(Gamer.class, firstName, lastName, username, password, email, phoneNum, initMoney);
-			Menu.printErrorMessage("Gamer account created successfully.");
+			Menu.println(Color.GREEN.getVal() + "Gamer account created successfully." + Color.RESET.getVal());
 		}
 
 		Menu.addMenu("2");
