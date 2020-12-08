@@ -1,5 +1,6 @@
 package Model.GameRelated;
 
+import Controller.GameRelated.GameController;
 import Controller.IDGenerator;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
@@ -44,6 +45,48 @@ public abstract class Game {
 		allGames.add(this);
 	}
 
+	public static LinkedList<String> getScoreboard(String gameName){
+		LinkedList<String> scoreBoard = new LinkedList<>();
+			LinkedList<Gamer> allPlayersOfGameName = GameLog.getAllGamersWhoPlayedGame(gameName);
+			allPlayersOfGameName.sort((gamer1, gamer2) -> {
+				int cmp;
+
+				cmp = -GameLog.getPoints(gamer1, gameName).compareTo(GameLog.getPoints(gamer2, gameName));
+				if (cmp != 0) return cmp;
+
+				cmp = -GameLog.getWinCount(gamer1, gameName).compareTo(GameLog.getWinCount(gamer2, gameName));
+				if (cmp != 0) return cmp;
+
+				cmp = GameLog.getLossCount(gamer1, gameName).compareTo(GameLog.getLossCount(gamer2, gameName));
+				if (cmp != 0) return cmp;
+
+				cmp = GameLog.getPlayedCount(gamer1, gameName).compareTo(GameLog.getPlayedCount(gamer2, gameName));
+				if (cmp != 0) return cmp;
+
+				cmp = -GameLog.getDrawCount(gamer1, gameName).compareTo(GameLog.getDrawCount(gamer2, gameName));
+				if (cmp != 0) return cmp;
+
+				return gamer1.getUsername().compareToIgnoreCase(gamer2.getUsername());
+			});
+
+			if (allPlayersOfGameName.size() == 0)
+				scoreBoard.addLast("No one has played %s until now.".formatted(gameName));
+			else
+				allPlayersOfGameName.forEach(gamer -> {
+					String username = gamer.getUsername();
+					int pts = (GameLog.getPoints(gamer, gameName)),
+							wins = (GameLog.getWinCount(gamer, gameName)),
+							losses = (GameLog.getLossCount(gamer, gameName)),
+							draws = (GameLog.getDrawCount(gamer, gameName)),
+							playCount = (GameLog.getPlayedCount(gamer, gameName));
+
+					scoreBoard.addLast("Username: %s,\tPoints: %d,\tWins: %d,\tLosses: %d,\tDraws: %d,\tPlayed Count: %d".formatted(
+							username, pts, wins, losses, draws, playCount
+					));
+				});
+	return scoreBoard;}
+
+
 	public static void startGame (Game game) {
 		allGames.addLast(game);
 	}
@@ -84,9 +127,14 @@ public abstract class Game {
 	}
 
 	public void concludeGame () {
-		// set end time
+		// set end time  //fixme : i dunno what to do with this sorry
 		// set Conclusion
-		// GameController.getInstance().setCurrentGameInSession(null);
+		if(gameHasEnded()){
+		if(getWinner().equals(null)) setConclusion(GameConclusion.DRAW);
+		else if(getWinner().equals(listOfPlayers.get(0).getGamer())) setConclusion(GameConclusion.PLAYER1_WIN);
+		else if(getWinner().equals(listOfPlayers.get(1).getGamer())) setConclusion(GameConclusion.PLAYER2_WIN);}
+		else {setConclusion(GameConclusion.IN_SESSION);}
+		//GameController.getInstance().setCurrentGameInSession(null);
 	}
 
 	public abstract boolean gameEnded ();
@@ -98,6 +146,7 @@ public abstract class Game {
 	}
 
 
+	//fixme : do we need this at all?
 	public boolean playerWUsernameWon (String username) {
 		if (conclusion == GameConclusion.IN_SESSION || conclusion == GameConclusion.DRAW) return false;
 		return getWinner().getUsername().equals(username);
