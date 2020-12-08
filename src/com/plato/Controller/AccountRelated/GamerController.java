@@ -51,7 +51,7 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
 				if (username.trim().toLowerCase().equals("/c")) return;
 
@@ -74,7 +74,7 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
 				if (username.trim().toLowerCase().equals("/c")) return;
 
@@ -92,7 +92,7 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
 				if (username.trim().toLowerCase().equals("/c")) return;
 

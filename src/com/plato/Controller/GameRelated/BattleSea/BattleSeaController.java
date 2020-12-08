@@ -41,7 +41,7 @@ public class BattleSeaController {
 		int boardChoice;
 		while (true)
 			try {
-				System.out.print("Your board choice: "); boardChoice = Integer.parseInt(Menu.getInputLine());
+				Menu.print("Your board choice: "); boardChoice = Integer.parseInt(Menu.getInputLine());
 
 				if (boardChoice < 1 || boardChoice > 5)
 					throw new InputMismatchException();
@@ -124,7 +124,7 @@ public class BattleSeaController {
 		PlayerBattleSea curentPlayer = ((PlayerBattleSea) currentGame.getTurnPlayer()),
 				currentOpponent = (PlayerBattleSea) currentGame.getOpponentOf(curentPlayer);
 
-		System.out.println("%s%s board%s".formatted(Color.BLACK_BRIGHT.getVal(), (boardIsForCurrentPlayer ? "Your" : "Opponent's"), Color.RESET.getVal()));
+		Menu.println("%s%s board%s".formatted(Color.BLACK_BRIGHT.getVal(), (boardIsForCurrentPlayer ? "Your" : "Opponent's"), Color.RESET.getVal()));
 
 		for (int y = 0; y <= 10; y++) {
 			boardStrBldr.append("\t| ");

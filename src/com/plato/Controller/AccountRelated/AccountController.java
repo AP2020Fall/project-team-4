@@ -24,7 +24,7 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -60,7 +60,7 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				System.out.print("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.print("Username:[/c to cancel] "); username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -77,7 +77,7 @@ public class AccountController {
 
 		while (true)
 			try {
-				System.out.print("Password:[/c to cancel] "); String password = Menu.getInputLine();
+				Menu.print("Password:[/c to cancel] "); String password = Menu.getInputLine();
 
 				if (password.trim().equalsIgnoreCase("/c")) return;
 
