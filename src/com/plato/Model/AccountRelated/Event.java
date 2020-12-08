@@ -32,7 +32,8 @@ public class Event
 		events.addLast(new Event(gameName, eventScore, start, end));
 	}
 
-	public static void removeEvent (String eventID) {
+	public static void removeEvent (String eventID)
+	{
 		events.remove(getEvent(eventID));
 	}
 
