@@ -113,6 +113,7 @@ public class Event
 		for (int i=0;i<participants.size();i++)
 		{if (participants.get(i).getUsername().equals(username))
 		return true;}
+
 		return false;
 	}
 
