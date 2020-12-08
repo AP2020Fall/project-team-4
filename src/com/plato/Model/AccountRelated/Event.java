@@ -99,6 +99,7 @@ public class Event
 	}
 
 	public void addParticipant (Gamer gamer)
+
 	{
 		participants.add(gamer);
 	}
