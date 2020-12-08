@@ -9,7 +9,7 @@ public class _12_1GameplayBattleSeaMenu extends Menu {
 	/*
 	 *	Used in getOptions()
 	 *	i=1 -> Board editing phase
-	 * 	i=2 -> Bombing phase 		=> todo set after board is finalized
+	 * 	i=2 -> Bombing phase
 	 */
 	private int phase = 1;
 

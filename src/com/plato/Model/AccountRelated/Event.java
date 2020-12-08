@@ -32,9 +32,8 @@ public class Event
 		events.addLast(new Event(gameName, eventScore, start, end));
 	}
 
-	public static void removeEvent (String eventID)
-	{
-		events.remove(getEvent(eventID));
+	public static void removeEvent (String eventID) {
+		events.remove(getEvent(eventID))
 	}
 
 	public static LinkedList<Event> getInSessionEventsParticipatingIn (Gamer gamer) {
@@ -54,7 +53,6 @@ public class Event
 			case "end":
 				end = LocalDate.parse(newval); break;
 		}
-
 	}
 
 	private boolean hasStarted () {
@@ -82,8 +80,8 @@ public class Event
 	}
 
 	public static void giveAwardsOfOverdueEvents () {
-		// TODO: 12/6/2020
 	}
+	// TODO: 12/6/2020
 
 	public static LinkedList<Event> getEvents ()
 

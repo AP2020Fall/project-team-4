@@ -52,10 +52,6 @@ public class MainController {
 		Menu.getMenuIn().displayMenu();
 
 		while (true) {
-
-//			if (Menu.getMenuIn() instanceof _12_1GameplayBattleSeaMenu && ((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).getPhase() == 2)
-//				BattleSeaController.getInstance().checkForTimeOut();
-
 			if (Menu.getScanner().hasNextLine()) {
 				try {
 					String comStr = Menu.getInputLine();
@@ -117,7 +113,7 @@ public class MainController {
 					Menu.getMenuIn().getChildMenus().get(2).enter();
 			}
 			case "add event" -> EventController.getInstance().createEvent();
-			case "add suggestions" -> AdminGameRecoController.getInstance().addReco();
+			case "add suggestions" -> AdminGameRecoController.getInstance().giveRecommendationToGamer();
 			case "view suggestions" -> {
 				AdminGameRecoController.getInstance().displayAllAdminRecos();
 				Menu.getMenuIn().getChildMenus().get(4).enter();
@@ -129,7 +125,7 @@ public class MainController {
 			}
 
 			// suggestions menu
-			case "choose suggested game" -> AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
+			case "choose suggested game" -> AdminGameRecoController.getInstance().chooseRecoGame();
 			case "remove suggestion" -> AdminGameRecoController.getInstance().removeReco();
 
 			// events menu
@@ -230,70 +226,69 @@ public class MainController {
 	}
 
 	public void serialize () throws IOException {
-		BufferedWriter writer;
 
 		// Admin.json
-		if (Admin.adminHasBeenCreated()) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Admin.json"));
-			writer.write(gson.toJson(Admin.getAdmin()));
-			writer.flush();
-		}
+		if (Admin.adminHasBeenCreated())
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Admin.json"))) {
+
+				writer.write(gson.toJson(Admin.getAdmin()));
+			}
 
 		// Gamer.json
-		if (Gamer.getGamers().size() > 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Gamer.json"));
-			writer.write(gson.toJson(Gamer.getGamers()));
-			writer.flush();
-		}
+		if (Gamer.getGamers().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Gamer.json"))) {
+
+				writer.write(gson.toJson(Gamer.getGamers()));
+			}
 
 		// AdminGameReco.json
-		if (AdminGameReco.getRecommendations().size() > 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/AdminGameReco.json"));
-			writer.write(gson.toJson(AdminGameReco.getRecommendations()));
-			writer.flush();
-		}
+		if (AdminGameReco.getRecommendations().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/AdminGameReco.json"))) {
+
+				writer.write(gson.toJson(AdminGameReco.getRecommendations()));
+			}
 
 		// Event.json
-		if (Event.getEvents().size() > 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Event.json"));
-			writer.write(gson.toJson(Event.getEvents()));
-			writer.flush();
-		}
+		if (Event.getEvents().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Event.json"))) {
+
+				writer.write(gson.toJson(Event.getEvents()));
+			}
 
 		// FriendRequest.json
-		if (FriendRequest.getAllfriendRequests().size() > 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/FriendRequest.json"));
-			writer.write(gson.toJson(FriendRequest.getAllfriendRequests()));
-			writer.flush();
-		}
+		if (FriendRequest.getAllfriendRequests().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/FriendRequest.json"))) {
+
+				writer.write(gson.toJson(FriendRequest.getAllfriendRequests()));
+			}
 
 		// Message.json
-		if (Message.getAllMessages().size() > 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Message.json"));
-			writer.write(gson.toJson(Message.getAllMessages()));
-			writer.flush();
-		}
+		if (Message.getAllMessages().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Message.json"))) {
+
+				writer.write(gson.toJson(Message.getAllMessages()));
+			}
 
 		// BattleSea.json
-		if (BattleSea.getAllBattleSeaGames().size() > 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea.json"));
-			writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
-			writer.flush();
-		}
+		if (BattleSea.getAllBattleSeaGames().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea.json"))) {
+
+				writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
+			}
 
 		// Reversi.json
-		if (Reversi.getAllReversiGames().size() > 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi.json"));
-			writer.write(gson.toJson(Reversi.getAllReversiGames()));
-			writer.flush();
-		}
+		if (Reversi.getAllReversiGames().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi.json"))) {
+
+				writer.write(gson.toJson(Reversi.getAllReversiGames()));
+			}
 
 		// IDGenerator.json
-		if (IDGenerator.getAllIDsGenerated().size() > 0) {
-			writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/IDGenerator.json"));
-			writer.write(gson.toJson(IDGenerator.getAllIDsGenerated()));
-			writer.flush();
-		}
+		if (IDGenerator.getAllIDsGenerated().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/IDGenerator.json"))) {
+
+				writer.write(gson.toJson(IDGenerator.getAllIDsGenerated()));
+			}
 	}
 
 	public void deserialize () throws IOException {
@@ -301,109 +296,120 @@ public class MainController {
 		// admins
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Admin.json"));
-			while (reader.ready()) {
-				json += reader.readLine();
-			}
 
-			if (json.length() > 2)
-				Admin.setAdmin(gson.fromJson(json, (Type) Admin.class));
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Admin.json"))) {
+				while (reader.ready())
+					json += reader.readLine();
+
+				if (json.length() > 2)
+					Admin.setAdmin(gson.fromJson(json, (Type) Admin.class));
+			}
 		}
 		// gamers
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Gamer.json"));
-			while (reader.ready()) {
-				json += reader.readLine();
-			}
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Gamer.json"))) {
 
-			if (json.length() > 2)
-				Gamer.setGamers(gson.fromJson(json, new TypeToken<LinkedList<Gamer>>() {
-				}.getType()));
+				while (reader.ready())
+					json += reader.readLine();
+
+				if (json.length() > 2)
+					Gamer.setGamers(gson.fromJson(json, new TypeToken<LinkedList<Gamer>>() {
+					}.getType()));
+			}
 		}
 		// admin game recommendations
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/AdminGameReco.json"));
-			while (reader.ready()) {
-				json += reader.readLine();
-			}
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/AdminGameReco.json"))) {
 
-			if (json.length() > 2)
-				AdminGameReco.setRecommendations(gson.fromJson(json, new TypeToken<LinkedList<AdminGameReco>>() {
-				}.getType()));
+				while (reader.ready())
+					json += reader.readLine();
+
+
+				if (json.length() > 2)
+					AdminGameReco.setRecommendations(gson.fromJson(json, new TypeToken<LinkedList<AdminGameReco>>() {
+					}.getType()));
+			}
 		}
 		// events
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Event.json"));
-			while (reader.ready()) {
-				json += reader.readLine();
-			}
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Event.json"))) {
 
-			if (json.length() > 2)
-				Event.setEvents(gson.fromJson(json, new TypeToken<LinkedList<Event>>() {
-				}.getType()));
+				while (reader.ready())
+					json += reader.readLine();
+
+				if (json.length() > 2)
+					Event.setEvents(gson.fromJson(json, new TypeToken<LinkedList<Event>>() {
+					}.getType()));
+			}
 		}
 		// frnd req's
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/FriendRequest.json"));
-			while (reader.ready()) {
-				json += reader.readLine();
-			}
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/FriendRequest.json"))) {
 
-			if (json.length() > 2)
-				FriendRequest.setAllfriendRequests(gson.fromJson(json, new TypeToken<LinkedList<FriendRequest>>() {
-				}.getType()));
+				while (reader.ready())
+					json += reader.readLine();
+
+				if (json.length() > 2)
+					FriendRequest.setAllfriendRequests(gson.fromJson(json, new TypeToken<LinkedList<FriendRequest>>() {
+					}.getType()));
+			}
 		}
 		// messages
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Message.json"));
-			while (reader.ready()) {
-				json += reader.readLine();
-			}
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Message.json"))) {
 
-			if (json.length() > 2)
-				Message.setAllMessages(gson.fromJson(json, new TypeToken<LinkedList<Message>>() {
-				}.getType()));
+				while (reader.ready())
+					json += reader.readLine();
+
+				if (json.length() > 2)
+					Message.setAllMessages(gson.fromJson(json, new TypeToken<LinkedList<Message>>() {
+					}.getType()));
+			}
 		}
 		// BattleSea list
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSea.json"));
-			while (reader.ready()) {
-				json += reader.readLine();
-			}
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSea.json"))) {
 
-			if (json.length() > 2)
-				Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<BattleSea>>() {
-				}.getType()));
+				while (reader.ready())
+					json += reader.readLine();
+
+				if (json.length() > 2)
+					Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<BattleSea>>() {
+					}.getType()));
+			}
 		}
 		// Reversi list
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi.json"));
-			while (reader.ready()) {
-				json += reader.readLine();
-			}
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi.json"))) {
 
-			if (json.length() > 2)
-				Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<Reversi>>() {
-				}.getType()));
+				while (reader.ready())
+					json += reader.readLine();
+
+
+				if (json.length() > 2)
+					Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<Reversi>>() {
+					}.getType()));
+			}
 		}
 		// IDGenerator list
 		{
 			String json = "";
-			BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/IDGenerator.json"));
-			while (reader.ready()) {
-				json += reader.readLine();
-			}
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/IDGenerator.json"))) {
 
-			if (json.length() > 2)
-				IDGenerator.setAllIDsGenerated(gson.fromJson(json, new TypeToken<LinkedList<String>>() {
-				}.getType()));
+				while (reader.ready())
+					json += reader.readLine();
+
+				if (json.length() > 2)
+					IDGenerator.setAllIDsGenerated(gson.fromJson(json, new TypeToken<LinkedList<String>>() {
+					}.getType()));
+			}
 		}
 
 		try {
@@ -424,7 +430,7 @@ public class MainController {
 
 	public void tryToExitProgram () {
 		Menu.displayAreYouSureMessage();
-		if (Menu.getInputLine().toLowerCase().equals("y")) {
+		if (Menu.getInputLine().equalsIgnoreCase("y")) {
 			try {
 				mainController.serialize();
 				AccountController.getInstance().logout();
@@ -435,7 +441,7 @@ public class MainController {
 		}
 	}
 
-	private static class InvalidInputException extends Exception {
+	public static class InvalidInputException extends Exception {
 		public InvalidInputException () {
 			super("Invalid Input");
 		}

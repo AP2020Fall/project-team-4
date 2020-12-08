@@ -31,9 +31,9 @@ public class ReversiView {
 	/**
 	 * displays all game history
 	 */
-	public void displayMoveHistory (LinkedList<String> history) {
-		// TODO: totoototoodoododoodoo
-		for(String string : history){System.out.println(string);}
+	public void displayMoveHistory (LinkedList<String> moves) {
+		for (String move : moves)
+			System.out.println(move);
 	}
 
 	public void displayAvailableCoords (ArrayList<String> availableCoordinates) {

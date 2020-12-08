@@ -1,5 +1,7 @@
 package View.GameRelated;
 
+import View.Menus.Menu;
+
 import java.util.LinkedList;
 
 public class GameView {
@@ -12,7 +14,7 @@ public class GameView {
 	}
 
 	public void displayTurn (String currentTurnGamerUsername) {
-		// TODO: 11/28/2020 AD  
+		Menu.println("It it currently %s's turn to play".formatted(currentTurnGamerUsername));
 	}
 
 	public void displayPtsPlayerGainedFromGame (int points, String gameName) {

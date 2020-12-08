@@ -19,12 +19,63 @@ public class Reversi extends Game {
 	}
 
 	/**
+	 * should be called after next turn
 	 * if board is full or atleast one of them is 0 return new ArrayList()
 	 * otherwise check every blank coordinate and if player can place there add to arraylist and return the arraylist in the end
 	 */
 	public ArrayList<String> getAvailableCoordinates() {
-		// TODO: 11/28/2020 AD  
-		return null;
+		ArrayList<String> availableCoordinates = new ArrayList<>();
+		String color;
+		if(getTurnNum()==0) {  //color is black
+			for(int y=0 ; y<8 ; y++){
+				for(int x=0 ; x<8 ; x++){
+					if(board[y][x].equals("b")){
+					    //dir UP
+						if(board[y-1][x].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						//dir UP_RIGHT
+						if(board[y-1][x+1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						//dir RIGHT
+						if(board[y][x+1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						//dir DOWN_RIGHT
+						if(board[y+1][x+1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						//dir DOWN
+						if(board[y+1][x].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						//dir DOWN_LEFT
+						if(board[y+1][x-1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						//dir LEFT
+						if(board[y][x-1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						//dir UP_LEFT
+						if(board[y-1][x-1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+					}
+				}
+			}
+		}
+		else if(getTurnNum()==1){ //color is white
+			for(int y=0 ; y<8 ; y++){
+				for(int x=0 ; x<8 ; x++){
+					if(board[y][x].equals("w")){
+						//dir UP
+						if(board[y-1][x].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						//dir UP_RIGHT
+						if(board[y-1][x+1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						//dir RIGHT
+						if(board[y][x+1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						//dir DOWN_RIGHT
+						if(board[y+1][x+1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						//dir DOWN
+						if(board[y+1][x].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						//dir DOWN_LEFT
+						if(board[y+1][x-1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						//dir LEFT
+						if(board[y][x-1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						//dir UP_LEFT
+						if(board[y-1][x-1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+					}
+				}
+			}
+
+		}
+		return availableCoordinates;
 	}
 
 	/**
@@ -69,25 +120,39 @@ public class Reversi extends Game {
 	 */
 	private boolean doesAnyDiskChangeColor (int x, int y, Direction dir){
 		switch (dir){
-			case UP:
+			case UP: if(!board[y-1][x].equals(board[y][x]) && !board[y-1][x].equals("-")) for(int i=y ; i>=0 ; i--){if(board[i][x].equals(board[y][x])) return true;}
 				break;
-			case UP_RIGHT:
+			case UP_RIGHT: if(!board[y-1][x+1].equals(board[y][x]) && !board[y-1][x+1].equals("-"))
+				for(int i=y ; i>=0 ; i--)
+					for(int j=x ; j<8 ; j++)
+						if(board[i][j].equals(board[y][x])) return true;
 				break;
-			case RIGHT:
+			case RIGHT: if(!board[y][x+1].equals(board[y][x]) && !board[y][x+1].equals("-"))
+				for(int i=x ; i<8 ; i++)
+					if(board[y][i].equals(board[y][x])) return true;
 				break;
-			case DOWN_RIGHT:
+			case DOWN_RIGHT: if(!board[y+1][x+1].equals(board[y][x]) && !board[y+1][x+1].equals("-"))
+				for(int i=y ; i<8 ; i++)
+					for(int j=x ; j<8 ; j++) if(board[i][j].equals(board[y][x])) return true;
 				break;
-			case DOWN:
+			case DOWN: if(!board[y+1][x].equals(board[y][x]) && !board[y+1][x].equals("-"))
+				for(int i=y ; i<8 ; i++) if(board[i][x].equals(board[y][x])) return true;
 				break;
-			case DOWN_LEFT:
+			case DOWN_LEFT: if(!board[y+1][x-1].equals(board[y][x]) && !board[y+1][x-1].equals("-"))
+				for(int i=y ; i<8 ; i++)
+					for(int j=x ; j>=0 ; j--) if(board[i][j].equals(board[y][x])) return true;
 				break;
 			case LEFT:
+				if(!board[y][x-1].equals(board[y][x]) && !board[y][x-1].equals("-"))
+					for(int i=x ; i>=0 ; i--) if(board[y][i].equals(board[y][x])) return true;
 				break;
 			case UP_LEFT:
+				if(!board[y-1][x-1].equals(board[y][x]) && !board[y-1][x-1].equals("-"))
+					for(int i=y ; i>=0 ; i--)
+						for(int j=x ; j>=0 ; j--) if(board[i][j].equals(board[y][x])) return true;
 				break;
 		}
-	return new Boolean(null); // fixme sorry gives error when trying to run
-	} //todo
+	return false;}
 
 	/**
 	 * @param startx from 0 to 7

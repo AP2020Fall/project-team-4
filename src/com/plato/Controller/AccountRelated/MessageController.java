@@ -1,7 +1,9 @@
 package Controller.AccountRelated;
 
+import Model.AccountRelated.Admin;
 import Model.AccountRelated.Message;
 import View.AccountRelated.MessageView;
+import View.Menus.Menu;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -30,6 +32,26 @@ public class MessageController {
 	}
 
 	public void sendMsg() {
-		// TODO TOTOOTOTOTOOTOTOTOTOOTOT
+		String msg;
+		while (true)
+			try {
+				Menu.print("Your message[/c to cancel] -> "); msg = Menu.getInputLine();
+
+				if (msg.trim().equalsIgnoreCase("/c")) return;
+
+				else if (msg.trim().equals(""))
+					throw new EmptyMessageException();
+
+				new Message(msg);
+
+			} catch (EmptyMessageException e) {
+				e.printStackTrace();
+			}
+	}
+
+	private class EmptyMessageException extends Exception {
+		public EmptyMessageException () {
+			super("You can't send an empty message.");
+		}
 	}
 }
