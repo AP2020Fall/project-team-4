@@ -76,7 +76,8 @@ public class Event {
 		// TODO: 12/6/2020
 	}
 
-	public static LinkedList<Event> getEvents () {
+	public static LinkedList<Event> getEvents ()
+	{
 		return events;
 	}
 
@@ -108,18 +109,21 @@ public class Event {
 	}
 
 	public Gamer getParticipant (String username) {
-		// TODO: 11/20/2020 AD
+
+		// TODO: 12/8/2020
 		return null;
 	}
 
 	public static Event getEvent (String eventID) {
+
 			return events.stream()
 					.filter(event -> event.getEventID().equals(eventID))
 					.findAny().get();
 	}
 
 	public static boolean eventInSessionExists (String eventID) {
-// TODO: 12/7/2020  
+
+		// TODO: 12/8/2020
 		return false;
 	}
 
