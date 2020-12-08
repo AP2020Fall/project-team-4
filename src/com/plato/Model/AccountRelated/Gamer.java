@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Gamer extends Account {
 
-	private int score = 0;
+	private int awardsFromEvents = 0;
 	private double money;
 	private LocalDate accountStartDate;
 	private LinkedList<Gamer> frnds = new LinkedList<>();
@@ -65,11 +65,11 @@ public class Gamer extends Account {
 	}
 
 	public void participateInEvent (String eventID) {
-		// TODO: 11/20/2020 AD
+		Event.getEvent(eventID).addParticipant(this);
 	}
 
 	public void stopParticipatingInEvent (String eventID) {
-		// TODO: 11/20/2020 AD
+		Event.getEvent(eventID).removeParticipant(this);
 	}
 
 	public int getDaysSinceRegistration () {
@@ -78,10 +78,6 @@ public class Gamer extends Account {
 
 	public static void setGamers (LinkedList<Gamer> gamers) {
 		getAccounts().addAll(gamers);
-	}
-
-	public int getScore () {
-		return score;
 	}
 
 	public LinkedList<String> getFaveGames () {
@@ -97,5 +93,13 @@ public class Gamer extends Account {
 
 	public double getMoney () {
 		return money;
+	}
+
+	private void giveEventAward (int award) {
+		awardsFromEvents += award;
+	}
+
+	public int getAwardsFromEvents () {
+		return awardsFromEvents;
 	}
 }

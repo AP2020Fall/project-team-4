@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
@@ -38,6 +39,8 @@ public class MainController {
 	}
 
 	public static void main (String[] args) {
+		new DayPassingController();
+
 		try {
 			getInstance().deserialize();
 		} catch (IOException e) {
@@ -445,6 +448,23 @@ public class MainController {
 	public static class InvalidInputException extends Exception {
 		public InvalidInputException () {
 			super("Invalid Input");
+		}
+	}
+
+	private static class DayPassingController extends Thread {
+		private static int lastDayUpdated;
+
+		public DayPassingController () {
+			lastDayUpdated = LocalDate.now().getDayOfMonth();
+		}
+
+		@Override
+		public void run () {
+			int today = LocalDate.now().getDayOfMonth();
+			if (today != lastDayUpdated) {
+				// todo do things that should be done everyday
+				Event.dealWOverdueEvents();
+			}
 		}
 	}
 }

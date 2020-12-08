@@ -13,6 +13,7 @@ public class Event {
 	private double eventScore;
 	private LocalDate start, end;
 	private LinkedList<Gamer> participants = new LinkedList<>();
+	private boolean awardsGiven = false; // true if an event has ended and its awards have been given, false otherwise
 
 	private static LinkedList<Event> events = new LinkedList<>();
 
@@ -33,31 +34,36 @@ public class Event {
 	}
 
 	public static LinkedList<Event> getInSessionEventsParticipatingIn (Gamer gamer) {
-		// TODO: 12/5/2020 AD
-		return null;
+		LinkedList<Event> inSessionEventsParticipatingIn = new LinkedList<>();
+
+		for (int i = 0; i < getInSessionEvents().size(); i++) {
+			Event inSessionEvent = getInSessionEvents().get(i);
+			if (inSessionEvent.getParticipants().contains(gamer) && !inSessionEventsParticipatingIn.contains(inSessionEvent))
+				inSessionEventsParticipatingIn.addLast(inSessionEvent);
+		}
+
+		return inSessionEventsParticipatingIn;
 	}
 
 	public void editField (String field, String newval) {
 		switch (field) {
 			case "game name":
 				gameName = newval; break;
-			case "eventscore":
+			case "event score":
 				eventScore = Double.parseDouble(newval); break;
 			case "start":
 				start = LocalDate.parse(newval); break;
 			case "end":
 				end = LocalDate.parse(newval); break;
 		}
-
 	}
 
 	private boolean hasStarted () {
-		// TODO: 11/16/2020 AD
-		return false;
+		return !LocalDate.now().isBefore(start);
 	}
+
 	private boolean isDue () {
-		// TODO: 11/16/2020 AD
-		return false;
+		return LocalDate.now().isAfter(end);
 	}
 
 	public boolean isInSession () {
@@ -65,15 +71,17 @@ public class Event {
 	}
 
 	public static void dealWOverdueEvents () {
-		for (int i=0;i<events.size();i++)
-			if (events.get(i).isDue()){
-				events.get(i).giveAwardsOfOverdueEvents();// FIXME: 12/7/2020 AD
-			}
+		for (int i = 0; i < events.size(); i++) {
 
+			Event event = events.get(i);
+			if (event.isDue() && !event.awardsGiven)
+				event.giveAwardsOfOverdueEvent();
+		}
 	}
 
-	public static void giveAwardsOfOverdueEvents () {
-		// TODO: 12/6/2020
+	public void giveAwardsOfOverdueEvent () {
+		// TODO: 12/8/2020 AD
+		awardsGiven = true;
 	}
 
 	public static LinkedList<Event> getEvents () {
@@ -85,6 +93,7 @@ public class Event {
 				.filter(Event::isInSession)
 				.sorted(Comparator.comparing(Event::getGameName)                // first battlesea then reversi events
 						.thenComparing(Event::getStart)                            // from earliest starting
+
 						.thenComparing(Event::getEnd)                            // from earliest ending
 						.thenComparingDouble(Event::getEventScore).reversed()    // from hishest prizes
 						.thenComparing(Event::getEventID))
@@ -96,26 +105,34 @@ public class Event {
 	}
 
 	public void removeParticipant (Gamer gamer) {
-		// TODO: 11/20/2020 AD
+		participants.remove(gamer);
 	}
 
 	public boolean participantExists (String username) {
-		// TODO: 11/20/2020 AD
+		for (int i = 0; i < participants.size(); i++) {
+			if (participants.get(i).getUsername().equals(username))
+				return true;
+		}
 		return false;
 	}
 
 	public Gamer getParticipant (String username) {
-		// TODO: 11/20/2020 AD
+		for (int i = 0; i < participants.size(); i++)
+			if (participants.get(i).getUsername().equals(username))
+				return participants.get(i);
 		return null;
 	}
 
 	public static Event getEvent (String eventID) {
-		// TODO: 11/16/2020 AD
-		return null;
+		return events.stream()
+				.filter(event -> event.getEventID().equals(eventID))
+				.findAny().get();
 	}
 
 	public static boolean eventInSessionExists (String eventID) {
-		// TODO: 11/16/2020 AD
+		for (int i = 0; i < getInSessionEvents().size(); i++)
+			if (getInSessionEvents().get(i).getEventID().equals(eventID))
+				return true;
 		return false;
 	}
 
