@@ -45,8 +45,9 @@ public class Event {
 		return inSessionEventsParticipatingIn;
 	}
 
+	@SuppressWarnings("EnhancedSwitchMigration")
 	public void editField (String field, String newval) {
-		switch (field) {
+		switch (field.toLowerCase()) {
 			case "game name":
 				gameName = newval; break;
 			case "event score":
@@ -58,7 +59,7 @@ public class Event {
 		}
 	}
 
-	private boolean hasStarted () {
+	public boolean hasStarted () {
 		return !LocalDate.now().isBefore(start);
 	}
 
@@ -70,6 +71,7 @@ public class Event {
 		return hasStarted() && !isDue();
 	}
 
+	@SuppressWarnings("ForLoopReplaceableByForEach")
 	public static void dealWOverdueEvents () {
 		for (int i = 0; i < events.size(); i++) {
 
@@ -89,7 +91,7 @@ public class Event {
 	}
 
 	public static LinkedList<Event> getInSessionEvents () {
-		return (LinkedList<Event>) getEvents().stream()
+		return getEvents().stream()
 				.filter(Event::isInSession)
 				.sorted(Comparator.comparing(Event::getGameName)                // first battlesea then reversi events
 						.thenComparing(Event::getStart)                            // from earliest starting
@@ -100,6 +102,12 @@ public class Event {
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
+	public static boolean notStartedEventExists (String eventID) {
+		return events.stream()
+				.filter(event -> !event.hasStarted())
+				.anyMatch(event -> event.getEventID().equals(eventID));
+	}
+
 	public void addParticipant (Gamer gamer) {
 		participants.add(gamer);
 	}
@@ -108,6 +116,7 @@ public class Event {
 		participants.remove(gamer);
 	}
 
+	@SuppressWarnings("ForLoopReplaceableByForEach")
 	public boolean participantExists (String username) {
 		for (int i = 0; i < participants.size(); i++) {
 			if (participants.get(i).getUsername().equals(username))
@@ -116,6 +125,7 @@ public class Event {
 		return false;
 	}
 
+	@SuppressWarnings("ForLoopReplaceableByForEach")
 	public Gamer getParticipant (String username) {
 		for (int i = 0; i < participants.size(); i++)
 			if (participants.get(i).getUsername().equals(username))
@@ -127,6 +137,11 @@ public class Event {
 		return events.stream()
 				.filter(event -> event.getEventID().equals(eventID))
 				.findAny().get();
+	}
+
+	public static boolean eventExists (String eventID) {
+		return events.stream()
+				.anyMatch(event -> event.getEventID().equals(eventID));
 	}
 
 	public static boolean eventInSessionExists (String eventID) {

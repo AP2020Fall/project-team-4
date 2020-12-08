@@ -1,5 +1,10 @@
 package View.Menus;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Color {
 	// Reset
 	RESET("\033[0m"),  // Text Reset
@@ -82,5 +87,12 @@ public enum Color {
 
 	public String getVal () {
 		return val;
+	}
+
+	public static LinkedList<Color> getAllBackgroundColors() {
+		return Arrays.stream(values())
+				.filter(color -> !color.toString().toLowerCase().startsWith("black"))
+				.filter(color -> color.toString().toLowerCase().endsWith("background"))
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 }

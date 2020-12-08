@@ -17,15 +17,17 @@ public class ReversiView {
 	 * along with coordinates
 	 */
 	public void displayGrid (String[][] board) {
-		for(int i=1 ; i<=8 ; i++){
-			if(i==8){System.out.println(" "+i);}
-			else{System.out.print(" "+i);}}
-		for(int i=0 ; i<8 ; i++){
-			System.out.print(i+1);  //for coordinates
-			for(int j=0 ; j<8 ; j++){
-				if(j==7){System.out.println(" "+board[i][j]);}
-				else{System.out.print(" "+board[i][j]);}
-			}}
+		for (int i = 1; i <= 8; i++) {
+			if (i == 8) {System.out.println(" " + i);}
+			else {System.out.print(" " + i);}
+		}
+		for (int i = 0; i < 8; i++) {
+			System.out.print(i + 1);  //for coordinates
+			for (int j = 0; j < 8; j++) {
+				if (j == 7) {System.out.println(" " + board[i][j]);}
+				else {System.out.print(" " + board[i][j]);}
+			}
+		}
 	}
 
 	/**

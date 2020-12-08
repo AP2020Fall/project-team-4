@@ -1,10 +1,10 @@
 package Controller.AccountRelated;
 
+import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Admin;
 import Model.AccountRelated.Gamer;
 import View.AccountRelated.AccountView;
-import View.Menus.Color;
 import View.Menus.Menu;
 
 import java.util.Arrays;
@@ -12,7 +12,7 @@ import java.util.LinkedList;
 
 public class AccountController {
 	private Account currentAccLoggedIn = null;
-	private boolean saveLoginInfo = false; // todo ask at login. also set to false when logout
+	private boolean saveLoginInfo = false; // ask at login. also set to false when logout
 
 	private static AccountController accountController;
 
@@ -220,7 +220,17 @@ public class AccountController {
 				"Phone Number"});
 		AccountView.getInstance().displayEditableFields(availableFields);
 
-		int field = Integer.parseInt(Menu.getInputLine());
+		int field = 0;
+		try {
+			String fieldstr = (Menu.getInputLine());
+
+			if (String.valueOf(fieldstr).matches("[1-5]"))
+				throw new NumberFormatException();
+
+			field = Integer.parseInt(fieldstr);
+		} catch (NumberFormatException e) {
+			Menu.printErrorMessage(new MainController.InvalidInputException().getMessage());
+		}
 
 		switch (field) {
 			case 1 -> {

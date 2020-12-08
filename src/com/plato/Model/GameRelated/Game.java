@@ -7,15 +7,13 @@ import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.Reversi.PlayerReversi;
 import Model.GameRelated.Reversi.Reversi;
+import View.Menus.Menu;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
-
-import static java.lang.Integer.compare;
 
 public abstract class Game {
 
@@ -45,46 +43,47 @@ public abstract class Game {
 		allGames.add(this);
 	}
 
-	public static LinkedList<String> getScoreboard(String gameName){
+	public static LinkedList<String> getScoreboard (String gameName) {
 		LinkedList<String> scoreBoard = new LinkedList<>();
-			LinkedList<Gamer> allPlayersOfGameName = GameLog.getAllGamersWhoPlayedGame(gameName);
-			allPlayersOfGameName.sort((gamer1, gamer2) -> {
-				int cmp;
+		LinkedList<Gamer> allPlayersOfGameName = GameLog.getAllGamersWhoPlayedGame(gameName);
+		allPlayersOfGameName.sort((gamer1, gamer2) -> {
+			int cmp;
 
-				cmp = -GameLog.getPoints(gamer1, gameName).compareTo(GameLog.getPoints(gamer2, gameName));
-				if (cmp != 0) return cmp;
+			cmp = -GameLog.getPoints(gamer1, gameName).compareTo(GameLog.getPoints(gamer2, gameName));
+			if (cmp != 0) return cmp;
 
-				cmp = -GameLog.getWinCount(gamer1, gameName).compareTo(GameLog.getWinCount(gamer2, gameName));
-				if (cmp != 0) return cmp;
+			cmp = -GameLog.getWinCount(gamer1, gameName).compareTo(GameLog.getWinCount(gamer2, gameName));
+			if (cmp != 0) return cmp;
 
-				cmp = GameLog.getLossCount(gamer1, gameName).compareTo(GameLog.getLossCount(gamer2, gameName));
-				if (cmp != 0) return cmp;
+			cmp = GameLog.getLossCount(gamer1, gameName).compareTo(GameLog.getLossCount(gamer2, gameName));
+			if (cmp != 0) return cmp;
 
-				cmp = GameLog.getPlayedCount(gamer1, gameName).compareTo(GameLog.getPlayedCount(gamer2, gameName));
-				if (cmp != 0) return cmp;
+			cmp = GameLog.getPlayedCount(gamer1, gameName).compareTo(GameLog.getPlayedCount(gamer2, gameName));
+			if (cmp != 0) return cmp;
 
-				cmp = -GameLog.getDrawCount(gamer1, gameName).compareTo(GameLog.getDrawCount(gamer2, gameName));
-				if (cmp != 0) return cmp;
+			cmp = -GameLog.getDrawCount(gamer1, gameName).compareTo(GameLog.getDrawCount(gamer2, gameName));
+			if (cmp != 0) return cmp;
 
-				return gamer1.getUsername().compareToIgnoreCase(gamer2.getUsername());
+			return gamer1.getUsername().compareToIgnoreCase(gamer2.getUsername());
+		});
+
+		if (allPlayersOfGameName.size() == 0)
+			scoreBoard.addLast("No one has played %s until now.".formatted(gameName));
+		else
+			allPlayersOfGameName.forEach(gamer -> {
+				String username = gamer.getUsername();
+				int pts = (GameLog.getPoints(gamer, gameName)),
+						wins = (GameLog.getWinCount(gamer, gameName)),
+						losses = (GameLog.getLossCount(gamer, gameName)),
+						draws = (GameLog.getDrawCount(gamer, gameName)),
+						playCount = (GameLog.getPlayedCount(gamer, gameName));
+
+				scoreBoard.addLast("Username: %s,\tPoints: %d,\tWins: %d,\tLosses: %d,\tDraws: %d,\tPlayed Count: %d".formatted(
+						username, pts, wins, losses, draws, playCount
+				));
 			});
-
-			if (allPlayersOfGameName.size() == 0)
-				scoreBoard.addLast("No one has played %s until now.".formatted(gameName));
-			else
-				allPlayersOfGameName.forEach(gamer -> {
-					String username = gamer.getUsername();
-					int pts = (GameLog.getPoints(gamer, gameName)),
-							wins = (GameLog.getWinCount(gamer, gameName)),
-							losses = (GameLog.getLossCount(gamer, gameName)),
-							draws = (GameLog.getDrawCount(gamer, gameName)),
-							playCount = (GameLog.getPlayedCount(gamer, gameName));
-
-					scoreBoard.addLast("Username: %s,\tPoints: %d,\tWins: %d,\tLosses: %d,\tDraws: %d,\tPlayed Count: %d".formatted(
-							username, pts, wins, losses, draws, playCount
-					));
-				});
-	return scoreBoard;}
+		return scoreBoard;
+	}
 
 
 	public static void startGame (Game game) {
@@ -117,8 +116,8 @@ public abstract class Game {
 	}
 
 	public Player getOpponentOf (Player player) {
-		if(player.equals(listOfPlayers.get(0))) return listOfPlayers.get(1);
-		else if(player.equals(listOfPlayers.get(1))) return listOfPlayers.get(0);
+		if (player.equals(listOfPlayers.get(0))) return listOfPlayers.get(1);
+		else if (player.equals(listOfPlayers.get(1))) return listOfPlayers.get(0);
 		else return null;
 	}
 
@@ -127,29 +126,32 @@ public abstract class Game {
 	}
 
 	public void concludeGame () {
-		// set end time  //fixme : i dunno what to do with this sorry
 		// set Conclusion
-		if(gameHasEnded()){
-		if(getWinner().equals(null)) setConclusion(GameConclusion.DRAW);
-		else if(getWinner().equals(listOfPlayers.get(0).getGamer())) setConclusion(GameConclusion.PLAYER1_WIN);
-		else if(getWinner().equals(listOfPlayers.get(1).getGamer())) setConclusion(GameConclusion.PLAYER2_WIN);}
-		else {setConclusion(GameConclusion.IN_SESSION);}
-		//GameController.getInstance().setCurrentGameInSession(null);
+		if (gameHasEnded()) {
+			if (getWinner().equals(null))
+				setConclusion(GameConclusion.DRAW);
+
+			else if (getWinner().equals(listOfPlayers.get(0).getGamer()))
+				setConclusion(GameConclusion.PLAYER1_WIN);
+
+			else if (getWinner().equals(listOfPlayers.get(1).getGamer()))
+				setConclusion(GameConclusion.PLAYER2_WIN);
+		}
+		else setConclusion(GameConclusion.IN_SESSION);
+		// set end time
+		dateGameEnded = LocalDateTime.now();
+		// going back to game menu
+		Menu.getMenu("11" + GameController.getInstance().getCurrentGameInSession().getGameName().indexOf(0));
+		// getting rid of current game in session
+		GameController.getInstance().setCurrentGameInSession(null);
 	}
 
 	public abstract boolean gameEnded ();
 
-	public Gamer getWinner () {
-		if(listOfPlayers.get(0).getScore()>listOfPlayers.get(1).getScore()) return listOfPlayers.get(0).getGamer();
-		else if(listOfPlayers.get(1).getScore()>listOfPlayers.get(0).getScore()) return listOfPlayers.get(1).getGamer();
+	public Gamer getWinner () { // fixme use getNumberOfBlack() and getNumberOfWhite() instead of scores
+		if (listOfPlayers.get(0).getScore() > listOfPlayers.get(1).getScore()) return listOfPlayers.get(0).getGamer();
+		else if (listOfPlayers.get(1).getScore() > listOfPlayers.get(0).getScore()) return listOfPlayers.get(1).getGamer();
 		else return null;
-	}
-
-
-	//fixme : do we need this at all?
-	public boolean playerWUsernameWon (String username) {
-		if (conclusion == GameConclusion.IN_SESSION || conclusion == GameConclusion.DRAW) return false;
-		return getWinner().getUsername().equals(username);
 	}
 
 	public String getGameName () {

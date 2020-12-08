@@ -23,53 +23,85 @@ public class Reversi extends Game {
 	 * if board is full or atleast one of them is 0 return new ArrayList()
 	 * otherwise check every blank coordinate and if player can place there add to arraylist and return the arraylist in the end
 	 */
-	public ArrayList<String> getAvailableCoordinates() {
+	public ArrayList<String> getAvailableCoordinates () {
 		ArrayList<String> availableCoordinates = new ArrayList<>();
 		String color;
-		if(getTurnNum()==0) {  //color is black
-			for(int y=0 ; y<8 ; y++){
-				for(int x=0 ; x<8 ; x++){
-					if(board[y][x].equals("b")){
-					    //dir UP
-						if(board[y-1][x].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+		if (getTurnNum() == 0) {  //color is black
+			for (int y = 0; y < 8; y++) {
+				for (int x = 0; x < 8; x++) {
+					if (board[y][x].equals("b")) {
+						//dir UP
+						if (board[y - 1][x].equals("w")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir UP_RIGHT
-						if(board[y-1][x+1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						if (board[y - 1][x + 1].equals("w")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir RIGHT
-						if(board[y][x+1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						if (board[y][x + 1].equals("w")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir DOWN_RIGHT
-						if(board[y+1][x+1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						if (board[y + 1][x + 1].equals("w")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir DOWN
-						if(board[y+1][x].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						if (board[y + 1][x].equals("w")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir DOWN_LEFT
-						if(board[y+1][x-1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						if (board[y + 1][x - 1].equals("w")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir LEFT
-						if(board[y][x-1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						if (board[y][x - 1].equals("w")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir UP_LEFT
-						if(board[y-1][x-1].equals("w")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("b")) availableCoordinates.add(i+","+x);}}}
+						if (board[y - 1][x - 1].equals("w")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
+						}
 					}
 				}
 			}
 		}
-		else if(getTurnNum()==1){ //color is white
-			for(int y=0 ; y<8 ; y++){
-				for(int x=0 ; x<8 ; x++){
-					if(board[y][x].equals("w")){
+		else if (getTurnNum() == 1) { //color is white
+			for (int y = 0; y < 8; y++) {
+				for (int x = 0; x < 8; x++) {
+					if (board[y][x].equals("w")) {
 						//dir UP
-						if(board[y-1][x].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						if (board[y - 1][x].equals("b")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir UP_RIGHT
-						if(board[y-1][x+1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						if (board[y - 1][x + 1].equals("b")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir RIGHT
-						if(board[y][x+1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						if (board[y][x + 1].equals("b")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir DOWN_RIGHT
-						if(board[y+1][x+1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						if (board[y + 1][x + 1].equals("b")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir DOWN
-						if(board[y+1][x].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						if (board[y + 1][x].equals("b")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir DOWN_LEFT
-						if(board[y+1][x-1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						if (board[y + 1][x - 1].equals("b")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir LEFT
-						if(board[y][x-1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						if (board[y][x - 1].equals("b")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
+						}
 						//dir UP_LEFT
-						if(board[y-1][x-1].equals("b")){{for(int i=y ; i>=0 ; i--){if(board[i][x].equals("w")) availableCoordinates.add(i+","+x);}}}
+						if (board[y - 1][x - 1].equals("b")) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
+						}
 					}
 				}
 			}
@@ -94,65 +126,73 @@ public class Reversi extends Game {
 
 	/**
 	 * checks for available coordinates
+	 *
 	 * @return true if there are possible coordinates and false if there are no coordinates available
 	 */
-	public boolean canPlayerPlaceAnyDisks(){
+	public boolean canPlayerPlaceAnyDisks () {
 		return getAvailableCoordinates().size() != 0;
 	}
 
 	/**
-	 * @return true if x,y is blank "-"
 	 * @return true if atleast one disk changes color in any direction (not the check directions method)
 	 */
 	public boolean canPlayerPlaceDiskHere (int x, int y) { // fixme only checking if it is an available coordinate is good. the detailed check should be done in getAvailableCoordinates
 		if (board[y][x].equals("-")) return true;
-		else if(canPlayerPlaceAnyDisks()) return true;
+		else if (canPlayerPlaceAnyDisks()) return true;
 		else return isBoardFull();
 	}
 
 	/**
 	 * @param x   start 0<=x<=7
 	 * @param y   start 0<=y<=7
-	 * @param dir
+	 * @param dir direction to proceed in
 	 * @return checks current color at x,y
 	 * checks if there are disks with opposite color next to it
 	 * returns true if after disks with oppoite color there is a same color disk in given direction
 	 */
-	private boolean doesAnyDiskChangeColor (int x, int y, Direction dir){
-		switch (dir){
-			case UP: if(!board[y-1][x].equals(board[y][x]) && !board[y-1][x].equals("-")) for(int i=y ; i>=0 ; i--){if(board[i][x].equals(board[y][x])) return true;}
+	private boolean doesAnyDiskChangeColor (int x, int y, Direction dir) {
+		switch (dir) {
+			case UP:
+				if (!board[y - 1][x].equals(board[y][x]) && !board[y - 1][x].equals("-"))
+					for (int i = y; i >= 0; i--) {if (board[i][x].equals(board[y][x])) return true;}
 				break;
-			case UP_RIGHT: if(!board[y-1][x+1].equals(board[y][x]) && !board[y-1][x+1].equals("-"))
-				for(int i=y ; i>=0 ; i--)
-					for(int j=x ; j<8 ; j++)
-						if(board[i][j].equals(board[y][x])) return true;
+			case UP_RIGHT:
+				if (!board[y - 1][x + 1].equals(board[y][x]) && !board[y - 1][x + 1].equals("-"))
+					for (int i = y; i >= 0; i--)
+						for (int j = x; j < 8; j++)
+							if (board[i][j].equals(board[y][x])) return true;
 				break;
-			case RIGHT: if(!board[y][x+1].equals(board[y][x]) && !board[y][x+1].equals("-"))
-				for(int i=x ; i<8 ; i++)
-					if(board[y][i].equals(board[y][x])) return true;
+			case RIGHT:
+				if (!board[y][x + 1].equals(board[y][x]) && !board[y][x + 1].equals("-"))
+					for (int i = x; i < 8; i++)
+						if (board[y][i].equals(board[y][x])) return true;
 				break;
-			case DOWN_RIGHT: if(!board[y+1][x+1].equals(board[y][x]) && !board[y+1][x+1].equals("-"))
-				for(int i=y ; i<8 ; i++)
-					for(int j=x ; j<8 ; j++) if(board[i][j].equals(board[y][x])) return true;
+			case DOWN_RIGHT:
+				if (!board[y + 1][x + 1].equals(board[y][x]) && !board[y + 1][x + 1].equals("-"))
+					for (int i = y; i < 8; i++)
+						for (int j = x; j < 8; j++) if (board[i][j].equals(board[y][x])) return true;
 				break;
-			case DOWN: if(!board[y+1][x].equals(board[y][x]) && !board[y+1][x].equals("-"))
-				for(int i=y ; i<8 ; i++) if(board[i][x].equals(board[y][x])) return true;
+			case DOWN:
+				if (!board[y + 1][x].equals(board[y][x]) && !board[y + 1][x].equals("-"))
+					for (int i = y; i < 8; i++) if (board[i][x].equals(board[y][x])) return true;
 				break;
-			case DOWN_LEFT: if(!board[y+1][x-1].equals(board[y][x]) && !board[y+1][x-1].equals("-"))
-				for(int i=y ; i<8 ; i++)
-					for(int j=x ; j>=0 ; j--) if(board[i][j].equals(board[y][x])) return true;
+			case DOWN_LEFT:
+				if (!board[y + 1][x - 1].equals(board[y][x]) && !board[y + 1][x - 1].equals("-"))
+					for (int i = y; i < 8; i++)
+						for (int j = x; j >= 0; j--) if (board[i][j].equals(board[y][x])) return true;
 				break;
 			case LEFT:
-				if(!board[y][x-1].equals(board[y][x]) && !board[y][x-1].equals("-"))
-					for(int i=x ; i>=0 ; i--) if(board[y][i].equals(board[y][x])) return true;
+				if (!board[y][x - 1].equals(board[y][x]) && !board[y][x - 1].equals("-"))
+					for (int i = x; i >= 0; i--) if (board[y][i].equals(board[y][x])) return true;
 				break;
 			case UP_LEFT:
-				if(!board[y-1][x-1].equals(board[y][x]) && !board[y-1][x-1].equals("-"))
-					for(int i=y ; i>=0 ; i--)
-						for(int j=x ; j>=0 ; j--) if(board[i][j].equals(board[y][x])) return true;
+				if (!board[y - 1][x - 1].equals(board[y][x]) && !board[y - 1][x - 1].equals("-"))
+					for (int i = y; i >= 0; i--)
+						for (int j = x; j >= 0; j--) if (board[i][j].equals(board[y][x])) return true;
 				break;
 		}
-	return false;}
+		return false;
+	}
 
 	/**
 	 * @param startx from 0 to 7
@@ -199,13 +239,13 @@ public class Reversi extends Game {
 	/**
 	 * should be called before changing turns
 	 */
-	public boolean hasPlayerMoved() {
-		if(moves.size()==0) return false;
-		else{
-		String color = moves.getLast().substring(0, 1);
+	public boolean hasPlayerMoved () {
+		if (moves.size() == 0) return false;
+		else {
+			String color = moves.getLast().substring(0, 1);
 
-		if (color.equals(((PlayerReversi) getPlayer(getTurnGamer())).getColor())) return true;
-		else return false;}
+			return color.equals(((PlayerReversi) getPlayer(getTurnGamer())).getColor());
+		}
 	}
 
 	//empties board , blank space is shown with -
@@ -227,15 +267,14 @@ public class Reversi extends Game {
 	 */
 	@Override
 	public boolean gameEnded () {
-		if(getNumberOfBlack()==0) return true;
-		else if(getNumberOfWhite()==0) return true;
+		if (getNumberOfBlack() == 0) return true;
+		else if (getNumberOfWhite() == 0) return true;
 		else return isBoardFull();
 	}
-	
 
-	public int getNumberOfBlack() {
+
+	public int getNumberOfBlack () {
 		int count = 0;
-		//TODO : straem for 2d array
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (board[i][j].equals("b")) count++;
@@ -246,7 +285,6 @@ public class Reversi extends Game {
 
 	public int getNumberOfWhite () {
 		int count = 0;
-		//TODO : straem for 2d array didnt find anything sorry
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (board[i][j].equals("w")) count++;
@@ -267,6 +305,7 @@ public class Reversi extends Game {
 		return -1; // should never happen
 	}
 
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean checkCoordinates (int number) {
 		return number >= 1 && number <= 8;
 	}

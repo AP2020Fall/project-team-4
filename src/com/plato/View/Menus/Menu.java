@@ -51,8 +51,7 @@ public abstract class Menu {
 	}
 
 	public static void addMenusForAdminOrGamer (String aORg) {
-		if (menus.containsKey("1"))
-			menus.remove("1");
+		menus.remove("1");
 
 		aORg = aORg.toUpperCase();
 

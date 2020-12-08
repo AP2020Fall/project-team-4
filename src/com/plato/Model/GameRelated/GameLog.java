@@ -29,7 +29,6 @@ public class GameLog {
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
 	public static Integer getPlayedCount (Gamer gamer, String gameName) {
-		// TODO: 11/29/2020 AD
 		int count = 0;
 		for(Game game : getAllFinishedGames()){
 			if(game.getGameName().equals(gameName))
@@ -135,7 +134,6 @@ public class GameLog {
 	 * @return the last finished game said player participated in
 	 */
 	public static String getLastGamePlayed (Gamer gamer) {
-		// TODO: 12/1/2020 AD
 		LinkedList<Game> gamesReversed = getAllFinishedGames();
 		Collections.reverse(getAllFinishedGames());
 		for(Game game : gamesReversed){
