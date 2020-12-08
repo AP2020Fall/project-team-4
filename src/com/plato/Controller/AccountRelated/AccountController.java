@@ -12,6 +12,7 @@ import java.util.LinkedList;
 
 public class AccountController {
 	private Account currentAccLoggedIn = null;
+	private boolean saveLoginInfo = false; // todo ask at login. also set to false when logout
 
 	private static AccountController accountController;
 
@@ -51,6 +52,9 @@ public class AccountController {
 
 
 		currentAccLoggedIn = Account.getAccount(username);
+
+		Menu.print(Color.YELLOW.getVal() + "Remember me?[y/n] " + Color.RESET.getVal());
+		saveLoginInfo = Menu.getInputLine().trim().equalsIgnoreCase("y");
 
 		Menu.addMenusForAdminOrGamer(currentAccLoggedIn instanceof Gamer ? "G" : "A");
 
@@ -191,6 +195,8 @@ public class AccountController {
 			try {
 				Menu.print("Old password:[/c to cancel] "); String oldPW = Menu.getInputLine();
 
+				if (oldPW.trim().equalsIgnoreCase("/c")) return;
+
 				if (!AccountController.getInstance().getCurrentAccLoggedIn().isPasswordCorrect(oldPW))
 					throw new PaswordIncorrectException();
 				break;
@@ -200,7 +206,9 @@ public class AccountController {
 
 		Menu.print("New password: "); String newPW = Menu.getInputLine();
 
-		AccountController.getInstance().getCurrentAccLoggedIn().editField("password", newPW);
+		Menu.displayAreYouSureMessage();
+		if (Menu.getInputLine().trim().equalsIgnoreCase("y"))
+			AccountController.getInstance().getCurrentAccLoggedIn().editField("password", newPW);
 	}
 
 	public void editAccFieldCommand () {
@@ -216,16 +224,28 @@ public class AccountController {
 
 		switch (field) {
 			case 1 -> {
-				Menu.print("New First name: ");
-				getCurrentAccLoggedIn().editField("first name", Menu.getInputLine());
+				Menu.print("New First name:[/c to cancel] "); String new1name = Menu.getInputLine();
 
-				Menu.println("First name changed successfully.");
+				if (new1name.trim().equalsIgnoreCase("/c")) return;
+
+				Menu.displayAreYouSureMessage();
+				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+					getCurrentAccLoggedIn().editField("first name", new1name);
+					Menu.println("First name changed successfully.");
+				}
 			}
 
 
 			case 2 -> {
-				Menu.print("New Last name:[/c to cancel] "); getCurrentAccLoggedIn().editField("last name", Menu.getInputLine());
-				Menu.println("Last name changed successfully.");
+				Menu.print("New Last name:[/c to cancel] "); String new2name = Menu.getInputLine();
+
+				if (new2name.trim().equalsIgnoreCase("/c")) return;
+
+				Menu.displayAreYouSureMessage();
+				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+					getCurrentAccLoggedIn().editField("last name", new2name);
+					Menu.println("Last name changed successfully.");
+				}
 			}
 			case 3 -> {
 				String username;
@@ -242,8 +262,11 @@ public class AccountController {
 						Menu.printErrorMessage(e.getMessage());
 					}
 
-				getCurrentAccLoggedIn().editField("username", Menu.getInputLine());
-				Menu.println("Username changed successfully.");
+				Menu.displayAreYouSureMessage();
+				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+					getCurrentAccLoggedIn().editField("username", Menu.getInputLine());
+					Menu.println("Username changed successfully.");
+				}
 			}
 			case 4 -> {
 				String newEmail;
@@ -307,20 +330,21 @@ public class AccountController {
 			);
 	}
 
-	public void logoutCommand () {
-		logout();
+	public void logout () {
+		currentAccLoggedIn = null;
+		saveLoginInfo = false;
 	}
 
 	public Account getCurrentAccLoggedIn () {
 		return currentAccLoggedIn;
 	}
 
-	public void logout () {
-		currentAccLoggedIn = null;
+	public void setCurrentAccLoggedIn (Account currentAccLoggedIn) {
+		this.currentAccLoggedIn = currentAccLoggedIn;
 	}
 
-	public boolean isLoggedIn () {
-		return currentAccLoggedIn != null;
+	public boolean saveLoginInfo () {
+		return saveLoginInfo;
 	}
 
 	public static class NoAccountExistsWithUsernameException extends Exception {

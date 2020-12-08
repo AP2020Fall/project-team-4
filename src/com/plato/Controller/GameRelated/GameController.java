@@ -6,6 +6,7 @@ import Model.AccountRelated.Admin;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
+import Model.GameRelated.GameLog;
 import Model.GameRelated.Reversi.Reversi;
 import View.GameRelated.GameView;
 import View.Menus.Menu;

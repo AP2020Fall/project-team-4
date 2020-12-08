@@ -39,7 +39,7 @@ public class MainController {
 	}
 
 	public static void main (String[] args) {
-		new DayPassingController();
+		DayPassController.getInstance().start();
 
 		try {
 			getInstance().deserialize();
@@ -49,8 +49,13 @@ public class MainController {
 
 		if (!Admin.adminHasBeenCreated())
 			Menu.addMenu("1");
-		else
+		else {
 			Menu.addMenu("2");
+			if (AccountController.getInstance().getCurrentAccLoggedIn() != null)
+				Menu.addMenu("3");
+
+			Menu.addMenusForAdminOrGamer(AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A");
+		}
 
 		Menu.getMenuIn().displayMenu();
 
@@ -223,13 +228,29 @@ public class MainController {
 			case "view gaming history in battlesea" -> GamerController.getInstance().displayGamingHistory("battlesea");
 			case "view gaming history in reversi" -> GamerController.getInstance().displayGamingHistory("reversi");
 			case "logout" -> {
-				AccountController.getInstance().logoutCommand();
-				Menu.getMenuIn().getChildMenus().get(command + 1).enter();
+				AccountController.getInstance().logout();
+				Menu.getMenuIn().getChildMenus()
+						.get(command + 1)
+						.enter();
 			}
 		}
 	}
 
 	public void serialize () throws IOException {
+
+		// SavedLoginInfo.json
+		if (AccountController.getInstance().getCurrentAccLoggedIn() != null) // if is logged-in
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/SavedLoginInfo.json"))) {
+				if (AccountController.getInstance().saveLoginInfo()) { // skip if said no to remember me
+					writer.write((AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "a" : "g") + "\n");
+					writer.write(gson.toJson(AccountController.getInstance().getCurrentAccLoggedIn()));
+				}
+			}
+		else // if is logged-out
+			try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/SavedLoginInfo.json")) {
+				printWriter.print("");
+			}
+
 
 		// Admin.json
 		if (Admin.adminHasBeenCreated())
@@ -320,6 +341,20 @@ public class MainController {
 				if (json.length() > 2)
 					Gamer.setGamers(gson.fromJson(json, new TypeToken<LinkedList<Gamer>>() {
 					}.getType()));
+			}
+		}
+		// savedLoginInfo
+		{
+			String json = "";
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/SavedLoginInfo.json"))) {
+				boolean forAdmin = false;
+				if (reader.ready()) forAdmin = reader.readLine().equalsIgnoreCase("a");
+
+				while (reader.ready())
+					json += reader.readLine();
+
+				if (json.length() > 2)
+					AccountController.getInstance().setCurrentAccLoggedIn(gson.fromJson(json, (forAdmin ? Account.class : Gamer.class)));
 			}
 		}
 		// admin game recommendations
@@ -451,11 +486,15 @@ public class MainController {
 		}
 	}
 
-	private static class DayPassingController extends Thread {
-		private static int lastDayUpdated;
+	private static class DayPassController extends Thread {
+		private int lastDayUpdated;
 
-		public DayPassingController () {
-			lastDayUpdated = LocalDate.now().getDayOfMonth();
+		private static DayPassController dayPassController = new DayPassController();
+
+		public static DayPassController getInstance () {
+			if (dayPassController == null)
+				dayPassController = new DayPassController();
+			return dayPassController;
 		}
 
 		@Override
@@ -464,6 +503,8 @@ public class MainController {
 			if (today != lastDayUpdated) {
 				// todo do things that should be done everyday
 				Event.dealWOverdueEvents();
+
+				lastDayUpdated = LocalDate.now().getDayOfMonth();
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 package View.Menus;
 
+import Controller.AccountRelated.AccountController;
 import Model.AccountRelated.Admin;
 
 import java.util.HashMap;
@@ -119,7 +120,7 @@ public abstract class Menu {
 				getMenu("7").addChildMenu(3, getMenu("14A"));
 				// for menu 14
 				getMenu("14A").addChildMenu(1, getMenu("13"));
-				getMenu("14A").addChildMenu(2, getMenu("2"));
+				getMenu("14A").addChildMenu(6, getMenu("2"));
 			}
 		}
 	}
@@ -169,7 +170,11 @@ public abstract class Menu {
 	}
 
 	public static Menu getMenuIn () {
-		return menus.values().stream().filter(menu -> menu.inMenu).findAny().get();
+		if (entryHistory.size() != 0) return entryHistory.getLast();
+
+		if (AccountController.getInstance().getCurrentAccLoggedIn() == null) return getMenu("2");
+
+		return getMenu(3 + (AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "A" : "G"));
 	}
 
 	public static Scanner getScanner () {
