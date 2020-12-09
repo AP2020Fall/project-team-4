@@ -12,6 +12,15 @@ import java.util.stream.Collectors;
 import static Model.GameRelated.Game.getAllFinishedGames;
 
 public class GameLog {
+
+
+	public static LinkedList<Game> getListOfGames(String gameName){
+		LinkedList<Game> listOfGames = new LinkedList<>();
+		for(Game game : getAllFinishedGames())
+			if(!game.getConclusion().equals(GameConclusion.IN_SESSION) && game.getGameName().equals(gameName))
+				listOfGames.add(game);
+	return listOfGames;}
+
 	/**
 	 * @param gamer the gamer to which we want points earned in game
 	 * @param gameName the game that we want the points gamer earned in
@@ -20,8 +29,9 @@ public class GameLog {
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
 	public static Integer getPoints (Gamer gamer, String gameName) {
-		// TODO: 11/29/2020 AD
-		return 0;
+		return getDrawCount(gamer,gameName)*GameConclusion.DRAW.getWinnerPoints()
+				+ getWinCount(gamer,gameName)*GameConclusion.PLAYER1_WIN.getWinnerPoints()
+				+ getLossCount(gamer , gameName)*GameConclusion.PLAYER2_WIN.getLoserPoints();
 	}
 
 	/**
@@ -30,8 +40,7 @@ public class GameLog {
 	 */
 	public static Integer getPlayedCount (Gamer gamer, String gameName) {
 		int count = 0;
-		for(Game game : getAllFinishedGames()){
-			if(game.getGameName().equals(gameName))
+		for(Game game : getListOfGames(gameName)){
 			    if(game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
 			    	count++;
 		}
@@ -43,12 +52,9 @@ public class GameLog {
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
 	public static Integer getPlayedCount (String gameName) {
-		int count = 0;
-		for(Game game : getAllFinishedGames()){
-			if(game.getGameName().equals(gameName)) count++;
-		}
-		return count;
+		return getListOfGames(gameName).size();
 	}
+
 
 	/**
 	 * @return number of times said gamer won said game
@@ -56,9 +62,11 @@ public class GameLog {
 	 */
 	public static Integer getWinCount (Gamer gamer, String gameName) {
 		int count = 0;
-		for(Game game : getAllFinishedGames()){
-			if(game.getGameName().equals(gameName) && game.getWinner().equals(gamer))
-				count++;
+		for(Game game : getListOfGames(gameName)){
+			if(game.getConclusion().equals(GameConclusion.PLAYER1_WIN) || game.getConclusion().equals(GameConclusion.PLAYER2_WIN))
+				if(game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
+					if(game.getWinner().equals(gamer))
+						count++;
 		}
 		return count;
 	}
@@ -69,8 +77,8 @@ public class GameLog {
 	 */
 	public static Integer getLossCount (Gamer gamer, String gameName) {
 		int count = 0;
-		for(Game game : getAllFinishedGames()){
-			if(game.getGameName().equals(gameName))
+		for(Game game : getListOfGames(gameName)){
+			if(game.getConclusion().equals(GameConclusion.PLAYER1_WIN) || game.getConclusion().equals(GameConclusion.PLAYER2_WIN))
 				if(game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
 					if(!game.getWinner().equals(gamer))
 						count++;
@@ -84,9 +92,8 @@ public class GameLog {
 	 */
 	public static Integer getDrawCount (Gamer gamer, String gameName) {
 		int count = 0;
-		for(Game game : getAllFinishedGames()) {
-			if (game.getGameName().equals(gameName))
-				if(game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
+		for(Game game : getListOfGames(gameName)) {
+			if(game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
 					if(game.getConclusion().equals(GameConclusion.DRAW))
 						count++;
 		}
@@ -98,11 +105,9 @@ public class GameLog {
 	 */
 	public static LinkedList<Gamer> getAllGamersWhoPlayedGame (String gameName) {
 		LinkedList<Gamer> listOfGamers = new LinkedList<>();
-		for(Game game : getAllFinishedGames()){
-			if(game.getGameName().equals(gameName)){
+		for(Game game : getListOfGames(gameName)){
 				listOfGamers.add(game.getListOfPlayers().get(0).getGamer());
-			listOfGamers.add(game.getListOfPlayers().get(1).getGamer());}
-		}
+			    listOfGamers.add(game.getListOfPlayers().get(1).getGamer());}
 		return listOfGamers;
 	}
 
@@ -115,6 +120,56 @@ public class GameLog {
 				.filter(game -> game.getGameName().equalsIgnoreCase(gameName))
 				.sorted(Comparator.comparing(Game::getDateGameEnded).reversed())
 				.collect(Collectors.toCollection(LinkedList::new));
+
+		LinkedList<String> gamesHistoryAsStrings = new LinkedList<>();
+
+		gamesHistory.forEach(game ->
+				gamesHistoryAsStrings.add("%s, %s %d-%d %s".formatted(
+						game.getDateGameEnded().format(DateTimeFormatter.ofPattern("yyyy-MMM-dd")),
+						game.getListOfPlayers().get(0).getUsername(),
+						game.getScores()[0],
+						game.getScores()[1],
+						game.getListOfPlayers().get(1).getUsername()
+				))
+		);
+
+		return gamesHistoryAsStrings;
+	}
+
+	/**
+	 * @param gamer
+	 * @return list of all the games gamer has played
+	 */
+	public static LinkedList<String> getGameHistory(Gamer gamer){
+		LinkedList<Game> gamesHistory = new LinkedList<>();
+		LinkedList<String> gamesHistoryAsString = new LinkedList<>();
+		for(Game game : getAllFinishedGames()){
+			if(game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
+				gamesHistory.add(game);
+		}
+		gamesHistory.forEach(game ->
+				gamesHistoryAsString.add("%s, %s %d-%d %s".formatted(
+						game.getDateGameEnded().format(DateTimeFormatter.ofPattern("yyyy-MMM-dd")),
+						game.getListOfPlayers().get(0).getUsername(),
+						game.getScores()[0],
+						game.getScores()[1],
+						game.getListOfPlayers().get(1).getUsername()
+				))
+		);
+	return gamesHistoryAsString;}
+
+
+	/**
+	 * every 2 games is one level so level = playedCount/2
+	 * @param gameName
+	 * @return
+	 */
+	public static String getGameStatic(String gameName , Gamer gamer){
+		return "Level:" + (int) getPlayedCount(gamer,gameName)/2 +
+				"played" + getPlayedCount(gamer , gameName) + "times" +
+				"number of wins: " + getWinCount(gamer , gameName) +
+				"number of loss: " + getLossCount(gamer , gameName);
+
 	}
 
 	/**
