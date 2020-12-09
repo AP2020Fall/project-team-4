@@ -18,7 +18,7 @@ public class EventView {
 	}
 
 	public void displayEvents (LinkedList<String> inSessionEvents) { // every string is in form -> "eventID gameName start end eventScore"
-		System.out.println(" |\tEventID\t|\t  Game  \t|\t  Start  \t|\t\tEnd\t\t|\tPrize\t|");
+		Menu.println(" |\tEventID\t|\t  Game  \t|\t  Start  \t|\t\tEnd\t\t|\tPrize\t|");
 		inSessionEvents.forEach(event ->
 				System.out.printf(" |\t%s \t|\t%s\t|\t%s\t|\t%s\t|\t%s\t|%n",
 				event.split(" ")[0],

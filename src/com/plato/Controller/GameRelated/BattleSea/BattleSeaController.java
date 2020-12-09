@@ -32,12 +32,6 @@ public class BattleSeaController {
 		return battleSeaController;
 	}
 
-	public static void main (String[] args) {
-		for (Color color : Color.values()) {
-			System.out.println(color.getVal() + color + Color.RESET.getVal());
-		}
-	}
-
 	public void chooseBetween5RandomlyGeneratedBoards () {
 		LinkedList<LinkedList<Ship>> fiveRandBoards = BattleSea.get5RandBoards();
 		BattleSeaView.getInstance().displayAll5RandomBoards(
@@ -287,7 +281,7 @@ public class BattleSeaController {
 
 		public void resetTimer () {
 			secondsRemaining = MAX_SECONDS;
-			// if bomb wasnt successful go to next turn
+			// if bomb wasn't successful go to next turn
 			if (command.equals("bomb"))
 				if (!((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getTurnPlayer())
 						.getBombsThrown().getLast().getWasSuccessful())

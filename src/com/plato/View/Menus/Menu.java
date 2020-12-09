@@ -132,7 +132,7 @@ public abstract class Menu {
 	}
 
 	public static void printSavedMessage () {
-//		Menu.println();
+		Menu.println(Color.BLUE.getVal() + "\t-Saved" + Color.RESET.getVal());
 	}
 
 	public LinkedList<String> getOptions () {
@@ -197,7 +197,7 @@ public abstract class Menu {
 		Menu.println(Color.GREEN.getVal() + text + Color.RESET.getVal());
 	}
 
-	public static void printAskingForInput(String text) {
+	public static void printAskingForInput (String text) {
 		Menu.print(Color.YELLOW.getVal() + text + Color.RESET.getVal());
 	}
 

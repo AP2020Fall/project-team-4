@@ -103,7 +103,9 @@ public class MainController {
 
 			// register-login menu
 			case "register gamer", "register admin" -> AccountController.getInstance().register();
-			case "login" -> AccountController.getInstance().login();
+			case "login" -> {
+				AccountController.getInstance().login();
+			}
 			case "delete account" -> AccountController.getInstance().deleteAccount();
 
 			// main menu
@@ -239,6 +241,8 @@ public class MainController {
 				Menu.getMenu("2").enter();
 			}
 		}
+
+		saveEverything();
 	}
 
 	public void serialize () throws IOException {
@@ -319,6 +323,15 @@ public class MainController {
 
 				writer.write(gson.toJson(IDGenerator.getAllIDsGenerated()));
 			}
+	}
+
+	public void saveEverything () {
+		try {
+			serialize();
+			Menu.printSavedMessage();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void deserialize () throws IOException {
