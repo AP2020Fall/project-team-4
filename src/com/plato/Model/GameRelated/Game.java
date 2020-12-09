@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public abstract class Game {
@@ -69,7 +70,14 @@ public abstract class Game {
 
 		if (allPlayersOfGameName.size() == 0)
 			scoreBoard.addLast("No one has played %s until now.".formatted(gameName));
-		else
+		else {
+			AtomicInteger rank = new AtomicInteger(1),
+					prevRankPts = new AtomicInteger(),
+					prevRankWins = new AtomicInteger(),
+					prevRankLosses = new AtomicInteger(),
+					prevRankDraws = new AtomicInteger(),
+					prevRankPlayCount = new AtomicInteger();
+
 			allPlayersOfGameName.forEach(gamer -> {
 				String username = gamer.getUsername();
 				int pts = (GameLog.getPoints(gamer, gameName)),
@@ -78,10 +86,19 @@ public abstract class Game {
 						draws = (GameLog.getDrawCount(gamer, gameName)),
 						playCount = (GameLog.getPlayedCount(gamer, gameName));
 
-				scoreBoard.addLast("Username: %s,\tPoints: %d,\tWins: %d,\tLosses: %d,\tDraws: %d,\tPlayed Count: %d".formatted(
-						username, pts, wins, losses, draws, playCount
+				// if everything is the same for two players dont go to rank
+				if (rank.get() != 1 &&
+						(prevRankPts.get() != pts ||
+						prevRankWins.get() != wins || prevRankLosses.get() != losses || prevRankDraws.get() != draws ||
+						prevRankPlayCount.get() != playCount))
+					rank.incrementAndGet();
+
+				scoreBoard.addLast("Rank: %d,\tUsername: %s,\tPoints: %d,\tWins: %d,\tLosses: %d,\tDraws: %d,\tPlayed Count: %d".formatted(
+						rank.get(), username, pts, wins, losses, draws, playCount
 				));
+				prevRankPts.set(pts); prevRankWins.set(wins); prevRankLosses.set(losses); prevRankDraws.set(draws); prevRankPlayCount.set(playCount);
 			});
+		}
 		return scoreBoard;
 	}
 

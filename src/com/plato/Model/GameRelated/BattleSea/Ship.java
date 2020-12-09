@@ -5,6 +5,8 @@ import Model.GameRelated.Game;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class Ship {
@@ -83,11 +85,11 @@ public class Ship {
 
 	public boolean isShipPosValid (LinkedList<Ship> board, int newX, int newY, boolean newIsVertical) {
 
-		if (newX < 1 || newY < 1 || newX > 10 || newY > 10) return false;
+		if (!BattleSea.checkCoordinates(newX) || !BattleSea.checkCoordinates(newY)) return false;
 
-		if ((newIsVertical ? newY : newX) + this.getL_SIZE() - 1 > 10) return false;
+		if (!BattleSea.checkCoordinates((newIsVertical ? newY : newX) + this.getL_SIZE() - 1)) return false;
 
-		if ((newIsVertical ? newX : newY) + this.getS_SIZE() - 1 > 10) return false;
+		if (!BattleSea.checkCoordinates((newIsVertical ? newX : newY) + this.getS_SIZE() - 1)) return false;
 
 		LinkedList<Ship> shipsExclThis = board.stream()
 				.filter(ship -> !ship.equals(this))
@@ -96,8 +98,13 @@ public class Ship {
 		LinkedList<int[]> thisCoords =
 				getAllCoords(new LinkedList<>(Collections.singletonList(this)));
 
-		return getAllCoords(shipsExclThis).stream()
-				.noneMatch(coord -> thisCoords.contains(coord));
+		AtomicBoolean valid = new AtomicBoolean(true);
+		getAllCoords(shipsExclThis).forEach(coord -> {
+			for (int[] thisCoord : thisCoords)
+				if (thisCoord[0] == coord[0] && thisCoord[1] == coord[1])
+					valid.set(false);
+		});
+		return valid.get();
 	}
 
 	public PlayerBattleSea getPlayer () {
@@ -129,5 +136,18 @@ public class Ship {
 
 	public void setGame (Game game) {
 		this.game = game;
+	}
+
+	@Override
+	public boolean equals (Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Ship ship = (Ship) o;
+		return leftMostX == ship.leftMostX && topMostY == ship.topMostY && isVertical == ship.isVertical && L_SIZE == ship.L_SIZE && S_SIZE == ship.S_SIZE;
+	}
+
+	@Override
+	public int hashCode () {
+		return Objects.hash(leftMostX, topMostY, isVertical, L_SIZE, S_SIZE);
 	}
 }

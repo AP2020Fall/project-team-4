@@ -1,5 +1,7 @@
 package View.GameRelated;
 
+import View.Menus.Menu;
+
 import java.util.LinkedList;
 
 public class GameLogView {
@@ -23,17 +25,23 @@ public class GameLogView {
 		System.out.printf("You have won %s %d times until now%n", gameName, count);
 	}
 
+	public void displayGamingHistoryOfGamer (String gameName, LinkedList<String> history) {
+		if (!gameName.equals(""))
+			Menu.println("Your Gaming History of %s".formatted(gameName));
+		history.forEach(entry -> Menu.println("\t\t" + entry));
+	}
+
 	public void displayLogOfGame (String gameName, int allPlayedCount, LinkedList<String> gameHistory) {
-		System.out.printf("%s:%n", gameName);
-		System.out.printf("%tPlay count: %d%n", allPlayedCount);
-		gameHistory.forEach(entry -> System.out.println("\t\t" + entry));
+		Menu.println("%s:".formatted(gameName));
+		Menu.println("\tPlay count: %d".formatted(allPlayedCount));
+		gameHistory.forEach(entry -> Menu.println("\t\t" + entry));
 	}
 
 	public void displayAllPointsOfPlayer (int points) {
-		System.out.printf("You have earned %d points from all you gameplay%n", points);
+		Menu.println("You have earned %d points from all you gameplay".formatted(points));
 	}
 
 	public void displayLastGamePlayed (String gameName) {
-		System.out.printf("Last game you played was %s%n", gameName);
+		Menu.println("Last game you played was %s".formatted(gameName));
 	}
 }
