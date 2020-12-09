@@ -4,6 +4,7 @@ import Controller.GameRelated.GameController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
+import Model.GameRelated.Game;
 import Model.GameRelated.Player;
 import View.GameRelated.BattleSea.BattleSeaView;
 import View.Menus.Color;
@@ -261,12 +262,16 @@ public class BattleSeaController {
 		public void run () {
 			secondsRemaining--;
 
-			if (command.equals("bomb"))
+			if (command.equals("bomb")) {
 				resetTimer();
+			}
 
 			if (secondsRemaining == -1) {
+				BattleSea currentGame = (BattleSea) GameController.getInstance().getCurrentGameInSession();
 				if (command.equals(""))
-					BattleSeaView.getInstance().displayOutOfTimeMessage(GameController.getInstance().getCurrentGameInSession().getTurnGamer().getUsername());
+					BattleSeaView.getInstance().displayOutOfTimeMessage(
+							currentGame.getOpponentOf(currentGame.getTurnPlayer()).getUsername()
+					);
 				resetTimer();
 			}
 		}
