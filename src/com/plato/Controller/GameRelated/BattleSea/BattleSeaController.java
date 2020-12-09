@@ -4,7 +4,6 @@ import Controller.GameRelated.GameController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
-import Model.GameRelated.Game;
 import Model.GameRelated.Player;
 import View.GameRelated.BattleSea.BattleSeaView;
 import View.Menus.Color;
@@ -129,8 +128,16 @@ public class BattleSeaController {
 		StringBuilder boardStrBldr = new StringBuilder();
 
 		BattleSea currentGame = (BattleSea) GameController.getInstance().getCurrentGameInSession();
-		PlayerBattleSea curentPlayer = ((PlayerBattleSea) currentGame.getTurnPlayer()),
-				currentOpponent = (PlayerBattleSea) currentGame.getOpponentOf(curentPlayer);
+
+		PlayerBattleSea playerToShowBoardOf, opponentPlayer;
+		if (boardIsForCurrentPlayer) {
+			playerToShowBoardOf = ((PlayerBattleSea) currentGame.getTurnPlayer());
+			opponentPlayer = (PlayerBattleSea) currentGame.getOpponentOf(playerToShowBoardOf);
+		}
+		else {
+			opponentPlayer = ((PlayerBattleSea) currentGame.getTurnPlayer());
+			playerToShowBoardOf = (PlayerBattleSea) currentGame.getOpponentOf(opponentPlayer);
+		}
 
 		Menu.println("%s%s board%s".formatted(Color.BLACK_BRIGHT.getVal(), (boardIsForCurrentPlayer ? "Your" : "Opponent's"), Color.RESET.getVal()));
 
@@ -143,41 +150,44 @@ public class BattleSeaController {
 				else if (x == 0) boardStrBldr.append(y);
 				else {
 					String symbol = " ";
+					int finalX = x, finalY = y;
 
-					// if there was a destroyed ship here
-					int finalX = x;
-					int finalY = y;
-					if (Ship.getAllCoords(currentOpponent.getShips(true)).stream()
-							.anyMatch(coord -> finalX == coord[0] && finalY == coord[1])) {
-						symbol = Color.RED_BOLD.getVal() + "*";
-					}
-
-					// if there was a successful bomb but not a destroyed ship here
-					else if (curentPlayer
-							.getBombsThrown(true).stream()
-							.anyMatch(bomb -> bomb.getX() == finalX && bomb.getY() == finalY)) {
-						symbol = Color.YELLOW_BOLD.getVal() + "+";
-					}
-
-					// if there was an unsuccessful bomb here
-					else if (curentPlayer
-							.getBombsThrown(false).stream()
-							.anyMatch(bomb -> bomb.getX() == finalX && bomb.getY() == finalY)) {
-						symbol = Color.GREEN_BOLD.getVal() + "-";
-					}
+//					boolean IntactShipHere = Ship.getAllCoords(playerToShowBoardOf.getShips(false)).stream()
+//							.anyMatch(),
 
 					// if there is a (partly) healthy ship here -> only for currentplayer's board
-					else if (boardIsForCurrentPlayer && Ship.getAllCoords(currentOpponent.getShips(true)).stream()
-							.anyMatch(coord -> finalX == coord[0] && finalY == coord[1])) {
-						symbol = Color.BLUE.getVal() + "#";
+					if (boardIsForCurrentPlayer) {
+						if (Ship.getAllCoords(playerToShowBoardOf.getShips(false)).stream()
+								.anyMatch(coord -> finalX == coord[0] && finalY == coord[1]))
+							symbol = Color.BLUE.getVal() + "#";
 					}
+//					else {
+						// if there was a destroyed ship here
+						if (Ship.getAllCoords(playerToShowBoardOf.getShips(true)).stream()
+								.anyMatch(coord -> finalX == coord[0] && finalY == coord[1])) {
+							symbol = Color.RED_BOLD.getVal() + "*";
+						}
 
+						// if there was a successful bomb but not a destroyed ship here
+						if (opponentPlayer
+								.getBombsThrown(true).stream()
+								.anyMatch(bomb -> bomb.getX() == finalX && bomb.getY() == finalY)) {
+							symbol = Color.YELLOW_BOLD.getVal() + "+";
+						}
+
+						// if there was an unsuccessful bomb here
+						if (opponentPlayer
+								.getBombsThrown(false).stream()
+								.anyMatch(bomb -> bomb.getX() == finalX && bomb.getY() == finalY)) {
+							symbol = Color.GREEN_BOLD.getVal() + "-";
+						}
+//					}
 					boardStrBldr.append(symbol + Color.RESET.getVal());
 				}
 				boardStrBldr.append(((x == 0 && y == 10) || (x == 10 && y == 0)) ? "" : " ");
 
 				if (x != 10)
-					boardStrBldr.append("|");
+					boardStrBldr.append("| ");
 			}
 			boardStrBldr.append("|\n");
 		}
