@@ -2,6 +2,7 @@ package Model.AccountRelated;
 
 import Controller.IDGenerator;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
@@ -27,14 +28,21 @@ public class AdminGameReco {
 	}
 
 	public static LinkedList<AdminGameReco> getRecommendations (Gamer gamer) {
-		return (LinkedList<AdminGameReco>) recommendations.stream()
+		return recommendations.stream()
 				.filter(recommendations -> recommendations.getGamer().getUsername().equals(gamer.getUsername()))
+				.sorted(Comparator.comparing(AdminGameReco::getGameName))
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public static AdminGameReco getRecommendation (String recoID) {
 		return recommendations.stream()
 				.filter(reco -> reco.recoID.equals(recoID))
+				.findAny().get();
+	}
+
+	public static AdminGameReco getRecommendation (Gamer gamer, String gameName) {
+		return getRecommendations().stream()
+				.filter(reco -> reco.getGamer().getUsername().equals(gamer.getUsername()) && reco.getGameName().equals(gameName))
 				.findAny().get();
 	}
 

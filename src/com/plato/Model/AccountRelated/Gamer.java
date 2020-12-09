@@ -15,11 +15,13 @@ public class Gamer extends Account {
 	private LinkedList<Gamer> frnds = new LinkedList<>();
 	private LinkedList<String> faveGames = new LinkedList<>();
 
-	protected Gamer (String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
+	public Gamer (String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
 		super(firstName, lastName, username, password, email, phoneNum);
 		accountStartDate = LocalDate.now();
 		this.money = money;
 	}
+	// for serialization
+	public Gamer () {}
 
 	public void sendFrndReq (String usernameTo) {
 		FriendRequest.addFriendReq(this, (Gamer) getAccount(usernameTo));
@@ -101,5 +103,25 @@ public class Gamer extends Account {
 
 	public int getAwardsFromEvents () {
 		return awardsFromEvents;
+	}
+
+	public void setAwardsFromEvents (int awardsFromEvents) {
+		this.awardsFromEvents = awardsFromEvents;
+	}
+
+	public void setMoney (double money) {
+		this.money = money;
+	}
+
+	public void setAccountStartDate (LocalDate accountStartDate) {
+		this.accountStartDate = accountStartDate;
+	}
+
+	public void setFrnds (LinkedList<Gamer> frnds) {
+		this.frnds = frnds;
+	}
+
+	public void setFaveGames (LinkedList<String> faveGames) {
+		this.faveGames = faveGames;
 	}
 }
