@@ -27,7 +27,7 @@ public class GameLogView {
 
 	public void displayGamingHistoryOfGamer (String gameName, LinkedList<String> history) {
 		if (!gameName.equals(""))
-			Menu.println("Your Gaming History of %s".formatted(gameName));
+			Menu.println("Your Gaming History of %s".formatted(gameName.equals("reversi") ? "Reversi":"BattleSea"));
 		history.forEach(entry -> Menu.println("\t\t" + entry));
 	}
 

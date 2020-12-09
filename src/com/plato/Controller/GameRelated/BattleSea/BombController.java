@@ -55,6 +55,7 @@ public class BombController {
 		}
 
 		currentPlayer.throwBomb(x, y);
+		Menu.printSuccessfulOperation("Bomb successful");
 		BattleSeaController.getInstance().getTurnTimerTask().bomb();
 	}
 

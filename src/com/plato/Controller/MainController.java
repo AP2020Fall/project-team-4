@@ -47,12 +47,19 @@ public class MainController {
 			e.printStackTrace();
 		}
 
-		if (!Admin.adminHasBeenCreated())
+		if (!Admin.adminHasBeenCreated()) {
 			Menu.addMenu("1");
+			Menu.getMenu("1").enter();
+		}
 		else {
 			Menu.addMenu("2");
-			if (AccountController.getInstance().getCurrentAccLoggedIn() != null)
-				Menu.addMenu("3");
+			if (AccountController.getInstance().getCurrentAccLoggedIn() != null) {
+				String aORg = AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A";
+				Menu.addMenu("3" + aORg);
+				Menu.getMenu("3"+aORg).enter();
+			} else
+				Menu.getMenu("2").enter();
+
 
 			Menu.addMenusForAdminOrGamer(AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A");
 		}
@@ -205,7 +212,7 @@ public class MainController {
 			case "display my opponent’s board" -> BattleSeaController.getInstance().displayOpponentBoard();
 
 			// gameplay reversi menu
-			case "place disks" -> ReversiController.getInstance().placeDisk();
+			case "place disk" -> ReversiController.getInstance().placeDisk();
 			case "next turn" -> ReversiController.getInstance().nextTurn();
 			case "whose turn now?" -> GameController.getInstance().displayTurn();
 			case "display available coordinates" -> ReversiController.getInstance().displayAvailableCoords();

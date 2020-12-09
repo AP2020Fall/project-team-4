@@ -35,26 +35,29 @@ public class ReversiController {
 	}
 
 	public void placeDisk () {
-
-		PlayerReversi currentPlayer = ((PlayerReversi) GameController.getInstance().getCurrentGameInSession().getTurnPlayer());
-
 		String Xstr, Ystr; int x, y;
 		while (true) {
 			try {
 				Menu.printAskingForInput("X [/c to cancel]: "); Xstr = Menu.getInputLine();
+
+				if (Xstr.trim().equalsIgnoreCase("/c")) return;
+
+				x = Integer.parseInt(Xstr);
+				if (!Reversi.checkCoordinates(x))
+					throw new InvalidCoordinateException();
+
 				Menu.printAskingForInput("Y [/c to cancel]: "); Ystr = Menu.getInputLine();
 
-				if (Xstr.toLowerCase().trim().equals("/c") || Ystr.toLowerCase().trim().equals("/c")) return;
+				if (Ystr.trim().equalsIgnoreCase("/c")) return;
 
-				x = Integer.parseInt(Xstr); y = Integer.parseInt(Ystr);
-
-				if (!Reversi.checkCoordinates(x) || !Reversi.checkCoordinates(y))
+				y = Integer.parseInt(Ystr);
+				if (!Reversi.checkCoordinates(y))
 					throw new InvalidCoordinateException();
 
 				if (!((Reversi) GameController.getInstance().getCurrentGameInSession()).canPlayerPlaceDiskHere(x, y))
-					throw new CantPlaceDiskHere();
+					throw new CantPlaceDiskHereException();
 				break;
-			} catch (InvalidCoordinateException | CantPlaceDiskHere e) {
+			} catch (InvalidCoordinateException | CantPlaceDiskHereException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 		}
@@ -98,8 +101,8 @@ public class ReversiController {
 		}
 	}
 
-	private static class CantPlaceDiskHere extends Exception {
-		public CantPlaceDiskHere () {
+	private static class CantPlaceDiskHereException extends Exception {
+		public CantPlaceDiskHereException () {
 			super("You cannot place the disk on this coordinates");
 		}
 	}

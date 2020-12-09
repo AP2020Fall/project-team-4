@@ -82,7 +82,6 @@ public class BattleSeaController {
 				this.getBoardAsStringBuilder(randBoard)
 		);
 		setTrialPlayerBoard(randBoard);
-		Ship.getAllCoords(randBoard);
 	}
 
 	public void displayCurrentPlayerBoard () {
