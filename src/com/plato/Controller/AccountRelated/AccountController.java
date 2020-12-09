@@ -212,12 +212,11 @@ public class AccountController {
 	}
 
 	public void editAccFieldCommand () {
-		LinkedList<String> availableFields = (LinkedList<String>) Arrays.asList(new String[]{
-				"First Name",
+		LinkedList<String> availableFields = new LinkedList<>(Arrays.asList("First Name",
 				"Last Name",
 				"Username",
 				"Email",
-				"Phone Number"});
+				"Phone Number"));
 		AccountView.getInstance().displayEditableFields(availableFields);
 
 		int field = 0;

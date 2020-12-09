@@ -1,33 +1,24 @@
 package Model.GameRelated.BattleSea;
 
-import Model.GameRelated.Game;
+import Controller.GameRelated.GameController;
 
 public class Bomb {
-	private final Game game;
 	private final int x, y;
 	private Boolean wasSuccessful;
 
-	Bomb (Game game, int x, int y, Boolean wasSuccessful) {
-		this.game = game;
-		this.x = x;
-		this.y = y;
-		this.wasSuccessful = wasSuccessful;
-	}
-
-	Bomb (Game game, int x, int y) {
-		this.game = game;
+	Bomb (int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	public static Bomb throwBomb (Game game, int x, int y, PlayerBattleSea thrower) {
-		Bomb bomb = new Bomb(game, x, y);
+	public static Bomb throwBomb (int x, int y, PlayerBattleSea thrower) {
+		Bomb bomb = new Bomb(x, y);
 		bomb.setWasSuccessful(bomb.wasSuccessFul(thrower));
 		return bomb;
 	}
 
 	private boolean wasSuccessFul (PlayerBattleSea thrower) {
-		PlayerBattleSea thrownAt = (PlayerBattleSea) game.getOpponentOf(thrower);
+		PlayerBattleSea thrownAt = (PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getOpponentOf(thrower);
 
 		return Ship.getAllCoords(thrownAt.getShips()).stream()
 				.anyMatch(coord -> coord[0] == this.getX() && coord[1] == this.getY());

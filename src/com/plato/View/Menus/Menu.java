@@ -131,6 +131,10 @@ public abstract class Menu {
 		System.out.print(Color.YELLOW.getVal() + "Are you sure?[y/n]  " + Color.RESET.getVal());
 	}
 
+	public static void printSavedMessage () {
+//		Menu.println();
+	}
+
 	public LinkedList<String> getOptions () {
 		LinkedList<String> options = new LinkedList<>();
 		if (canBack()) options.add("Back");

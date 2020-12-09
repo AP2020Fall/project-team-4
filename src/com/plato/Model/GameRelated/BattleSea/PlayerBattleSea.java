@@ -17,7 +17,7 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public void throwBomb (int x, int y) {
-		bombsThrown.addLast(Bomb.throwBomb(getGame(), x, y, this));
+		bombsThrown.addLast(Bomb.throwBomb(x, y, this));
 	}
 
 	public void finalizeBoard (LinkedList<Ship> ships) {
