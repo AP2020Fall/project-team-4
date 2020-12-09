@@ -110,24 +110,11 @@ public class GameLog {
 	 * @return a LinkedList<String> of all finished games of said type(battlesea or reversi)
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
-	public static LinkedList<String> getGameHistory (String gameName) {
-		LinkedList<Game> gamesHistory = Game.getAllFinishedGames().stream()
+	public static LinkedList<Game> getGameHistory (String gameName) {
+		return Game.getAllFinishedGames().stream()
+				.filter(game -> game.getGameName().equalsIgnoreCase(gameName))
 				.sorted(Comparator.comparing(Game::getDateGameEnded).reversed())
 				.collect(Collectors.toCollection(LinkedList::new));
-
-		LinkedList<String> gamesHitoryAsStrings = new LinkedList<>();
-
-		gamesHistory.forEach(game ->
-				gamesHitoryAsStrings.add("%s, %s %d-%d %s".formatted(
-						game.getDateGameEnded().format(DateTimeFormatter.ofPattern("yyyy-MMM-dd")),
-						game.getListOfPlayers().get(0).getUsername(),
-						game.getScores()[0],
-						game.getScores()[1],
-						game.getListOfPlayers().get(1).getUsername()
-				))
-		);
-
-		return gamesHitoryAsStrings;
 	}
 
 	/**
