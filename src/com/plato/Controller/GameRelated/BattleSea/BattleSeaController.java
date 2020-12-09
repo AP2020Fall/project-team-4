@@ -82,6 +82,7 @@ public class BattleSeaController {
 				this.getBoardAsStringBuilder(randBoard)
 		);
 		setTrialPlayerBoard(randBoard);
+		Ship.getAllCoords(randBoard);
 	}
 
 	public void displayCurrentPlayerBoard () {
@@ -113,7 +114,7 @@ public class BattleSeaController {
 					String symbol = (Ship.getAllCoords(board).stream()
 							.anyMatch(shipCoord -> shipCoord[0] == finalX && shipCoord[1] == finalY)) ? "#" : " ";
 
-					boardStrBldr.append(symbol);
+					boardStrBldr.append(Color.BLUE.getVal() + symbol + Color.RESET.getVal());
 				}
 				boardStrBldr.append((((x == 0 && y == 10) || (x == 10 && y == 0)) ? "" : " ") + (x != 10 ? "| " : ""));
 			}

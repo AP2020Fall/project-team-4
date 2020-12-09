@@ -229,8 +229,7 @@ public class MainController {
 			case "view gaming history in reversi" -> GamerController.getInstance().displayGamingHistory("reversi");
 			case "logout" -> {
 				AccountController.getInstance().logout();
-				Menu.getMenuIn().getChildMenus()
-						.get(command + 1)
+				Menu.getMenu("2")
 						.enter();
 			}
 		}
@@ -354,7 +353,7 @@ public class MainController {
 					json += reader.readLine();
 
 				if (json.length() > 2)
-					AccountController.getInstance().setCurrentAccLoggedIn(gson.fromJson(json, (forAdmin ? Account.class : Gamer.class)));
+					AccountController.getInstance().setCurrentAccLoggedIn(gson.fromJson(json, (forAdmin ? Admin.class : Gamer.class)));
 			}
 		}
 		// admin game recommendations

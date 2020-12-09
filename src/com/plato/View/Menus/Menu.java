@@ -13,7 +13,6 @@ public abstract class Menu {
 	private final String menuTitle;
 	private static final LinkedList<Menu> entryHistory = new LinkedList<>();
 	private HashMap<Integer, Menu> childMenus = new HashMap<>();
-	protected boolean inMenu = false;
 
 	private static HashMap<String, Menu> menus = new HashMap<>();
 
@@ -171,9 +170,9 @@ public abstract class Menu {
 	}
 
 	public void enter () {
+		if (entryHistory.contains(this))
+			entryHistory.remove(this);
 		entryHistory.addLast(this);
-		getMenuIn().inMenu = false;
-		this.inMenu = true;
 	}
 
 	public static void printErrorMessage (String message) {
