@@ -39,6 +39,8 @@ public class ReversiView {
 	}
 
 	public void displayAvailableCoords (ArrayList<String> availableCoordinates) {
-		// TODO TOODODOODOD
+		System.out.println("Available Coordinates : ");
+		for(String string : availableCoordinates)
+			System.out.println(string);
 	}
 }
