@@ -2,7 +2,9 @@ package Model.AccountRelated;
 
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 public class Message {
 	private String text;
@@ -18,7 +20,9 @@ public class Message {
 	}
 
 	public static LinkedList<Message> getAllMessages () {
-		return allMessages;
+		return allMessages.stream()
+				.sorted(Comparator.comparing(Message::getDateTime))
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public static void setAllMessages (LinkedList<Message> allMessages) {

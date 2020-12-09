@@ -20,7 +20,6 @@ public class MessageController {
 
 	public void displayAdminMessages () {
 		LinkedList<Message> messages = Message.getAllMessages();
-		messages.sort(Comparator.comparing(Message::getDateTime));
 
 		MessageView.getInstance().displayAdminMessages(new LinkedList<>() {{
 			for (Message message : messages)
@@ -43,7 +42,7 @@ public class MessageController {
 					throw new EmptyMessageException();
 
 				new Message(msg);
-
+				break;
 			} catch (EmptyMessageException e) {
 				e.printStackTrace();
 			}
