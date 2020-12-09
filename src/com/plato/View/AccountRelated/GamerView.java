@@ -15,14 +15,6 @@ public class GamerView {
 		// TODO: 11/28/2020 AD
 	}
 
-	public void displayGamingHistory () {
-		// TODO: 11/16/2020 AD
-	}
-
-	public void displayGamingHistory (String gameName) {
-		// TODO: 11/16/2020 AD
-	}
-
 	public void displayAllUsernames (LinkedList<String> gamersUsernames) {
 		System.out.println("Gamer usernames' list: ");
 		gamersUsernames.forEach(gamer -> System.out.printf("\t%s%n", gamer));

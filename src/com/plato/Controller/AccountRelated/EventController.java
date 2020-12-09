@@ -28,7 +28,7 @@ public class EventController {
 
 		String gameNum;
 		while (true) {
-			Menu.printAskingForInput("Choose Game:[/c to cancel] "); gameNum = String.valueOf(Integer.parseInt(Menu.getInputLine()));
+			Menu.printAskingForInput("Choose Game:[/c to cancel] "); gameNum = Menu.getInputLine();
 
 			if (gameNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -42,10 +42,11 @@ public class EventController {
 		LocalDate start;
 		while (true) {
 			try {
-				Menu.printAskingForInput("Start Date[d-MMM-yyyy][/c to cancel]: ");
-				start = LocalDate.parse(Menu.getInputLine(), DateTimeFormatter.ofPattern("d-MMM-yyyy"));
+				Menu.printAskingForInput("Start Date[d-MMM-yyyy][/c to cancel]: "); String startStr = Menu.getInputLine();
 
-				if (gameNum.trim().equalsIgnoreCase("/c")) return;
+				if (startStr.trim().equalsIgnoreCase("/c")) return;
+
+				start = LocalDate.parse(startStr, DateTimeFormatter.ofPattern("d-MMM-yyyy"));
 
 				if (start.isBefore(LocalDate.now()))
 					throw new StartDateTimeHasAlreadyPassedException();
@@ -60,20 +61,22 @@ public class EventController {
 		LocalDate end;
 		while (true) {
 			try {
-				Menu.printAskingForInput("End Date[d-MMM-yyyy][/c to cancel]: ");
-				end = LocalDate.parse(Menu.getInputLine(), DateTimeFormatter.ofPattern("d-MMM-yyyy"));
+				Menu.printAskingForInput("End Date[d-MMM-yyyy][/c to cancel]: "); String endStr = Menu.getInputLine();
 
-				if (gameNum.trim().equalsIgnoreCase("/c")) return;
+				if (endStr.trim().equalsIgnoreCase("/c")) return;
 
-				if (end.isBefore(LocalDate.now()))
-					throw new EndDateTimeHasAlreadyPassedException();
+				end = LocalDate.parse(endStr, DateTimeFormatter.ofPattern("d-MMM-yyyy"));
 
 				if (end.isBefore(start))
 					throw new StartDateTimeIsAfterEndException();
+
+				if (end.isBefore(LocalDate.now()))
+					throw new EndDateTimeHasAlreadyPassedException();
 				break;
 			} catch (DateTimeParseException e) {
 				Menu.printErrorMessage("Invalid end date format.");
-			} catch (EndDateTimeHasAlreadyPassedException | StartDateTimeIsAfterEndException e) {
+			}
+			catch (StartDateTimeIsAfterEndException | EndDateTimeHasAlreadyPassedException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 		}
@@ -81,9 +84,11 @@ public class EventController {
 		double eventPrize;
 		while (true) {
 			try {
-				Menu.printAskingForInput("Event Prize[/c to cancel]: "); eventPrize = Double.parseDouble(Menu.getInputLine());
+				Menu.printAskingForInput("Event Prize[/c to cancel]: "); String prizeStr = Menu.getInputLine();
 
-				if (gameNum.trim().equalsIgnoreCase("/c")) return;
+				if (prizeStr.trim().equalsIgnoreCase("/c")) return;
+
+				eventPrize = Double.parseDouble(prizeStr);
 
 				break;
 			} catch (NumberFormatException e) {
@@ -342,13 +347,13 @@ public class EventController {
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
-				if (Event.eventInSessionExists(eventid))
+				if (!Event.eventInSessionExists(eventid))
 					throw new EventDoesntExistException();
 
 				Event.removeEvent(eventid);
 				break;
-			} catch (EventDoesntExistException eventDoesntExist) {
-				eventDoesntExist.printStackTrace();
+			} catch (EventDoesntExistException e) {
+				Menu.printErrorMessage(e.getMessage());
 			}
 	}
 

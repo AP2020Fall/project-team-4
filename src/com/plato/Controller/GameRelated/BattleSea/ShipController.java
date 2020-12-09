@@ -24,7 +24,7 @@ public class ShipController {
 
 		ShipView.getInstance().displayShipsWithNamesForEditing(new LinkedList<>() {{
 			for (Ship ship : ships)
-				add("%d %d".formatted(ship.getLeftMostX(), ship.getTopMostY()));
+				add("%d %d %d %d".formatted(ship.getLeftMostX(), ship.getTopMostY(), ship.getL_SIZE(), ship.getS_SIZE()));
 
 		}});
 
@@ -79,7 +79,7 @@ public class ShipController {
 
 		ShipView.getInstance().displayShipsWithNamesForEditing(new LinkedList<>() {{
 			for (Ship ship : ships)
-				add("%d %d".formatted(ship.getLeftMostX(), ship.getTopMostY()));
+				add("%d %d %d %d".formatted(ship.getLeftMostX(), ship.getTopMostY(), ship.getL_SIZE(), ship.getS_SIZE()));
 
 		}});
 

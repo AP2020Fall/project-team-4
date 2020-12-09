@@ -5,8 +5,6 @@ import java.util.LinkedList;
 public class _1RegisterMenu extends Menu {
 	protected _1RegisterMenu (boolean adminHasBeenCreated) {
 		super("Registry Menu");
-		if (!adminHasBeenCreated)
-			this.inMenu = true;
 	}
 
 	@Override

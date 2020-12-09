@@ -115,8 +115,9 @@ public class GameLog {
 	 * @return a LinkedList<String> of all finished games of said type(battlesea or reversi)
 	 * 			-Be sure to use to use the finished games list instead of all of them
 	 */
-	public static LinkedList<String> getGameHistory (String gameName) {
-		LinkedList<Game> gamesHistory = Game.getAllFinishedGames().stream()
+	public static LinkedList<Game> getGameHistory (String gameName) {
+		return Game.getAllFinishedGames().stream()
+				.filter(game -> game.getGameName().equalsIgnoreCase(gameName))
 				.sorted(Comparator.comparing(Game::getDateGameEnded).reversed())
 				.collect(Collectors.toCollection(LinkedList::new));
 

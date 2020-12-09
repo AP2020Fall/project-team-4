@@ -17,7 +17,7 @@ public class ShipView {
 	/*
 	used for changing editing board
 	 */
-	public void displayShipsWithNamesForEditing (LinkedList<String> shipsAndTheirStartingCoords) { // every string is in form -> "startx starty"
+	public void displayShipsWithNamesForEditing (LinkedList<String> shipsAndTheirStartingCoords) { // every string is in form -> "startx starty lsize ssize"
 		LinkedList<Character> shipNames = new LinkedList<>() {{
 			add('A');
 			add('B');
@@ -30,7 +30,12 @@ public class ShipView {
 
 		System.out.println("Ships: ");
 		for (String shipInfo : shipsAndTheirStartingCoords)
-			System.out.printf("\t%s: StartX=%s StartY=%s%n", shipNamesIt.next(), shipInfo.split(" ")[0], shipInfo.split(" ")[1]);
+			System.out.printf("\t%s: StartX=%s\tStartY=%s\tLargeSize=%s\tSmallSize=%s%n",
+					shipNamesIt.next(),
+					shipInfo.split(" ")[0],
+					shipInfo.split(" ")[1],
+					shipInfo.split(" ")[2],
+					shipInfo.split(" ")[3]);
 	}
 
 	/*
