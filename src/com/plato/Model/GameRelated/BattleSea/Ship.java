@@ -28,7 +28,7 @@ public class Ship {
 		return getAllCoords(getPlayer().getShips()).size()
 				==
 				((PlayerBattleSea) game.getOpponentOf(shipOwner)).getBombsThrown().stream()
-						.filter(bomb -> bomb.wasSuccessFul((PlayerBattleSea) game.getOpponentOf(shipOwner)))
+						.filter(Bomb::getWasSuccessful)
 						.count();
 	}
 

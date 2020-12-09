@@ -2,7 +2,6 @@ package Model.GameRelated.BattleSea;
 
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
-import Model.GameRelated.GameLog;
 import Model.GameRelated.Reversi.Reversi;
 
 import java.util.ArrayList;
@@ -32,9 +31,23 @@ public class BattleSea extends Game {
 	 */
 	@Override
 	public boolean gameEnded () {
-		return false;
+		PlayerBattleSea player1 = (PlayerBattleSea) getListOfPlayers().get(0),
+				player2 = (PlayerBattleSea) getListOfPlayers().get(1);
+
+		return player2.getBombsThrown(true).size() == 26 || player1.getBombsThrown(true).size() == 26;
 	}
 
+	@Override
+	public Gamer getWinner () {
+		PlayerBattleSea player1 = (PlayerBattleSea) getListOfPlayers().get(0),
+				player2 = (PlayerBattleSea) getListOfPlayers().get(1);
+		if (player2.getBombsThrown(true).size() == 26)
+			return player2.getGamer();
+		if (player1.getBombsThrown(true).size() == 26)
+			return player1.getGamer();
+
+		return null;
+	}
 
 	public static LinkedList<LinkedList<Ship>> get5RandBoards () {
 		LinkedList<LinkedList<Ship>> boards = new LinkedList<>();
@@ -74,7 +87,6 @@ public class BattleSea extends Game {
 
 		return board;
 	}
-
 
 	public static void setDetailsForBattlesea (String details) {
 		battleseaDetails = details;
