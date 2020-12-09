@@ -63,8 +63,6 @@ public class GameLogController {
 		LinkedList<Game> history = GameLog.getGameHistory(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()));
 		LinkedList<String> historyStrs = getGameHistoryAsStrings(history);
 
-		//todo set historyStrs
-
 		GameLogView.getInstance().displayGamingHistoryOfGamer("", historyStrs);
 	}
 
@@ -72,18 +70,16 @@ public class GameLogController {
 		LinkedList<Game> history = GameLog.getGameHistory(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn())).stream()
 				.filter(game -> game.getGameName().equalsIgnoreCase(gamename))
 				.collect(Collectors.toCollection(LinkedList::new));
-		LinkedList<String> historyStrs = new LinkedList<>();
-
-		//todo set historyStrs
+		LinkedList<String> historyStrs = getGameHistoryAsStrings(history);
 
 		GameLogView.getInstance().displayGamingHistoryOfGamer(gamename, historyStrs);
 	}
 
 	public LinkedList<String> getGameHistoryAsStrings (LinkedList<Game> gamesHistory) {
-		LinkedList<String> gamesHitoryAsStrings = new LinkedList<>();
+		LinkedList<String> gamesHistoryAsStrings = new LinkedList<>();
 
 		gamesHistory.forEach(game ->
-				gamesHitoryAsStrings.add("%s, %s %d-%d %s".formatted(
+				gamesHistoryAsStrings.add("%s, %s %d-%d %s".formatted(
 						game.getDateGameEnded().format(DateTimeFormatter.ofPattern("yyyy-MMM-dd")),
 						game.getListOfPlayers().get(0).getUsername(),
 						game.getScores()[0],
@@ -92,6 +88,6 @@ public class GameLogController {
 				))
 		);
 
-		return gamesHitoryAsStrings;
+		return gamesHistoryAsStrings;
 	}
 }

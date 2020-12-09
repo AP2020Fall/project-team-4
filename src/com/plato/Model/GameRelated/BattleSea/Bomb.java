@@ -26,7 +26,7 @@ public class Bomb {
 		return bomb;
 	}
 
-	public boolean wasSuccessFul (PlayerBattleSea thrower) {
+	private boolean wasSuccessFul (PlayerBattleSea thrower) {
 		PlayerBattleSea thrownAt = (PlayerBattleSea) game.getOpponentOf(thrower);
 
 		return Ship.getAllCoords(thrownAt.getShips()).stream()

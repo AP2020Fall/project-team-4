@@ -102,7 +102,6 @@ public abstract class Game {
 		return scoreBoard;
 	}
 
-
 	public static void startGame (Game game) {
 		allGames.addLast(game);
 	}
@@ -165,7 +164,7 @@ public abstract class Game {
 
 	public abstract boolean gameEnded ();
 
-	public Gamer getWinner () { // fixme use getNumberOfBlack() and getNumberOfWhite() instead of scores
+	public Gamer getWinner () { // fixme what if we make this abstract and override it in reversi and battlesea and also for reversi use getNumberOfBlack() and getNumberOfWhite() instead of scores
 		if (listOfPlayers.get(0).getScore() > listOfPlayers.get(1).getScore()) return listOfPlayers.get(0).getGamer();
 		else if (listOfPlayers.get(1).getScore() > listOfPlayers.get(0).getScore()) return listOfPlayers.get(1).getGamer();
 		else return null;
@@ -184,7 +183,7 @@ public abstract class Game {
 	}
 
 	public int[] getScores () {
-		return new int[]{listOfPlayers.get(0).getScore(), listOfPlayers.get(1).getScore()};
+		return new int[]{listOfPlayers.get(0).getScore(), listOfPlayers.get(1).getScore()}; // fixme use getnumberofwhite and black instead
 	}
 
 	public ArrayList<Player> getListOfPlayers () {

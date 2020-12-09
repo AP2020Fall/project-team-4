@@ -288,8 +288,12 @@ public class BattleSeaController {
 
 		public void resetTimer () {
 			secondsRemaining = MAX_SECONDS;
+			// if bomb wasnt successful go to next turn
+			if (command.equals("bomb"))
+				if (!((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getTurnPlayer())
+						.getBombsThrown().getLast().getWasSuccessful())
+					GameController.getInstance().getCurrentGameInSession().nextTurn();
 			command = "";
-			GameController.getInstance().getCurrentGameInSession().nextTurn();
 			BattleSeaController.inTheMiddleOfMenu = false;
 		}
 

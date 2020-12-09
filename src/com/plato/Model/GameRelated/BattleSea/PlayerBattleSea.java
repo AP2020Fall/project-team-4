@@ -33,7 +33,7 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public Bomb getBombObj (int x, int y) {
-		return ((PlayerBattleSea) getGame().getOpponentOf(this)).getBombsThrown().stream()
+		return this.getBombsThrown().stream()
 				.filter(bomb -> bomb.getX() == x && bomb.getY() == y)
 				.findAny().get();
 	}
