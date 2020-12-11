@@ -80,9 +80,14 @@ public class GameController {
 	}
 
 	public void addGameToFavesOfLoggedInGamer () {
+		String gameName = ((_11GameMenu) Menu.getMenuIn()).getGameName();
+		if (((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFaveGames().contains(gameName)) {
+			Menu.printErrorMessage("This game is already in your favorites list");
+			return;
+		}
 		Menu.displayAreYouSureMessage();
 		if (Menu.getInputLine().equalsIgnoreCase("y")) {
-			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(((_11GameMenu) Menu.getMenuIn()).getGameName());
+			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(gameName);
 			GameView.getInstance().displaySuccessfulFaveGameAdditionMessage(((_11GameMenu) Menu.getMenuIn()).getGameName());
 		}
 	}

@@ -28,13 +28,14 @@ public class FriendRequest {
 
 	public static FriendRequest getFriendReq (Gamer from, Gamer to) {
 		return allfriendRequests.stream()
-				.filter(friendRequest -> friendRequest.to.equals(to) && friendRequest.from.equals(from))
+				.filter(friendRequest -> friendRequest.to.getUsername().equals(to.getUsername()) &&
+						friendRequest.from.getUsername().equals(from.getUsername()))
 				.findAny().get();
 	}
 
 	public static LinkedList<FriendRequest> getFriendReq (Gamer to) {
-		return (LinkedList<FriendRequest>) allfriendRequests.stream()
-				.filter(friendRequest -> friendRequest.to.equals(to))
+		return allfriendRequests.stream()
+				.filter(friendRequest -> friendRequest.to.getUsername().equals(to.getUsername()))
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 

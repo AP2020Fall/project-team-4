@@ -12,6 +12,10 @@ public class FriendRequestView {
 	}
 
 	public void displayFrndReqsPlayerGotten (LinkedList<String> friendRequestsGottenUsernames) {
+		if (friendRequestsGottenUsernames.size()==0) {
+			System.out.println("You haven't received any friend requests.");
+			return;
+		}
 		System.out.println("Friend requests: ");
 		friendRequestsGottenUsernames.stream()
 				.forEach(fromAccount -> System.out.printf("\t%s%n", fromAccount));

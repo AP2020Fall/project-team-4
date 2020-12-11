@@ -118,9 +118,8 @@ public class MainController {
 			case "View Favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
 			case "View Platobot’s messages" -> MessageController.getInstance().displayAdminMessages();
 			case "View last played" -> GameLogController.getInstance().displayLastGamePlayed();
-			case "View admin’s suggestions" -> {
-				AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
-			}
+			case "View admin’s suggestions" ->
+					AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
 			case "View Events" -> {
 				EventController.getInstance().displayInSessionEvents();
 				enterAppropriateMenu();
@@ -366,8 +365,10 @@ public class MainController {
 				while (reader.ready())
 					json += reader.readLine();
 
-				if (json.length() > 2)
+				if (json.length() > 2) {
 					AccountController.getInstance().setCurrentAccLoggedIn(gson.fromJson(json, (forAdmin ? Admin.class : Gamer.class)));
+					AccountController.getInstance().setSaveLoginInfo(true);
+				}
 			}
 		}
 		// admin game recommendations

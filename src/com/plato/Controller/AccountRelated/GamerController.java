@@ -37,7 +37,7 @@ public class GamerController {
 	}
 
 	public void displayFriendsUsernames () {
-		LinkedList<Gamer> playersFriendsAccounts = (LinkedList<Gamer>) ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn())
+		LinkedList<Gamer> playersFriendsAccounts = ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn())
 				.getFrnds().stream().sorted(Comparator.comparing(Account::getUsername))
 				.collect(Collectors.toCollection(LinkedList::new));
 
@@ -45,7 +45,8 @@ public class GamerController {
 			for (Gamer friendAccount : playersFriendsAccounts)
 				add(friendAccount.getUsername());
 		}});
-		MainController.enterAppropriateMenu();
+		if (playersFriendsAccounts.size() > 0)
+			MainController.enterAppropriateMenu();
 	}
 
 	public void displayUserProfileToAdmin () {
@@ -54,7 +55,7 @@ public class GamerController {
 			try {
 				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
 
-				if (username.trim().toLowerCase().equals("/c")) return;
+				if (username.trim().equalsIgnoreCase("/c")) return;
 
 				if (!Account.accountExists(username))
 					throw new AccountController.NoAccountExistsWithUsernameException();
@@ -77,7 +78,7 @@ public class GamerController {
 			try {
 				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
 
-				if (username.trim().toLowerCase().equals("/c")) return;
+				if (username.trim().equalsIgnoreCase("/c")) return;
 
 				if (!((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(username))
 					throw new FriendDoesntExistException();
@@ -95,7 +96,7 @@ public class GamerController {
 			try {
 				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
 
-				if (username.trim().toLowerCase().equals("/c")) return;
+				if (username.trim().equalsIgnoreCase("/c")) return;
 
 				if (!((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(username))
 					throw new FriendDoesntExistException();

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class Event {
 	private final String eventID;
+	private String title;
 	private String gameName;
 	private double eventScore;
 	private LocalDate start, end;
@@ -17,7 +18,8 @@ public class Event {
 
 	private static LinkedList<Event> events = new LinkedList<>();
 
-	private Event (String gameName, double eventScore, LocalDate start, LocalDate end) {
+	private Event (String title, String gameName, double eventScore, LocalDate start, LocalDate end) {
+		this.title = title;
 		this.gameName = gameName;
 		this.eventScore = eventScore;
 		this.start = start;
@@ -25,8 +27,8 @@ public class Event {
 		this.eventID = IDGenerator.generateNext();
 	}
 
-	public static void addEvent (String gameName, double eventScore, LocalDate start, LocalDate end) {
-		events.addLast(new Event(gameName, eventScore, start, end));
+	public static void addEvent (String title, String gameName, double eventScore, LocalDate start, LocalDate end) {
+		events.addLast(new Event(title, gameName, eventScore, start, end));
 	}
 
 	public static void removeEvent (String eventID) {
@@ -36,10 +38,11 @@ public class Event {
 	public static LinkedList<Event> getInSessionEventsParticipatingIn (Gamer gamer) {
 		LinkedList<Event> inSessionEventsParticipatingIn = new LinkedList<>();
 
-		for (int i = 0; i < getInSessionEvents().size(); i++) {
-			Event inSessionEvent = getInSessionEvents().get(i);
-			if (inSessionEvent.getParticipants().contains(gamer) && !inSessionEventsParticipatingIn.contains(inSessionEvent))
-				inSessionEventsParticipatingIn.addLast(inSessionEvent);
+		for (Event inSessionEvent : getInSessionEvents()) {
+			for (Gamer participant : inSessionEvent.getParticipants()) {
+				if (participant.getUsername().equals(gamer.getUsername()) && !inSessionEventsParticipatingIn.contains(inSessionEvent))
+					inSessionEventsParticipatingIn.add(inSessionEvent);
+			}
 		}
 
 		return inSessionEventsParticipatingIn;
@@ -48,6 +51,8 @@ public class Event {
 	@SuppressWarnings("EnhancedSwitchMigration")
 	public void editField (String field, String newval) {
 		switch (field.toLowerCase()) {
+			case "title":
+				title = newval; break;
 			case "game name":
 				gameName = newval; break;
 			case "event score":
@@ -113,7 +118,7 @@ public class Event {
 	}
 
 	public void removeParticipant (Gamer gamer) {
-		participants.remove(gamer);
+		participants.removeIf(participant -> participant.getUsername().equals(gamer.getUsername()));
 	}
 
 	@SuppressWarnings("ForLoopReplaceableByForEach")
@@ -193,5 +198,9 @@ public class Event {
 
 	public LocalDate getEnd () {
 		return end;
+	}
+
+	public String getTitle () {
+		return title;
 	}
 }
