@@ -15,8 +15,7 @@ import View.Menus.Menu;
 import View.Menus._11GameMenu;
 import View.Menus._12_1GameplayBattleSeaMenu;
 import View.Menus._3MainMenu;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
@@ -56,8 +55,9 @@ public class MainController {
 			if (AccountController.getInstance().getCurrentAccLoggedIn() != null) {
 				String aORg = AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A";
 				Menu.addMenu("3" + aORg);
-				Menu.getMenu("3"+aORg).enter();
-			} else
+				Menu.getMenu("3" + aORg).enter();
+			}
+			else
 				Menu.getMenu("2").enter();
 
 
