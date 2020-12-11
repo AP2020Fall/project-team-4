@@ -35,17 +35,17 @@ public class AdminGameRecoController {
 				if (!Account.accountExists(gamerUN))
 					throw new AccountController.NoAccountExistsWithUsernameException();
 
-				if (!(Account.getAccount(gamerUN) instanceof Admin))
+				if (Account.getAccount(gamerUN) instanceof Admin)
 					throw new CantRecommendToYourselfException();
 				break;
 			} catch (AccountController.NoAccountExistsWithUsernameException | CantRecommendToYourselfException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		String gamechoice = "";
+		String gamechoice;
 		LinkedList<String> recoChoices = new LinkedList<>(Arrays.asList("BattleSea", "Reversi"));
 
-		while (true) {
+		while (true)
 			try {
 				AtomicInteger count = new AtomicInteger(1);
 				recoChoices.forEach(game -> Menu.println("%d. %s".formatted(count.getAndIncrement(), game)));
@@ -65,8 +65,8 @@ public class AdminGameRecoController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-			AdminGameReco.addReco(recoChoices.get(Integer.parseInt(gamechoice)), ((Gamer) Account.getAccount(gamerUN)));
-		}
+
+		AdminGameReco.addReco(recoChoices.get(Integer.parseInt(gamechoice)), ((Gamer) Account.getAccount(gamerUN)));
 	}
 
 	public void displayAdminsRecosToPlayer () {
@@ -76,27 +76,27 @@ public class AdminGameRecoController {
 			for (AdminGameReco adminGameReco : recosForPlayer)
 				add(adminGameReco.getGameName());
 		}});
+		if (recosForPlayer.size() == 0) return;
 
-		while (true)
-			try {
-				Menu.printAskingForInput("Choose game:[/c to cancel] "); String command = Menu.getInputLine();
+//		while (true)
+//			try {
+//				Menu.printAskingForInput("Choose game:[/c to cancel] "); String command = Menu.getInputLine();
+//
+//				if (command.trim().equalsIgnoreCase("/c")) return;
+//
+//				int choice = Integer.parseInt(command);
+//
+//				if (choice < 1 || choice > recosForPlayer.size())
+//					throw new InputMismatchException();
+//
+//				((_11GameMenu) Menu.getMenuIn().getChildMenus().get(MainController.getCommand()))
+//						.setGameName(recosForPlayer.get(choice - 1).getGameName());
+//				break;
+//			} catch (InputMismatchException e) {
+//				Menu.printErrorMessage("Invalid input");
+//			}
 
-				if (command.trim().equalsIgnoreCase("/c")) return;
-
-				int choice = Integer.parseInt(command);
-
-				if (choice < 1 || choice > recosForPlayer.size())
-					throw new InputMismatchException();
-
-
-				((_11GameMenu) Menu.getMenuIn().getChildMenus().get(5))
-						.setGameName(recosForPlayer.get(choice - 1).getGameName());
-				break;
-			} catch (InputMismatchException e) {
-				Menu.printErrorMessage("Invalid input");
-			}
-
-		Menu.getMenuIn().getChildMenus().get(5).enter();
+		MainController.enterAppropriateMenu();
 	}
 
 	public void displayAllAdminRecos () {
@@ -134,16 +134,26 @@ public class AdminGameRecoController {
 	public void chooseRecoGame () {
 		LinkedList<AdminGameReco> recos = ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getAdminGameRecosGotten();
 
-		int gameNum = Integer.parseInt(Menu.getInputLine());
+		int choice;
+		while (true)
+			try {
+				Menu.printAskingForInput("Choose game:[/c to cancel] "); String command = Menu.getInputLine();
 
-		switch (recos.size()) {
-			case 1 -> { if (gameNum != 1) return; }
-			case 2 -> { if (gameNum != 1 && gameNum != 2) return; }
-			default -> {return;}
-		}
+				if (command.trim().equalsIgnoreCase("/c")) return;
 
-		switch (recos.get(gameNum - 1).getGameName().toLowerCase()) {
+				choice = Integer.parseInt(command);
 
+				if (choice < 1 || choice > recos.size())
+					throw new InputMismatchException();
+
+				((_11GameMenu) Menu.getMenuIn().getChildMenus().get(MainController.getCommand()))
+						.setGameName(recos.get(choice - 1).getGameName());
+				break;
+			} catch (InputMismatchException e) {
+				Menu.printErrorMessage("Invalid input");
+			}
+
+		switch (recos.get(choice - 1).getGameName().toLowerCase()) {
 			case "battlesea" -> Menu.getMenu("11B").enter();
 
 			case "reversi" -> Menu.getMenu("11R").enter();

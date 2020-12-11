@@ -13,8 +13,8 @@ public class _10GamesMenu extends Menu {
 		LinkedList<String> options;
 
 		options = new LinkedList<>(Arrays.asList(
-				"Open BattleSea Game Menu ",
-				"Open Reversi Game Menu "
+				"Open BattleSea Game Menu",
+				"Open Reversi Game Menu"
 		));
 
 		options.addAll(super.getOptions());

@@ -21,7 +21,7 @@ public class _11GameMenu extends Menu {
 
 		options = new LinkedList<>(Arrays.asList(
 				"Show scoreboard",
-				"Show points",
+				"Show Points",
 				"Details",
 				"Show log of game",
 				"Show wins count",

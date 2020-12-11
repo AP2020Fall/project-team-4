@@ -1,12 +1,10 @@
 package Controller.AccountRelated;
 
-import Model.AccountRelated.Admin;
 import Model.AccountRelated.Message;
 import View.AccountRelated.MessageView;
 import View.Menus.Menu;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.LinkedList;
 
 public class MessageController {
@@ -44,7 +42,7 @@ public class MessageController {
 				new Message(msg);
 				break;
 			} catch (EmptyMessageException e) {
-				e.printStackTrace();
+				Menu.printErrorMessage(e.getMessage());
 			}
 	}
 

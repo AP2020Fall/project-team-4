@@ -186,7 +186,7 @@ public class EventController {
 
 				break;
 			} catch (EventDoesntExistException | NotParticipatingInEventException e) {
-				e.printStackTrace();
+				Menu.printErrorMessage(e.getMessage());
 			}
 
 		event.removeParticipant(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()));

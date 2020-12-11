@@ -2,7 +2,6 @@ package Model.GameRelated.BattleSea;
 
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
-import Model.GameRelated.Reversi.Reversi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,8 +91,8 @@ public class BattleSea extends Game {
 	public static void setDetailsForBattlesea (String details) {
 		battleseaDetails = details;
 		getAllGames().stream()
-				.filter(game -> game instanceof Reversi)
-				.forEach(game -> game.setDetails(battleseaDetails));
+				.filter(game -> game instanceof BattleSea)
+				.forEach(game -> game.setDetailsForIndividualGame(details));
 	}
 
 	public static String getBattleseaDetails () {

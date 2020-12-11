@@ -1,5 +1,6 @@
 package Controller.AccountRelated;
 
+import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.GameLog;
@@ -44,7 +45,7 @@ public class GamerController {
 			for (Gamer friendAccount : playersFriendsAccounts)
 				add(friendAccount.getUsername());
 		}});
-		Menu.getMenuIn().getChildMenus().get(1).enter();
+		MainController.enterAppropriateMenu();
 	}
 
 	public void displayUserProfileToAdmin () {

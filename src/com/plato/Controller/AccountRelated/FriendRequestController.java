@@ -1,5 +1,6 @@
 package Controller.AccountRelated;
 
+import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Admin;
 import Model.AccountRelated.FriendRequest;
@@ -47,7 +48,7 @@ public class FriendRequestController {
 			for (FriendRequest friendRequest : ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFriendRequestsGotten())
 				add(friendRequest.getFrom().getUsername());
 		}});
-		Menu.getMenuIn().getChildMenus().get(3).enter();
+		MainController.enterAppropriateMenu();
 	}
 
 	public void acceptFriendReq () {

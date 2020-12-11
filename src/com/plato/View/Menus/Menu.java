@@ -109,7 +109,7 @@ public abstract class Menu {
 				getMenu("3A").addChildMenu(2, getMenu("5A"));
 				getMenu("3A").addChildMenu(4, getMenu("4A"));
 				getMenu("3A").addChildMenu(6, getMenu("7"));
-				getMenu("3A").addChildMenu(7, getMenu("14A"));
+				getMenu("3A").addChildMenu(9, getMenu("14A"));
 				// for menu 4
 				getMenu("4A").addChildMenu(3, getMenu("14A"));
 				// for menu 5

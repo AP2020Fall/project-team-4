@@ -35,6 +35,8 @@ public class _3MainMenu extends Menu {
 					"Add suggestion",
 					"View suggestions",
 					"Send message",
+					"Edit Details of BattleSea",
+					"Edit Details of Reversi",
 					"View Users"
 			));
 

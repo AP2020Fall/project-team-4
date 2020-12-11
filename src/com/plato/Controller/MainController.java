@@ -95,102 +95,97 @@ public class MainController {
 		LinkedList<String> menuOpts = Menu.getMenuIn().getOptions();
 
 		command--; // to use for accessing menuOpts indexes
-		String commandOption = menuOpts.get(command).toLowerCase().trim();
+		String commandOption = menuOpts.get(command).trim();
 
 		switch (commandOption) {
-			case "exit program" -> tryToExitProgram();
-			case "back" -> Menu.getMenuIn().back();
-			case "go to account menu" -> Menu.getMenuIn().getChildMenus().get(command + 1).enter();
+			case "Exit program" -> tryToExitProgram();
+			case "Back" -> Menu.getMenuIn().back();
+			case "Go to Account Menu", "Go to Games Menu", "Go to Friends Menu",
+					"Open Reversi Game Menu", "Open BattleSea Game Menu" -> enterAppropriateMenu();
 
 			// register-login menu
-			case "register gamer", "register admin" -> AccountController.getInstance().register();
-			case "login" -> {
-				AccountController.getInstance().login();
-			}
-			case "delete account" -> AccountController.getInstance().deleteAccount();
+			case "Register Gamer", "Register Admin" -> AccountController.getInstance().register();
+			case "Login" -> AccountController.getInstance().login();
+			case "Delete Account" -> AccountController.getInstance().deleteAccount();
 
 			// main menu
-			case "show points" -> {
+			case "Show Points" -> {
 				if (Menu.getMenuIn() instanceof _3MainMenu)
 					GameLogController.getInstance().displayAllPointsOfPlayer();
 				if (Menu.getMenuIn() instanceof _11GameMenu)
 					GameLogController.getInstance().displayPtsLoggedInPlayerEarnedFromGame();
 			}
-			case "view favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
-			case "go to games menu" -> Menu.getMenuIn().getChildMenus().get(3).enter();
-			case "view platobot's messages" -> MessageController.getInstance().displayAdminMessages();
-			case "view last played" -> GameLogController.getInstance().displayLastGamePlayed();
-			case "view admin's suggestions" -> AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
-			case "go to friends menu" -> Menu.getMenuIn().getChildMenus().get(6).enter();
-			case "view events" -> {
+			case "View Favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
+			case "View Platobot’s messages" -> MessageController.getInstance().displayAdminMessages();
+			case "View last played" -> GameLogController.getInstance().displayLastGamePlayed();
+			case "View admin’s suggestions" -> {
+				AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
+			}
+			case "View Events" -> {
 				EventController.getInstance().displayInSessionEvents();
-
-				if (!((_3MainMenu) Menu.getMenuIn()).isForAdmin())
-					Menu.getMenuIn().getChildMenus().get(7).enter();
-				else
-					Menu.getMenuIn().getChildMenus().get(2).enter();
+				enterAppropriateMenu();
 			}
-			case "add event" -> EventController.getInstance().createEvent();
-			case "add suggestions" -> AdminGameRecoController.getInstance().giveRecommendationToGamer();
-			case "view suggestions" -> {
+			case "Add Event" -> EventController.getInstance().createEvent();
+			case "Add suggestion" -> AdminGameRecoController.getInstance().giveRecommendationToGamer();
+			case "View suggestions" -> {
 				AdminGameRecoController.getInstance().displayAllAdminRecos();
-				Menu.getMenuIn().getChildMenus().get(4).enter();
+				enterAppropriateMenu();
 			}
-			case "send message" -> MessageController.getInstance().sendMsg();
-			case "view users" -> {
+			case "Send message" -> MessageController.getInstance().sendMsg();
+			case "Edit Details of BattleSea", "Edit Details of Reversi" -> {
+				String gameName = commandOption.split(" ")[commandOption.split(" ").length - 1];
+				GameController.getInstance().editDetails(gameName);
+			}
+			case "View Users" -> {
 				GamerController.getInstance().displayAllUsernames();
-				Menu.getMenuIn().getChildMenus().get(6).enter();
+				enterAppropriateMenu();
 			}
 
 			// suggestions menu
-			case "choose suggested game" -> AdminGameRecoController.getInstance().chooseRecoGame();
-			case "remove suggestion" -> AdminGameRecoController.getInstance().removeReco();
+			case "Choose suggested game" -> AdminGameRecoController.getInstance().chooseRecoGame();
+			case "Remove suggestion" -> AdminGameRecoController.getInstance().removeReco();
 
 			// events menu
-			case "view event info" -> EventController.getInstance().displayEventInfo();
-			case "participate in event" -> EventController.getInstance().participateInEvent();
+			case "View event info" -> EventController.getInstance().displayEventInfo();
+			case "Participate in event" -> EventController.getInstance().participateInEvent();
 			case "Show Events participating in" -> EventController.getInstance().displayInSessionEventsParticipatingIn();
 			case "Stop participating in Event" -> EventController.getInstance().stopParticipatingInEvent();
-			case "edit event" -> EventController.getInstance().editEvent();
-			case "remove event" -> EventController.getInstance().removeEvent();
+			case "Edit Event" -> EventController.getInstance().editEvent();
+			case "Remove Event" -> EventController.getInstance().removeEvent();
 
 			// friend menu
-			case "show friends" -> GamerController.getInstance().displayFriendsUsernames();
-			case "send friend request" -> FriendRequestController.getInstance().sendFrndRequest();
-			case "show friend requests" -> FriendRequestController.getInstance().displayFrndReqsPlayerGotten();
+			case "Show friends" -> GamerController.getInstance().displayFriendsUsernames();
+			case "Send Friend Request" -> FriendRequestController.getInstance().sendFrndRequest();
+			case "Show Friend Requests" -> FriendRequestController.getInstance().displayFrndReqsPlayerGotten();
 
 			// gamer user management menu
-			case "view user profile" -> GamerController.getInstance().displayUserProfileToAdmin();
+			case "View user profile" -> GamerController.getInstance().displayUserProfileToAdmin();
 
 			// friend management menu
-			case "view friend profile" -> GamerController.getInstance().displayFriendPersonalInfo();
-			case "remove friend" -> GamerController.getInstance().removeFriend();
+			case "View friend profile" -> GamerController.getInstance().displayFriendPersonalInfo();
+			case "Remove Friend" -> GamerController.getInstance().removeFriend();
 
 			// friend request management menu
-			case "accept friend request" -> FriendRequestController.getInstance().acceptFriendReq();
-			case "decline friend request" -> FriendRequestController.getInstance().declineFriendReq();
-
-			// games menu
-			case "open battlesea game menu" -> Menu.getMenuIn().getChildMenus().get(1).enter();
-			case "open reversi game menu" -> Menu.getMenuIn().getChildMenus().get(2).enter();
+			case "Accept Friend Request" -> FriendRequestController.getInstance().acceptFriendReq();
+			case "Decline Friend Request" -> FriendRequestController.getInstance().declineFriendReq();
 
 			// game menu
-			case "show scoreboard" -> GameController.getInstance().displayScoreboardOfGame();
-			case "details" -> GameController.getInstance().displayGameHowToPlay();
-			case "show log of game" -> GameLogController.getInstance().displayLogOfGame();
-			case "show wins count" -> GameLogController.getInstance().displayWinCountOfGameByLoggedInPlayer();
-			case "show played count" -> GameLogController.getInstance().displayPlayedCountOfGameByLoggedInPlayer();
-			case "add to favorites" -> GameController.getInstance().addGameToFavesOfLoggedInGamer();
-			case "run game" -> GameController.getInstance().runGame();
+			case "Show scoreboard" -> GameController.getInstance().displayScoreboardOfGame();
+			case "Details" -> GameController.getInstance().displayGameHowToPlay();
+			case "Show log of game" -> GameLogController.getInstance().displayLogOfGame();
+			case "Show wins count" -> GameLogController.getInstance().displayWinCountOfGameByLoggedInPlayer();
+			case "Show played count" -> GameLogController.getInstance().displayPlayedCountOfGameByLoggedInPlayer();
+			case "Add to favorites" -> GameController.getInstance().addGameToFavesOfLoggedInGamer();
+			case "Run Game" -> GameController.getInstance().runGame();
 
 			// gameplay battlesea menu
 			//		phase 1
-			case "generate a random board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
-			case "choose between 5 randomly generated boards" -> BattleSeaController.getInstance().chooseBetween5RandomlyGeneratedBoards();
-			case "display on-trial board" -> BattleSeaController.getInstance().displayTrialBoard();
-			case "move ship" -> ShipController.getInstance().editShipCoords();
-			case "change ship direction" -> ShipController.getInstance().rotateShip();
-			case "finalize board" -> {
+			case "Generate a Random Board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
+			case "Choose between 5 randomly generated boards" -> BattleSeaController.getInstance().chooseBetween5RandomlyGeneratedBoards();
+			case "Display on-trial Board" -> BattleSeaController.getInstance().displayTrialBoard();
+			case "Move ship" -> ShipController.getInstance().editShipCoords();
+			case "Change ship direction" -> ShipController.getInstance().rotateShip();
+			case "Finalize Board" -> {
 				BattleSeaController.getInstance().finalizeTrialBoard();
 				if (((BattleSea) GameController.getInstance().getCurrentGameInSession()).canStartBombing()) {
 					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
@@ -198,46 +193,45 @@ public class MainController {
 				}
 			}
 			//		phase 2
-			case "boom (throw bomb)" -> BombController.getInstance().throwBomb();
-			case "time?" -> BattleSeaController.getInstance().displayRemainingTime();
-			case "whose turn?" -> GameController.getInstance().displayTurn();
-			case "display all my ships" -> ShipController.getInstance().displayAllShipsOfCurrentPlayer();
-			case "display all my booms" -> BombController.getInstance().displayAllCurrentPlayerBombs();
-			case "display all my opponent’s booms" -> BombController.getInstance().displayAllOpponentBombs();
-			case "display all my correct booms" -> BombController.getInstance().displayAllSuccessCurrentPlayerBombs();
-			case "display all my opponent’s correct booms" -> BombController.getInstance().displayAllSuccessOpponentBombs();
-			case "display all my incorrect booms" -> BombController.getInstance().displayAllUnsuccessCurrentPlayerBombs();
-			case "display all my opponent’s incorrect booms" -> BombController.getInstance().displayAllUnsuccessOpponentBombs();
-			case "display all my boomed ships" -> ShipController.getInstance().displayDestroyedShipsOfCurrentPlayer();
-			case "display all my opponent’s boomed ships" -> ShipController.getInstance().displayDestroyedShipsOfOpponent();
-			case "display all my unboomed ships" -> ShipController.getInstance().displayHealthyShipsOfCurrentPlayer();
-			case "display my board" -> BattleSeaController.getInstance().displayCurrentPlayerBoard();
-			case "display my opponent’s board" -> BattleSeaController.getInstance().displayOpponentBoard();
+			case "Boom (Throw Bomb)" -> BombController.getInstance().throwBomb();
+			case "Time?" -> BattleSeaController.getInstance().displayRemainingTime();
+			case "Whose turn?", "Whose turn now?" -> GameController.getInstance().displayTurn();
+			case "Display all my ships" -> ShipController.getInstance().displayAllShipsOfCurrentPlayer();
+			case "Display all my booms" -> BombController.getInstance().displayAllCurrentPlayerBombs();
+			case "Display all my opponent’s booms" -> BombController.getInstance().displayAllOpponentBombs();
+			case "Display all my correct booms" -> BombController.getInstance().displayAllSuccessCurrentPlayerBombs();
+			case "Display all my opponent’s correct booms" -> BombController.getInstance().displayAllSuccessOpponentBombs();
+			case "Display all my incorrect booms" -> BombController.getInstance().displayAllUnsuccessCurrentPlayerBombs();
+			case "Display all my opponent’s incorrect booms" -> BombController.getInstance().displayAllUnsuccessOpponentBombs();
+			case "Display all my boomed ships" -> ShipController.getInstance().displayDestroyedShipsOfCurrentPlayer();
+			case "Display all my opponent’s boomed ships" -> ShipController.getInstance().displayDestroyedShipsOfOpponent();
+			case "Display all my unboomed ships" -> ShipController.getInstance().displayHealthyShipsOfCurrentPlayer();
+			case "Display my board" -> BattleSeaController.getInstance().displayCurrentPlayerBoard();
+			case "Display my opponent’s board" -> BattleSeaController.getInstance().displayOpponentBoard();
 
 			// gameplay reversi menu
-			case "place disk" -> ReversiController.getInstance().placeDisk();
-			case "next turn" -> ReversiController.getInstance().nextTurn();
-			case "whose turn now?" -> GameController.getInstance().displayTurn();
-			case "display available coordinates" -> ReversiController.getInstance().displayAvailableCoords();
-			case "display board (grid)" -> ReversiController.getInstance().displayGrid();
-			case "display disks" -> ReversiController.getInstance().displayPrevMoves();
-			case "display scores" -> ReversiController.getInstance().displayInGameScores();
-			case "display final result" -> GameController.getInstance().displayGameConclusion();
+			case "Place Disk" -> ReversiController.getInstance().placeDisk();
+			case "Next Turn" -> ReversiController.getInstance().nextTurn();
+			case "Display available coordinates" -> ReversiController.getInstance().displayAvailableCoords();
+			case "Display Board (Grid)" -> ReversiController.getInstance().displayGrid();
+			case "Display disks" -> ReversiController.getInstance().displayPrevMoves();
+			case "Display scores" -> ReversiController.getInstance().displayInGameScores();
+			case "Display final result" -> GameController.getInstance().displayGameConclusion();
 
 			// user editing menu
-			case "change password" -> AccountController.getInstance().changePWCommand();
-			case "edit personal info" -> AccountController.getInstance().editAccFieldCommand();
+			case "Change password" -> AccountController.getInstance().changePWCommand();
+			case "Edit Personal info" -> AccountController.getInstance().editAccFieldCommand();
 
 			// account menu
-			case "view personal info (w/ money)", "View personal info (w/o money)" -> {
-				AccountController.getInstance().displayPersonalInfo(); // for admin
-				Menu.getMenuIn().getChildMenus().get(command + 1).enter();
+			case "View personal info (w/ money)", "View personal info (w/o money)" -> {
+				AccountController.getInstance().displayPersonalInfo();
+				enterAppropriateMenu();
 			}
-			case "view plato statistics" -> GamerController.getInstance().displayAccountStats();
-			case "view gaming history" -> GameLogController.getInstance().displayGamingHistoryOfGamer();
-			case "view gaming history in battlesea" -> GameLogController.getInstance().displayGamingHistoryOfGamerInGame("battlesea");
-			case "view gaming history in reversi" -> GameLogController.getInstance().displayGamingHistoryOfGamerInGame("reversi");
-			case "logout" -> {
+			case "View plato statistics" -> GamerController.getInstance().displayAccountStats();
+			case "View Gaming History" -> GameLogController.getInstance().displayGamingHistoryOfGamer();
+			case "View Gaming History in BattleSea" -> GameLogController.getInstance().displayGamingHistoryOfGamerInGame("battlesea");
+			case "View Gaming History in Reversi" -> GameLogController.getInstance().displayGamingHistoryOfGamerInGame("reversi");
+			case "Logout" -> {
 				AccountController.getInstance().logout();
 				Menu.getMenu("2").enter();
 			}
@@ -526,5 +520,13 @@ public class MainController {
 				lastDayUpdated = LocalDate.now().getDayOfMonth();
 			}
 		}
+	}
+
+	public static int getCommand () {
+		return command;
+	}
+
+	public static void enterAppropriateMenu () {
+		Menu.getMenuIn().getChildMenus().get(command).enter();
 	}
 }

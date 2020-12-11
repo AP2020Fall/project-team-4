@@ -314,7 +314,7 @@ public class Reversi extends Game {
 		reversiDetails = details;
 		getAllGames().stream()
 				.filter(game -> game instanceof Reversi)
-				.forEach(game -> game.setDetails(reversiDetails));
+				.forEach(game -> game.setDetailsForIndividualGame(reversiDetails));
 	}
 
 	public static String getReversiDetails () {
