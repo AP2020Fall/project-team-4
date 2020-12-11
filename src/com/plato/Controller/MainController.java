@@ -15,7 +15,8 @@ import View.Menus.Menu;
 import View.Menus._11GameMenu;
 import View.Menus._12_1GameplayBattleSeaMenu;
 import View.Menus._3MainMenu;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
@@ -302,20 +303,20 @@ public class MainController {
 
 				writer.write(gson.toJson(Message.getAllMessages()));
 			}
-
-		// BattleSea.json
-		if (BattleSea.getAllBattleSeaGames().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea.json"))) {
-
-				writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
-			}
-
-		// Reversi.json
-		if (Reversi.getAllReversiGames().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi.json"))) {
-
-				writer.write(gson.toJson(Reversi.getAllReversiGames()));
-			}
+//
+//		// BattleSea.json
+//		if (BattleSea.getAllBattleSeaGames().size() > 0)
+//			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea.json"))) {
+//
+//				writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
+//			}
+//
+//		// Reversi.json
+//		if (Reversi.getAllReversiGames().size() > 0)
+//			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi.json"))) {
+//
+//				writer.write(gson.toJson(Reversi.getAllReversiGames()));
+//			} fixme
 
 		// IDGenerator.json
 		if (IDGenerator.getAllIDsGenerated().size() > 0)
@@ -428,33 +429,33 @@ public class MainController {
 					}.getType()));
 			}
 		}
-		// BattleSea list
-		{
-			String json = "";
-			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSea.json"))) {
-
-				while (reader.ready())
-					json += reader.readLine();
-
-				if (json.length() > 2)
-					Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<BattleSea>>() {
-					}.getType()));
-			}
-		}
-		// Reversi list
-		{
-			String json = "";
-			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi.json"))) {
-
-				while (reader.ready())
-					json += reader.readLine();
-
-
-				if (json.length() > 2)
-					Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<Reversi>>() {
-					}.getType()));
-			}
-		}
+//		// BattleSea list
+//		{
+//			String json = "";
+//			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSea.json"))) {
+//
+//				while (reader.ready())
+//					json += reader.readLine();
+//
+//				if (json.length() > 2)
+//					Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<BattleSea>>() {
+//					}.getType()));
+//			}
+//		}
+//		// Reversi list
+//		{
+//			String json = "";
+//			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi.json"))) {
+//
+//				while (reader.ready())
+//					json += reader.readLine();
+//
+//
+//				if (json.length() > 2)
+//					Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<Reversi>>() {
+//					}.getType()));
+//			}
+//		}fixme
 		// IDGenerator list
 		{
 			String json = "";
