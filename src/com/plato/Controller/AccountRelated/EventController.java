@@ -24,6 +24,10 @@ public class EventController {
 	}
 
 	public void createEvent () {
+		Menu.printAskingForInput("Title:[/c to cancel] "); String title = Menu.getInputLine();
+
+		if (title.trim().equalsIgnoreCase("/c")) return;
+
 		EventView.getInstance().displayAvailableGames();
 
 		String gameNum;
@@ -96,33 +100,42 @@ public class EventController {
 			}
 		}
 
-		Event.addEvent(gameName, eventPrize, start, end);
+		Event.addEvent(title, gameName, eventPrize, start, end);
 	}
 
 	public void displayInSessionEvents () {
-		EventView.getInstance().displayEvents(new LinkedList<>() {{
-			for (Event inSessionEvent : Event.getInSessionEvents()) {
-				add("%s %s %s %s %.01f".formatted(
+		LinkedList<String> events = new LinkedList<>() {{
+			for (Event inSessionEvent : Event.getInSessionEvents())
+				add("%s %s %s %s %s %.01f".formatted(
+						inSessionEvent.getTitle(),
 						inSessionEvent.getEventID(),
 						inSessionEvent.getGameName(),
 						inSessionEvent.getStart().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
 						inSessionEvent.getEnd().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
 						inSessionEvent.getEventScore()));
-			}
-		}});
+		}};
+		if (events.size() == 0)
+			EventView.getInstance().displayNoCurrentlyInSessionEvents();
+		else
+			EventView.getInstance().displayEvents(events);
 	}
 
 	public void displayInSessionEventsParticipatingIn () {
-		EventView.getInstance().displayEvents(new LinkedList<>() {{
+		LinkedList<String> events = new LinkedList<>() {{
 			for (Event inSessionEvent : Event.getInSessionEventsParticipatingIn(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()))) {
-				add("%s %s %s %s %.01f".formatted(
+				add("%s %s %s %s %s %.01f".formatted(
+						inSessionEvent.getTitle(),
 						inSessionEvent.getEventID(),
 						inSessionEvent.getGameName(),
 						inSessionEvent.getStart().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
 						inSessionEvent.getEnd().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
 						inSessionEvent.getEventScore()));
 			}
-		}});
+		}};
+		if (events.size() == 0)
+			EventView.getInstance().displayNotParticipatingInAnyEvents();
+		else
+			EventView.getInstance().displayEvents(events);
 	}
 
 	public void displayEventInfo () {
@@ -143,6 +156,7 @@ public class EventController {
 		Event event = Event.getEvent(eventid);
 
 		EventView.getInstance().displayEventInfo(
+				event.getTitle(),
 				event.getGameName(),
 				event.getStart().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
 				event.getEnd().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
@@ -157,16 +171,22 @@ public class EventController {
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
-				if (Event.eventInSessionExists(eventid))
+				if (!Event.eventExists(eventid) || !Event.eventInSessionExists(eventid))
 					throw new EventDoesntExistException();
 
-				break;
-			} catch (EventDoesntExistException eventDoesntExist) {
-				eventDoesntExist.printStackTrace();
-			}
-		Event event = Event.getEvent(eventid);
+				if (Event.getEvent(eventid).participantExists(AccountController.getInstance().getCurrentAccLoggedIn().getUsername()))
+					throw new AlreadyParticipatingInEventException();
 
-		event.addParticipant(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()));
+				break;
+			} catch (EventDoesntExistException | AlreadyParticipatingInEventException e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
+
+		Menu.displayAreYouSureMessage();
+		if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).participateInEvent(eventid);
+			Menu.printSuccessfulOperation("You are now participating in this event.");
+		}
 	}
 
 	public void stopParticipatingInEvent () {
@@ -177,7 +197,7 @@ public class EventController {
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
-				if (Event.eventInSessionExists(eventid))
+				if (!Event.eventInSessionExists(eventid))
 					throw new EventDoesntExistException();
 
 				event = Event.getEvent(eventid);
@@ -186,10 +206,14 @@ public class EventController {
 
 				break;
 			} catch (EventDoesntExistException | NotParticipatingInEventException e) {
-				e.printStackTrace();
+				Menu.printErrorMessage(e.getMessage());
 			}
 
-		event.removeParticipant(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()));
+		Menu.displayAreYouSureMessage();
+		if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).stopParticipatingInEvent(event.getEventID());
+			Menu.printSuccessfulOperation("You have stopped participating in this event.");
+		}
 	}
 
 	public void editEvent () {
@@ -214,6 +238,7 @@ public class EventController {
 
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
 		LinkedList<String> availableFields = (LinkedList<String>) Arrays.asList(new String[]{
+				"Title",
 				"Game name",
 				"Event prize",
 				"Start date",
@@ -235,6 +260,18 @@ public class EventController {
 
 		switch (field) {
 			case 1 -> {
+				Menu.printAskingForInput("New Title:[/c to cancel] "); String title = Menu.getInputLine();
+
+				if (title.trim().equalsIgnoreCase("/c")) return;
+
+				Menu.displayAreYouSureMessage();
+				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+					event.editField("title", title);
+					Menu.printSuccessfulOperation("Title changed successfully.");
+				}
+			}
+
+			case 2 -> {
 				String gameNum;
 				while (true)
 					try {
@@ -258,7 +295,7 @@ public class EventController {
 				}
 			}
 
-			case 2 -> {
+			case 3 -> {
 				String prize;
 				while (true)
 					try {
@@ -278,7 +315,7 @@ public class EventController {
 				}
 			}
 
-			case 3 -> {
+			case 4 -> {
 				String startDate;
 				while (true)
 					try {
@@ -308,7 +345,7 @@ public class EventController {
 				}
 			}
 
-			case 4 -> {
+			case 5 -> {
 				String endDate;
 				while (true)
 					try {
@@ -390,6 +427,12 @@ public class EventController {
 	private static class NotParticipatingInEventException extends Exception {
 		public NotParticipatingInEventException () {
 			super("You are not participating in event");
+		}
+	}
+
+	private static class AlreadyParticipatingInEventException extends Exception {
+		public AlreadyParticipatingInEventException () {
+			super("You are already participating in this event");
 		}
 	}
 }

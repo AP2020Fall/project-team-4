@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public abstract class Game {
 
 	private final String gameID;
-	protected String details;
+	protected String details = "";
 
 	private final ArrayList<Player> listOfPlayers = new ArrayList<>();
 	private int turn = 0;
@@ -210,10 +210,7 @@ public abstract class Game {
 		return dateGameEnded;
 	}
 
-	public void setDetails (String details) {
-		if (this instanceof Reversi)
-			Reversi.setDetailsForReversi(details);
-		else
-			BattleSea.setDetailsForBattlesea(details);
+	public void setDetailsForIndividualGame (String details) {
+		this.details = details;
 	}
 }

@@ -108,8 +108,8 @@ public abstract class Menu {
 				// for menu 3
 				getMenu("3A").addChildMenu(2, getMenu("5A"));
 				getMenu("3A").addChildMenu(4, getMenu("4A"));
-				getMenu("3A").addChildMenu(6, getMenu("7"));
-				getMenu("3A").addChildMenu(7, getMenu("14A"));
+				getMenu("3A").addChildMenu(8, getMenu("7"));
+				getMenu("3A").addChildMenu(9, getMenu("14A"));
 				// for menu 4
 				getMenu("4A").addChildMenu(3, getMenu("14A"));
 				// for menu 5
@@ -132,7 +132,7 @@ public abstract class Menu {
 	}
 
 	public static void printSavedMessage () {
-//		Menu.println();
+		Menu.println(Color.BLUE.getVal() + "\t-Saved" + Color.RESET.getVal());
 	}
 
 	public LinkedList<String> getOptions () {
@@ -197,7 +197,7 @@ public abstract class Menu {
 		Menu.println(Color.GREEN.getVal() + text + Color.RESET.getVal());
 	}
 
-	public static void printAskingForInput(String text) {
+	public static void printAskingForInput (String text) {
 		Menu.print(Color.YELLOW.getVal() + text + Color.RESET.getVal());
 	}
 

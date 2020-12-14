@@ -1,5 +1,6 @@
 package Controller.AccountRelated;
 
+import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Admin;
 import Model.AccountRelated.FriendRequest;
@@ -24,30 +25,44 @@ public class FriendRequestController {
 			try {
 				Menu.printAskingForInput("Username:[/c to cancel] "); usernameTo = Menu.getInputLine();
 
-				if (usernameTo.trim().toLowerCase().equals("/c")) return;
-
-				if (((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(usernameTo))
-					throw new CantSendFriendReqToAlreadyFriendException(usernameTo);
+				if (usernameTo.trim().equalsIgnoreCase("/c")) return;
 
 				if (!Account.accountExists(usernameTo))
 					throw new AccountController.NoAccountExistsWithUsernameException();
 
+				if (usernameTo.equals(AccountController.getInstance().getCurrentAccLoggedIn().getUsername()))
+					throw new CantSendFriendRendReqToYourselfException();
+
 				if (Account.getAccount(usernameTo) instanceof Admin)
 					throw new CantFriendRequestTheAdminException();
+
+				if (FriendRequest.frndReqExists(AccountController.getInstance().getCurrentAccLoggedIn().getUsername(), usernameTo))
+					throw new FriendRequestAlreadyExistsException(usernameTo);
+
+				if (((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(usernameTo))
+					throw new CantSendFriendReqToAlreadyFriendException(usernameTo);
 				break;
-			} catch (CantSendFriendReqToAlreadyFriendException | AccountController.NoAccountExistsWithUsernameException | CantFriendRequestTheAdminException e) {
+			} catch (AccountController.NoAccountExistsWithUsernameException | CantSendFriendRendReqToYourselfException | CantFriendRequestTheAdminException |
+					FriendRequestAlreadyExistsException | CantSendFriendReqToAlreadyFriendException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).sendFrndReq(usernameTo);
+		Menu.displayAreYouSureMessage();
+		if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).sendFrndReq(usernameTo);
+			Menu.printSuccessfulOperation("You have successfully sent a friend request to " + usernameTo + ".");
+		}
 	}
 
 	public void displayFrndReqsPlayerGotten () {
-		FriendRequestView.getInstance().displayFrndReqsPlayerGotten(new LinkedList<>() {{
+		LinkedList<String> frndReqs = new LinkedList<>() {{
 			for (FriendRequest friendRequest : ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFriendRequestsGotten())
 				add(friendRequest.getFrom().getUsername());
-		}});
-		Menu.getMenuIn().getChildMenus().get(3).enter();
+		}};
+
+		FriendRequestView.getInstance().displayFrndReqsPlayerGotten(frndReqs);
+		if (frndReqs.size() > 0)
+			MainController.enterAppropriateMenu();
 	}
 
 	public void acceptFriendReq () {
@@ -56,7 +71,7 @@ public class FriendRequestController {
 			try {
 				Menu.printAskingForInput("Username:[/c to cancel] "); usernameFrom = Menu.getInputLine();
 
-				if (usernameFrom.trim().toLowerCase().equals("/c")) return;
+				if (usernameFrom.trim().equalsIgnoreCase("/c")) return;
 
 				if (!Account.accountExists(usernameFrom))
 					throw new AccountController.NoAccountExistsWithUsernameException();
@@ -71,6 +86,8 @@ public class FriendRequestController {
 
 		FriendRequest.getFriendReq(((Gamer) Account.getAccount(usernameFrom)), ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()))
 				.conclude(true);
+
+			//todo havent finished checking yet
 	}
 
 	public void declineFriendReq () {
@@ -79,7 +96,7 @@ public class FriendRequestController {
 			try {
 				Menu.printAskingForInput("Username:[/c to cancel] "); usernameFrom = Menu.getInputLine();
 
-				if (usernameFrom.trim().toLowerCase().equals("/c")) return;
+				if (usernameFrom.trim().equals("/c")) return;
 
 				if (!Account.accountExists(usernameFrom))
 					throw new AccountController.NoAccountExistsWithUsernameException();
@@ -111,6 +128,18 @@ public class FriendRequestController {
 	private static class CantFriendRequestTheAdminException extends Exception {
 		public CantFriendRequestTheAdminException () {
 			super("You can't send friend request to admin.");
+		}
+	}
+
+	private static class CantSendFriendRendReqToYourselfException extends Exception {
+		public CantSendFriendRendReqToYourselfException () {
+			super("You can't send yourself a friend request");
+		}
+	}
+
+	private static class FriendRequestAlreadyExistsException extends Exception {
+		public FriendRequestAlreadyExistsException (String usernameTo) {
+			super("You have already sent a friend request to " + usernameTo);
 		}
 	}
 }

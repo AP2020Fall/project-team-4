@@ -17,20 +17,29 @@ public class EventView {
 		System.out.printf("\t1. %s - 2. %s%n", "BattleSea", "Reversi");
 	}
 
-	public void displayEvents (LinkedList<String> inSessionEvents) { // every string is in form -> "eventID gameName start end eventScore"
-		System.out.println(" |\tEventID\t|\t  Game  \t|\t  Start  \t|\t\tEnd\t\t|\tPrize\t|");
-		inSessionEvents.forEach(event ->
-				System.out.printf(" |\t%s \t|\t%s\t|\t%s\t|\t%s\t|\t%s\t|%n",
-				event.split(" ")[0],
-				event.split(" ")[1],
-				event.split(" ")[2],
-				event.split(" ")[3],
-				event.split(" ")[4]
-		));
+	public void displayEvents (LinkedList<String> inSessionEvents) { // every string is in form -> "title eventID gameName start end eventScore"
+
+		Menu.println(" |\tTitle\t\t|\tEventID\t|\t  Game  \t|\t  Start  \t|\t\tEnd\t\t|\tPrize\t|");
+		inSessionEvents.forEach(event -> {
+			int cols = event.split(" ").length;
+			StringBuilder title = new StringBuilder();
+			for (int i = 0; i < cols - 5; i++)
+				title.append(event.split(" ")[i] + " ");
+
+			System.out.printf(" | %s\t|\t%s\t|\t%s\t|\t%s\t|\t%s\t|\t%s\t|%n",
+					title.toString(),
+					event.split(" ")[cols-5],
+					event.split(" ")[cols - 4],
+					event.split(" ")[cols - 3],
+					event.split(" ")[cols - 2],
+					event.split(" ")[cols - 1]
+			);
+		});
 	}
 
-	public void displayEventInfo (String gameName, String start, String end, double prizeScore) {
-		System.out.printf("Game = %s\tStart = %s\tEnd = %s\tPrize = %.01f\t%n",
+	public void displayEventInfo (String title, String gameName, String start, String end, double prizeScore) {
+		System.out.printf("Title = %s%nGame = %s%nStart = %s\tEnd = %s%nPrize = %.01f%n",
+				title,
 				gameName,
 				start,
 				end,
@@ -43,5 +52,13 @@ public class EventView {
 		for (String field : editableFields) {
 			System.out.printf("%d. %s%n", editableFields.indexOf(field) + 1, field);
 		}
+	}
+
+	public void displayNotParticipatingInAnyEvents () {
+		System.out.println("You are currently not participating in any events");
+	}
+
+	public void displayNoCurrentlyInSessionEvents () {
+		System.out.println("There is no events currently in session.");
 	}
 }

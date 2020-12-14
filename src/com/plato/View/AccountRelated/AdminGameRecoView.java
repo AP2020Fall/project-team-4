@@ -13,6 +13,10 @@ public class AdminGameRecoView {
 	}
 
 	public void displayAdminsRecosToPlayer (LinkedList<String> gameRecosGotten) { // every string is in form -> "gameName"
+		if (gameRecosGotten.size() == 0) {
+			System.out.println("You haven't received any suggestions from admin yet.");
+			return;
+		}
 		System.out.print("Suggestions you've gotten from admin: ");
 
 		AtomicInteger i = new AtomicInteger(1);
@@ -24,9 +28,9 @@ public class AdminGameRecoView {
 	}
 
 	public void displayAllAdminRecos (LinkedList<String> allRecos) { // every string is in form -> "recoID gamerUsername gameName"
-		System.out.println(" | RecoID\t| Gamer\t| Game\t|");
+		System.out.println(" | RecoID |  Gamer\t| Game\t|");
 		allRecos.forEach(reco -> {
-			System.out.printf(" | %s\t| %s\t| %s\t|%n",
+			System.out.printf(" | %s | %s\t| %s\t\t|%n",
 					reco.split(" ")[0],
 					reco.split(" ")[1],
 					reco.split(" ")[2]

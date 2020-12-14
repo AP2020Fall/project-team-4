@@ -7,9 +7,9 @@ import java.util.LinkedList;
 public abstract class Account {
 	private String firstName, lastName, username, password, userID, email, phoneNum;
 
-	protected static LinkedList<Account> accounts =     new LinkedList<>();
+	protected static LinkedList<Account> accounts = new LinkedList<>();
 
-	protected Account (String firstName, String lastName, String username, String password, String email, String phoneNum) {
+	public Account (String firstName, String lastName, String username, String password, String email, String phoneNum) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
@@ -18,6 +18,9 @@ public abstract class Account {
 		this.email = email;
 		this.phoneNum = phoneNum;
 	}
+
+	// for serialization
+	public Account () {}
 
 	public static void addAccount (Class accType, String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
 		if (accType.getSimpleName().equalsIgnoreCase("admin"))
@@ -28,38 +31,26 @@ public abstract class Account {
 
 	public static void removeAccount (String username) {
 		accounts.remove(getAccount(username));
-
 	}
 
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public boolean isPasswordCorrect (String pw) {
 		return this.password.equals(pw);
 	}
 
 	public void editField (String field, String newVal) {
 		switch (field) {
-			case "first name":
-				firstName = newVal;
-				break;
-			case "last name":
-				lastName = newVal;
-				break;
-			case "username":
-				username = newVal;
-				break;
-			case "password":
-				password = newVal;
-				break;
-			case "email":
-				email = newVal;
-				break;
-			case "phone Num":
-				phoneNum = newVal;
-				break;
+			case "first name" -> setFirstName(newVal);
+			case "last name" -> setLastName(newVal);
+			case "username" -> setUsername(newVal);
+			case "password" -> setPassword(newVal);
+			case "email" -> setEmail(newVal);
+			case "phone num" -> setPhoneNum(newVal);
 		}
 	}
 
 	public static boolean isEmailOK (String email) {
-		return email.matches("[a-z0-9_.]+@[a-z]+\\.com");
+		return email.toLowerCase().matches("[a-z0-9_.]+@[a-z]+\\.com");
 	}
 
 	public static boolean isPhoneNumOK (String phoneNum) {
@@ -107,5 +98,33 @@ public abstract class Account {
 
 	public String getPhoneNum () {
 		return phoneNum;
+	}
+
+	public void setFirstName (String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName (String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setUsername (String username) {
+		this.username = username;
+	}
+
+	public void setPassword (String password) {
+		this.password = password;
+	}
+
+	public void setUserID (String userID) {
+		this.userID = userID;
+	}
+
+	public void setEmail (String email) {
+		this.email = email;
+	}
+
+	public void setPhoneNum (String phoneNum) {
+		this.phoneNum = phoneNum;
 	}
 }

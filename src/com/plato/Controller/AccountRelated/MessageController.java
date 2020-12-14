@@ -1,12 +1,10 @@
 package Controller.AccountRelated;
 
-import Model.AccountRelated.Admin;
 import Model.AccountRelated.Message;
 import View.AccountRelated.MessageView;
 import View.Menus.Menu;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.LinkedList;
 
 public class MessageController {
@@ -20,7 +18,6 @@ public class MessageController {
 
 	public void displayAdminMessages () {
 		LinkedList<Message> messages = Message.getAllMessages();
-		messages.sort(Comparator.comparing(Message::getDateTime));
 
 		MessageView.getInstance().displayAdminMessages(new LinkedList<>() {{
 			for (Message message : messages)
@@ -43,9 +40,9 @@ public class MessageController {
 					throw new EmptyMessageException();
 
 				new Message(msg);
-
+				break;
 			} catch (EmptyMessageException e) {
-				e.printStackTrace();
+				Menu.printErrorMessage(e.getMessage());
 			}
 	}
 

@@ -359,6 +359,10 @@ public class AccountController {
 		this.currentAccLoggedIn = currentAccLoggedIn;
 	}
 
+	public void setSaveLoginInfo (boolean saveLoginInfo) {
+		this.saveLoginInfo = saveLoginInfo;
+	}
+
 	public boolean saveLoginInfo () {
 		return saveLoginInfo;
 	}

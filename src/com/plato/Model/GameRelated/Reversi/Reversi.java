@@ -118,8 +118,11 @@ public class Reversi extends Game {
 		if (canPlayerPlaceAnyDisks()) {
 			if (canPlayerPlaceDiskHere(x, y)) {
 				checkDirections(x, y);
-				if (getTurnNum() == 0) {addMove(x, y, "black");}
-				else {addMove(x, y, "white");}
+				if (getTurnNum() == 0) {
+					board[y-1][x-1] = "b";
+					addMove(x, y, "black");}
+				else {board[y-1][x-1]="w";
+					addMove(x, y, "white");}
 			}
 		}
 	}
@@ -314,7 +317,7 @@ public class Reversi extends Game {
 		reversiDetails = details;
 		getAllGames().stream()
 				.filter(game -> game instanceof Reversi)
-				.forEach(game -> game.setDetails(reversiDetails));
+				.forEach(game -> game.setDetailsForIndividualGame(reversiDetails));
 	}
 
 	public static String getReversiDetails () {

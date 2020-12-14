@@ -22,7 +22,10 @@ public class GameView {
 	}
 
 	public void displayGameHowToPlay (String gameDetails) {
-		System.out.println(gameDetails);
+		if (gameDetails == null || gameDetails.equals(""))
+			System.out.println("Details of this game hasn't been added yet.");
+		else
+			System.out.println(gameDetails);
 	}
 
 	public void displayScoreboardOfGame (String gameName, LinkedList<String> scoreBoard) {
@@ -31,7 +34,7 @@ public class GameView {
 	}
 
 	public void displayGameConclusion (String conclusion, String player1Username, String player2Username, int player1IngameScore, int player2IngameScore) {
-		if (conclusion.toUpperCase().equals("IS"))
+		if (conclusion.equalsIgnoreCase("IS"))
 			System.out.println("Game is still in session. Results are undetermined.");
 		else {
 			if (conclusion.toUpperCase().contains("D"))

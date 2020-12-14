@@ -1,12 +1,12 @@
 package Controller.GameRelated;
 
 import Controller.AccountRelated.AccountController;
+import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Admin;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
-import Model.GameRelated.GameLog;
 import Model.GameRelated.Reversi.Reversi;
 import View.GameRelated.GameView;
 import View.Menus.Menu;
@@ -76,19 +76,26 @@ public class GameController {
 		Game.startGame(game);
 		getInstance().setCurrentGameInSession(game);
 
-		Menu.getMenuIn().getChildMenus().get(8).enter();
+		MainController.enterAppropriateMenu();
 	}
 
 	public void addGameToFavesOfLoggedInGamer () {
+		String gameName = ((_11GameMenu) Menu.getMenuIn()).getGameName();
+		if (((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFaveGames().contains(gameName)) {
+			Menu.printErrorMessage("This game is already in your favorites list");
+			return;
+		}
 		Menu.displayAreYouSureMessage();
 		if (Menu.getInputLine().equalsIgnoreCase("y")) {
-			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(((_11GameMenu) Menu.getMenuIn()).getGameName());
+			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(gameName);
 			GameView.getInstance().displaySuccessfulFaveGameAdditionMessage(((_11GameMenu) Menu.getMenuIn()).getGameName());
 		}
 	}
 
 	public void displayGameHowToPlay () {
-		GameView.getInstance().displayGameHowToPlay(((_11GameMenu) Menu.getMenuIn()).getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getBattleseaDetails() : Reversi.getReversiDetails());
+		GameView.getInstance().displayGameHowToPlay(
+				((_11GameMenu) Menu.getMenuIn()).getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getBattleseaDetails() : Reversi.getReversiDetails()
+		);
 	}
 
 	public void displayTurn () {
@@ -130,6 +137,29 @@ public class GameController {
 		getInstance().currentGameInSession = currentGameInSession;
 	}
 
+	public void editDetails (String gameName) {
+		String details;
+		while (true)
+			try {
+				Menu.printAskingForInput(gameName + "'s Details[/c to cancel] -> "); details = Menu.getInputLine();
+
+				if (details.trim().equalsIgnoreCase("/c")) return;
+
+				else if (details.trim().equals(""))
+					throw new EmptyDetailsException();
+
+				break;
+			} catch (EmptyDetailsException e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
+
+		if (gameName.trim().equalsIgnoreCase("battlesea"))
+			BattleSea.setDetailsForBattlesea(details);
+		else
+			Reversi.setDetailsForReversi(details);
+		Menu.printSuccessfulOperation("Details of " + gameName + " changed successfully.");
+	}
+
 	private static class CantPlayWithYourselfException extends Exception {
 		public CantPlayWithYourselfException () {
 			super("You should select another gamer's username than yourself to play with");
@@ -139,6 +169,12 @@ public class GameController {
 	private static class CantPlayWithAdminException extends Exception {
 		public CantPlayWithAdminException () {
 			super("You can't play with Admin");
+		}
+	}
+
+	private static class EmptyDetailsException extends Exception {
+		public EmptyDetailsException () {
+			super("You can't set the game details to empty.");
 		}
 	}
 }
