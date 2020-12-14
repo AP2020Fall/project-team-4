@@ -1,1 +1,20 @@
-[{"eventID":"172024","gameName":"BattleSea","eventScore":20.0,"start":{"year":2020,"month":12,"day":9},"end":{"year":2020,"month":12,"day":9},"participants":[],"awardsGiven":false}]
+[
+  {
+    "eventID": "240547",
+    "title": "Big Event",
+    "gameName": "BattleSea",
+    "eventScore": 200.0,
+    "start": {
+      "year": 2020,
+      "month": 12,
+      "day": 12
+    },
+    "end": {
+      "year": 2020,
+      "month": 12,
+      "day": 13
+    },
+    "participants": [],
+    "awardsGiven": false
+  }
+]

@@ -17,6 +17,7 @@ public class ReversiView {
 	 * along with coordinates
 	 */
 	public void displayGrid (String[][] board) {
+		System.out.print(" ");
 		for (int i = 1; i <= 8; i++) {
 			if (i == 8) {System.out.println(" " + i);}
 			else {System.out.print(" " + i);}

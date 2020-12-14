@@ -1,1 +1,9 @@
-{"firstName":"1","lastName":"1","username":"admin","password":"pw","userID":"598226","email":"1@gmail.com","phoneNum":"00011122233"}
+{
+  "firstName": "1",
+  "lastName": "1",
+  "username": "admin",
+  "password": "pw",
+  "userID": "598226",
+  "email": "1@gmail.com",
+  "phoneNum": "00011122233"
+}

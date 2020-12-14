@@ -1,1 +1,26 @@
-[{"recoID":"359809","gameName":"Reversi","gamer":{"awardsFromEvents":0,"money":50.0,"accountStartDate":{"year":2020,"month":12,"day":6},"frnds":[],"faveGames":["BattleSea"],"firstName":"1","lastName":"1","username":"dorrin1","password":"11","userID":"359220","email":"1@gmail.com","phoneNum":"00011122233"}}]
+[
+  {
+    "recoID": "359809",
+    "gameName": "Reversi",
+    "gamer": {
+      "awardsFromEvents": 0,
+      "money": 50.0,
+      "accountStartDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 6
+      },
+      "frnds": [],
+      "faveGames": [
+        "BattleSea"
+      ],
+      "firstName": "1",
+      "lastName": "1",
+      "username": "dorrin1",
+      "password": "11",
+      "userID": "359220",
+      "email": "1@gmail.com",
+      "phoneNum": "00011122233"
+    }
+  }
+]

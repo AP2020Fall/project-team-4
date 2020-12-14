@@ -478,6 +478,7 @@ public class MainController {
 
 	private void initGsonAndItsBuilder () {
 		gsonBuilder.setDateFormat("yyyy-MMM-dd HH:mm:ss");
+		gsonBuilder.setPrettyPrinting();
 		gson = gsonBuilder.create();
 	}
 
