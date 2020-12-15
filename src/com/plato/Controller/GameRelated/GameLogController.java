@@ -59,7 +59,7 @@ public class GameLogController {
 		GameLogView.getInstance().displayLastGamePlayed(gameName);
 	}
 
-	public void displayGamingHistoryOfGamer () {
+	public void displayFullGamingHistoryOfGamer () {
 		LinkedList<Game> history = GameLog.getGameHistory(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()));
 		LinkedList<String> historyStrs = getGameHistoryAsStrings(history);
 
@@ -89,5 +89,17 @@ public class GameLogController {
 		);
 
 		return gamesHistoryAsStrings;
+	}
+
+	public void displayPlayerStatsInGame (String gamename) {
+		Gamer gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+		GameLogView.getInstance().displayPlayerStatsInGame(
+				gamename,
+				GameLog.getLevel(gamer, gamename),
+				GameLog.getPoints(gamer, gamename),
+				GameLog.getWinCount(gamer, gamename),
+				GameLog.getLossCount(gamer, gamename),
+				GameLog.getPlayedCount(gamer, gamename)
+		);
 	}
 }

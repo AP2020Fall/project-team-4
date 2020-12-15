@@ -237,20 +237,20 @@ public class EventController {
 			}
 
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
-		LinkedList<String> availableFields = (LinkedList<String>) Arrays.asList(new String[]{
+		LinkedList<String> availableFields = new LinkedList<>(Arrays.asList(
 				"Title",
 				"Game name",
 				"Event prize",
 				"Start date",
 				"End date"
-		});
+		));
 		EventView.getInstance().displayEditableFields(availableFields);
 
 		int field = 0;
 		try {
 			String fieldstr = (Menu.getInputLine());
 
-			if (!String.valueOf(fieldstr).matches("[1-4]")) // FIXME: check correctness
+			if (!String.valueOf(fieldstr).matches("[1-5]")) // FIXME: check correctness
 				throw new NumberFormatException();
 
 			field = Integer.parseInt(fieldstr);

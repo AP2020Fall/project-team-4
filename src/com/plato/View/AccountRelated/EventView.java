@@ -19,26 +19,27 @@ public class EventView {
 
 	public void displayEvents (LinkedList<String> inSessionEvents) { // every string is in form -> "title eventID gameName start end eventScore"
 
-		Menu.println(" |\tTitle\t\t|\tEventID\t|\t  Game  \t|\t  Start  \t|\t\tEnd\t\t|\tPrize\t|");
 		inSessionEvents.forEach(event -> {
-			int cols = event.split(" ").length;
+			int length = event.split(" ").length;
+
+			Menu.print("EventId: " + event.split(" ")[length - 5] + " -> ");
+
 			StringBuilder title = new StringBuilder();
-			for (int i = 0; i < cols - 5; i++)
+			for (int i = 0; i < length - 5; i++)
 				title.append(event.split(" ")[i] + " ");
 
-			System.out.printf(" | %s\t|\t%s\t|\t%s\t|\t%s\t|\t%s\t|\t%s\t|%n",
+			System.out.printf("Title = %s  Game = %s  Start = %s  End = %s  Prize = %s %n",
 					title.toString(),
-					event.split(" ")[cols-5],
-					event.split(" ")[cols - 4],
-					event.split(" ")[cols - 3],
-					event.split(" ")[cols - 2],
-					event.split(" ")[cols - 1]
+					event.split(" ")[length - 4],
+					event.split(" ")[length - 3],
+					event.split(" ")[length - 2],
+					event.split(" ")[length - 1]
 			);
 		});
 	}
 
 	public void displayEventInfo (String title, String gameName, String start, String end, double prizeScore) {
-		System.out.printf("Title = %s%nGame = %s%nStart = %s\tEnd = %s%nPrize = %.01f%n",
+		System.out.printf("Title = %s%nGame = %s%nStart = %s  End = %s%nPrize = %.01f%n",
 				title,
 				gameName,
 				start,

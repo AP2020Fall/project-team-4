@@ -23,6 +23,8 @@ public class _14AccountMenu extends Menu {
 					"View Gaming History",
 					"View Gaming History in BattleSea",
 					"View Gaming History in Reversi",
+					"View my BattleSea statistics",
+					"View my Reversi statistics",
 					"Logout"
 			));
 

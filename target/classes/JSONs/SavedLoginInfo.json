@@ -1,21 +1,10 @@
-g
+a
 {
-  "awardsFromEvents": 0,
-  "money": 50.0,
-  "accountStartDate": {
-    "year": 2020,
-    "month": 12,
-    "day": 6
-  },
-  "frnds": [],
-  "faveGames": [
-    "BattleSea"
-  ],
-  "firstName": "dor",
-  "lastName": "dorr",
-  "username": "dreww",
-  "password": "11",
-  "userID": "359220",
-  "email": "dor@gmail.com",
-  "phoneNum": "00011223344"
+  "firstName": "1",
+  "lastName": "1",
+  "username": "admin",
+  "password": "pw",
+  "userID": "598226",
+  "email": "1@gmail.com",
+  "phoneNum": "00011122233"
 }

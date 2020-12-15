@@ -150,4 +150,8 @@ public class GameLog {
 		}
 		return null;
 	}
+
+	public static int getLevel (Gamer gamer, String gameName) {
+		return getPoints(gamer, gameName) / 2;
+	}
 }

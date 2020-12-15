@@ -16,5 +16,23 @@
     },
     "participants": [],
     "awardsGiven": false
+  },
+  {
+    "eventID": "825541",
+    "title": "title",
+    "gameName": "Reversi",
+    "eventScore": 555.0,
+    "start": {
+      "year": 2020,
+      "month": 12,
+      "day": 15
+    },
+    "end": {
+      "year": 2020,
+      "month": 12,
+      "day": 18
+    },
+    "participants": [],
+    "awardsGiven": false
   }
 ]

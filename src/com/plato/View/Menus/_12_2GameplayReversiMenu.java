@@ -1,5 +1,7 @@
 package View.Menus;
 
+import Controller.GameRelated.GameController;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -26,6 +28,12 @@ public class _12_2GameplayReversiMenu extends Menu {
 		options.addAll(super.getOptions());
 
 		return options;
+	}
+
+	@Override
+	public void back () {
+		super.back();
+		GameController.getInstance().setCurrentGameInSession(null);
 	}
 
 	@Override

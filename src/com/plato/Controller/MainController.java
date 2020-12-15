@@ -227,9 +227,11 @@ public class MainController {
 				enterAppropriateMenu();
 			}
 			case "View plato statistics" -> GamerController.getInstance().displayAccountStats();
-			case "View Gaming History" -> GameLogController.getInstance().displayGamingHistoryOfGamer();
-			case "View Gaming History in BattleSea" -> GameLogController.getInstance().displayGamingHistoryOfGamerInGame("battlesea");
-			case "View Gaming History in Reversi" -> GameLogController.getInstance().displayGamingHistoryOfGamerInGame("reversi");
+			case "View Gaming History" -> GameLogController.getInstance().displayFullGamingHistoryOfGamer();
+			case "View Gaming History in BattleSea" -> GameLogController.getInstance().displayGamingHistoryOfGamerInGame("BattleSea");
+			case "View Gaming History in Reversi" -> GameLogController.getInstance().displayGamingHistoryOfGamerInGame("Reversi");
+			case "View my BattleSea statistics" -> GameLogController.getInstance().displayPlayerStatsInGame("BattleSea");
+			case "View my Reversi statistics" -> GameLogController.getInstance().displayPlayerStatsInGame("Reversi");
 			case "Logout" -> {
 				AccountController.getInstance().logout();
 				Menu.getMenu("2").enter();
