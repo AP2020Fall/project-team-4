@@ -20,12 +20,12 @@
   {
     "eventID": "825541",
     "title": "title",
-    "gameName": "Reversi",
-    "eventScore": 555.0,
+    "gameName": "BattleSea",
+    "eventScore": 5.0,
     "start": {
       "year": 2020,
       "month": 12,
-      "day": 15
+      "day": 16
     },
     "end": {
       "year": 2020,

@@ -53,7 +53,7 @@ public class AdminGameReco {
 
 	public static boolean recommendationExists (Gamer gamer, String gameName) {
 		return recommendations.stream()
-				.anyMatch(reco -> reco.gamer.getUsername().equals(gamer.getUsername()) && reco.gameName.equals(gameName));
+				.anyMatch(reco -> reco.gamer.getUsername().equals(gamer.getUsername()) && reco.gameName.equalsIgnoreCase(gameName));
 	}
 
 	public static LinkedList<AdminGameReco> getRecommendations () {

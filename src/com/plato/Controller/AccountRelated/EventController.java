@@ -250,7 +250,7 @@ public class EventController {
 		try {
 			String fieldstr = (Menu.getInputLine());
 
-			if (!String.valueOf(fieldstr).matches("[1-5]")) // FIXME: check correctness
+			if (!String.valueOf(fieldstr).matches("[1-5]"))
 				throw new NumberFormatException();
 
 			field = Integer.parseInt(fieldstr);
@@ -273,6 +273,7 @@ public class EventController {
 
 			case 2 -> {
 				String gameNum;
+				EventView.getInstance().displayAvailableGames();
 				while (true)
 					try {
 						Menu.printAskingForInput("Choose New Game:[/c to cancel] "); gameNum = Menu.getInputLine();

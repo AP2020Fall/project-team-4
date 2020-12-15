@@ -3,6 +3,7 @@ package Model.AccountRelated;
 import Controller.IDGenerator;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
@@ -50,6 +51,7 @@ public class Event {
 
 	@SuppressWarnings("EnhancedSwitchMigration")
 	public void editField (String field, String newval) {
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
 		switch (field.toLowerCase()) {
 			case "title":
 				title = newval; break;
@@ -58,9 +60,9 @@ public class Event {
 			case "event score":
 				eventScore = Double.parseDouble(newval); break;
 			case "start":
-				start = LocalDate.parse(newval); break;
+				start = LocalDate.parse(newval, dateTimeFormatter); break;
 			case "end":
-				end = LocalDate.parse(newval); break;
+				end = LocalDate.parse(newval, dateTimeFormatter); break;
 		}
 	}
 
