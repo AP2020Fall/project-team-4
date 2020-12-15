@@ -212,23 +212,25 @@ public class AccountController {
 	}
 
 	public void editAccFieldCommand () {
-		LinkedList<String> availableFields = new LinkedList<>(Arrays.asList("First Name",
+		LinkedList<String> availableFields = new LinkedList<>(Arrays.asList(
+				"First Name",
 				"Last Name",
 				"Username",
 				"Email",
 				"Phone Number"));
 		AccountView.getInstance().displayEditableFields(availableFields);
 
-		int field = 0;
+		int field;
 		try {
-			String fieldstr = (Menu.getInputLine());
+			Menu.printAskingForInput("Choose field to edit:\n"); String fieldstr = Menu.getInputLine();
 
-			if (String.valueOf(fieldstr).matches("[1-5]"))
+			if (!String.valueOf(fieldstr).matches("[1-5]"))
 				throw new NumberFormatException();
 
 			field = Integer.parseInt(fieldstr);
 		} catch (NumberFormatException e) {
 			Menu.printErrorMessage(new MainController.InvalidInputException().getMessage());
+			return;
 		}
 
 		switch (field) {
@@ -243,8 +245,6 @@ public class AccountController {
 					Menu.printSuccessfulOperation("First name changed successfully.");
 				}
 			}
-
-
 			case 2 -> {
 				Menu.printAskingForInput("New Last name:[/c to cancel] "); String new2name = Menu.getInputLine();
 
@@ -273,7 +273,7 @@ public class AccountController {
 
 				Menu.displayAreYouSureMessage();
 				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-					getCurrentAccLoggedIn().editField("username", Menu.getInputLine());
+					getCurrentAccLoggedIn().editField("username", username);
 					Menu.printSuccessfulOperation("Username changed successfully.");
 				}
 			}

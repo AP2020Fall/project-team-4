@@ -250,7 +250,7 @@ public class EventController {
 		try {
 			String fieldstr = (Menu.getInputLine());
 
-			if (String.valueOf(fieldstr).matches("[1-4]"))
+			if (!String.valueOf(fieldstr).matches("[1-4]")) // FIXME: check correctness
 				throw new NumberFormatException();
 
 			field = Integer.parseInt(fieldstr);

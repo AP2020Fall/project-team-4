@@ -27,7 +27,6 @@ public class AccountView {
 	}
 
 	public void displayEditableFields (LinkedList<String> editableFields) {
-		Menu.printAskingForInput("Choose field to edit:\n");
 		for (String field : editableFields) {
 			System.out.printf("%d. %s%n", editableFields.indexOf(field) + 1, field);
 		}
