@@ -2,7 +2,6 @@ package Model.GameRelated;
 
 import Model.AccountRelated.Gamer;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -11,8 +10,9 @@ import java.util.stream.Collectors;
 import static Model.GameRelated.Game.getAllFinishedGames;
 
 public class GameLog {
-
-
+	/**
+	 * @return a list of all finished games
+	 */
 	public static LinkedList<Game> getListOfGames (String gameName) {
 		LinkedList<Game> listOfGames = new LinkedList<>();
 		for (Game game : getAllFinishedGames())
@@ -25,8 +25,6 @@ public class GameLog {
 	 * @param gamer    the gamer to which we want points earned in game
 	 * @param gameName the game that we want the points gamer earned in
 	 * @return based on the predetermined scoring system of said game, count the points from the list of all games.
-	 * don't use ingame points. just the points determined for win, loss or draw.
-	 * -Be sure to use to use the finished games list instead of all of them
 	 */
 	public static Integer getPoints (Gamer gamer, String gameName) {
 		return getDrawCount(gamer, gameName) * GameConclusion.DRAW.getWinnerPoints()
@@ -36,7 +34,6 @@ public class GameLog {
 
 	/**
 	 * @return number of times said gamer played said game
-	 * -Be sure to use to use the finished games list instead of all of them
 	 */
 	public static Integer getPlayedCount (Gamer gamer, String gameName) {
 		int count = 0;
@@ -49,7 +46,6 @@ public class GameLog {
 
 	/**
 	 * @return number of times said game was played by anyone
-	 * -Be sure to use to use the finished games list instead of all of them
 	 */
 	public static Integer getPlayedCount (String gameName) {
 		return getListOfGames(gameName).size();
@@ -58,7 +54,6 @@ public class GameLog {
 
 	/**
 	 * @return number of times said gamer won said game
-	 * -Be sure to use to use the finished games list instead of all of them
 	 */
 	public static Integer getWinCount (Gamer gamer, String gameName) {
 		int count = 0;
@@ -73,7 +68,6 @@ public class GameLog {
 
 	/**
 	 * @return number of times said gamer lost said game
-	 * -Be sure to use to use the finished games list instead of all of them
 	 */
 	public static Integer getLossCount (Gamer gamer, String gameName) {
 		int count = 0;
@@ -88,7 +82,6 @@ public class GameLog {
 
 	/**
 	 * @return number of times said gamer tied said game
-	 * -Be sure to use to use the finished games list instead of all of them
 	 */
 	public static Integer getDrawCount (Gamer gamer, String gameName) {
 		int count = 0;
@@ -114,7 +107,6 @@ public class GameLog {
 
 	/**
 	 * @return a LinkedList<String> of all finished games of said type(battlesea or reversi)
-	 * -Be sure to use to use the finished games list instead of all of them
 	 */
 	public static LinkedList<Game> getGameHistory (String gameName) {
 		return Game.getAllFinishedGames().stream()
@@ -124,7 +116,6 @@ public class GameLog {
 	}
 
 	/**
-	 * @param gamer
 	 * @return list of all the games gamer has played
 	 */
 	public static LinkedList<Game> getGameHistory (Gamer gamer) {
@@ -138,9 +129,6 @@ public class GameLog {
 
 	/**
 	 * every 2 games is one level so level = playedCount/2
-	 *
-	 * @param gameName
-	 * @return
 	 */
 	public static String getGameStatic (String gameName, Gamer gamer) {
 		return "Level:" + (int) getPlayedCount(gamer, gameName) / 2 +

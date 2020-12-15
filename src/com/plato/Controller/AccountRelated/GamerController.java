@@ -117,7 +117,16 @@ public class GamerController {
 	}
 
 	public void displayAccountStats () {
-		GamerView.getInstance().displayAccountStats();
+		Gamer gamer = ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn());
+
+		GamerView.getInstance().displayPlatoStats(
+				gamer.getDaysSinceRegistration(),
+				gamer.getFrnds().size(),
+				GameLog.getWinCount(gamer, "BattleSea") + GameLog.getWinCount(gamer, "Reversi"),
+				GameLog.getLossCount(gamer, "BattleSea") + GameLog.getLossCount(gamer, "Reversi"),
+				GameLog.getDrawCount(gamer, "BattleSea") + GameLog.getDrawCount(gamer, "Reversi"),
+				GameLog.getPoints(gamer, "BattleSea") + GameLog.getPoints(gamer, "Reversi")
+		);
 	}
 
 	private static class FriendDoesntExistException extends Exception {

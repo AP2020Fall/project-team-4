@@ -1,5 +1,7 @@
 package View.AccountRelated;
 
+import View.Menus.Menu;
+
 import java.util.LinkedList;
 
 public class GamerView {
@@ -11,8 +13,11 @@ public class GamerView {
 		return gamerView;
 	}
 
-	public void displayAccountStats () {
-		// TODO: 11/28/2020 AD
+	public void displayPlatoStats (int daysSinceReg, int frndCount, int win, int loss, int draw, int pts) {
+		Menu.println("Plato age: %dd".formatted(daysSinceReg));
+		Menu.println("Number of Friends: " + frndCount);
+		Menu.println("Game Stats:");
+		Menu.println("\tPoints: %d, W: %d, L: %d, D: %d".formatted(pts, win, loss, draw));
 	}
 
 	public void displayAllUsernames (LinkedList<String> gamersUsernames) {

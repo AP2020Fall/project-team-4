@@ -5,7 +5,6 @@ import Model.AccountRelated.Admin;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -132,7 +131,7 @@ public abstract class Menu {
 	}
 
 	public static void printSavedMessage () {
-		Menu.println(Color.BLUE.getVal() + "\t-Saved" + Color.RESET.getVal());
+		Menu.println(Color.BLUE.getVal() + "\t-Saved-" + Color.RESET.getVal());
 	}
 
 	public LinkedList<String> getOptions () {
@@ -211,14 +210,6 @@ public abstract class Menu {
 
 	public static Menu getMenu (String menuid) {
 		return menus.get(menuid);
-	}
-
-	public String getMenuID () {
-		for (Map.Entry<String, Menu> menuEntry : menus.entrySet())
-			if (menuEntry.getValue().menuTitle.equals(this.menuTitle))
-				return menuEntry.getKey();
-
-		return "";
 	}
 
 	public HashMap<Integer, Menu> getChildMenus () {

@@ -1,7 +1,6 @@
 package Model.AccountRelated;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -75,7 +74,7 @@ public class Gamer extends Account {
 	}
 
 	public int getDaysSinceRegistration () {
-		return Math.toIntExact(ChronoUnit.DAYS.between(LocalDateTime.now(), accountStartDate));
+		return Math.toIntExact(ChronoUnit.DAYS.between(accountStartDate, LocalDate.now()));
 	}
 
 	public static void setGamers (LinkedList<Gamer> gamers) {
