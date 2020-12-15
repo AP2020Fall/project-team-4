@@ -87,9 +87,7 @@ public class GamerController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).removeFrnd(
-				((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFrnd(username)
-		);
+		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).removeFrnd(username);
 	}
 
 	public void displayFriendPersonalInfo () {

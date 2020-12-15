@@ -30,8 +30,8 @@ public class Gamer extends Account {
 		frnds.addLast(friendUN);
 	}
 
-	public void removeFrnd (Gamer friend) {
-		frnds.remove(friend);
+	public void removeFrnd (String friendUN) {
+		frnds.remove(friendUN);
 	}
 
 	public boolean frndExists (String un) {
