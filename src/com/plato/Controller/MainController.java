@@ -263,12 +263,21 @@ public class MainController {
 
 				writer.write(gson.toJson(Admin.getAdmin()));
 			}
+		else
+			try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/AccountRelated/Admin.json")) {
+				printWriter.print("");
+			}
+
 
 		// Gamer.json
 		if (Gamer.getGamers().size() > 0)
 			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Gamer.json"))) {
 
 				writer.write(gson.toJson(Gamer.getGamers()));
+			}
+		else
+			try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/AccountRelated/Gamer.json")) {
+				printWriter.print("");
 			}
 
 		// AdminGameReco.json
@@ -277,12 +286,20 @@ public class MainController {
 
 				writer.write(gson.toJson(AdminGameReco.getRecommendations()));
 			}
+		else
+			try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/AccountRelated/AdminGameReco.json")) {
+				printWriter.print("");
+			}
 
 		// Event.json
 		if (Event.getEvents().size() > 0)
 			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Event.json"))) {
 
 				writer.write(gson.toJson(Event.getEvents()));
+			}
+		else
+			try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/AccountRelated/Event.json")) {
+				printWriter.print("");
 			}
 
 		// FriendRequest.json
@@ -291,12 +308,20 @@ public class MainController {
 
 				writer.write(gson.toJson(FriendRequest.getAllfriendRequests()));
 			}
+		else
+			try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/AccountRelated/FriendRequest.json")) {
+				printWriter.print("");
+			}
 
 		// Message.json
 		if (Message.getAllMessages().size() > 0)
 			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/AccountRelated/Message.json"))) {
 
 				writer.write(gson.toJson(Message.getAllMessages()));
+			}
+		else
+			try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/AccountRelated/Message.json")) {
+				printWriter.print("");
 			}
 //
 //		// BattleSea.json
