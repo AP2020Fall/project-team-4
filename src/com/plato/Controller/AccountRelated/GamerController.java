@@ -37,15 +37,15 @@ public class GamerController {
 	}
 
 	public void displayFriendsUsernames () {
-		LinkedList<Gamer> playersFriendsAccounts = ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn())
-				.getFrnds().stream().sorted(Comparator.comparing(Account::getUsername))
+		LinkedList<String> playersFriends = ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn())
+				.getFrnds().stream().sorted()
 				.collect(Collectors.toCollection(LinkedList::new));
 
 		GamerView.getInstance().displayFriendsUsernames(new LinkedList<>() {{
-			for (Gamer friendAccount : playersFriendsAccounts)
-				add(friendAccount.getUsername());
+			for (String friendUN : playersFriends)
+				add(friendUN);
 		}});
-		if (playersFriendsAccounts.size() > 0)
+		if (playersFriends.size() > 0)
 			MainController.enterAppropriateMenu();
 	}
 
@@ -87,7 +87,9 @@ public class GamerController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).removeFrnd(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFrnd(username));
+		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).removeFrnd(
+				((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFrnd(username)
+		);
 	}
 
 	public void displayFriendPersonalInfo () {

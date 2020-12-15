@@ -1,10 +1,19 @@
-a
+g
 {
-  "firstName": "1",
-  "lastName": "1",
-  "username": "admin",
-  "password": "pw",
-  "userID": "598226",
-  "email": "1@gmail.com",
-  "phoneNum": "00011122233"
+  "awardsFromEvents": 0,
+  "money": 25.0,
+  "accountStartDate": {
+    "year": 2020,
+    "month": 12,
+    "day": 6
+  },
+  "frnds": [],
+  "faveGames": [],
+  "firstName": "2",
+  "lastName": "2",
+  "username": "dorrin2",
+  "password": "22",
+  "userID": "708921",
+  "email": "2@gmail.com",
+  "phoneNum": "0001112233"
 }

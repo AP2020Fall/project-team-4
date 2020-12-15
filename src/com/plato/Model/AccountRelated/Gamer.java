@@ -11,7 +11,7 @@ public class Gamer extends Account {
 	private int awardsFromEvents = 0;
 	private double money;
 	private LocalDate accountStartDate;
-	private LinkedList<Gamer> frnds = new LinkedList<>();
+	private LinkedList<String> frnds = new LinkedList<>();
 	private LinkedList<String> faveGames = new LinkedList<>();
 
 	public Gamer (String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
@@ -23,34 +23,31 @@ public class Gamer extends Account {
 	public Gamer () {}
 
 	public void sendFrndReq (String usernameTo) {
-		FriendRequest.addFriendReq(this, (Gamer) getAccount(usernameTo));
+		FriendRequest.addFriendReq(this.getUsername(), usernameTo);
 	}
 
-	public void addFrnd (Gamer friend) {
-		frnds.addLast(friend);
+	public void addFrnd (String friendUN) {
+		frnds.addLast(friendUN);
 	}
 
 	public void removeFrnd (Gamer friend) {
 		frnds.remove(friend);
 	}
 
-	public LinkedList<Gamer> getFrnds () {
-		return frnds;
-	}
-
 	public boolean frndExists (String un) {
 		return frnds.stream()
-				.anyMatch(gamer -> gamer.getUsername().equals(un));
+				.anyMatch(gamerUN -> gamerUN.equals(un));
 	}
 
 	public Gamer getFrnd (String un) {
 		return frnds.stream()
-				.filter(gamer -> gamer.getUsername().equals(un))
+				.filter(gamerUN -> gamerUN.equals(un))
+				.map(gamerun -> ((Gamer) Account.getAccount(gamerun)))
 				.findAny().get();
 	}
 
 	public LinkedList<FriendRequest> getFriendRequestsGotten () {
-		return FriendRequest.getFriendReq(this);
+		return FriendRequest.getFriendReq(this.getUsername());
 	}
 
 	public static LinkedList<Gamer> getGamers () {
@@ -63,6 +60,10 @@ public class Gamer extends Account {
 	public void addToFaveGames (String gameName) {
 		if (!faveGames.contains(gameName))
 			faveGames.addLast(gameName);
+	}
+
+	public LinkedList<String> getFrnds () {
+		return frnds;
 	}
 
 	public void participateInEvent (String eventID) {
@@ -116,7 +117,7 @@ public class Gamer extends Account {
 		this.accountStartDate = accountStartDate;
 	}
 
-	public void setFrnds (LinkedList<Gamer> frnds) {
+	public void setFrnds (LinkedList<String> frnds) {
 		this.frnds = frnds;
 	}
 

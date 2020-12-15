@@ -36,14 +36,14 @@ public class FriendRequestController {
 				if (Account.getAccount(usernameTo) instanceof Admin)
 					throw new CantFriendRequestTheAdminException();
 
-				if (FriendRequest.frndReqExists(AccountController.getInstance().getCurrentAccLoggedIn().getUsername(), usernameTo))
-					throw new FriendRequestAlreadyExistsException(usernameTo);
-
 				if (((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(usernameTo))
 					throw new CantSendFriendReqToAlreadyFriendException(usernameTo);
+
+				if (FriendRequest.frndReqExists(AccountController.getInstance().getCurrentAccLoggedIn().getUsername(), usernameTo))
+					throw new FriendRequestAlreadyExistsException(usernameTo);
 				break;
 			} catch (AccountController.NoAccountExistsWithUsernameException | CantSendFriendRendReqToYourselfException | CantFriendRequestTheAdminException |
-					FriendRequestAlreadyExistsException | CantSendFriendReqToAlreadyFriendException e) {
+					CantSendFriendReqToAlreadyFriendException | FriendRequestAlreadyExistsException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
@@ -57,7 +57,7 @@ public class FriendRequestController {
 	public void displayFrndReqsPlayerGotten () {
 		LinkedList<String> frndReqs = new LinkedList<>() {{
 			for (FriendRequest friendRequest : ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFriendRequestsGotten())
-				add(friendRequest.getFrom().getUsername());
+				add(friendRequest.getFromUsername());
 		}};
 
 		FriendRequestView.getInstance().displayFrndReqsPlayerGotten(frndReqs);
@@ -84,10 +84,10 @@ public class FriendRequestController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		FriendRequest.getFriendReq(((Gamer) Account.getAccount(usernameFrom)), ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()))
-				.conclude(true);
-
-			//todo havent finished checking yet
+		FriendRequest.concludeFrndReq(
+				usernameFrom,
+				AccountController.getInstance().getCurrentAccLoggedIn().getUsername(),
+				true);
 	}
 
 	public void declineFriendReq () {
@@ -109,8 +109,10 @@ public class FriendRequestController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		FriendRequest.getFriendReq(((Gamer) Account.getAccount(usernameFrom)), ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()))
-				.conclude(false);
+		FriendRequest.concludeFrndReq(
+				usernameFrom,
+				AccountController.getInstance().getCurrentAccLoggedIn().getUsername(),
+				false);
 	}
 
 	private static class FriendRequestDoesntExistException extends Exception {
@@ -120,8 +122,8 @@ public class FriendRequestController {
 	}
 
 	private static class CantSendFriendReqToAlreadyFriendException extends Exception {
-		public CantSendFriendReqToAlreadyFriendException (String alrFriendUsername) {
-			super("You already are friends with " + alrFriendUsername);
+		public CantSendFriendReqToAlreadyFriendException (String alrFrndUsername) {
+			super("You already are friends with " + alrFrndUsername);
 		}
 	}
 

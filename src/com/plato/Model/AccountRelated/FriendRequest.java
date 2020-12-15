@@ -4,57 +4,68 @@ import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class FriendRequest {
-	private final Gamer from, to;
+	private final String fromUsername, toUsername;
 
 	private static LinkedList<FriendRequest> allfriendRequests = new LinkedList<>();
 
-	private FriendRequest (Gamer from, Gamer to) {
-		this.from = from;
-		this.to = to;
-		allfriendRequests.addLast(this);
+	private FriendRequest (String fromUsername, String toUsername) {
+		this.fromUsername = fromUsername;
+		this.toUsername = toUsername;
 	}
 
-	public static void addFriendReq (Gamer from, Gamer to) {
-		allfriendRequests.add(new FriendRequest(from, to));
+	public static void addFriendReq (String fromUsername, String toUsername) {
+		allfriendRequests.add(new FriendRequest(fromUsername, toUsername));
 	}
 
-	public void conclude (boolean accepted) {
+	public static void concludeFrndReq (String fromUsername, String toUsername, boolean accepted) {
+		FriendRequest.getFriendReq(fromUsername, toUsername).conclude(accepted);
+		allfriendRequests.removeIf(friendRequest ->
+				friendRequest.fromUsername.equals(fromUsername) &&
+				friendRequest.toUsername.equals(toUsername));
+//		allfriendRequests.remove(getFriendReq(fromUsername, toUsername));
+	}
+
+	private void conclude (boolean accepted) {
 		if (accepted) {
-			from.addFrnd(to);
-			to.addFrnd(from);
+			((Gamer) Account.getAccount(fromUsername)).addFrnd(toUsername);
+			((Gamer) Account.getAccount(toUsername)).addFrnd(fromUsername);
 		}
-		allfriendRequests.remove(this);
+//		allfriendRequests.remove(this); fixme
 	}
 
-	public static FriendRequest getFriendReq (Gamer from, Gamer to) {
+	public static FriendRequest getFriendReq (String fromUsername, String toUsername) {
 		return allfriendRequests.stream()
-				.filter(friendRequest -> friendRequest.to.getUsername().equals(to.getUsername()) &&
-						friendRequest.from.getUsername().equals(from.getUsername()))
+				.filter(friendRequest ->
+						friendRequest.toUsername.equals(toUsername) &&
+						friendRequest.fromUsername.equals(fromUsername)
+				)
 				.findAny().get();
 	}
 
-	public static LinkedList<FriendRequest> getFriendReq (Gamer to) {
+	public static LinkedList<FriendRequest> getFriendReq (String toUsername) {
 		return allfriendRequests.stream()
-				.filter(friendRequest -> friendRequest.to.getUsername().equals(to.getUsername()))
+				.filter(friendRequest -> friendRequest.toUsername.equals(toUsername))
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public static boolean frndReqExists (String usernameFrom) {
 		return allfriendRequests.stream()
-				.anyMatch(friendRequest -> friendRequest.getFrom().getUsername().equals(usernameFrom));
+				.anyMatch(friendRequest -> friendRequest.fromUsername.equals(usernameFrom));
 	}
 
-	public static boolean frndReqExists (String usernameFrom, String usernameTo) {
+	public static boolean frndReqExists (String fromUsername, String toUsername) {
 		return allfriendRequests.stream()
-				.anyMatch(friendRequest -> friendRequest.getFrom().getUsername().equals(usernameFrom) && friendRequest.getTo().getUsername().equals(usernameTo));
+				.anyMatch(friendRequest ->
+						friendRequest.fromUsername.equals(fromUsername) &&
+						friendRequest.toUsername.equals(toUsername));
 	}
 
-	public Gamer getFrom () {
-		return from;
+	public String getFromUsername () {
+		return fromUsername;
 	}
 
-	public Gamer getTo () {
-		return to;
+	public String getToUsername () {
+		return toUsername;
 	}
 
 	public static LinkedList<FriendRequest> getAllfriendRequests () {
