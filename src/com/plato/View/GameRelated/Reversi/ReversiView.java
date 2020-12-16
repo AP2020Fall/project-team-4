@@ -46,12 +46,16 @@ public class ReversiView {
 	}
 
 	public void displayAvailableCoords (ArrayList<String> availableCoordinates) {
-		if (availableCoordinates.size()==0) {
+		if (availableCoordinates.size() == 0) {
 			Menu.println("You cannot make any moves");
 			return;
 		}
 		System.out.println("Available Coordinates : ");
-		for (String string : availableCoordinates)
-			System.out.println(string);
+		for (String coord : availableCoordinates)
+			System.out.printf(
+					"x = %d, y = %d%n",
+					Integer.parseInt(coord.split(",")[1].trim()) + 1,
+					Integer.parseInt(coord.split(",")[0].trim()) + 1
+			);
 	}
 }

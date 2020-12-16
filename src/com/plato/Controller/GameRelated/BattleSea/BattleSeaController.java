@@ -250,7 +250,7 @@ public class BattleSeaController {
 			battleseaGPMenu.setTrialBoardExists(true);
 		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() == null)
 			battleseaGPMenu.setTrialBoardExists(true);
-		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() != null){
+		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() != null) {
 			battleseaGPMenu.nextPhase();
 			resetTrialPlayerBoards();
 		}
@@ -275,7 +275,7 @@ public class BattleSeaController {
 	}
 
 	static class TurnTimerTask extends TimerTask {
-		private final int MAX_SECONDS = 30;
+		private final int MAX_SECONDS = (int) Double.POSITIVE_INFINITY; // fixme change to 30
 		private int secondsRemaining = MAX_SECONDS;
 		private String command = "";
 
@@ -300,10 +300,14 @@ public class BattleSeaController {
 		public void resetTimer () {
 			secondsRemaining = MAX_SECONDS;
 			// if bomb wasn't successful go to next turn
-			if (command.equals("bomb"))
-				if (!((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getTurnPlayer())
-						.getBombsThrown().getLast().getWasSuccessful())
+			if (command.equals("bomb")) {
+				if (!((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
+						.getTurnPlayer())
+						.getBombsThrown().getLast().wasSuccessful())
 					GameController.getInstance().getCurrentGameInSession().nextTurn();
+			}
+			else
+				GameController.getInstance().getCurrentGameInSession().nextTurn();
 			command = "";
 		}
 

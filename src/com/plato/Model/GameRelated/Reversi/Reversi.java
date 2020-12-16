@@ -107,8 +107,8 @@ public class Reversi extends Game {
 	/**
 	 * @return true if atleast one disk changes color in any direction (not the check directions method)
 	 */
-	public boolean canPlayerPlaceDiskHere (int x, int y) { // fixme : is it x,y or y,x ? y,x
-		return getAvailableCoordinates().contains(x + "," + y);
+	public boolean canPlayerPlaceDiskHere (int x, int y) {
+		return getAvailableCoordinates().contains(y + "," + x);
 	}
 
 	/**

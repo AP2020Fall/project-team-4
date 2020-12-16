@@ -44,7 +44,7 @@ public class PlayerBattleSea extends Player {
 
 	public LinkedList<Bomb> getBombsThrown (boolean successBombs) {
 		return getBombsThrown().stream()
-				.filter(bomb -> bomb.getWasSuccessful() == successBombs)
+				.filter(bomb -> bomb.wasSuccessful() == successBombs)
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
