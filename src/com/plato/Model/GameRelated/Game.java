@@ -128,13 +128,13 @@ public abstract class Game {
 		// set Conclusion
 		if (gameHasEnded()) {
 			if (getWinner() == null)
-				setConclusion(GameConclusion.DRAW);
+				conclusion = (GameConclusion.DRAW);
 
 			else if (getWinner().equals(getListOfPlayers().get(0).getGamer()))
-				setConclusion(GameConclusion.PLAYER1_WIN);
+				conclusion=(GameConclusion.PLAYER1_WIN);
 
 			else if (getWinner().equals(getListOfPlayers().get(1).getGamer()))
-				setConclusion(GameConclusion.PLAYER2_WIN);
+				conclusion = (GameConclusion.PLAYER2_WIN);
 		}
 		else setConclusion(GameConclusion.IN_SESSION);
 		// set end time
@@ -147,7 +147,7 @@ public abstract class Game {
 
 	public abstract boolean gameEnded ();
 
-	public Gamer getWinner () { // fixme what if we make this abstract and override it in reversi and battlesea and also for reversi use getNumberOfBlack() and getNumberOfWhite() instead of scores
+	public Gamer getWinner () { // fixme use getNumberOfBlack() and getNumberOfWhite() instead of scores
 		if (getListOfPlayers().get(0).getScore() > getListOfPlayers().get(1).getScore()) return getListOfPlayers().get(0).getGamer();
 		else if (getListOfPlayers().get(1).getScore() > getListOfPlayers().get(0).getScore()) return getListOfPlayers().get(1).getGamer();
 		else return null;
