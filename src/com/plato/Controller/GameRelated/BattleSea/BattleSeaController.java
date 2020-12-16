@@ -217,7 +217,7 @@ public class BattleSeaController {
 	}
 
 	public void setTrialPlayerBoard (LinkedList<Ship> trialPlayerBoard) {
-		ArrayList<Player> players = GameController.getInstance().getCurrentGameInSession().getListOfPlayers();
+		LinkedList<Player> players = GameController.getInstance().getCurrentGameInSession().getListOfPlayers();
 
 		if (((PlayerBattleSea) players.get(0)).getShips() == null) trialPlayerBoard1 = trialPlayerBoard;
 		else if (((PlayerBattleSea) players.get(1)).getShips() == null) trialPlayerBoard2 = trialPlayerBoard;

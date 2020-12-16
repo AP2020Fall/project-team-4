@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class PlayerBattleSea extends Player {
 
 	private LinkedList<Ship> ships;
-	private final LinkedList<Bomb> bombsThrown = new LinkedList<>();
+	private LinkedList<Bomb> bombsThrown = new LinkedList<>();
 
 	public PlayerBattleSea (//Game game,fixme
 							Gamer gamer) {
@@ -43,6 +43,9 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public LinkedList<Bomb> getBombsThrown () {
+		if (bombsThrown == null)
+			bombsThrown = new LinkedList<>();
+
 		return bombsThrown;
 	}
 
@@ -59,7 +62,6 @@ public class PlayerBattleSea extends Player {
 
 	public LinkedList<Bomb> getOpponentBombsThrown (boolean successBombs) {
 		return ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getOpponentOf(this)).getBombsThrown(successBombs);
-//		return ((PlayerBattleSea) getGame().getOpponentOf(this)).getBombsThrown(successBombs); fixme
 	}
 
 	public LinkedList<Ship> getShips (boolean destroyed) {
@@ -83,6 +85,8 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public LinkedList<Ship> getShips () {
+		if (ships == null)
+			ships = new LinkedList<>();
 		return ships;
 	}
 }

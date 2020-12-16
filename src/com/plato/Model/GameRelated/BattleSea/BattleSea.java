@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class BattleSea extends Game {
 	private static String battleseaDetails;
+	private final ArrayList<PlayerBattleSea> listOfPlayers = new ArrayList<>();
 
 	private static final ArrayList<String> arrangement = new ArrayList<>(Arrays.asList(
 			"5 2 1", // l s n
@@ -127,5 +128,9 @@ public class BattleSea extends Game {
 	 */
 	public static void setAllGames (LinkedList<BattleSea> allGames) {
 		Game.getAllGames().addAll(allGames);
+	}
+
+	public ArrayList<PlayerBattleSea> getListOfBattleSeaPlayers () {
+		return listOfPlayers;
 	}
 }

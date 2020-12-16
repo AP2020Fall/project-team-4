@@ -21,7 +21,6 @@ public abstract class Game {
 	private final String gameID;
 	protected String details = "";
 
-	private final ArrayList<Player> listOfPlayers = new ArrayList<>();
 	private int turn = 0;
 	private GameConclusion conclusion = GameConclusion.IN_SESSION;
 	private LocalDateTime dateGameEnded;
@@ -33,21 +32,13 @@ public abstract class Game {
 
 		Collections.shuffle(players);
 		if (this instanceof BattleSea) {
-			listOfPlayers.add(new PlayerBattleSea(players.get(0)));
-			listOfPlayers.add(new PlayerBattleSea(players.get(1)));
+			getListOfPlayers().add(new PlayerBattleSea(players.get(0)));
+			getListOfPlayers().add(new PlayerBattleSea(players.get(1)));
 		}
 		else if (this instanceof Reversi) {
-			listOfPlayers.add(new PlayerReversi(players.get(0), "b"));
-			listOfPlayers.add(new PlayerReversi(players.get(1), "w"));
+			getListOfPlayers().add(new PlayerReversi(players.get(0), "b"));
+			getListOfPlayers().add(new PlayerReversi(players.get(1), "w"));
 		}
-//		if (this instanceof BattleSea) {
-//			listOfPlayers.add(new PlayerBattleSea(this, players.get(0)));
-//			listOfPlayers.add(new PlayerBattleSea(this, players.get(1)));
-//		}
-//		else if (this instanceof Reversi) {
-//			listOfPlayers.add(new PlayerReversi(this, players.get(0), "b"));
-//			listOfPlayers.add(new PlayerReversi(this, players.get(1), "w"));
-//		} fixme
 	}
 
 	public static LinkedList<String> getScoreboard (String gameName) {
@@ -126,11 +117,11 @@ public abstract class Game {
 	}
 
 	public Gamer getTurnGamer () {
-		return listOfPlayers.get(turn).getGamer();
+		return getListOfPlayers().get(turn).getGamer();
 	}
 
 	public Player getTurnPlayer () {
-		return listOfPlayers.get(turn);
+		return getListOfPlayers().get(turn);
 	}
 
 	public int getTurnNum () {
@@ -138,13 +129,13 @@ public abstract class Game {
 	}
 
 	public Player getOpponentOf (Player player) {
-		if (player.equals(listOfPlayers.get(0))) return listOfPlayers.get(1);
-		else if (player.equals(listOfPlayers.get(1))) return listOfPlayers.get(0);
+		if (player.equals(getListOfPlayers().get(0))) return getListOfPlayers().get(1);
+		else if (player.equals(getListOfPlayers().get(1))) return getListOfPlayers().get(0);
 		else return null;
 	}
 
 	public Player getPlayer (Gamer gamer) {
-		return listOfPlayers.stream().filter(player -> player.getGamer().getUsername().equals(gamer.getUsername())).findAny().get();
+		return getListOfPlayers().stream().filter(player -> player.getGamer().getUsername().equals(gamer.getUsername())).findAny().get();
 	}
 
 	public void concludeGame () {
@@ -153,10 +144,10 @@ public abstract class Game {
 			if (getWinner() == null)
 				setConclusion(GameConclusion.DRAW);
 
-			else if (getWinner().equals(listOfPlayers.get(0).getGamer()))
+			else if (getWinner().equals(getListOfPlayers().get(0).getGamer()))
 				setConclusion(GameConclusion.PLAYER1_WIN);
 
-			else if (getWinner().equals(listOfPlayers.get(1).getGamer()))
+			else if (getWinner().equals(getListOfPlayers().get(1).getGamer()))
 				setConclusion(GameConclusion.PLAYER2_WIN);
 		}
 		else setConclusion(GameConclusion.IN_SESSION);
@@ -171,8 +162,8 @@ public abstract class Game {
 	public abstract boolean gameEnded ();
 
 	public Gamer getWinner () { // fixme what if we make this abstract and override it in reversi and battlesea and also for reversi use getNumberOfBlack() and getNumberOfWhite() instead of scores
-		if (listOfPlayers.get(0).getScore() > listOfPlayers.get(1).getScore()) return listOfPlayers.get(0).getGamer();
-		else if (listOfPlayers.get(1).getScore() > listOfPlayers.get(0).getScore()) return listOfPlayers.get(1).getGamer();
+		if (getListOfPlayers().get(0).getScore() > getListOfPlayers().get(1).getScore()) return getListOfPlayers().get(0).getGamer();
+		else if (getListOfPlayers().get(1).getScore() > getListOfPlayers().get(0).getScore()) return getListOfPlayers().get(1).getGamer();
 		else return null;
 	}
 
@@ -189,13 +180,16 @@ public abstract class Game {
 	}
 
 	public int[] getScores () {
-		return new int[]{listOfPlayers.get(0).getScore(), listOfPlayers.get(1).getScore()}; // fixme use getnumberofwhite and black instead
+		return new int[]{getListOfPlayers().get(0).getScore(), getListOfPlayers().get(1).getScore()}; // fixme use getnumberofwhite and black instead
 	}
 
 	public abstract int getInGameScore(int playerNum);
 
-	public ArrayList<Player> getListOfPlayers () {
-		return listOfPlayers;
+	public LinkedList<Player> getListOfPlayers () {
+		if (this instanceof Reversi)
+			return new LinkedList<>(((Reversi) this).getListOfReversiPlayers());
+		else
+			return new LinkedList<>(((BattleSea) this).getListOfBattleSeaPlayers());
 	}
 
 	public static LinkedList<Game> getAllGames () {

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class Reversi extends Game {
 	private static String reversiDetails;
+	protected final ArrayList<PlayerReversi> listOfPlayers = new ArrayList<>();
 
 	private String[][] board = new String[8][8];
 	private LinkedList<String> moves = new LinkedList<>();
@@ -339,6 +340,10 @@ public class Reversi extends Game {
 	 */
 	public static void setAllGames (LinkedList<Reversi> allGames) {
 		Game.getAllGames().addAll(allGames);
+	}
+
+	public ArrayList<PlayerReversi> getListOfReversiPlayers () {
+		return listOfPlayers;
 	}
 }
 
