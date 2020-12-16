@@ -125,10 +125,13 @@ public class Reversi extends Game {
 			if (canPlayerPlaceDiskHere(x, y)) {
 				checkDirections(x, y);
 				if (getTurnNum() == 0) {
-					board[y-1][x-1] = "b";
-					addMove(x, y, "black");}
-				else {board[y-1][x-1]="w";
-					addMove(x, y, "white");}
+					board[y - 1][x - 1] = "b";
+					addMove(x, y, "black");
+				}
+				else {
+					board[y - 1][x - 1] = "w";
+					addMove(x, y, "white");
+				}
 			}
 		}
 	}
@@ -250,6 +253,7 @@ public class Reversi extends Game {
 	 */
 	public boolean hasPlayerMoved () {
 		if (moves.size() == 0) return false;
+		else if (!canPlayerPlaceAnyDisks()) return true;
 		else {
 			String color = moves.getLast().substring(0, 1);
 

@@ -2,7 +2,6 @@ package Controller.GameRelated.Reversi;
 
 import Controller.GameRelated.GameController;
 import Model.AccountRelated.Gamer;
-import Model.GameRelated.Reversi.PlayerReversi;
 import Model.GameRelated.Reversi.Reversi;
 import View.GameRelated.GameView;
 import View.GameRelated.Reversi.ReversiView;
@@ -24,7 +23,8 @@ public class ReversiController {
 				return;
 			}
 
-			if (!((Reversi) GameController.getInstance().getCurrentGameInSession()).hasPlayerMoved() && ((Reversi) GameController.getInstance().getCurrentGameInSession()).canPlayerPlaceAnyDisks())
+			if (!((Reversi) GameController.getInstance().getCurrentGameInSession()).hasPlayerMoved() &&
+					((Reversi) GameController.getInstance().getCurrentGameInSession()).canPlayerPlaceAnyDisks())
 				throw new HasntMadeMoveInCurrentTurnException();
 
 		} catch (HasntMadeMoveInCurrentTurnException e) {
@@ -38,6 +38,12 @@ public class ReversiController {
 		String Xstr, Ystr; int x, y;
 		while (true) {
 			try {
+				if (((Reversi) GameController.getInstance().getCurrentGameInSession()).hasPlayerMoved())
+					throw new PlayerHasAlreadyPlacedDiskException();
+
+				if (!((Reversi) GameController.getInstance().getCurrentGameInSession()).canPlayerPlaceAnyDisks())
+					nextTurn();
+
 				Menu.printAskingForInput("X [/c to cancel]: "); Xstr = Menu.getInputLine();
 
 				if (Xstr.trim().equalsIgnoreCase("/c")) return;
@@ -57,7 +63,7 @@ public class ReversiController {
 				if (!((Reversi) GameController.getInstance().getCurrentGameInSession()).canPlayerPlaceDiskHere(x, y))
 					throw new CantPlaceDiskHereException();
 				break;
-			} catch (InvalidCoordinateException | CantPlaceDiskHereException e) {
+			} catch (InvalidCoordinateException | CantPlaceDiskHereException | PlayerHasAlreadyPlacedDiskException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 		}
@@ -66,7 +72,9 @@ public class ReversiController {
 	}
 
 	public void displayAvailableCoords () {
-		ReversiView.getInstance().displayAvailableCoords(((Reversi) GameController.getInstance().getCurrentGameInSession()).getAvailableCoordinates());
+		ReversiView.getInstance().displayAvailableCoords(
+				((Reversi) GameController.getInstance().getCurrentGameInSession())
+						.getAvailableCoordinates());
 	}
 
 	public void displayGrid () {
@@ -84,8 +92,8 @@ public class ReversiController {
 		GameView.getInstance().displayInGameScores(
 				player1Gamer.getUsername(),
 				player2Gamer.getUsername(),
-				((Reversi) GameController.getInstance().getCurrentGameInSession()).getInGameScore(1),
-				((Reversi) GameController.getInstance().getCurrentGameInSession()).getInGameScore(2)
+				GameController.getInstance().getCurrentGameInSession().getInGameScore(1),
+				GameController.getInstance().getCurrentGameInSession().getInGameScore(2)
 		);
 	}
 
@@ -104,6 +112,12 @@ public class ReversiController {
 	private static class CantPlaceDiskHereException extends Exception {
 		public CantPlaceDiskHereException () {
 			super("You cannot place the disk on this coordinates");
+		}
+	}
+
+	private class PlayerHasAlreadyPlacedDiskException extends Exception {
+		public PlayerHasAlreadyPlacedDiskException () {
+			super("You have already made your move this turn");
 		}
 	}
 }

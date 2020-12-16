@@ -72,8 +72,8 @@ public abstract class Game {
 				// if everything is the same for two players dont go to rank
 				if (rank.get() != 1 &&
 						(prevRankPts.get() != pts ||
-						prevRankWins.get() != wins || prevRankLosses.get() != losses || prevRankDraws.get() != draws ||
-						prevRankPlayCount.get() != playCount))
+								prevRankWins.get() != wins || prevRankLosses.get() != losses || prevRankDraws.get() != draws ||
+								prevRankPlayCount.get() != playCount))
 					rank.incrementAndGet();
 
 				scoreBoard.addLast("Rank: %d,\tUsername: %s,\tPoints: %d,\tWins: %d,\tLosses: %d,\tDraws: %d,\tPlayed Count: %d".formatted(
@@ -126,17 +126,14 @@ public abstract class Game {
 
 	public void concludeGame () {
 		// set Conclusion
-		if (gameHasEnded()) {
-			if (getWinner() == null)
-				conclusion = (GameConclusion.DRAW);
+		if (getWinner() == null)
+			conclusion = (GameConclusion.DRAW);
 
-			else if (getWinner().equals(getListOfPlayers().get(0).getGamer()))
-				conclusion=(GameConclusion.PLAYER1_WIN);
+		else if (getWinner().equals(getListOfPlayers().get(0).getGamer()))
+			conclusion = (GameConclusion.PLAYER1_WIN);
 
-			else if (getWinner().equals(getListOfPlayers().get(1).getGamer()))
-				conclusion = (GameConclusion.PLAYER2_WIN);
-		}
-		else setConclusion(GameConclusion.IN_SESSION);
+		else if (getWinner().equals(getListOfPlayers().get(1).getGamer()))
+			conclusion = (GameConclusion.PLAYER2_WIN);
 		// set end time
 		dateGameEnded = LocalDateTime.now();
 		// going back to game menu
@@ -169,7 +166,7 @@ public abstract class Game {
 		return new int[]{getListOfPlayers().get(0).getScore(), getListOfPlayers().get(1).getScore()}; // fixme use getnumberofwhite and black instead
 	}
 
-	public abstract int getInGameScore(int playerNum);
+	public abstract int getInGameScore (int playerNum);
 
 	public LinkedList<Player> getListOfPlayers () {
 		if (this instanceof Reversi)

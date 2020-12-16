@@ -14,7 +14,11 @@ public class GameView {
 		return gameView;
 	}
 
-	public void displayTurn (String currentTurnGamerUsername) {
+	public void displayTurn (String gamename, boolean gameHasEnded, String currentTurnGamerUsername) {
+		if (gamename.equals("Reversi") && gameHasEnded) {
+			System.out.println("Game has ended.");
+			return;
+		}
 		Menu.println("It it currently %s's turn to play".formatted(currentTurnGamerUsername));
 	}
 

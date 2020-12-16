@@ -100,7 +100,11 @@ public class GameController {
 	}
 
 	public void displayTurn () {
-		GameView.getInstance().displayTurn(gameController.getCurrentGameInSession().getTurnGamer().getUsername());
+		GameView.getInstance().displayTurn(
+				"Reversi",
+				GameController.getInstance().getCurrentGameInSession().gameEnded(),
+				gameController.getCurrentGameInSession().getTurnGamer().getUsername()
+		);
 	}
 
 	public void displayGameConclusion () {
