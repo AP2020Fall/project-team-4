@@ -39,35 +39,50 @@ public class Reversi extends Game {
 					if (board[y][x].equals(color)) {
 						//dir UP
 						if (board[y - 1][x].equals(otherColor)) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("-")) availableCoordinates.add(i+1 + "," + (x+1));}}
+							{for (int i = y; i >= 0; i--) {
+								if (board[i][x].equals("-")) availableCoordinates.add(i+1 + "," + (x+1));
+							continue;}}
 						}
 						//dir UP_RIGHT
 						if (board[y - 1][x + 1].equals(otherColor)) {
-							{ for (int i = y , j=x ; i >= 0  && j<8 ; i-- , j++) {if (board[i][j].equals("-")) availableCoordinates.add(i+1 + "," + (j+1));}}
+							{ for (int i = y , j=x ; i >= 0  && j<8 ; i-- , j++) {
+								if (board[i][j].equals("-")) availableCoordinates.add(i+1 + "," + (j+1));
+							continue;}}
 						}
 						//dir RIGHT
 						if (board[y][x + 1].equals(otherColor)) {
-							{for (int i = x; i <8 ; i++) {if (board[y][i].equals("-")) availableCoordinates.add(y+1 + "," + (i+1));}}
+							{for (int i = x; i <8 ; i++) {if (board[y][i].equals("-")) availableCoordinates.add(y+1 + "," + (i+1));
+							continue;}}
 						}
 						//dir DOWN_RIGHT
 						if (board[y + 1][x + 1].equals(otherColor)) {
-							{for (int i = y , j=x; i >= 0 && j<8 ; i-- , j++) {if (board[i][j].equals("-")) availableCoordinates.add(i+1 + "," + (j+1));}}
+							{for (int i = y , j=x; i >= 0 && j<8 ; i-- , j++) {
+								if (board[i][j].equals("-")) availableCoordinates.add(i+1 + "," + (j+1));
+							continue;}}
 						}
 						//dir DOWN
 						if (board[y + 1][x].equals(otherColor)) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("-")) availableCoordinates.add(i+1 + "," + (x+1));}}
+							{for (int i = y; i >= 0; i--) {
+								if (board[i][x].equals("-")) availableCoordinates.add(i+1 + "," + (x+1));
+							continue;}}
 						}
 						//dir DOWN_LEFT
 						if (board[y + 1][x - 1].equals(otherColor)) {
-							{for (int i = y , j=x ; i >= 0 && j>=0 ; i-- , j--) {if (board[i][j].equals("-")) availableCoordinates.add(i+1 + "," +(j+1));}}
+							{for (int i = y , j=x ; i >= 0 && j>=0 ; i-- , j--) {
+								if (board[i][j].equals("-")) availableCoordinates.add(i+1 + "," +(j+1));
+							continue;}}
 						}
 						//dir LEFT
 						if (board[y][x - 1].equals(otherColor)) {
-							{for (int i = x; i >= 0; i--) {if (board[i][x].equals("-")) availableCoordinates.add(y+1 + "," + (i+1));}}
+							{for (int i = x; i >= 0; i--) {
+								if (board[i][x].equals("-")) availableCoordinates.add(y+1 + "," + (i+1));
+							continue;}}
 						}
 						//dir UP_LEFT
 						if (board[y - 1][x - 1].equals(otherColor)) {
-							{for (int i = y , j=x; i >= 0 && j>=0; i-- , j--) {if (board[i][j].equals("-")) availableCoordinates.add(i+1 + "," + (j+1));}}
+							{for (int i = y , j=x; i >= 0 && j>=0; i-- , j--) {
+								if (board[i][j].equals("-")) availableCoordinates.add(i+1 + "," + (j+1));
+							continue;}}
 						}
 					}
 				}
