@@ -31,88 +31,47 @@ public class Reversi extends Game {
 	 */
 	public ArrayList<String> getAvailableCoordinates () {
 		ArrayList<String> availableCoordinates = new ArrayList<>();
-		String color;
-		if (getTurnNum() == 0) {  //color is black
-			for (int y = 0; y < 8; y++) {
-				for (int x = 0; x < 8; x++) {
-					if (board[y][x].equals("b")) {
-						//dir UP
-						if (board[y - 1][x].equals("w")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir UP_RIGHT
-						if (board[y - 1][x + 1].equals("w")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir RIGHT
-						if (board[y][x + 1].equals("w")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir DOWN_RIGHT
-						if (board[y + 1][x + 1].equals("w")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir DOWN
-						if (board[y + 1][x].equals("w")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir DOWN_LEFT
-						if (board[y + 1][x - 1].equals("w")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir LEFT
-						if (board[y][x - 1].equals("w")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir UP_LEFT
-						if (board[y - 1][x - 1].equals("w")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("b")) availableCoordinates.add(i + "," + x);}}
-						}
-					}
-				}
-			}
-		}
-		else if (getTurnNum() == 1) { //color is white
-			for (int y = 0; y < 8; y++) {
-				for (int x = 0; x < 8; x++) {
-					if (board[y][x].equals("w")) {
-						//dir UP
-						if (board[y - 1][x].equals("b")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir UP_RIGHT
-						if (board[y - 1][x + 1].equals("b")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir RIGHT
-						if (board[y][x + 1].equals("b")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir DOWN_RIGHT
-						if (board[y + 1][x + 1].equals("b")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir DOWN
-						if (board[y + 1][x].equals("b")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir DOWN_LEFT
-						if (board[y + 1][x - 1].equals("b")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir LEFT
-						if (board[y][x - 1].equals("b")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
-						}
-						//dir UP_LEFT
-						if (board[y - 1][x - 1].equals("b")) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals("w")) availableCoordinates.add(i + "," + x);}}
-						}
-					}
-				}
-			}
+		String color = ((PlayerReversi)getTurnPlayer()).getColor();
+		String otherColor = (color.equals("b")) ? "w" : "b" ;
 
-		}
+			for (int y = 0; y < 8; y++) {
+				for (int x = 0; x < 8; x++) {
+					if (board[y][x].equals(color)) {
+						//dir UP
+						if (board[y - 1][x].equals(otherColor)) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
+						}
+						//dir UP_RIGHT
+						if (board[y - 1][x + 1].equals(otherColor)) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
+						}
+						//dir RIGHT
+						if (board[y][x + 1].equals(otherColor)) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
+						}
+						//dir DOWN_RIGHT
+						if (board[y + 1][x + 1].equals(otherColor)) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
+						}
+						//dir DOWN
+						if (board[y + 1][x].equals(otherColor)) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
+						}
+						//dir DOWN_LEFT
+						if (board[y + 1][x - 1].equals(otherColor)) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
+						}
+						//dir LEFT
+						if (board[y][x - 1].equals(otherColor)) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
+						}
+						//dir UP_LEFT
+						if (board[y - 1][x - 1].equals(otherColor)) {
+							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
+						}
+					}
+				}
+			}
 		return availableCoordinates;
 	}
 
@@ -148,10 +107,8 @@ public class Reversi extends Game {
 	/**
 	 * @return true if atleast one disk changes color in any direction (not the check directions method)
 	 */
-	public boolean canPlayerPlaceDiskHere (int x, int y) { // fixme only checking if it is an available coordinate is good. the detailed check should be done in getAvailableCoordinates
-		if (board[y][x].equals("-")) return true;
-		else if (canPlayerPlaceAnyDisks()) return true;
-		else return isBoardFull();
+	public boolean canPlayerPlaceDiskHere (int x, int y) { // fixme : is it x,y or y,x ?
+		return getAvailableCoordinates().contains(x + "," + y);
 	}
 
 	/**
