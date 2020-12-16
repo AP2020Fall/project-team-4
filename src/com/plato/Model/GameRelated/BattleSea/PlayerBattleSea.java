@@ -49,11 +49,15 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public LinkedList<Bomb> getOpponentBombsThrown () {
-		return ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getOpponentOf(this)).getBombsThrown();
+		return ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
+				.getOpponentOf(this))
+				.getBombsThrown();
 	}
 
 	public LinkedList<Bomb> getOpponentBombsThrown (boolean successBombs) {
-		return ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getOpponentOf(this)).getBombsThrown(successBombs);
+		return ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
+				.getOpponentOf(this))
+				.getBombsThrown(successBombs);
 	}
 
 	public LinkedList<Ship> getShips (boolean destroyed) {
@@ -63,18 +67,19 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public LinkedList<Ship> getOpponentShips () {
-		return new LinkedList<>(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getOpponentOf(this)).ships);
+		return new LinkedList<>(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
+				.getOpponentOf(this)).ships);
 	}
 
 	public LinkedList<Ship> getOpponentShips (boolean destroyed) {
-		return ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getOpponentOf(this)).getShips().stream()
+		return ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
+				.getOpponentOf(this))
+				.getShips().stream()
 				.filter(ship -> ship.isDestroyed(this) == destroyed)
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public LinkedList<Ship> getShips () {
-		if (ships == null)
-			ships = new LinkedList<>();
 		return ships;
 	}
 }

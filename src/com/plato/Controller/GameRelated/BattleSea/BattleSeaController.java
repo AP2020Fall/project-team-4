@@ -10,22 +10,19 @@ import View.Menus.Color;
 import View.Menus.Menu;
 import View.Menus._12_1GameplayBattleSeaMenu;
 
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BattleSeaController {
-	private static LinkedList<Ship> trialPlayerBoard1;
-	private static LinkedList<Ship> trialPlayerBoard2;
-
-	private static boolean inTheMiddleOfMenu = false;
+	private LinkedList<Ship> trialPlayerBoard1;
+	private LinkedList<Ship> trialPlayerBoard2;
 
 	private static BattleSeaController battleSeaController;
 
 	private TurnTimerTask turnTimerTask = new TurnTimerTask();
-	private Timer turnTimer = new Timer();
-
-	public static boolean isInTheMiddleOfMenu () {
-		return inTheMiddleOfMenu;
-	}
+	private Timer turnTimer;
 
 	public static BattleSeaController getInstance () {
 		if (battleSeaController == null)
@@ -149,16 +146,12 @@ public class BattleSeaController {
 					String symbol = " ";
 					int finalX = x, finalY = y;
 
-//					boolean IntactShipHere = Ship.getAllCoords(playerToShowBoardOf.getShips(false)).stream()
-//							.anyMatch(),
-
 					// if there is a (partly) healthy ship here -> only for currentplayer's board
 					if (boardIsForCurrentPlayer) {
 						if (Ship.getAllCoords(playerToShowBoardOf.getShips(false)).stream()
 								.anyMatch(coord -> finalX == coord[0] && finalY == coord[1]))
 							symbol = Color.BLUE.getVal() + "#";
 					}
-//					else {
 					// if there was a destroyed ship here
 					if (Ship.getAllCoords(playerToShowBoardOf.getShips(true)).stream()
 							.anyMatch(coord -> finalX == coord[0] && finalY == coord[1])) {
@@ -219,7 +212,8 @@ public class BattleSeaController {
 	public void setTrialPlayerBoard (LinkedList<Ship> trialPlayerBoard) {
 		LinkedList<Player> players = GameController.getInstance().getCurrentGameInSession().getListOfPlayers();
 
-		if (((PlayerBattleSea) players.get(0)).getShips() == null) trialPlayerBoard1 = trialPlayerBoard;
+		if (((PlayerBattleSea) players.get(0)).getShips() == null)
+			trialPlayerBoard1 = trialPlayerBoard;
 		else if (((PlayerBattleSea) players.get(1)).getShips() == null) trialPlayerBoard2 = trialPlayerBoard;
 	}
 
@@ -250,20 +244,34 @@ public class BattleSeaController {
 
 	public void updateGamePlayMenu () {
 		_12_1GameplayBattleSeaMenu battleseaGPMenu = ((_12_1GameplayBattleSeaMenu) Menu.getMenuIn());
+		BattleSea currentGame = ((BattleSea) GameController.getInstance().getCurrentGameInSession());
 
-		battleseaGPMenu.setTrialBoardExists(trialPlayerBoard1 != null || trialPlayerBoard2 != null);
+		if (trialPlayerBoard1 != null && currentGame.getListOfBattleSeaPlayers().get(0).getShips() == null)
+			battleseaGPMenu.setTrialBoardExists(true);
+		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() == null)
+			battleseaGPMenu.setTrialBoardExists(true);
+		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() != null){
+			battleseaGPMenu.nextPhase();
+			resetTrialPlayerBoards();
+		}
+		else
+			battleseaGPMenu.setTrialBoardExists(false);
+
+//		battleseaGPMenu.setTrialBoardExists(trialPlayerBoard1 != null ^ trialPlayerBoard2 != null);
+	}
+
+	public Timer getTurnTimer () {
+		return turnTimer;
 	}
 
 	public void initTurnTimerStuff () {
+		turnTimer = new Timer();
 		turnTimer.scheduleAtFixedRate(turnTimerTask, 1 * 1000, 1 * 1000);
+		turnTimerTask.resetTimer();
 	}
 
 	public TurnTimerTask getTurnTimerTask () {
 		return turnTimerTask;
-	}
-
-	public static void setInTheMiddleOfMenu (boolean inTheMiddleOfMenu) {
-		BattleSeaController.inTheMiddleOfMenu = inTheMiddleOfMenu;
 	}
 
 	static class TurnTimerTask extends TimerTask {
@@ -297,7 +305,6 @@ public class BattleSeaController {
 						.getBombsThrown().getLast().getWasSuccessful())
 					GameController.getInstance().getCurrentGameInSession().nextTurn();
 			command = "";
-			BattleSeaController.inTheMiddleOfMenu = false;
 		}
 
 		public int getSecondsRemaining () {
