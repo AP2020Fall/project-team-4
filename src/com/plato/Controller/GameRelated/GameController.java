@@ -1,6 +1,7 @@
 package Controller.GameRelated;
 
 import Controller.AccountRelated.AccountController;
+import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Admin;
@@ -14,6 +15,7 @@ import View.Menus._11GameMenu;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 import static Model.GameRelated.Game.getScoreboard;
 
@@ -28,7 +30,7 @@ public class GameController {
 		return gameController;
 	}
 
-	// based on which menu _11GameMenu.getGameName() shows go to _12_1GameplayBattleSeaMenu or ReversiMenu
+	// based on which menu _11GameMenu.getGameName() shows go to GameplayBattleSeaMenu or GameplayReversiMenu
 	public void runGame () {
 		Gamer player2;
 		while (true)
@@ -158,6 +160,71 @@ public class GameController {
 		else
 			Reversi.setDetailsForReversi(details);
 		Menu.printSuccessfulOperation("Details of " + gameName + " changed successfully.");
+	}
+
+	public void displayPrevGamesAndChooseToContinue () {
+		LinkedList<Game> unfinishedGames = new LinkedList<>();
+
+		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
+			case "reversi" -> unfinishedGames = new LinkedList<>(Reversi.getAllReversiGames());
+			case "battlesea" -> unfinishedGames = new LinkedList<>(BattleSea.getAllBattleSeaGames());
+		}
+
+		unfinishedGames = unfinishedGames.stream()
+				.filter(game ->
+						!game.gameHasEnded() &&
+								game.getListOfPlayers().stream()
+										.anyMatch(player -> player.getUsername()
+												.equals(AccountController.getInstance().getCurrentAccLoggedIn().getUsername()))
+				)
+				.collect(Collectors.toCollection(LinkedList::new));
+
+		LinkedList<Game> finalUnfinishedGames = unfinishedGames;
+		GameView.getInstance().displayPrevGamesAndChooseToContinue(new LinkedList<>() {{
+
+			for (Game unfinishedGame : finalUnfinishedGames) {
+
+				String yourUsername = AccountController.getInstance().getCurrentAccLoggedIn().getUsername(),
+						opponentUsername = unfinishedGame.getOpponentOf(unfinishedGame.getPlayer((Gamer) Account.getAccount(yourUsername))).getUsername();
+
+				add("%s %s %d %d %s".formatted(
+						opponentUsername,
+						unfinishedGame.getListOfPlayers().get(0).getUsername(), // player1
+						unfinishedGame.getInGameScore(1),                // score1
+						unfinishedGame.getInGameScore(2),                // score2
+						unfinishedGame.getListOfPlayers().get(1).getUsername()    //player2
+				));
+			}
+		}});
+
+		int gameChoice;
+		while (true)
+			try {
+				Menu.printAskingForInput("Which game to continue:[/c to cancel] "); String choice = Menu.getInputLine();
+
+				if (choice.trim().equalsIgnoreCase("/c")) return;
+
+				if (!choice.matches("[0-9]+"))
+					throw new MainController.InvalidInputException();
+
+				gameChoice = Integer.parseInt(choice);
+
+				if (gameChoice < 1 || gameChoice > unfinishedGames.size())
+					throw new MainController.InvalidInputException();
+
+				break;
+			} catch (MainController.InvalidInputException e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
+
+		currentGameInSession = unfinishedGames.get(gameChoice - 1);
+		if (currentGameInSession instanceof BattleSea) {
+			Menu.getMenu("12B").enter();
+
+			BattleSeaController.getInstance().updateGamePlayMenu();
+		}
+		else
+			Menu.getMenu("12R").enter();
 	}
 
 	private static class CantPlayWithYourselfException extends Exception {

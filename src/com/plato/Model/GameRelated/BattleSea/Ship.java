@@ -1,7 +1,7 @@
 package Model.GameRelated.BattleSea;
 
 import Controller.GameRelated.BattleSea.BattleSeaController;
-import Model.GameRelated.Game;
+import Controller.GameRelated.GameController;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class Ship {
-	private Game game;
+//	private Game game;fixme
 	private int leftMostX, topMostY;
 	private boolean isVertical;
 
@@ -27,9 +27,14 @@ public class Ship {
 	public boolean isDestroyed (PlayerBattleSea shipOwner) {
 		return getAllCoords(getPlayer().getShips()).size()
 				==
-				((PlayerBattleSea) game.getOpponentOf(shipOwner)).getBombsThrown().stream()
+				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getOpponentOf(shipOwner)).getBombsThrown().stream()
 						.filter(Bomb::getWasSuccessful)
 						.count();
+//		return getAllCoords(getPlayer().getShips()).size()
+//				==
+//				((PlayerBattleSea) game.getOpponentOf(shipOwner)).getBombsThrown().stream()
+//						.filter(Bomb::getWasSuccessful)
+//						.count(); fixme
 	}
 
 	public static LinkedList<int[]> getAllCoords (LinkedList<Ship> ships) {
@@ -108,10 +113,14 @@ public class Ship {
 	}
 
 	public PlayerBattleSea getPlayer () {
-		return game.getListOfPlayers().stream()
+		return GameController.getInstance().getCurrentGameInSession().getListOfPlayers().stream()
 				.map(player -> ((PlayerBattleSea) player))
 				.filter(player -> player.getShips().contains(this))
 				.findAny().get();
+//		return game.getListOfPlayers().stream()
+//				.map(player -> ((PlayerBattleSea) player))
+//				.filter(player -> player.getShips().contains(this))
+//				.findAny().get(); fixme
 	}
 
 	public int getLeftMostX () {
@@ -134,9 +143,9 @@ public class Ship {
 		return isVertical;
 	}
 
-	public void setGame (Game game) {
-		this.game = game;
-	}
+//	public void setGame (Game game) {
+//		this.game = game;
+//	} fixme
 
 	@Override
 	public boolean equals (Object o) {

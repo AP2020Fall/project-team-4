@@ -118,8 +118,7 @@ public class MainController {
 			case "View Favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
 			case "View Platobot’s messages" -> MessageController.getInstance().displayAdminMessages();
 			case "View last played" -> GameLogController.getInstance().displayLastGamePlayed();
-			case "View admin’s suggestions" ->
-					AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
+			case "View admin’s suggestions" -> AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
 			case "View Events" -> {
 				EventController.getInstance().displayInSessionEvents();
 				enterAppropriateMenu();
@@ -175,6 +174,7 @@ public class MainController {
 			case "Show wins count" -> GameLogController.getInstance().displayWinCountOfGameByLoggedInPlayer();
 			case "Show played count" -> GameLogController.getInstance().displayPlayedCountOfGameByLoggedInPlayer();
 			case "Add to favorites" -> GameController.getInstance().addGameToFavesOfLoggedInGamer();
+			case "Continue previous games" -> GameController.getInstance().displayPrevGamesAndChooseToContinue();
 			case "Run Game" -> GameController.getInstance().runGame();
 
 			// gameplay battlesea menu
@@ -244,16 +244,15 @@ public class MainController {
 	public void serialize () throws IOException {
 
 		// SavedLoginInfo.json
+		try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/SavedLoginInfo.json")) {
+			printWriter.print("");
+		}
 		if (AccountController.getInstance().getCurrentAccLoggedIn() != null) // if is logged-in
 			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/SavedLoginInfo.json"))) {
 				if (AccountController.getInstance().saveLoginInfo()) { // skip if said no to remember me
 					writer.write((AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "a" : "g") + "\n");
 					writer.write(gson.toJson(AccountController.getInstance().getCurrentAccLoggedIn()));
 				}
-			}
-		else // if is logged-out
-			try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/SavedLoginInfo.json")) {
-				printWriter.print("");
 			}
 
 
@@ -317,22 +316,31 @@ public class MainController {
 
 				writer.write(gson.toJson(Message.getAllMessages()));
 			}
-//
-//		// BattleSea.json
-//		if (BattleSea.getAllBattleSeaGames().size() > 0)
-//			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea.json"))) {
-//
-//				writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
-//			}
-//
-//		// Reversi.json
-//		if (Reversi.getAllReversiGames().size() > 0)
-//			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi.json"))) {
-//
-//				writer.write(gson.toJson(Reversi.getAllReversiGames()));
-//			} fixme
+
+		// BattleSea.json
+		try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/GameRelated/BattleSea.json")) {
+			printWriter.print("");
+		}
+		if (BattleSea.getAllBattleSeaGames().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/BattleSea.json"))) {
+
+				writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
+			}
+
+		// Reversi.json
+		try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/GameRelated/Reversi.json")) {
+			printWriter.print("");
+		}
+		if (Reversi.getAllReversiGames().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/GameRelated/Reversi.json"))) {
+
+				writer.write(gson.toJson(Reversi.getAllReversiGames()));
+			}
 
 		// IDGenerator.json
+		try (PrintWriter printWriter = new PrintWriter("src/Resources/JSONs/IDGenerator.json")) {
+			printWriter.print("");
+		}
 		if (IDGenerator.getAllIDsGenerated().size() > 0)
 			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/JSONs/IDGenerator.json"))) {
 
@@ -445,33 +453,33 @@ public class MainController {
 					}.getType()));
 			}
 		}
-//		// BattleSea list
-//		{
-//			String json = "";
-//			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSea.json"))) {
-//
-//				while (reader.ready())
-//					json += reader.readLine();
-//
-//				if (json.length() > 2)
-//					Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<BattleSea>>() {
-//					}.getType()));
-//			}
-//		}
-//		// Reversi list
-//		{
-//			String json = "";
-//			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi.json"))) {
-//
-//				while (reader.ready())
-//					json += reader.readLine();
-//
-//
-//				if (json.length() > 2)
-//					Game.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<Reversi>>() {
-//					}.getType()));
-//			}
-//		}fixme
+		// BattleSea list
+		{
+			String json = "";
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSea.json"))) {
+
+				while (reader.ready())
+					json += reader.readLine();
+
+				if (json.length() > 2)
+					BattleSea.setAllGames( gson.fromJson(json, new TypeToken<LinkedList<BattleSea>>() {
+					}.getType()));
+			}
+		}
+		// Reversi list
+		{
+			String json = "";
+			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi.json"))) {
+
+				while (reader.ready())
+					json += reader.readLine();
+
+
+				if (json.length() > 2)
+					Reversi.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<Reversi>>() {
+					}.getType()));
+			}
+		}
 		// IDGenerator list
 		{
 			String json = "";

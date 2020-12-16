@@ -33,15 +33,21 @@ public abstract class Game {
 
 		Collections.shuffle(players);
 		if (this instanceof BattleSea) {
-			listOfPlayers.add(new PlayerBattleSea(this, players.get(0)));
-			listOfPlayers.add(new PlayerBattleSea(this, players.get(1)));
+			listOfPlayers.add(new PlayerBattleSea(players.get(0)));
+			listOfPlayers.add(new PlayerBattleSea(players.get(1)));
 		}
 		else if (this instanceof Reversi) {
-			listOfPlayers.add(new PlayerReversi(this, players.get(0), "b"));
-			listOfPlayers.add(new PlayerReversi(this, players.get(1), "w"));
+			listOfPlayers.add(new PlayerReversi(players.get(0), "b"));
+			listOfPlayers.add(new PlayerReversi(players.get(1), "w"));
 		}
-
-		allGames.add(this);
+//		if (this instanceof BattleSea) {
+//			listOfPlayers.add(new PlayerBattleSea(this, players.get(0)));
+//			listOfPlayers.add(new PlayerBattleSea(this, players.get(1)));
+//		}
+//		else if (this instanceof Reversi) {
+//			listOfPlayers.add(new PlayerReversi(this, players.get(0), "b"));
+//			listOfPlayers.add(new PlayerReversi(this, players.get(1), "w"));
+//		} fixme
 	}
 
 	public static LinkedList<String> getScoreboard (String gameName) {
@@ -106,7 +112,7 @@ public abstract class Game {
 		allGames.addLast(game);
 	}
 
-	private boolean gameHasEnded () {
+	public boolean gameHasEnded () {
 		return dateGameEnded != null;
 	}
 
@@ -138,13 +144,13 @@ public abstract class Game {
 	}
 
 	public Player getPlayer (Gamer gamer) {
-		return listOfPlayers.stream().filter(player -> player.getGamer().equals(gamer)).findAny().get();
+		return listOfPlayers.stream().filter(player -> player.getGamer().getUsername().equals(gamer.getUsername())).findAny().get();
 	}
 
 	public void concludeGame () {
 		// set Conclusion
 		if (gameHasEnded()) {
-			if (getWinner().equals(null))
+			if (getWinner() == null)
 				setConclusion(GameConclusion.DRAW);
 
 			else if (getWinner().equals(listOfPlayers.get(0).getGamer()))
@@ -186,16 +192,14 @@ public abstract class Game {
 		return new int[]{listOfPlayers.get(0).getScore(), listOfPlayers.get(1).getScore()}; // fixme use getnumberofwhite and black instead
 	}
 
+	public abstract int getInGameScore(int playerNum);
+
 	public ArrayList<Player> getListOfPlayers () {
 		return listOfPlayers;
 	}
 
 	public static LinkedList<Game> getAllGames () {
 		return allGames;
-	}
-
-	public static void setAllGames (LinkedList<Game> allGames) {
-		Game.allGames.addAll(allGames);
 	}
 
 	public String getDetails () {

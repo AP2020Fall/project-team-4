@@ -3,12 +3,14 @@ package Model.GameRelated;
 import Model.AccountRelated.Gamer;
 
 public abstract class Player {
-	private final Game game;
+//public abstract class Player {fixme
+//	private final Game game; fixme
 	private final Gamer gamer;
 	private int score = 0;
 
-	protected Player (Game game, Gamer gamer) {
-		this.game = game;
+	protected Player (//Game game, fixme
+					  Gamer gamer) {
+//		this.game = game; fixme
 		this.gamer = gamer;
 	}
 
@@ -28,7 +30,7 @@ public abstract class Player {
 		return score;
 	}
 
-	public Game getGame () {
-		return game;
-	}
+//	public Game getGame () {
+//		return game;
+//	} fixme
 }

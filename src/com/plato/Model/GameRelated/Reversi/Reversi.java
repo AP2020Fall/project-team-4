@@ -275,7 +275,6 @@ public class Reversi extends Game {
 		else return isBoardFull();
 	}
 
-
 	public int getNumberOfBlack () {
 		int count = 0;
 		for (int i = 0; i < 8; i++) {
@@ -333,6 +332,13 @@ public class Reversi extends Game {
 				.filter(game -> game instanceof Reversi)
 				.map(game -> ((Reversi) game))
 				.collect(Collectors.toCollection(LinkedList::new));
+	}
+
+	/**
+	 * only used for gson, to add all the extracted reversi games
+	 */
+	public static void setAllGames (LinkedList<Reversi> allGames) {
+		Game.getAllGames().addAll(allGames);
 	}
 }
 

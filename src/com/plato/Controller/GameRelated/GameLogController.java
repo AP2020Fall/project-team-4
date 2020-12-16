@@ -82,8 +82,8 @@ public class GameLogController {
 				gamesHistoryAsStrings.add("%s, %s %d-%d %s".formatted(
 						game.getDateGameEnded().format(DateTimeFormatter.ofPattern("yyyy-MMM-dd")),
 						game.getListOfPlayers().get(0).getUsername(),
-						game.getScores()[0],
-						game.getScores()[1],
+						game.getInGameScore(1),
+						game.getInGameScore(2),
 						game.getListOfPlayers().get(1).getUsername()
 				))
 		);

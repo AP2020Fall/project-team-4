@@ -94,10 +94,10 @@ public abstract class Menu {
 				getMenu("10").addChildMenu(2, getMenu("11R"));
 				getMenu("10").addChildMenu(4, getMenu("14G"));
 				// for menu 11
-				getMenu("11B").addChildMenu(8, getMenu("12B"));
-				getMenu("11R").addChildMenu(8, getMenu("12R"));
-				getMenu("11B").addChildMenu(10, getMenu("14G"));
-				getMenu("11R").addChildMenu(10, getMenu("14G"));
+				getMenu("11B").addChildMenu(9, getMenu("12B"));
+				getMenu("11R").addChildMenu(9, getMenu("12R"));
+				getMenu("11B").addChildMenu(11, getMenu("14G"));
+				getMenu("11R").addChildMenu(11, getMenu("14G"));
 				// for menu 14
 				getMenu("14G").addChildMenu(1, getMenu("13"));
 				getMenu("14G").addChildMenu(6, getMenu("2"));

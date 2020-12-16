@@ -49,6 +49,13 @@ public class BattleSea extends Game {
 		return null;
 	}
 
+	@Override
+	public int getInGameScore (int playerNum) {
+		return ((PlayerBattleSea) getListOfPlayers().get(playerNum - 1))
+				.getBombsThrown(true)
+				.size();
+	}
+
 	public static LinkedList<LinkedList<Ship>> get5RandBoards () {
 		LinkedList<LinkedList<Ship>> boards = new LinkedList<>();
 
@@ -113,5 +120,12 @@ public class BattleSea extends Game {
 	public boolean canStartBombing () {
 		return ((PlayerBattleSea) getListOfPlayers().get(0)).getShips() != null &&
 				((PlayerBattleSea) getListOfPlayers().get(1)).getShips() != null;
+	}
+
+	/**
+	 * only used for gson, to add all the extracted battlesea games
+	 */
+	public static void setAllGames (LinkedList<BattleSea> allGames) {
+		Game.getAllGames().addAll(allGames);
 	}
 }

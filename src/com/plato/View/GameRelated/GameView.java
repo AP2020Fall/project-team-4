@@ -3,6 +3,7 @@ package View.GameRelated;
 import View.Menus.Menu;
 
 import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameView {
 	private static GameView gameView;
@@ -48,5 +49,18 @@ public class GameView {
 
 	public void displayInGameScores (String player1Username, String player2Username, int player1IngameScore, int player2IngameScore) {
 		System.out.printf("In-game scores are -> %s %d - %d %s%n", player1Username, player1IngameScore, player2IngameScore, player2Username);
+	}
+
+	public void displayPrevGamesAndChooseToContinue (LinkedList<String> unfinishedGames) { // all strings in form {opponent'sUN player1 score1 score2 player2}
+		AtomicInteger counter = new AtomicInteger(1);
+		unfinishedGames.forEach(unfinishedGame ->
+				Menu.println("%d. Your Opponent= %s\t\t%s %s - %s %s".formatted(
+						counter.getAndIncrement(),
+						unfinishedGame.split(" ")[0],
+						unfinishedGame.split(" ")[1], // player1
+						unfinishedGame.split(" ")[2], // score1
+						unfinishedGame.split(" ")[3], // player2
+						unfinishedGame.split(" ")[4]  // score2
+				)));
 	}
 }
