@@ -66,9 +66,10 @@ public class BombController {
 	}
 
 	public void displayAllOpponentBombs () {
-		BombView.getInstance().displayBombs(getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
-				.getTurnPlayer())
-				.getOpponentBombsThrown()));
+		BombView.getInstance().displayBombs(
+				getBombXYs(((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
+						.getTurnPlayer())
+						.getOpponentBombsThrown()));
 	}
 
 	public void displayAllSuccessCurrentPlayerBombs () {

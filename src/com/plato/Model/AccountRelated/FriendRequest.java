@@ -22,7 +22,6 @@ public class FriendRequest {
 		allfriendRequests.removeIf(friendRequest ->
 				friendRequest.fromUsername.equals(fromUsername) &&
 				friendRequest.toUsername.equals(toUsername));
-//		allfriendRequests.remove(getFriendReq(fromUsername, toUsername));
 	}
 
 	private void conclude (boolean accepted) {
@@ -30,7 +29,6 @@ public class FriendRequest {
 			((Gamer) Account.getAccount(fromUsername)).addFrnd(toUsername);
 			((Gamer) Account.getAccount(toUsername)).addFrnd(fromUsername);
 		}
-//		allfriendRequests.remove(this); fixme
 	}
 
 	public static FriendRequest getFriendReq (String fromUsername, String toUsername) {

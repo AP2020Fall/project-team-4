@@ -1,5 +1,7 @@
 package View.GameRelated.Reversi;
 
+import View.Menus.Menu;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -35,13 +37,21 @@ public class ReversiView {
 	 * displays all game history
 	 */
 	public void displayMoveHistory (LinkedList<String> moves) {
+		if (moves.size() == 0) {
+			Menu.println("No moves made yet.");
+		return;
+		}
 		for (String move : moves)
 			System.out.println(move);
 	}
 
 	public void displayAvailableCoords (ArrayList<String> availableCoordinates) {
+		if (availableCoordinates.size()==0) {
+			Menu.println("You cannot make any moves");
+			return;
+		}
 		System.out.println("Available Coordinates : ");
-		for(String string : availableCoordinates)
+		for (String string : availableCoordinates)
 			System.out.println(string);
 	}
 }
