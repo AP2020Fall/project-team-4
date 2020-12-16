@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class Ship {
-//	private Game game;fixme
 	private int leftMostX, topMostY;
 	private boolean isVertical;
 
@@ -30,11 +29,6 @@ public class Ship {
 				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getOpponentOf(shipOwner)).getBombsThrown().stream()
 						.filter(Bomb::getWasSuccessful)
 						.count();
-//		return getAllCoords(getPlayer().getShips()).size()
-//				==
-//				((PlayerBattleSea) game.getOpponentOf(shipOwner)).getBombsThrown().stream()
-//						.filter(Bomb::getWasSuccessful)
-//						.count(); fixme
 	}
 
 	public static LinkedList<int[]> getAllCoords (LinkedList<Ship> ships) {
@@ -117,10 +111,6 @@ public class Ship {
 				.map(player -> ((PlayerBattleSea) player))
 				.filter(player -> player.getShips().contains(this))
 				.findAny().get();
-//		return game.getListOfPlayers().stream()
-//				.map(player -> ((PlayerBattleSea) player))
-//				.filter(player -> player.getShips().contains(this))
-//				.findAny().get(); fixme
 	}
 
 	public int getLeftMostX () {
@@ -142,10 +132,6 @@ public class Ship {
 	public boolean isVertical () {
 		return isVertical;
 	}
-
-//	public void setGame (Game game) {
-//		this.game = game;
-//	} fixme
 
 	@Override
 	public boolean equals (Object o) {

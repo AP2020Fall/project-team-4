@@ -7,10 +7,8 @@ public class PlayerReversi extends Player {
 	private final String color;
 
 
-	public PlayerReversi (//Game game,fixme
-						  Gamer gamer, String color) {
-		super(//game,fixme
-				gamer);
+	public PlayerReversi (Gamer gamer, String color) {
+		super(gamer);
 		this.color = color;
 	}
 
