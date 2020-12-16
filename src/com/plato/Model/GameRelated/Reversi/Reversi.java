@@ -4,19 +4,24 @@ import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class Reversi extends Game {
 	private static String reversiDetails;
-	protected final ArrayList<PlayerReversi> listOfPlayers = new ArrayList<>();
+	protected ArrayList<PlayerReversi> listOfPlayers = new ArrayList<>();
 
 	private String[][] board = new String[8][8];
 	private LinkedList<String> moves = new LinkedList<>();
 
 	public Reversi (ArrayList<Gamer> gamers) {
-		super(gamers);
+		super();
 		details = reversiDetails;
+
+		Collections.shuffle(gamers);
+		listOfPlayers.add(new PlayerReversi(gamers.get(0), "b"));
+		listOfPlayers.add(new PlayerReversi(gamers.get(1), "w"));
 	}
 
 	/**
@@ -343,6 +348,8 @@ public class Reversi extends Game {
 	}
 
 	public ArrayList<PlayerReversi> getListOfReversiPlayers () {
+		if (listOfPlayers == null)
+			listOfPlayers = new ArrayList<>();
 		return listOfPlayers;
 	}
 }

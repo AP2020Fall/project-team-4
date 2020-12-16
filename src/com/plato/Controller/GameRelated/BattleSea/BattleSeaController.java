@@ -249,13 +249,9 @@ public class BattleSeaController {
 	}
 
 	public void updateGamePlayMenu () {
-		BattleSea currentGameInSession = (BattleSea) GameController.getInstance().getCurrentGameInSession();
 		_12_1GameplayBattleSeaMenu battleseaGPMenu = ((_12_1GameplayBattleSeaMenu) Menu.getMenuIn());
 
 		battleseaGPMenu.setTrialBoardExists(trialPlayerBoard1 != null || trialPlayerBoard2 != null);
-
-		if (currentGameInSession.canStartBombing())
-			battleseaGPMenu.nextPhase();
 	}
 
 	public void initTurnTimerStuff () {

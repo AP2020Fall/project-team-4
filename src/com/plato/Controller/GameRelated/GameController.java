@@ -63,7 +63,7 @@ public class GameController {
 			add(finalPlayer2);
 		}};
 
-		Game game;
+		Game game = null;
 		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
 			case "battlesea" -> {
 				game = new BattleSea(players);
@@ -72,11 +72,10 @@ public class GameController {
 				game = new Reversi(players);
 				((Reversi) game).emptyBoard();
 			}
-			default -> throw new IllegalStateException("Unexpected value: " + ((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase());
 		}
 
 		Game.startGame(game);
-		getInstance().setCurrentGameInSession(game);
+		setCurrentGameInSession(game);
 
 		MainController.enterAppropriateMenu();
 	}
@@ -196,6 +195,8 @@ public class GameController {
 				));
 			}
 		}});
+
+		if (unfinishedGames.size() == 0) return;
 
 		int gameChoice;
 		while (true)

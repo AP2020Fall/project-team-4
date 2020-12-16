@@ -1,58 +1,21 @@
 [
   {
-    "listOfPlayers": [
-      {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 50.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [
-            "BattleSea"
-          ],
-          "firstName": "1",
-          "lastName": "1",
-          "username": "dorrin1",
-          "password": "11",
-          "userID": "359220",
-          "email": "1@gmail.com",
-          "phoneNum": "00011122233"
-        },
-        "score": 0
-      },
-      {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 25.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [],
-          "firstName": "2",
-          "lastName": "2",
-          "username": "dorrin2",
-          "password": "22",
-          "userID": "708921",
-          "email": "2@gmail.com",
-          "phoneNum": "0001112233"
-        },
-        "score": 0
-      }
-    ],
-    "gameID": "358465",
+    "listOfPlayers": [],
+    "gameID": "629850",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [],
+    "gameID": "059629",
     "turn": 0,
     "conclusion": "IN_SESSION"
   },
   {
     "listOfPlayers": [
       {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 50.0,
@@ -76,6 +39,8 @@
         "score": 0
       },
       {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 25.0,
@@ -97,13 +62,15 @@
         "score": 0
       }
     ],
-    "gameID": "584884",
+    "gameID": "834083",
     "turn": 0,
     "conclusion": "IN_SESSION"
   },
   {
     "listOfPlayers": [
       {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 25.0,
@@ -125,6 +92,8 @@
         "score": 0
       },
       {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 50.0,
@@ -148,13 +117,15 @@
         "score": 0
       }
     ],
-    "gameID": "049991",
+    "gameID": "341150",
     "turn": 0,
     "conclusion": "IN_SESSION"
   },
   {
     "listOfPlayers": [
       {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 50.0,
@@ -178,6 +149,8 @@
         "score": 0
       },
       {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 25.0,
@@ -199,13 +172,15 @@
         "score": 0
       }
     ],
-    "gameID": "129997",
+    "gameID": "089616",
     "turn": 0,
     "conclusion": "IN_SESSION"
   },
   {
     "listOfPlayers": [
       {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 50.0,
@@ -229,6 +204,8 @@
         "score": 0
       },
       {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 25.0,
@@ -250,34 +227,15 @@
         "score": 0
       }
     ],
-    "gameID": "137993",
+    "gameID": "886048",
     "turn": 0,
     "conclusion": "IN_SESSION"
   },
   {
     "listOfPlayers": [
       {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 25.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [],
-          "firstName": "2",
-          "lastName": "2",
-          "username": "dorrin2",
-          "password": "22",
-          "userID": "708921",
-          "email": "2@gmail.com",
-          "phoneNum": "0001112233"
-        },
-        "score": 0
-      },
-      {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 50.0,
@@ -299,15 +257,63 @@
           "phoneNum": "00011122233"
         },
         "score": 0
+      },
+      {
+        "ships": [],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 25.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "2",
+          "lastName": "2",
+          "username": "dorrin2",
+          "password": "22",
+          "userID": "708921",
+          "email": "2@gmail.com",
+          "phoneNum": "0001112233"
+        },
+        "score": 0
       }
     ],
-    "gameID": "098387",
+    "gameID": "962065",
     "turn": 0,
     "conclusion": "IN_SESSION"
   },
   {
     "listOfPlayers": [
       {
+        "ships": [],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 25.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "2",
+          "lastName": "2",
+          "username": "dorrin2",
+          "password": "22",
+          "userID": "708921",
+          "email": "2@gmail.com",
+          "phoneNum": "0001112233"
+        },
+        "score": 0
+      },
+      {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 50.0,
@@ -329,36 +335,17 @@
           "phoneNum": "00011122233"
         },
         "score": 0
-      },
-      {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 25.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [],
-          "firstName": "2",
-          "lastName": "2",
-          "username": "dorrin2",
-          "password": "22",
-          "userID": "708921",
-          "email": "2@gmail.com",
-          "phoneNum": "0001112233"
-        },
-        "score": 0
       }
     ],
-    "gameID": "271289",
+    "gameID": "005806",
     "turn": 0,
     "conclusion": "IN_SESSION"
   },
   {
     "listOfPlayers": [
       {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 50.0,
@@ -382,6 +369,8 @@
         "score": 0
       },
       {
+        "ships": [],
+        "bombsThrown": [],
         "gamer": {
           "awardsFromEvents": 0,
           "money": 25.0,
@@ -403,211 +392,7 @@
         "score": 0
       }
     ],
-    "gameID": "354912",
-    "turn": 0,
-    "conclusion": "IN_SESSION"
-  },
-  {
-    "listOfPlayers": [
-      {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 25.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [],
-          "firstName": "2",
-          "lastName": "2",
-          "username": "dorrin2",
-          "password": "22",
-          "userID": "708921",
-          "email": "2@gmail.com",
-          "phoneNum": "0001112233"
-        },
-        "score": 0
-      },
-      {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 50.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [
-            "BattleSea"
-          ],
-          "firstName": "1",
-          "lastName": "1",
-          "username": "dorrin1",
-          "password": "11",
-          "userID": "359220",
-          "email": "1@gmail.com",
-          "phoneNum": "00011122233"
-        },
-        "score": 0
-      }
-    ],
-    "gameID": "534093",
-    "turn": 0,
-    "conclusion": "IN_SESSION"
-  },
-  {
-    "listOfPlayers": [
-      {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 50.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [
-            "BattleSea"
-          ],
-          "firstName": "1",
-          "lastName": "1",
-          "username": "dorrin1",
-          "password": "11",
-          "userID": "359220",
-          "email": "1@gmail.com",
-          "phoneNum": "00011122233"
-        },
-        "score": 0
-      },
-      {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 25.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [],
-          "firstName": "2",
-          "lastName": "2",
-          "username": "dorrin2",
-          "password": "22",
-          "userID": "708921",
-          "email": "2@gmail.com",
-          "phoneNum": "0001112233"
-        },
-        "score": 0
-      }
-    ],
-    "gameID": "014384",
-    "turn": 0,
-    "conclusion": "IN_SESSION"
-  },
-  {
-    "listOfPlayers": [
-      {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 25.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [],
-          "firstName": "2",
-          "lastName": "2",
-          "username": "dorrin2",
-          "password": "22",
-          "userID": "708921",
-          "email": "2@gmail.com",
-          "phoneNum": "0001112233"
-        },
-        "score": 0
-      },
-      {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 50.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [
-            "BattleSea"
-          ],
-          "firstName": "1",
-          "lastName": "1",
-          "username": "dorrin1",
-          "password": "11",
-          "userID": "359220",
-          "email": "1@gmail.com",
-          "phoneNum": "00011122233"
-        },
-        "score": 0
-      }
-    ],
-    "gameID": "594640",
-    "turn": 1,
-    "conclusion": "IN_SESSION"
-  },
-  {
-    "listOfPlayers": [
-      {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 25.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [],
-          "firstName": "2",
-          "lastName": "2",
-          "username": "dorrin2",
-          "password": "22",
-          "userID": "708921",
-          "email": "2@gmail.com",
-          "phoneNum": "0001112233"
-        },
-        "score": 0
-      },
-      {
-        "gamer": {
-          "awardsFromEvents": 0,
-          "money": 50.0,
-          "accountStartDate": {
-            "year": 2020,
-            "month": 12,
-            "day": 6
-          },
-          "frnds": [],
-          "faveGames": [
-            "BattleSea"
-          ],
-          "firstName": "1",
-          "lastName": "1",
-          "username": "dorrin1",
-          "password": "11",
-          "userID": "359220",
-          "email": "1@gmail.com",
-          "phoneNum": "00011122233"
-        },
-        "score": 0
-      }
-    ],
-    "gameID": "345823",
+    "gameID": "374365",
     "turn": 0,
     "conclusion": "IN_SESSION"
   }

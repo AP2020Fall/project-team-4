@@ -189,6 +189,7 @@ public class MainController {
 			case "Change ship direction" -> ShipController.getInstance().rotateShip();
 			case "Finalize Board" -> {
 				BattleSeaController.getInstance().finalizeTrialBoard();
+
 				if (((BattleSea) GameController.getInstance().getCurrentGameInSession()).canStartBombing()) {
 					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
 					BattleSeaController.getInstance().initTurnTimerStuff();

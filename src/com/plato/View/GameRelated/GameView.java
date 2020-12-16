@@ -52,6 +52,9 @@ public class GameView {
 	}
 
 	public void displayPrevGamesAndChooseToContinue (LinkedList<String> unfinishedGames) { // all strings in form {opponent'sUN player1 score1 score2 player2}
+		if (unfinishedGames.size()==0)
+			Menu.println("You don't have any unfinished games.");
+
 		AtomicInteger counter = new AtomicInteger(1);
 		unfinishedGames.forEach(unfinishedGame ->
 				Menu.println("%d. Your Opponent= %s\t\t%s %s - %s %s".formatted(

@@ -4,14 +4,10 @@ import Controller.GameRelated.GameController;
 import Controller.IDGenerator;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
-import Model.GameRelated.BattleSea.PlayerBattleSea;
-import Model.GameRelated.Reversi.PlayerReversi;
 import Model.GameRelated.Reversi.Reversi;
 import View.Menus.Menu;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -27,18 +23,8 @@ public abstract class Game {
 
 	private static LinkedList<Game> allGames = new LinkedList<>();
 
-	protected Game (ArrayList<Gamer> players) {
+	protected Game () {
 		this.gameID = IDGenerator.generateNext();
-
-		Collections.shuffle(players);
-		if (this instanceof BattleSea) {
-			getListOfPlayers().add(new PlayerBattleSea(players.get(0)));
-			getListOfPlayers().add(new PlayerBattleSea(players.get(1)));
-		}
-		else if (this instanceof Reversi) {
-			getListOfPlayers().add(new PlayerReversi(players.get(0), "b"));
-			getListOfPlayers().add(new PlayerReversi(players.get(1), "w"));
-		}
 	}
 
 	public static LinkedList<String> getScoreboard (String gameName) {

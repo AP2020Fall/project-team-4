@@ -3,15 +3,12 @@ package Model.GameRelated.BattleSea;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class BattleSea extends Game {
 	private static String battleseaDetails;
-	private final ArrayList<PlayerBattleSea> listOfPlayers = new ArrayList<>();
+	private ArrayList<PlayerBattleSea> listOfPlayers = new ArrayList<>();
 
 	private static final ArrayList<String> arrangement = new ArrayList<>(Arrays.asList(
 			"5 2 1", // l s n
@@ -22,8 +19,13 @@ public class BattleSea extends Game {
 	));
 
 	public BattleSea (ArrayList<Gamer> gamers) {
-		super(gamers);
+		super();
 		details = battleseaDetails;
+
+		Collections.shuffle(gamers);
+		listOfPlayers.add(new PlayerBattleSea(gamers.get(0)));
+		listOfPlayers.add(new PlayerBattleSea(gamers.get(1)));
+
 	}
 
 	/**
@@ -119,8 +121,10 @@ public class BattleSea extends Game {
 	}
 
 	public boolean canStartBombing () {
-		return ((PlayerBattleSea) getListOfPlayers().get(0)).getShips() != null &&
-				((PlayerBattleSea) getListOfPlayers().get(1)).getShips() != null;
+		return listOfPlayers.get(0).getShips() != null &&
+				listOfPlayers.get(1).getShips() != null &&
+				listOfPlayers.get(0).getShips().size() != 0 &&
+				listOfPlayers.get(1).getShips().size() != 0;
 	}
 
 	/**
@@ -131,6 +135,8 @@ public class BattleSea extends Game {
 	}
 
 	public ArrayList<PlayerBattleSea> getListOfBattleSeaPlayers () {
+		if (listOfPlayers == null)
+			listOfPlayers = new ArrayList<>();
 		return listOfPlayers;
 	}
 }
