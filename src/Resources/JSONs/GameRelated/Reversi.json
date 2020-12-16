@@ -562,5 +562,809 @@
     "gameID": "541769",
     "turn": 0,
     "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "elahe",
+          "lastName": "mrtz",
+          "username": "eli",
+          "password": "1234",
+          "userID": "100792",
+          "email": "elahe@email.com",
+          "phoneNum": "0912080808"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "502459",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "elahe",
+          "lastName": "mrtz",
+          "username": "eli",
+          "password": "1234",
+          "userID": "100792",
+          "email": "elahe@email.com",
+          "phoneNum": "0912080808"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "740272",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "elahe",
+          "lastName": "mrtz",
+          "username": "eli",
+          "password": "1234",
+          "userID": "100792",
+          "email": "elahe@email.com",
+          "phoneNum": "0912080808"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "965500",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "elahe",
+          "lastName": "mrtz",
+          "username": "eli",
+          "password": "1234",
+          "userID": "100792",
+          "email": "elahe@email.com",
+          "phoneNum": "0912080808"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "379853",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "elahe",
+          "lastName": "mrtz",
+          "username": "eli",
+          "password": "1234",
+          "userID": "100792",
+          "email": "elahe@email.com",
+          "phoneNum": "0912080808"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "463840",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "elahe",
+          "lastName": "mrtz",
+          "username": "eli",
+          "password": "1234",
+          "userID": "100792",
+          "email": "elahe@email.com",
+          "phoneNum": "0912080808"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "005665",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
   }
 ]
