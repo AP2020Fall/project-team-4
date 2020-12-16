@@ -27,6 +27,7 @@ public class _11GameMenu extends Menu {
 				"Show wins count",
 				"Show played count",
 				"Add to favorites",
+				"Continue previous games",
 				"Run Game"
 		));
 

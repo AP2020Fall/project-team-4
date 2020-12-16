@@ -8,6 +8,7 @@ import Model.GameRelated.Player;
 import View.GameRelated.BattleSea.BattleSeaView;
 import View.Menus.Color;
 import View.Menus.Menu;
+import View.Menus._12_1GameplayBattleSeaMenu;
 
 import java.util.*;
 
@@ -56,6 +57,7 @@ public class BattleSeaController {
 				this.getBoardAsStringBuilder(chosenBoard)
 		);
 		setTrialPlayerBoard(chosenBoard);
+		updateGamePlayMenu();
 	}
 
 	public void finalizeTrialBoard () {
@@ -64,6 +66,7 @@ public class BattleSeaController {
 				.finalizeBoard(getCurrentlyEditingTrialBoard());
 
 		resetTrialPlayerBoards();
+		updateGamePlayMenu();
 	}
 
 	public void displayRemainingTime () {
@@ -76,6 +79,7 @@ public class BattleSeaController {
 				this.getBoardAsStringBuilder(randBoard)
 		);
 		setTrialPlayerBoard(randBoard);
+		updateGamePlayMenu();
 	}
 
 	public void displayCurrentPlayerBoard () {
@@ -155,25 +159,25 @@ public class BattleSeaController {
 							symbol = Color.BLUE.getVal() + "#";
 					}
 //					else {
-						// if there was a destroyed ship here
-						if (Ship.getAllCoords(playerToShowBoardOf.getShips(true)).stream()
-								.anyMatch(coord -> finalX == coord[0] && finalY == coord[1])) {
-							symbol = Color.RED_BOLD.getVal() + "*";
-						}
+					// if there was a destroyed ship here
+					if (Ship.getAllCoords(playerToShowBoardOf.getShips(true)).stream()
+							.anyMatch(coord -> finalX == coord[0] && finalY == coord[1])) {
+						symbol = Color.RED_BOLD.getVal() + "*";
+					}
 
-						// if there was a successful bomb but not a destroyed ship here
-						if (opponentPlayer
-								.getBombsThrown(true).stream()
-								.anyMatch(bomb -> bomb.getX() == finalX && bomb.getY() == finalY)) {
-							symbol = Color.YELLOW_BOLD.getVal() + "+";
-						}
+					// if there was a successful bomb but not a destroyed ship here
+					if (opponentPlayer
+							.getBombsThrown(true).stream()
+							.anyMatch(bomb -> bomb.getX() == finalX && bomb.getY() == finalY)) {
+						symbol = Color.YELLOW_BOLD.getVal() + "+";
+					}
 
-						// if there was an unsuccessful bomb here
-						if (opponentPlayer
-								.getBombsThrown(false).stream()
-								.anyMatch(bomb -> bomb.getX() == finalX && bomb.getY() == finalY)) {
-							symbol = Color.GREEN_BOLD.getVal() + "-";
-						}
+					// if there was an unsuccessful bomb here
+					if (opponentPlayer
+							.getBombsThrown(false).stream()
+							.anyMatch(bomb -> bomb.getX() == finalX && bomb.getY() == finalY)) {
+						symbol = Color.GREEN_BOLD.getVal() + "-";
+					}
 //					}
 					boardStrBldr.append(symbol + Color.RESET.getVal());
 				}
@@ -213,7 +217,7 @@ public class BattleSeaController {
 	}
 
 	public void setTrialPlayerBoard (LinkedList<Ship> trialPlayerBoard) {
-		ArrayList<Player> players = GameController.getInstance().getCurrentGameInSession().getListOfPlayers();
+		LinkedList<Player> players = GameController.getInstance().getCurrentGameInSession().getListOfPlayers();
 
 		if (((PlayerBattleSea) players.get(0)).getShips() == null) trialPlayerBoard1 = trialPlayerBoard;
 		else if (((PlayerBattleSea) players.get(1)).getShips() == null) trialPlayerBoard2 = trialPlayerBoard;
@@ -242,6 +246,12 @@ public class BattleSeaController {
 
 	public void resetTrialPlayerBoards () {
 		trialPlayerBoard1 = null; trialPlayerBoard2 = null;
+	}
+
+	public void updateGamePlayMenu () {
+		_12_1GameplayBattleSeaMenu battleseaGPMenu = ((_12_1GameplayBattleSeaMenu) Menu.getMenuIn());
+
+		battleseaGPMenu.setTrialBoardExists(trialPlayerBoard1 != null || trialPlayerBoard2 != null);
 	}
 
 	public void initTurnTimerStuff () {

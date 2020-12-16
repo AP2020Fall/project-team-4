@@ -1,6 +1,5 @@
 package View.Menus;
 
-import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.GameController;
 
 import java.util.Arrays;
@@ -13,6 +12,7 @@ public class _12_1GameplayBattleSeaMenu extends Menu {
 	 * 	i=2 -> Bombing phase
 	 */
 	private int phase = 1;
+	private boolean trialBoardExists;
 
 	protected _12_1GameplayBattleSeaMenu () {
 		super("BattleSea Gameplay Menu");
@@ -24,7 +24,6 @@ public class _12_1GameplayBattleSeaMenu extends Menu {
 
 		switch (phase) {
 			case 1 -> {
-				boolean trialBoardExists = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard() != null;
 
 				options = new LinkedList<>(Arrays.asList(
 						"Generate a Random Board",
@@ -81,6 +80,14 @@ public class _12_1GameplayBattleSeaMenu extends Menu {
 
 	public void nextPhase () {
 		phase = 2;
+	}
+
+	public void setTrialBoardExists (boolean trialBoardExists) {
+		this.trialBoardExists = trialBoardExists;
+	}
+
+	public boolean trialBoardExists () {
+		return trialBoardExists;
 	}
 
 	public int getPhase () {

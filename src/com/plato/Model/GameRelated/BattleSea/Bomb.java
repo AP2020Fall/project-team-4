@@ -4,7 +4,7 @@ import Controller.GameRelated.GameController;
 
 public class Bomb {
 	private final int x, y;
-	private Boolean wasSuccessful;
+	private boolean wasSuccessful;
 
 	Bomb (int x, int y) {
 		this.x = x;

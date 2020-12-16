@@ -16,7 +16,7 @@ public class GameLog {
 	public static LinkedList<Game> getListOfGames (String gameName) {
 		LinkedList<Game> listOfGames = new LinkedList<>();
 		for (Game game : getAllFinishedGames())
-			if (!game.getConclusion().equals(GameConclusion.IN_SESSION) && game.getGameName().equals(gameName))
+			if (game.getConclusion() != GameConclusion.IN_SESSION && game.getGameName().equals(gameName))
 				listOfGames.add(game);
 		return listOfGames;
 	}

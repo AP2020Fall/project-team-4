@@ -4,18 +4,24 @@ import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class Reversi extends Game {
 	private static String reversiDetails;
+	protected ArrayList<PlayerReversi> listOfPlayers = new ArrayList<>();
 
 	private String[][] board = new String[8][8];
 	private LinkedList<String> moves = new LinkedList<>();
 
 	public Reversi (ArrayList<Gamer> gamers) {
-		super(gamers);
+		super();
 		details = reversiDetails;
+
+		Collections.shuffle(gamers);
+		listOfPlayers.add(new PlayerReversi(gamers.get(0), "b"));
+		listOfPlayers.add(new PlayerReversi(gamers.get(1), "w"));
 	}
 
 	/**
@@ -78,10 +84,13 @@ public class Reversi extends Game {
 			if (canPlayerPlaceDiskHere(x, y)) {
 				checkDirections(x, y);
 				if (getTurnNum() == 0) {
-					board[y-1][x-1] = "b";
-					addMove(x, y, "black");}
-				else {board[y-1][x-1]="w";
-					addMove(x, y, "white");}
+					board[y - 1][x - 1] = "b";
+					addMove(x, y, "black");
+				}
+				else {
+					board[y - 1][x - 1] = "w";
+					addMove(x, y, "white");
+				}
 			}
 		}
 	}
@@ -201,6 +210,7 @@ public class Reversi extends Game {
 	 */
 	public boolean hasPlayerMoved () {
 		if (moves.size() == 0) return false;
+		else if (!canPlayerPlaceAnyDisks()) return true;
 		else {
 			String color = moves.getLast().substring(0, 1);
 
@@ -231,7 +241,6 @@ public class Reversi extends Game {
 		else if (getNumberOfWhite() == 0) return true;
 		else return isBoardFull();
 	}
-
 
 	public int getNumberOfBlack () {
 		int count = 0;
@@ -290,6 +299,19 @@ public class Reversi extends Game {
 				.filter(game -> game instanceof Reversi)
 				.map(game -> ((Reversi) game))
 				.collect(Collectors.toCollection(LinkedList::new));
+	}
+
+	/**
+	 * only used for gson, to add all the extracted reversi games
+	 */
+	public static void setAllGames (LinkedList<Reversi> allGames) {
+		Game.getAllGames().addAll(allGames);
+	}
+
+	public ArrayList<PlayerReversi> getListOfReversiPlayers () {
+		if (listOfPlayers == null)
+			listOfPlayers = new ArrayList<>();
+		return listOfPlayers;
 	}
 }
 
