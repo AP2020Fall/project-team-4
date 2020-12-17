@@ -38,7 +38,7 @@ public class GameView {
 		scoreBoard.forEach(System.out::println);
 	}
 
-	public void displayGameConclusion (String conclusion, String player1Username, String player2Username, int player1IngameScore, int player2IngameScore) {
+	public void displayGameConclusion (String conclusion, String player1Username, String player2Username, int player1InGameScore, int player2InGameScore) {
 		if (conclusion.equalsIgnoreCase("IS"))
 			System.out.println("Game is still in session. Results are undetermined.");
 		else {
@@ -47,7 +47,7 @@ public class GameView {
 			else if (conclusion.toUpperCase().contains("W"))
 				System.out.printf("Game ended with player %s winning.%n", (conclusion.contains("1") ? player1Username : player2Username));
 
-			System.out.printf("Final in-game scores are -> %s %d - %d %s%n", player1Username, player1IngameScore, player2IngameScore, player2Username);
+			System.out.printf("Final in-game scores are -> %s %d - %d %s%n", player1Username, player1InGameScore, player2InGameScore, player2Username);
 		}
 	}
 

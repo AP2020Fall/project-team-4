@@ -158,10 +158,6 @@ public abstract class Game {
 		this.conclusion = conclusion;
 	}
 
-	public int[] getScores () {
-		return new int[]{getListOfPlayers().get(0).getScore(), getListOfPlayers().get(1).getScore()}; // fixme use getnumberofwhite and black instead
-	}
-
 	public abstract int getInGameScore (int playerNum);
 
 	public LinkedList<Player> getListOfPlayers () {

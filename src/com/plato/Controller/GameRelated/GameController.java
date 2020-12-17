@@ -124,8 +124,8 @@ public class GameController {
 				conclusion,
 				player1Gamer.getUsername(),
 				player2Gamer.getUsername(),
-				gameController.getCurrentGameInSession().getPlayer(player1Gamer).getScore(),
-				gameController.getCurrentGameInSession().getPlayer(player2Gamer).getScore()
+				gameController.getCurrentGameInSession().getInGameScore(1),
+				gameController.getCurrentGameInSession().getInGameScore(2)
 		);
 	}
 

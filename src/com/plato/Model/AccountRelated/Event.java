@@ -50,19 +50,24 @@ public class Event {
 	}
 
 	@SuppressWarnings("EnhancedSwitchMigration")
-	public void editField (String field, String newval) {
+	public void editField (String field, String newVal) {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
 		switch (field.toLowerCase()) {
 			case "title":
-				title = newval; break;
+				title = newVal;
+				break;
 			case "game name":
-				gameName = newval; break;
+				gameName = newVal;
+				break;
 			case "event score":
-				eventScore = Double.parseDouble(newval); break;
+				eventScore = Double.parseDouble(newVal);
+				break;
 			case "start":
-				start = LocalDate.parse(newval, dateTimeFormatter); break;
+				start = LocalDate.parse(newVal, dateTimeFormatter);
+				break;
 			case "end":
-				end = LocalDate.parse(newval, dateTimeFormatter); break;
+				end = LocalDate.parse(newVal, dateTimeFormatter);
+				break;
 		}
 	}
 
@@ -100,15 +105,16 @@ public class Event {
 	public static LinkedList<Event> getInSessionEvents () {
 		return getEvents().stream()
 				.filter(Event::isInSession)
-				.sorted(Comparator.comparing(Event::getGameName)                // first battlesea then reversi events
+				.sorted(Comparator.comparing(Event::getGameName)                // first battleSea then reversi events
 						.thenComparing(Event::getStart)                            // from earliest starting
 
 						.thenComparing(Event::getEnd)                            // from earliest ending
-						.thenComparingDouble(Event::getEventScore).reversed()    // from hishest prizes
+						.thenComparingDouble(Event::getEventScore).reversed()    // from highest prizes
 						.thenComparing(Event::getEventID))
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
+	@SuppressWarnings("unused")
 	public static boolean notStartedEventExists (String eventID) {
 		return events.stream()
 				.filter(event -> !event.hasStarted())
@@ -132,7 +138,7 @@ public class Event {
 		return false;
 	}
 
-	@SuppressWarnings("ForLoopReplaceableByForEach")
+	@SuppressWarnings({"ForLoopReplaceableByForEach", "unused"})
 	public Gamer getParticipant (String username) {
 		for (int i = 0; i < participants.size(); i++)
 			if (participants.get(i).getUsername().equals(username))
@@ -140,12 +146,14 @@ public class Event {
 		return null;
 	}
 
+	@SuppressWarnings("OptionalGetWithoutIsPresent")
 	public static Event getEvent (String eventID) {
 		return events.stream()
 				.filter(event -> event.getEventID().equals(eventID))
 				.findAny().get();
 	}
 
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean eventExists (String eventID) {
 		return events.stream()
 				.anyMatch(event -> event.getEventID().equals(eventID));
@@ -159,27 +167,13 @@ public class Event {
 	}
 
 	public LinkedList<Gamer> getParticipants () {
+		if (participants == null)
+			participants = new LinkedList<>();
 		return participants;
 	}
 
 	public static void setEvents (LinkedList<Event> events) {
 		Event.events = events;
-	}
-
-	private void setGameName (String gameName) {
-		this.gameName = gameName;
-	}
-
-	private void setEventScore (double eventScore) {
-		this.eventScore = eventScore;
-	}
-
-	private void setStart (LocalDate start) {
-		this.start = start;
-	}
-
-	private void setEnd (LocalDate end) {
-		this.end = end;
 	}
 
 	public String getEventID () {

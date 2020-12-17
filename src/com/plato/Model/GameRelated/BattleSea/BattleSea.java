@@ -41,15 +41,15 @@ public class BattleSea extends Game {
 
 	@Override
 	public Gamer getWinner () {
-		PlayerBattleSea player1 = (PlayerBattleSea) getListOfPlayers().get(0),
-				player2 = (PlayerBattleSea) getListOfPlayers().get(1);
+		// player1 win
+		if (getInGameScore(1) > getInGameScore(2))
+			return listOfPlayers.get(0).getGamer();
 
-		if (player2.getShips(false).size() == 0)
-			return getOpponentOf(player2).getGamer();
-		if (player1.getShips(false).size() == 0)
-			return getOpponentOf(player1).getGamer();
+		// player2win
+		if (getInGameScore(1) < getInGameScore(2))
+			return listOfPlayers.get(1).getGamer();
 
-		return null;
+		return null; // draw
 	}
 
 	@Override

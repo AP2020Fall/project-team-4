@@ -281,7 +281,7 @@ public class BattleSeaController {
 	}
 
 	static class TurnTimerTask extends TimerTask {
-		private final int MAX_SECONDS = 120; // fixme change to 30
+		private final int MAX_SECONDS = 30; // fixme change to 30
 		private int secondsRemaining = MAX_SECONDS;
 		private String command = "";
 
