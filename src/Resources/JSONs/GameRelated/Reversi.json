@@ -276,5 +276,1918 @@
     "gameID": "914947",
     "turn": 0,
     "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "b",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "w",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [
+      "black placed disk in coordinate (6,5)",
+      "white placed disk in coordinate (6,6)"
+    ],
+    "gameID": "828436",
+    "turn": 1,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "988385",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "045443",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "053792",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "096859",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "557830",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "930952",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "566396",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "413764",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "481486",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "389576",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "b",
+        "b",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "b",
+        "b",
+        "b",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "b",
+        "b",
+        "b",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [
+      "black placed disk in coordinate (6,5)"
+    ],
+    "gameID": "652108",
+    "turn": 1,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [
+      "black placed disk in coordinate (5,6)"
+    ],
+    "gameID": "975228",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 100.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "dorrin",
+          "lastName": "sot",
+          "username": "doe",
+          "password": "2345",
+          "userID": "117334",
+          "email": "dor@email.com",
+          "phoneNum": "09123232323"
+        },
+        "score": 0
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [
+      "black placed disk in coordinate (5,6)"
+    ],
+    "gameID": "875358",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
   }
 ]
