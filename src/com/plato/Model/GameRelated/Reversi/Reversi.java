@@ -156,42 +156,50 @@ public class Reversi extends Game {
 		String otherColor = (color.equals("b")) ? "w" : "b" ;
 		switch (dir) {
 			case UP:
-				if (board[y - 1][x].equals(otherColor))
+				if(y-1>0)
+					if (board[y - 1][x].equals(otherColor))
 					for (int i = y-1 ; i >= 0; i--)
 						if (board[i][x].equals(color)) return true;
 				break;
 			case UP_RIGHT:
-				if (board[y - 1][x + 1].equals(otherColor))
+				if(y-1>0 && x+1<8)
+					if (board[y - 1][x + 1].equals(otherColor))
 					for (int i = y-1 , j=x+1 ; i >= 0 && j<8 ; i-- , j++)
 						if (board[i][j].equals(color)) return true;
 				break;
 			case RIGHT:
-				if (board[y][x + 1].equals(otherColor))
+				if(x+1<8)
+					if (board[y][x + 1].equals(otherColor))
 					for (int i = x+1 ; i < 8; i++)
 						if (board[y][i].equals(color)) return true;
 				break;
 			case DOWN_RIGHT:
-				if (board[y + 1][x + 1].equals(otherColor))
+				if(y+1<8 && x+1<8)
+					if (board[y + 1][x + 1].equals(otherColor))
 					for (int i = y+1 , j=x+1 ; i < 8 && j<8 ; i++ , j++)
 						if (board[i][j].equals(color)) return true;
 				break;
 			case DOWN:
-				if (board[y + 1][x].equals(otherColor))
+				if(y+1<8)
+					if (board[y + 1][x].equals(otherColor))
 					for (int i = y+1 ; i < 8; i++)
 						if (board[i][x].equals(color)) return true;
 				break;
 			case DOWN_LEFT:
-				if (board[y + 1][x - 1].equals(otherColor))
+				if(y+1<8 && x-1>0)
+					if (board[y + 1][x - 1].equals(otherColor))
 					for (int i = y+1 , j=x-1 ; i < 8 && j>=0 ; i++ , j--)
 						if (board[i][j].equals(color)) return true;
 				break;
 			case LEFT:
-				if (board[y][x - 1].equals(otherColor))
+				if(x-1>0)
+					if (board[y][x - 1].equals(otherColor))
 					for (int i = x-1 ; i >= 0; i--)
 						if (board[y][i].equals(color)) return true;
 				break;
 			case UP_LEFT:
-				if (board[y - 1][x - 1].equals(otherColor))
+				if(y-1>0 && x-1>0)
+					if (board[y - 1][x - 1].equals(otherColor))
 					for (int i = y-1 , j=x-1 ; i >= 0 && j>=0 ; i-- , j--)
 						if (board[i][j].equals(color)) return true;
 				break;

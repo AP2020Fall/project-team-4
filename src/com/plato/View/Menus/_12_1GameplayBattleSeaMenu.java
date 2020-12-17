@@ -1,5 +1,6 @@
 package View.Menus;
 
+import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.GameController;
 
 import java.util.Arrays;
@@ -66,6 +67,7 @@ public class _12_1GameplayBattleSeaMenu extends Menu {
 	public void back () {
 		super.back();
 		GameController.getInstance().setCurrentGameInSession(null);
+		BattleSeaController.getInstance().getTurnTimer().cancel();
 	}
 
 	@Override
