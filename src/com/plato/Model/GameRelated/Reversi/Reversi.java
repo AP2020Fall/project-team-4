@@ -34,8 +34,24 @@ public class Reversi extends Game {
 		ArrayList<String> availableCoordinates = new ArrayList<>();
 		String color = ((PlayerReversi)getTurnPlayer()).getColor();
 		String otherColor = (color.equals("b")) ? "w" : "b" ;
+		if(!isBoardFull()) {
+			for (int y = 0; y < 8; y++)
+				for (int x = 0; x < 8; x++)
+					if (board[y][x].equals(color))
+						for (Direction dir : Direction.values()){
+							if(checkCoordinates(y+dir.getDeltaY()+1) && checkCoordinates(x+dir.getDeltaX()+1)){
+								if (board[y + dir.getDeltaY()][x + dir.getDeltaX()].equals(otherColor)){
+								for (int i = y + dir.getDeltaY(), j = x + dir.getDeltaX(); checkCoordinates(i + dir.getDeltaY() + 1) && checkCoordinates(j + dir.getDeltaX() + 1); i=+dir.getDeltaY() , j=+dir.getDeltaX()) {
+									if (board[i][j] .equals("-")) {
+										availableCoordinates.add((i + 1) + " " + (j + 1));
+										break;
+									} else if (board[i][j].equals(color)) break;
+								}}}}
 
-			for (int y = 0; y < 8; y++) {
+
+
+
+		/*	for (int y = 0; y < 8; y++) {
 				for (int x = 0; x < 8; x++) {
 					if (board[y][x].equals(color)) {
 						//dir UP
@@ -104,7 +120,8 @@ public class Reversi extends Game {
 							}}
 					}
 				}
-			}
+			}}*/
+		}
 		return availableCoordinates;
 	}
 
