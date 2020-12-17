@@ -49,14 +49,25 @@ public class BombController {
 				x = Integer.parseInt(Xstr);
 				y = Integer.parseInt(Ystr);
 				break;
+			} catch (NumberFormatException e) {
+				Menu.println("You can only use numbers from 1 to 8 inclusive");
 			} catch (InvalidCoordinateException | CoordinateAlreadyBombedException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 		}
 
 		currentPlayer.throwBomb(x, y);
-		Menu.printSuccessfulOperation("Bomb successful");
 		BattleSeaController.getInstance().getTurnTimerTask().bomb();
+		if (((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getTurnPlayer())
+				.getBombsThrown().getLast().wasSuccessful()) {
+			Menu.printSuccessfulOperation("Bomb successful");
+			Menu.println("You can bomb one more time.");
+		}
+		else {
+			BattleSeaController.getInstance().getTurnTimerTask().bomb();
+			Menu.printSuccessfulOperation("Bomb unsuccessful");
+			Menu.println("Next!!");
+		}
 	}
 
 	public void displayAllCurrentPlayerBombs () {

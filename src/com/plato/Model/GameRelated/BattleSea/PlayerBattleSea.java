@@ -72,10 +72,11 @@ public class PlayerBattleSea extends Player {
 	}
 
 	public LinkedList<Ship> getOpponentShips (boolean destroyed) {
-		return ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
-				.getOpponentOf(this))
+		PlayerBattleSea opponent = (PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getOpponentOf(this);
+
+		return opponent
 				.getShips().stream()
-				.filter(ship -> ship.isDestroyed(this) == destroyed)
+				.filter(ship -> ship.isDestroyed(opponent) == destroyed)
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
