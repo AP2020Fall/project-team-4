@@ -1,7 +1,5 @@
 package View.Menus;
 
-import View.Menus.Menu;
-
 import java.util.LinkedList;
 
 public class _4AdminGamerRecoMenu extends Menu {

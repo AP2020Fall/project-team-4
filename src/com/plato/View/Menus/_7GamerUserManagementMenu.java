@@ -1,8 +1,6 @@
 package View.Menus;
 
-import View.Menus.Menu;
-
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class _7GamerUserManagementMenu extends Menu {
@@ -14,7 +12,7 @@ public class _7GamerUserManagementMenu extends Menu {
 	public LinkedList<String> getOptions () {
 		LinkedList<String> options;
 
-		options = new LinkedList<>(Arrays.asList(
+		options = new LinkedList<>(Collections.singletonList(
 				"View user profile"
 		));
 

@@ -23,9 +23,13 @@ public class FriendRequestController {
 		String usernameTo;
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] "); usernameTo = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] ");
+				usernameTo = Menu.getInputLine();
 
 				if (usernameTo.trim().equalsIgnoreCase("/c")) return;
+
+				if (!usernameTo.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("Username");
 
 				if (!Account.accountExists(usernameTo))
 					throw new AccountController.NoAccountExistsWithUsernameException();
@@ -42,8 +46,7 @@ public class FriendRequestController {
 				if (FriendRequest.frndReqExists(AccountController.getInstance().getCurrentAccLoggedIn().getUsername(), usernameTo))
 					throw new FriendRequestAlreadyExistsException(usernameTo);
 				break;
-			} catch (AccountController.NoAccountExistsWithUsernameException | CantSendFriendRendReqToYourselfException | CantFriendRequestTheAdminException |
-					CantSendFriendReqToAlreadyFriendException | FriendRequestAlreadyExistsException e) {
+			} catch (AccountController.NoAccountExistsWithUsernameException | CantSendFriendRendReqToYourselfException | CantFriendRequestTheAdminException | CantSendFriendReqToAlreadyFriendException | FriendRequestAlreadyExistsException | MainController.InvalidFormatException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
@@ -69,9 +72,13 @@ public class FriendRequestController {
 		String usernameFrom;
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] "); usernameFrom = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] ");
+				usernameFrom = Menu.getInputLine();
 
 				if (usernameFrom.trim().equalsIgnoreCase("/c")) return;
+
+				if (!usernameFrom.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("Username");
 
 				if (!Account.accountExists(usernameFrom))
 					throw new AccountController.NoAccountExistsWithUsernameException();
@@ -80,7 +87,7 @@ public class FriendRequestController {
 					throw new FriendRequestDoesntExistException();
 
 				break;
-			} catch (AccountController.NoAccountExistsWithUsernameException | FriendRequestDoesntExistException e) {
+			} catch (AccountController.NoAccountExistsWithUsernameException | FriendRequestDoesntExistException | MainController.InvalidFormatException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
@@ -94,9 +101,13 @@ public class FriendRequestController {
 		String usernameFrom;
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] "); usernameFrom = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] ");
+				usernameFrom = Menu.getInputLine();
 
 				if (usernameFrom.trim().equals("/c")) return;
+
+				if (!usernameFrom.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("Username");
 
 				if (!Account.accountExists(usernameFrom))
 					throw new AccountController.NoAccountExistsWithUsernameException();
@@ -105,7 +116,7 @@ public class FriendRequestController {
 					throw new FriendRequestDoesntExistException();
 
 				break;
-			} catch (AccountController.NoAccountExistsWithUsernameException | FriendRequestDoesntExistException e) {
+			} catch (AccountController.NoAccountExistsWithUsernameException | FriendRequestDoesntExistException | MainController.InvalidFormatException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 

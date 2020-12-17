@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class Event {
+	private static LinkedList<Event> events = new LinkedList<>();
 	private final String eventID;
 	private String title;
 	private String gameName;
@@ -16,8 +17,6 @@ public class Event {
 	private LocalDate start, end;
 	private LinkedList<Gamer> participants = new LinkedList<>();
 	private boolean awardsGiven = false; // true if an event has ended and its awards have been given, false otherwise
-
-	private static LinkedList<Event> events = new LinkedList<>();
 
 	private Event (String title, String gameName, double eventScore, LocalDate start, LocalDate end) {
 		this.title = title;
@@ -47,6 +46,63 @@ public class Event {
 		}
 
 		return inSessionEventsParticipatingIn;
+	}
+
+	@SuppressWarnings("ForLoopReplaceableByForEach")
+	public static void dealWOverdueEvents () {
+		for (int i = 0; i < events.size(); i++) {
+
+			Event event = events.get(i);
+			if (event.isDue() && !event.awardsGiven)
+				event.giveAwardsOfOverdueEvent();
+		}
+	}
+
+	public static LinkedList<Event> getEvents () {
+		return events;
+	}
+
+	public static void setEvents (LinkedList<Event> events) {
+		Event.events = events;
+	}
+
+	public static LinkedList<Event> getInSessionEvents () {
+		return getEvents().stream()
+				.filter(Event::isInSession)
+				.sorted(Comparator.comparing(Event::getGameName)                // first battleSea then reversi events
+						.thenComparing(Event::getStart)                            // from earliest starting
+
+						.thenComparing(Event::getEnd)                            // from earliest ending
+						.thenComparingDouble(Event::getEventScore).reversed()    // from highest prizes
+						.thenComparing(Event::getEventID))
+				.collect(Collectors.toCollection(LinkedList::new));
+	}
+
+	@SuppressWarnings("unused")
+	public static boolean notStartedEventExists (String eventID) {
+		return events.stream()
+				.filter(event -> !event.hasStarted())
+				.anyMatch(event -> event.getEventID().equals(eventID));
+	}
+
+	@SuppressWarnings("OptionalGetWithoutIsPresent")
+	public static Event getEvent (String eventID) {
+		return events.stream()
+				.filter(event -> event.getEventID().equals(eventID))
+				.findAny().get();
+	}
+
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
+	public static boolean eventExists (String eventID) {
+		return events.stream()
+				.anyMatch(event -> event.getEventID().equals(eventID));
+	}
+
+	public static boolean eventInSessionExists (String eventID) {
+		for (int i = 0; i < getInSessionEvents().size(); i++)
+			if (getInSessionEvents().get(i).getEventID().equals(eventID))
+				return true;
+		return false;
 	}
 
 	@SuppressWarnings("EnhancedSwitchMigration")
@@ -83,42 +139,9 @@ public class Event {
 		return hasStarted() && !isDue();
 	}
 
-	@SuppressWarnings("ForLoopReplaceableByForEach")
-	public static void dealWOverdueEvents () {
-		for (int i = 0; i < events.size(); i++) {
-
-			Event event = events.get(i);
-			if (event.isDue() && !event.awardsGiven)
-				event.giveAwardsOfOverdueEvent();
-		}
-	}
-
 	public void giveAwardsOfOverdueEvent () {
 		// TODO: 12/8/2020 AD
 		awardsGiven = true;
-	}
-
-	public static LinkedList<Event> getEvents () {
-		return events;
-	}
-
-	public static LinkedList<Event> getInSessionEvents () {
-		return getEvents().stream()
-				.filter(Event::isInSession)
-				.sorted(Comparator.comparing(Event::getGameName)                // first battleSea then reversi events
-						.thenComparing(Event::getStart)                            // from earliest starting
-
-						.thenComparing(Event::getEnd)                            // from earliest ending
-						.thenComparingDouble(Event::getEventScore).reversed()    // from highest prizes
-						.thenComparing(Event::getEventID))
-				.collect(Collectors.toCollection(LinkedList::new));
-	}
-
-	@SuppressWarnings("unused")
-	public static boolean notStartedEventExists (String eventID) {
-		return events.stream()
-				.filter(event -> !event.hasStarted())
-				.anyMatch(event -> event.getEventID().equals(eventID));
 	}
 
 	public void addParticipant (Gamer gamer) {
@@ -146,34 +169,10 @@ public class Event {
 		return null;
 	}
 
-	@SuppressWarnings("OptionalGetWithoutIsPresent")
-	public static Event getEvent (String eventID) {
-		return events.stream()
-				.filter(event -> event.getEventID().equals(eventID))
-				.findAny().get();
-	}
-
-	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
-	public static boolean eventExists (String eventID) {
-		return events.stream()
-				.anyMatch(event -> event.getEventID().equals(eventID));
-	}
-
-	public static boolean eventInSessionExists (String eventID) {
-		for (int i = 0; i < getInSessionEvents().size(); i++)
-			if (getInSessionEvents().get(i).getEventID().equals(eventID))
-				return true;
-		return false;
-	}
-
 	public LinkedList<Gamer> getParticipants () {
 		if (participants == null)
 			participants = new LinkedList<>();
 		return participants;
-	}
-
-	public static void setEvents (LinkedList<Event> events) {
-		Event.events = events;
 	}
 
 	public String getEventID () {

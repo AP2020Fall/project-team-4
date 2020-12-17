@@ -41,7 +41,7 @@ public class GamerView {
 	}
 
 	public void displayFriendsUsernames (LinkedList<String> friendsUsernameList) {
-		if (friendsUsernameList.size()==0) {
+		if (friendsUsernameList.size() == 0) {
 			System.out.println("You currently don't have any friends.");
 			return;
 		}

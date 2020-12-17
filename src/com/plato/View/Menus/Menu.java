@@ -9,13 +9,11 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Menu {
-	private final String menuTitle;
-	private static final LinkedList<Menu> entryHistory = new LinkedList<>();
-	private HashMap<Integer, Menu> childMenus = new HashMap<>();
-
-	private static HashMap<String, Menu> menus = new HashMap<>();
-
 	protected static final Scanner scanner = new Scanner(System.in);
+	private static final LinkedList<Menu> entryHistory = new LinkedList<>();
+	private static final HashMap<String, Menu> menus = new HashMap<>();
+	private final String menuTitle;
+	private final HashMap<Integer, Menu> childMenus = new HashMap<>();
 
 	protected Menu (String menuTitle) {
 		this.menuTitle = menuTitle;
@@ -38,8 +36,8 @@ public abstract class Menu {
 			case "10" -> menus.putIfAbsent(menuNumber, new _10GamesMenu());
 			case "11B" -> menus.putIfAbsent(menuNumber, new _11GameMenu("BattleSea"));
 			case "11R" -> menus.putIfAbsent(menuNumber, new _11GameMenu("Reversi"));
-			case "11" -> menus.putIfAbsent(menuNumber, new _11GameMenu()); 	// from the admin game recos menu
-																					// -> remove this and set to 11B or 11R based on users decision
+			case "11" -> menus.putIfAbsent(menuNumber, new _11GameMenu());    // from the admin game recos menu
+			// -> remove this and set to 11B or 11R based on users decision
 			case "12B" -> menus.putIfAbsent(menuNumber, new _12_1GameplayBattleSeaMenu());
 			case "12R" -> menus.putIfAbsent(menuNumber, new _12_2GameplayReversiMenu());
 			case "13" -> menus.putIfAbsent(menuNumber, new _13UserInfoEditingMenu());
@@ -122,16 +120,58 @@ public abstract class Menu {
 		}
 	}
 
-	public void addChildMenu (int index, Menu child) {
-		childMenus.put(index, child);
-	}
-
 	public static void displayAreYouSureMessage () {
 		System.out.print(Color.YELLOW.getVal() + "Are you sure?[y/n]  " + Color.RESET.getVal());
 	}
 
 	public static void printSavedMessage () {
 		Menu.println(Color.BLUE.getVal() + "\t-Saved-" + Color.RESET.getVal());
+	}
+
+	public static Menu getMenuIn () {
+		if (entryHistory.size() != 0) return entryHistory.getLast();
+
+		if (AccountController.getInstance().getCurrentAccLoggedIn() == null) return getMenu("2");
+
+		return getMenu(3 + (AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "A" : "G"));
+	}
+
+	public static void printErrorMessage (String message) {
+		if (message.endsWith("."))
+			message = message.substring(0, message.length() - 1);
+		Menu.println(Color.RED.getVal() + "*%s*".formatted(message) + Color.RESET.getVal());
+	}
+
+	public static void print (String text) {
+		System.out.print(text);
+	}
+
+	public static void println (String text) {
+		System.out.println(text);
+	}
+
+	public static void printSuccessfulOperation (String text) {
+		Menu.println(Color.GREEN.getVal() + text + Color.RESET.getVal());
+	}
+
+	public static void printAskingForInput (String text) {
+		Menu.print(Color.YELLOW.getVal() + text + Color.RESET.getVal());
+	}
+
+	public static Scanner getScanner () {
+		return scanner;
+	}
+
+	public static String getInputLine () {
+		return scanner.nextLine();
+	}
+
+	public static Menu getMenu (String menuid) {
+		return menus.get(menuid);
+	}
+
+	public void addChildMenu (int index, Menu child) {
+		childMenus.put(index, child);
 	}
 
 	public LinkedList<String> getOptions () {
@@ -164,52 +204,9 @@ public abstract class Menu {
 		entryHistory.getLast().enter();
 	}
 
-	public static Menu getMenuIn () {
-		if (entryHistory.size() != 0) return entryHistory.getLast();
-
-		if (AccountController.getInstance().getCurrentAccLoggedIn() == null) return getMenu("2");
-
-		return getMenu(3 + (AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "A" : "G"));
-	}
-
 	public void enter () {
-		if (entryHistory.contains(this))
-			entryHistory.remove(this);
+		entryHistory.remove(this);
 		entryHistory.addLast(this);
-	}
-
-	public static void printErrorMessage (String message) {
-		if (message.endsWith("."))
-			message = message.substring(0, message.length() - 1);
-		Menu.println(Color.RED.getVal() + "*%s*".formatted(message) + Color.RESET.getVal());
-	}
-
-	public static void print(String text) {
-		System.out.print(text);
-	}
-
-	public static void println(String text) {
-		System.out.println(text);
-	}
-
-	public static void printSuccessfulOperation (String text) {
-		Menu.println(Color.GREEN.getVal() + text + Color.RESET.getVal());
-	}
-
-	public static void printAskingForInput (String text) {
-		Menu.print(Color.YELLOW.getVal() + text + Color.RESET.getVal());
-	}
-
-	public static Scanner getScanner () {
-		return scanner;
-	}
-
-	public static String getInputLine () {
-		return scanner.nextLine();
-	}
-
-	public static Menu getMenu (String menuid) {
-		return menus.get(menuid);
 	}
 
 	public HashMap<Integer, Menu> getChildMenus () {

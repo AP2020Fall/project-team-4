@@ -10,10 +10,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class Ship {
+	private final int L_SIZE, S_SIZE;
 	private int leftMostX, topMostY;
 	private boolean isVertical;
-
-	private final int L_SIZE, S_SIZE;
 
 	public Ship (int leftMostX, int topMostY, boolean isVertical, int l_SIZE, int s_SIZE) {
 		this.leftMostX = leftMostX;
@@ -21,17 +20,6 @@ public class Ship {
 		this.isVertical = isVertical;
 		L_SIZE = l_SIZE;
 		S_SIZE = s_SIZE;
-	}
-
-	public boolean isDestroyed (PlayerBattleSea shipOwner) {
-		LinkedList<int[]> thisShipCoords = getAllCoords(new LinkedList<>(Collections.singletonList(this)));
-		int shipPartsBombedCount = (int) shipOwner.getOpponentBombsThrown(true).stream()
-				.filter(bomb -> thisShipCoords.stream().anyMatch(coord -> coord[0] == bomb.getX() && coord[1]== bomb.getY()))
-				.count();
-
-		return shipPartsBombedCount
-				==
-				thisShipCoords.size();
 	}
 
 	public static LinkedList<int[]> getAllCoords (LinkedList<Ship> ships) {
@@ -61,6 +49,17 @@ public class Ship {
 		}
 
 		return coords;
+	}
+
+	public boolean isDestroyed (PlayerBattleSea shipOwner) {
+		LinkedList<int[]> thisShipCoords = getAllCoords(new LinkedList<>(Collections.singletonList(this)));
+		int shipPartsBombedCount = (int) shipOwner.getOpponentBombsThrown(true).stream()
+				.filter(bomb -> thisShipCoords.stream().anyMatch(coord -> coord[0] == bomb.getX() && coord[1] == bomb.getY()))
+				.count();
+
+		return shipPartsBombedCount
+				==
+				thisShipCoords.size();
 	}
 
 	public void changeDir () {

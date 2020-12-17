@@ -19,8 +19,20 @@ public class Gamer extends Account {
 		accountStartDate = LocalDate.now();
 		this.money = money;
 	}
+
 	// for serialization
 	public Gamer () {}
+
+	public static LinkedList<Gamer> getGamers () {
+		return getAccounts().stream()
+				.filter(account -> account instanceof Gamer)
+				.map(account -> ((Gamer) account))
+				.collect(Collectors.toCollection(LinkedList::new));
+	}
+
+	public static void setGamers (LinkedList<Gamer> gamers) {
+		getAccounts().addAll(gamers);
+	}
 
 	public void sendFrndReq (String usernameTo) {
 		FriendRequest.addFriendReq(this.getUsername(), usernameTo);
@@ -50,13 +62,6 @@ public class Gamer extends Account {
 		return FriendRequest.getFriendReq(this.getUsername());
 	}
 
-	public static LinkedList<Gamer> getGamers () {
-		return getAccounts().stream()
-				.filter(account -> account instanceof Gamer)
-				.map(account -> ((Gamer) account))
-				.collect(Collectors.toCollection(LinkedList::new));
-	}
-
 	public void addToFaveGames (String gameName) {
 		if (!faveGames.contains(gameName))
 			faveGames.addLast(gameName);
@@ -64,6 +69,10 @@ public class Gamer extends Account {
 
 	public LinkedList<String> getFrnds () {
 		return frnds;
+	}
+
+	public void setFrnds (LinkedList<String> frnds) {
+		this.frnds = frnds;
 	}
 
 	public void participateInEvent (String eventID) {
@@ -78,12 +87,12 @@ public class Gamer extends Account {
 		return Math.toIntExact(ChronoUnit.DAYS.between(accountStartDate, LocalDate.now()));
 	}
 
-	public static void setGamers (LinkedList<Gamer> gamers) {
-		getAccounts().addAll(gamers);
-	}
-
 	public LinkedList<String> getFaveGames () {
 		return faveGames;
+	}
+
+	public void setFaveGames (LinkedList<String> faveGames) {
+		this.faveGames = faveGames;
 	}
 
 	public LinkedList<AdminGameReco> getAdminGameRecosGotten () {
@@ -95,6 +104,10 @@ public class Gamer extends Account {
 
 	public double getMoney () {
 		return money;
+	}
+
+	public void setMoney (double money) {
+		this.money = money;
 	}
 
 	private void giveEventAward (int award) {
@@ -109,19 +122,7 @@ public class Gamer extends Account {
 		this.awardsFromEvents = awardsFromEvents;
 	}
 
-	public void setMoney (double money) {
-		this.money = money;
-	}
-
 	public void setAccountStartDate (LocalDate accountStartDate) {
 		this.accountStartDate = accountStartDate;
-	}
-
-	public void setFrnds (LinkedList<String> frnds) {
-		this.frnds = frnds;
-	}
-
-	public void setFaveGames (LinkedList<String> faveGames) {
-		this.faveGames = faveGames;
 	}
 }

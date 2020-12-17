@@ -2,7 +2,6 @@ package View.Menus;
 
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Color {
@@ -85,14 +84,14 @@ public enum Color {
 		this.val = val;
 	}
 
-	public String getVal () {
-		return val;
-	}
-
-	public static LinkedList<Color> getAllBackgroundColors() {
+	public static LinkedList<Color> getAllBackgroundColors () {
 		return Arrays.stream(values())
 				.filter(color -> !color.toString().toLowerCase().startsWith("black"))
 				.filter(color -> color.toString().toLowerCase().endsWith("background"))
 				.collect(Collectors.toCollection(LinkedList::new));
+	}
+
+	public String getVal () {
+		return val;
 	}
 }

@@ -40,6 +40,9 @@ public class GameController {
 
 				if (username2.trim().equalsIgnoreCase("/c")) return;
 
+				if (!username2.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("Second player's username");
+
 				if (!Account.accountExists(username2))
 					throw new AccountController.NoAccountExistsWithUsernameException();
 
@@ -52,7 +55,7 @@ public class GameController {
 				player2 = (Gamer) Account.getAccount(username2);
 
 				break;
-			} catch (AccountController.NoAccountExistsWithUsernameException | CantPlayWithAdminException | CantPlayWithYourselfException e) {
+			} catch (AccountController.NoAccountExistsWithUsernameException | CantPlayWithAdminException | CantPlayWithYourselfException | MainController.InvalidFormatException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
@@ -65,9 +68,7 @@ public class GameController {
 
 		Game game = null;
 		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
-			case "battlesea" -> {
-				game = new BattleSea(players);
-			}
+			case "battlesea" -> game = new BattleSea(players);
 			case "reversi" -> {
 				game = new Reversi(players);
 				((Reversi) game).emptyBoard();
@@ -146,7 +147,8 @@ public class GameController {
 		String details;
 		while (true)
 			try {
-				Menu.printAskingForInput(gameName + "'s Details[/c to cancel] -> "); details = Menu.getInputLine();
+				Menu.printAskingForInput(gameName + "'s Details[/c to cancel] -> ");
+				details = Menu.getInputLine();
 
 				if (details.trim().equalsIgnoreCase("/c")) return;
 
@@ -205,7 +207,8 @@ public class GameController {
 		int gameChoice;
 		while (true)
 			try {
-				Menu.printAskingForInput("Which game to continue:[/c to cancel] "); String choice = Menu.getInputLine();
+				Menu.printAskingForInput("Which game to continue:[/c to cancel] ");
+				String choice = Menu.getInputLine();
 
 				if (choice.trim().equalsIgnoreCase("/c")) return;
 

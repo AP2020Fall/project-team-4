@@ -12,9 +12,15 @@ public class MessageView {
 	}
 
 	public void displayAdminMessages (LinkedList<String> messages) { // every string is in form -> "date text"
-		messages.forEach(message -> System.out.printf("\t> %s - %s%n",
-				message.split(" ")[0],
-				message.split(" ")[1]
-		));
+		messages.forEach(message -> {
+			StringBuilder text = new StringBuilder();
+			for (int i = 1; i < message.split(" ").length; i++)
+				text.append(message.split(" ")[i]).append(" ");
+
+			System.out.printf("\t> %s - %s%n",
+					message.split(" ")[0],
+					text.toString()
+			);
+		});
 	}
 }

@@ -131,7 +131,7 @@ public class GameLog {
 	 * every 2 games is one level so level = playedCount/2
 	 */
 	public static String getGameStatic (String gameName, Gamer gamer) {
-		return "Level:" + (int) getPlayedCount(gamer, gameName) / 2 +
+		return "Level:" + getPlayedCount(gamer, gameName) / 2 +
 				"played" + getPlayedCount(gamer, gameName) + "times" +
 				"number of wins: " + getWinCount(gamer, gameName) +
 				"number of loss: " + getLossCount(gamer, gameName);

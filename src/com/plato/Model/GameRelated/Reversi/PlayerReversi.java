@@ -1,7 +1,6 @@
 package Model.GameRelated.Reversi;
 
 import Model.AccountRelated.Gamer;
-import Model.GameRelated.Game;
 import Model.GameRelated.Player;
 
 public class PlayerReversi extends Player {

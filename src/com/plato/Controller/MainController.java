@@ -26,11 +26,10 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class MainController {
-	private static MainController mainController;
-	private GsonBuilder gsonBuilder = new GsonBuilder();
-	private Gson gson;
-
 	static int command;
+	private static MainController mainController;
+	private final GsonBuilder gsonBuilder = new GsonBuilder();
+	private Gson gson;
 
 	public static MainController getInstance () {
 		if (mainController == null)
@@ -67,6 +66,7 @@ public class MainController {
 
 		Menu.getMenuIn().displayMenu();
 
+		//noinspection InfiniteLoopStatement
 		while (true) {
 			if (Menu.getScanner().hasNextLine()) {
 				try {
@@ -89,6 +89,14 @@ public class MainController {
 				Menu.getMenuIn().displayMenu();
 			}
 		}
+	}
+
+	public static int getCommand () {
+		return command;
+	}
+
+	public static void enterAppropriateMenu () {
+		Menu.getMenuIn().getChildMenus().get(command).enter();
 	}
 
 	private void dealWithInput (int command) {
@@ -174,10 +182,7 @@ public class MainController {
 			case "Show wins count" -> GameLogController.getInstance().displayWinCountOfGameByLoggedInPlayer();
 			case "Show played count" -> GameLogController.getInstance().displayPlayedCountOfGameByLoggedInPlayer();
 			case "Add to favorites" -> GameController.getInstance().addGameToFavesOfLoggedInGamer();
-			case "Continue previous games" -> {
-				GameController.getInstance().displayPrevGamesAndChooseToContinue();
-
-			}
+			case "Continue previous games" -> GameController.getInstance().displayPrevGamesAndChooseToContinue();
 			case "Run Game" -> GameController.getInstance().runGame();
 
 			// gameplay battlesea menu
@@ -365,135 +370,135 @@ public class MainController {
 		initGsonAndItsBuilder();
 		// admins
 		{
-			String json = "";
+			StringBuilder json = new StringBuilder();
 
 			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Admin.json"))) {
 				while (reader.ready())
-					json += reader.readLine();
+					json.append(reader.readLine());
 
 				if (json.length() > 2)
-					Admin.setAdmin(gson.fromJson(json, (Type) Admin.class));
+					Admin.setAdmin(gson.fromJson(json.toString(), (Type) Admin.class));
 			}
 		}
 		// gamers
 		{
-			String json = "";
+			StringBuilder json = new StringBuilder();
 			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Gamer.json"))) {
 
 				while (reader.ready())
-					json += reader.readLine();
+					json.append(reader.readLine());
 
 				if (json.length() > 2)
-					Gamer.setGamers(gson.fromJson(json, new TypeToken<LinkedList<Gamer>>() {
+					Gamer.setGamers(gson.fromJson(json.toString(), new TypeToken<LinkedList<Gamer>>() {
 					}.getType()));
 			}
 		}
 		// savedLoginInfo
 		{
-			String json = "";
+			StringBuilder json = new StringBuilder();
 			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/SavedLoginInfo.json"))) {
 				boolean forAdmin = false;
 				if (reader.ready()) forAdmin = reader.readLine().equalsIgnoreCase("a");
 
 				while (reader.ready())
-					json += reader.readLine();
+					json.append(reader.readLine());
 
 				if (json.length() > 2) {
-					AccountController.getInstance().setCurrentAccLoggedIn(gson.fromJson(json, (forAdmin ? Admin.class : Gamer.class)));
+					AccountController.getInstance().setCurrentAccLoggedIn(gson.fromJson(json.toString(), (forAdmin ? Admin.class : Gamer.class)));
 					AccountController.getInstance().setSaveLoginInfo(true);
 				}
 			}
 		}
 		// admin game recommendations
 		{
-			String json = "";
+			StringBuilder json = new StringBuilder();
 			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/AdminGameReco.json"))) {
 
 				while (reader.ready())
-					json += reader.readLine();
+					json.append(reader.readLine());
 
 
 				if (json.length() > 2)
-					AdminGameReco.setRecommendations(gson.fromJson(json, new TypeToken<LinkedList<AdminGameReco>>() {
+					AdminGameReco.setRecommendations(gson.fromJson(json.toString(), new TypeToken<LinkedList<AdminGameReco>>() {
 					}.getType()));
 			}
 		}
 		// events
 		{
-			String json = "";
+			StringBuilder json = new StringBuilder();
 			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Event.json"))) {
 
 				while (reader.ready())
-					json += reader.readLine();
+					json.append(reader.readLine());
 
 				if (json.length() > 2)
-					Event.setEvents(gson.fromJson(json, new TypeToken<LinkedList<Event>>() {
+					Event.setEvents(gson.fromJson(json.toString(), new TypeToken<LinkedList<Event>>() {
 					}.getType()));
 			}
 		}
 		// frnd req's
 		{
-			String json = "";
+			StringBuilder json = new StringBuilder();
 			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/FriendRequest.json"))) {
 
 				while (reader.ready())
-					json += reader.readLine();
+					json.append(reader.readLine());
 
 				if (json.length() > 2)
-					FriendRequest.setAllfriendRequests(gson.fromJson(json, new TypeToken<LinkedList<FriendRequest>>() {
+					FriendRequest.setAllfriendRequests(gson.fromJson(json.toString(), new TypeToken<LinkedList<FriendRequest>>() {
 					}.getType()));
 			}
 		}
 		// messages
 		{
-			String json = "";
+			StringBuilder json = new StringBuilder();
 			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/AccountRelated/Message.json"))) {
 
 				while (reader.ready())
-					json += reader.readLine();
+					json.append(reader.readLine());
 
 				if (json.length() > 2)
-					Message.setAllMessages(gson.fromJson(json, new TypeToken<LinkedList<Message>>() {
+					Message.setAllMessages(gson.fromJson(json.toString(), new TypeToken<LinkedList<Message>>() {
 					}.getType()));
 			}
 		}
 		// BattleSea list
 		{
-			String json = "";
+			StringBuilder json = new StringBuilder();
 			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/BattleSea.json"))) {
 
 				while (reader.ready())
-					json += reader.readLine();
+					json.append(reader.readLine());
 
 				if (json.length() > 2)
-					BattleSea.setAllGames( gson.fromJson(json, new TypeToken<LinkedList<BattleSea>>() {
+					BattleSea.setAllGames(gson.fromJson(json.toString(), new TypeToken<LinkedList<BattleSea>>() {
 					}.getType()));
 			}
 		}
 		// Reversi list
 		{
-			String json = "";
+			StringBuilder json = new StringBuilder();
 			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/GameRelated/Reversi.json"))) {
 
 				while (reader.ready())
-					json += reader.readLine();
+					json.append(reader.readLine());
 
 
 				if (json.length() > 2)
-					Reversi.setAllGames(gson.fromJson(json, new TypeToken<LinkedList<Reversi>>() {
+					Reversi.setAllGames(gson.fromJson(json.toString(), new TypeToken<LinkedList<Reversi>>() {
 					}.getType()));
 			}
 		}
 		// IDGenerator list
 		{
-			String json = "";
+			StringBuilder json = new StringBuilder();
 			try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/JSONs/IDGenerator.json"))) {
 
 				while (reader.ready())
-					json += reader.readLine();
+					json.append(reader.readLine());
 
 				if (json.length() > 2)
-					IDGenerator.setAllIDsGenerated(gson.fromJson(json, new TypeToken<LinkedList<String>>() {
+					IDGenerator.setAllIDsGenerated(gson.fromJson(json.toString(), new TypeToken<LinkedList<String>>() {
 					}.getType()));
 			}
 		}
@@ -505,7 +510,7 @@ public class MainController {
 			String reversiDetails = Game.getAllGames().stream().filter(game -> game instanceof Reversi).findFirst().get().getDetails();
 			Reversi.setDetailsForReversi(reversiDetails);
 		} catch (NoSuchElementException | NullPointerException e) {
-			return;
+
 		}
 	}
 
@@ -534,10 +539,15 @@ public class MainController {
 		}
 	}
 
-	private static class DayPassController extends Thread {
-		private int lastDayUpdated;
+	public static class InvalidFormatException extends Exception {
+		public InvalidFormatException (String field) {
+			super(field + " format is invalid");
+		}
+	}
 
+	private static class DayPassController extends Thread {
 		private static DayPassController dayPassController = new DayPassController();
+		private int lastDayUpdated;
 
 		public static DayPassController getInstance () {
 			if (dayPassController == null)
@@ -555,13 +565,5 @@ public class MainController {
 				lastDayUpdated = LocalDate.now().getDayOfMonth();
 			}
 		}
-	}
-
-	public static int getCommand () {
-		return command;
-	}
-
-	public static void enterAppropriateMenu () {
-		Menu.getMenuIn().getChildMenus().get(command).enter();
 	}
 }

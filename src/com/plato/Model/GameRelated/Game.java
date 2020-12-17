@@ -14,14 +14,12 @@ import java.util.stream.Collectors;
 
 public abstract class Game {
 
+	private static final LinkedList<Game> allGames = new LinkedList<>();
 	private final String gameID;
 	protected String details = "";
-
 	private int turn = 0;
 	private GameConclusion conclusion = GameConclusion.IN_SESSION;
 	private LocalDateTime dateGameEnded;
-
-	private static LinkedList<Game> allGames = new LinkedList<>();
 
 	protected Game () {
 		this.gameID = IDGenerator.generateNext();
@@ -79,7 +77,11 @@ public abstract class Game {
 				scoreBoard.addLast("Rank: %d,\tUsername: %s,\tPoints: %d,\tWins: %d,\tLosses: %d,\tDraws: %d,\tPlayed Count: %d".formatted(
 						rank.get(), username, pts, wins, losses, draws, playCount
 				));
-				prevRankPts.set(pts); prevRankWins.set(wins); prevRankLosses.set(losses); prevRankDraws.set(draws); prevRankPlayCount.set(playCount);
+				prevRankPts.set(pts);
+				prevRankWins.set(wins);
+				prevRankLosses.set(losses);
+				prevRankDraws.set(draws);
+				prevRankPlayCount.set(playCount);
 			});
 		}
 		return scoreBoard;
@@ -87,6 +89,14 @@ public abstract class Game {
 
 	public static void startGame (Game game) {
 		allGames.addLast(game);
+	}
+
+	public static LinkedList<Game> getAllGames () {
+		return allGames;
+	}
+
+	public static LinkedList<Game> getAllFinishedGames () {
+		return allGames.stream().filter(Game::gameHasEnded).collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public boolean gameHasEnded () {
@@ -167,16 +177,8 @@ public abstract class Game {
 			return new LinkedList<>(((BattleSea) this).getListOfBattleSeaPlayers());
 	}
 
-	public static LinkedList<Game> getAllGames () {
-		return allGames;
-	}
-
 	public String getDetails () {
 		return details;
-	}
-
-	public static LinkedList<Game> getAllFinishedGames () {
-		return allGames.stream().filter(Game::gameHasEnded).collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public LocalDateTime getDateGameEnded () {

@@ -28,11 +28,12 @@ public class MessageController {
 		}});
 	}
 
-	public void sendMsg() {
+	public void sendMsg () {
 		String msg;
 		while (true)
 			try {
-				Menu.printAskingForInput("Your message[/c to cancel] -> "); msg = Menu.getInputLine();
+				Menu.printAskingForInput("Your message[/c to cancel] -> ");
+				msg = Menu.getInputLine();
 
 				if (msg.trim().equalsIgnoreCase("/c")) return;
 

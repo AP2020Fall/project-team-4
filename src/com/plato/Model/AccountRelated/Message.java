@@ -7,10 +7,9 @@ import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class Message {
-	private String text;
-	private LocalDateTime dateTime;
-
 	private static LinkedList<Message> allMessages = new LinkedList<>();
+	private final String text;
+	private final LocalDateTime dateTime;
 
 	public Message (String text) {
 		this.text = text;

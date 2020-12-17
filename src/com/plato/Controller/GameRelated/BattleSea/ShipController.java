@@ -28,9 +28,11 @@ public class ShipController {
 
 		}});
 
-		String shipName; Ship chosenShip;
+		String shipName;
+		Ship chosenShip;
 		while (true) {
-			Menu.printAskingForInput("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
+			Menu.printAskingForInput("Choose ship[/c to cancel ]: ");
+			shipName = Menu.getInputLine();
 
 			if (shipName.toLowerCase().trim().equals("/c")) return;
 
@@ -42,11 +44,14 @@ public class ShipController {
 			Menu.printErrorMessage("Invalid ship name.");
 		}
 
-		String newX, newY; int newXInt, newYInt;
+		String newX, newY;
+		int newXInt, newYInt;
 		while (true)
 			try {
-				Menu.printAskingForInput("New x [/c to cancel , /s to use prev val]: "); newX = Menu.getInputLine();
-				Menu.printAskingForInput("New y [/c to cancel , /s to use prev val]: "); newY = Menu.getInputLine();
+				Menu.printAskingForInput("New x [/c to cancel , /s to use prev val]: ");
+				newX = Menu.getInputLine();
+				Menu.printAskingForInput("New y [/c to cancel , /s to use prev val]: ");
+				newY = Menu.getInputLine();
 
 				if (newX.toLowerCase().trim().equals("/c") || newY.toLowerCase().trim().equals("/c")) return;
 
@@ -74,7 +79,7 @@ public class ShipController {
 		chosenShip.move(newXInt, newYInt);
 	}
 
-	public  void rotateShip () {
+	public void rotateShip () {
 		LinkedList<Ship> ships = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
 
 		ShipView.getInstance().displayShipsWithNamesForEditing(new LinkedList<>() {{
@@ -83,9 +88,11 @@ public class ShipController {
 
 		}});
 
-		String shipName; Ship chosenShip;
+		String shipName;
+		Ship chosenShip;
 		while (true) {
-			Menu.printAskingForInput("Choose ship[/c to cancel ]: "); shipName = Menu.getInputLine();
+			Menu.printAskingForInput("Choose ship[/c to cancel ]: ");
+			shipName = Menu.getInputLine();
 
 			if (shipName.toLowerCase().trim().equals("/c")) return;
 
@@ -107,7 +114,7 @@ public class ShipController {
 		chosenShip.changeDir();
 	}
 
-	public  void displayAllShipsOfCurrentPlayer () {
+	public void displayAllShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
 				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
@@ -115,28 +122,28 @@ public class ShipController {
 		);
 	}
 
-	public  void displayDestroyedShipsOfCurrentPlayer () {
+	public void displayDestroyedShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
 				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
 						.getShips(true)));
 	}
 
-	public  void displayDestroyedShipsOfOpponent () {
+	public void displayDestroyedShipsOfOpponent () {
 		ShipView.getInstance().displayShips(getShipsSizes(
 				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
 						.getOpponentShips(true)));
 	}
 
-	public  void displayHealthyShipsOfCurrentPlayer () {
+	public void displayHealthyShipsOfCurrentPlayer () {
 		ShipView.getInstance().displayShips(getShipsSizes(
 				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
 						.getTurnPlayer())
 						.getShips(false)));
 	}
 
-	public  LinkedList<String> getShipsSizes (LinkedList<Ship> ships) {
+	public LinkedList<String> getShipsSizes (LinkedList<Ship> ships) {
 		return new LinkedList<>() {{
 			for (Ship ship : ships)
 				add("%d %d".formatted(ship.getL_SIZE(), ship.getS_SIZE()));

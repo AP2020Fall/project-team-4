@@ -11,10 +11,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class AccountController {
+	private static AccountController accountController;
 	private Account currentAccLoggedIn = null;
 	private boolean saveLoginInfo = false; // ask at login. also set to false when logout
-
-	private static AccountController accountController;
 
 	public static AccountController getInstance () {
 		if (accountController == null)
@@ -26,20 +25,25 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] ");
+				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
+
+				if (!username.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("Username");
 
 				if (!Account.accountExists(username))
 					throw new NoAccountExistsWithUsernameException();
 				break;
-			} catch (NoAccountExistsWithUsernameException e) {
+			} catch (NoAccountExistsWithUsernameException | MainController.InvalidFormatException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
 		while (true)
 			try {
-				Menu.printAskingForInput("Password:[/c to cancel] "); String password = Menu.getInputLine();
+				Menu.printAskingForInput("Password:[/c to cancel] ");
+				String password = Menu.getInputLine();
 
 				if (password.trim().equalsIgnoreCase("/c")) return;
 
@@ -65,9 +69,13 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] ");
+				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
+
+				if (!username.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("Username");
 
 				if (!Account.accountExists(username))
 					throw new NoAccountExistsWithUsernameException();
@@ -76,13 +84,14 @@ public class AccountController {
 					throw new AdminAccountCantBeDeletedException();
 
 				break;
-			} catch (AdminAccountCantBeDeletedException | NoAccountExistsWithUsernameException e) {
+			} catch (AdminAccountCantBeDeletedException | NoAccountExistsWithUsernameException | MainController.InvalidFormatException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
 		while (true)
 			try {
-				Menu.printAskingForInput("Password:[/c to cancel] "); String password = Menu.getInputLine();
+				Menu.printAskingForInput("Password:[/c to cancel] ");
+				String password = Menu.getInputLine();
 
 				if (password.trim().equalsIgnoreCase("/c")) return;
 
@@ -105,32 +114,65 @@ public class AccountController {
 		String username;
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] ");
+				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
+
+				if (!username.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("Username");
 
 				if (Account.accountExists(username))
 					throw new AccountWithUsernameAlreadyExistsException();
 				break;
-			} catch (AccountWithUsernameAlreadyExistsException e) {
+			} catch (AccountWithUsernameAlreadyExistsException | MainController.InvalidFormatException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
 
 		// trying to ask for password and full name
-		Menu.printAskingForInput("Password:[/c to cancel] "); String password = Menu.getInputLine();
+		Menu.printAskingForInput("Password:[/c to cancel] ");
+		String password = Menu.getInputLine();
 		if (password.trim().equalsIgnoreCase("/c")) return;
 
-		Menu.printAskingForInput("First Name:[/c to cancel] "); String firstName = Menu.getInputLine();
-		if (firstName.trim().equalsIgnoreCase("/c")) return;
+		String firstName;
+		while (true) {
+			try {
+				Menu.printAskingForInput("First Name:[/c to cancel] ");
+				firstName = Menu.getInputLine();
 
-		Menu.printAskingForInput("Last Name:[/c to cancel] "); String lastName = Menu.getInputLine();
-		if (lastName.trim().equalsIgnoreCase("/c")) return;
+				if (firstName.trim().equalsIgnoreCase("/c")) return;
+
+				if (!firstName.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("First name");
+
+				break;
+			} catch (MainController.InvalidFormatException e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
+		}
+
+		String lastName;
+		while (true)
+			try {
+				Menu.printAskingForInput("Last Name:[/c to cancel] ");
+				lastName = Menu.getInputLine();
+
+				if (lastName.trim().equalsIgnoreCase("/c")) return;
+
+				if (!lastName.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("Last name");
+
+				break;
+			} catch (MainController.InvalidFormatException e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
 
 		String email;
 		while (true)
 			try {
-				Menu.printAskingForInput("Email Address:[/c to cancel] "); email = Menu.getInputLine();
+				Menu.printAskingForInput("Email Address:[/c to cancel] ");
+				email = Menu.getInputLine();
 
 				if (email.trim().equalsIgnoreCase("/c")) return;
 
@@ -144,7 +186,8 @@ public class AccountController {
 		String phoneNum;
 		while (true)
 			try {
-				Menu.printAskingForInput("Phone Number:[/c to cancel] "); phoneNum = Menu.getInputLine();
+				Menu.printAskingForInput("Phone Number:[/c to cancel] ");
+				phoneNum = Menu.getInputLine();
 
 				if (phoneNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -167,7 +210,8 @@ public class AccountController {
 			double initMoney;
 			while (true) {
 				try {
-					Menu.printAskingForInput("Initial Balance:[/c to cancel] "); initMoney = Double.parseDouble(Menu.getInputLine());
+					Menu.printAskingForInput("Initial Balance:[/c to cancel] ");
+					initMoney = Double.parseDouble(Menu.getInputLine());
 
 					if (phoneNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -183,7 +227,7 @@ public class AccountController {
 			}
 
 			Account.addAccount(Gamer.class, firstName, lastName, username, password, email, phoneNum, initMoney);
-			Menu.printSuccessfulOperation( "Gamer account created successfully." );
+			Menu.printSuccessfulOperation("Gamer account created successfully.");
 		}
 
 		Menu.addMenu("2");
@@ -193,7 +237,8 @@ public class AccountController {
 	public void changePWCommand () {
 		while (true)
 			try {
-				Menu.printAskingForInput("Old password:[/c to cancel] "); String oldPW = Menu.getInputLine();
+				Menu.printAskingForInput("Old password:[/c to cancel] ");
+				String oldPW = Menu.getInputLine();
 
 				if (oldPW.trim().equalsIgnoreCase("/c")) return;
 
@@ -204,7 +249,8 @@ public class AccountController {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
-		Menu.printAskingForInput("New password: "); String newPW = Menu.getInputLine();
+		Menu.printAskingForInput("New password: ");
+		String newPW = Menu.getInputLine();
 
 		Menu.displayAreYouSureMessage();
 		if (Menu.getInputLine().trim().equalsIgnoreCase("y"))
@@ -222,7 +268,8 @@ public class AccountController {
 
 		int field;
 		try {
-			Menu.printAskingForInput("Choose field to edit:\n"); String fieldstr = Menu.getInputLine();
+			Menu.printAskingForInput("Choose field to edit:\n");
+			String fieldstr = Menu.getInputLine();
 
 			if (!String.valueOf(fieldstr).matches("[1-5]"))
 				throw new NumberFormatException();
@@ -235,10 +282,21 @@ public class AccountController {
 
 		switch (field) {
 			case 1 -> {
-				Menu.printAskingForInput("New First name:[/c to cancel] "); String new1name = Menu.getInputLine();
+				String new1name;
+				while (true)
+					try {
+						Menu.printAskingForInput("New First name:[/c to cancel] ");
+						new1name = Menu.getInputLine();
 
-				if (new1name.trim().equalsIgnoreCase("/c")) return;
+						if (new1name.trim().equalsIgnoreCase("/c")) return;
 
+						if (!new1name.matches("[!-~]+"))
+							throw new MainController.InvalidFormatException("New first name");
+
+						break;
+					} catch (MainController.InvalidFormatException e) {
+						Menu.printErrorMessage(e.getMessage());
+					}
 				Menu.displayAreYouSureMessage();
 				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
 					getCurrentAccLoggedIn().editField("first name", new1name);
@@ -246,10 +304,21 @@ public class AccountController {
 				}
 			}
 			case 2 -> {
-				Menu.printAskingForInput("New Last name:[/c to cancel] "); String new2name = Menu.getInputLine();
+				String new2name;
+				while (true)
+					try {
+						Menu.printAskingForInput("New Last name:[/c to cancel] ");
+						new2name = Menu.getInputLine();
 
-				if (new2name.trim().equalsIgnoreCase("/c")) return;
+						if (new2name.trim().equalsIgnoreCase("/c")) return;
 
+						if (!new2name.matches("[!-~]+"))
+							throw new MainController.InvalidFormatException("New last name");
+
+						break;
+					} catch (MainController.InvalidFormatException e) {
+						Menu.printErrorMessage(e.getMessage());
+					}
 				Menu.displayAreYouSureMessage();
 				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
 					getCurrentAccLoggedIn().editField("last name", new2name);
@@ -260,14 +329,19 @@ public class AccountController {
 				String username;
 				while (true)
 					try {
-						Menu.printAskingForInput("New Username:[/c to cancel] "); username = Menu.getInputLine();
+						Menu.printAskingForInput("New Username:[/c to cancel] ");
+						username = Menu.getInputLine();
 
 						if (username.trim().equalsIgnoreCase("/c")) return;
 
+						if (!username.matches("[!-~]+"))
+							throw new MainController.InvalidFormatException("New username");
+
 						if (Account.accountExists(username))
 							throw new AccountWithUsernameAlreadyExistsException();
+
 						break;
-					} catch (AccountWithUsernameAlreadyExistsException e) {
+					} catch (AccountWithUsernameAlreadyExistsException | MainController.InvalidFormatException e) {
 						Menu.printErrorMessage(e.getMessage());
 					}
 
@@ -281,7 +355,8 @@ public class AccountController {
 				String newEmail;
 				while (true)
 					try {
-						Menu.printAskingForInput("New email address:[/c to cancel] "); newEmail = Menu.getInputLine();
+						Menu.printAskingForInput("New email address:[/c to cancel] ");
+						newEmail = Menu.getInputLine();
 
 						if (newEmail.trim().equalsIgnoreCase("/c")) return;
 
@@ -302,7 +377,8 @@ public class AccountController {
 				String newPhoneNum;
 				while (true)
 					try {
-						Menu.printAskingForInput("Phone Number:[/c to cancel] "); newPhoneNum = Menu.getInputLine();
+						Menu.printAskingForInput("Phone Number:[/c to cancel] ");
+						newPhoneNum = Menu.getInputLine();
 
 						if (newPhoneNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -391,15 +467,15 @@ public class AccountController {
 		}
 	}
 
-	private static class InvalidEmailFormatException extends Exception {
+	private static class InvalidEmailFormatException extends MainController.InvalidFormatException {
 		public InvalidEmailFormatException () {
-			super("Email format is invalid.");
+			super("Email");
 		}
 	}
 
-	private static class InvalidPhoneNumFormatException extends Exception {
+	private static class InvalidPhoneNumFormatException extends MainController.InvalidFormatException {
 		public InvalidPhoneNumFormatException () {
-			super("Phone number format is invalid.");
+			super("Phone number");
 		}
 	}
 

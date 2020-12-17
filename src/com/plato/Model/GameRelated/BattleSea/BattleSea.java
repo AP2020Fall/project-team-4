@@ -7,9 +7,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class BattleSea extends Game {
-	private static String battleseaDetails;
-	private ArrayList<PlayerBattleSea> listOfPlayers = new ArrayList<>();
-
 	private static final ArrayList<String> arrangement = new ArrayList<>(Arrays.asList(
 			"5 2 1", // l s n
 			"5 1 1",
@@ -17,6 +14,8 @@ public class BattleSea extends Game {
 			"3 1 1",
 			"2 1 2"
 	));
+	private static String battleseaDetails;
+	private ArrayList<PlayerBattleSea> listOfPlayers = new ArrayList<>();
 
 	public BattleSea (ArrayList<Gamer> gamers) {
 		super();
@@ -26,37 +25,6 @@ public class BattleSea extends Game {
 		listOfPlayers.add(new PlayerBattleSea(gamers.get(0)));
 		listOfPlayers.add(new PlayerBattleSea(gamers.get(1)));
 
-	}
-
-	/**
-	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended
-	 */
-	@Override
-	public boolean gameEnded () {
-		PlayerBattleSea player1 = (PlayerBattleSea) getListOfPlayers().get(0),
-				player2 = (PlayerBattleSea) getListOfPlayers().get(1);
-
-		return player2.getShips(false).size() == 0 || player1.getShips(false).size() == 0;
-	}
-
-	@Override
-	public Gamer getWinner () {
-		// player1 win
-		if (getInGameScore(1) > getInGameScore(2))
-			return listOfPlayers.get(0).getGamer();
-
-		// player2win
-		if (getInGameScore(1) < getInGameScore(2))
-			return listOfPlayers.get(1).getGamer();
-
-		return null; // draw
-	}
-
-	@Override
-	public int getInGameScore (int playerNum) {
-		return ((PlayerBattleSea) getListOfPlayers().get(playerNum - 1))
-				.getBombsThrown(true)
-				.size();
 	}
 
 	public static LinkedList<LinkedList<Ship>> get5RandBoards () {
@@ -98,7 +66,7 @@ public class BattleSea extends Game {
 		return board;
 	}
 
-	public static void setDetailsForBattlesea (String details) {
+	public static void setDetailsForBattlesea (String details) { // fixme wont save if no games exist and we edit and restart program
 		battleseaDetails = details;
 		getAllGames().stream()
 				.filter(game -> game instanceof BattleSea)
@@ -109,6 +77,7 @@ public class BattleSea extends Game {
 		return battleseaDetails;
 	}
 
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean checkCoordinates (int number) {
 		return number <= 10 && number >= 1;
 	}
@@ -120,18 +89,49 @@ public class BattleSea extends Game {
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
-	public boolean canStartBombing () {
-		return listOfPlayers.get(0).getShips() != null &&
-				listOfPlayers.get(1).getShips() != null &&
-				listOfPlayers.get(0).getShips().size() != 0 &&
-				listOfPlayers.get(1).getShips().size() != 0;
-	}
-
 	/**
 	 * only used for gson, to add all the extracted battlesea games
 	 */
 	public static void setAllGames (LinkedList<BattleSea> allGames) {
 		Game.getAllGames().addAll(allGames);
+	}
+
+	/**
+	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended
+	 */
+	@Override
+	public boolean gameEnded () {
+		PlayerBattleSea player1 = (PlayerBattleSea) getListOfPlayers().get(0),
+				player2 = (PlayerBattleSea) getListOfPlayers().get(1);
+
+		return player2.getShips(false).size() == 0 || player1.getShips(false).size() == 0;
+	}
+
+	@Override
+	public Gamer getWinner () {
+		// player1 win
+		if (getInGameScore(1) > getInGameScore(2))
+			return listOfPlayers.get(0).getGamer();
+
+		// player2win
+		if (getInGameScore(1) < getInGameScore(2))
+			return listOfPlayers.get(1).getGamer();
+
+		return null; // draw
+	}
+
+	@Override
+	public int getInGameScore (int playerNum) {
+		return ((PlayerBattleSea) getListOfPlayers().get(playerNum - 1))
+				.getBombsThrown(true)
+				.size();
+	}
+
+	public boolean canStartBombing () {
+		return listOfPlayers.get(0).getShips() != null &&
+				listOfPlayers.get(1).getShips() != null &&
+				listOfPlayers.get(0).getShips().size() != 0 &&
+				listOfPlayers.get(1).getShips().size() != 0;
 	}
 
 	public ArrayList<PlayerBattleSea> getListOfBattleSeaPlayers () {

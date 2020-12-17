@@ -4,9 +4,8 @@ import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class FriendRequest {
-	private final String fromUsername, toUsername;
-
 	private static LinkedList<FriendRequest> allfriendRequests = new LinkedList<>();
+	private final String fromUsername, toUsername;
 
 	private FriendRequest (String fromUsername, String toUsername) {
 		this.fromUsername = fromUsername;
@@ -21,21 +20,14 @@ public class FriendRequest {
 		FriendRequest.getFriendReq(fromUsername, toUsername).conclude(accepted);
 		allfriendRequests.removeIf(friendRequest ->
 				friendRequest.fromUsername.equals(fromUsername) &&
-				friendRequest.toUsername.equals(toUsername));
-	}
-
-	private void conclude (boolean accepted) {
-		if (accepted) {
-			((Gamer) Account.getAccount(fromUsername)).addFrnd(toUsername);
-			((Gamer) Account.getAccount(toUsername)).addFrnd(fromUsername);
-		}
+						friendRequest.toUsername.equals(toUsername));
 	}
 
 	public static FriendRequest getFriendReq (String fromUsername, String toUsername) {
 		return allfriendRequests.stream()
 				.filter(friendRequest ->
 						friendRequest.toUsername.equals(toUsername) &&
-						friendRequest.fromUsername.equals(fromUsername)
+								friendRequest.fromUsername.equals(fromUsername)
 				)
 				.findAny().get();
 	}
@@ -55,15 +47,7 @@ public class FriendRequest {
 		return allfriendRequests.stream()
 				.anyMatch(friendRequest ->
 						friendRequest.fromUsername.equals(fromUsername) &&
-						friendRequest.toUsername.equals(toUsername));
-	}
-
-	public String getFromUsername () {
-		return fromUsername;
-	}
-
-	public String getToUsername () {
-		return toUsername;
+								friendRequest.toUsername.equals(toUsername));
 	}
 
 	public static LinkedList<FriendRequest> getAllfriendRequests () {
@@ -72,5 +56,20 @@ public class FriendRequest {
 
 	public static void setAllfriendRequests (LinkedList<FriendRequest> allfriendRequests) {
 		FriendRequest.allfriendRequests = allfriendRequests;
+	}
+
+	private void conclude (boolean accepted) {
+		if (accepted) {
+			((Gamer) Account.getAccount(fromUsername)).addFrnd(toUsername);
+			((Gamer) Account.getAccount(toUsername)).addFrnd(fromUsername);
+		}
+	}
+
+	public String getFromUsername () {
+		return fromUsername;
+	}
+
+	public String getToUsername () {
+		return toUsername;
 	}
 }

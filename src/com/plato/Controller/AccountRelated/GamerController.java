@@ -42,8 +42,7 @@ public class GamerController {
 				.collect(Collectors.toCollection(LinkedList::new));
 
 		GamerView.getInstance().displayFriendsUsernames(new LinkedList<>() {{
-			for (String friendUN : playersFriends)
-				add(friendUN);
+			this.addAll(playersFriends);
 		}});
 		if (playersFriends.size() > 0)
 			MainController.enterAppropriateMenu();
@@ -53,14 +52,18 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] ");
+				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
+
+				if (!username.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("Username");
 
 				if (!Account.accountExists(username))
 					throw new AccountController.NoAccountExistsWithUsernameException();
 				break;
-			} catch (AccountController.NoAccountExistsWithUsernameException e) {
+			} catch (AccountController.NoAccountExistsWithUsernameException | MainController.InvalidFormatException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
@@ -76,14 +79,18 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] ");
+				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
+
+				if (!username.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("Username");
 
 				if (!((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(username))
 					throw new FriendDoesntExistException();
 				break;
-			} catch (FriendDoesntExistException e) {
+			} catch (FriendDoesntExistException | MainController.InvalidFormatException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
@@ -94,7 +101,8 @@ public class GamerController {
 		String username;
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] "); username = Menu.getInputLine();
+				Menu.printAskingForInput("Username:[/c to cancel] ");
+				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 

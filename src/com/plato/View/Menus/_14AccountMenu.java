@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class _14AccountMenu extends Menu {
-	private Menu entry;
 	private final boolean isForAdmin;
+	private Menu entry;
 
 	protected _14AccountMenu (boolean isForAdmin) {
 		super("Account Menu");

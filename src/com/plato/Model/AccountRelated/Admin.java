@@ -18,12 +18,12 @@ public class Admin extends Account {
 				.findAny().get();
 	}
 
+	public static void setAdmin (Admin admin) {
+		getAccounts().add(admin);
+	}
+
 	public static boolean adminHasBeenCreated () {
 		return getAccounts().stream()
 				.anyMatch(account -> account instanceof Admin);
-	}
-
-	public static void setAdmin (Admin admin) {
-		getAccounts().add(admin);
 	}
 }

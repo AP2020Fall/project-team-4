@@ -7,11 +7,10 @@ import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class AdminGameReco {
+	private static LinkedList<AdminGameReco> recommendations = new LinkedList<>();
 	private final String recoID;
 	private final String gameName;
-	private Gamer gamer;
-
-	private static LinkedList<AdminGameReco> recommendations = new LinkedList<>();
+	private final Gamer gamer;
 
 	private AdminGameReco (String gameName, Gamer gamer) {
 		this.recoID = IDGenerator.generateNext();

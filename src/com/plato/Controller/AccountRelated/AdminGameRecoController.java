@@ -28,9 +28,13 @@ public class AdminGameRecoController {
 		String gamerUN;
 		while (true)
 			try {
-				Menu.printAskingForInput("Gamer username:[/c to cancel] "); gamerUN = Menu.getInputLine();
+				Menu.printAskingForInput("Gamer username:[/c to cancel] ");
+				gamerUN = Menu.getInputLine();
 
 				if (gamerUN.trim().equalsIgnoreCase("/c")) return;
+
+				if (!gamerUN.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("Gamer username");
 
 				if (!Account.accountExists(gamerUN))
 					throw new AccountController.NoAccountExistsWithUsernameException();
@@ -38,7 +42,7 @@ public class AdminGameRecoController {
 				if (Account.getAccount(gamerUN) instanceof Admin)
 					throw new CantRecommendToYourselfException();
 				break;
-			} catch (AccountController.NoAccountExistsWithUsernameException | CantRecommendToYourselfException e) {
+			} catch (AccountController.NoAccountExistsWithUsernameException | CantRecommendToYourselfException | MainController.InvalidFormatException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 
@@ -50,14 +54,15 @@ public class AdminGameRecoController {
 				AtomicInteger count = new AtomicInteger(1);
 				recoChoices.forEach(game -> Menu.println("%d. %s".formatted(count.getAndIncrement(), game)));
 
-				Menu.printAskingForInput("Your game choice:[/c to cancel] "); gamechoice = Menu.getInputLine();
+				Menu.printAskingForInput("Your game choice:[/c to cancel] ");
+				gamechoice = Menu.getInputLine();
 
 				if (gamechoice.trim().equalsIgnoreCase("/c")) return;
 
 				if (!gamechoice.matches("[1-2]"))
 					throw new MainController.InvalidInputException();
 
-				if (AdminGameReco.recommendationExists((Gamer) Account.getAccount(gamerUN), recoChoices.get(Integer.parseInt(gamechoice)-1)))
+				if (AdminGameReco.recommendationExists((Gamer) Account.getAccount(gamerUN), recoChoices.get(Integer.parseInt(gamechoice) - 1)))
 					throw new AdminGameRecoAlreadyExists();
 
 				break;
@@ -66,7 +71,7 @@ public class AdminGameRecoController {
 			}
 
 
-		AdminGameReco.addReco(recoChoices.get(Integer.parseInt(gamechoice)-1), ((Gamer) Account.getAccount(gamerUN)));
+		AdminGameReco.addReco(recoChoices.get(Integer.parseInt(gamechoice) - 1), ((Gamer) Account.getAccount(gamerUN)));
 	}
 
 	public void displayAdminsRecosToPlayer () {
@@ -98,7 +103,8 @@ public class AdminGameRecoController {
 		String recoID;
 		while (true)
 			try {
-				Menu.printAskingForInput("Suggestion ID:[/c to cancel] "); recoID = Menu.getInputLine();
+				Menu.printAskingForInput("Suggestion ID:[/c to cancel] ");
+				recoID = Menu.getInputLine();
 
 				if (recoID.trim().equalsIgnoreCase("/c")) return;
 
@@ -119,7 +125,8 @@ public class AdminGameRecoController {
 		int choice;
 		while (true)
 			try {
-				Menu.printAskingForInput("Choose game:[/c to cancel] "); String command = Menu.getInputLine();
+				Menu.printAskingForInput("Choose game:[/c to cancel] ");
+				String command = Menu.getInputLine();
 
 				if (command.trim().equalsIgnoreCase("/c")) return;
 

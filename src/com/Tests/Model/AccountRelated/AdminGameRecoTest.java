@@ -73,7 +73,7 @@ public class AdminGameRecoTest {
 		assertFalse(AdminGameReco.recommendationExists(gamer, Reversi.class.getSimpleName()));
 
 		assumeTrue(Account.accountExists("2"));
-		 gamer = (Gamer) Account.getAccount("2");
+		gamer = (Gamer) Account.getAccount("2");
 		assumeTrue(AdminGameReco.recommendationExists(gamer, Reversi.class.getSimpleName()));
 		AdminGameReco.removeReco(AdminGameReco.getRecommendation(gamer, Reversi.class.getSimpleName()).getRecoID());
 		assertFalse(AdminGameReco.recommendationExists(gamer, Reversi.class.getSimpleName()));

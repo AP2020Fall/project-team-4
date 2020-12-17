@@ -24,15 +24,27 @@ public class EventController {
 	}
 
 	public void createEvent () {
-		Menu.printAskingForInput("Title:[/c to cancel] "); String title = Menu.getInputLine();
+		String title;
+		while (true)
+			try {
+				Menu.printAskingForInput("Title:[/c to cancel] ");
+				title = Menu.getInputLine();
 
-		if (title.trim().equalsIgnoreCase("/c")) return;
+				if (title.trim().equalsIgnoreCase("/c")) return;
 
+				if (!title.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("First name");
+
+				break;
+			} catch (MainController.InvalidFormatException e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
 		EventView.getInstance().displayAvailableGames();
 
 		String gameNum;
 		while (true) {
-			Menu.printAskingForInput("Choose Game:[/c to cancel] "); gameNum = Menu.getInputLine();
+			Menu.printAskingForInput("Choose Game:[/c to cancel] ");
+			gameNum = Menu.getInputLine();
 
 			if (gameNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -46,7 +58,8 @@ public class EventController {
 		LocalDate start;
 		while (true) {
 			try {
-				Menu.printAskingForInput("Start Date[d-MMM-yyyy][/c to cancel]: "); String startStr = Menu.getInputLine();
+				Menu.printAskingForInput("Start Date[d-MMM-yyyy][/c to cancel]: ");
+				String startStr = Menu.getInputLine();
 
 				if (startStr.trim().equalsIgnoreCase("/c")) return;
 
@@ -65,7 +78,8 @@ public class EventController {
 		LocalDate end;
 		while (true) {
 			try {
-				Menu.printAskingForInput("End Date[d-MMM-yyyy][/c to cancel]: "); String endStr = Menu.getInputLine();
+				Menu.printAskingForInput("End Date[d-MMM-yyyy][/c to cancel]: ");
+				String endStr = Menu.getInputLine();
 
 				if (endStr.trim().equalsIgnoreCase("/c")) return;
 
@@ -79,8 +93,7 @@ public class EventController {
 				break;
 			} catch (DateTimeParseException e) {
 				Menu.printErrorMessage("Invalid end date format.");
-			}
-			catch (StartDateTimeIsAfterEndException | EndDateTimeHasAlreadyPassedException e) {
+			} catch (StartDateTimeIsAfterEndException | EndDateTimeHasAlreadyPassedException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
 		}
@@ -88,7 +101,8 @@ public class EventController {
 		double eventPrize;
 		while (true) {
 			try {
-				Menu.printAskingForInput("Event Prize[/c to cancel]: "); String prizeStr = Menu.getInputLine();
+				Menu.printAskingForInput("Event Prize[/c to cancel]: ");
+				String prizeStr = Menu.getInputLine();
 
 				if (prizeStr.trim().equalsIgnoreCase("/c")) return;
 
@@ -142,7 +156,8 @@ public class EventController {
 		String eventid;
 		while (true)
 			try {
-				Menu.printAskingForInput("Event ID:[/c to cancel] "); eventid = Menu.getInputLine();
+				Menu.printAskingForInput("Event ID:[/c to cancel] ");
+				eventid = Menu.getInputLine();
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
@@ -167,7 +182,8 @@ public class EventController {
 		String eventid;
 		while (true)
 			try {
-				Menu.printAskingForInput("Event ID:[/c to cancel] "); eventid = Menu.getInputLine();
+				Menu.printAskingForInput("Event ID:[/c to cancel] ");
+				eventid = Menu.getInputLine();
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
@@ -193,7 +209,8 @@ public class EventController {
 		Event event;
 		while (true)
 			try {
-				Menu.printAskingForInput("Event ID:[/c to cancel] "); String eventid = Menu.getInputLine();
+				Menu.printAskingForInput("Event ID:[/c to cancel] ");
+				String eventid = Menu.getInputLine();
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
@@ -220,7 +237,8 @@ public class EventController {
 		Event event;
 		while (true)
 			try {
-				Menu.printAskingForInput("Event ID:[/c to cancel] "); String eventid = Menu.getInputLine();
+				Menu.printAskingForInput("Event ID:[/c to cancel] ");
+				String eventid = Menu.getInputLine();
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
@@ -260,10 +278,21 @@ public class EventController {
 
 		switch (field) {
 			case 1 -> {
-				Menu.printAskingForInput("New Title:[/c to cancel] "); String title = Menu.getInputLine();
+				String title;
+				while (true)
+					try {
+						Menu.printAskingForInput("New Title:[/c to cancel] ");
+						title = Menu.getInputLine();
 
-				if (title.trim().equalsIgnoreCase("/c")) return;
+						if (title.trim().equalsIgnoreCase("/c")) return;
 
+						if (!title.matches("[!-~]+"))
+							throw new MainController.InvalidFormatException("New title");
+
+						break;
+					} catch (MainController.InvalidFormatException e) {
+						Menu.printErrorMessage(e.getMessage());
+					}
 				Menu.displayAreYouSureMessage();
 				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
 					event.editField("title", title);
@@ -276,7 +305,8 @@ public class EventController {
 				EventView.getInstance().displayAvailableGames();
 				while (true)
 					try {
-						Menu.printAskingForInput("Choose New Game:[/c to cancel] "); gameNum = Menu.getInputLine();
+						Menu.printAskingForInput("Choose New Game:[/c to cancel] ");
+						gameNum = Menu.getInputLine();
 
 						if (gameNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -300,7 +330,8 @@ public class EventController {
 				String prize;
 				while (true)
 					try {
-						Menu.printAskingForInput("New Event Prize Amount: [/c to cancel] "); prize = Menu.getInputLine();
+						Menu.printAskingForInput("New Event Prize Amount: [/c to cancel] ");
+						prize = Menu.getInputLine();
 
 						if (prize.trim().equalsIgnoreCase("/c")) return;
 						Double.parseDouble(prize);
@@ -320,7 +351,8 @@ public class EventController {
 				String startDate;
 				while (true)
 					try {
-						Menu.printAskingForInput("New Event Start Date: [/c to cancel] "); startDate = Menu.getInputLine();
+						Menu.printAskingForInput("New Event Start Date: [/c to cancel] ");
+						startDate = Menu.getInputLine();
 
 						if (startDate.trim().equalsIgnoreCase("/c")) return;
 
@@ -350,7 +382,8 @@ public class EventController {
 				String endDate;
 				while (true)
 					try {
-						Menu.printAskingForInput("New Event End Date: [/c to cancel] "); endDate = Menu.getInputLine();
+						Menu.printAskingForInput("New Event End Date: [/c to cancel] ");
+						endDate = Menu.getInputLine();
 
 						if (endDate.trim().equalsIgnoreCase("/c")) return;
 
@@ -381,7 +414,8 @@ public class EventController {
 	public void removeEvent () {
 		while (true)
 			try {
-				Menu.printAskingForInput("Event ID:[/c to cancel] "); String eventid = Menu.getInputLine();
+				Menu.printAskingForInput("Event ID:[/c to cancel] ");
+				String eventid = Menu.getInputLine();
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 

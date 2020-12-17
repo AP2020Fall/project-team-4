@@ -16,12 +16,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class BattleSeaController {
+	private static BattleSeaController battleSeaController;
 	private LinkedList<Ship> trialPlayerBoard1;
 	private LinkedList<Ship> trialPlayerBoard2;
-
-	private static BattleSeaController battleSeaController;
-
-	private TurnTimerTask turnTimerTask = new TurnTimerTask();
+	private final TurnTimerTask turnTimerTask = new TurnTimerTask();
 	private Timer turnTimer;
 
 	public static BattleSeaController getInstance () {
@@ -39,7 +37,8 @@ public class BattleSeaController {
 		int boardChoice;
 		while (true)
 			try {
-				Menu.printAskingForInput("Your board choice: "); boardChoice = Integer.parseInt(Menu.getInputLine());
+				Menu.printAskingForInput("Your board choice: ");
+				boardChoice = Integer.parseInt(Menu.getInputLine());
 
 				if (boardChoice < 1 || boardChoice > 5)
 					throw new InputMismatchException();
@@ -240,7 +239,8 @@ public class BattleSeaController {
 	}
 
 	public void resetTrialPlayerBoards () {
-		trialPlayerBoard1 = null; trialPlayerBoard2 = null;
+		trialPlayerBoard1 = null;
+		trialPlayerBoard2 = null;
 	}
 
 	public void updateGamePlayMenu () {
@@ -272,7 +272,7 @@ public class BattleSeaController {
 
 	public void initTurnTimerStuff () {
 		turnTimer = new Timer();
-		turnTimer.scheduleAtFixedRate(turnTimerTask, 1 * 1000, 1 * 1000);
+		turnTimer.scheduleAtFixedRate(turnTimerTask, 1000, 1000);
 		turnTimerTask.resetTimer();
 	}
 

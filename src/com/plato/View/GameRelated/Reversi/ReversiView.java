@@ -39,7 +39,7 @@ public class ReversiView {
 	public void displayMoveHistory (LinkedList<String> moves) {
 		if (moves.size() == 0) {
 			Menu.println("No moves made yet.");
-		return;
+			return;
 		}
 		for (String move : moves)
 			System.out.println(move);

@@ -22,7 +22,8 @@ public class BombController {
 	public void throwBomb () {
 		PlayerBattleSea currentPlayer = ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getTurnPlayer());
 
-		String Xstr, Ystr; int x, y;
+		String Xstr, Ystr;
+		int x, y;
 		while (true) {
 			try {
 				// for x
