@@ -1,19 +1,21 @@
 g
 {
   "awardsFromEvents": 0,
-  "money": 100.0,
+  "money": 50.0,
   "accountStartDate": {
     "year": 2020,
     "month": 12,
-    "day": 14
+    "day": 6
   },
   "frnds": [],
-  "faveGames": [],
-  "firstName": "elahe",
-  "lastName": "mrtz",
-  "username": "eli",
-  "password": "1234",
-  "userID": "100792",
-  "email": "elahe@email.com",
-  "phoneNum": "0912080808"
+  "faveGames": [
+    "BattleSea"
+  ],
+  "firstName": "1",
+  "lastName": "1",
+  "username": "dorrin1",
+  "password": "11",
+  "userID": "359220",
+  "email": "1@gmail.com",
+  "phoneNum": "00011122233"
 }

@@ -32,7 +32,7 @@ public class Bomb {
 		return y;
 	}
 
-	public Boolean getWasSuccessful () {
+	public Boolean wasSuccessful () {
 		return wasSuccessful;
 	}
 

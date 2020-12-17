@@ -60,7 +60,8 @@ public class ReversiController {
 				if (!Reversi.checkCoordinates(y))
 					throw new InvalidCoordinateException();
 
-				if (!((Reversi) GameController.getInstance().getCurrentGameInSession()).canPlayerPlaceDiskHere(x, y))
+				if (!((Reversi) GameController.getInstance().getCurrentGameInSession())
+						.canPlayerPlaceDiskHere(x-1, y-1)) //fixme check if needs -1
 					throw new CantPlaceDiskHereException();
 				break;
 			} catch (InvalidCoordinateException | CantPlaceDiskHereException | PlayerHasAlreadyPlacedDiskException e) {
@@ -68,7 +69,7 @@ public class ReversiController {
 			}
 		}
 
-		((Reversi) GameController.getInstance().getCurrentGameInSession()).placeDisk(x, y);
+		((Reversi) GameController.getInstance().getCurrentGameInSession()).placeDisk(x-1, y-1); //fixme check if needs -1
 	}
 
 	public void displayAvailableCoords () {
