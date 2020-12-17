@@ -144,11 +144,7 @@ public abstract class Game {
 
 	public abstract boolean gameEnded ();
 
-	public Gamer getWinner () { // fixme use getNumberOfBlack() and getNumberOfWhite() instead of scores
-		if (getListOfPlayers().get(0).getScore() > getListOfPlayers().get(1).getScore()) return getListOfPlayers().get(0).getGamer();
-		else if (getListOfPlayers().get(1).getScore() > getListOfPlayers().get(0).getScore()) return getListOfPlayers().get(1).getGamer();
-		else return null;
-	}
+	public abstract Gamer getWinner ();
 
 	public String getGameName () {
 		return getClass().getSimpleName();
