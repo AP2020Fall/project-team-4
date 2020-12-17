@@ -1470,5 +1470,255 @@
     "gameID": "514924",
     "turn": 1,
     "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "ships": [
+          {
+            "leftMostX": 2,
+            "topMostY": 3,
+            "isVertical": false,
+            "L_SIZE": 5,
+            "S_SIZE": 2
+          },
+          {
+            "leftMostX": 1,
+            "topMostY": 9,
+            "isVertical": false,
+            "L_SIZE": 5,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 7,
+            "topMostY": 1,
+            "isVertical": true,
+            "L_SIZE": 4,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 7,
+            "topMostY": 8,
+            "isVertical": false,
+            "L_SIZE": 3,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 7,
+            "topMostY": 10,
+            "isVertical": false,
+            "L_SIZE": 2,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 2,
+            "topMostY": 1,
+            "isVertical": false,
+            "L_SIZE": 2,
+            "S_SIZE": 1
+          }
+        ],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 25.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "2",
+          "lastName": "2",
+          "username": "dorrin2",
+          "password": "22",
+          "userID": "708921",
+          "email": "2@gmail.com",
+          "phoneNum": "0001112233"
+        },
+        "score": 0
+      }
+    ],
+    "gameID": "282724",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "ships": [
+          {
+            "leftMostX": 5,
+            "topMostY": 3,
+            "isVertical": true,
+            "L_SIZE": 5,
+            "S_SIZE": 2
+          },
+          {
+            "leftMostX": 3,
+            "topMostY": 5,
+            "isVertical": true,
+            "L_SIZE": 5,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 2,
+            "topMostY": 4,
+            "isVertical": true,
+            "L_SIZE": 4,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 10,
+            "topMostY": 8,
+            "isVertical": true,
+            "L_SIZE": 3,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 8,
+            "topMostY": 7,
+            "isVertical": false,
+            "L_SIZE": 2,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 7,
+            "topMostY": 2,
+            "isVertical": false,
+            "L_SIZE": 2,
+            "S_SIZE": 1
+          }
+        ],
+        "bombsThrown": [
+          {
+            "x": 6,
+            "y": 5,
+            "wasSuccessful": true
+          }
+        ],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 50.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [
+            "BattleSea"
+          ],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "359220",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233"
+        },
+        "score": 0
+      },
+      {
+        "ships": [
+          {
+            "leftMostX": 6,
+            "topMostY": 2,
+            "isVertical": true,
+            "L_SIZE": 5,
+            "S_SIZE": 2
+          },
+          {
+            "leftMostX": 3,
+            "topMostY": 10,
+            "isVertical": false,
+            "L_SIZE": 5,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 2,
+            "topMostY": 6,
+            "isVertical": true,
+            "L_SIZE": 4,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 1,
+            "topMostY": 4,
+            "isVertical": true,
+            "L_SIZE": 3,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 6,
+            "topMostY": 8,
+            "isVertical": false,
+            "L_SIZE": 2,
+            "S_SIZE": 1
+          },
+          {
+            "leftMostX": 2,
+            "topMostY": 3,
+            "isVertical": false,
+            "L_SIZE": 2,
+            "S_SIZE": 1
+          }
+        ],
+        "bombsThrown": [
+          {
+            "x": 4,
+            "y": 5,
+            "wasSuccessful": false
+          }
+        ],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 25.0,
+          "accountStartDate": {
+            "year": 2020,
+            "month": 12,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "2",
+          "lastName": "2",
+          "username": "dorrin2",
+          "password": "22",
+          "userID": "708921",
+          "email": "2@gmail.com",
+          "phoneNum": "0001112233"
+        },
+        "score": 0
+      }
+    ],
+    "gameID": "619633",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
   }
 ]

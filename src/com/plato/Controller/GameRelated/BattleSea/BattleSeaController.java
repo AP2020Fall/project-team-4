@@ -152,17 +152,18 @@ public class BattleSeaController {
 								.anyMatch(coord -> finalX == coord[0] && finalY == coord[1]))
 							symbol = Color.BLUE.getVal() + "#";
 					}
-					// if there was a destroyed ship here
-					if (Ship.getAllCoords(playerToShowBoardOf.getShips(true)).stream()
-							.anyMatch(coord -> finalX == coord[0] && finalY == coord[1])) {
-						symbol = Color.RED_BOLD.getVal() + "*";
-					}
 
 					// if there was a successful bomb but not a destroyed ship here
 					if (opponentPlayer
 							.getBombsThrown(true).stream()
 							.anyMatch(bomb -> bomb.getX() == finalX && bomb.getY() == finalY)) {
 						symbol = Color.YELLOW_BOLD.getVal() + "+";
+					}
+
+					// if there was a destroyed ship here
+					if (Ship.getAllCoords(playerToShowBoardOf.getShips(true)).stream()
+							.anyMatch(coord -> finalX == coord[0] && finalY == coord[1])) {
+						symbol = Color.RED_BOLD.getVal() + "*";
 					}
 
 					// if there was an unsuccessful bomb here
@@ -256,8 +257,6 @@ public class BattleSeaController {
 		}
 		else
 			battleseaGPMenu.setTrialBoardExists(false);
-
-//		battleseaGPMenu.setTrialBoardExists(trialPlayerBoard1 != null ^ trialPlayerBoard2 != null);
 	}
 
 	public Timer getTurnTimer () {
