@@ -28,6 +28,7 @@ public class Reversi extends Game {
 	 * should be called after next turn
 	 * if board is full or atleast one of them is 0 return new ArrayList()
 	 * otherwise check every blank coordinate and if player can place there add to arraylist and return the arraylist in the end
+	 * @return all x and y's in result are 1<={x or y}<=8
 	 */
 	public ArrayList<String> getAvailableCoordinates () {
 		ArrayList<String> availableCoordinates = new ArrayList<>();
@@ -39,36 +40,68 @@ public class Reversi extends Game {
 					if (board[y][x].equals(color)) {
 						//dir UP
 						if (board[y - 1][x].equals(otherColor)) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
-						}
+							for (int i = y-1 ; i >= 0; i--) {
+								if (board[i][x].equals("-")){
+									availableCoordinates.add(i+1 + "," + (x+1));
+									break;}
+								else if(board[i][x].equals(color)) {break;}
+							}}
 						//dir UP_RIGHT
 						if (board[y - 1][x + 1].equals(otherColor)) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
-						}
+							 for (int i = y-1 , j=x+1 ; i >= 0  && j<8 ; i-- , j++) {
+								if (board[i][j].equals("-")) {
+									availableCoordinates.add(i+1 + "," + (j+1));
+									break;}
+								else if(board[i][j].equals(color)) {break;}
+							}}
 						//dir RIGHT
 						if (board[y][x + 1].equals(otherColor)) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
-						}
+							for (int i = x+1 ; i <8 ; i++) {
+								if (board[y][i].equals("-")) {
+									availableCoordinates.add(y+1 + "," + (i+1));
+									break;}
+								else if(board[y][i].equals(color)) {break;}
+							}}
 						//dir DOWN_RIGHT
 						if (board[y + 1][x + 1].equals(otherColor)) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
-						}
+							for (int i = y+1 , j=x+1; i <8  && j<8 ; i++ , j++) {
+								if (board[i][j].equals("-")) {
+									availableCoordinates.add(i+1 + "," + (j+1));
+									break;}
+								else if(board[i][j].equals(color)) {break;}
+							}}
 						//dir DOWN
 						if (board[y + 1][x].equals(otherColor)) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
-						}
+							for (int i = y+1 ; i <8; i++) {
+								if (board[i][x].equals("-")){
+									availableCoordinates.add(i+1 + "," + (x+1));
+									break;}
+								else if(board[i][x].equals(color)) {break;}
+							}}
 						//dir DOWN_LEFT
 						if (board[y + 1][x - 1].equals(otherColor)) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
-						}
+							for (int i = y+1 , j=x-1 ; i<8 && j>=0 ; i++ , j--) {
+								if (board[i][j].equals("-")){
+									availableCoordinates.add(i+1 + "," +(j+1));
+									break;}
+								else if(board[i][j].equals(color)) {break;}
+							}}
 						//dir LEFT
 						if (board[y][x - 1].equals(otherColor)) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
-						}
+							for (int i = x-1 ; i >= 0; i--) {
+								if (board[y][i].equals("-")) {
+									availableCoordinates.add(y+1 + "," + (i+1));
+									break;}
+								else if(board[y][i].equals(color)) {break;}
+							}}
 						//dir UP_LEFT
 						if (board[y - 1][x - 1].equals(otherColor)) {
-							{for (int i = y; i >= 0; i--) {if (board[i][x].equals(color)) availableCoordinates.add(i + "," + x);}}
-						}
+							for (int i = y-1 , j=x-1; i >= 0 && j>=0; i-- , j--) {
+								if (board[i][j].equals("-")){
+									availableCoordinates.add(i+1 + "," + (j+1));
+									break;}
+								else if(board[i][j].equals(color)){ break;}
+							}}
 					}
 				}
 			}
@@ -83,6 +116,8 @@ public class Reversi extends Game {
 		if (canPlayerPlaceAnyDisks()) {
 			if (canPlayerPlaceDiskHere(x, y)) {
 				checkDirections(x, y);
+				// converting y and x to 1-8 system
+				y++; x++;
 				if (getTurnNum() == 0) {
 					board[y - 1][x - 1] = "b";
 					addMove(x, y, "black");
@@ -105,10 +140,13 @@ public class Reversi extends Game {
 	}
 
 	/**
+	 * @param x 0<=x<=7
+	 * @param y 0<=y<=7
 	 * @return true if atleast one disk changes color in any direction (not the check directions method)
 	 */
-	public boolean canPlayerPlaceDiskHere (int x, int y) {
-		return getAvailableCoordinates().contains(y + "," + x);
+	public boolean canPlayerPlaceDiskHere (int x, int y) { // fixme : is it x,y or y,x ?
+		return getAvailableCoordinates().contains(String.format("%d,%d", y+1, x+1));
+				//y + "," + x); fixme
 	}
 
 	/**
@@ -120,44 +158,56 @@ public class Reversi extends Game {
 	 * returns true if after disks with oppoite color there is a same color disk in given direction
 	 */
 	private boolean doesAnyDiskChangeColor (int x, int y, Direction dir) {
+		String color = ((PlayerReversi) getTurnPlayer()).getColor();
+		String otherColor = (color.equals("b")) ? "w" : "b" ;
 		switch (dir) {
 			case UP:
-				if (!board[y - 1][x].equals(board[y][x]) && !board[y - 1][x].equals("-"))
-					for (int i = y; i >= 0; i--) {if (board[i][x].equals(board[y][x])) return true;}
+				if(y-1>=0)
+					if (board[y - 1][x].equals(otherColor))
+					for (int i = y-1 ; i >= 0; i--)
+						if (board[i][x].equals(color)) return true;
 				break;
 			case UP_RIGHT:
-				if (!board[y - 1][x + 1].equals(board[y][x]) && !board[y - 1][x + 1].equals("-"))
-					for (int i = y; i >= 0; i--)
-						for (int j = x; j < 8; j++)
-							if (board[i][j].equals(board[y][x])) return true;
+				if(y-1>=0 && x+1<8)
+					if (board[y - 1][x + 1].equals(otherColor))
+					for (int i = y-1 , j=x+1 ; i >= 0 && j<8 ; i-- , j++)
+						if (board[i][j].equals(color)) return true;
 				break;
 			case RIGHT:
-				if (!board[y][x + 1].equals(board[y][x]) && !board[y][x + 1].equals("-"))
-					for (int i = x; i < 8; i++)
-						if (board[y][i].equals(board[y][x])) return true;
+				if(x+1<8)
+					if (board[y][x + 1].equals(otherColor))
+					for (int i = x+1 ; i < 8; i++)
+						if (board[y][i].equals(color)) return true;
 				break;
 			case DOWN_RIGHT:
-				if (!board[y + 1][x + 1].equals(board[y][x]) && !board[y + 1][x + 1].equals("-"))
-					for (int i = y; i < 8; i++)
-						for (int j = x; j < 8; j++) if (board[i][j].equals(board[y][x])) return true;
+				if(y+1<8 && x+1<8)
+					if (board[y + 1][x + 1].equals(otherColor))
+					for (int i = y+1 , j=x+1 ; i < 8 && j<8 ; i++ , j++)
+						if (board[i][j].equals(color)) return true;
 				break;
 			case DOWN:
-				if (!board[y + 1][x].equals(board[y][x]) && !board[y + 1][x].equals("-"))
-					for (int i = y; i < 8; i++) if (board[i][x].equals(board[y][x])) return true;
+				if(y+1<8)
+					if (board[y + 1][x].equals(otherColor))
+					for (int i = y+1 ; i < 8; i++)
+						if (board[i][x].equals(color)) return true;
 				break;
 			case DOWN_LEFT:
-				if (!board[y + 1][x - 1].equals(board[y][x]) && !board[y + 1][x - 1].equals("-"))
-					for (int i = y; i < 8; i++)
-						for (int j = x; j >= 0; j--) if (board[i][j].equals(board[y][x])) return true;
+				if(y+1<8 && x-1>0)
+					if (board[y + 1][x - 1].equals(otherColor))
+					for (int i = y+1 , j=x-1 ; i < 8 && j>=0 ; i++ , j--)
+						if (board[i][j].equals(color)) return true;
 				break;
 			case LEFT:
-				if (!board[y][x - 1].equals(board[y][x]) && !board[y][x - 1].equals("-"))
-					for (int i = x; i >= 0; i--) if (board[y][i].equals(board[y][x])) return true;
+				if(x-1>=0)
+					if (board[y][x - 1].equals(otherColor))
+					for (int i = x-1 ; i >= 0; i--)
+						if (board[y][i].equals(color)) return true;
 				break;
 			case UP_LEFT:
-				if (!board[y - 1][x - 1].equals(board[y][x]) && !board[y - 1][x - 1].equals("-"))
-					for (int i = y; i >= 0; i--)
-						for (int j = x; j >= 0; j--) if (board[i][j].equals(board[y][x])) return true;
+				if(y-1>=0 && x-1>=0)
+					if (board[y - 1][x - 1].equals(otherColor))
+					for (int i = y-1 , j=x-1 ; i >= 0 && j>=0 ; i-- , j--)
+						if (board[i][j].equals(color)) return true;
 				break;
 		}
 		return false;
@@ -171,7 +221,7 @@ public class Reversi extends Game {
 	 *               moves from startx,starty in the given direction and if any disks should change color call method again but one step forward
 	 */
 	private void changeColor (int startx, int starty, int destx, int desty, Direction direction) {
-		board[desty][destx] = ((PlayerReversi) getPlayer(getTurnGamer())).getColor();
+		board[desty][destx] = ((PlayerReversi) getTurnPlayer()).getColor();
 		if (doesAnyDiskChangeColor(destx, desty, direction))
 			changeColor(destx, desty, destx + direction.getDeltaX(), desty + direction.getDeltaY(), direction);
 	}
