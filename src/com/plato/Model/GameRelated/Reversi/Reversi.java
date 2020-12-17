@@ -28,6 +28,7 @@ public class Reversi extends Game {
 	 * should be called after next turn
 	 * if board is full or atleast one of them is 0 return new ArrayList()
 	 * otherwise check every blank coordinate and if player can place there add to arraylist and return the arraylist in the end
+	 * @return all x and y's in result are 1<={x or y}<=8
 	 */
 	public ArrayList<String> getAvailableCoordinates () {
 		ArrayList<String> availableCoordinates = new ArrayList<>();
@@ -115,6 +116,8 @@ public class Reversi extends Game {
 		if (canPlayerPlaceAnyDisks()) {
 			if (canPlayerPlaceDiskHere(x, y)) {
 				checkDirections(x, y);
+				// converting y and x to 1-8 system
+				y++; x++;
 				if (getTurnNum() == 0) {
 					board[y - 1][x - 1] = "b";
 					addMove(x, y, "black");
@@ -137,10 +140,13 @@ public class Reversi extends Game {
 	}
 
 	/**
+	 * @param x 0<=x<=7
+	 * @param y 0<=y<=7
 	 * @return true if atleast one disk changes color in any direction (not the check directions method)
 	 */
 	public boolean canPlayerPlaceDiskHere (int x, int y) { // fixme : is it x,y or y,x ?
-		return getAvailableCoordinates().contains(y + "," + x);
+		return getAvailableCoordinates().contains(String.format("%d,%d", y+1, x+1));
+				//y + "," + x); fixme
 	}
 
 	/**
@@ -156,13 +162,13 @@ public class Reversi extends Game {
 		String otherColor = (color.equals("b")) ? "w" : "b" ;
 		switch (dir) {
 			case UP:
-				if(y-1>0)
+				if(y-1>=0)
 					if (board[y - 1][x].equals(otherColor))
 					for (int i = y-1 ; i >= 0; i--)
 						if (board[i][x].equals(color)) return true;
 				break;
 			case UP_RIGHT:
-				if(y-1>0 && x+1<8)
+				if(y-1>=0 && x+1<8)
 					if (board[y - 1][x + 1].equals(otherColor))
 					for (int i = y-1 , j=x+1 ; i >= 0 && j<8 ; i-- , j++)
 						if (board[i][j].equals(color)) return true;
@@ -192,13 +198,13 @@ public class Reversi extends Game {
 						if (board[i][j].equals(color)) return true;
 				break;
 			case LEFT:
-				if(x-1>0)
+				if(x-1>=0)
 					if (board[y][x - 1].equals(otherColor))
 					for (int i = x-1 ; i >= 0; i--)
 						if (board[y][i].equals(color)) return true;
 				break;
 			case UP_LEFT:
-				if(y-1>0 && x-1>0)
+				if(y-1>=0 && x-1>=0)
 					if (board[y - 1][x - 1].equals(otherColor))
 					for (int i = y-1 , j=x-1 ; i >= 0 && j>=0 ; i-- , j--)
 						if (board[i][j].equals(color)) return true;

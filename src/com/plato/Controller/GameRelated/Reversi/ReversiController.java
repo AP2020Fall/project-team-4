@@ -36,13 +36,22 @@ public class ReversiController {
 
 	public void placeDisk () {
 		String Xstr, Ystr; int x, y;
-		while (true) {
+		if (((Reversi) GameController.getInstance().getCurrentGameInSession()).hasPlayerMoved()) {
 			try {
-				if (((Reversi) GameController.getInstance().getCurrentGameInSession()).hasPlayerMoved())
-					throw new PlayerHasAlreadyPlacedDiskException();
+				throw new PlayerHasAlreadyPlacedDiskException();
+			} catch (PlayerHasAlreadyPlacedDiskException e) {
+				Menu.printErrorMessage(e.getMessage());
+			}
+			return;
+		}
 
-				if (!((Reversi) GameController.getInstance().getCurrentGameInSession()).canPlayerPlaceAnyDisks())
-					nextTurn();
+		if (!((Reversi) GameController.getInstance().getCurrentGameInSession()).canPlayerPlaceAnyDisks()) {
+			nextTurn();
+			return;
+		}
+
+		while (true)
+			try {
 
 				Menu.printAskingForInput("X [/c to cancel]: "); Xstr = Menu.getInputLine();
 
@@ -64,10 +73,10 @@ public class ReversiController {
 						.canPlayerPlaceDiskHere(x-1, y-1)) //fixme check if needs -1
 					throw new CantPlaceDiskHereException();
 				break;
-			} catch (InvalidCoordinateException | CantPlaceDiskHereException | PlayerHasAlreadyPlacedDiskException e) {
+			} catch (InvalidCoordinateException | CantPlaceDiskHereException e) {
 				Menu.printErrorMessage(e.getMessage());
 			}
-		}
+
 
 		((Reversi) GameController.getInstance().getCurrentGameInSession()).placeDisk(x-1, y-1); //fixme check if needs -1
 	}

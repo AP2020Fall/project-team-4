@@ -54,8 +54,8 @@ public class ReversiView {
 		for (String coord : availableCoordinates)
 			System.out.printf(
 					"x = %d, y = %d%n",
-					Integer.parseInt(coord.split(",")[1].trim()) + 1,
-					Integer.parseInt(coord.split(",")[0].trim()) + 1
+					Integer.parseInt(coord.split(",")[1].trim()),
+					Integer.parseInt(coord.split(",")[0].trim())
 			);
 	}
 }
