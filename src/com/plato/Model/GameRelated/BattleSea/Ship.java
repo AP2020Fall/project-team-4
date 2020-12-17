@@ -24,11 +24,14 @@ public class Ship {
 	}
 
 	public boolean isDestroyed (PlayerBattleSea shipOwner) {
-		return getAllCoords(getPlayer().getShips()).size()
+		LinkedList<int[]> thisShipCoords = getAllCoords(new LinkedList<>(Collections.singletonList(this)));
+		int shipPartsBombedCount = (int) shipOwner.getOpponentBombsThrown(true).stream()
+				.filter(bomb -> thisShipCoords.stream().anyMatch(coord -> coord[0] == bomb.getX() && coord[1]== bomb.getY()))
+				.count();
+
+		return shipPartsBombedCount
 				==
-				((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getOpponentOf(shipOwner)).getBombsThrown().stream()
-						.filter(Bomb::wasSuccessful)
-						.count();
+				thisShipCoords.size();
 	}
 
 	public static LinkedList<int[]> getAllCoords (LinkedList<Ship> ships) {

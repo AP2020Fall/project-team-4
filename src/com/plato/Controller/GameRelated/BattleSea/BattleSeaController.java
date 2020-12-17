@@ -247,16 +247,23 @@ public class BattleSeaController {
 		_12_1GameplayBattleSeaMenu battleseaGPMenu = ((_12_1GameplayBattleSeaMenu) Menu.getMenuIn());
 		BattleSea currentGame = ((BattleSea) GameController.getInstance().getCurrentGameInSession());
 
-		if (trialPlayerBoard1 != null && currentGame.getListOfBattleSeaPlayers().get(0).getShips() == null)
+		if (currentGame.getListOfBattleSeaPlayers().get(0).getShips() == null && trialPlayerBoard1 != null)
 			battleseaGPMenu.setTrialBoardExists(true);
 		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() == null)
 			battleseaGPMenu.setTrialBoardExists(true);
 		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() != null) {
 			battleseaGPMenu.nextPhase();
+			initTurnTimerStuff();
 			resetTrialPlayerBoards();
 		}
 		else
 			battleseaGPMenu.setTrialBoardExists(false);
+
+		if (currentGame.canStartBombing()) {
+			battleseaGPMenu.nextPhase();
+			initTurnTimerStuff();
+			resetTrialPlayerBoards();
+		}
 	}
 
 	public Timer getTurnTimer () {
@@ -274,7 +281,7 @@ public class BattleSeaController {
 	}
 
 	static class TurnTimerTask extends TimerTask {
-		private final int MAX_SECONDS = (int) Double.POSITIVE_INFINITY; // fixme change to 30
+		private final int MAX_SECONDS = 120; // fixme change to 30
 		private int secondsRemaining = MAX_SECONDS;
 		private String command = "";
 
