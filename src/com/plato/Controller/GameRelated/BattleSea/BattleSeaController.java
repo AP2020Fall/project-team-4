@@ -280,8 +280,12 @@ public class BattleSeaController {
 		return turnTimerTask;
 	}
 
+	public void setMaxTime (int maxTime) {
+		turnTimerTask.MAX_SECONDS = maxTime;
+	}
+
 	static class TurnTimerTask extends TimerTask {
-		private final int MAX_SECONDS = 30; // fixme change to 30
+		private int MAX_SECONDS = 30;
 		private int secondsRemaining = MAX_SECONDS;
 		private String command = "";
 

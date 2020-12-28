@@ -30,6 +30,7 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class MainController extends Application {
+	private Stage primaryStage;
 	static int command;
 	private static MainController mainController;
 	private final GsonBuilder gsonBuilder = new GsonBuilder();
@@ -41,18 +42,35 @@ public class MainController extends Application {
 		return mainController;
 	}
 
-	@Override
-	public void start (Stage primaryStage) {
-		Pane root = new Pane();
-		primaryStage.setScene(new Scene(root, 500,500));
-		primaryStage.setResizable(false);
-		primaryStage.setOnCloseRequest(windowEvent -> tryToExitProgram());
-		primaryStage.setTitle("Plato App");
-		primaryStage.show();
+//	@Override
+//	public void start (Stage primaryStage) {
+//		this.primaryStage = primaryStage;
+//		jumpToBattleSeaGameMenu(); // fixme make comment later
+//		Pane root = new Pane();
+//		primaryStage.setScene(new Scene(root, 500,500));
+//		primaryStage.setResizable(false);
+//		primaryStage.setOnCloseRequest(windowEvent -> tryToExitProgram());
+//		primaryStage.setTitle("Plato App");
+//		primaryStage.show(); fixme uncomment later
+//	}
+
+	private void jumpToBattleSeaGameMenu () {
+		System.setIn(new ByteArrayInputStream((//"2\ndorrin1\n11\ny\n" +
+				"3\n1\n").getBytes()));
 	}
 
 	public static void main (String[] args) {
 		launch(args);
+	}
+
+	public Stage getPrimaryStage () {
+		return primaryStage;
+	}
+
+	@Override
+	public void start (Stage primaryStage) {
+		getInstance().primaryStage = primaryStage;
+		jumpToBattleSeaGameMenu(); // fixme make comment later
 		DayPassController.getInstance().start();
 
 		try {
@@ -546,6 +564,26 @@ public class MainController extends Application {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * creates a new stage on top of the previous stage
+	 * .show() needs to be used outside in case further changes are needed
+	 */
+	public Stage createAndReturnNewStage (Pane root, String title, boolean newOrReplace) {
+		if (newOrReplace)
+			return new Stage() {{
+				setScene(new Scene(root));
+				setResizable(false);
+				setAlwaysOnTop(true);
+				setTitle(title);
+			}};
+		primaryStage.setScene(new Scene(root));
+		primaryStage.setResizable(false);
+		primaryStage.setAlwaysOnTop(true);
+		primaryStage.setTitle(title);
+
+		return primaryStage;
 	}
 
 	public static class InvalidInputException extends Exception {

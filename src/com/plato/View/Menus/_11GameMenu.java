@@ -1,5 +1,7 @@
 package View.Menus;
 
+import View.GameRelated.BattleSea.BattleSeaView;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -42,9 +44,15 @@ public class _11GameMenu extends Menu {
 		gameName = "";
 	}
 
-	public void enter (String gameName) {
+	@SuppressWarnings("StatementWithEmptyBody")
+	@Override
+	public void enter () {
 		super.enter();
-		setGameName(gameName);
+		if (gameName.matches("[bB].")) {
+			BattleSeaView.getInstance().initGameMenuView();
+		} else if (gameName.matches("[rR].")) {
+			// todo go to reversi menu
+		}
 	}
 
 	@Override
