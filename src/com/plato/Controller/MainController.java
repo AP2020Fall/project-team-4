@@ -18,6 +18,10 @@ import View.Menus._3MainMenu;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -25,7 +29,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
-public class MainController {
+public class MainController extends Application {
 	static int command;
 	private static MainController mainController;
 	private final GsonBuilder gsonBuilder = new GsonBuilder();
@@ -37,7 +41,18 @@ public class MainController {
 		return mainController;
 	}
 
+	@Override
+	public void start (Stage primaryStage) {
+		Pane root = new Pane();
+		primaryStage.setScene(new Scene(root, 500,500));
+		primaryStage.setResizable(false);
+		primaryStage.setOnCloseRequest(windowEvent -> tryToExitProgram());
+		primaryStage.setTitle("Plato App");
+		primaryStage.show();
+	}
+
 	public static void main (String[] args) {
+		launch(args);
 		DayPassController.getInstance().start();
 
 		try {
