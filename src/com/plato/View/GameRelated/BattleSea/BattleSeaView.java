@@ -2,14 +2,19 @@ package View.GameRelated.BattleSea;
 
 import Controller.MainController;
 import View.Menus.Menu;
-import javafx.scene.layout.GridPane;
+import javafx.application.Application;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.LinkedList;
 
-public class BattleSeaView {
+public class BattleSeaView extends Application {
 	private static BattleSeaView battleSeaView;
+	private Stage primaryStage;
 	private Pane mainPane;
 
 	public static BattleSeaView getInstance () {
@@ -18,14 +23,35 @@ public class BattleSeaView {
 		return battleSeaView;
 	}
 
+	@Override
+	public void start (Stage primaryStage) {
+		primaryStage.show();
+		this.primaryStage = primaryStage;
+		initGameMenuView();
+	}
+
+	public static void main (String[] args) {
+		launch(args);
+	}
+
 	public void initGameMenuView () {
-		mainPane = new GridPane(){{
-			setWidth(900); setHeight(900);
+		mainPane = new AnchorPane() {{
+			double wh = Screen.getPrimary().getBounds().getHeight();
+			setMinSize(wh, wh); setMaxSize(wh, wh);
+
+			ImageView bg = new ImageView() {{
+				setImage(new Image("https://i.pinimg.com/originals/a9/ac/64/a9ac648a584d68eebb451a0460125462.jpg"));
+				setLayoutX(0); setLayoutY(0);
+				setPreserveRatio(true);
+				setSmooth(true);
+				setFitWidth(wh); setFitHeight(wh);
+			}};
+			getChildren().add(bg);
 		}};
 
-		Stage stage = MainController.getInstance().createAndReturnNewStage(mainPane, "Battlesea Main Menu", true);
-		stage.show();
-		System.out.println("stage.isShowing() = " + stage.isShowing());
+		MainController.getInstance().createAndReturnNewStage(
+				mainPane, "Battlesea Main Menu", true, primaryStage
+		).show();
 	}
 
 

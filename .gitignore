@@ -25,5 +25,5 @@ hs_err_pid*
 # intellij config files
 .idea/
 
-src/Resources/JSONs/SavedLoginInfo.json
+src/com/plato/Resources/JSONs/SavedLoginInfo.json
 src/com/plato/log.txt

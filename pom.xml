@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <build>
-        <sourceDirectory>src/com/plato</sourceDirectory>
+        <sourceDirectory>src/com/Plato</sourceDirectory>
         <testSourceDirectory>src/com/Tests</testSourceDirectory>
         <plugins>
             <plugin>
@@ -26,7 +26,8 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>Controller.MainController</mainClass>
+                    <mainClass>View.GameRelated.BattleSea.BattleSeaView</mainClass>
+<!--                    <mainClass>Controller.MainController</mainClass> fixme-->
                     <options>
                         <option>--add-modules</option>
                         <option>javafx.controls,javafx.fxml</option>

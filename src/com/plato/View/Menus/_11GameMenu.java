@@ -48,9 +48,11 @@ public class _11GameMenu extends Menu {
 	@Override
 	public void enter () {
 		super.enter();
-		if (gameName.matches("[bB].")) {
+		gameName = gameName.trim();
+		if (gameName.toLowerCase().startsWith("b")) {
 			BattleSeaView.getInstance().initGameMenuView();
-		} else if (gameName.matches("[rR].")) {
+		}
+		else if (gameName.toLowerCase().startsWith("r")) {
 			// todo go to reversi menu
 		}
 	}

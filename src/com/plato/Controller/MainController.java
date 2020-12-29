@@ -19,8 +19,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -63,13 +64,10 @@ public class MainController extends Application {
 		launch(args);
 	}
 
-	public Stage getPrimaryStage () {
-		return primaryStage;
-	}
-
 	@Override
 	public void start (Stage primaryStage) {
 		getInstance().primaryStage = primaryStage;
+		primaryStage.show();
 		jumpToBattleSeaGameMenu(); // fixme make comment later
 		DayPassController.getInstance().start();
 
@@ -570,19 +568,26 @@ public class MainController extends Application {
 	 * creates a new stage on top of the previous stage
 	 * .show() needs to be used outside in case further changes are needed
 	 */
-	public Stage createAndReturnNewStage (Pane root, String title, boolean newOrReplace) {
-		if (newOrReplace)
-			return new Stage() {{
-				setScene(new Scene(root));
-				setResizable(false);
-				setAlwaysOnTop(true);
-				setTitle(title);
-			}};
+	public Stage createAndReturnNewStage (Parent root, String title, boolean newOrReplace, Stage ownerStage) {
+		if (newOrReplace) {
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(ownerStage);
+			stage.setResizable(false);
+			stage.setAlwaysOnTop(true);
+			stage.setTitle(title);
+			return stage;
+		}
 		primaryStage.setScene(new Scene(root));
 		primaryStage.setResizable(false);
 		primaryStage.setAlwaysOnTop(true);
 		primaryStage.setTitle(title);
 
+		return primaryStage;
+	}
+
+	public Stage getPrimaryStage () {
 		return primaryStage;
 	}
 
@@ -619,4 +624,6 @@ public class MainController extends Application {
 			}
 		}
 	}
+
+
 }
