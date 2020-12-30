@@ -46,6 +46,18 @@ public class _3MainMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+
+		if (isForAdmin) {
+			// todo go to admin main menu
+		}
+		else {
+			// todo go to gamer main menu
+		}
+	}
+
+	@Override
 	public boolean canBack () {
 		return false;
 	}

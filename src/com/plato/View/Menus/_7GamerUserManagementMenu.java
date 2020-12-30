@@ -22,6 +22,12 @@ public class _7GamerUserManagementMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+		// todo go display a list of gamer usernames and if a user is clicked display user info
+	}
+
+	@Override
 	public boolean canBack () {
 		return true;
 	}

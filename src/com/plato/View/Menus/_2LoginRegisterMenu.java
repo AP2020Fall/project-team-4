@@ -22,6 +22,12 @@ public class _2LoginRegisterMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+		// todo go to login register menu
+	}
+
+	@Override
 	public boolean canGoToAccMenu () {
 		return false;
 	}

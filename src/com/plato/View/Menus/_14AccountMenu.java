@@ -43,6 +43,13 @@ public class _14AccountMenu extends Menu {
 	public void enter () {
 		entry = getMenuIn(); // in case of back from account menu go to its entry menu aka menu that was used to enter account menu.
 		super.enter();
+
+		if (isForAdmin) {
+			// todo display account menu for admin
+		}
+		else {
+			// todo display account menu for gamer
+		}
 	}
 
 	@Override

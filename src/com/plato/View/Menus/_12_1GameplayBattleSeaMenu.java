@@ -64,6 +64,12 @@ public class _12_1GameplayBattleSeaMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+		// todo start battlesea game
+	}
+
+	@Override
 	public void back () {
 		super.back();
 		GameController.getInstance().setCurrentGameInSession(null);

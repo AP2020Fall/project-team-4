@@ -23,6 +23,12 @@ public class _10GamesMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+		// todo display games list
+	}
+
+	@Override
 	public boolean canBack () {
 		return true;
 	}

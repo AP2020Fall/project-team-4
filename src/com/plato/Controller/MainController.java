@@ -43,18 +43,6 @@ public class MainController extends Application {
 		return mainController;
 	}
 
-//	@Override
-//	public void start (Stage primaryStage) {
-//		this.primaryStage = primaryStage;
-//		jumpToBattleSeaGameMenu(); // fixme make comment later
-//		Pane root = new Pane();
-//		primaryStage.setScene(new Scene(root, 500,500));
-//		primaryStage.setResizable(false);
-//		primaryStage.setOnCloseRequest(windowEvent -> tryToExitProgram());
-//		primaryStage.setTitle("Plato App");
-//		primaryStage.show(); fixme uncomment later
-//	}
-
 	private void jumpToBattleSeaGameMenu () {
 		System.setIn(new ByteArrayInputStream((//"2\ndorrin1\n11\ny\n" +
 				"3\n1\n").getBytes()));
@@ -68,7 +56,7 @@ public class MainController extends Application {
 	public void start (Stage primaryStage) {
 		getInstance().primaryStage = primaryStage;
 		primaryStage.show();
-		jumpToBattleSeaGameMenu(); // fixme make comment later
+//		jumpToBattleSeaGameMenu(); // fixme make comment later
 		DayPassController.getInstance().start();
 
 		try {

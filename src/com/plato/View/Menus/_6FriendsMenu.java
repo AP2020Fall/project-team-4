@@ -24,6 +24,14 @@ public class _6FriendsMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+
+
+		// todo go to friends menu
+	}
+
+	@Override
 	public boolean canBack () {
 		return true;
 	}

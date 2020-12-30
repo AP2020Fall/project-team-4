@@ -26,6 +26,18 @@ public class _4AdminGamerRecoMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+
+		if (isForAdmin) {
+			// todo go to admin recommendation menu
+		}
+		else {
+			// todo go to gamer recommendation menu
+		}
+	}
+
+	@Override
 	public boolean canBack () {
 		return true;
 	}

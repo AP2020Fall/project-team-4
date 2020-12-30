@@ -21,6 +21,12 @@ public class _13UserInfoEditingMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+		// todo display a list of editable info of user
+	}
+
+	@Override
 	public boolean canBack () {
 		return true;
 	}

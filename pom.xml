@@ -26,8 +26,8 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>View.GameRelated.BattleSea.BattleSeaView</mainClass>
-<!--                    <mainClass>Controller.MainController</mainClass> fixme-->
+<!--                    <mainClass>View.GameRelated.BattleSea.BattleSeaView</mainClass>-->
+                    <mainClass>Controller.MainController</mainClass>
                     <options>
                         <option>--add-modules</option>
                         <option>javafx.controls,javafx.fxml</option>

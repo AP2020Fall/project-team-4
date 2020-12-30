@@ -23,6 +23,12 @@ public class _9FriendRequestManagementMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+		// todo display a list of friend requests gotten and either accept or decline
+	}
+
+	@Override
 	public boolean canBack () {
 		return true;
 	}

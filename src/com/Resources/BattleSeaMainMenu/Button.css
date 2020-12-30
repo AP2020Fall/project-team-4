@@ -1,0 +1,19 @@
+.button {
+    -fx-min-height: 100;
+    -fx-max-height: 100;
+    -fx-min-width: 300;
+    -fx-max-width: 300;
+    /*-fx-fill: transparent;*/
+    -fx-fill: red;
+    -fx-stroke: coral;
+    -fx-stroke-width: 1px;
+    -fx-font-family: "Andale Mono", fantasy;
+    -fx-font-size: 20px;
+    -fx-arc-width: 20;
+    -fx-arc-height: 20;
+    -fx-text-effect: engrave;
+}
+.button:hover {
+    -fx-fill: darksalmon;
+    -fx-stroke-width: 3px;
+}

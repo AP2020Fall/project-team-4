@@ -35,6 +35,18 @@ public class _5EventsMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+
+		if (isForAdmin) {
+			// todo go to admin events menu
+		}
+		else {
+			// todo go to gamer events menu
+		}
+	}
+
+	@Override
 	public boolean canBack () {
 		return true;
 	}

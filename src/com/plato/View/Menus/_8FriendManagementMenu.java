@@ -23,6 +23,13 @@ public class _8FriendManagementMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+		// todo go display a list of friend usernames and if a user is clicked display friend profile
+		// todo also have the option to unfriend the selected user
+	}
+
+	@Override
 	public boolean canBack () {
 		return true;
 	}

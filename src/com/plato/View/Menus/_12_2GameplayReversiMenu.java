@@ -31,6 +31,12 @@ public class _12_2GameplayReversiMenu extends Menu {
 	}
 
 	@Override
+	public void enter () {
+		super.enter();
+		// todo enter reversi game
+	}
+
+	@Override
 	public void back () {
 		super.back();
 		GameController.getInstance().setCurrentGameInSession(null);
