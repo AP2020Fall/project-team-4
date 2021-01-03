@@ -1,7 +1,5 @@
 package View.AccountRelated;
 
-import View.Menus.Menu;
-
 import java.util.LinkedList;
 
 public class EventView {

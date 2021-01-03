@@ -6,7 +6,6 @@ import Model.AccountRelated.Admin;
 import Model.AccountRelated.FriendRequest;
 import Model.AccountRelated.Gamer;
 import View.AccountRelated.FriendRequestView;
-import View.Menus.Menu;
 
 import java.util.LinkedList;
 

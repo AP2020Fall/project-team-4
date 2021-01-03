@@ -6,7 +6,6 @@ import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Reversi.Reversi;
 import View.AccountRelated.EventView;
-import View.Menus.Menu;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

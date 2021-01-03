@@ -5,7 +5,6 @@ import Controller.IDGenerator;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Reversi.Reversi;
-import View.Menus.Menu;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;

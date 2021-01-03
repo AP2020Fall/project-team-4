@@ -7,7 +7,6 @@ import Model.GameRelated.Game;
 import Model.GameRelated.GameLog;
 import Model.GameRelated.Reversi.Reversi;
 import View.GameRelated.GameLogView;
-import View.Menus.Menu;
 import View.Menus._11GameMenu;
 
 import java.time.format.DateTimeFormatter;

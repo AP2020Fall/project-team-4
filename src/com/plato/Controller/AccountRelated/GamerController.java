@@ -5,7 +5,6 @@ import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.GameLog;
 import View.AccountRelated.GamerView;
-import View.Menus.Menu;
 
 import java.util.Comparator;
 import java.util.LinkedList;

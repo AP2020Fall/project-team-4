@@ -2,7 +2,6 @@ package Controller.AccountRelated;
 
 import Model.AccountRelated.Message;
 import View.AccountRelated.MessageView;
-import View.Menus.Menu;
 
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;

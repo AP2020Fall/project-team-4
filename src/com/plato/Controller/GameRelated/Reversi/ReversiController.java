@@ -5,7 +5,6 @@ import Model.AccountRelated.Gamer;
 import Model.GameRelated.Reversi.Reversi;
 import View.GameRelated.GameView;
 import View.GameRelated.Reversi.ReversiView;
-import View.Menus.Menu;
 
 public class ReversiController {
 	private static ReversiController reversiController;

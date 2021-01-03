@@ -5,7 +5,6 @@ import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
 import View.GameRelated.BattleSea.ShipView;
-import View.Menus.Menu;
 
 import java.util.InputMismatchException;
 import java.util.LinkedList;

@@ -1,7 +1,5 @@
 package View.GameRelated;
 
-import View.Menus.Menu;
-
 import java.util.LinkedList;
 
 public class GameLogView {

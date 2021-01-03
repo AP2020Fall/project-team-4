@@ -1,7 +1,5 @@
 package View.GameRelated.Reversi;
 
-import View.Menus.Menu;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 

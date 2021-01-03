@@ -7,7 +7,6 @@ import Model.GameRelated.BattleSea.Ship;
 import Model.GameRelated.Player;
 import View.GameRelated.BattleSea.BattleSeaView;
 import View.Menus.Color;
-import View.Menus.Menu;
 import View.Menus._12_1GameplayBattleSeaMenu;
 
 import java.util.InputMismatchException;
