@@ -111,129 +111,26 @@ public class AccountController {
 //		}
 	}
 
-	public void register () {
-		String username = "";
-		while (true)
-			try {
-//				Menu.printAskingForInput("Username:[/c to cancel] ");
-//				username = Menu.getInputLine();
+	public void register (String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws NegativeMoneyException, MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException {
 
-				if (username.trim().equalsIgnoreCase("/c")) return;
+		if (Account.accountExists(username))
+			throw new AccountWithUsernameAlreadyExistsException();
 
-				if (!username.matches("[!-~]+"))
-					throw new MainController.InvalidFormatException("Username");
+		if (!Account.isEmailOK(email))
+			throw new InvalidEmailFormatException();
 
-				if (Account.accountExists(username))
-					throw new AccountWithUsernameAlreadyExistsException();
-				break;
-			} catch (AccountWithUsernameAlreadyExistsException | MainController.InvalidFormatException e) {
-//				Menu.printErrorMessage(e.getMessage());
+		if (!Account.isPhoneNumOK(phoneNum))
+			throw new InvalidPhoneNumFormatException();
+
+		if (!firstName.equals(""))
+			if (!Admin.adminHasBeenCreated())
+				Account.addAccount(Admin.class, firstName, lastName, username, password, email, phoneNum, 0);
+			else {
+				if (initMoney < 0)
+					throw new NegativeMoneyException();
+
+				Account.addAccount(Gamer.class, firstName, lastName, username, password, email, phoneNum, initMoney);
 			}
-
-
-		// trying to ask for password and full name
-//		Menu.printAskingForInput("Password:[/c to cancel] ");
-		String password = "";
-//		password = Menu.getInputLine();
-//		if (password.trim().equalsIgnoreCase("/c")) return;
-
-		String firstName = "";
-		while (true) {
-			try {
-//				Menu.printAskingForInput("First Name:[/c to cancel] ");
-//				firstName = Menu.getInputLine();
-
-				if (firstName.trim().equalsIgnoreCase("/c")) return;
-
-				if (!firstName.matches("[!-~]+"))
-					throw new MainController.InvalidFormatException("First name");
-
-				break;
-			} catch (MainController.InvalidFormatException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-		}
-
-		String lastName = "";
-		while (true)
-			try {
-//				Menu.printAskingForInput("Last Name:[/c to cancel] ");
-//				lastName = Menu.getInputLine();
-
-				if (lastName.trim().equalsIgnoreCase("/c")) return;
-
-				if (!lastName.matches("[!-~]+"))
-					throw new MainController.InvalidFormatException("Last name");
-
-				break;
-			} catch (MainController.InvalidFormatException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
-		String email = "";
-		while (true)
-			try {
-//				Menu.printAskingForInput("Email Address:[/c to cancel] ");
-//				email = Menu.getInputLine();
-
-				if (email.trim().equalsIgnoreCase("/c")) return;
-
-				if (!Account.isEmailOK(email))
-					throw new InvalidEmailFormatException();
-				break;
-			} catch (InvalidEmailFormatException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
-		String phoneNum = "";
-		while (true)
-			try {
-//				Menu.printAskingForInput("Phone Number:[/c to cancel] ");
-//				phoneNum = Menu.getInputLine();
-
-				if (phoneNum.trim().equalsIgnoreCase("/c")) return;
-
-				if (!Account.isPhoneNumOK(phoneNum))
-					throw new InvalidPhoneNumFormatException();
-				break;
-			} catch (InvalidPhoneNumFormatException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
-		// if admin account hasnt already been created make admin account
-		// 		otherwise ask for initial money amount and make a gamer account
-		if (!Admin.adminHasBeenCreated()) {
-			Account.addAccount(Admin.class, firstName, lastName, username, password, email, phoneNum, 0);
-//			Menu.printSuccessfulOperation("Admin account created successfully.");
-		}
-		else {
-			// trying to get initial balance
-			//		if input is not a number or is negative try asking for it again
-			double initMoney = 0;
-			while (true) {
-				try {
-//					Menu.printAskingForInput("Initial Balance:[/c to cancel] ");
-//					initMoney = Double.parseDouble(Menu.getInputLine());
-
-					if (phoneNum.trim().equalsIgnoreCase("/c")) return;
-
-					if (initMoney < 0)
-						throw new NegativeMoneyException();
-
-					break;
-				} catch (NumberFormatException e) {
-//					Menu.printErrorMessage("Initial Balance must be a number.");
-				} catch (NegativeMoneyException e) {
-//					Menu.printErrorMessage(e.getMessage());
-				}
-			}
-
-			Account.addAccount(Gamer.class, firstName, lastName, username, password, email, phoneNum, initMoney);
-//			Menu.printSuccessfulOperation("Gamer account created successfully.");
-		}
-
-//		Menu.addMenu("2");
-//		Menu.getMenu("2").enter();
 	}
 
 	public void changePWCommand () {
@@ -258,7 +155,7 @@ public class AccountController {
 
 //		Menu.displayAreYouSureMessage();
 //		if (Menu.getInputLine().trim().equalsIgnoreCase("y"))
-			AccountController.getInstance().getCurrentAccLoggedIn().editField("password", newPW);
+		AccountController.getInstance().getCurrentAccLoggedIn().editField("password", newPW);
 	}
 
 	public void editAccFieldCommand () {
@@ -456,7 +353,7 @@ public class AccountController {
 		}
 	}
 
-	private static class AccountWithUsernameAlreadyExistsException extends Exception {
+	public static class AccountWithUsernameAlreadyExistsException extends Exception {
 		public AccountWithUsernameAlreadyExistsException () {
 			super("An Account already exists with this username.");
 		}
@@ -486,7 +383,7 @@ public class AccountController {
 		}
 	}
 
-	private static class NegativeMoneyException extends Throwable {
+	public static class NegativeMoneyException extends Throwable {
 		public NegativeMoneyException () {
 			super("Initial Balance must be a positive number.");
 		}

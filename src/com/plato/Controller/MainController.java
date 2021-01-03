@@ -71,7 +71,7 @@ public class MainController extends Application {
 
 		if (!Admin.adminHasBeenCreated()) {
 			try {
-				primaryStage.setScene(new Scene(FXMLLoader.load(new File("src/com/plato/View/Menus/AdminRegisterMenu.fxml").toURI().toURL())));
+				primaryStage.setScene(new Scene(FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterMenu.fxml").toURI().toURL())));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -130,7 +130,7 @@ public class MainController extends Application {
 					"Open Reversi Game Menu", "Open BattleSea Game Menu" -> enterAppropriateMenu();
 
 			// register-login menu
-			case "Register Gamer", "Register Admin" -> AccountController.getInstance().register();
+//			case "Register Gamer", "Register Admin" -> AccountController.getInstance().register();
 			case "Login" -> AccountController.getInstance().login();
 			case "Delete Account" -> AccountController.getInstance().deleteAccount();
 
