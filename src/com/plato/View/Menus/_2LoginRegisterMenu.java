@@ -3,7 +3,7 @@ package View.Menus;
 import java.util.LinkedList;
 
 public class _2LoginRegisterMenu extends Menu {
-	protected _2LoginRegisterMenu (boolean adminHasBeenCreated) {
+	protected _2LoginRegisterMenu () {
 		super("Login/Registry Menu");
 	}
 

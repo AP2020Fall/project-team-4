@@ -1,8 +1,8 @@
-[IJ]-1-Unknown-[IJ]-event=org.apache.maven.settings.building.DefaultSettingsBuildingRequest@4a8a60bc
-[IJ]-1-Unknown-[IJ]-event=org.apache.maven.settings.building.DefaultSettingsBuildingResult@7807ac2c
-[IJ]-1-Unknown-[IJ]-event=org.apache.maven.toolchain.building.DefaultToolchainsBuildingRequest@4a067c25
-[IJ]-1-Unknown-[IJ]-event=org.apache.maven.toolchain.building.DefaultToolchainsBuildingResult@517bd097
-[IJ]-1-Unknown-[IJ]-event=org.apache.maven.execution.DefaultMavenExecutionRequest@6ea1bcdc
+[IJ]-1-Unknown-[IJ]-event=org.apache.maven.settings.building.DefaultSettingsBuildingRequest@6d8792db
+[IJ]-1-Unknown-[IJ]-event=org.apache.maven.settings.building.DefaultSettingsBuildingResult@460f76a6
+[IJ]-1-Unknown-[IJ]-event=org.apache.maven.toolchain.building.DefaultToolchainsBuildingRequest@1922e6d
+[IJ]-1-Unknown-[IJ]-event=org.apache.maven.toolchain.building.DefaultToolchainsBuildingResult@4cc76301
+[IJ]-1-Unknown-[IJ]-event=org.apache.maven.execution.DefaultMavenExecutionRequest@37eeec90
 [IJ]-1-ProjectDiscoveryStarted-[IJ]-id=unknown
 [INFO] Scanning for projects...
 [IJ]-1-SessionStarted-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-projects=org.openjfx:project-team-4&&
@@ -1118,5 +1118,50 @@
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.7.1/plexus-component-annotations-1.7.1.jar-[IJ]-artifactCoord=org.codehaus.plexus:plexus-component-annotations:jar:1.7.1-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.commons:commons-lang3:jar:3.8.1-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar-[IJ]-artifactCoord=org.apache.commons:commons-lang3:jar:3.8.1-[IJ]-error=
-null
-Button.fxml
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.google.gson.internal.reflect.UnsafeReflectionAccessor (file:/Users/dorrinsotoudeh/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar) to field java.time.LocalDate.year
+WARNING: Please consider reporting this to the maintainers of com.google.gson.internal.reflect.UnsafeReflectionAccessor
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+
+
+(Gamer) Main Menu:
+1. Show Points
+2. View Favorite games
+3. Go to Games Menu
+4. View Platobot’s messages
+5. View last played
+6. View admin’s suggestions
+7. Go to Friends Menu
+8. View Events
+9. Go to Account Menu
+10. Exit program
+
+Your choice:  	-Saved-
+
+
+Games Menu:
+1. Open BattleSea Game Menu
+2. Open Reversi Game Menu
+3. Back
+4. Go to Account Menu
+5. Exit program
+
+Your choice:  null
+	-Saved-
+
+
+Game Menu:
+1. Show scoreboard
+2. Show Points
+3. Details
+4. Show log of game
+5. Show wins count
+6. Show played count
+7. Add to favorites
+8. Continue previous games
+9. Run Game
+10. Back
+11. Go to Account Menu
+12. Exit program
+

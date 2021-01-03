@@ -22,7 +22,7 @@ public abstract class Menu {
 	public static void addMenu (String menuNumber) {
 		switch (menuNumber) {
 			case "1" -> menus.putIfAbsent(menuNumber, new _1RegisterMenu(Admin.adminHasBeenCreated()));
-			case "2" -> menus.putIfAbsent(menuNumber, new _2LoginRegisterMenu(true));
+			case "2" -> menus.putIfAbsent(menuNumber, new _2LoginRegisterMenu());
 			case "3G" -> menus.putIfAbsent(menuNumber, new _3MainMenu(false));
 			case "3A" -> menus.putIfAbsent(menuNumber, new _3MainMenu(true));
 			case "4G" -> menus.putIfAbsent(menuNumber, new _4AdminGamerRecoMenu(false));
