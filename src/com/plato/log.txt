@@ -20,11 +20,24 @@
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/openjfx/javafx-maven-plugin/0.0.4/javafx-maven-plugin-0.0.4.pom-[IJ]-artifactCoord=org.openjfx:javafx-maven-plugin:pom:0.0.4-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.openjfx:javafx-maven-plugin:jar:0.0.4-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/openjfx/javafx-maven-plugin/0.0.4/javafx-maven-plugin-0.0.4.jar-[IJ]-artifactCoord=org.openjfx:javafx-maven-plugin:jar:0.0.4-[IJ]-error=
-[IJ]-1-ProjectStarted-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT
-[INFO] 
-[INFO] ---------------------< org.openjfx:project-team-4 >---------------------
-[INFO] Building project-team-4 1.0-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
+[IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-deploy-plugin:pom:3.0.0-M1-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/plugins/maven-deploy-plugin/3.0.0-M1/maven-deploy-plugin-3.0.0-M1.pom-[IJ]-artifactCoord=org.apache.maven.plugins:maven-deploy-plugin:pom:3.0.0-M1-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-deploy-plugin:jar:3.0.0-M1-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/plugins/maven-deploy-plugin/3.0.0-M1/maven-deploy-plugin-3.0.0-M1.jar-[IJ]-artifactCoord=org.apache.maven.plugins:maven-deploy-plugin:jar:3.0.0-M1-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-site-plugin:pom:3.9.0-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/plugins/maven-site-plugin/3.9.0/maven-site-plugin-3.9.0.pom-[IJ]-artifactCoord=org.apache.maven.plugins:maven-site-plugin:pom:3.9.0-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-plugins:pom:34-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/plugins/maven-plugins/34/maven-plugins-34.pom-[IJ]-artifactCoord=org.apache.maven.plugins:maven-plugins:pom:34-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven:maven-parent:pom:34-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/maven-parent/34/maven-parent-34.pom-[IJ]-artifactCoord=org.apache.maven:maven-parent:pom:34-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache:apache:pom:23-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/apache/23/apache-23.pom-[IJ]-artifactCoord=org.apache:apache:pom:23-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-site-plugin:jar:3.9.0-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/plugins/maven-site-plugin/3.9.0/maven-site-plugin-3.9.0.jar-[IJ]-artifactCoord=org.apache.maven.plugins:maven-site-plugin:jar:3.9.0-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-install-plugin:pom:3.0.0-M1-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/plugins/maven-install-plugin/3.0.0-M1/maven-install-plugin-3.0.0-M1.pom-[IJ]-artifactCoord=org.apache.maven.plugins:maven-install-plugin:pom:3.0.0-M1-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-install-plugin:jar:3.0.0-M1-[IJ]-error=
+[IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/plugins/maven-install-plugin/3.0.0-M1/maven-install-plugin-3.0.0-M1.jar-[IJ]-artifactCoord=org.apache.maven.plugins:maven-install-plugin:jar:3.0.0-M1-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-clean-plugin:pom:2.5-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom-[IJ]-artifactCoord=org.apache.maven.plugins:maven-clean-plugin:pom:2.5-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-plugins:pom:22-[IJ]-error=
@@ -35,6 +48,11 @@
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/apache/10/apache-10.pom-[IJ]-artifactCoord=org.apache:apache:pom:10-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-clean-plugin:jar:2.5-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.jar-[IJ]-artifactCoord=org.apache.maven.plugins:maven-clean-plugin:jar:2.5-[IJ]-error=
+[IJ]-1-ProjectStarted-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT
+[INFO] 
+[INFO] ---------------------< org.openjfx:project-team-4 >---------------------
+[INFO] Building project-team-4 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-resources-plugin:pom:2.6-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.pom-[IJ]-artifactCoord=org.apache.maven.plugins:maven-resources-plugin:pom:2.6-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-plugins:pom:23-[IJ]-error=
@@ -539,9 +557,9 @@
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.openjfx:javafx-media:jar:mac:15-ea+5-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/openjfx/javafx-media/15-ea+5/javafx-media-15-ea+5-mac.jar-[IJ]-artifactCoord=org.openjfx:javafx-media:jar:mac:15-ea+5-[IJ]-error=
 [IJ]-1-DependencyResolutionResult-[IJ]-error=
-[IJ]-1-MojoStarted-[IJ]-source=LIFECYCLE-[IJ]-goal=clean-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-error=
+[IJ]-1-MojoStarted-[IJ]-source=CLI-[IJ]-goal=clean-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-error=
 [INFO] 
-[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ project-team-4 ---
+[INFO] --- maven-clean-plugin:2.5:clean (default-cli) @ project-team-4 ---
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven.plugins:maven-clean-plugin:pom:2.5-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom-[IJ]-artifactCoord=org.apache.maven.plugins:maven-clean-plugin:pom:2.5-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.apache.maven:maven-plugin-api:pom:2.0.6-[IJ]-error=
@@ -565,7 +583,7 @@
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.codehaus.plexus:plexus-utils:jar:3.0-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/codehaus/plexus/plexus-utils/3.0/plexus-utils-3.0.jar-[IJ]-artifactCoord=org.codehaus.plexus:plexus-utils:jar:3.0-[IJ]-error=
 [INFO] Deleting /Users/dorrinsotoudeh/Desktop/project-team-4/target
-[IJ]-1-MojoSucceeded-[IJ]-source=LIFECYCLE-[IJ]-goal=clean-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-error=
+[IJ]-1-MojoSucceeded-[IJ]-source=CLI-[IJ]-goal=clean-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-error=
 [IJ]-1-ForkStarted-[IJ]-source=CLI-[IJ]-goal=run-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-error=
 [INFO] 
 [INFO] >>> javafx-maven-plugin:0.0.4:run (default-cli) > process-classes @ project-team-4 >>>
@@ -816,7 +834,7 @@
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.codehaus.plexus:plexus-interpolation:jar:1.13-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.13/plexus-interpolation-1.13.jar-[IJ]-artifactCoord=org.codehaus.plexus:plexus-interpolation:jar:1.13-[IJ]-error=
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory /Users/dorrinsotoudeh/Desktop/project-team-4/src/main/resources
+[INFO] Copying 16 resources
 [IJ]-1-MojoSucceeded-[IJ]-source=LIFECYCLE-[IJ]-goal=resources-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-error=
 [IJ]-1-MojoStarted-[IJ]-source=LIFECYCLE-[IJ]-goal=compile-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-error=
 [INFO] 
@@ -1123,3 +1141,14 @@ WARNING: Illegal reflective access by com.google.gson.internal.reflect.UnsafeRef
 WARNING: Please consider reporting this to the maintainers of com.google.gson.internal.reflect.UnsafeReflectionAccessor
 WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 WARNING: All illegal access operations will be denied in a future release
+2021-01-03 22:31:58.184 java[4637:323872] TSM AdjustCapsLockLEDForKeyTransitionHandling - _ISSetPhysicalKeyboardCapsLockLED Inhibit
+[IJ]-1-MojoSucceeded-[IJ]-source=CLI-[IJ]-goal=run-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-error=
+[IJ]-1-ProjectSucceeded-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT
+[IJ]-1-SessionEnded-[IJ]-id=unknown
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  25.495 s
+[INFO] Finished at: 2021-01-03T22:32:09+04:00
+[INFO] ------------------------------------------------------------------------
+[IJ]-1-Unknown-[IJ]-event=org.apache.maven.execution.DefaultMavenExecutionResult@31906cb2

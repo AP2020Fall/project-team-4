@@ -6,7 +6,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,9 +16,9 @@ public class AdminRegisterMenuController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		Image showImg = new Image(String.valueOf(new File("src/com/Resources/ShowPW.png"))),
-				hideImg = new Image(String.valueOf(new File("src/com/Resources/DontShowPW.png")));
-		showPwOrNot.setImage(hideImg);
+		Image showImg = new Image("https://www.flaticon.com/svg/static/icons/svg/565/565654.svg"),
+				hideImg = new Image("https://www.flaticon.com/svg/static/icons/svg/565/565655.svg");
+		showPwOrNot.setImage(showImg);
 		pwFieldpwShown.setVisible(false);
 		pwFieldpwHidden.setVisible(true);
 		
@@ -37,5 +36,8 @@ public class AdminRegisterMenuController implements Initializable {
 				pwFieldpwShown.setText(pwFieldpwHidden.getText());
 			}
 		});
+		showPwOrNot.setFitHeight(25);
+		showPwOrNot.setFitWidth(25);
+		showPwOrNot.setVisible(true);
 	}
 }

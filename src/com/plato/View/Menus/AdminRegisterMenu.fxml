@@ -49,11 +49,14 @@
         <TextField promptText="Username" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Label fx:id="UsernameError" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
         <Label fx:id="PasswordError" layoutX="355.0" layoutY="93.0" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-        <PasswordField fx:id="pwFieldpwHidden" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <TextField fx:id="pwFieldpwShown" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <ImageView fx:id="showPwOrNot" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true"
-                   GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2"
-                   GridPane.valignment="CENTER"/>
+        <StackPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <children>
+                <PasswordField fx:id="pwFieldpwHidden" promptText="Password"/>
+                <TextField fx:id="pwFieldpwShown" promptText="Password"/>
+                <ImageView visible="false" fx:id="showPwOrNot" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true"
+                           preserveRatio="true" StackPane.alignment="CENTER_RIGHT"/>
+            </children>
+        </StackPane>
     </children>
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>

@@ -9,8 +9,17 @@
     <version>1.0-SNAPSHOT</version>
 
     <build>
-        <sourceDirectory>src/com/Plato</sourceDirectory>
+        <sourceDirectory>src/com/plato</sourceDirectory>
         <testSourceDirectory>src/com/Tests</testSourceDirectory>
+        <resources>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/com/Resources</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

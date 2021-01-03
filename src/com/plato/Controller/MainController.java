@@ -28,10 +28,10 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class MainController extends Application {
-	private Stage primaryStage;
 	static int command;
 	private static MainController mainController;
 	private final GsonBuilder gsonBuilder = new GsonBuilder();
+	private Stage primaryStage;
 	private Gson gson;
 
 	public static MainController getInstance () {
@@ -40,13 +40,21 @@ public class MainController extends Application {
 		return mainController;
 	}
 
+	public static void main (String[] args) {
+		launch(args);
+	}
+
+	public static int getCommand () {
+		return command;
+	}
+
+	public static void enterAppropriateMenu () {
+//		Menu.getMenuIn().getChildMenus().get(command).enter();
+	}
+
 	private void jumpToBattleSeaGameMenu () {
 		System.setIn(new ByteArrayInputStream((//"2\ndorrin1\n11\ny\n" +
 				"3\n1\n").getBytes()));
-	}
-
-	public static void main (String[] args) {
-		launch(args);
 	}
 
 	@Override
@@ -63,8 +71,10 @@ public class MainController extends Application {
 
 		if (!Admin.adminHasBeenCreated()) {
 			try {
-				primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../View/Menus/AdminRegisterMenu.fxml"))));
-			} catch (IOException e) { e.printStackTrace(); }
+				primaryStage.setScene(new Scene(FXMLLoader.load(new File("src/com/plato/View/Menus/AdminRegisterMenu.fxml").toURI().toURL())));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		else {
 			// fixme go to login menu or main menu
@@ -102,14 +112,6 @@ public class MainController extends Application {
 //				Menu.getMenuIn().displayMenu();
 //			}
 //		}
-	}
-
-	public static int getCommand () {
-		return command;
-	}
-
-	public static void enterAppropriateMenu () {
-//		Menu.getMenuIn().getChildMenus().get(command).enter();
 	}
 
 	private void dealWithInput (int command) {
@@ -539,13 +541,13 @@ public class MainController extends Application {
 	public void tryToExitProgram () {
 //		Menu.displayAreYouSureMessage();
 //		if (Menu.getInputLine().equalsIgnoreCase("y")) {
-			try {
-				mainController.serialize();
-				AccountController.getInstance().logout();
-				System.exit(1);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			mainController.serialize();
+			AccountController.getInstance().logout();
+			System.exit(1);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 //		}
 	}
 
