@@ -43,7 +43,7 @@ public class BattleSeaView extends Application {
 			setMinSize(wh, wh); setMaxSize(wh, wh);
 
 			ImageView bg = new ImageView() {{
-				setImage(new Image("https://i.pinimg.com/originals/a9/ac/64/a9ac648a584d68eebb451a0460125462.jpg"));
+				setImage(new Image("https://www.flaticon.com/free-icon/fingerprint_565512"));
 				setLayoutX(0); setLayoutY(0);
 				setPreserveRatio(true);
 				setSmooth(true);
