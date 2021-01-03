@@ -1,8 +1,8 @@
-[IJ]-1-Unknown-[IJ]-event=org.apache.maven.settings.building.DefaultSettingsBuildingRequest@6d8792db
-[IJ]-1-Unknown-[IJ]-event=org.apache.maven.settings.building.DefaultSettingsBuildingResult@460f76a6
-[IJ]-1-Unknown-[IJ]-event=org.apache.maven.toolchain.building.DefaultToolchainsBuildingRequest@1922e6d
-[IJ]-1-Unknown-[IJ]-event=org.apache.maven.toolchain.building.DefaultToolchainsBuildingResult@4cc76301
-[IJ]-1-Unknown-[IJ]-event=org.apache.maven.execution.DefaultMavenExecutionRequest@37eeec90
+[IJ]-1-Unknown-[IJ]-event=org.apache.maven.settings.building.DefaultSettingsBuildingRequest@64bc21ac
+[IJ]-1-Unknown-[IJ]-event=org.apache.maven.settings.building.DefaultSettingsBuildingResult@55f3c410
+[IJ]-1-Unknown-[IJ]-event=org.apache.maven.toolchain.building.DefaultToolchainsBuildingRequest@76a82f33
+[IJ]-1-Unknown-[IJ]-event=org.apache.maven.toolchain.building.DefaultToolchainsBuildingResult@2f08c4b
+[IJ]-1-Unknown-[IJ]-event=org.apache.maven.execution.DefaultMavenExecutionRequest@32fe9d0a
 [IJ]-1-ProjectDiscoveryStarted-[IJ]-id=unknown
 [INFO] Scanning for projects...
 [IJ]-1-SessionStarted-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-projects=org.openjfx:project-team-4&&
@@ -890,7 +890,7 @@
 [IJ]-1-ARTIFACT_RESOLVING-[IJ]-path=-[IJ]-artifactCoord=org.codehaus.plexus:plexus-compiler-javac:jar:2.8.4-[IJ]-error=
 [IJ]-1-ARTIFACT_RESOLVED-[IJ]-path=/Users/dorrinsotoudeh/.m2/repository/org/codehaus/plexus/plexus-compiler-javac/2.8.4/plexus-compiler-javac-2.8.4.jar-[IJ]-artifactCoord=org.codehaus.plexus:plexus-compiler-javac:jar:2.8.4-[IJ]-error=
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 62 source files to /Users/dorrinsotoudeh/Desktop/project-team-4/target/classes
+[INFO] Compiling 46 source files to /Users/dorrinsotoudeh/Desktop/project-team-4/target/classes
 [IJ]-1-MojoSucceeded-[IJ]-source=LIFECYCLE-[IJ]-goal=compile-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-error=
 [IJ]-1-ForkedProjectSucceeded-[IJ]-source=CLI-[IJ]-goal=run-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-error=
 [IJ]-1-ForkSucceeded-[IJ]-source=CLI-[IJ]-goal=run-[IJ]-id=org.openjfx:project-team-4:jar:1.0-SNAPSHOT-[IJ]-error=
@@ -1123,45 +1123,3 @@ WARNING: Illegal reflective access by com.google.gson.internal.reflect.UnsafeRef
 WARNING: Please consider reporting this to the maintainers of com.google.gson.internal.reflect.UnsafeReflectionAccessor
 WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 WARNING: All illegal access operations will be denied in a future release
-
-
-(Gamer) Main Menu:
-1. Show Points
-2. View Favorite games
-3. Go to Games Menu
-4. View Platobot’s messages
-5. View last played
-6. View admin’s suggestions
-7. Go to Friends Menu
-8. View Events
-9. Go to Account Menu
-10. Exit program
-
-Your choice:  	-Saved-
-
-
-Games Menu:
-1. Open BattleSea Game Menu
-2. Open Reversi Game Menu
-3. Back
-4. Go to Account Menu
-5. Exit program
-
-Your choice:  null
-	-Saved-
-
-
-Game Menu:
-1. Show scoreboard
-2. Show Points
-3. Details
-4. Show log of game
-5. Show wins count
-6. Show played count
-7. Add to favorites
-8. Continue previous games
-9. Run Game
-10. Back
-11. Go to Account Menu
-12. Exit program
-

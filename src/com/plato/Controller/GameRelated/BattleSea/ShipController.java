@@ -27,11 +27,11 @@ public class ShipController {
 
 		}});
 
-		String shipName;
+		String shipName = "";
 		Ship chosenShip;
 		while (true) {
-			Menu.printAskingForInput("Choose ship[/c to cancel ]: ");
-			shipName = Menu.getInputLine();
+//			Menu.printAskingForInput("Choose ship[/c to cancel ]: ");
+//			shipName = Menu.getInputLine();
 
 			if (shipName.toLowerCase().trim().equals("/c")) return;
 
@@ -40,17 +40,17 @@ public class ShipController {
 				break;
 			}
 
-			Menu.printErrorMessage("Invalid ship name.");
+//			Menu.printErrorMessage("Invalid ship name.");
 		}
 
-		String newX, newY;
+		String newX = "", newY = "";
 		int newXInt, newYInt;
 		while (true)
 			try {
-				Menu.printAskingForInput("New x [/c to cancel , /s to use prev val]: ");
-				newX = Menu.getInputLine();
-				Menu.printAskingForInput("New y [/c to cancel , /s to use prev val]: ");
-				newY = Menu.getInputLine();
+//				Menu.printAskingForInput("New x [/c to cancel , /s to use prev val]: ");
+//				newX = Menu.getInputLine();
+//				Menu.printAskingForInput("New y [/c to cancel , /s to use prev val]: ");
+//				newY = Menu.getInputLine();
 
 				if (newX.toLowerCase().trim().equals("/c") || newY.toLowerCase().trim().equals("/c")) return;
 
@@ -70,9 +70,9 @@ public class ShipController {
 					throw new InvalidCoordinateException();
 				break;
 			} catch (InputMismatchException e) {
-				Menu.printErrorMessage("You must either enter a number or \"/s\" for both new x and new y");
+//				Menu.printErrorMessage("You must either enter a number or \"/s\" for both new x and new y");
 			} catch (InvalidCoordinateException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		chosenShip.move(newXInt, newYInt);
@@ -87,11 +87,11 @@ public class ShipController {
 
 		}});
 
-		String shipName;
+		String shipName = "";
 		Ship chosenShip;
 		while (true) {
-			Menu.printAskingForInput("Choose ship[/c to cancel ]: ");
-			shipName = Menu.getInputLine();
+//			Menu.printAskingForInput("Choose ship[/c to cancel ]: ");
+//			shipName = Menu.getInputLine();
 
 			if (shipName.toLowerCase().trim().equals("/c")) return;
 
@@ -100,14 +100,14 @@ public class ShipController {
 				break;
 			}
 
-			Menu.printErrorMessage("Invalid ship name.");
+//			Menu.printErrorMessage("Invalid ship name.");
 		}
 
 		try {
 			if (!chosenShip.canChangeDir())
 				throw new CantChangeDirException();
 		} catch (CantChangeDirException e) {
-			Menu.printErrorMessage(e.getMessage());
+//			Menu.printErrorMessage(e.getMessage());
 		}
 
 		chosenShip.changeDir();

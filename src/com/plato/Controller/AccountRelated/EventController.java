@@ -23,11 +23,11 @@ public class EventController {
 	}
 
 	public void createEvent () {
-		String title;
+		String title = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Title:[/c to cancel] ");
-				title = Menu.getInputLine();
+//				Menu.printAskingForInput("Title:[/c to cancel] ");
+//				title = Menu.getInputLine();
 
 				if (title.trim().equalsIgnoreCase("/c")) return;
 
@@ -36,20 +36,20 @@ public class EventController {
 
 				break;
 			} catch (MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 		EventView.getInstance().displayAvailableGames();
 
-		String gameNum;
+		String gameNum = "";
 		while (true) {
-			Menu.printAskingForInput("Choose Game:[/c to cancel] ");
-			gameNum = Menu.getInputLine();
+//			Menu.printAskingForInput("Choose Game:[/c to cancel] ");
+//			gameNum = Menu.getInputLine();
 
 			if (gameNum.trim().equalsIgnoreCase("/c")) return;
 
 			if (gameNum.matches("[1-2]"))
 				break;
-			Menu.printErrorMessage("Invalid input.");
+//			Menu.printErrorMessage("Invalid input.");
 		}
 
 		String gameName = (Integer.parseInt(gameNum) == 1) ? BattleSea.class.getSimpleName() : Reversi.class.getSimpleName();
@@ -57,8 +57,9 @@ public class EventController {
 		LocalDate start;
 		while (true) {
 			try {
-				Menu.printAskingForInput("Start Date[d-MMM-yyyy][/c to cancel]: ");
-				String startStr = Menu.getInputLine();
+//				Menu.printAskingForInput("Start Date[d-MMM-yyyy][/c to cancel]: ");
+				String startStr = "";
+//				startStr = Menu.getInputLine();
 
 				if (startStr.trim().equalsIgnoreCase("/c")) return;
 
@@ -68,17 +69,18 @@ public class EventController {
 					throw new StartDateTimeHasAlreadyPassedException();
 				break;
 			} catch (DateTimeParseException e) {
-				Menu.printErrorMessage("Invalid start date format.");
+//				Menu.printErrorMessage("Invalid start date format.");
 			} catch (StartDateTimeHasAlreadyPassedException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 		}
 
 		LocalDate end;
 		while (true) {
 			try {
-				Menu.printAskingForInput("End Date[d-MMM-yyyy][/c to cancel]: ");
-				String endStr = Menu.getInputLine();
+//				Menu.printAskingForInput("End Date[d-MMM-yyyy][/c to cancel]: ");
+				String endStr = "";
+//				endStr = Menu.getInputLine();
 
 				if (endStr.trim().equalsIgnoreCase("/c")) return;
 
@@ -91,17 +93,18 @@ public class EventController {
 					throw new EndDateTimeHasAlreadyPassedException();
 				break;
 			} catch (DateTimeParseException e) {
-				Menu.printErrorMessage("Invalid end date format.");
+//				Menu.printErrorMessage("Invalid end date format.");
 			} catch (StartDateTimeIsAfterEndException | EndDateTimeHasAlreadyPassedException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 		}
 
 		double eventPrize;
 		while (true) {
 			try {
-				Menu.printAskingForInput("Event Prize[/c to cancel]: ");
-				String prizeStr = Menu.getInputLine();
+//				Menu.printAskingForInput("Event Prize[/c to cancel]: ");
+				String prizeStr = "";
+//				prizeStr = Menu.getInputLine();
 
 				if (prizeStr.trim().equalsIgnoreCase("/c")) return;
 
@@ -109,7 +112,7 @@ public class EventController {
 
 				break;
 			} catch (NumberFormatException e) {
-				Menu.printErrorMessage("Invalid format.");
+//				Menu.prin tErrorMessage("Invalid format.");
 			}
 		}
 
@@ -152,11 +155,11 @@ public class EventController {
 	}
 
 	public void displayEventInfo () {
-		String eventid;
+		String eventid = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Event ID:[/c to cancel] ");
-				eventid = Menu.getInputLine();
+//				Menu.printAskingForInput("Event ID:[/c to cancel] ");
+//				eventid = Menu.getInputLine();
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
@@ -178,11 +181,11 @@ public class EventController {
 	}
 
 	public void participateInEvent () {
-		String eventid;
+		String eventid = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Event ID:[/c to cancel] ");
-				eventid = Menu.getInputLine();
+//				Menu.printAskingForInput("Event ID:[/c to cancel] ");
+//				eventid = Menu.getInputLine();
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
@@ -194,22 +197,23 @@ public class EventController {
 
 				break;
 			} catch (EventDoesntExistException | AlreadyParticipatingInEventException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
-		Menu.displayAreYouSureMessage();
-		if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).participateInEvent(eventid);
-			Menu.printSuccessfulOperation("You are now participating in this event.");
-		}
+//		Menu.displayAreYouSureMessage();
+//		if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).participateInEvent(eventid);
+//			Menu.printSuccessfulOperation("You are now participating in this event.");
+//		}
 	}
 
 	public void stopParticipatingInEvent () {
 		Event event;
 		while (true)
 			try {
-				Menu.printAskingForInput("Event ID:[/c to cancel] ");
-				String eventid = Menu.getInputLine();
+//				Menu.printAskingForInput("Event ID:[/c to cancel] ");
+				String eventid = "";
+//				eventid = Menu.getInputLine();
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
@@ -222,22 +226,23 @@ public class EventController {
 
 				break;
 			} catch (EventDoesntExistException | NotParticipatingInEventException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
-		Menu.displayAreYouSureMessage();
-		if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).stopParticipatingInEvent(event.getEventID());
-			Menu.printSuccessfulOperation("You have stopped participating in this event.");
-		}
+//		Menu.displayAreYouSureMessage();
+//		if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).stopParticipatingInEvent(event.getEventID());
+//			Menu.printSuccessfulOperation("You have stopped participating in this event.");
+//		}
 	}
 
 	public void editEvent () {
 		Event event;
 		while (true)
 			try {
-				Menu.printAskingForInput("Event ID:[/c to cancel] ");
-				String eventid = Menu.getInputLine();
+//				Menu.printAskingForInput("Event ID:[/c to cancel] ");
+				String eventid = "";
+//				eventid = Menu.getInputLine();
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
@@ -250,7 +255,7 @@ public class EventController {
 				event = Event.getEvent(eventid);
 				break;
 			} catch (EventDoesntExistException | CantEditInSessionEventException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
@@ -265,23 +270,24 @@ public class EventController {
 
 		int field = 0;
 		try {
-			String fieldstr = (Menu.getInputLine());
+			String fieldstr = "";
+//			fieldstr = (Menu.getInputLine());
 
 			if (!String.valueOf(fieldstr).matches("[1-5]"))
 				throw new NumberFormatException();
 
 			field = Integer.parseInt(fieldstr);
 		} catch (NumberFormatException e) {
-			Menu.printErrorMessage(new MainController.InvalidInputException().getMessage());
+//			Menu.printErrorMessage(new MainController.InvalidInputException().getMessage());
 		}
 
 		switch (field) {
 			case 1 -> {
-				String title;
+				String title = "";
 				while (true)
 					try {
-						Menu.printAskingForInput("New Title:[/c to cancel] ");
-						title = Menu.getInputLine();
+//						Menu.printAskingForInput("New Title:[/c to cancel] ");
+//						title = Menu.getInputLine();
 
 						if (title.trim().equalsIgnoreCase("/c")) return;
 
@@ -290,22 +296,22 @@ public class EventController {
 
 						break;
 					} catch (MainController.InvalidFormatException e) {
-						Menu.printErrorMessage(e.getMessage());
+//						Menu.printErrorMessage(e.getMessage());
 					}
-				Menu.displayAreYouSureMessage();
-				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-					event.editField("title", title);
-					Menu.printSuccessfulOperation("Title changed successfully.");
-				}
+//				Menu.displayAreYouSureMessage();
+//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//					event.editField("title", title);
+//					Menu.printSuccessfulOperation("Title changed successfully.");
+//				}
 			}
 
 			case 2 -> {
-				String gameNum;
+				String gameNum = "";
 				EventView.getInstance().displayAvailableGames();
 				while (true)
 					try {
-						Menu.printAskingForInput("Choose New Game:[/c to cancel] ");
-						gameNum = Menu.getInputLine();
+//						Menu.printAskingForInput("Choose New Game:[/c to cancel] ");
+//						gameNum = Menu.getInputLine();
 
 						if (gameNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -313,45 +319,45 @@ public class EventController {
 							throw new MainController.InvalidInputException();
 						break;
 					} catch (MainController.InvalidInputException e) {
-						Menu.printErrorMessage(e.getMessage());
+//						Menu.printErrorMessage(e.getMessage());
 					}
 
 				String gameName = (Integer.parseInt(gameNum) == 1) ? BattleSea.class.getSimpleName() : Reversi.class.getSimpleName();
 
-				Menu.displayAreYouSureMessage();
-				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-					event.editField("game name", gameName);
-					Menu.printSuccessfulOperation("Game name changed successfully.");
-				}
+//				Menu.displayAreYouSureMessage();
+//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//					event.editField("game name", gameName);
+//					Menu.printSuccessfulOperation("Game name changed successfully.");
+//				}
 			}
 
 			case 3 -> {
-				String prize;
+				String prize = "";
 				while (true)
 					try {
-						Menu.printAskingForInput("New Event Prize Amount: [/c to cancel] ");
-						prize = Menu.getInputLine();
+//						Menu.printAskingForInput("New Event Prize Amount: [/c to cancel] ");
+//						prize = Menu.getInputLine();
 
 						if (prize.trim().equalsIgnoreCase("/c")) return;
 						Double.parseDouble(prize);
 						break;
 					} catch (NumberFormatException e) {
-						Menu.printErrorMessage("Invalid format.");
+//						Menu.printErrorMessage("Invalid format.");
 					}
 
-				Menu.displayAreYouSureMessage();
-				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-					event.editField("event score", prize);
-					Menu.printSuccessfulOperation("Event prize changed successfully.");
-				}
+//				Menu.displayAreYouSureMessage();
+//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//					event.editField("event score", prize);
+//					Menu.printSuccessfulOperation("Event prize changed successfully.");
+//				}
 			}
 
 			case 4 -> {
-				String startDate;
+				String startDate = "";
 				while (true)
 					try {
-						Menu.printAskingForInput("New Event Start Date: [/c to cancel] ");
-						startDate = Menu.getInputLine();
+//						Menu.printAskingForInput("New Event Start Date: [/c to cancel] ");
+//						startDate = Menu.getInputLine();
 
 						if (startDate.trim().equalsIgnoreCase("/c")) return;
 
@@ -365,24 +371,24 @@ public class EventController {
 
 						break;
 					} catch (DateTimeParseException e) {
-						Menu.printErrorMessage("Invalid start date format.");
+//						Menu.printErrorMessage("Invalid start date format.");
 					} catch (StartDateTimeHasAlreadyPassedException | StartDateTimeIsAfterEndException e) {
-						Menu.printErrorMessage(e.getMessage());
+//						Menu.printErrorMessage(e.getMessage());
 					}
 
-				Menu.displayAreYouSureMessage();
-				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-					event.editField("start", startDate);
-					Menu.printSuccessfulOperation("Start date changed successfully.");
-				}
+//				Menu.displayAreYouSureMessage();
+//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//					event.editField("start", startDate);
+//					Menu.printSuccessfulOperation("Start date changed successfully.");
+//				}
 			}
 
 			case 5 -> {
-				String endDate;
+				String endDate = "";
 				while (true)
 					try {
-						Menu.printAskingForInput("New Event End Date: [/c to cancel] ");
-						endDate = Menu.getInputLine();
+//						Menu.printAskingForInput("New Event End Date: [/c to cancel] ");
+//						endDate = Menu.getInputLine();
 
 						if (endDate.trim().equalsIgnoreCase("/c")) return;
 
@@ -396,16 +402,16 @@ public class EventController {
 
 						break;
 					} catch (DateTimeParseException e) {
-						Menu.printErrorMessage("Invalid start date format.");
+//						Menu.printErrorMessage("Invalid start date format.");
 					} catch (EndDateTimeHasAlreadyPassedException | StartDateTimeIsAfterEndException e) {
-						Menu.printErrorMessage(e.getMessage());
+//						Menu.printErrorMessage(e.getMessage());
 					}
 
-				Menu.displayAreYouSureMessage();
-				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-					event.editField("end", endDate);
-					Menu.printSuccessfulOperation("End date changed successfully.");
-				}
+//				Menu.displayAreYouSureMessage();
+//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//					event.editField("end", endDate);
+//					Menu.printSuccessfulOperation("End date changed successfully.");
+//				}
 			}
 		}
 	}
@@ -413,8 +419,9 @@ public class EventController {
 	public void removeEvent () {
 		while (true)
 			try {
-				Menu.printAskingForInput("Event ID:[/c to cancel] ");
-				String eventid = Menu.getInputLine();
+//				Menu.printAskingForInput("Event ID:[/c to cancel] ");
+				String eventid = "";
+//				eventid = Menu.getInputLine();
 
 				if (eventid.trim().equalsIgnoreCase("/c")) return;
 
@@ -424,7 +431,7 @@ public class EventController {
 				Event.removeEvent(eventid);
 				break;
 			} catch (EventDoesntExistException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 	}
 

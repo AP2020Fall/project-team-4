@@ -20,7 +20,7 @@ public class EventView {
 		inSessionEvents.forEach(event -> {
 			int length = event.split(" ").length;
 
-			Menu.print("EventId: " + event.split(" ")[length - 5] + " -> ");
+//			Menu.print("EventId: " + event.split(" ")[length - 5] + " -> ");
 
 			StringBuilder title = new StringBuilder();
 			for (int i = 0; i < length - 5; i++)
@@ -47,7 +47,7 @@ public class EventView {
 	}
 
 	public void displayEditableFields (LinkedList<String> editableFields) {
-		Menu.printAskingForInput("Choose field to edit:\n");
+//		Menu.printAskingForInput("Choose field to edit:\n");
 		for (String field : editableFields) {
 			System.out.printf("%d. %s%n", editableFields.indexOf(field) + 1, field);
 		}

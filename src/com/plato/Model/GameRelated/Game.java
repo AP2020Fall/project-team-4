@@ -146,7 +146,7 @@ public abstract class Game {
 		// set end time
 		dateGameEnded = LocalDateTime.now();
 		// going back to game menu
-		Menu.getMenuIn().back();
+//		Menu.getMenuIn().back();
 		// getting rid of current game in session
 		GameController.getInstance().setCurrentGameInSession(null);
 	}

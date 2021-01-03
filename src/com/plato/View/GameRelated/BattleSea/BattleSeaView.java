@@ -152,10 +152,10 @@ public class BattleSeaView extends Application {
 	}
 
 	public void displayRemainingTime (int seconds) {
-		Menu.println("You have %ds remaining.".formatted(seconds));
+//		Menu.println("You have %ds remaining.".formatted(seconds));
 	}
 
 	public void displayOutOfTimeMessage (String otherPlayer) {
-		Menu.println("%nSorry you ran out of time. Now it's %s's turn.".formatted(otherPlayer));
+//		Menu.println("%nSorry you ran out of time. Now it's %s's turn.".formatted(otherPlayer));
 	}
 }

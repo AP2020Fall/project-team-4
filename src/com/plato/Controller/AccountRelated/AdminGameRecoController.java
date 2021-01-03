@@ -6,7 +6,6 @@ import Model.AccountRelated.Admin;
 import Model.AccountRelated.AdminGameReco;
 import Model.AccountRelated.Gamer;
 import View.AccountRelated.AdminGameRecoView;
-import View.Menus._11GameMenu;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -24,11 +23,11 @@ public class AdminGameRecoController {
 	}
 
 	public void giveRecommendationToGamer () {
-		String gamerUN;
+		String gamerUN = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Gamer username:[/c to cancel] ");
-				gamerUN = Menu.getInputLine();
+//				Menu.printAskingForInput("Gamer username:[/c to cancel] ");
+//				gamerUN = Menu.getInputLine();
 
 				if (gamerUN.trim().equalsIgnoreCase("/c")) return;
 
@@ -42,21 +41,21 @@ public class AdminGameRecoController {
 					throw new CantRecommendToYourselfException();
 				break;
 			} catch (AccountController.NoAccountExistsWithUsernameException | CantRecommendToYourselfException | MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
-		String gamechoice;
+		String gamechoice = "";
 		LinkedList<String> recoChoices = new LinkedList<>(Arrays.asList("BattleSea", "Reversi"));
 
 		while (true)
 			try {
 				AtomicInteger count = new AtomicInteger(1);
-				recoChoices.forEach(game -> Menu.println("%d. %s".formatted(count.getAndIncrement(), game)));
+//				recoChoices.forEach(game -> Menu.println("%d. %s".formatted(count.getAndIncrement(), game)));
 
-				Menu.printAskingForInput("Your game choice:[/c to cancel] ");
-				gamechoice = Menu.getInputLine();
+//				Menu.printAskingForInput("Your game choice:[/c to cancel] ");
+//				gamechoice = Menu.getInputLine();
 
-				if (gamechoice.trim().equalsIgnoreCase("/c")) return;
+//				if (gamechoice.trim().equalsIgnoreCase("/c")) return;
 
 				if (!gamechoice.matches("[1-2]"))
 					throw new MainController.InvalidInputException();
@@ -66,7 +65,7 @@ public class AdminGameRecoController {
 
 				break;
 			} catch (MainController.InvalidInputException | AdminGameRecoAlreadyExists e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 
@@ -99,11 +98,11 @@ public class AdminGameRecoController {
 	}
 
 	public void removeReco () {
-		String recoID;
+		String recoID = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Suggestion ID:[/c to cancel] ");
-				recoID = Menu.getInputLine();
+//				Menu.printAskingForInput("Suggestion ID:[/c to cancel] ");
+//				recoID = Menu.getInputLine();
 
 				if (recoID.trim().equalsIgnoreCase("/c")) return;
 
@@ -112,7 +111,7 @@ public class AdminGameRecoController {
 
 				break;
 			} catch (AdminGameRecoDoesntExistException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		AdminGameReco.removeReco(recoID);
@@ -124,8 +123,9 @@ public class AdminGameRecoController {
 		int choice;
 		while (true)
 			try {
-				Menu.printAskingForInput("Choose game:[/c to cancel] ");
-				String command = Menu.getInputLine();
+//				Menu.printAskingForInput("Choose game:[/c to cancel] ");
+				String command = "";
+//				command = Menu.getInputLine();
 
 				if (command.trim().equalsIgnoreCase("/c")) return;
 
@@ -134,17 +134,17 @@ public class AdminGameRecoController {
 				if (choice < 1 || choice > recos.size())
 					throw new InputMismatchException();
 
-				((_11GameMenu) Menu.getMenuIn().getChildMenus().get(MainController.getCommand()))
-						.setGameName(recos.get(choice - 1).getGameName());
+//				((_11GameMenu) Menu.getMenuIn().getChildMenus().get(MainController.getCommand()))
+//						.setGameName(recos.get(choice - 1).getGameName());
 				break;
 			} catch (InputMismatchException e) {
-				Menu.printErrorMessage("Invalid input");
+//				Menu.printErrorMessage("Invalid input");
 			}
 
 		switch (recos.get(choice - 1).getGameName().toLowerCase()) {
-			case "battlesea" -> Menu.getMenu("11B").enter();
+//			case "battlesea" -> Menu.getMenu("11B").enter();
 
-			case "reversi" -> Menu.getMenu("11R").enter();
+//			case "reversi" -> Menu.getMenu("11R").enter();
 		}
 	}
 

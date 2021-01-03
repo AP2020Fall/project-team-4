@@ -28,11 +28,11 @@ public class MessageController {
 	}
 
 	public void sendMsg () {
-		String msg;
+		String msg = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Your message[/c to cancel] -> ");
-				msg = Menu.getInputLine();
+//				Menu.printAskingForInput("Your message[/c to cancel] -> ");
+//				msg = Menu.getInputLine();
 
 				if (msg.trim().equalsIgnoreCase("/c")) return;
 
@@ -42,7 +42,7 @@ public class MessageController {
 				new Message(msg);
 				break;
 			} catch (EmptyMessageException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 	}
 

@@ -11,13 +11,11 @@ import Model.AccountRelated.*;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
 import Model.GameRelated.Reversi.Reversi;
-import View.Menus._11GameMenu;
-import View.Menus._12_1GameplayBattleSeaMenu;
-import View.Menus._3MainMenu;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
@@ -54,7 +52,6 @@ public class MainController extends Application {
 	@Override
 	public void start (Stage primaryStage) {
 		getInstance().primaryStage = primaryStage;
-		primaryStage.show();
 //		jumpToBattleSeaGameMenu(); // fixme make comment later
 		DayPassController.getInstance().start();
 
@@ -65,48 +62,46 @@ public class MainController extends Application {
 		}
 
 		if (!Admin.adminHasBeenCreated()) {
-			Menu.addMenu("1");
-			Menu.getMenu("1").enter();
+			try {
+				primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../View/Menus/AdminRegisterMenu.fxml"))));
+			} catch (IOException e) { e.printStackTrace(); }
 		}
 		else {
-			Menu.addMenu("2");
-			if (AccountController.getInstance().getCurrentAccLoggedIn() != null) {
-				String aORg = AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A";
-				Menu.addMenu("3" + aORg);
-				Menu.getMenu("3" + aORg).enter();
-			}
-			else
-				Menu.getMenu("2").enter();
-
-
-			Menu.addMenusForAdminOrGamer(AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A");
+			// fixme go to login menu or main menu
+//			Menu.addMenu("2");
+//			if (AccountController.getInstance().getCurrentAccLoggedIn() != null) {
+//				String aORg = AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A";
+//				Menu.addMenu("3" + aORg);
+//				Menu.getMenu("3" + aORg).enter();
+//			}
+//			else
+//				Menu.getMenu("2").enter();
 		}
 
-		Menu.getMenuIn().displayMenu();
+		primaryStage.show();
 
-		//noinspection InfiniteLoopStatement
-		while (true) {
-			if (Menu.getScanner().hasNextLine()) {
-				try {
-					String comStr = Menu.getInputLine();
-
-					if (!comStr.matches("[0-9]+"))
-						throw new InvalidInputException();
-
-					command = Integer.parseInt(comStr);
-
-					if (command < 1 || command > Menu.getMenuIn().getOptions().size())
-						throw new InvalidInputException();
-
-					getInstance().dealWithInput(command);
-
-				} catch (InvalidInputException e) {
-					Menu.printErrorMessage(e.getMessage());
-				}
-
-				Menu.getMenuIn().displayMenu();
-			}
-		}
+//		while (true) {
+//			if (Menu.getScanner().hasNextLine()) {
+//				try {
+//					String comStr = Menu.getInputLine();
+//
+//					if (!comStr.matches("[0-9]+"))
+//						throw new InvalidInputException();
+//
+//					command = Integer.parseInt(comStr);
+//
+//					if (command < 1 || command > Menu.getMenuIn().getOptions().size())
+//						throw new InvalidInputException();
+//
+//					getInstance().dealWithInput(command);
+//
+//				} catch (InvalidInputException e) {
+//					Menu.printErrorMessage(e.getMessage());
+//				}
+//
+//				Menu.getMenuIn().displayMenu();
+//			}
+//		}
 	}
 
 	public static int getCommand () {
@@ -114,18 +109,21 @@ public class MainController extends Application {
 	}
 
 	public static void enterAppropriateMenu () {
-		Menu.getMenuIn().getChildMenus().get(command).enter();
+//		Menu.getMenuIn().getChildMenus().get(command).enter();
 	}
 
 	private void dealWithInput (int command) {
-		LinkedList<String> menuOpts = Menu.getMenuIn().getOptions();
+		LinkedList<String> menuOpts = new LinkedList<>();
+//		menuOpts = Menu.getMenuIn().getOptions();
 
 		command--; // to use for accessing menuOpts indexes
 		String commandOption = menuOpts.get(command).trim();
 
 		switch (commandOption) {
 			case "Exit program" -> tryToExitProgram();
-			case "Back" -> Menu.getMenuIn().back();
+			case "Back" -> {
+//				Menu.getMenuIn().back();
+			}
 			case "Go to Account Menu", "Go to Games Menu", "Go to Friends Menu",
 					"Open Reversi Game Menu", "Open BattleSea Game Menu" -> enterAppropriateMenu();
 
@@ -136,10 +134,10 @@ public class MainController extends Application {
 
 			// main menu
 			case "Show Points" -> {
-				if (Menu.getMenuIn() instanceof _3MainMenu)
-					GameLogController.getInstance().displayAllPointsOfPlayer();
-				if (Menu.getMenuIn() instanceof _11GameMenu)
-					GameLogController.getInstance().displayPtsLoggedInPlayerEarnedFromGame();
+//				if (Menu.getMenuIn() instanceof _3MainMenu)
+//					GameLogController.getInstance().displayAllPointsOfPlayer();
+//				if (Menu.getMenuIn() instanceof _11GameMenu)
+//					GameLogController.getInstance().displayPtsLoggedInPlayerEarnedFromGame();
 			}
 			case "View Favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
 			case "View Platobot’s messages" -> MessageController.getInstance().displayAdminMessages();
@@ -214,7 +212,7 @@ public class MainController extends Application {
 				BattleSeaController.getInstance().finalizeTrialBoard();
 
 				if (((BattleSea) GameController.getInstance().getCurrentGameInSession()).canStartBombing()) {
-					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
+//					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
 					BattleSeaController.getInstance().initTurnTimerStuff();
 				}
 			}
@@ -261,7 +259,7 @@ public class MainController extends Application {
 			case "View my Reversi statistics" -> GameLogController.getInstance().displayPlayerStatsInGame("Reversi");
 			case "Logout" -> {
 				AccountController.getInstance().logout();
-				Menu.getMenu("2").enter();
+//				Menu.getMenu("2").enter();
 			}
 		}
 
@@ -378,7 +376,7 @@ public class MainController extends Application {
 	public void saveEverything () {
 		try {
 			serialize();
-			Menu.printSavedMessage();
+//			Menu.printSavedMessage();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -539,8 +537,8 @@ public class MainController extends Application {
 	}
 
 	public void tryToExitProgram () {
-		Menu.displayAreYouSureMessage();
-		if (Menu.getInputLine().equalsIgnoreCase("y")) {
+//		Menu.displayAreYouSureMessage();
+//		if (Menu.getInputLine().equalsIgnoreCase("y")) {
 			try {
 				mainController.serialize();
 				AccountController.getInstance().logout();
@@ -548,7 +546,7 @@ public class MainController extends Application {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
+//		}
 	}
 
 	/**

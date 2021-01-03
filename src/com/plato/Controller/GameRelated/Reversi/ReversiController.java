@@ -27,20 +27,20 @@ public class ReversiController {
 				throw new HasntMadeMoveInCurrentTurnException();
 
 		} catch (HasntMadeMoveInCurrentTurnException e) {
-			Menu.printErrorMessage(e.getMessage());
+//			Menu.printErrorMessage(e.getMessage());
 			return;
 		}
 		GameController.getInstance().getCurrentGameInSession().nextTurn();
 	}
 
 	public void placeDisk () {
-		String Xstr, Ystr;
+		String Xstr = "", Ystr="";
 		int x, y;
 		if (((Reversi) GameController.getInstance().getCurrentGameInSession()).hasPlayerMoved())
 			try {
 				throw new PlayerHasAlreadyPlacedDiskException();
 			} catch (PlayerHasAlreadyPlacedDiskException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 				return;
 			}
 
@@ -51,8 +51,8 @@ public class ReversiController {
 
 		while (true)
 			try {
-				Menu.printAskingForInput("X [/c to cancel]: ");
-				Xstr = Menu.getInputLine();
+//				Menu.printAskingForInput("X [/c to cancel]: ");
+//				Xstr = Menu.getInputLine();
 
 				if (Xstr.trim().equalsIgnoreCase("/c")) return;
 
@@ -60,8 +60,8 @@ public class ReversiController {
 				if (!Reversi.checkCoordinates(x))
 					throw new InvalidCoordinateException();
 
-				Menu.printAskingForInput("Y [/c to cancel]: ");
-				Ystr = Menu.getInputLine();
+//				Menu.printAskingForInput("Y [/c to cancel]: ");
+//				Ystr = Menu.getInputLine();
 
 				if (Ystr.trim().equalsIgnoreCase("/c")) return;
 
@@ -74,7 +74,7 @@ public class ReversiController {
 					throw new CantPlaceDiskHereException();
 				break;
 			} catch (InvalidCoordinateException | CantPlaceDiskHereException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 

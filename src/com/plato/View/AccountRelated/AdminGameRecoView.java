@@ -28,19 +28,19 @@ public class AdminGameRecoView {
 	}
 
 	public void displayAllAdminRecos (LinkedList<String> allRecos) { // every string is in form -> "recoID gamerUsername gameName"
-		if (allRecos.size() == 0)
-			Menu.println("You have made any recommendations made.");
-		else
+		if (allRecos.size() == 0) {
+//			Menu.println("You have made any recommendations made.");
+		}else
 			allRecos.forEach(reco -> {
 				StringBuilder username = new StringBuilder();
 				for (int i = 1; i < reco.split(" ").length - 1; i++)
 					username.append(reco.split(" ")[i]).append(" ");
 
-				Menu.println("RecoID: %s -> Gamer = %s  Game = %s".formatted(
-						reco.split(" ")[0],
-						username,
-						reco.split(" ")[2]
-				));
+//				Menu.println("RecoID: %s -> Gamer = %s  Game = %s".formatted(
+//						reco.split(" ")[0],
+//						username,
+//						reco.split(" ")[2]
+//				));
 			});
 	}
 }

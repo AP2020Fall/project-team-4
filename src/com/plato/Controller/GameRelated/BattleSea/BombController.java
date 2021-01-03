@@ -21,13 +21,13 @@ public class BombController {
 	public void throwBomb () {
 		PlayerBattleSea currentPlayer = ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getTurnPlayer());
 
-		String Xstr, Ystr;
+		String Xstr = "", Ystr = "";
 		int x, y;
 		while (true) {
 			try {
 				// for x
-				Menu.printAskingForInput("X [/c to cancel]: ");
-				Xstr = Menu.getInputLine().trim();
+//				Menu.printAskingForInput("X [/c to cancel]: ");
+//				Xstr = Menu.getInputLine().trim();
 
 				if (Xstr.equalsIgnoreCase("/c")) return;
 
@@ -35,8 +35,8 @@ public class BombController {
 					throw new InvalidCoordinateException();
 
 				// for y
-				Menu.printAskingForInput("Y [/c to cancel]: ");
-				Ystr = Menu.getInputLine().trim();
+//				Menu.printAskingForInput("Y [/c to cancel]: ");
+//				Ystr = Menu.getInputLine().trim();
 
 				if (Ystr.equalsIgnoreCase("/c")) return;
 
@@ -50,9 +50,9 @@ public class BombController {
 				y = Integer.parseInt(Ystr);
 				break;
 			} catch (NumberFormatException e) {
-				Menu.println("You can only use numbers from 1 to 8 inclusive");
+//				Menu.println("You can only use numbers from 1 to 8 inclusive");
 			} catch (InvalidCoordinateException | CoordinateAlreadyBombedException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 		}
 
@@ -60,13 +60,13 @@ public class BombController {
 		BattleSeaController.getInstance().getTurnTimerTask().bomb();
 		if (((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getTurnPlayer())
 				.getBombsThrown().getLast().wasSuccessful()) {
-			Menu.printSuccessfulOperation("Bomb successful");
-			Menu.println("You can bomb one more time.");
+//			Menu.printSuccessfulOperation("Bomb successful");
+//			Menu.println("You can bomb one more time.");
 		}
 		else {
 			BattleSeaController.getInstance().getTurnTimerTask().bomb();
-			Menu.printSuccessfulOperation("Bomb unsuccessful");
-			Menu.println("Next!!");
+//			Menu.printSuccessfulOperation("Bomb unsuccessful");
+//			Menu.println("Next!!");
 		}
 	}
 

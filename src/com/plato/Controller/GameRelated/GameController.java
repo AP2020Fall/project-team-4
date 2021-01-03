@@ -10,13 +10,10 @@ import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
 import Model.GameRelated.Reversi.Reversi;
 import View.GameRelated.GameView;
-import View.Menus._11GameMenu;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
-
-import static Model.GameRelated.Game.getScoreboard;
 
 public class GameController {
 	private static GameController gameController;
@@ -34,8 +31,9 @@ public class GameController {
 		Gamer player2;
 		while (true)
 			try {
-				Menu.printAskingForInput("Second Player's username:[/c to cancel] ");
-				String username2 = Menu.getInputLine();
+//				Menu.printAskingForInput("Second Player's username:[/c to cancel] ");
+				String username2 = "";
+//				username2 = Menu.getInputLine();
 
 				if (username2.trim().equalsIgnoreCase("/c")) return;
 
@@ -55,7 +53,7 @@ public class GameController {
 
 				break;
 			} catch (AccountController.NoAccountExistsWithUsernameException | CantPlayWithAdminException | CantPlayWithYourselfException | MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 
@@ -66,13 +64,13 @@ public class GameController {
 		}};
 
 		Game game = null;
-		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
-			case "battlesea" -> game = new BattleSea(players);
-			case "reversi" -> {
-				game = new Reversi(players);
-				((Reversi) game).emptyBoard();
-			}
-		}
+//		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
+//			case "battlesea" -> game = new BattleSea(players);
+//			case "reversi" -> {
+//				game = new Reversi(players);
+//				((Reversi) game).emptyBoard();
+//			}
+//		}
 
 		Game.startGame(game);
 		setCurrentGameInSession(game);
@@ -81,22 +79,22 @@ public class GameController {
 	}
 
 	public void addGameToFavesOfLoggedInGamer () {
-		String gameName = ((_11GameMenu) Menu.getMenuIn()).getGameName();
-		if (((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFaveGames().contains(gameName)) {
-			Menu.printErrorMessage("This game is already in your favorites list");
-			return;
-		}
-		Menu.displayAreYouSureMessage();
-		if (Menu.getInputLine().equalsIgnoreCase("y")) {
-			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(gameName);
-			GameView.getInstance().displaySuccessfulFaveGameAdditionMessage(((_11GameMenu) Menu.getMenuIn()).getGameName());
-		}
+//		String gameName = ((_11GameMenu) Menu.getMenuIn()).getGameName();
+//		if (((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFaveGames().contains(gameName)) {
+//			Menu.printErrorMessage("This game is already in your favorites list");
+//			return;
+//		}
+//		Menu.displayAreYouSureMessage();
+//		if (Menu.getInputLine().equalsIgnoreCase("y")) {
+//			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(gameName);
+//			GameView.getInstance().displaySuccessfulFaveGameAdditionMessage(((_11GameMenu) Menu.getMenuIn()).getGameName());
+//		}
 	}
 
 	public void displayGameHowToPlay () {
-		GameView.getInstance().displayGameHowToPlay(
-				((_11GameMenu) Menu.getMenuIn()).getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getBattleseaDetails() : Reversi.getReversiDetails()
-		);
+//		GameView.getInstance().displayGameHowToPlay(
+//				((_11GameMenu) Menu.getMenuIn()).getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getBattleseaDetails() : Reversi.getReversiDetails()
+//		);
 	}
 
 	public void displayTurn () {
@@ -130,8 +128,8 @@ public class GameController {
 	}
 
 	public void displayScoreboardOfGame () {
-		LinkedList<String> scoreBoard = getScoreboard(((_11GameMenu) Menu.getMenuIn()).getGameName());
-		GameView.getInstance().displayScoreboardOfGame(((_11GameMenu) Menu.getMenuIn()).getGameName(), scoreBoard);
+//		LinkedList<String> scoreBoard = getScoreboard(((_11GameMenu) Menu.getMenuIn()).getGameName());
+//		GameView.getInstance().displayScoreboardOfGame(((_11GameMenu) Menu.getMenuIn()).getGameName(), scoreBoard);
 	}
 
 	public Game getCurrentGameInSession () {
@@ -143,11 +141,11 @@ public class GameController {
 	}
 
 	public void editDetails (String gameName) {
-		String details;
+		String details = "";
 		while (true)
 			try {
-				Menu.printAskingForInput(gameName + "'s Details[/c to cancel] -> ");
-				details = Menu.getInputLine();
+//				Menu.printAskingForInput(gameName + "'s Details[/c to cancel] -> ");
+//				details = Menu.getInputLine();
 
 				if (details.trim().equalsIgnoreCase("/c")) return;
 
@@ -156,23 +154,23 @@ public class GameController {
 
 				break;
 			} catch (EmptyDetailsException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		if (gameName.trim().equalsIgnoreCase("battlesea"))
 			BattleSea.setDetailsForBattlesea(details);
 		else
 			Reversi.setDetailsForReversi(details);
-		Menu.printSuccessfulOperation("Details of " + gameName + " changed successfully.");
+//		Menu.printSuccessfulOperation("Details of " + gameName + " changed successfully.");
 	}
 
 	public void displayPrevGamesAndChooseToContinue () {
 		LinkedList<Game> unfinishedGames = new LinkedList<>();
 
-		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
-			case "reversi" -> unfinishedGames = new LinkedList<>(Reversi.getAllReversiGames());
-			case "battlesea" -> unfinishedGames = new LinkedList<>(BattleSea.getAllBattleSeaGames());
-		}
+//		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
+//			case "reversi" -> unfinishedGames = new LinkedList<>(Reversi.getAllReversiGames());
+//			case "battlesea" -> unfinishedGames = new LinkedList<>(BattleSea.getAllBattleSeaGames());
+//		}
 
 		unfinishedGames = unfinishedGames.stream()
 				.filter(game ->
@@ -206,8 +204,9 @@ public class GameController {
 		int gameChoice;
 		while (true)
 			try {
-				Menu.printAskingForInput("Which game to continue:[/c to cancel] ");
-				String choice = Menu.getInputLine();
+//				Menu.printAskingForInput("Which game to continue:[/c to cancel] ");
+				String choice = "";
+//				choice = Menu.getInputLine();
 
 				if (choice.trim().equalsIgnoreCase("/c")) return;
 
@@ -221,17 +220,18 @@ public class GameController {
 
 				break;
 			} catch (MainController.InvalidInputException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		currentGameInSession = unfinishedGames.get(gameChoice - 1);
 		if (currentGameInSession instanceof BattleSea) {
-			Menu.getMenu("12B").enter();
+//			Menu.getMenu("12B").enter();
 
 			BattleSeaController.getInstance().updateGamePlayMenu();
 		}
-		else
-			Menu.getMenu("12R").enter();
+		else {
+//			Menu.getMenu("12R").enter();
+		}
 	}
 
 	private static class CantPlayWithYourselfException extends Exception {

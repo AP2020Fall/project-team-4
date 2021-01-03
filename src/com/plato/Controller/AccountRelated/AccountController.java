@@ -21,11 +21,11 @@ public class AccountController {
 	}
 
 	public void login () {
-		String username;
+		String username = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] ");
-				username = Menu.getInputLine();
+//				Menu.printAskingForInput("Username:[/c to cancel] ");
+//				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -36,13 +36,14 @@ public class AccountController {
 					throw new NoAccountExistsWithUsernameException();
 				break;
 			} catch (NoAccountExistsWithUsernameException | MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		while (true)
 			try {
-				Menu.printAskingForInput("Password:[/c to cancel] ");
-				String password = Menu.getInputLine();
+//				Menu.printAskingForInput("Password:[/c to cancel] ");
+				String password = "";
+//				password = Menu.getInputLine();
 
 				if (password.trim().equalsIgnoreCase("/c")) return;
 
@@ -50,26 +51,26 @@ public class AccountController {
 					throw new PaswordIncorrectException();
 				break;
 			} catch (PaswordIncorrectException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 
 		currentAccLoggedIn = Account.getAccount(username);
 
-		Menu.printAskingForInput("Remember me?[y/n] ");
-		saveLoginInfo = Menu.getInputLine().trim().equalsIgnoreCase("y");
+//		Menu.printAskingForInput("Remember me?[y/n] ");
+//		saveLoginInfo = Menu.getInputLine().trim().equalsIgnoreCase("y");
 
-		Menu.addMenusForAdminOrGamer(currentAccLoggedIn instanceof Gamer ? "G" : "A");
+//		Menu.addMenusForAdminOrGamer(currentAccLoggedIn instanceof Gamer ? "G" : "A");
 
-		Menu.getMenu("3" + (currentAccLoggedIn instanceof Gamer ? "G" : "A")).enter();
+//		Menu.getMenu("3" + (currentAccLoggedIn instanceof Gamer ? "G" : "A")).enter();
 	}
 
 	public void deleteAccount () {
-		String username;
+		String username = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] ");
-				username = Menu.getInputLine();
+//				Menu.printAskingForInput("Username:[/c to cancel] ");
+//				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -84,13 +85,14 @@ public class AccountController {
 
 				break;
 			} catch (AdminAccountCantBeDeletedException | NoAccountExistsWithUsernameException | MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		while (true)
 			try {
-				Menu.printAskingForInput("Password:[/c to cancel] ");
-				String password = Menu.getInputLine();
+//				Menu.printAskingForInput("Password:[/c to cancel] ");
+				String password = "";
+//				password = Menu.getInputLine();
 
 				if (password.trim().equalsIgnoreCase("/c")) return;
 
@@ -99,22 +101,22 @@ public class AccountController {
 
 				break;
 			} catch (PaswordIncorrectException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
-		Menu.displayAreYouSureMessage();
-		if (Menu.getInputLine().equalsIgnoreCase("y")) {
-			Account.removeAccount(username);
-			Menu.printSuccessfulOperation("Removed account successfully.");
-		}
+//		Menu.displayAreYouSureMessage();
+//		if (Menu.getInputLine().equalsIgnoreCase("y")) {
+//			Account.removeAccount(username);
+//			Menu.printSuccessfulOperation("Removed account successfully.");
+//		}
 	}
 
 	public void register () {
-		String username;
+		String username = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] ");
-				username = Menu.getInputLine();
+//				Menu.printAskingForInput("Username:[/c to cancel] ");
+//				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -125,20 +127,21 @@ public class AccountController {
 					throw new AccountWithUsernameAlreadyExistsException();
 				break;
 			} catch (AccountWithUsernameAlreadyExistsException | MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 
 		// trying to ask for password and full name
-		Menu.printAskingForInput("Password:[/c to cancel] ");
-		String password = Menu.getInputLine();
-		if (password.trim().equalsIgnoreCase("/c")) return;
+//		Menu.printAskingForInput("Password:[/c to cancel] ");
+		String password = "";
+//		password = Menu.getInputLine();
+//		if (password.trim().equalsIgnoreCase("/c")) return;
 
-		String firstName;
+		String firstName = "";
 		while (true) {
 			try {
-				Menu.printAskingForInput("First Name:[/c to cancel] ");
-				firstName = Menu.getInputLine();
+//				Menu.printAskingForInput("First Name:[/c to cancel] ");
+//				firstName = Menu.getInputLine();
 
 				if (firstName.trim().equalsIgnoreCase("/c")) return;
 
@@ -147,15 +150,15 @@ public class AccountController {
 
 				break;
 			} catch (MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 		}
 
-		String lastName;
+		String lastName = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Last Name:[/c to cancel] ");
-				lastName = Menu.getInputLine();
+//				Menu.printAskingForInput("Last Name:[/c to cancel] ");
+//				lastName = Menu.getInputLine();
 
 				if (lastName.trim().equalsIgnoreCase("/c")) return;
 
@@ -164,14 +167,14 @@ public class AccountController {
 
 				break;
 			} catch (MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
-		String email;
+		String email = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Email Address:[/c to cancel] ");
-				email = Menu.getInputLine();
+//				Menu.printAskingForInput("Email Address:[/c to cancel] ");
+//				email = Menu.getInputLine();
 
 				if (email.trim().equalsIgnoreCase("/c")) return;
 
@@ -179,14 +182,14 @@ public class AccountController {
 					throw new InvalidEmailFormatException();
 				break;
 			} catch (InvalidEmailFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
-		String phoneNum;
+		String phoneNum = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Phone Number:[/c to cancel] ");
-				phoneNum = Menu.getInputLine();
+//				Menu.printAskingForInput("Phone Number:[/c to cancel] ");
+//				phoneNum = Menu.getInputLine();
 
 				if (phoneNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -194,23 +197,23 @@ public class AccountController {
 					throw new InvalidPhoneNumFormatException();
 				break;
 			} catch (InvalidPhoneNumFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		// if admin account hasnt already been created make admin account
 		// 		otherwise ask for initial money amount and make a gamer account
 		if (!Admin.adminHasBeenCreated()) {
 			Account.addAccount(Admin.class, firstName, lastName, username, password, email, phoneNum, 0);
-			Menu.printSuccessfulOperation("Admin account created successfully.");
+//			Menu.printSuccessfulOperation("Admin account created successfully.");
 		}
 		else {
 			// trying to get initial balance
 			//		if input is not a number or is negative try asking for it again
-			double initMoney;
+			double initMoney = 0;
 			while (true) {
 				try {
-					Menu.printAskingForInput("Initial Balance:[/c to cancel] ");
-					initMoney = Double.parseDouble(Menu.getInputLine());
+//					Menu.printAskingForInput("Initial Balance:[/c to cancel] ");
+//					initMoney = Double.parseDouble(Menu.getInputLine());
 
 					if (phoneNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -219,25 +222,26 @@ public class AccountController {
 
 					break;
 				} catch (NumberFormatException e) {
-					Menu.printErrorMessage("Initial Balance must be a number.");
+//					Menu.printErrorMessage("Initial Balance must be a number.");
 				} catch (NegativeMoneyException e) {
-					Menu.printErrorMessage(e.getMessage());
+//					Menu.printErrorMessage(e.getMessage());
 				}
 			}
 
 			Account.addAccount(Gamer.class, firstName, lastName, username, password, email, phoneNum, initMoney);
-			Menu.printSuccessfulOperation("Gamer account created successfully.");
+//			Menu.printSuccessfulOperation("Gamer account created successfully.");
 		}
 
-		Menu.addMenu("2");
-		Menu.getMenu("2").enter();
+//		Menu.addMenu("2");
+//		Menu.getMenu("2").enter();
 	}
 
 	public void changePWCommand () {
 		while (true)
 			try {
-				Menu.printAskingForInput("Old password:[/c to cancel] ");
-				String oldPW = Menu.getInputLine();
+//				Menu.printAskingForInput("Old password:[/c to cancel] ");
+				String oldPW = "";
+//				oldPW = Menu.getInputLine();
 
 				if (oldPW.trim().equalsIgnoreCase("/c")) return;
 
@@ -245,14 +249,15 @@ public class AccountController {
 					throw new PaswordIncorrectException();
 				break;
 			} catch (PaswordIncorrectException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
-		Menu.printAskingForInput("New password: ");
-		String newPW = Menu.getInputLine();
+//		Menu.printAskingForInput("New password: ");
+		String newPW = "";
+//		newPW = Menu.getInputLine();
 
-		Menu.displayAreYouSureMessage();
-		if (Menu.getInputLine().trim().equalsIgnoreCase("y"))
+//		Menu.displayAreYouSureMessage();
+//		if (Menu.getInputLine().trim().equalsIgnoreCase("y"))
 			AccountController.getInstance().getCurrentAccLoggedIn().editField("password", newPW);
 	}
 
@@ -267,25 +272,26 @@ public class AccountController {
 
 		int field;
 		try {
-			Menu.printAskingForInput("Choose field to edit:\n");
-			String fieldstr = Menu.getInputLine();
+//			Menu.printAskingForInput("Choose field to edit:\n");
+			String fieldstr = "";
+//			fieldstr = Menu.getInputLine();
 
 			if (!String.valueOf(fieldstr).matches("[1-5]"))
 				throw new NumberFormatException();
 
 			field = Integer.parseInt(fieldstr);
 		} catch (NumberFormatException e) {
-			Menu.printErrorMessage(new MainController.InvalidInputException().getMessage());
+//			Menu.printErrorMessage(new MainController.InvalidInputException().getMessage());
 			return;
 		}
 
 		switch (field) {
 			case 1 -> {
-				String new1name;
+				String new1name = "";
 				while (true)
 					try {
-						Menu.printAskingForInput("New First name:[/c to cancel] ");
-						new1name = Menu.getInputLine();
+//						Menu.printAskingForInput("New First name:[/c to cancel] ");
+//						new1name = Menu.getInputLine();
 
 						if (new1name.trim().equalsIgnoreCase("/c")) return;
 
@@ -294,20 +300,20 @@ public class AccountController {
 
 						break;
 					} catch (MainController.InvalidFormatException e) {
-						Menu.printErrorMessage(e.getMessage());
+//						Menu.printErrorMessage(e.getMessage());
 					}
-				Menu.displayAreYouSureMessage();
-				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-					getCurrentAccLoggedIn().editField("first name", new1name);
-					Menu.printSuccessfulOperation("First name changed successfully.");
-				}
+//				Menu.displayAreYouSureMessage();
+//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//					getCurrentAccLoggedIn().editField("first name", new1name);
+//					Menu.printSuccessfulOperation("First name changed successfully.");
+//				}
 			}
 			case 2 -> {
-				String new2name;
+				String new2name = "";
 				while (true)
 					try {
-						Menu.printAskingForInput("New Last name:[/c to cancel] ");
-						new2name = Menu.getInputLine();
+//						Menu.printAskingForInput("New Last name:[/c to cancel] ");
+//						new2name = Menu.getInputLine();
 
 						if (new2name.trim().equalsIgnoreCase("/c")) return;
 
@@ -316,20 +322,20 @@ public class AccountController {
 
 						break;
 					} catch (MainController.InvalidFormatException e) {
-						Menu.printErrorMessage(e.getMessage());
+//						Menu.printErrorMessage(e.getMessage());
 					}
-				Menu.displayAreYouSureMessage();
-				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-					getCurrentAccLoggedIn().editField("last name", new2name);
-					Menu.printSuccessfulOperation("Last name changed successfully.");
-				}
+//				Menu.displayAreYouSureMessage();
+//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//					getCurrentAccLoggedIn().editField("last name", new2name);
+//					Menu.printSuccessfulOperation("Last name changed successfully.");
+//				}
 			}
 			case 3 -> {
-				String username;
+				String username = "";
 				while (true)
 					try {
-						Menu.printAskingForInput("New Username:[/c to cancel] ");
-						username = Menu.getInputLine();
+//						Menu.printAskingForInput("New Username:[/c to cancel] ");
+//						username = Menu.getInputLine();
 
 						if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -341,21 +347,21 @@ public class AccountController {
 
 						break;
 					} catch (AccountWithUsernameAlreadyExistsException | MainController.InvalidFormatException e) {
-						Menu.printErrorMessage(e.getMessage());
+//						Menu.printErrorMessage(e.getMessage());
 					}
 
-				Menu.displayAreYouSureMessage();
-				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-					getCurrentAccLoggedIn().editField("username", username);
-					Menu.printSuccessfulOperation("Username changed successfully.");
-				}
+//				Menu.displayAreYouSureMessage();
+//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//					getCurrentAccLoggedIn().editField("username", username);
+//					Menu.printSuccessfulOperation("Username changed successfully.");
+//				}
 			}
 			case 4 -> {
-				String newEmail;
+				String newEmail = "";
 				while (true)
 					try {
-						Menu.printAskingForInput("New email address:[/c to cancel] ");
-						newEmail = Menu.getInputLine();
+//						Menu.printAskingForInput("New email address:[/c to cancel] ");
+//						newEmail = Menu.getInputLine();
 
 						if (newEmail.trim().equalsIgnoreCase("/c")) return;
 
@@ -363,21 +369,21 @@ public class AccountController {
 							throw new InvalidEmailFormatException();
 						break;
 					} catch (InvalidEmailFormatException e) {
-						Menu.printErrorMessage(e.getMessage());
+//						Menu.printErrorMessage(e.getMessage());
 					}
 
-				Menu.displayAreYouSureMessage();
-				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-					getCurrentAccLoggedIn().editField("email", newEmail);
-					Menu.printSuccessfulOperation("Email changed successfully.");
-				}
+//				Menu.displayAreYouSureMessage();
+//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//					getCurrentAccLoggedIn().editField("email", newEmail);
+//					Menu.printSuccessfulOperation("Email changed successfully.");
+//				}
 			}
 			case 5 -> {
-				String newPhoneNum;
+				String newPhoneNum = "";
 				while (true)
 					try {
-						Menu.printAskingForInput("Phone Number:[/c to cancel] ");
-						newPhoneNum = Menu.getInputLine();
+//						Menu.printAskingForInput("Phone Number:[/c to cancel] ");
+//						newPhoneNum = Menu.getInputLine();
 
 						if (newPhoneNum.trim().equalsIgnoreCase("/c")) return;
 
@@ -385,16 +391,18 @@ public class AccountController {
 							throw new InvalidPhoneNumFormatException();
 						break;
 					} catch (InvalidPhoneNumFormatException e) {
-						Menu.printErrorMessage(e.getMessage());
+//						Menu.printErrorMessage(e.getMessage());
 					}
 
-				Menu.displayAreYouSureMessage();
-				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-					getCurrentAccLoggedIn().editField("phone num", newPhoneNum);
-					Menu.printSuccessfulOperation("Phone number changed successfully.");
-				}
+//				Menu.displayAreYouSureMessage();
+//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//					getCurrentAccLoggedIn().editField("phone num", newPhoneNum);
+//					Menu.printSuccessfulOperation("Phone number changed successfully.");
+//				}
 			}
-			default -> Menu.printErrorMessage("Invalid field.");
+			default -> {
+//				Menu.printErrorMessage("Invalid field.");
+			}
 		}
 
 	}

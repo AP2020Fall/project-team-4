@@ -19,11 +19,11 @@ public class FriendRequestController {
 	}
 
 	public void sendFrndRequest () {
-		String usernameTo;
+		String usernameTo = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] ");
-				usernameTo = Menu.getInputLine();
+//				Menu.printAskingForInput("Username:[/c to cancel] ");
+//				usernameTo = Menu.getInputLine();
 
 				if (usernameTo.trim().equalsIgnoreCase("/c")) return;
 
@@ -46,14 +46,14 @@ public class FriendRequestController {
 					throw new FriendRequestAlreadyExistsException(usernameTo);
 				break;
 			} catch (AccountController.NoAccountExistsWithUsernameException | CantSendFriendRendReqToYourselfException | CantFriendRequestTheAdminException | CantSendFriendReqToAlreadyFriendException | FriendRequestAlreadyExistsException | MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
-		Menu.displayAreYouSureMessage();
-		if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).sendFrndReq(usernameTo);
-			Menu.printSuccessfulOperation("You have successfully sent a friend request to " + usernameTo + ".");
-		}
+//		Menu.displayAreYouSureMessage();
+//		if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
+//			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).sendFrndReq(usernameTo);
+//			Menu.printSuccessfulOperation("You have successfully sent a friend request to " + usernameTo + ".");
+//		}
 	}
 
 	public void displayFrndReqsPlayerGotten () {
@@ -68,11 +68,11 @@ public class FriendRequestController {
 	}
 
 	public void acceptFriendReq () {
-		String usernameFrom;
+		String usernameFrom = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] ");
-				usernameFrom = Menu.getInputLine();
+//				Menu.printAskingForInput("Username:[/c to cancel] ");
+//				usernameFrom = Menu.getInputLine();
 
 				if (usernameFrom.trim().equalsIgnoreCase("/c")) return;
 
@@ -87,7 +87,7 @@ public class FriendRequestController {
 
 				break;
 			} catch (AccountController.NoAccountExistsWithUsernameException | FriendRequestDoesntExistException | MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		FriendRequest.concludeFrndReq(
@@ -97,11 +97,11 @@ public class FriendRequestController {
 	}
 
 	public void declineFriendReq () {
-		String usernameFrom;
+		String usernameFrom = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] ");
-				usernameFrom = Menu.getInputLine();
+//				Menu.printAskingForInput("Username:[/c to cancel] ");
+//				usernameFrom = Menu.getInputLine();
 
 				if (usernameFrom.trim().equals("/c")) return;
 
@@ -116,7 +116,7 @@ public class FriendRequestController {
 
 				break;
 			} catch (AccountController.NoAccountExistsWithUsernameException | FriendRequestDoesntExistException | MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		FriendRequest.concludeFrndReq(

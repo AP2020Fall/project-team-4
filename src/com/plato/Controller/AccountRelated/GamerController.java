@@ -48,11 +48,11 @@ public class GamerController {
 	}
 
 	public void displayUserProfileToAdmin () {
-		String username;
+		String username = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] ");
-				username = Menu.getInputLine();
+//				Menu.printAskingForInput("Username:[/c to cancel] ");
+//				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -63,7 +63,7 @@ public class GamerController {
 					throw new AccountController.NoAccountExistsWithUsernameException();
 				break;
 			} catch (AccountController.NoAccountExistsWithUsernameException | MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		Gamer user = ((Gamer) Account.getAccount(username));
@@ -75,11 +75,11 @@ public class GamerController {
 	}
 
 	public void removeFriend () {
-		String username;
+		String username = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] ");
-				username = Menu.getInputLine();
+//				Menu.printAskingForInput("Username:[/c to cancel] ");
+//				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -90,18 +90,18 @@ public class GamerController {
 					throw new FriendDoesntExistException();
 				break;
 			} catch (FriendDoesntExistException | MainController.InvalidFormatException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).removeFrnd(username);
 	}
 
 	public void displayFriendPersonalInfo () {
-		String username;
+		String username = "";
 		while (true)
 			try {
-				Menu.printAskingForInput("Username:[/c to cancel] ");
-				username = Menu.getInputLine();
+//				Menu.printAskingForInput("Username:[/c to cancel] ");
+//				username = Menu.getInputLine();
 
 				if (username.trim().equalsIgnoreCase("/c")) return;
 
@@ -109,7 +109,7 @@ public class GamerController {
 					throw new FriendDoesntExistException();
 				break;
 			} catch (FriendDoesntExistException e) {
-				Menu.printErrorMessage(e.getMessage());
+//				Menu.printErrorMessage(e.getMessage());
 			}
 
 		Gamer frnd = ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFrnd(username);

@@ -36,7 +36,7 @@ public class ReversiView {
 	 */
 	public void displayMoveHistory (LinkedList<String> moves) {
 		if (moves.size() == 0) {
-			Menu.println("No moves made yet.");
+//			Menu.println("No moves made yet.");
 			return;
 		}
 		for (String move : moves)
@@ -45,7 +45,7 @@ public class ReversiView {
 
 	public void displayAvailableCoords (ArrayList<String> availableCoordinates) {
 		if (availableCoordinates.size() == 0) {
-			Menu.println("You cannot make any moves");
+//			Menu.println("You cannot make any moves");
 			return;
 		}
 		System.out.println("Available Coordinates : ");
