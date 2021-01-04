@@ -1,14 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="View.Menus.LoginMenu"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.LoginMenuController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" />
+    <ColumnConstraints hgrow="SOMETIMES" />
+      <ColumnConstraints hgrow="SOMETIMES" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+  </rowConstraints>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+   <children>
+      <Label text="SIGN-IN" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Arial Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label text="Username" GridPane.rowIndex="1">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label text="Password" GridPane.rowIndex="2">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+       <StackPane fx:id="pwStackPane" GridPane.columnIndex="1" GridPane.rowIndex="2">
+           <TextField promptText="Password" />
+           <PasswordField promptText="Password" />
+           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" StackPane.alignment="CENTER_RIGHT" />
+       </StackPane>
+      <TextField promptText="Username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label fx:id="usernameError" minWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <Label fx:id="passwordError" minWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <CheckBox fx:id="rememberMe" mnemonicParsing="false" text="Remember Me?" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </CheckBox>
+      <HBox alignment="CENTER" spacing="100.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
+         <children>
+            <VBox spacing="5.0">
+               <children>
+                  <Label fx:id="deleteAccount" text="← Delete Account" textFill="#8a0000" />
+                  <Label fx:id="signUp" text="← Don't have an account" textFill="#8a0000" />
+               </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </VBox>
+            <Button mnemonicParsing="false" onAction="#login" text="Sign-in">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</GridPane>
