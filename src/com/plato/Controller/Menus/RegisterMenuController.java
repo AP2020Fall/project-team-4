@@ -24,11 +24,11 @@ public class RegisterMenuController implements Initializable {
 	public ImageView showPwOrNot;
 	public PasswordField pwFieldpwHidden;
 	public TextField pwFieldpwShown, usernameTxtFld;
-	public Label usernameError, AdminGamerTitle;
+	public Label usernameError, AdminGamerTitle, passwordError;
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		AdminGamerTitle.setText((Admin.adminHasBeenCreated() ? "gamer":"admin" + " sign-up").toUpperCase());
+		AdminGamerTitle.setText((Admin.adminHasBeenCreated() ? "gamer" : "admin" + " sign-up").toUpperCase());
 
 		pwFieldpwShown = (TextField) pwStackPane.getChildren().get(0);
 		pwFieldpwHidden = (PasswordField) pwStackPane.getChildren().get(1);
@@ -77,12 +77,24 @@ public class RegisterMenuController implements Initializable {
 
 		String password = (showPwOrNot.getImage().getUrl().contains("invisible") ? pwFieldpwShown : pwFieldpwHidden).getText();
 		try {
-			AccountController.getInstance().register(usernameTxtFld.getText(), password, "", "", "", "", 0);
+			AccountController.getInstance().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
 		} catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
 			usernameError.setText(e.getMessage());
 			return;
-		} catch (AccountController.NegativeMoneyException | MainController.InvalidFormatException e) {
+		} catch (MainController.InvalidFormatException e) {
+			if (e.getMessage().toLowerCase().startsWith("username")) {
+				usernameError.setText(e.getMessage());
+				return;
+			}
+			if (e.getMessage().toLowerCase().startsWith("password")) {
+				passwordError.setText(e.getMessage());
+				return;
+			}
+		} catch (AccountController.NegativeMoneyException e) {
 		}
+		RegisterFormController.setStage(stage);
+		RegisterFormController.setUsername(usernameTxtFld.getText());
+		RegisterFormController.setPassword(password);
 		stage.show();
 	}
 }

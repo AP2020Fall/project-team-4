@@ -60,6 +60,7 @@ public class MainController extends Application {
 	@Override
 	public void start (Stage primaryStage) {
 		getInstance().primaryStage = primaryStage;
+		primaryStage.setResizable(false);
 //		jumpToBattleSeaGameMenu(); // fixme make comment later
 		DayPassController.getInstance().start();
 
@@ -74,7 +75,7 @@ public class MainController extends Application {
 				primaryStage.setScene(new Scene(FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterMenu.fxml").toURI().toURL())));
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			} // fixme uncomment
 		}
 		else {
 			// fixme go to login menu or main menu

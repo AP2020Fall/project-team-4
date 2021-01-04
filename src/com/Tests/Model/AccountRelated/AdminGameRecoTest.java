@@ -21,7 +21,7 @@ public class AdminGameRecoTest {
 
 	@Test
 	public void addAdminGameRecoTest () {
-		Account.addAccount(Gamer.class, "1", "1", "1", "1", "1@gmail.com", "00011122233", 1);
+		Account.addAccount(Gamer.class, null, "1", "1", "1", "1", "1@gmail.com", "00011122233", 1);
 		assumeTrue(Account.accountExists("1"));
 		assumeTrue(Account.getAccount("1") instanceof Gamer);
 		Gamer gamer = (Gamer) Account.getAccount("1");
@@ -42,7 +42,7 @@ public class AdminGameRecoTest {
 		assertEquals(BattleSea.class.getSimpleName(), AdminGameReco.getRecommendations(gamer).get(0).getGameName());
 		assertEquals(Reversi.class.getSimpleName(), AdminGameReco.getRecommendations(gamer).get(1).getGameName());
 
-		Account.addAccount(Gamer.class, "2", "2", "2", "2", "2@gmail.com", "00011122233", 1);
+		Account.addAccount(Gamer.class, null, "2", "2", "2", "2", "2@gmail.com", "00011122233", 1);
 
 		assumeTrue(Account.accountExists("2"));
 		assumeTrue(Account.getAccount("2") instanceof Gamer);

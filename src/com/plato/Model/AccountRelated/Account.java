@@ -1,14 +1,16 @@
 package Model.AccountRelated;
 
 import Controller.IDGenerator;
+import javafx.scene.image.Image;
 
 import java.util.LinkedList;
 
 public abstract class Account {
 	protected static LinkedList<Account> accounts = new LinkedList<>();
 	private String firstName, lastName, username, password, userID, email, phoneNum;
+	private String pfpUrl;
 
-	public Account (String firstName, String lastName, String username, String password, String email, String phoneNum) {
+	public Account (Image pfp, String firstName, String lastName, String username, String password, String email, String phoneNum) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
@@ -16,17 +18,18 @@ public abstract class Account {
 		this.userID = IDGenerator.generateNext();
 		this.email = email;
 		this.phoneNum = phoneNum;
+		this.pfpUrl = pfp.getUrl();
 	}
 
 	// for serialization
 	public Account () {}
 
 	@SuppressWarnings("rawtypes")
-	public static void addAccount (Class accType, String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
+	public static void addAccount (Class accType, Image pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
 		if (accType.getSimpleName().equalsIgnoreCase("admin"))
-			accounts.addLast(new Admin(firstName, lastName, username, password, email, phoneNum));
+			accounts.addLast(new Admin(pfp, firstName, lastName, username, password, email, phoneNum));
 		else
-			accounts.addLast(new Gamer(firstName, lastName, username, password, email, phoneNum, money));
+			accounts.addLast(new Gamer(pfp, firstName, lastName, username, password, email, phoneNum, money));
 	}
 
 	public static void removeAccount (String username) {

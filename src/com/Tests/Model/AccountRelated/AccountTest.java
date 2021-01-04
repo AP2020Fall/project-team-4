@@ -18,10 +18,10 @@ public class AccountTest {
 
 	@Test
 	public void editAccountFirstNameTest () {
-		Account.addAccount(Gamer.class,
-				"fn", "ln",
-				"testAccUN", "pw",
-				"test@gmail.com", "00011122233", 50);
+		Account.addAccount(Gamer.class, null,
+				"fn",
+				"ln", "testAccUN",
+				"pw", "test@gmail.com", "00011122233", 50);
 
 		Account account = Account.getAccount("testAccUN");
 
@@ -34,10 +34,10 @@ public class AccountTest {
 
 	@Test
 	public void editAccountLastNameTest () {
-		Account.addAccount(Gamer.class,
-				"fn", "ln",
-				"testAccUN", "pw",
-				"test@gmail.com", "00011122233", 50);
+		Account.addAccount(Gamer.class, null,
+				"fn",
+				"ln", "testAccUN",
+				"pw", "test@gmail.com", "00011122233", 50);
 
 		Account account = Account.getAccount("testAccUN");
 
@@ -50,10 +50,10 @@ public class AccountTest {
 
 	@Test
 	public void editAccountUsernameTest () {
-		Account.addAccount(Gamer.class,
-				"fn", "ln",
-				"testAccUN", "pw",
-				"test@gmail.com", "00011122233", 50);
+		Account.addAccount(Gamer.class, null,
+				"fn",
+				"ln", "testAccUN",
+				"pw", "test@gmail.com", "00011122233", 50);
 
 		Account account = Account.getAccount("testAccUN");
 
@@ -66,10 +66,10 @@ public class AccountTest {
 
 	@Test
 	public void editAccountPasswordTest () {
-		Account.addAccount(Gamer.class,
-				"fn", "ln",
-				"testAccUN", "pw",
-				"test@gmail.com", "00011122233", 50);
+		Account.addAccount(Gamer.class, null,
+				"fn",
+				"ln", "testAccUN",
+				"pw", "test@gmail.com", "00011122233", 50);
 
 		Account account = Account.getAccount("testAccUN");
 
@@ -82,10 +82,10 @@ public class AccountTest {
 
 	@Test
 	public void editAccountEmailTest () {
-		Account.addAccount(Gamer.class,
-				"fn", "ln",
-				"testAccUN", "pw",
-				"test@gmail.com", "00011122233", 50);
+		Account.addAccount(Gamer.class, null,
+				"fn",
+				"ln", "testAccUN",
+				"pw", "test@gmail.com", "00011122233", 50);
 
 		Account account = Account.getAccount("testAccUN");
 
@@ -98,10 +98,10 @@ public class AccountTest {
 
 	@Test
 	public void editAccountPhoneNumTest () {
-		Account.addAccount(Gamer.class,
-				"fn", "ln",
-				"testAccUN", "pw",
-				"test@gmail.com", "00011122233", 50);
+		Account.addAccount(Gamer.class, null,
+				"fn",
+				"ln", "testAccUN",
+				"pw", "test@gmail.com", "00011122233", 50);
 
 		Account account = Account.getAccount("testAccUN");
 
@@ -138,14 +138,14 @@ public class AccountTest {
 	public void addAccountTest () {
 		assertAll("add account tests",
 				() -> {
-					Account.addAccount(Admin.class, "1", "1", "1", "1", "1@gmail.com", "00011122233", 25);
+					Account.addAccount(Admin.class, null, "1", "1", "1", "1", "1@gmail.com", "00011122233", 25);
 					assertTrue(Account.accountExists("1"));
 					assertTrue(Admin.adminHasBeenCreated());
 					assertEquals("1", Admin.getAdmin().getUsername());
 					assertEquals("1", Account.getAccount("1").getUsername());
 				},
 				() -> {
-					Account.addAccount(Gamer.class, "2", "2", "2", "2", "2@gmail.com", "00011122233", 2);
+					Account.addAccount(Gamer.class, null, "2", "2", "2", "2", "2@gmail.com", "00011122233", 2);
 					assertTrue(Account.accountExists("2"));
 					assertEquals("2", Account.getAccount("2").getUsername());
 				}
@@ -154,7 +154,7 @@ public class AccountTest {
 
 	@Test
 	public void removeAccountTest () {
-		Account.addAccount(Gamer.class, "1", "1", "1", "1", "1@gmail.com", "00011122233", 1);
+		Account.addAccount(Gamer.class, null, "1", "1", "1", "1", "1@gmail.com", "00011122233", 1);
 		assumeTrue(Account.accountExists("1"));
 		Account.removeAccount("1");
 		assertFalse(Account.accountExists("1"));

@@ -1,5 +1,7 @@
 package Model.AccountRelated;
 
+import javafx.scene.image.Image;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
@@ -14,8 +16,8 @@ public class Gamer extends Account {
 	private LinkedList<String> frnds = new LinkedList<>();
 	private LinkedList<String> faveGames = new LinkedList<>();
 
-	public Gamer (String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
-		super(firstName, lastName, username, password, email, phoneNum);
+	public Gamer (Image pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
+		super(pfp, firstName, lastName, username, password, email, phoneNum);
 		accountStartDate = LocalDate.now();
 		this.money = money;
 	}

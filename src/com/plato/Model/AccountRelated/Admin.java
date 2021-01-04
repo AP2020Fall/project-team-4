@@ -1,8 +1,10 @@
 package Model.AccountRelated;
 
+import javafx.scene.image.Image;
+
 public class Admin extends Account {
-	public Admin (String firstName, String lastName, String username, String password, String email, String phoneNum) {
-		super(firstName, lastName, username, password, email, phoneNum);
+	public Admin (Image pfp, String firstName, String lastName, String username, String password, String email, String phoneNum) {
+		super(pfp, firstName, lastName, username, password, email, phoneNum);
 	}
 
 	// for serialization

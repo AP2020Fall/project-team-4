@@ -5,6 +5,7 @@ import Model.AccountRelated.Account;
 import Model.AccountRelated.Admin;
 import Model.AccountRelated.Gamer;
 import View.AccountRelated.AccountView;
+import javafx.scene.image.Image;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -111,7 +112,16 @@ public class AccountController {
 //		}
 	}
 
-	public void register (String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws NegativeMoneyException, MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException {
+	public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws NegativeMoneyException, MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException {
+
+		if (!username.matches("[!-~]+"))
+			throw new MainController.InvalidFormatException("Username");
+		if (!password.matches("[!-~]+"))
+			throw new MainController.InvalidFormatException("Password");
+		if (!firstName.matches("[!-~]+"))
+			throw new MainController.InvalidFormatException("First Name");
+		if (!lastName.matches("[!-~]+"))
+			throw new MainController.InvalidFormatException("Last Name");
 
 		if (Account.accountExists(username))
 			throw new AccountWithUsernameAlreadyExistsException();
@@ -124,12 +134,12 @@ public class AccountController {
 
 		if (!firstName.equals(""))
 			if (!Admin.adminHasBeenCreated())
-				Account.addAccount(Admin.class, firstName, lastName, username, password, email, phoneNum, 0);
+				Account.addAccount(Admin.class, new Image("https://i.pinimg.com/736x/fd/a1/3b/fda13b9d6d88f25a9d968901d319216a.jpg"), firstName, lastName, username, password, email, phoneNum, 0);
 			else {
 				if (initMoney < 0)
 					throw new NegativeMoneyException();
 
-				Account.addAccount(Gamer.class, firstName, lastName, username, password, email, phoneNum, initMoney);
+				Account.addAccount(Gamer.class, pfp, firstName, lastName, username, password, email, phoneNum, initMoney);
 			}
 	}
 
