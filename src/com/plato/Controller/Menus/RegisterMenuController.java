@@ -28,7 +28,10 @@ public class RegisterMenuController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		AdminGamerTitle.setText((Admin.adminHasBeenCreated() ? "gamer" : "admin" + " sign-up").toUpperCase());
+		AdminGamerTitle.setText(((Admin.adminHasBeenCreated() ? "gamer" : "admin") + " sign-up").toUpperCase());
+		RegisterFormController.adjustWidthBasedOnTextLength(passwordError);
+		RegisterFormController.adjustWidthBasedOnTextLength(usernameError);
+		RegisterFormController.adjustWidthBasedOnTextLength(AdminGamerTitle);
 
 		pwFieldpwShown = (TextField) pwStackPane.getChildren().get(0);
 		pwFieldpwHidden = (PasswordField) pwStackPane.getChildren().get(1);
@@ -90,8 +93,8 @@ public class RegisterMenuController implements Initializable {
 				passwordError.setText(e.getMessage());
 				return;
 			}
-		} catch (AccountController.NegativeMoneyException e) {
 		}
+
 		RegisterFormController.setStage(stage);
 		RegisterFormController.setUsername(usernameTxtFld.getText());
 		RegisterFormController.setPassword(password);

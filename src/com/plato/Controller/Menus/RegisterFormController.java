@@ -38,6 +38,10 @@ public class RegisterFormController implements Initializable {
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
 		isForAdmin = !Admin.adminHasBeenCreated();
+		adjustWidthBasedOnTextLength(emailError);
+		adjustWidthBasedOnTextLength(phoneNumError);
+		adjustWidthBasedOnTextLength(lastNameError);
+		adjustWidthBasedOnTextLength(firstNameError);
 
 		for (int i = 0; i <= 60; i++) {
 			coinMenu.getItems().add(new MenuItem(String.valueOf(i)));
@@ -86,7 +90,7 @@ public class RegisterFormController implements Initializable {
 
 		try {
 			AccountController.getInstance().register(pfp.getImage(), username, password, firstName.getText(), lastName.getText(), email.getText(), phoneNum.getText(), money);
-		} catch (AccountController.NegativeMoneyException | AccountController.AccountWithUsernameAlreadyExistsException e) {
+		} catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
 			return;
 		} catch (MainController.InvalidFormatException e) {
 			if (e.getMessage().toLowerCase().startsWith("first name")) {
@@ -105,6 +109,7 @@ public class RegisterFormController implements Initializable {
 		}
 		LoginMenuController.setStage(loginStage);
 		loginStage.show();
+		stage.close();
 	}
 
 	public static void setPassword (String password) {
@@ -126,5 +131,11 @@ public class RegisterFormController implements Initializable {
 
 	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
+	}
+
+	public static void adjustWidthBasedOnTextLength(Label label) {
+		label.textProperty().addListener((observable, oldValue, newValue) -> {
+			label.setPrefWidth(label.getText().length() * 7); // why 7? Totally trial number.
+		});
 	}
 }

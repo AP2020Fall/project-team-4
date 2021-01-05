@@ -66,65 +66,36 @@ public class AccountController {
 //		Menu.getMenu("3" + (currentAccLoggedIn instanceof Gamer ? "G" : "A")).enter();
 	}
 
-	public void deleteAccount () {
-		String username = "";
-		while (true)
-			try {
-//				Menu.printAskingForInput("Username:[/c to cancel] ");
-//				username = Menu.getInputLine();
+	public void deleteAccount (String username, String password) throws MainController.InvalidFormatException, NoAccountExistsWithUsernameException, AdminAccountCantBeDeletedException, PaswordIncorrectException {
+		if (!username.matches("[!-~]+"))
+			throw new MainController.InvalidFormatException("Username");
 
-				if (username.trim().equalsIgnoreCase("/c")) return;
+		if (!Account.accountExists(username))
+			throw new NoAccountExistsWithUsernameException();
 
-				if (!username.matches("[!-~]+"))
-					throw new MainController.InvalidFormatException("Username");
+		if (Account.getAccount(username) instanceof Admin)
+			throw new AdminAccountCantBeDeletedException();
 
-				if (!Account.accountExists(username))
-					throw new NoAccountExistsWithUsernameException();
+		if (!Account.getAccount(username).isPasswordCorrect(password))
+			throw new PaswordIncorrectException();
 
-				if (Account.getAccount(username) instanceof Admin)
-					throw new AdminAccountCantBeDeletedException();
-
-				break;
-			} catch (AdminAccountCantBeDeletedException | NoAccountExistsWithUsernameException | MainController.InvalidFormatException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
-		while (true)
-			try {
-//				Menu.printAskingForInput("Password:[/c to cancel] ");
-				String password = "";
-//				password = Menu.getInputLine();
-
-				if (password.trim().equalsIgnoreCase("/c")) return;
-
-				if (!Account.getAccount(username).isPasswordCorrect(password))
-					throw new PaswordIncorrectException();
-
-				break;
-			} catch (PaswordIncorrectException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
-//		Menu.displayAreYouSureMessage();
-//		if (Menu.getInputLine().equalsIgnoreCase("y")) {
-//			Account.removeAccount(username);
-//			Menu.printSuccessfulOperation("Removed account successfully.");
-//		}
+		Account.removeAccount(username);
 	}
 
-	public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws NegativeMoneyException, MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException {
+	public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException {
 
 		if (!username.matches("[!-~]+"))
 			throw new MainController.InvalidFormatException("Username");
 		if (!password.matches("[!-~]+"))
 			throw new MainController.InvalidFormatException("Password");
+
+		if (Account.accountExists(username))
+			throw new AccountWithUsernameAlreadyExistsException();
+
 		if (!firstName.matches("[!-~]+"))
 			throw new MainController.InvalidFormatException("First Name");
 		if (!lastName.matches("[!-~]+"))
 			throw new MainController.InvalidFormatException("Last Name");
-
-		if (Account.accountExists(username))
-			throw new AccountWithUsernameAlreadyExistsException();
 
 		if (!Account.isEmailOK(email))
 			throw new InvalidEmailFormatException();
@@ -136,9 +107,6 @@ public class AccountController {
 			if (!Admin.adminHasBeenCreated())
 				Account.addAccount(Admin.class, new Image("https://i.pinimg.com/736x/fd/a1/3b/fda13b9d6d88f25a9d968901d319216a.jpg"), firstName, lastName, username, password, email, phoneNum, 0);
 			else {
-				if (initMoney < 0)
-					throw new NegativeMoneyException();
-
 				Account.addAccount(Gamer.class, pfp, firstName, lastName, username, password, email, phoneNum, initMoney);
 			}
 	}
@@ -369,13 +337,13 @@ public class AccountController {
 		}
 	}
 
-	private static class PaswordIncorrectException extends Exception {
+	public static class PaswordIncorrectException extends Exception {
 		public PaswordIncorrectException () {
 			super("Password incorrect.");
 		}
 	}
 
-	private static class AdminAccountCantBeDeletedException extends Exception {
+	public static class AdminAccountCantBeDeletedException extends Exception {
 		public AdminAccountCantBeDeletedException () {
 			super("Admin account can't be deleted.");
 		}

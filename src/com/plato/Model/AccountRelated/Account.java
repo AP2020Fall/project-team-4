@@ -1,6 +1,7 @@
 package Model.AccountRelated;
 
 import Controller.IDGenerator;
+import Controller.MainController;
 import javafx.scene.image.Image;
 
 import java.util.LinkedList;
@@ -30,10 +31,13 @@ public abstract class Account {
 			accounts.addLast(new Admin(pfp, firstName, lastName, username, password, email, phoneNum));
 		else
 			accounts.addLast(new Gamer(pfp, firstName, lastName, username, password, email, phoneNum, money));
+
+		MainController.getInstance().saveEverything();
 	}
 
 	public static void removeAccount (String username) {
 		accounts.remove(getAccount(username));
+		MainController.getInstance().saveEverything();
 	}
 
 	public static boolean isEmailOK (String email) {
@@ -77,6 +81,7 @@ public abstract class Account {
 			case "email" -> setEmail(newVal);
 			case "phone num" -> setPhoneNum(newVal);
 		}
+		MainController.getInstance().saveEverything();
 	}
 
 	public String getUsername () {
