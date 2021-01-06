@@ -132,7 +132,7 @@ public class MainController extends Application {
 
 			// register-login menu
 //			case "Register Gamer", "Register Admin" -> AccountController.getInstance().register();
-			case "Login" -> AccountController.getInstance().login();
+//			case "Login" -> AccountController.getInstance().login();
 //			case "Delete Account" -> AccountController.getInstance().deleteAccount();
 
 			// main menu

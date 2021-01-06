@@ -1,6 +1,9 @@
 package Controller.Menus;
 
+import Controller.AccountRelated.AccountController;
 import Controller.MainController;
+import Model.AccountRelated.Account;
+import Model.AccountRelated.Gamer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,6 +30,7 @@ public class LoginMenuController implements Initializable {
 	public TextField pwFieldpwShown;
 	public Label delAccLbl, sgnUpLbl, usernameError, passwordError;
 	public CheckBox rememberMe;
+	public TextField username;
 
 	public static void setStage (Stage stage) {
 		LoginMenuController.stage = stage;
@@ -75,12 +79,33 @@ public class LoginMenuController implements Initializable {
 	}
 
 	public void login (ActionEvent actionEvent) {
-		// TODO: 1/4/2021 AD
+		try {
+			AccountController.getInstance().login(username.getText(), ((PasswordField) pwStackPane.getChildren().get(1)).getText(), rememberMe.isSelected());
+		} catch (MainController.InvalidFormatException | AccountController.NoAccountExistsWithUsernameException e) {
+			usernameError.setText(e.getMessage());
+			return;
+		} catch (AccountController.PaswordIncorrectException e) {
+			passwordError.setText(e.getMessage());
+			return;
+		}
+
+		Account account = AccountController.getInstance().getCurrentAccLoggedIn();
+
+		stage.close();
+
+		MainMenuController.setGamerOrAdmin(account instanceof Gamer);
+
+		try {
+			MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/MainMenu.fxml").toURI().toURL()),
+					"Main Menu", false, null).show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void signUp (MouseEvent mouseEvent) {
 		stage.close();
-		stage = null;
 		try {
 			MainController.getInstance().createAndReturnNewStage(FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterMenu.fxml").toURI().toURL()),
 					"Register Menu",

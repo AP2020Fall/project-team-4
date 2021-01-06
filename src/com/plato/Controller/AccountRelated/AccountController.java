@@ -21,49 +21,19 @@ public class AccountController {
 		return accountController;
 	}
 
-	public void login () {
-		String username = "";
-		while (true)
-			try {
-//				Menu.printAskingForInput("Username:[/c to cancel] ");
-//				username = Menu.getInputLine();
-
-				if (username.trim().equalsIgnoreCase("/c")) return;
+	public void login (String username, String password, boolean rememberMe) throws MainController.InvalidFormatException, NoAccountExistsWithUsernameException, PaswordIncorrectException{
 
 				if (!username.matches("[!-~]+"))
 					throw new MainController.InvalidFormatException("Username");
 
 				if (!Account.accountExists(username))
 					throw new NoAccountExistsWithUsernameException();
-				break;
-			} catch (NoAccountExistsWithUsernameException | MainController.InvalidFormatException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
-		while (true)
-			try {
-//				Menu.printAskingForInput("Password:[/c to cancel] ");
-				String password = "";
-//				password = Menu.getInputLine();
-
-				if (password.trim().equalsIgnoreCase("/c")) return;
 
 				if (!Account.getAccount(username).isPasswordCorrect(password))
 					throw new PaswordIncorrectException();
-				break;
-			} catch (PaswordIncorrectException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
 
-
+		saveLoginInfo = rememberMe;
 		currentAccLoggedIn = Account.getAccount(username);
-
-//		Menu.printAskingForInput("Remember me?[y/n] ");
-//		saveLoginInfo = Menu.getInputLine().trim().equalsIgnoreCase("y");
-
-//		Menu.addMenusForAdminOrGamer(currentAccLoggedIn instanceof Gamer ? "G" : "A");
-
-//		Menu.getMenu("3" + (currentAccLoggedIn instanceof Gamer ? "G" : "A")).enter();
 	}
 
 	public void deleteAccount (String username, String password) throws MainController.InvalidFormatException, NoAccountExistsWithUsernameException, AdminAccountCantBeDeletedException, PaswordIncorrectException {

@@ -3,7 +3,6 @@ package Controller.Menus;
 import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -13,8 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -74,17 +71,17 @@ public class DeleteAccountController implements Initializable {
 	}
 
 	public void removeAccount (ActionEvent actionEvent) {
-		Stage stage = new Stage();
-		try {
-			stage = MainController.getInstance().createAndReturnNewStage(
-					FXMLLoader.load(new File("src/com/plato/View/Menus/LoginMenu.fxml").toURI().toURL()),
-					"Login Menu",
-					true,
-					MainController.getInstance().getPrimaryStage()
-			);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		Stage stage = new Stage();
+//		try {
+//			stage = MainController.getInstance().createAndReturnNewStage(
+//					FXMLLoader.load(new File("src/com/plato/View/Menus/LoginMenu.fxml").toURI().toURL()),
+//					"Login Menu",
+//					true,
+//					MainController.getInstance().getPrimaryStage()
+//			);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 		String password = (showPwOrNot.getImage().getUrl().contains("invisible") ? pwFieldpwShown : pwFieldpwHidden).getText();
 
@@ -107,6 +104,7 @@ public class DeleteAccountController implements Initializable {
 			return;
 		}
 
-		stage.show();
+		DeleteAccountController.stage.close();
+//		stage.show();
 	}
 }
