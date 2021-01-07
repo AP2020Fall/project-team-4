@@ -31,6 +31,8 @@ public class MainMenuController implements Initializable {
 		else {
 			buttons.getChildren().subList(0, 3).clear();
 		}
+		pane.setMinSize(775, 516);
+		pane.setMaxSize(1550, 1033);
 
 		buttons.getChildren().forEach(button -> {
 			button.setOnMouseEntered(e -> button.setOpacity(0.8));
