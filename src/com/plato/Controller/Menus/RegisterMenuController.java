@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class RegisterMenuController implements Initializable {
+	public static Stage stage;
 	public StackPane pwStackPane;
 	public ImageView showPwOrNot;
 	public PasswordField pwFieldpwHidden;
@@ -63,6 +64,7 @@ public class RegisterMenuController implements Initializable {
 		showPwOrNot.resize(25, 25);
 		showPwOrNot.setSmooth(true);
 		showPwOrNot.toFront();
+		stage.setOnCloseRequest(e -> stage = null);
 	}
 
 	public void signUp (ActionEvent actionEvent) {
@@ -99,5 +101,13 @@ public class RegisterMenuController implements Initializable {
 		RegisterFormController.setUsername(usernameTxtFld.getText());
 		RegisterFormController.setPassword(password);
 		stage.show();
+	}
+
+	public static void setStage (Stage stage) {
+		RegisterMenuController.stage = stage;
+	}
+
+	public static Stage getStage () {
+		return stage;
 	}
 }

@@ -36,6 +36,34 @@ public class Gamer extends Account {
 		getAccounts().addAll(gamers);
 	}
 
+	public static LinkedList<Gamer> getGamers (String usernameSearch) {
+		if (usernameSearch.length() == 0) return getGamers();
+
+		return getAccounts().stream()
+				.filter(account -> account instanceof Gamer)
+				.filter(account -> account.getUsername().contains(usernameSearch))
+				.map(account -> ((Gamer) account))
+				.sorted((g1, g2) -> {
+					int cmp;
+
+					// number of times search is repeated in usernames
+					cmp = -Integer.compare((g1.getUsername().length() - g1.getUsername().replace(usernameSearch, "").length()) / usernameSearch.length(),
+							(g2.getUsername().length() - g2.getUsername().replace(usernameSearch, "").length()) / usernameSearch.length());
+
+					if (cmp != 0)
+						return cmp;
+
+					// index at which the match starts
+					cmp = Integer.compare(g1.getUsername().indexOf(usernameSearch), g2.getUsername().indexOf(usernameSearch));
+					if (cmp != 0)
+						return cmp;
+
+					// if all else fails sort by username
+					return g1.getUsername().compareToIgnoreCase(g2.getUsername());
+				})
+				.collect(Collectors.toCollection(LinkedList::new));
+	}
+
 	public void sendFrndReq (String usernameTo) {
 		FriendRequest.addFriendReq(this.getUsername(), usernameTo);
 	}

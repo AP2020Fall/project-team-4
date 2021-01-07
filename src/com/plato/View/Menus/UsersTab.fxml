@@ -1,8 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: RED;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.UsersTabController">
-
-</AnchorPane>
+<SplitPane dividerPositions="0.5949197860962567" maxHeight="1000.0" maxWidth="1500.0" minHeight="500.0" minWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.UsersTabController">
+   <items>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" percentWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="210.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="444.0" minHeight="190.0" prefHeight="444.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <TextField fx:id="search" promptText="Search" GridPane.columnIndex="1" />
+        <Label text="🔍" textAlignment="RIGHT" GridPane.halignment="RIGHT">
+          <GridPane.margin>
+            <Insets right="2.0" />
+          </GridPane.margin>
+          <font>
+            <Font name="Arial" size="25.0" />
+          </font>
+        </Label>
+        <Label fx:id="clearSearch" text="x" GridPane.columnIndex="2">
+          <font>
+            <Font name="System Italic" size="19.0" />
+          </font>
+          <GridPane.margin>
+            <Insets left="5.0" />
+          </GridPane.margin>
+        </Label>
+         <ListView fx:id="accountsList" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+      </GridPane>
+      <Pane fx:id="profile" prefHeight="200.0" prefWidth="200.0" />
+   </items>
+</SplitPane>

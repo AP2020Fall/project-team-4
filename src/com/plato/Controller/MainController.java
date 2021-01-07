@@ -9,6 +9,7 @@ import Controller.GameRelated.GameLogController;
 import Controller.GameRelated.Reversi.ReversiController;
 import Controller.Menus.LoginMenuController;
 import Controller.Menus.MainMenuController;
+import Controller.Menus.RegisterMenuController;
 import Model.AccountRelated.*;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
@@ -62,8 +63,10 @@ public class MainController extends Application {
 		// is signed in
 		String path;
 
-		if (!Admin.adminHasBeenCreated())
+		if (!Admin.adminHasBeenCreated()) {
 			path = "src/com/plato/View/Menus/RegisterMenu.fxml";
+			RegisterMenuController.setStage(primaryStage);
+		}
 
 		else if (AccountController.getInstance().getCurrentAccLoggedIn() == null) {
 			path = "src/com/plato/View/Menus/LoginMenu.fxml";
@@ -82,29 +85,6 @@ public class MainController extends Application {
 
 
 		primaryStage.show();
-
-//		while (true) {
-//			if (Menu.getScanner().hasNextLine()) {
-//				try {
-//					String comStr = Menu.getInputLine();
-//
-//					if (!comStr.matches("[0-9]+"))
-//						throw new InvalidInputException();
-//
-//					command = Integer.parseInt(comStr);
-//
-//					if (command < 1 || command > Menu.getMenuIn().getOptions().size())
-//						throw new InvalidInputException();
-//
-//					getInstance().dealWithInput(command);
-//
-//				} catch (InvalidInputException e) {
-//					Menu.printErrorMessage(e.getMessage());
-//				}
-//
-//				Menu.getMenuIn().displayMenu();
-//			}
-//		}
 	}
 
 	private void dealWithInput (int command) {

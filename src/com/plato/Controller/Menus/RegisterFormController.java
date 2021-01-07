@@ -110,6 +110,7 @@ public class RegisterFormController implements Initializable {
 		LoginMenuController.setStage(loginStage);
 		loginStage.show();
 		stage.close();
+		RegisterMenuController.getStage().close();
 	}
 
 	public static void setPassword (String password) {

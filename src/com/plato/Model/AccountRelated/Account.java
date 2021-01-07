@@ -132,6 +132,14 @@ public abstract class Account {
 		this.phoneNum = phoneNum;
 	}
 
+	public String getPfpUrl () {
+		return pfpUrl;
+	}
+
+	public void setPfpUrl (String pfpUrl) {
+		this.pfpUrl = pfpUrl;
+	}
+
 	public void setUserID (String userID) {
 		this.userID = userID;
 	}
