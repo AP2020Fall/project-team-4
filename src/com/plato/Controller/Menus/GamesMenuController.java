@@ -1,9 +1,9 @@
 package Controller.Menus;
 
 public class GamesMenuController {
-	private boolean isForFaveGames;
+	private static boolean isForFaveGames;
 
-	public void setIsForFaveGames (boolean forFaveGames) { // todo when fxml is called this method should be called
+	public static void setIsForFaveGames (boolean forFaveGames) { // todo when fxml is called this method should be called
 		isForFaveGames = forFaveGames;
 	}
 }

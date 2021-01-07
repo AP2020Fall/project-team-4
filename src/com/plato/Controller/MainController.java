@@ -60,17 +60,19 @@ public class MainController extends Application {
 		}
 
 		// is signed in
-		String path = AccountController.getInstance().getCurrentAccLoggedIn() != null
-				?
-				"src/com/plato/View/Menus/MainMenu.fxml"
-				:
-				"src/com/plato/View/Menus/LoginMenu.fxml";
+		String path;
 
-		if (path.contains("MainMenu"))
-			MainMenuController.setGamerOrAdmin(AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer);
-		else
+		if (!Admin.adminHasBeenCreated())
+			path = "src/com/plato/View/Menus/RegisterMenu.fxml";
+
+		else if (AccountController.getInstance().getCurrentAccLoggedIn() == null) {
+			path = "src/com/plato/View/Menus/LoginMenu.fxml";
 			LoginMenuController.setStage(primaryStage);
-
+		}
+		else {
+			path = "src/com/plato/View/Menus/MainMenu.fxml";
+			MainMenuController.setGamerOrAdmin(AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer);
+		}
 
 		try {
 			primaryStage.setScene(new Scene(FXMLLoader.load(new File(path).toURI().toURL())));
