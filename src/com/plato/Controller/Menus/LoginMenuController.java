@@ -81,7 +81,6 @@ public class LoginMenuController implements Initializable {
 	public void login (ActionEvent actionEvent) {
 		try {
 			AccountController.getInstance().login(username.getText(), ((PasswordField) pwStackPane.getChildren().get(1)).getText(), rememberMe.isSelected());
-			System.out.println(rememberMe.isSelected());
 		} catch (MainController.InvalidFormatException | AccountController.NoAccountExistsWithUsernameException e) {
 			usernameError.setText(e.getMessage());
 			return;

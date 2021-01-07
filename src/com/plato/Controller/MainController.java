@@ -264,8 +264,6 @@ public class MainController extends Application {
 	}
 
 	public void serialize () throws IOException {
-		System.out.println("getCurrentAccLoggedIn() = " + AccountController.getInstance().getCurrentAccLoggedIn());
-
 		// SavedLoginInfo.json
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/SavedLoginInfo.json")) {
 			printWriter.print("");
@@ -373,6 +371,7 @@ public class MainController extends Application {
 
 	public void saveEverything () {
 		try {
+			initGsonAndItsBuilder();
 			serialize();
 		} catch (IOException e) {
 			e.printStackTrace();

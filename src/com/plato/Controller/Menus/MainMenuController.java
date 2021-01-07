@@ -24,11 +24,13 @@ public class MainMenuController implements Initializable {
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
 		// for admin
-		if (!gamerOrAdmin)
+		if (!gamerOrAdmin) {
 			buttons.getChildren().subList(3, 10).clear();
-			// for gamer
-		else
+		}
+		// for gamer
+		else {
 			buttons.getChildren().subList(0, 3).clear();
+		}
 
 		buttons.getChildren().forEach(button -> {
 			button.setOnMouseEntered(e -> button.setOpacity(0.8));
@@ -42,8 +44,9 @@ public class MainMenuController implements Initializable {
 	}
 
 	public void eventsTab (ActionEvent actionEvent) {
+		System.out.println("MainMenuController.eventsTab");
 		try {
-			pane = FXMLLoader.load(new File("src/com/plato/View/Menus/EventsTab.fxml").toURI().toURL());
+			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/EventsTab.fxml").toURI().toURL()));
 			EventsTabController.setGamerOrAdmin(gamerOrAdmin);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -51,8 +54,9 @@ public class MainMenuController implements Initializable {
 	}
 
 	public void usersTab (ActionEvent actionEvent) {
+		System.out.println("MainMenuController.usersTab");
 		try {
-			pane = FXMLLoader.load(new File("src/com/plato/View/Menus/UsersTab.fxml").toURI().toURL());
+			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/UsersTab.fxml").toURI().toURL()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -61,7 +65,7 @@ public class MainMenuController implements Initializable {
 	public void accountPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.accountPage");
 		try {
-			pane = FXMLLoader.load(new File("src/com/plato/View/Menus/AccountPage.fxml").toURI().toURL());
+			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/AccountPage.fxml").toURI().toURL()));
 			AccountPageController.setGamerOrAdmin(gamerOrAdmin);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -69,16 +73,18 @@ public class MainMenuController implements Initializable {
 	}
 
 	public void gamingHistoryPage (ActionEvent actionEvent) {
+		System.out.println("MainMenuController.gamingHistoryPage");
 		try {
-			pane = FXMLLoader.load(new File("src/com/plato/View/Menus/GamingHistoryTab.fxml").toURI().toURL());
+			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamingHistoryTab.fxml").toURI().toURL()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void gamesTab (ActionEvent actionEvent) {
+		System.out.println("MainMenuController.gamesTab");
 		try {
-			pane = FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL());
+			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()));
 			GamesMenuController.setIsForFaveGames(false);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -86,8 +92,9 @@ public class MainMenuController implements Initializable {
 	}
 
 	public void faveGamesTab (ActionEvent actionEvent) {
+		System.out.println("MainMenuController.faveGamesTab");
 		try {
-			pane = FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL());
+			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()));
 			GamesMenuController.setIsForFaveGames(true);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -95,16 +102,18 @@ public class MainMenuController implements Initializable {
 	}
 
 	public void friendsPage (ActionEvent actionEvent) {
+		System.out.println("MainMenuController.friendsPage");
 		try {
-			pane = FXMLLoader.load(new File("src/com/plato/View/Menus/FriendsTab.fxml").toURI().toURL());
+			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/FriendsTab.fxml").toURI().toURL()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void messagesTab (ActionEvent actionEvent) {
+		System.out.println("MainMenuController.messagesTab");
 		try {
-			pane = FXMLLoader.load(new File("src/com/plato/View/Menus/AdminMsgs.fxml").toURI().toURL());
+			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/AdminMsgs.fxml").toURI().toURL()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
