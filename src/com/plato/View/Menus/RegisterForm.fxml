@@ -27,7 +27,7 @@
             <GridPane.margin>
                 <Insets bottom="10.0"/>
             </GridPane.margin>
-            <Image url="https://cdn4.iconfinder.com/data/icons/48-bubbles/48/30.User-256.png"/>
+            <Image url="https://i.imgur.com/vMppUMs.png"/>
         </ImageView>
         <Label text="First Name" GridPane.rowIndex="1">
             <font>
@@ -42,7 +42,7 @@
             <GridPane.margin>
                 <Insets bottom="15.0"/>
             </GridPane.margin>
-            <Image url="https://cdn4.iconfinder.com/data/icons/glyphs/24/icons_add-256.png"/>
+            <Image url="https://i.imgur.com/CxCk2qN.png"/>
         </ImageView>
         <Label text="Last Name" GridPane.rowIndex="2">
             <font>
@@ -73,7 +73,7 @@
                 </font>
             </SplitMenuButton>
             <ImageView fx:id="coinImg" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="https://cdn3.iconfinder.com/data/icons/currency-and-cryptocurrency-signs/64/cryptocurrency_blockchain_dollar-256.png"/>
+                <Image url="https://i.imgur.com/Iq0MAc7.png"/>
             </ImageView>
         </HBox>
         <HBox alignment="CENTER" spacing="5.0" GridPane.columnSpan="3" GridPane.halignment="CENTER"

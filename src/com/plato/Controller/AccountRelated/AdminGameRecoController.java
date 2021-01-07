@@ -81,7 +81,7 @@ public class AdminGameRecoController {
 		}});
 		if (recosForPlayer.size() == 0) return;
 
-		MainController.enterAppropriateMenu();
+//		MainController.enterAppropriateMenu();
 	}
 
 	public void displayAllAdminRecos () {

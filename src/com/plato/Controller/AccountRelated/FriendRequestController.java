@@ -64,7 +64,9 @@ public class FriendRequestController {
 
 		FriendRequestView.getInstance().displayFrndReqsPlayerGotten(frndReqs);
 		if (frndReqs.size() > 0)
-			MainController.enterAppropriateMenu();
+		{
+//			MainController.enterAppropriateMenu();
+		}
 	}
 
 	public void acceptFriendReq () {

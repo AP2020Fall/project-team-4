@@ -7,6 +7,8 @@ import Controller.GameRelated.BattleSea.ShipController;
 import Controller.GameRelated.GameController;
 import Controller.GameRelated.GameLogController;
 import Controller.GameRelated.Reversi.ReversiController;
+import Controller.Menus.LoginMenuController;
+import Controller.Menus.MainMenuController;
 import Model.AccountRelated.*;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
@@ -31,8 +33,8 @@ public class MainController extends Application {
 	static int command;
 	private static MainController mainController;
 	private final GsonBuilder gsonBuilder = new GsonBuilder();
-	private Stage primaryStage;
 	private Gson gson;
+	private Stage primaryStage;
 
 	public static MainController getInstance () {
 		if (mainController == null)
@@ -44,24 +46,11 @@ public class MainController extends Application {
 		launch(args);
 	}
 
-	public static int getCommand () {
-		return command;
-	}
-
-	public static void enterAppropriateMenu () {
-//		Menu.getMenuIn().getChildMenus().get(command).enter();
-	}
-
-	private void jumpToBattleSeaGameMenu () {
-		System.setIn(new ByteArrayInputStream((//"2\ndorrin1\n11\ny\n" +
-				"3\n1\n").getBytes()));
-	}
-
 	@Override
 	public void start (Stage primaryStage) {
 		getInstance().primaryStage = primaryStage;
 		primaryStage.setResizable(false);
-//		jumpToBattleSeaGameMenu(); // fixme make comment later
+		primaryStage.setOnCloseRequest(e -> saveEverything());
 		DayPassController.getInstance().start();
 
 		try {
@@ -70,24 +59,25 @@ public class MainController extends Application {
 			e.printStackTrace();
 		}
 
-		if (!Admin.adminHasBeenCreated()) {
-			try {
-				primaryStage.setScene(new Scene(FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterMenu.fxml").toURI().toURL())));
-			} catch (IOException e) {
-				e.printStackTrace();
-			} // fixme uncomment
+		// is signed in
+		String path = AccountController.getInstance().getCurrentAccLoggedIn() != null
+				?
+				"src/com/plato/View/Menus/MainMenu.fxml"
+				:
+				"src/com/plato/View/Menus/LoginMenu.fxml";
+
+		if (path.contains("MainMenu"))
+			MainMenuController.setGamerOrAdmin(AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer);
+		else
+			LoginMenuController.setStage(primaryStage);
+
+
+		try {
+			primaryStage.setScene(new Scene(FXMLLoader.load(new File(path).toURI().toURL())));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		else {
-			// fixme go to login menu or main menu
-//			Menu.addMenu("2");
-//			if (AccountController.getInstance().getCurrentAccLoggedIn() != null) {
-//				String aORg = AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer ? "G" : "A";
-//				Menu.addMenu("3" + aORg);
-//				Menu.getMenu("3" + aORg).enter();
-//			}
-//			else
-//				Menu.getMenu("2").enter();
-		}
+
 
 		primaryStage.show();
 
@@ -123,12 +113,14 @@ public class MainController extends Application {
 		String commandOption = menuOpts.get(command).trim();
 
 		switch (commandOption) {
-			case "Exit program" -> tryToExitProgram();
+			case "Exit program" -> saveEverything();
 			case "Back" -> {
 //				Menu.getMenuIn().back();
 			}
 			case "Go to Account Menu", "Go to Games Menu", "Go to Friends Menu",
-					"Open Reversi Game Menu", "Open BattleSea Game Menu" -> enterAppropriateMenu();
+					"Open Reversi Game Menu", "Open BattleSea Game Menu" -> {
+//				enterAppropriateMenu();
+			}
 
 			// register-login menu
 //			case "Register Gamer", "Register Admin" -> AccountController.getInstance().register();
@@ -148,13 +140,13 @@ public class MainController extends Application {
 			case "View admin’s suggestions" -> AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
 			case "View Events" -> {
 				EventController.getInstance().displayInSessionEvents();
-				enterAppropriateMenu();
+//				enterAppropriateMenu();
 			}
 			case "Add Event" -> EventController.getInstance().createEvent();
 			case "Add suggestion" -> AdminGameRecoController.getInstance().giveRecommendationToGamer();
 			case "View suggestions" -> {
 				AdminGameRecoController.getInstance().displayAllAdminRecos();
-				enterAppropriateMenu();
+//				enterAppropriateMenu();
 			}
 			case "Send message" -> MessageController.getInstance().sendMsg();
 			case "Edit Details of BattleSea", "Edit Details of Reversi" -> {
@@ -163,7 +155,7 @@ public class MainController extends Application {
 			}
 			case "View Users" -> {
 				GamerController.getInstance().displayAllUsernames();
-				enterAppropriateMenu();
+//				enterAppropriateMenu();
 			}
 
 			// suggestions menu
@@ -252,7 +244,7 @@ public class MainController extends Application {
 			// account menu
 			case "View personal info (w/ money)", "View personal info (w/o money)" -> {
 				AccountController.getInstance().displayPersonalInfo();
-				enterAppropriateMenu();
+//				enterAppropriateMenu();
 			}
 			case "View plato statistics" -> GamerController.getInstance().displayAccountStats();
 			case "View Gaming History" -> GameLogController.getInstance().displayFullGamingHistoryOfGamer();
@@ -270,6 +262,7 @@ public class MainController extends Application {
 	}
 
 	public void serialize () throws IOException {
+		System.out.println("getCurrentAccLoggedIn() = " + AccountController.getInstance().getCurrentAccLoggedIn());
 
 		// SavedLoginInfo.json
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/SavedLoginInfo.json")) {
@@ -379,7 +372,6 @@ public class MainController extends Application {
 	public void saveEverything () {
 		try {
 			serialize();
-//			Menu.printSavedMessage();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -539,19 +531,6 @@ public class MainController extends Application {
 		gson = gsonBuilder.create();
 	}
 
-	public void tryToExitProgram () {
-//		Menu.displayAreYouSureMessage();
-//		if (Menu.getInputLine().equalsIgnoreCase("y")) {
-		try {
-			mainController.serialize();
-			AccountController.getInstance().logout();
-			System.exit(1);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-//		}
-	}
-
 	/**
 	 * creates a new stage on top of the previous stage
 	 * .show() needs to be used outside in case further changes are needed
@@ -571,6 +550,7 @@ public class MainController extends Application {
 		primaryStage.setResizable(false);
 		primaryStage.setAlwaysOnTop(true);
 		primaryStage.setTitle(title);
+		primaryStage.setOnCloseRequest(e -> saveEverything());
 
 		return primaryStage;
 	}
@@ -612,6 +592,4 @@ public class MainController extends Application {
 			}
 		}
 	}
-
-
 }

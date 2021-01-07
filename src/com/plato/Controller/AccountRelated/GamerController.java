@@ -44,7 +44,9 @@ public class GamerController {
 			this.addAll(playersFriends);
 		}});
 		if (playersFriends.size() > 0)
-			MainController.enterAppropriateMenu();
+		{
+//			MainController.enterAppropriateMenu();
+		}
 	}
 
 	public void displayUserProfileToAdmin () {

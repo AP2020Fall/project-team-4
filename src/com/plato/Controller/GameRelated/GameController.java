@@ -75,7 +75,6 @@ public class GameController {
 		Game.startGame(game);
 		setCurrentGameInSession(game);
 
-		MainController.enterAppropriateMenu();
 	}
 
 	public void addGameToFavesOfLoggedInGamer () {
