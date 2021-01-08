@@ -1,30 +1,26 @@
 [
   {
-    "fromUsername": "c",
-    "toUsername": "heelo"
+    "fromUsername": "dddw",
+    "toUsername": "dorrin1"
   },
   {
-    "fromUsername": "c",
-    "toUsername": "java"
-  },
-  {
-    "fromUsername": "c",
-    "toUsername": "dddw"
-  },
-  {
-    "fromUsername": "dorrin1",
-    "toUsername": "dddw"
-  },
-  {
-    "fromUsername": "dorrin1",
-    "toUsername": "java"
-  },
-  {
-    "fromUsername": "dorrin1",
-    "toUsername": "heelo"
-  },
-  {
-    "fromUsername": "dorrin1",
+    "fromUsername": "dddw",
     "toUsername": "c"
+  },
+  {
+    "fromUsername": "dddw",
+    "toUsername": "java"
+  },
+  {
+    "fromUsername": "heelo",
+    "toUsername": "java"
+  },
+  {
+    "fromUsername": "heelo",
+    "toUsername": "c"
+  },
+  {
+    "fromUsername": "heelo",
+    "toUsername": "dorrin1"
   }
 ]

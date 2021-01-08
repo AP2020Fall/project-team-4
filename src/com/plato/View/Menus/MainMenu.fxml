@@ -21,6 +21,9 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
         </Button>
         <Button fx:id="b1" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#usersTab" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Users" textAlignment="CENTER">
             <graphic>
@@ -31,6 +34,9 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
         </Button>
         <Button fx:id="b2" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPage" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Account" textAlignment="CENTER">
             <graphic>
@@ -41,6 +47,9 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
         </Button>
         <Button fx:id="b3" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="30.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#eventsTab" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Events" textAlignment="CENTER">
             <graphic>
@@ -51,6 +60,9 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
         </Button>
         <Button fx:id="b4" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="300.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamingHistoryPage" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Gaming&#10;History" textAlignment="CENTER">
             <graphic>
@@ -61,6 +73,9 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
         </Button>
         <Button fx:id="b5" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="435.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamesTab" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Games" textAlignment="CENTER">
             <graphic>
@@ -71,6 +86,9 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
         </Button>
         <Button fx:id="b6" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="570.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#faveGamesTab" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Favourite&#10;Games" textAlignment="CENTER">
             <graphic>
@@ -81,6 +99,9 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
         </Button>
         <Button fx:id="b7" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="705.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#friendsPage" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Friends" textAlignment="CENTER">
             <graphic>
@@ -91,6 +112,9 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
         </Button>
         <Button fx:id="b8" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="460.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPage" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Account" textAlignment="CENTER">
             <graphic>
@@ -101,6 +125,9 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
         </Button>
         <Button fx:id="b9" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="1535.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#messagesTab" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Messages" textAlignment="CENTER">
             <graphic>
@@ -111,9 +138,12 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
-        </Button>
-        <padding>
+         <padding>
             <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
-        </padding>
+         </padding>
+        </Button>
+      <padding>
+         <Insets left="20.0" right="20.0" />
+      </padding>
     </HBox>
 </VBox>

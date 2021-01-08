@@ -49,7 +49,7 @@ public class FriendRequestManagementPageController implements Initializable {
 		availableForFrndReqList.getItems().clear();
 
 		for (Gamer gamer : Gamer.getGamers(Gamer.getAvailableGamersForFrndReq(currentLoggedIn), search.getText())) {
-			Circle circle = new Circle(30);
+			Circle circle = new Circle(40);
 
 			availableForFrndReqList.getItems().add(new GridPane() {{
 				getRowConstraints().add(new RowConstraints() {{

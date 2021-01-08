@@ -1,11 +1,16 @@
 package Controller.Menus;
 
+import Controller.MainController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,8 +36,15 @@ public class MainMenuController implements Initializable {
 		else {
 			buttons.getChildren().subList(0, 3).clear();
 		}
-		pane.setMinSize(775, 516);
-		pane.setMaxSize(1550, 1033);
+		pane.setMinWidth(775);
+		pane.setMaxWidth(1550);
+		pane.setMinHeight(600);
+		pane.setMaxHeight(pane.getMinHeight());
+
+		Stage stage = MainController.getInstance().getPrimaryStage();
+		stage.setMinHeight(600 + 195 + 30);
+		stage.setMaxHeight(stage.getMinHeight());
+		stage.setHeight(stage.getMinHeight());
 
 		buttons.getChildren().forEach(button -> {
 			button.setOnMouseEntered(e -> button.setOpacity(0.8));
@@ -48,8 +60,11 @@ public class MainMenuController implements Initializable {
 	public void eventsTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.eventsTab");
 		try {
+			pane.getChildren().clear();
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/EventsTab.fxml").toURI().toURL()));
 			EventsTabController.setGamerOrAdmin(gamerOrAdmin);
+			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
+			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -58,7 +73,10 @@ public class MainMenuController implements Initializable {
 	public void usersTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.usersTab");
 		try {
+			pane.getChildren().clear();
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/UsersTab.fxml").toURI().toURL()));
+			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
+			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -67,8 +85,11 @@ public class MainMenuController implements Initializable {
 	public void accountPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.accountPage");
 		try {
+			pane.getChildren().clear();
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/AccountPage.fxml").toURI().toURL()));
 			AccountPageController.setGamerOrAdmin(gamerOrAdmin);
+			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
+			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -77,7 +98,10 @@ public class MainMenuController implements Initializable {
 	public void gamingHistoryPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.gamingHistoryPage");
 		try {
+			pane.getChildren().clear();
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamingHistoryTab.fxml").toURI().toURL()));
+			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
+			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -86,8 +110,11 @@ public class MainMenuController implements Initializable {
 	public void gamesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.gamesTab");
 		try {
+			pane.getChildren().clear();
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()));
 			GamesMenuController.setIsForFaveGames(false);
+			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
+			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -96,8 +123,11 @@ public class MainMenuController implements Initializable {
 	public void faveGamesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.faveGamesTab");
 		try {
+			pane.getChildren().clear();
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()));
 			GamesMenuController.setIsForFaveGames(true);
+			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
+			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -106,7 +136,10 @@ public class MainMenuController implements Initializable {
 	public void friendsPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.friendsPage");
 		try {
+			pane.getChildren().clear();
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/FriendsTab.fxml").toURI().toURL()));
+			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
+			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -115,7 +148,10 @@ public class MainMenuController implements Initializable {
 	public void messagesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.messagesTab");
 		try {
+			pane.getChildren().clear();
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/AdminMsgs.fxml").toURI().toURL()));
+			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
+			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

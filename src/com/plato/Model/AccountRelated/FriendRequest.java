@@ -21,6 +21,10 @@ public class FriendRequest {
 		allfriendRequests.removeIf(friendRequest ->
 				friendRequest.fromUsername.equals(fromUsername) &&
 						friendRequest.toUsername.equals(toUsername));
+		if (accepted)
+			allfriendRequests.removeIf(friendRequest ->
+					friendRequest.fromUsername.equals(toUsername) &&
+							friendRequest.toUsername.equals(fromUsername));
 	}
 
 	public static FriendRequest getFriendReq (String fromUsername, String toUsername) {
