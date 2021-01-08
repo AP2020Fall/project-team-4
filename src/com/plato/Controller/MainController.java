@@ -153,7 +153,7 @@ public class MainController extends Application {
 
 			// friend menu
 			case "Show friends" -> GamerController.getInstance().displayFriendsUsernames();
-			case "Send Friend Request" -> FriendRequestController.getInstance().sendFrndRequest();
+//			case "Send Friend Request" -> FriendRequestController.getInstance().sendFrndRequest();
 			case "Show Friend Requests" -> FriendRequestController.getInstance().displayFrndReqsPlayerGotten();
 
 			// gamer user management menu
@@ -164,8 +164,8 @@ public class MainController extends Application {
 //			case "Remove Friend" -> GamerController.getInstance().removeFriend();
 
 			// friend request management menu
-			case "Accept Friend Request" -> FriendRequestController.getInstance().acceptFriendReq();
-			case "Decline Friend Request" -> FriendRequestController.getInstance().declineFriendReq();
+//			case "Accept Friend Request" -> FriendRequestController.getInstance().acceptFriendReq();
+//			case "Decline Friend Request" -> FriendRequestController.getInstance().declineFriendReq();
 
 			// game menu
 			case "Show scoreboard" -> GameController.getInstance().displayScoreboardOfGame();

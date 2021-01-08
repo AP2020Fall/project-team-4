@@ -46,7 +46,7 @@ public class UsersTabController implements Initializable {
 	private void updateAccountsList () {
 		accountsList.getItems().clear();
 
-		for (Gamer gamer : Gamer.getGamers(search.getText())) {
+		for (Gamer gamer : Gamer.getGamers(Gamer.getGamers(), search.getText())) {
 			Circle circle = new Circle(50);
 
 			accountsList.getItems().add(new GridPane() {{

@@ -36,13 +36,11 @@ public class Gamer extends Account {
 		getAccounts().addAll(gamers);
 	}
 
-	public static LinkedList<Gamer> getGamers (String usernameSearch) {
-		if (usernameSearch.length() == 0) return getGamers();
+	public static LinkedList<Gamer> getGamers (LinkedList<Gamer> gamerList, String usernameSearch) {
+		if (usernameSearch.length() == 0) return gamerList;
 
-		return getAccounts().stream()
-				.filter(account -> account instanceof Gamer)
+		return gamerList.stream()
 				.filter(account -> account.getUsername().contains(usernameSearch))
-				.map(account -> ((Gamer) account))
 				.sorted((g1, g2) -> {
 					int cmp;
 
@@ -61,6 +59,16 @@ public class Gamer extends Account {
 					// if all else fails sort by username
 					return g1.getUsername().compareToIgnoreCase(g2.getUsername());
 				})
+				.collect(Collectors.toCollection(LinkedList::new));
+	}
+
+	public static LinkedList<Gamer> getAvailableGamersForFrndReq (Gamer gamerFrom) {
+		return Gamer.getGamers().stream()
+				.filter(gamerTo ->
+						!gamerTo.getUsername().equals(gamerFrom.getUsername()) &&
+								!gamerFrom.frndExists(gamerTo.getUsername()) &&
+								!FriendRequest.frndReqExists(gamerFrom.getUsername(), gamerTo.getUsername())
+				)
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 

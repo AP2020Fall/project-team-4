@@ -2,6 +2,7 @@ package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
 import Controller.AccountRelated.GamerController;
+import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -115,6 +117,18 @@ public class FriendsTabController implements Initializable {
 	}
 
 	public void displayFrndRequests (ActionEvent actionEvent) {
-		// TODO: 1/8/2021 AD
+		Stage stage = null;
+		try {
+			stage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/FriendRequestManagementPage.fxml").toURI().toURL()),
+					"Friend Requests",
+					true,
+					MainController.getInstance().getPrimaryStage()
+			);
+			FriendRequestManagementPageController.setStage(stage);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
