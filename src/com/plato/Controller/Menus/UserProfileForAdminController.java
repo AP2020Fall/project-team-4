@@ -58,10 +58,10 @@ public class UserProfileForAdminController implements Initializable {
 				AdminGameReco.removeReco("BattleSea", gamer);
 		});
 
-		backBtn.setOnMouseEntered(e-> backBtn.setOpacity(0.8));
-		backBtn.setOnMouseExited(e-> backBtn.setOpacity(1));
-		sendBtn.setOnMouseEntered(e-> sendBtn.setOpacity(0.8));
-		sendBtn.setOnMouseExited(e-> sendBtn.setOpacity(1));
+		backBtn.setOnMouseEntered(e -> backBtn.setOpacity(0.8));
+		backBtn.setOnMouseExited(e -> backBtn.setOpacity(1));
+		sendBtn.setOnMouseEntered(e -> sendBtn.setOpacity(0.8));
+		sendBtn.setOnMouseExited(e -> sendBtn.setOpacity(1));
 	}
 
 	public void sendMsg (ActionEvent actionEvent) {

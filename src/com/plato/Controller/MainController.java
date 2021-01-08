@@ -161,7 +161,7 @@ public class MainController extends Application {
 
 			// friend management menu
 			case "View friend profile" -> GamerController.getInstance().displayFriendPersonalInfo();
-			case "Remove Friend" -> GamerController.getInstance().removeFriend();
+//			case "Remove Friend" -> GamerController.getInstance().removeFriend();
 
 			// friend request management menu
 			case "Accept Friend Request" -> FriendRequestController.getInstance().acceptFriendReq();

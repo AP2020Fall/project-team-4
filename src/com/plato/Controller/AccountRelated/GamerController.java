@@ -43,8 +43,7 @@ public class GamerController {
 		GamerView.getInstance().displayFriendsUsernames(new LinkedList<>() {{
 			this.addAll(playersFriends);
 		}});
-		if (playersFriends.size() > 0)
-		{
+		if (playersFriends.size() > 0) {
 //			MainController.enterAppropriateMenu();
 		}
 	}
@@ -76,26 +75,8 @@ public class GamerController {
 		);
 	}
 
-	public void removeFriend () {
-		String username = "";
-		while (true)
-			try {
-//				Menu.printAskingForInput("Username:[/c to cancel] ");
-//				username = Menu.getInputLine();
-
-				if (username.trim().equalsIgnoreCase("/c")) return;
-
-				if (!username.matches("[!-~]+"))
-					throw new MainController.InvalidFormatException("Username");
-
-				if (!((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).frndExists(username))
-					throw new FriendDoesntExistException();
-				break;
-			} catch (FriendDoesntExistException | MainController.InvalidFormatException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
-		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).removeFrnd(username);
+	public void removeFriend (String frndUsername) {
+		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).removeFrnd(frndUsername);
 	}
 
 	public void displayFriendPersonalInfo () {
