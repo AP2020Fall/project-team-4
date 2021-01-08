@@ -4,6 +4,7 @@ import Controller.AccountRelated.AccountController;
 import Controller.AccountRelated.GamerController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
@@ -73,6 +74,8 @@ public class FriendsTabController implements Initializable {
 						setTextAlignment(TextAlignment.CENTER);
 						setPadding(new Insets(5, 5, 5, 5));
 						setOnAction(e -> unfriend(frndUN));
+						setOnMouseEntered(e -> setOpacity(0.8));
+						setOnMouseExited(e -> setOpacity(1));
 					}};
 
 					circle.setCenterX(pfp.getFitHeight() / 2);
@@ -92,7 +95,7 @@ public class FriendsTabController implements Initializable {
 
 	private void unfriend (String frndUN) {
 		GamerController.getInstance().removeFriend(frndUN);
-		if (FriendProfileController.getGamer().getUsername().equals(frndUN))
+		if (FriendProfileController.getFrnd().getUsername().equals(frndUN))
 			frndProfile.getChildren().clear();
 
 		frndsList.getItems()
@@ -102,12 +105,16 @@ public class FriendsTabController implements Initializable {
 	private void displayGamerProfile (String frndUn) {
 		try {
 			frndProfile.getChildren().clear();
-			FriendProfileController.setGamer((Gamer) Account.getAccount(frndUn));
+			FriendProfileController.setFrnd((Gamer) Account.getAccount(frndUn));
 			frndProfile.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/FriendProfile.fxml").toURI().toURL()));
 			GridPane.setValignment(frndProfile.getChildren().get(0), VPos.CENTER);
 			GridPane.setHalignment(frndProfile.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void displayFrndRequests (ActionEvent actionEvent) {
+		// TODO: 1/8/2021 AD
 	}
 }
