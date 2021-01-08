@@ -19,14 +19,14 @@ public class MessageTest {
 	@Test
 	public void sendMsgTest () throws InterruptedException {
 		assumeTrue(Message.getAllMessages().size() == 0);
-		Message message1 = new Message("Hi1");
-		Thread.sleep(300);
-		Message message2 = new Message("Hi2");
-		Thread.sleep(300);
-		Message message3 = new Message("Hi3");
-		Thread.sleep(300);
-		Message message4 = new Message("Hi4");
-		Thread.sleep(300);
+//		Message message1 = new Message("Hi1");
+//		Thread.sleep(300);
+//		Message message2 = new Message("Hi2");
+//		Thread.sleep(300);
+//		Message message3 = new Message("Hi3");
+//		Thread.sleep(300);
+//		Message message4 = new Message("Hi4");
+//		Thread.sleep(300);
 
 		assertEquals(4, Message.getAllMessages().size());
 

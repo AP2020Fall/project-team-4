@@ -4,7 +4,9 @@ import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -39,11 +41,6 @@ public class UsersTabController implements Initializable {
 		clearSearch.setOnMouseClicked(e -> search.setText(""));
 
 		search.textProperty().addListener((observableValue, s, t1) -> updateAccountsList());
-//		search.setOnKeyPressed(keyEvent -> {
-//			if (keyEvent.getCode() == KeyCode.ENTER) {
-//				updateAccountsList();
-//			}
-//		});
 	}
 
 	private void updateAccountsList () {
@@ -83,17 +80,20 @@ public class UsersTabController implements Initializable {
 				add(pfp, 0, 0);
 				add(username, 1, 0);
 
-				setOnMouseClicked(e -> {
-					displayGamerProfile(username.getText());
-				});
+				setOnMouseClicked(e -> displayGamerProfile(((Label) getChildren().get(1)).getText()));
+				setOnMouseEntered(e -> setOpacity(0.8));
+				setOnMouseExited(e -> setOpacity(1));
 			}});
 		}
 	}
 
 	private void displayGamerProfile (String username) {
 		try {
-			profile.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/UserProfileForAdmin.fxml").toURI().toURL()));
+			profile.getChildren().clear();
 			UserProfileForAdminController.setGamer((Gamer) Account.getAccount(username));
+			profile.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/UserProfileForAdmin.fxml").toURI().toURL()));
+			GridPane.setValignment(profile.getChildren().get(0), VPos.CENTER);
+			GridPane.setHalignment(profile.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

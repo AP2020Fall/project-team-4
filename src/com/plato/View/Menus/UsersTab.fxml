@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<SplitPane dividerPositions="0.5949197860962567" maxHeight="1000.0" maxWidth="1500.0" minHeight="500.0" minWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.UsersTabController">
+<SplitPane dividerPositions="0.410427807486631" maxHeight="1000.0" maxWidth="1500.0" minHeight="500.0" minWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.UsersTabController">
    <items>
       <GridPane>
         <columnConstraints>
@@ -43,6 +36,13 @@
         </Label>
          <ListView fx:id="accountsList" GridPane.columnSpan="3" GridPane.rowIndex="1" />
       </GridPane>
-      <Pane fx:id="profile" prefHeight="200.0" prefWidth="200.0" />
+       <GridPane fx:id="profile" maxWidth="420.0" minWidth="420.0">
+           <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" />
+           </columnConstraints>
+           <rowConstraints>
+               <RowConstraints vgrow="SOMETIMES" />
+           </rowConstraints>
+       </GridPane>
    </items>
 </SplitPane>

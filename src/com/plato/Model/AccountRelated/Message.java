@@ -10,12 +10,21 @@ public class Message {
 	private static LinkedList<Message> allMessages = new LinkedList<>();
 	private final String text;
 	private final LocalDateTime dateTime;
+	private final Gamer gamer;
 
-	public Message (String text) {
+	public Message (Gamer gamer, String text) {
 		this.text = text;
+		this.gamer = gamer;
 		this.dateTime = LocalDateTime.now();
 
 		allMessages.addLast(this);
+	}
+
+	public static LinkedList<Message> getMessagesToGamer (Gamer gamer) {
+		return allMessages.stream()
+				.filter(message -> message.getGamer().getUsername().equals(gamer.getUsername()))
+				.sorted(Comparator.comparing(Message::getDateTime))
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public static LinkedList<Message> getAllMessages () {
@@ -34,5 +43,9 @@ public class Message {
 
 	public String getText () {
 		return text;
+	}
+
+	public Gamer getGamer () {
+		return gamer;
 	}
 }

@@ -96,9 +96,10 @@ public class LoginMenuController implements Initializable {
 		MainMenuController.setGamerOrAdmin(account instanceof Gamer);
 
 		try {
-			MainController.getInstance().createAndReturnNewStage(
+			Stage stage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/MainMenu.fxml").toURI().toURL()),
-					"Main Menu", false, null).show();
+					"Main Menu", false, null);
+			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

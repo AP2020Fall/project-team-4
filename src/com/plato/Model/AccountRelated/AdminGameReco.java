@@ -26,6 +26,10 @@ public class AdminGameReco {
 		recommendations.remove(getRecommendation(recoID));
 	}
 
+	public static void removeReco (String gameName, Gamer gamer) {
+		recommendations.remove(getRecommendation(gamer, gameName));
+	}
+
 	public static LinkedList<AdminGameReco> getRecommendations (Gamer gamer) {
 		return recommendations.stream()
 				.filter(recommendations -> recommendations.getGamer().getUsername().equals(gamer.getUsername()))

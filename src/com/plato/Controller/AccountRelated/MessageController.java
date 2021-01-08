@@ -1,5 +1,6 @@
 package Controller.AccountRelated;
 
+import Model.AccountRelated.Gamer;
 import Model.AccountRelated.Message;
 import View.AccountRelated.MessageView;
 
@@ -27,26 +28,14 @@ public class MessageController {
 		}});
 	}
 
-	public void sendMsg () {
-		String msg = "";
-		while (true)
-			try {
-//				Menu.printAskingForInput("Your message[/c to cancel] -> ");
-//				msg = Menu.getInputLine();
+	public void sendMsg (Gamer gamer, String msg) throws EmptyMessageException {
+		if (msg.trim().equals(""))
+			throw new EmptyMessageException();
 
-				if (msg.trim().equalsIgnoreCase("/c")) return;
-
-				else if (msg.trim().equals(""))
-					throw new EmptyMessageException();
-
-				new Message(msg);
-				break;
-			} catch (EmptyMessageException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
+		new Message(gamer, msg);
 	}
 
-	private class EmptyMessageException extends Exception {
+	public static class EmptyMessageException extends Exception {
 		public EmptyMessageException () {
 			super("You can't send an empty message.");
 		}

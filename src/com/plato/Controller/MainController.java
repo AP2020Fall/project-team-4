@@ -83,7 +83,6 @@ public class MainController extends Application {
 			e.printStackTrace();
 		}
 
-
 		primaryStage.show();
 	}
 
@@ -130,7 +129,7 @@ public class MainController extends Application {
 				AdminGameRecoController.getInstance().displayAllAdminRecos();
 //				enterAppropriateMenu();
 			}
-			case "Send message" -> MessageController.getInstance().sendMsg();
+//			case "Send message" -> MessageController.getInstance().sendMsg();
 			case "Edit Details of BattleSea", "Edit Details of Reversi" -> {
 				String gameName = commandOption.split(" ")[commandOption.split(" ").length - 1];
 				GameController.getInstance().editDetails(gameName);
