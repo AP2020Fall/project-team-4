@@ -1,10 +1,6 @@
 [
   {
     "fromUsername": "c",
-    "toUsername": "dorrin1"
-  },
-  {
-    "fromUsername": "c",
     "toUsername": "heelo"
   },
   {
@@ -14,5 +10,21 @@
   {
     "fromUsername": "c",
     "toUsername": "dddw"
+  },
+  {
+    "fromUsername": "dorrin1",
+    "toUsername": "dddw"
+  },
+  {
+    "fromUsername": "dorrin1",
+    "toUsername": "java"
+  },
+  {
+    "fromUsername": "dorrin1",
+    "toUsername": "heelo"
+  },
+  {
+    "fromUsername": "dorrin1",
+    "toUsername": "c"
   }
 ]

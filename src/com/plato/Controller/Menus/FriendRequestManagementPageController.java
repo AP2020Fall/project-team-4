@@ -2,6 +2,8 @@ package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
 import Controller.AccountRelated.FriendRequestController;
+import Model.AccountRelated.Account;
+import Model.AccountRelated.FriendRequest;
 import Model.AccountRelated.Gamer;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -66,42 +68,22 @@ public class FriendRequestManagementPageController implements Initializable {
 					setPreserveRatio(true);
 					setFitHeight(circle.getRadius() * 2);
 					setClip(circle);
-					setPadding(new Insets(5,5,5,5));
+					setPadding(new Insets(5, 5, 5, 5));
 				}};
 				Label username = new Label() {{
 					setText(gamer.getUsername());
 					setFont(Font.font("Arial", FontWeight.BOLD, 20));
 					setTextAlignment(TextAlignment.LEFT);
 					setPadding(new Insets(0, 10, 0, 10));
-					setMinWidth(200);
+					setMinWidth(175);
 				}};
-//				Button declineBtn = new Button() {{
-//					setStyle("-fx-background-color: url('https://i.imgur.com/kMFxd9Q.png');");
-//					setStyle("-fx-background-size: 50 50;");
-//					setStyle("-fx-background-radius: 25;");
-//					setMaxSize(50, 50);
-//					setMinSize(50, 50);
-//					setOnMouseEntered(e -> setOpacity(0.8));
-//					setOnMouseExited(e -> setOpacity(1));
-//					setOnMouseClicked(e -> acceptFriendReq(username.getText()));
-//				}};
-//				Button acceptBtn = new Button() {{
-//					setStyle("-fx-background-color: url('https://i.imgur.com/kMFxd9Q.png');");
-//					setStyle("-fx-background-size: 50 50;");
-//					setStyle("-fx-background-radius: 25;");
-//					setMaxSize(50, 50);
-//					setMinSize(50, 50);
-//					setOnMouseEntered(e -> setOpacity(0.8));
-//					setOnMouseExited(e -> setOpacity(1));
-//					setOnMouseClicked(e -> declineFriendReq(username.getText()));
-//				}};
 				Button sendFrndReqBtn = new Button() {{
-					setStyle("-fx-background-image: url('https://i.imgur.com/kMFxd9Q.png');" +
+					setStyle("-fx-background-image: url('https://i.imgur.com/0bfM4ED.png?1');" +
 							" -fx-background-size: 50 50;" +
 							" -fx-background-radius: 25;");
 					setMaxSize(50, 50);
 					setMinSize(50, 50);
-					setPadding(new Insets(2.5,2.5,2.5,2.5));
+					setPadding(new Insets(2.5, 2.5, 2.5, 2.5));
 					setOnMouseEntered(e -> setOpacity(0.8));
 					setOnMouseExited(e -> setOpacity(1));
 					setOnMouseClicked(e -> sendFriendReqDone(username.getText()));
@@ -138,7 +120,73 @@ public class FriendRequestManagementPageController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		updateFriendReqsList();
+		FriendRequest.getFriendReq(AccountController.getInstance().getCurrentAccLoggedIn().getUsername()).forEach(friendRequest ->
+				System.out.println("friendRequest.getFromUsername() = " + friendRequest.getFromUsername() + "\t,\tfriendRequest.getToUsername() = " + friendRequest.getToUsername()));
+
+
+		for (FriendRequest friendRequest : FriendRequest.getFriendReq(AccountController.getInstance().getCurrentAccLoggedIn().getUsername())) {
+			Gamer gamerFrom = (Gamer) Account.getAccount(friendRequest.getFromUsername());
+
+			Circle circle = new Circle(50);
+
+			frndReqsGottenList.getItems().add(new GridPane() {{
+				getRowConstraints().add(new RowConstraints() {{
+					setMinHeight(circle.getRadius() * 2);
+					setMaxHeight(circle.getRadius() * 2);
+				}});
+
+				getColumnConstraints().add(new ColumnConstraints() {{
+					setMinWidth(circle.getRadius() * 2);
+					setMaxWidth(circle.getRadius() * 2);
+				}});
+
+				ImageView pfp = new ImageView() {{
+					setImage(new Image(gamerFrom.getPfpUrl()));
+					setSmooth(true);
+					setPreserveRatio(true);
+					setFitHeight(circle.getRadius() * 2);
+					setClip(circle);
+					setPadding(new Insets(5, 5, 5, 5));
+				}};
+				Label username = new Label() {{
+					setText(gamerFrom.getUsername());
+					setFont(Font.font("Arial", FontWeight.BOLD, 20));
+					setTextAlignment(TextAlignment.LEFT);
+					setPadding(new Insets(0, 10, 0, 10));
+					setMinWidth(200);
+				}};
+				Button acceptBtn = new Button() {{
+					setStyle("-fx-background-image: url('https://i.imgur.com/BqfqMoS.png');" +
+							"-fx-background-size: 80 80;" +
+							"-fx-background-radius: 40;");
+					setMaxSize(80, 80);
+					setMinSize(80, 80);
+					setPadding(new Insets(5, 5, 5, 5));
+					setOnMouseEntered(e -> setOpacity(0.8));
+					setOnMouseExited(e -> setOpacity(1));
+					setOnMouseClicked(e -> acceptFriendReq(username.getText()));
+				}};
+				Button declineBtn = new Button() {{
+					setStyle("-fx-background-image: url('https://i.imgur.com/kMFxd9Q.png');" +
+							"-fx-background-size: 80 80;" +
+							"-fx-background-radius: 40;");
+					setMaxSize(80, 80);
+					setMinSize(80, 80);
+					setPadding(new Insets(5, 5, 5, 5));
+					setOnMouseEntered(e -> setOpacity(0.8));
+					setOnMouseExited(e -> setOpacity(1));
+					setOnMouseClicked(e -> declineFriendReq(username.getText()));
+				}};
+
+				circle.setCenterX(pfp.getFitHeight() / 2);
+				circle.setCenterY(pfp.getFitHeight() / 2);
+
+				add(pfp, 0, 0);
+				add(username, 1, 0);
+				add(declineBtn, 2, 0);
+				add(acceptBtn, 3, 0);
+			}});
+		}
 
 		btn1.setOnMouseEntered(e -> btn1.setOpacity(0.8));
 		btn1.setOnMouseExited(e -> btn1.setOpacity(1));
@@ -151,10 +199,6 @@ public class FriendRequestManagementPageController implements Initializable {
 		clearSearch.setOnMouseClicked(e -> search.setText(""));
 
 		search.textProperty().addListener((observableValue, s, t1) -> updateAvailableGamersList());
-	}
-
-	private void updateFriendReqsList () {
-		// TODO: 1/8/2021 AD
 	}
 
 	public void closeFriendReqSendingWindow (ActionEvent actionEvent) {
