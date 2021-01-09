@@ -4,6 +4,7 @@ import Controller.GameRelated.GameController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
+import Model.GameRelated.Game;
 import Model.GameRelated.Player;
 import View.GameRelated.BattleSea.BattleSeaView;
 
@@ -315,6 +316,11 @@ public class BattleSeaController {
 			else
 				GameController.getInstance().getCurrentGameInSession().nextTurn();
 			command = "";
+			if (GameController.getInstance().getCurrentGameInSession().gameEnded()) {
+				Game currentGame = GameController.getInstance().getCurrentGameInSession();
+				GameController.getInstance().getCurrentGameInSession().concludeGame();
+				GameController.getInstance().displayGameConclusion(currentGame);
+			}
 		}
 
 		public int getSecondsRemaining () {

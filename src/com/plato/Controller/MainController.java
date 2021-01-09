@@ -189,7 +189,7 @@ public class MainController extends Application {
 
 				if (((BattleSea) GameController.getInstance().getCurrentGameInSession()).canStartBombing()) {
 //					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
-					BattleSeaController.getInstance().initTurnTimerStuff();
+//					BattleSeaController.getInstance().initTurnTimerStuff();
 				}
 			}
 			//		phase 2
@@ -216,7 +216,7 @@ public class MainController extends Application {
 			case "Display Board (Grid)" -> ReversiController.getInstance().displayGrid();
 			case "Display disks" -> ReversiController.getInstance().displayPrevMoves();
 			case "Display scores" -> ReversiController.getInstance().displayInGameScores();
-			case "Display final result" -> GameController.getInstance().displayGameConclusion();
+			case "Display final result" -> GameController.getInstance().displayGameConclusion(GameController.getInstance().getCurrentGameInSession());
 
 			// user editing menu
 			case "Change password" -> AccountController.getInstance().changePWCommand();

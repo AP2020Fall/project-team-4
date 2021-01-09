@@ -88,9 +88,9 @@ public class GameController {
 		);
 	}
 
-	public void displayGameConclusion () {
+	public void displayGameConclusion (Game game) {
 		String conclusion;
-		switch (gameController.getCurrentGameInSession().getConclusion()) {
+		switch (game.getConclusion()) {
 			case DRAW -> conclusion = "D";
 			case PLAYER1_WIN -> conclusion = "1W";
 			case PLAYER2_WIN -> conclusion = "2W";
@@ -98,15 +98,15 @@ public class GameController {
 			default -> conclusion = "";
 		}
 
-		Gamer player1Gamer = gameController.getCurrentGameInSession().getListOfPlayers().get(0).getGamer(),
-				player2Gamer = gameController.getCurrentGameInSession().getListOfPlayers().get(1).getGamer();
+		Gamer player1Gamer = game.getListOfPlayers().get(0).getGamer(),
+				player2Gamer = game.getListOfPlayers().get(1).getGamer();
 
 		GameView.getInstance().displayGameConclusion(
 				conclusion,
 				player1Gamer.getUsername(),
 				player2Gamer.getUsername(),
-				gameController.getCurrentGameInSession().getInGameScore(1),
-				gameController.getCurrentGameInSession().getInGameScore(2)
+				game.getInGameScore(1),
+				game.getInGameScore(2)
 		);
 	}
 
