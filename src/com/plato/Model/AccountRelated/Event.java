@@ -27,14 +27,17 @@ public class Event {
 		this.eventID = IDGenerator.generateNext();
 	}
 
+	// اطلاعات ایونت رو از کنترلر میگه و ایونت رو میسازه
 	public static void addEvent (String title, String gameName, double eventScore, LocalDate start, LocalDate end) {
 		events.addLast(new Event(title, gameName, eventScore, start, end));
 	}
 
+	// بین ایونتها میگرده دنبال یه ایونتی که آیدیش این باشه
 	public static void removeEvent (String eventID) {
 		events.remove(getEvent(eventID));
 	}
 
+	// یین همه ایونتا میگرده و اونایی که این کاربر جزو شرکت کننده هاشون بوده رو برمیگردونه
 	public static LinkedList<Event> getInSessionEventsParticipatingIn (Gamer gamer) {
 		LinkedList<Event> inSessionEventsParticipatingIn = new LinkedList<>();
 
@@ -48,6 +51,7 @@ public class Event {
 		return inSessionEventsParticipatingIn;
 	}
 
+	// وقتی هر روز برای ایونتایی که تایمشون تموم شده میگرده، این متد جایزه اونایی که تموم شدن رو میده
 	@SuppressWarnings("ForLoopReplaceableByForEach")
 	public static void dealWOverdueEvents () {
 		for (int i = 0; i < events.size(); i++) {
@@ -62,10 +66,13 @@ public class Event {
 		return events;
 	}
 
+	// برای deserialize کردن
 	public static void setEvents (LinkedList<Event> events) {
 		Event.events = events;
 	}
 
+	// ایونتایی که شروع شدند .لی تموم نشدند رو مرتب میکنه و برمیگردونه
+	// ترتیب مرتب کردن تو کامنتای داخل متده
 	public static LinkedList<Event> getInSessionEvents () {
 		return getEvents().stream()
 				.filter(Event::isInSession)
@@ -78,6 +85,7 @@ public class Event {
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
+	// چک میکنه اگه ایونت شروع نشده ای با این آیدی وجود داره یا نه
 	@SuppressWarnings("unused")
 	public static boolean notStartedEventExists (String eventID) {
 		return events.stream()
@@ -85,6 +93,7 @@ public class Event {
 				.anyMatch(event -> event.getEventID().equals(eventID));
 	}
 
+	// بین ایونتا دنبال این آیدی میگرده و اون ایونت رو پس میده
 	@SuppressWarnings("OptionalGetWithoutIsPresent")
 	public static Event getEvent (String eventID) {
 		return events.stream()
@@ -92,12 +101,14 @@ public class Event {
 				.findAny().get();
 	}
 
+	// بین ایونتا میگرده که آیا این آیدی وجود داره یا نه
 	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean eventExists (String eventID) {
 		return events.stream()
 				.anyMatch(event -> event.getEventID().equals(eventID));
 	}
 
+	// چک میکنه که آیا ایونت درحال اجرایی با این آیدی وجود داره یا نه
 	public static boolean eventInSessionExists (String eventID) {
 		for (int i = 0; i < getInSessionEvents().size(); i++)
 			if (getInSessionEvents().get(i).getEventID().equals(eventID))
@@ -105,6 +116,7 @@ public class Event {
 		return false;
 	}
 
+	// ویژگی گفته شده رو تغییر میده
 	@SuppressWarnings("EnhancedSwitchMigration")
 	public void editField (String field, String newVal) {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
@@ -127,31 +139,38 @@ public class Event {
 		}
 	}
 
+	// چک میکنه که آیا زمان شروع ایونت قبل یا خود امروز هست یا نه
 	public boolean hasStarted () {
 		return !LocalDate.now().isBefore(start);
 	}
 
+	// چک میکنه که ایا زمان پایان ایونت قبل امروز هست یا نه
 	private boolean isDue () {
 		return LocalDate.now().isAfter(end);
 	}
 
+	// چک میکنه کا آیا ایونت شروع شده و تموم نشده هست یا نه
 	public boolean isInSession () {
 		return hasStarted() && !isDue();
 	}
 
+	// وقتی هر روز برای ایونتایی که تایمشون تموم شده میگرده، این متد جایزه اونایی که تموم شدن رو میده
 	public void giveAwardsOfOverdueEvent () {
 		// TODO: 12/8/2020 AD
 		awardsGiven = true;
 	}
 
+	// بازیکن را به لیست شرکت کنندگان ایونت اضافه میکند
 	public void addParticipant (Gamer gamer) {
 		participants.add(gamer);
 	}
-
+	
+	// بازیکن را از لیست شرکت کنندگان ایونت حذف میکند
 	public void removeParticipant (Gamer gamer) {
 		participants.removeIf(participant -> participant.getUsername().equals(gamer.getUsername()));
 	}
 
+	// چک میکنه که آیا بازیکن تو ایونت شرکت میکنه یا نه
 	@SuppressWarnings("ForLoopReplaceableByForEach")
 	public boolean participantExists (String username) {
 		for (int i = 0; i < participants.size(); i++) {
@@ -161,6 +180,7 @@ public class Event {
 		return false;
 	}
 
+	// دنبال شرکت کننده با این نام کاربری میگرده و برمیگردونه
 	@SuppressWarnings({"ForLoopReplaceableByForEach", "unused"})
 	public Gamer getParticipant (String username) {
 		for (int i = 0; i < participants.size(); i++)
@@ -169,6 +189,7 @@ public class Event {
 		return null;
 	}
 
+	// لیست کل شرکنندگان رو میده
 	public LinkedList<Gamer> getParticipants () {
 		if (participants == null)
 			participants = new LinkedList<>();
