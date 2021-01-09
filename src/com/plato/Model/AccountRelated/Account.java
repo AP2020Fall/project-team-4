@@ -25,6 +25,7 @@ public abstract class Account {
 	// for serialization
 	public Account () {}
 
+	// با توجه به ورودی اکانت-تایپ میاد یه اکانت گیمر یا ادمین با این ویژگی ها رو میسازه
 	@SuppressWarnings("rawtypes")
 	public static void addAccount (Class accType, Image pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
 		if (accType.getSimpleName().equalsIgnoreCase("admin"))
@@ -35,24 +36,29 @@ public abstract class Account {
 		MainController.getInstance().saveEverything();
 	}
 
+	// اکانت با این نام کاربری رو حذف میکنه
 	public static void removeAccount (String username) {
 		accounts.remove(getAccount(username));
 		MainController.getInstance().saveEverything();
 	}
 
+	// چک میکنه که فرمت ایمیل درسته یا نه
 	public static boolean isEmailOK (String email) {
 		return email.toLowerCase().matches("[a-z0-9_.]+@[a-z]+\\.com");
 	}
 
+	// چک میکنه که فرمت شماره تلفن درسته یا نه
 	public static boolean isPhoneNumOK (String phoneNum) {
 		return phoneNum.matches("\\d{10,11}");
 	}
 
+	// چک میکنه که آیا اکانت با این نام کاربری وجود داره یا نه
 	public static boolean accountExists (String username) {
 		return accounts.stream()
 				.anyMatch(account -> account.getUsername().equals(username));
 	}
 
+	// دنبال اکانت با این نام کاربری میگرده
 	public static Account getAccount (String username) {
 		return accounts.stream()
 				.filter(account -> account.getUsername().equals(username))
@@ -63,6 +69,7 @@ public abstract class Account {
 		return accounts;
 	}
 
+	// برای deserialize کردن
 	public static void setAccounts (LinkedList<Account> accounts) {
 		Account.accounts = accounts;
 	}
@@ -72,6 +79,7 @@ public abstract class Account {
 		return this.password.equals(pw);
 	}
 
+	// ویژگی گفته شده رو به مقدار جدید گفته شده تغییر میده
 	public void editField (String field, String newVal) {
 		switch (field) {
 			case "first name" -> setFirstName(newVal);
