@@ -175,7 +175,7 @@ public class MainController extends Application {
 			case "Show played count" -> GameLogController.getInstance().displayPlayedCountOfGameByLoggedInPlayer();
 			case "Add to favorites" -> GameController.getInstance().addGameToFavesOfLoggedInGamer();
 			case "Continue previous games" -> GameController.getInstance().displayPrevGamesAndChooseToContinue();
-			case "Run Game" -> GameController.getInstance().runGame();
+//			case "Run Game" -> GameController.getInstance().runGame();
 
 			// gameplay battlesea menu
 			//		phase 1

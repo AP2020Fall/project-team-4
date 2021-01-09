@@ -110,11 +110,20 @@ public class MainMenuController implements Initializable {
 	public void gamesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.gamesTab");
 		try {
-			pane.getChildren().clear();
-			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()));
+//			pane.getChildren().clear();
+//			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()));
+//			GamesMenuController.setIsForFaveGames(false);
+//			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
+//			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 			GamesMenuController.setIsForFaveGames(false);
-			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
-			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
+			Stage stage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()),
+					"Games Menu",
+					true,
+					MainController.getInstance().getPrimaryStage()
+			);
+			GamesMenuController.setStage(stage);
+			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -123,11 +132,20 @@ public class MainMenuController implements Initializable {
 	public void faveGamesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.faveGamesTab");
 		try {
-			pane.getChildren().clear();
-			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()));
+//			pane.getChildren().clear();
+//			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()));
+//			GamesMenuController.setIsForFaveGames(true);
+//			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
+//			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 			GamesMenuController.setIsForFaveGames(true);
-			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
-			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
+			Stage stage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()),
+					"Games Menu",
+					true,
+					MainController.getInstance().getPrimaryStage()
+			);
+			GamesMenuController.setStage(stage);
+			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.BattleSeaEditBoardPageController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+    </rowConstraints>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <Button maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 75 75; -fx-background-repeat: no-repeat; -fx-background-position: center;" GridPane.valignment="TOP">
+        <GridPane.margin>
+            <Insets />
+        </GridPane.margin>
+    </Button>
+    <GridPane hgap="5.0" vgap="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" />
+            <ColumnConstraints hgrow="SOMETIMES" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+        <Circle fx:id="pfp1" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets bottom="10.0" top="10.0" />
+            </GridPane.margin>
+        </Circle>
+        <Circle fx:id="pfp2" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </GridPane.margin>
+        </Circle>
+        <Circle fx:id="turnIndicator1" fill="#fdff1f" radius="7.5" stroke="#f5ba60" strokeType="INSIDE" strokeWidth="2.0" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+            <effect>
+                <Reflection fraction="0.3" />
+            </effect>
+            <GridPane.margin>
+                <Insets left="20.0" right="20.0" />
+            </GridPane.margin>
+        </Circle>
+        <Circle fx:id="turnIndicator2" fill="#fdff1f" layoutX="18.0" layoutY="205.0" radius="7.5" stroke="#f5ba60" strokeType="INSIDE" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <effect>
+                <Reflection fraction="0.3" />
+            </effect>
+            <GridPane.margin>
+                <Insets left="20.0" right="20.0" />
+            </GridPane.margin>
+        </Circle>
+        <Label fx:id="username1" text="-" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <font>
+                <Font name="Arial" size="17.0" />
+            </font>
+        </Label>
+        <Label fx:id="username2" layoutX="93.0" layoutY="135.0" text="-" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <font>
+                <Font name="Arial" size="17.0" />
+            </font>
+        </Label>
+        <ProgressIndicator fx:id="timer1" progress="0.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <ProgressIndicator fx:id="timer2" layoutX="82.0" layoutY="165.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+    </GridPane>
+    <GridPane fx:id="board" gridLinesVisible="true" hgap="1.0" maxHeight="700.0" maxWidth="700.0" minHeight="700.0" minWidth="700.0" vgap="1.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <GridPane.margin>
+            <Insets top="20.0" />
+        </GridPane.margin>
+    </GridPane>
+    <VBox alignment="CENTER" maxHeight="160.0" maxWidth="210.0" minHeight="160.0" minWidth="160.0" spacing="10.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+        <GridPane.margin>
+            <Insets />
+        </GridPane.margin>
+        <HBox alignment="CENTER" spacing="10.0">
+            <Button fx:id="generate1RandBoardButton" maxHeight="75.0" maxWidth="100.0" minHeight="75.0" minWidth="100.0" mnemonicParsing="false" onAction="#generate1RandBoard" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;https://i.imgur.com/h5EvLv1.png?1&quot;); -fx-background-size: 75 60; -fx-background-repeat: no-repeat; -fx-background-position: center;" />
+            <Button maxHeight="75.0" maxWidth="100.0" minHeight="75.0" minWidth="100.0" mnemonicParsing="false" onAction="#generate5RandBoards" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;https://i.imgur.com/wf6mqqs.png?1&quot;); -fx-background-size: 75 60; -fx-background-repeat: no-repeat; -fx-background-position: center;" />
+        </HBox>
+        <Button maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#doneEditing" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;https://i.imgur.com/v2ihpyg.png&quot;); -fx-background-size: 75 75; -fx-background-repeat: no-repeat; -fx-background-position: center;" />
+    </VBox>
+    <GridPane fx:id="genRandBoardWindow" maxHeight="860.0" maxWidth="325.0"
+              style="-fx-background-color: white; -fx-border-color: b9b9b9; -fx-border-radius: 20; -fx-background-radius: 20;"
+              visible="false" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowSpan="2"
+              GridPane.valignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints percentHeight="9.0" vgrow="SOMETIMES"/>
+            <RowConstraints percentHeight="18.2" vgrow="SOMETIMES"/>
+            <RowConstraints percentHeight="18.2" vgrow="SOMETIMES"/>
+            <RowConstraints percentHeight="18.2" vgrow="SOMETIMES"/>
+            <RowConstraints percentHeight="18.2" vgrow="SOMETIMES"/>
+            <RowConstraints percentHeight="18.2" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <GridPane.margin>
+            <Insets/>
+        </GridPane.margin>
+        <effect>
+            <DropShadow color="#575656" offsetX="1.0" offsetY="1.0"/>
+        </effect>
+        <Label text="Choose Your Board" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+           <font>
+               <Font name="Arial Narrow" size="35.0"/>
+           </font>
+           <GridPane.margin>
+               <Insets top="10.0"/>
+           </GridPane.margin>
+        </Label>
+        <Label layoutX="384.0" layoutY="83.0" text="*You can edit it later*" GridPane.halignment="CENTER"
+               GridPane.valignment="BOTTOM">
+           <font>
+               <Font name="Arial Narrow" size="24.0"/>
+           </font>
+        </Label>
+        <GridPane fx:id="board1" gridLinesVisible="true" hgap="0.5" maxHeight="125.0" maxWidth="125.0" minHeight="150.0"
+                  minWidth="150.0" vgap="0.5" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                  GridPane.valignment="CENTER">
+           <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+           </columnConstraints>
+           <rowConstraints>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+           </rowConstraints>
+           <GridPane.margin>
+               <Insets bottom="5.0" top="5.0"/>
+           </GridPane.margin>
+        </GridPane>
+        <GridPane fx:id="board2" gridLinesVisible="true" hgap="0.5" layoutX="370.0" layoutY="169.0" maxHeight="125.0"
+                  maxWidth="125.0" minHeight="150.0" minWidth="150.0" vgap="0.5" GridPane.halignment="CENTER"
+                  GridPane.rowIndex="2" GridPane.valignment="CENTER">
+           <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+           </columnConstraints>
+           <rowConstraints>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+           </rowConstraints>
+           <GridPane.margin>
+               <Insets bottom="5.0" top="5.0"/>
+           </GridPane.margin>
+        </GridPane>
+        <GridPane fx:id="board3" gridLinesVisible="true" hgap="0.5" layoutX="370.0" layoutY="438.0" maxHeight="125.0"
+                  maxWidth="125.0" minHeight="150.0" minWidth="150.0" vgap="0.5" GridPane.halignment="CENTER"
+                  GridPane.rowIndex="3" GridPane.valignment="CENTER">
+           <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+           </columnConstraints>
+           <rowConstraints>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+           </rowConstraints>
+           <GridPane.margin>
+               <Insets bottom="5.0" top="5.0"/>
+           </GridPane.margin>
+        </GridPane>
+        <GridPane fx:id="board4" gridLinesVisible="true" hgap="0.5" layoutX="370.0" layoutY="627.0" maxHeight="125.0"
+                  maxWidth="125.0" minHeight="150.0" minWidth="150.0" vgap="0.5" GridPane.halignment="CENTER"
+                  GridPane.rowIndex="4" GridPane.valignment="CENTER">
+           <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+           </columnConstraints>
+           <rowConstraints>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+           </rowConstraints>
+           <GridPane.margin>
+               <Insets bottom="5.0" top="5.0"/>
+           </GridPane.margin>
+        </GridPane>
+        <GridPane fx:id="board5" gridLinesVisible="true" hgap="0.5" layoutX="370.0" layoutY="739.0" maxHeight="125.0"
+                  maxWidth="125.0" minHeight="150.0" minWidth="150.0" vgap="0.5" GridPane.halignment="CENTER"
+                  GridPane.rowIndex="5" GridPane.valignment="CENTER">
+           <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0"/>
+           </columnConstraints>
+           <rowConstraints>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES"/>
+           </rowConstraints>
+           <GridPane.margin>
+               <Insets bottom="10.0" top="5.0"/>
+           </GridPane.margin>
+        </GridPane>
+        <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false"
+                onAction="#closeGen5RandBoard"
+                style="-fx-background-radius: 15; -fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 30 30; -fx-background-repeat: no-repeat; -fx-background-position: center;"
+                GridPane.valignment="TOP">
+           <GridPane.margin>
+               <Insets left="5.0" top="5.0"/>
+           </GridPane.margin>
+        </Button>
+    </GridPane>
+</GridPane>

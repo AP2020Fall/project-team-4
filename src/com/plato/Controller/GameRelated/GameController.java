@@ -27,35 +27,20 @@ public class GameController {
 	}
 
 	// based on which menu _11GameMenu.getGameName() shows go to GameplayBattleSeaMenu or GameplayReversiMenu
-	public void runGame () {
-		Gamer player2;
-		while (true)
-			try {
-//				Menu.printAskingForInput("Second Player's username:[/c to cancel] ");
-				String username2 = "";
-//				username2 = Menu.getInputLine();
+	public void runGame (String username2, String gameName) throws MainController.InvalidFormatException, AccountController.NoAccountExistsWithUsernameException, CantPlayWithAdminException, CantPlayWithYourselfException {
+		if (!username2.matches("[!-~]+"))
+			throw new MainController.InvalidFormatException("Second player's username");
 
-				if (username2.trim().equalsIgnoreCase("/c")) return;
+		if (!Account.accountExists(username2))
+			throw new AccountController.NoAccountExistsWithUsernameException();
 
-				if (!username2.matches("[!-~]+"))
-					throw new MainController.InvalidFormatException("Second player's username");
+		if (username2.equals(Admin.getAdmin().getUsername()))
+			throw new CantPlayWithAdminException();
 
-				if (!Account.accountExists(username2))
-					throw new AccountController.NoAccountExistsWithUsernameException();
+		if (AccountController.getInstance().getCurrentAccLoggedIn().getUsername().equals(username2))
+			throw new CantPlayWithYourselfException();
 
-				if (username2.equals(Admin.getAdmin().getUsername()))
-					throw new CantPlayWithAdminException();
-
-				if (AccountController.getInstance().getCurrentAccLoggedIn().getUsername().equals(username2))
-					throw new CantPlayWithYourselfException();
-
-				player2 = (Gamer) Account.getAccount(username2);
-
-				break;
-			} catch (AccountController.NoAccountExistsWithUsernameException | CantPlayWithAdminException | CantPlayWithYourselfException | MainController.InvalidFormatException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
+		Gamer player2 = (Gamer) Account.getAccount(username2);
 
 		Gamer finalPlayer2 = player2;
 		ArrayList<Gamer> players = new ArrayList<>() {{
@@ -64,17 +49,16 @@ public class GameController {
 		}};
 
 		Game game = null;
-//		switch (((_11GameMenu) Menu.getMenuIn()).getGameName().toLowerCase()) {
-//			case "battlesea" -> game = new BattleSea(players);
-//			case "reversi" -> {
-//				game = new Reversi(players);
-//				((Reversi) game).emptyBoard();
-//			}
-//		}
+		switch (gameName.toLowerCase()) {
+			case "battlesea" -> game = new BattleSea(players);
+			case "reversi" -> {
+				game = new Reversi(players);
+				((Reversi) game).emptyBoard();
+			}
+		}
 
 		Game.startGame(game);
 		setCurrentGameInSession(game);
-
 	}
 
 	public void addGameToFavesOfLoggedInGamer () {
@@ -233,13 +217,13 @@ public class GameController {
 		}
 	}
 
-	private static class CantPlayWithYourselfException extends Exception {
+	public static class CantPlayWithYourselfException extends Exception {
 		public CantPlayWithYourselfException () {
 			super("You should select another gamer's username than yourself to play with");
 		}
 	}
 
-	private static class CantPlayWithAdminException extends Exception {
+	public static class CantPlayWithAdminException extends Exception {
 		public CantPlayWithAdminException () {
 			super("You can't play with Admin");
 		}
