@@ -147,4 +147,16 @@ public class Ship {
 	public int hashCode () {
 		return Objects.hash(leftMostX, topMostY, isVertical, L_SIZE, S_SIZE);
 	}
+
+	public static String getImgUrl (int Lsize, int Ssize) {
+		String size = Lsize + " " + Ssize;
+
+		return switch (size) {
+			case "5 2" ->
+			case "5 1" ->
+			case "4 1" ->
+			case "3 1" ->
+			case "2 1" ->
+		};
+	}
 }
