@@ -179,7 +179,7 @@ public class MainController extends Application {
 
 			// gameplay battlesea menu
 			//		phase 1
-			case "Generate a Random Board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
+//			case "Generate a Random Board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
 			case "Choose between 5 randomly generated boards" -> BattleSeaController.getInstance().chooseBetween5RandomlyGeneratedBoards();
 			case "Display on-trial Board" -> BattleSeaController.getInstance().displayTrialBoard();
 			case "Move ship" -> ShipController.getInstance().editShipCoords();

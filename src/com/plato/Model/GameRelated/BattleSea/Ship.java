@@ -152,11 +152,12 @@ public class Ship {
 		String size = Lsize + " " + Ssize;
 
 		return switch (size) {
-			case "5 2" ->
-			case "5 1" ->
-			case "4 1" ->
-			case "3 1" ->
-			case "2 1" ->
+			case "5 2" -> "https://i.imgur.com/oJ05ht1.png";
+			case "5 1" -> "https://i.imgur.com/PeODDrk.png";
+			case "4 1" -> "https://i.imgur.com/hHcn8ds.png";
+			case "3 1" -> "https://i.imgur.com/CT4RjeJ.png";
+			case "2 1" -> "https://i.imgur.com/KsQnH87.png";
+			default -> throw new IllegalStateException("Unexpected value: " + size);
 		};
 	}
 }

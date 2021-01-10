@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -115,6 +116,42 @@
         <GridPane.margin>
             <Insets top="20.0" />
         </GridPane.margin>
+        <ImageView fx:id="ship5_2" fitHeight="325.0" fitWidth="130.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="5" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </GridPane.margin>
+            <Image url="https://i.imgur.com/oJ05ht1.pnghttps://i.imgur.com/oJ05ht1.png" />
+        </ImageView>
+        <ImageView fx:id="ship5_1" fitHeight="325.0" fitWidth="65.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </GridPane.margin>
+            <Image url="https://i.imgur.com/PeODDrk.pnghttps://i.imgur.com/PeODDrk.png" />
+        </ImageView>
+        <ImageView fx:id="ship4_1" fitHeight="260.0" fitWidth="65.0" layoutX="150.0" layoutY="-6.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </GridPane.margin>
+            <Image url="https://i.imgur.com/hHcn8ds.pnghttps://i.imgur.com/hHcn8ds.png" />
+        </ImageView>
+        <ImageView fx:id="ship3_1" fitHeight="195.0" fitWidth="65.0" layoutX="115.0" layoutY="93.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </GridPane.margin>
+            <Image url="https://i.imgur.com/CT4RjeJ.pnghttps://i.imgur.com/CT4RjeJ.png" />
+        </ImageView>
+        <ImageView fx:id="ship2_1_1" fitHeight="130.0" fitWidth="65.0" layoutX="80.0" layoutY="192.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </GridPane.margin>
+            <Image url="https://i.imgur.com/KsQnH87.pnghttps://i.imgur.com/KsQnH87.png" />
+        </ImageView>
+        <ImageView fx:id="ship2_1_2" fitHeight="130.0" fitWidth="65.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </GridPane.margin>
+            <Image url="https://i.imgur.com/KsQnH87.pnghttps://i.imgur.com/KsQnH87.png" />
+        </ImageView>
     </GridPane>
     <VBox alignment="CENTER" maxHeight="160.0" maxWidth="210.0" minHeight="160.0" minWidth="160.0" spacing="10.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
         <GridPane.margin>
@@ -157,7 +194,7 @@
                 <Font name="Arial Narrow" size="24.0" />
             </font>
         </Label>
-        <GridPane fx:id="board1" gridLinesVisible="true" hgap="0.5" maxHeight="125.0" maxWidth="125.0" minHeight="150.0" minWidth="150.0" vgap="0.5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+        <GridPane fx:id="board1" gridLinesVisible="true" hgap="0.1" maxHeight="125.0" maxWidth="125.0" minHeight="150.0" minWidth="150.0" onMouseClicked="#chooseRandBoard" vgap="0.1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
@@ -186,8 +223,26 @@
             <GridPane.margin>
                 <Insets bottom="5.0" top="5.0" />
             </GridPane.margin>
+            <ImageView fx:id="ship5_21" fitHeight="70.0" fitWidth="28.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/oJ05ht1.png" />
+            </ImageView>
+            <ImageView fx:id="ship5_11" fitHeight="70.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/PeODDrk.png" />
+            </ImageView>
+            <ImageView fx:id="ship4_11" fitHeight="56.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/hHcn8ds.png" />
+            </ImageView>
+            <ImageView fx:id="ship3_11" fitHeight="42.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/CT4RjeJ.png" />
+            </ImageView>
+            <ImageView fx:id="ship2_1_11" fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/KsQnH87.png" />
+            </ImageView>
+            <ImageView fx:id="ship2_1_21" fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/KsQnH87.png" />
+            </ImageView>
         </GridPane>
-        <GridPane fx:id="board2" gridLinesVisible="true" hgap="0.5" layoutX="370.0" layoutY="169.0" maxHeight="125.0" maxWidth="125.0" minHeight="150.0" minWidth="150.0" vgap="0.5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+        <GridPane fx:id="board2" gridLinesVisible="true" hgap="0.1" layoutX="370.0" layoutY="169.0" maxHeight="125.0" maxWidth="125.0" minHeight="150.0" minWidth="150.0" onMouseClicked="#chooseRandBoard" vgap="0.1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
@@ -216,8 +271,26 @@
             <GridPane.margin>
                 <Insets bottom="5.0" top="5.0" />
             </GridPane.margin>
+            <ImageView fx:id="ship5_22" fitHeight="70.0" fitWidth="28.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/oJ05ht1.png" />
+            </ImageView>
+            <ImageView fx:id="ship5_12" fitHeight="70.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/PeODDrk.png" />
+            </ImageView>
+            <ImageView fx:id="ship4_12" fitHeight="56.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/hHcn8ds.png" />
+            </ImageView>
+            <ImageView fx:id="ship3_12" fitHeight="42.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/CT4RjeJ.png" />
+            </ImageView>
+            <ImageView fx:id="ship2_1_12" fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/KsQnH87.png" />
+            </ImageView>
+            <ImageView fx:id="ship2_1_22" fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/KsQnH87.png" />
+            </ImageView>
         </GridPane>
-        <GridPane fx:id="board3" gridLinesVisible="true" hgap="0.5" layoutX="370.0" layoutY="438.0" maxHeight="125.0" maxWidth="125.0" minHeight="150.0" minWidth="150.0" vgap="0.5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+        <GridPane fx:id="board3" gridLinesVisible="true" hgap="0.1" layoutX="370.0" layoutY="438.0" maxHeight="125.0" maxWidth="125.0" minHeight="150.0" minWidth="150.0" onMouseClicked="#chooseRandBoard" vgap="0.1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
@@ -246,8 +319,26 @@
             <GridPane.margin>
                 <Insets bottom="5.0" top="5.0" />
             </GridPane.margin>
+            <ImageView fx:id="ship5_23" fitHeight="70.0" fitWidth="28.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/oJ05ht1.png" />
+            </ImageView>
+            <ImageView fx:id="ship5_13" fitHeight="70.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/PeODDrk.png" />
+            </ImageView>
+            <ImageView fx:id="ship4_13" fitHeight="56.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/hHcn8ds.png" />
+            </ImageView>
+            <ImageView fx:id="ship3_13" fitHeight="42.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/CT4RjeJ.png" />
+            </ImageView>
+            <ImageView fx:id="ship2_1_13" fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/KsQnH87.png" />
+            </ImageView>
+            <ImageView fx:id="ship2_1_23" fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/KsQnH87.png" />
+            </ImageView>
         </GridPane>
-        <GridPane fx:id="board4" gridLinesVisible="true" hgap="0.5" layoutX="370.0" layoutY="627.0" maxHeight="125.0" maxWidth="125.0" minHeight="150.0" minWidth="150.0" vgap="0.5" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+        <GridPane fx:id="board4" gridLinesVisible="true" hgap="0.1" layoutX="370.0" layoutY="627.0" maxHeight="125.0" maxWidth="125.0" minHeight="150.0" minWidth="150.0" onMouseClicked="#chooseRandBoard" vgap="0.1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
@@ -276,8 +367,26 @@
             <GridPane.margin>
                 <Insets bottom="5.0" top="5.0" />
             </GridPane.margin>
+            <ImageView fx:id="ship5_24" fitHeight="70.0" fitWidth="28.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/oJ05ht1.png" />
+            </ImageView>
+            <ImageView fx:id="ship5_14" fitHeight="70.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/PeODDrk.png" />
+            </ImageView>
+            <ImageView fx:id="ship4_14" fitHeight="56.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/hHcn8ds.png" />
+            </ImageView>
+            <ImageView fx:id="ship3_14" fitHeight="42.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/CT4RjeJ.png" />
+            </ImageView>
+            <ImageView fx:id="ship2_1_14" fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/KsQnH87.png" />
+            </ImageView>
+            <ImageView fx:id="ship2_1_24" fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/KsQnH87.png" />
+            </ImageView>
         </GridPane>
-        <GridPane fx:id="board5" gridLinesVisible="true" hgap="0.5" layoutX="370.0" layoutY="739.0" maxHeight="125.0" maxWidth="125.0" minHeight="150.0" minWidth="150.0" vgap="0.5" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+        <GridPane fx:id="board5" gridLinesVisible="true" hgap="0.1" layoutX="370.0" layoutY="739.0" maxHeight="125.0" maxWidth="125.0" minHeight="150.0" minWidth="150.0" onMouseClicked="#chooseRandBoard" vgap="0.1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
@@ -306,6 +415,26 @@
             <GridPane.margin>
                 <Insets bottom="10.0" top="5.0" />
             </GridPane.margin>
+            <ImageView fx:id="ship5_25" fitHeight="70.0" fitWidth="28.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/oJ05ht1.png" />
+            </ImageView>
+            <ImageView fx:id="ship5_15" fitHeight="70.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/PeODDrk.png" />
+            </ImageView>
+            <ImageView fx:id="ship4_15" fitHeight="56.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/hHcn8ds.png" />
+            </ImageView>
+            <ImageView fx:id="ship3_15" fitHeight="42.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/CT4RjeJ.png" />
+            </ImageView>
+            <ImageView fx:id="ship2_1_15" fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Image url="https://i.imgur.com/KsQnH87.png" />
+            </ImageView>
+            <ImageView fx:id="ship2_1_25" fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <image>
+                    <Image url="https://i.imgur.com/KsQnH87.png" />
+                </image>
+            </ImageView>
         </GridPane>
         <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#closeGen5RandBoard" style="-fx-background-radius: 15; -fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 30 30; -fx-background-repeat: no-repeat; -fx-background-position: center;" GridPane.valignment="TOP">
             <GridPane.margin>

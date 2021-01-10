@@ -67,8 +67,7 @@ public class BattleSeaController {
 		BattleSeaView.getInstance().displayRemainingTime(turnTimerTask.getSecondsRemaining());
 	}
 
-	public void displayRandomlyGeneratedBoard () {
-		LinkedList<Ship> randBoard = BattleSea.getRandBoard();
+	public void displayRandomlyGeneratedBoard (LinkedList<Ship> randBoard) {
 		BattleSeaView.getInstance().displayBoard(
 				this.getBoardAsStringBuilder(randBoard)
 		);
@@ -105,7 +104,7 @@ public class BattleSeaController {
 					String symbol = (Ship.getAllCoords(board).stream()
 							.anyMatch(shipCoord -> shipCoord[0] == finalX && shipCoord[1] == finalY)) ? "#" : " ";
 
-//					boardStrBldr.append(Color.BLUE.getVal() + symbol + Color.RESET.getVal());
+					boardStrBldr.append(symbol);
 				}
 				boardStrBldr.append((((x == 0 && y == 10) || (x == 10 && y == 0)) ? "" : " ") + (x != 10 ? "| " : ""));
 			}

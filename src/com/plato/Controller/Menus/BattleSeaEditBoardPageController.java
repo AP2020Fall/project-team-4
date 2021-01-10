@@ -1,9 +1,11 @@
 package Controller.Menus;
 
+import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.GameController;
 import Controller.MainController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
+import Model.GameRelated.BattleSea.Ship;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -11,11 +13,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -24,7 +28,9 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BattleSeaEditBoardPageController implements Initializable {
 	private static Stage stage;
@@ -36,10 +42,17 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	public GridPane board;
 	public GridPane board5, board4, board3, board2, board1; // random boards
 	public GridPane genRandBoardWindow;
+	public ImageView ship5_2, ship5_1, ship4_1, ship3_1, ship2_1_1, ship2_1_2;
 	private PlayerBattleSea player1, player2;
+	private LinkedList<Ship> currentBoard;
+	private LinkedList<LinkedList<Ship>> currentRandBoards;
 	private IntegerProperty editingTurn = new SimpleIntegerProperty(-1);
 
 	public static void setStage (Stage stage) {
+		stage.setMinWidth(1000);
+		stage.setMinHeight(stage.getMinWidth());
+		stage.setMaxWidth(stage.getMinWidth());
+		stage.setMaxHeight(stage.getMinWidth());
 		BattleSeaEditBoardPageController.stage = stage;
 		BattleSeaEditBoardPageController.stage.setOnCloseRequest(e -> BattleSeaEditBoardPageController.stage = null);
 	}
@@ -118,6 +131,17 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		timer.setAutoReverse(false);
 
 		timer.play();
+
+		board1.setOnMouseEntered(e -> board1.setOpacity(0.8));
+		board1.setOnMouseExited(e -> board1.setOpacity(1));
+		board2.setOnMouseEntered(e -> board2.setOpacity(0.8));
+		board2.setOnMouseExited(e -> board2.setOpacity(1));
+		board3.setOnMouseEntered(e -> board3.setOpacity(0.8));
+		board3.setOnMouseExited(e -> board3.setOpacity(1));
+		board4.setOnMouseEntered(e -> board4.setOpacity(0.8));
+		board4.setOnMouseExited(e -> board4.setOpacity(1));
+		board5.setOnMouseEntered(e -> board5.setOpacity(0.8));
+		board5.setOnMouseExited(e -> board5.setOpacity(1));
 	}
 
 	public void closeStage (ActionEvent actionEvent) {
@@ -129,13 +153,67 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	}
 
 	public void generate5RandBoards (ActionEvent actionEvent) {
-		// TODO: 1/9/2021 AD
+		genRandBoardWindow.setVisible(true);
+		currentRandBoards = BattleSea.get5RandBoards();
+
+		setBoard(currentRandBoards.get(0), board1);
+		setBoard(currentRandBoards.get(1), board2);
+		setBoard(currentRandBoards.get(2), board3);
+		setBoard(currentRandBoards.get(3), board4);
+		setBoard(currentRandBoards.get(4), board5);
 	}
 
 	public void generate1RandBoard (ActionEvent actionEvent) {
-		BattleSea.getRandBoard().forEach(ship -> {
-			ship.get
+		LinkedList<Ship> randBoard = BattleSea.getRandBoard();
+		BattleSeaController.getInstance().displayRandomlyGeneratedBoard(randBoard);
+
+		setBoard(randBoard, board);
+	}
+
+	public void setBoard (LinkedList<Ship> board, GridPane boardToShowShipsIn) {
+		currentBoard = board;
+
+		AtomicBoolean firstSmallShipIsMoved = new AtomicBoolean(false);
+
+		board.forEach(ship -> {
+			String size = ship.getL_SIZE() + "_" + ship.getS_SIZE();
+			if (size.equals("2_1")) {
+				if (!firstSmallShipIsMoved.get()) {
+					size += "_1";
+					firstSmallShipIsMoved.set(true);
+				}
+				else
+					size += "_2";
+			}
+			String finalSize = size;
+			ImageView shipToMove = boardToShowShipsIn.getChildren().stream()
+					.filter(node -> node.getId().contains(finalSize))
+					.map(node -> ((ImageView) node))
+					.findAny().get();
+
+			shipToMove.setRotate(ship.isVertical() ? 0 : 90);
+
+			GridPane.setColumnIndex(shipToMove, ship.getLeftMostX() - 1);
+			GridPane.setRowIndex(shipToMove, ship.getTopMostY() - 1);
+
+			GridPane.setColumnSpan(shipToMove, ship.isVertical() ? ship.getS_SIZE() : ship.getL_SIZE());
+			GridPane.setRowSpan(shipToMove, ship.isVertical() ? ship.getL_SIZE() : ship.getS_SIZE());
+
+			double margin = switch (boardToShowShipsIn.getId()) {
+				case "board1", "board2", "board3", "board4", "board5" -> .1;
+				case "board" -> 1;
+				default -> throw new IllegalStateException("Unexpected value: " + boardToShowShipsIn.getId());
+			};
+			GridPane.setMargin(shipToMove, new Insets(margin, margin, margin, margin));
 		});
+	}
+
+	public void chooseRandBoard (MouseEvent mouseEvent) {
+		setBoard(
+				currentRandBoards.get(Integer.parseInt(String.valueOf((((GridPane) mouseEvent.getSource()).getId().charAt(5)))) - 1),
+				board
+		);
+		closeGen5RandBoard(new ActionEvent());
 	}
 
 	public void closeGen5RandBoard (ActionEvent actionEvent) {
