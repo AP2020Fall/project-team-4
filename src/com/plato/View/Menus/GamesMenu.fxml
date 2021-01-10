@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.GamesMenuController">
 
+    <Button layoutX="198.0" layoutY="200" minHeight="100" minWidth="100" onAction="#battleSeaMainMenu" prefHeight="100.0" prefWidth="130.0" text="Battlesea Main Menu" />
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.Menus.GamesMenuController"
-            prefHeight="400.0" prefWidth="600.0">
+    <Button layoutX="337.0" layoutY="200.0" minHeight="100" minWidth="100" onAction="#reversiMainMenu" prefHeight="100.0" prefWidth="137.0" text="Reversi Main Menu" />
 
-    <Button text="Battlesea Main Menu" onAction="#battleSeaMainMenu" minWidth="100" minHeight="100" layoutY="200" layoutX="200"/>
-
-    <Button text="Battlesea Main Menu" onAction="#reversiMainMenu" minWidth="100" minHeight="100" layoutY="200" layoutX="200"/>
-
-    <Button text="back" onAction="#closeStage"/>
+    <Button onAction="#closeStage" text="back" />
 
 
 </AnchorPane>
-
