@@ -15,6 +15,10 @@
 
     <Button text="Battlesea Main Menu" onAction="#battleSeaMainMenu" minWidth="100" minHeight="100" layoutY="200" layoutX="200"/>
 
+
+    <Button text="Battlesea Main Menu" onAction="#reversiMainMenu" minWidth="100" minHeight="100" layoutY="200" layoutX="200"/>
+
+
     <Button text="back" onAction="#closeStage"/>
 
 </AnchorPane>
