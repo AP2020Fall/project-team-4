@@ -37,4 +37,8 @@ public class GamesMenuController {
 			e.printStackTrace();
 		}
 	}
+
+	public void closeStage (ActionEvent actionEvent) {
+		stage.close();
+	}
 }

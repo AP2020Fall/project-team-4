@@ -79,14 +79,10 @@ public class ShipController {
 	}
 
 	public void rotateShip (LinkedList<Ship> board, Ship chosenShip) throws CantChangeDirException {
-		if (chosenShip.canChangeDir(board)) {
-			System.out.println("Can");
-			chosenShip.changeDir();
-		}
-		else {
-			System.out.println("Cant");
+		if (!chosenShip.canChangeDir(board))
 			throw new CantChangeDirException();
-		}
+
+		chosenShip.changeDir();
 	}
 
 	public void displayAllShipsOfCurrentPlayer () {

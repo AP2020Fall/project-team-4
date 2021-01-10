@@ -97,11 +97,9 @@ public class Ship {
 
 	public boolean isShipPosValid (LinkedList<Ship> board, int newX, int newY, boolean newIsVertical) {
 		if (!BattleSea.checkCoordinates(newX) || !BattleSea.checkCoordinates(newY)) return false;
-		System.out.println(1);
 		if (!BattleSea.checkCoordinates((newIsVertical ? newY : newX) + this.getL_SIZE() - 1)) return false;
-		System.out.println(2);
 		if (!BattleSea.checkCoordinates((newIsVertical ? newX : newY) + this.getS_SIZE() - 1)) return false;
-		System.out.println(3);
+
 		LinkedList<Ship> shipsExclThis = board.stream()
 				.filter(ship -> !ship.equals(this))
 				.collect(Collectors.toCollection(LinkedList::new));
@@ -110,13 +108,8 @@ public class Ship {
 //				getAllCoords(new LinkedList<>(Collections.singletonList(this)));
 				getAllCoords(new LinkedList<>(Collections.singleton(new Ship(newX, newY, newIsVertical, L_SIZE, S_SIZE))));
 
-		System.out.println("thisCoords");
-		thisCoords.forEach(coord -> System.out.println("x = " + coord[0] + "  y = " + coord[1]));
-
 		AtomicBoolean valid = new AtomicBoolean(true);
-		System.out.println("shipsExclThis");
 		getAllCoords(shipsExclThis).forEach(coord -> {
-			System.out.println("x = " + coord[0] + "  y = " + coord[1]);
 			for (int[] thisCoord : thisCoords) {
 				if (thisCoord[0] == coord[0] && thisCoord[1] == coord[1])
 					valid.set(false);

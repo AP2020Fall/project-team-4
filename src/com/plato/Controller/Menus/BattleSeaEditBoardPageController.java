@@ -232,8 +232,11 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		genRandBoardWindow.setVisible(false);
 	}
 
-	public void startMovingShip (MouseDragEvent mouseDragEvent) {
-		// TODO: 1/10/2021 AD
+	public void startMovingShip (MouseEvent mouseEvent) {
+//		ImageView shipImageView = ((ImageView) mouseEvent.getSource());
+		System.out.println("BattleSeaEditBoardPageController.startMovingShip");
+		System.out.println("mouseEvent.getSceneX() = " + mouseEvent.getSceneX());
+
 	}
 
 	public void stopMovingShip (MouseDragEvent mouseDragEvent) {
@@ -247,11 +250,7 @@ public class BattleSeaEditBoardPageController implements Initializable {
 				.findAny().get();
 
 		try {
-//			System.out.println("BEFORE ROTATE => ");
-//			BattleSeaController.getInstance().displayRandomlyGeneratedBoard(currentBoard);
 			ShipController.getInstance().rotateShip(currentBoard, ship);
-//			System.out.println("AFTER ROTATE => ");
-//			BattleSeaController.getInstance().displayRandomlyGeneratedBoard(currentBoard);
 			setBoard(currentBoard, board);
 		} catch (ShipController.CantChangeDirException e) {
 			System.out.println(e.getMessage());
