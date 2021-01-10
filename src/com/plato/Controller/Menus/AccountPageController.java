@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+
 import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
@@ -9,29 +10,39 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AccountPageController implements Initializable {
+
+public class AccountPageController implements Initializable
+{
+
 	private static boolean gamerOrAdmin;
 	public ImageView pfp;
+
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		AccountPageController.gamerOrAdmin = gamerOrAdmin;
 	}
 
+
 	@Override
-	public void initialize (URL location, ResourceBundle resources) {
+	public void initialize (URL location, ResourceBundle resources)
+	{
 
 		Account currentLoggedIn = AccountController.getInstance().getCurrentAccLoggedIn();
 
 		pfp.setImage(new Image(currentLoggedIn.getPfpUrl()));
 	}
 
-	public void logout (ActionEvent actionEvent) {
+
+	public void logout (ActionEvent actionEvent)
+	{
 		AccountController.getInstance().logout();
+
 
 
 		try {
@@ -44,7 +55,9 @@ public class AccountPageController implements Initializable {
 			)
 					.show();
 
-		} catch (IOException e) {
+
+		} catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
