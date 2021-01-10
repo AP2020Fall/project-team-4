@@ -78,39 +78,15 @@ public class ShipController {
 		chosenShip.move(newXInt, newYInt);
 	}
 
-	public void rotateShip () {
-		LinkedList<Ship> ships = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
-
-		ShipView.getInstance().displayShipsWithNamesForEditing(new LinkedList<>() {{
-			for (Ship ship : ships)
-				add("%d %d %d %d".formatted(ship.getLeftMostX(), ship.getTopMostY(), ship.getL_SIZE(), ship.getS_SIZE()));
-
-		}});
-
-		String shipName = "";
-		Ship chosenShip;
-		while (true) {
-//			Menu.printAskingForInput("Choose ship[/c to cancel ]: ");
-//			shipName = Menu.getInputLine();
-
-			if (shipName.toLowerCase().trim().equals("/c")) return;
-
-			if (shipName.matches("[A-F]")) {
-				chosenShip = ships.get("ABCDEF".indexOf(shipName));
-				break;
-			}
-
-//			Menu.printErrorMessage("Invalid ship name.");
+	public void rotateShip (LinkedList<Ship> board, Ship chosenShip) throws CantChangeDirException {
+		if (chosenShip.canChangeDir(board)) {
+			System.out.println("Can");
+			chosenShip.changeDir();
 		}
-
-		try {
-			if (!chosenShip.canChangeDir())
-				throw new CantChangeDirException();
-		} catch (CantChangeDirException e) {
-//			Menu.printErrorMessage(e.getMessage());
+		else {
+			System.out.println("Cant");
+			throw new CantChangeDirException();
 		}
-
-		chosenShip.changeDir();
 	}
 
 	public void displayAllShipsOfCurrentPlayer () {
@@ -155,7 +131,7 @@ public class ShipController {
 		}
 	}
 
-	private static class CantChangeDirException extends Exception {
+	public static class CantChangeDirException extends Exception {
 		public CantChangeDirException () {
 			super("Can't change this ship's direction");
 		}

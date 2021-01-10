@@ -1,6 +1,7 @@
 package Controller.Menus;
 
 import Controller.GameRelated.BattleSea.BattleSeaController;
+import Controller.GameRelated.BattleSea.ShipController;
 import Controller.GameRelated.GameController;
 import Controller.MainController;
 import Model.GameRelated.BattleSea.BattleSea;
@@ -19,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
@@ -71,6 +73,11 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			pfp2.setSmooth(true);
 			pfp2.setClip(new Circle(pfp2.getBoundsInLocal().getCenterX(), pfp2.getBoundsInLocal().getCenterY(), 50));
 		}
+		// setting the usernames
+		{
+			username1.setText(player1.getUsername());
+			username2.setText(player2.getUsername());
+		}
 
 		editingTurn.addListener((observable, oldValue, newValue) -> {
 			if (newValue.intValue() == 1) {
@@ -89,14 +96,16 @@ public class BattleSeaEditBoardPageController implements Initializable {
 				turnIndicator1.setVisible(false);
 				turnIndicator2.setVisible(true);
 
-				// todo add the ships for player1
+				((BattleSea) GameController.getInstance().getCurrentGameInSession()).getListOfBattleSeaPlayers().get(0)
+						.finalizeBoard(currentBoard);
 
 				generate1RandBoardButton.fire();
 			}
 
 			else if (oldValue.intValue() == 2) {
 
-				// todo add the ships for player2
+				((BattleSea) GameController.getInstance().getCurrentGameInSession()).getListOfBattleSeaPlayers().get(1)
+						.finalizeBoard(currentBoard);
 
 				try {
 					MainController.getInstance().createAndReturnNewStage(
@@ -149,7 +158,10 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	}
 
 	public void doneEditing (ActionEvent actionEvent) {
-		// TODO: 1/9/2021 AD
+		switch (editingTurn.intValue()) {
+			case 1 -> editingTurn.set(2);
+			case 2 -> editingTurn.set(-1);
+		}
 	}
 
 	public void generate5RandBoards (ActionEvent actionEvent) {
@@ -218,5 +230,31 @@ public class BattleSeaEditBoardPageController implements Initializable {
 
 	public void closeGen5RandBoard (ActionEvent actionEvent) {
 		genRandBoardWindow.setVisible(false);
+	}
+
+	public void startMovingShip (MouseDragEvent mouseDragEvent) {
+		// TODO: 1/10/2021 AD
+	}
+
+	public void stopMovingShip (MouseDragEvent mouseDragEvent) {
+		// TODO: 1/10/2021 AD
+	}
+
+	public void rotateShip (MouseEvent mouseEvent) {
+		ImageView shipImageView = ((ImageView) mouseEvent.getSource());
+		Ship ship = currentBoard.stream()
+				.filter(ship1 -> ship1.getLeftMostX() == GridPane.getColumnIndex(shipImageView) + 1 && ship1.getTopMostY() == GridPane.getRowIndex(shipImageView) + 1)
+				.findAny().get();
+
+		try {
+//			System.out.println("BEFORE ROTATE => ");
+//			BattleSeaController.getInstance().displayRandomlyGeneratedBoard(currentBoard);
+			ShipController.getInstance().rotateShip(currentBoard, ship);
+//			System.out.println("AFTER ROTATE => ");
+//			BattleSeaController.getInstance().displayRandomlyGeneratedBoard(currentBoard);
+			setBoard(currentBoard, board);
+		} catch (ShipController.CantChangeDirException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

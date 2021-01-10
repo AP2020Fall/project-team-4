@@ -64,17 +64,17 @@ public class MainController extends Application {
 		String path;
 
 		if (!Admin.adminHasBeenCreated()) {
-			path = "src/com/plato/View/Menus/RegisterMenu.fxml";
 			RegisterMenuController.setStage(primaryStage);
+			path = "src/com/plato/View/Menus/RegisterMenu.fxml";
 		}
 
 		else if (AccountController.getInstance().getCurrentAccLoggedIn() == null) {
-			path = "src/com/plato/View/Menus/LoginMenu.fxml";
 			LoginMenuController.setStage(primaryStage);
+			path = "src/com/plato/View/Menus/LoginMenu.fxml";
 		}
 		else {
-			path = "src/com/plato/View/Menus/MainMenu.fxml";
 			MainMenuController.setGamerOrAdmin(AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer);
+			path = "src/com/plato/View/Menus/MainMenu.fxml";
 		}
 
 		try {
@@ -183,7 +183,7 @@ public class MainController extends Application {
 			case "Choose between 5 randomly generated boards" -> BattleSeaController.getInstance().chooseBetween5RandomlyGeneratedBoards();
 			case "Display on-trial Board" -> BattleSeaController.getInstance().displayTrialBoard();
 			case "Move ship" -> ShipController.getInstance().editShipCoords();
-			case "Change ship direction" -> ShipController.getInstance().rotateShip();
+//			case "Change ship direction" -> ShipController.getInstance().rotateShip();
 			case "Finalize Board" -> {
 				BattleSeaController.getInstance().finalizeTrialBoard();
 

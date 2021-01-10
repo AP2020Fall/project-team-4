@@ -111,42 +111,41 @@
             <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <GridPane.margin>
             <Insets top="20.0" />
         </GridPane.margin>
-        <ImageView fx:id="ship5_2" fitHeight="325.0" fitWidth="130.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="5" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+        <ImageView fx:id="ship5_2" fitHeight="325.0" fitWidth="130.0" onMouseClicked="#rotateShip" onMouseDragEntered="#startMovingShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="5" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </GridPane.margin>
             <Image url="https://i.imgur.com/oJ05ht1.pnghttps://i.imgur.com/oJ05ht1.png" />
         </ImageView>
-        <ImageView fx:id="ship5_1" fitHeight="325.0" fitWidth="65.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+        <ImageView fx:id="ship5_1" fitHeight="325.0" fitWidth="65.0" onMouseClicked="#rotateShip" onMouseDragEntered="#startMovingShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </GridPane.margin>
             <Image url="https://i.imgur.com/PeODDrk.pnghttps://i.imgur.com/PeODDrk.png" />
         </ImageView>
-        <ImageView fx:id="ship4_1" fitHeight="260.0" fitWidth="65.0" layoutX="150.0" layoutY="-6.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+        <ImageView fx:id="ship4_1" fitHeight="260.0" fitWidth="65.0" layoutX="150.0" layoutY="-6.0" onMouseClicked="#rotateShip" onMouseDragEntered="#startMovingShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </GridPane.margin>
             <Image url="https://i.imgur.com/hHcn8ds.pnghttps://i.imgur.com/hHcn8ds.png" />
         </ImageView>
-        <ImageView fx:id="ship3_1" fitHeight="195.0" fitWidth="65.0" layoutX="115.0" layoutY="93.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+        <ImageView fx:id="ship3_1" fitHeight="195.0" fitWidth="65.0" layoutX="115.0" layoutY="93.0" onMouseClicked="#rotateShip" onMouseDragEntered="#startMovingShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </GridPane.margin>
             <Image url="https://i.imgur.com/CT4RjeJ.pnghttps://i.imgur.com/CT4RjeJ.png" />
         </ImageView>
-        <ImageView fx:id="ship2_1_1" fitHeight="130.0" fitWidth="65.0" layoutX="80.0" layoutY="192.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+        <ImageView fx:id="ship2_1_1" fitHeight="130.0" fitWidth="65.0" layoutX="80.0" layoutY="192.0" onMouseClicked="#rotateShip" onMouseDragEntered="#startMovingShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </GridPane.margin>
             <Image url="https://i.imgur.com/KsQnH87.pnghttps://i.imgur.com/KsQnH87.png" />
         </ImageView>
-        <ImageView fx:id="ship2_1_2" fitHeight="130.0" fitWidth="65.0" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+        <ImageView fx:id="ship2_1_2" fitHeight="130.0" fitWidth="65.0" onMouseClicked="#rotateShip" onMouseDragEntered="#startMovingShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true" rotate="90.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </GridPane.margin>
@@ -218,7 +217,6 @@
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <GridPane.margin>
                 <Insets bottom="5.0" top="5.0" />
@@ -256,7 +254,6 @@
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
@@ -314,7 +311,6 @@
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <GridPane.margin>
                 <Insets bottom="5.0" top="5.0" />
@@ -352,7 +348,6 @@
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
@@ -410,7 +405,6 @@
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <GridPane.margin>
                 <Insets bottom="10.0" top="5.0" />
@@ -431,9 +425,7 @@
                 <Image url="https://i.imgur.com/KsQnH87.png" />
             </ImageView>
             <ImageView fx:id="ship2_1_25" fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                <image>
-                    <Image url="https://i.imgur.com/KsQnH87.png" />
-                </image>
+                <Image url="https://i.imgur.com/KsQnH87.png" />
             </ImageView>
         </GridPane>
         <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#closeGen5RandBoard" style="-fx-background-radius: 15; -fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 30 30; -fx-background-repeat: no-repeat; -fx-background-position: center;" GridPane.valignment="TOP">
