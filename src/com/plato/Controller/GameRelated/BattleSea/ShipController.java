@@ -6,7 +6,6 @@ import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
 import View.GameRelated.BattleSea.ShipView;
 
-import java.util.InputMismatchException;
 import java.util.LinkedList;
 
 public class ShipController {
@@ -18,64 +17,20 @@ public class ShipController {
 		return shipController;
 	}
 
-	public void editShipCoords () {
-		LinkedList<Ship> ships = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
+	public void moveShip (LinkedList<Ship> board, Ship chosenShip, int newXInt, int newYInt) {
+		try {
+			if (!BattleSea.checkCoordinates((newXInt)))
+				throw new InvalidCoordinateException();
 
-		ShipView.getInstance().displayShipsWithNamesForEditing(new LinkedList<>() {{
-			for (Ship ship : ships)
-				add("%d %d %d %d".formatted(ship.getLeftMostX(), ship.getTopMostY(), ship.getL_SIZE(), ship.getS_SIZE()));
+			if (!BattleSea.checkCoordinates((newYInt)))
+				throw new InvalidCoordinateException();
 
-		}});
+			if (!chosenShip.canMove(newXInt, newYInt))
+				throw new InvalidCoordinateException();
 
-		String shipName = "";
-		Ship chosenShip;
-		while (true) {
-//			Menu.printAskingForInput("Choose ship[/c to cancel ]: ");
-//			shipName = Menu.getInputLine();
+			chosenShip.move(newXInt, newYInt);
 
-			if (shipName.toLowerCase().trim().equals("/c")) return;
-
-			if (shipName.matches("[A-F]")) {
-				chosenShip = ships.get("ABCDEF".indexOf(shipName));
-				break;
-			}
-
-//			Menu.printErrorMessage("Invalid ship name.");
-		}
-
-		String newX = "", newY = "";
-		int newXInt, newYInt;
-		while (true)
-			try {
-//				Menu.printAskingForInput("New x [/c to cancel , /s to use prev val]: ");
-//				newX = Menu.getInputLine();
-//				Menu.printAskingForInput("New y [/c to cancel , /s to use prev val]: ");
-//				newY = Menu.getInputLine();
-
-				if (newX.toLowerCase().trim().equals("/c") || newY.toLowerCase().trim().equals("/c")) return;
-
-				boolean X_Same = newX.toLowerCase().trim().equals("/s"),
-						Y_Same = newY.toLowerCase().trim().equals("/s");
-
-				if (!X_Same && !BattleSea.checkCoordinates(Integer.parseInt(newX)))
-					throw new InvalidCoordinateException();
-
-				if (!Y_Same && !BattleSea.checkCoordinates(Integer.parseInt(newY)))
-					throw new InvalidCoordinateException();
-
-				newXInt = X_Same ? chosenShip.getLeftMostX() : Integer.parseInt(newX);
-				newYInt = Y_Same ? chosenShip.getTopMostY() : Integer.parseInt(newY);
-
-				if (!chosenShip.canMove(newXInt, newYInt))
-					throw new InvalidCoordinateException();
-				break;
-			} catch (InputMismatchException e) {
-//				Menu.printErrorMessage("You must either enter a number or \"/s\" for both new x and new y");
-			} catch (InvalidCoordinateException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
-		chosenShip.move(newXInt, newYInt);
+		} catch (InvalidCoordinateException e) {}
 	}
 
 	public void rotateShip (LinkedList<Ship> board, Ship chosenShip) throws CantChangeDirException {
