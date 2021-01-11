@@ -235,7 +235,7 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	public void startMovingShip (MouseEvent mouseEvent) {
 //		ImageView shipImageView = ((ImageView) mouseEvent.getSource());
 		System.out.println("BattleSeaEditBoardPageController.startMovingShip");
-		System.out.println("mouseEvent.getSceneX() = " + mouseEvent.getSceneX());
+		System.out.println("mouseEvent.getScjhbjhbjeneX() = " + mouseEvent.getSceneX());
 
 	}
 
