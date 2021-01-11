@@ -20,7 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
@@ -232,17 +231,6 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		genRandBoardWindow.setVisible(false);
 	}
 
-	public void startMovingShip (MouseEvent mouseEvent) {
-//		ImageView shipImageView = ((ImageView) mouseEvent.getSource());
-		System.out.println("BattleSeaEditBoardPageController.startMovingShip");
-		System.out.println("mouseEvent.getScjhbjhbjeneX() = " + mouseEvent.getSceneX());
-
-	}
-
-	public void stopMovingShip (MouseDragEvent mouseDragEvent) {
-		// TODO: 1/10/2021 AD
-	}
-
 	public void rotateShip (MouseEvent mouseEvent) {
 		ImageView shipImageView = ((ImageView) mouseEvent.getSource());
 		Ship ship = currentBoard.stream()
@@ -255,5 +243,27 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		} catch (ShipController.CantChangeDirException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public void updateShipPos (MouseEvent mouseEvent) {
+		ImageView shipImgView = (ImageView) mouseEvent.getSource();
+		Ship ship = currentBoard.stream()
+				.filter(ship1 -> ship1.getLeftMostX() - 1 == GridPane.getColumnIndex(shipImgView) && ship1.getTopMostY() - 1 == GridPane.getRowIndex(shipImgView))
+				.findAny().get();
+
+		double destXOfImageView = mouseEvent.getSceneX() - shipImgView.getLayoutBounds().getWidth() / 2;
+		double destYOfImageView = mouseEvent.getSceneY() - shipImgView.getLayoutBounds().getHeight() / 2;
+		int destXOfShip = ((int) ((destXOfImageView - board.getLayoutBounds().getMinX()) / 70)),
+				destYOfShip = ((int) ((destYOfImageView - board.getLayoutBounds().getMinY()) / 70));
+
+		System.out.println("destXOfImageView = " + destXOfImageView + "\t\tdestYOfImageView = " + destYOfImageView);
+		System.out.println("destXOfShip = " + destXOfShip + "\t\t\tdestYOfShip = " + destYOfShip);
+
+		int oldShipX = ship.getLeftMostX(), oldShipY = ship.getTopMostY();
+//		int boardGridPaneX = grid.getLayoutBounds().getMinX() +
+
+		ShipController.getInstance().moveShip(currentBoard, ship, destXOfShip, destYOfShip);
+
+		setBoard(currentBoard, board);
 	}
 }

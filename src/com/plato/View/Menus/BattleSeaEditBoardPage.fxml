@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.BattleSeaEditBoardPageController">
+<GridPane fx:id="pageGridPane" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.BattleSeaEditBoardPageController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
         <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
@@ -115,36 +115,36 @@
         <GridPane.margin>
             <Insets top="20.0" />
         </GridPane.margin>
-      <ImageView fx:id="ship5_2" fitHeight="325.0" fitWidth="130.0" onDragDetected="#startMovingShip" onMouseClicked="#rotateShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true">
-         <image>
-            <Image url="https://i.imgur.com/oJ05ht1.pnghttps://i.imgur.com/oJ05ht1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ship5_1" fitHeight="325.0" fitWidth="65.0" onDragDetected="#startMovingShip" onMouseClicked="#rotateShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true">
-         <image>
-            <Image url="https://i.imgur.com/PeODDrk.pnghttps://i.imgur.com/PeODDrk.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ship4_1" fitHeight="260.0" fitWidth="65.0" onDragDetected="#startMovingShip" onMouseClicked="#rotateShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true">
-         <image>
-            <Image url="https://i.imgur.com/hHcn8ds.pnghttps://i.imgur.com/hHcn8ds.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ship3_1" fitHeight="195.0" fitWidth="65.0" onDragDetected="#startMovingShip" onMouseClicked="#rotateShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true">
-         <image>
-            <Image url="https://i.imgur.com/CT4RjeJ.pnghttps://i.imgur.com/CT4RjeJ.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ship2_1_1" fitHeight="130.0" fitWidth="65.0" onDragDetected="#startMovingShip" onMouseClicked="#rotateShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true">
-         <image>
-            <Image url="https://i.imgur.com/KsQnH87.pnghttps://i.imgur.com/KsQnH87.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ship2_1_2" fitHeight="130.0" fitWidth="65.0" onDragDetected="#startMovingShip" onMouseClicked="#rotateShip" onMouseDragExited="#stopMovingShip" pickOnBounds="true">
-         <image>
-            <Image url="https://i.imgur.com/KsQnH87.pnghttps://i.imgur.com/KsQnH87.png" />
-         </image>
-      </ImageView>
+        <ImageView fx:id="ship5_2" fitHeight="325.0" fitWidth="130.0" onDragDetected="#updateShipPos" onMouseClicked="#rotateShip" onMouseDragged="#updateShipPos" pickOnBounds="true">
+            <image>
+                <Image url="https://i.imgur.com/oJ05ht1.pnghttps://i.imgur.com/oJ05ht1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="ship5_1" fitHeight="325.0" fitWidth="65.0" onDragDetected="#updateShipPos" onMouseClicked="#rotateShip" onMouseDragged="#updateShipPos" pickOnBounds="true">
+            <image>
+                <Image url="https://i.imgur.com/PeODDrk.pnghttps://i.imgur.com/PeODDrk.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="ship4_1" fitHeight="260.0" fitWidth="65.0" onDragDetected="#updateShipPos" onMouseClicked="#rotateShip" onMouseDragged="#updateShipPos" pickOnBounds="true">
+            <image>
+                <Image url="https://i.imgur.com/hHcn8ds.pnghttps://i.imgur.com/hHcn8ds.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="ship3_1" fitHeight="195.0" fitWidth="65.0" onDragDetected="#updateShipPos" onMouseClicked="#rotateShip" onMouseDragged="#updateShipPos" pickOnBounds="true">
+            <image>
+                <Image url="https://i.imgur.com/CT4RjeJ.pnghttps://i.imgur.com/CT4RjeJ.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="ship2_1_1" fitHeight="130.0" fitWidth="65.0" onDragDetected="#updateShipPos" onMouseClicked="#rotateShip" onMouseDragged="#updateShipPos" pickOnBounds="true">
+            <image>
+                <Image url="https://i.imgur.com/KsQnH87.pnghttps://i.imgur.com/KsQnH87.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="ship2_1_2" fitHeight="130.0" fitWidth="65.0" onDragDetected="#updateShipPos" onMouseClicked="#rotateShip" onMouseDragged="#updateShipPos" pickOnBounds="true">
+            <image>
+                <Image url="https://i.imgur.com/KsQnH87.pnghttps://i.imgur.com/KsQnH87.png" />
+            </image>
+        </ImageView>
     </GridPane>
     <VBox alignment="CENTER" maxHeight="160.0" maxWidth="210.0" minHeight="160.0" minWidth="160.0" spacing="10.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
         <GridPane.margin>
