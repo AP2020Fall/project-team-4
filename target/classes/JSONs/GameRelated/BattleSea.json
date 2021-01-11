@@ -1,0 +1,3048 @@
+[
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "028099",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "582918",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "918612",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "593315",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "963960",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "061888",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "859248",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "284736",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "795905",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "905674",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "579412",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "184884",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "406487",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "790648",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "656386",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "764615",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "251012",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "252177",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "859123",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "748767",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "132086",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "836933",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "781641",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "071453",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "521893",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "628873",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "606970",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "204770",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "651255",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "222801",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "052078",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "ships": [
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 2,
+            "leftMostX": 6,
+            "topMostY": 2,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 1,
+            "leftMostX": 4,
+            "topMostY": 4,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 4,
+            "S_SIZE": 1,
+            "leftMostX": 5,
+            "topMostY": 9,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 3,
+            "S_SIZE": 1,
+            "leftMostX": 1,
+            "topMostY": 1,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 9,
+            "topMostY": 7,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 9,
+            "topMostY": 9,
+            "isVertical": true
+          }
+        ],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "ships": [
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 2,
+            "leftMostX": 5,
+            "topMostY": 4,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 1,
+            "leftMostX": 5,
+            "topMostY": 3,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 4,
+            "S_SIZE": 1,
+            "leftMostX": 3,
+            "topMostY": 1,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 3,
+            "S_SIZE": 1,
+            "leftMostX": 8,
+            "topMostY": 7,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 2,
+            "topMostY": 9,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 5,
+            "topMostY": 10,
+            "isVertical": false
+          }
+        ],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "421789",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "ships": [
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 2,
+            "leftMostX": 2,
+            "topMostY": 2,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 1,
+            "leftMostX": 4,
+            "topMostY": 5,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 4,
+            "S_SIZE": 1,
+            "leftMostX": 7,
+            "topMostY": 7,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 3,
+            "S_SIZE": 1,
+            "leftMostX": 6,
+            "topMostY": 1,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 10,
+            "topMostY": 4,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 1,
+            "topMostY": 2,
+            "isVertical": true
+          }
+        ],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "ships": [
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 2,
+            "leftMostX": 3,
+            "topMostY": 6,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 1,
+            "leftMostX": 8,
+            "topMostY": 3,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 4,
+            "S_SIZE": 1,
+            "leftMostX": 1,
+            "topMostY": 9,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 3,
+            "S_SIZE": 1,
+            "leftMostX": 4,
+            "topMostY": 2,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 6,
+            "topMostY": 9,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 1,
+            "topMostY": 6,
+            "isVertical": false
+          }
+        ],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "h",
+          "lastName": "h",
+          "username": "heelo",
+          "password": "h",
+          "userID": "677561",
+          "email": "h@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "446080",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "135870",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "395929",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "349121",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "ships": [
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 2,
+            "leftMostX": 5,
+            "topMostY": 4,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 1,
+            "leftMostX": 3,
+            "topMostY": 10,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 4,
+            "S_SIZE": 1,
+            "leftMostX": 7,
+            "topMostY": 3,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 3,
+            "S_SIZE": 1,
+            "leftMostX": 8,
+            "topMostY": 4,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 2,
+            "topMostY": 9,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 5,
+            "topMostY": 9,
+            "isVertical": false
+          }
+        ],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "481806",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "253232",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "264447",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "188949",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "ships": [
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 2,
+            "leftMostX": 8,
+            "topMostY": 2,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 1,
+            "leftMostX": 1,
+            "topMostY": 5,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 4,
+            "S_SIZE": 1,
+            "leftMostX": 2,
+            "topMostY": 7,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 3,
+            "S_SIZE": 1,
+            "leftMostX": 5,
+            "topMostY": 1,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 10,
+            "topMostY": 1,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 3,
+            "topMostY": 8,
+            "isVertical": false
+          }
+        ],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "974025",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "531556",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "888713",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "579138",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "668095",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "331083",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "323398",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "ships": [
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 2,
+            "leftMostX": 6,
+            "topMostY": 6,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 1,
+            "leftMostX": 5,
+            "topMostY": 1,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 4,
+            "S_SIZE": 1,
+            "leftMostX": 7,
+            "topMostY": 5,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 3,
+            "S_SIZE": 1,
+            "leftMostX": 1,
+            "topMostY": 9,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 10,
+            "topMostY": 8,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 1,
+            "topMostY": 3,
+            "isVertical": true
+          }
+        ],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "ships": [
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 2,
+            "leftMostX": 9,
+            "topMostY": 5,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 1,
+            "leftMostX": 4,
+            "topMostY": 2,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 4,
+            "S_SIZE": 1,
+            "leftMostX": 6,
+            "topMostY": 6,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 3,
+            "S_SIZE": 1,
+            "leftMostX": 7,
+            "topMostY": 3,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 5,
+            "topMostY": 1,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 1,
+            "topMostY": 6,
+            "isVertical": true
+          }
+        ],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "112738",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "ships": [
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 2,
+            "leftMostX": 7,
+            "topMostY": 5,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 5,
+            "S_SIZE": 1,
+            "leftMostX": 6,
+            "topMostY": 2,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 4,
+            "S_SIZE": 1,
+            "leftMostX": 1,
+            "topMostY": 6,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 3,
+            "S_SIZE": 1,
+            "leftMostX": 3,
+            "topMostY": 9,
+            "isVertical": false
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 9,
+            "topMostY": 1,
+            "isVertical": true
+          },
+          {
+            "L_SIZE": 2,
+            "S_SIZE": 1,
+            "leftMostX": 2,
+            "topMostY": 1,
+            "isVertical": false
+          }
+        ],
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "307355",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  },
+  {
+    "listOfPlayers": [
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 19.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 6
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "c",
+          "lastName": "c",
+          "username": "c",
+          "password": "c",
+          "userID": "526048",
+          "email": "c@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "bombsThrown": [],
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 0.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 7
+          },
+          "frnds": [
+            "heelo"
+          ],
+          "faveGames": [],
+          "firstName": "d",
+          "lastName": "d",
+          "username": "dddw",
+          "password": "d",
+          "userID": "537781",
+          "email": "d@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "gameID": "433442",
+    "turn": 0,
+    "conclusion": "IN_SESSION"
+  }
+]
