@@ -117,7 +117,6 @@ Controller\Menus\AdminMsgsController.class
 Controller\GameRelated\GameController.class
 Model\GameRelated\BattleSea\Bomb.class
 Controller\Menus\EditEventPageController.class
-Controller\GameRelated\BattleSea\ShipController$2.class
 Controller\AccountRelated\AdminGameRecoController$2.class
 Controller\AccountRelated\GamerController$FriendDoesntExistException.class
 Controller\GameRelated\GameLogController.class
