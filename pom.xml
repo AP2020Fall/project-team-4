@@ -37,10 +37,10 @@
                 <configuration>
                     <mainClass>Controller.MainController</mainClass>
                     <options>
-                        <option>--add-modules</option>
-                        <option>javafx.controls,javafx.fxml</option>
-                        <option>--add-exports</option>
-                        <option>javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED</option>
+<!--                        <option>&#45;&#45;add-modules</option>-->
+<!--                        <option>javafx.controls,javafx.fxml</option>-->
+<!--                        <option>&#45;&#45;add-exports</option>-->
+<!--                        <option>javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED</option>-->
 <!--                        <option>&#45;&#45;add-modules javafx.controls,javafx.fxml &#45;&#45;add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED</option>-->
                     </options>
                 </configuration>
