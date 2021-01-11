@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+
 import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import Model.AccountRelated.Gamer;
@@ -10,10 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+
 
 
 public class GamesMenuController implements Initializable
@@ -27,8 +31,11 @@ public class GamesMenuController implements Initializable
 
 
 	public static void setIsForFaveGames (boolean forFaveGames)
-	{ // todo when fxml is called this method should be called
+	{
+
+		// todo when fxml is called this method should be called
 		isForFaveGames = forFaveGames;
+
 	}
 
 
@@ -37,6 +44,7 @@ public class GamesMenuController implements Initializable
 
 	public static void setStage (Stage stage)
 	{
+
 		GamesMenuController.stage = stage;
 		GamesMenuController.stage.setOnCloseRequest(e -> GamesMenuController.stage = null);
 	}
@@ -56,12 +64,15 @@ public class GamesMenuController implements Initializable
 					true,
 					MainController.getInstance().getPrimaryStage()
 			);
+
 			GameMenuController.setStage(battleSeaMainMenu);
 			battleSeaMainMenu.show();
 			stage.close();
 		}
+
 		catch (IOException e)
 		{
+
 			e.printStackTrace();
 		}
 
@@ -80,10 +91,15 @@ public class GamesMenuController implements Initializable
 		try {
 
 			GameMenuController.setGameName("Reversi");
+
 			Stage reversiMainMenu = MainController.getInstance().createAndReturnNewStage(
+
 					FXMLLoader.load(new File("src/com/plato/View/Menus/GameMenu.fxml").toURI().toURL()),
+
 					"Reversi Main Menu",
+
 					true,
+
 					MainController.getInstance().getPrimaryStage()
 			);
 

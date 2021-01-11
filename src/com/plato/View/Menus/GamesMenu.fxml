@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.Button?>
+
 <?import javafx.scene.layout.AnchorPane?>
+
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.GamesMenuController">
 
+
     <Button fx:id="battlseaButton" layoutX="198.0" layoutY="200" minHeight="100" minWidth="100" onAction="#battleSeaMainMenu" prefHeight="100.0" prefWidth="130.0" text="Battlesea Main Menu" />
+
 
     <Button fx:id="reversiButton" layoutX="337.0" layoutY="200.0" minHeight="100" minWidth="100" onAction="#reversiMainMenu" prefHeight="100.0" prefWidth="137.0" text="Reversi Main Menu" />
 
+
     <Button onAction="#closeStage" text="back" />
+
 
 
 </AnchorPane>
