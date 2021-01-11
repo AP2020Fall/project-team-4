@@ -30,7 +30,6 @@
          <image>
             <Image url="adminpic" />
          </image>
-
       </ImageView>
    </children>
 </GridPane>
