@@ -61,9 +61,11 @@ public class MainMenuController implements Initializable {
 		System.out.println("MainMenuController.eventsTab");
 		try {
 			pane.getChildren().clear();
-			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/EventsTab.fxml").toURI().toURL()));
 			EventsTabController.setGamerOrAdmin(gamerOrAdmin);
-			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
+			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/EventsTab.fxml").toURI().toURL()));
+			MainController.getInstance().getPrimaryStage().setMinHeight(700 + 195 + 30);
+			MainController.getInstance().getPrimaryStage().setMaxHeight(MainController.getInstance().getPrimaryStage().getMinHeight());
+//			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
 			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -110,11 +112,6 @@ public class MainMenuController implements Initializable {
 	public void gamesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.gamesTab");
 		try {
-//			pane.getChildren().clear();
-//			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()));
-//			GamesMenuController.setIsForFaveGames(false);
-//			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
-//			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 			GamesMenuController.setIsForFaveGames(false);
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()),
@@ -132,11 +129,6 @@ public class MainMenuController implements Initializable {
 	public void faveGamesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.faveGamesTab");
 		try {
-//			pane.getChildren().clear();
-//			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()));
-//			GamesMenuController.setIsForFaveGames(true);
-//			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
-//			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 			GamesMenuController.setIsForFaveGames(true);
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/GamesMenu.fxml").toURI().toURL()),

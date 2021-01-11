@@ -28,21 +28,22 @@
                 <configuration>
                     <source>15</source>
                     <target>15</target>
+                    <release>15</release>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.4</version>
+                <version>0.0.5</version>
                 <configuration>
                     <mainClass>Controller.MainController</mainClass>
-                    <options>
+<!--                    <options>-->
 <!--                        <option>&#45;&#45;add-modules</option>-->
 <!--                        <option>javafx.controls,javafx.fxml</option>-->
 <!--                        <option>&#45;&#45;add-exports</option>-->
 <!--                        <option>javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED</option>-->
 <!--                        <option>&#45;&#45;add-modules javafx.controls,javafx.fxml &#45;&#45;add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED</option>-->
-                    </options>
+<!--                    </options>-->
                 </configuration>
             </plugin>
             <plugin>

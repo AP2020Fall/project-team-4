@@ -145,9 +145,9 @@ public class MainController extends Application {
 
 			// events menu
 			case "View event info" -> EventController.getInstance().displayEventInfo();
-			case "Participate in event" -> EventController.getInstance().participateInEvent();
+//			case "Participate in event" -> EventController.getInstance().participateInEvent();
 			case "Show Events participating in" -> EventController.getInstance().displayInSessionEventsParticipatingIn();
-			case "Stop participating in Event" -> EventController.getInstance().stopParticipatingInEvent();
+//			case "Stop participating in Event" -> EventController.getInstance().stopParticipatingInEvent();
 			case "Edit Event" -> EventController.getInstance().editEvent();
 			case "Remove Event" -> EventController.getInstance().removeEvent();
 
@@ -291,10 +291,10 @@ public class MainController extends Application {
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Event.json")) {
 			printWriter.print("");
 		}
-		if (Event.getEvents().size() > 0)
+		if (Event.getAllEvents().size() > 0)
 			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Event.json"))) {
 
-				writer.write(gson.toJson(Event.getEvents()));
+				writer.write(gson.toJson(Event.getAllEvents()));
 			}
 
 		// FriendRequest.json
