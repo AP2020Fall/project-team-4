@@ -8,7 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
@@ -27,7 +27,7 @@ public class GamesMenuController implements Initializable
 	private static boolean isForFaveGames;
 	public Button battlseaButton;
 	public Button reversiButton;
-	public AnchorPane anchorPane;
+	public GridPane gridpane;
 
 
 	public static void setIsForFaveGames (boolean forFaveGames)
@@ -50,13 +50,8 @@ public class GamesMenuController implements Initializable
 	}
 
 
-	public void battleSeaMainMenu (ActionEvent actionEvent)
-
-
-	{
-		try
-
-		{
+	public void battleSeaMainMenu (ActionEvent actionEvent) {
+		try {
 			GameMenuController.setGameName("BattleSea");
 			Stage battleSeaMainMenu = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/GameMenu.fxml").toURI().toURL()),
@@ -84,9 +79,7 @@ public class GamesMenuController implements Initializable
 
 	}
 
-	public void reversiMainMenu(ActionEvent actionEvent)
-
-	{
+	public void reversiMainMenu (ActionEvent actionEvent) {
 
 		try {
 
@@ -109,10 +102,7 @@ public class GamesMenuController implements Initializable
 
 			stage.close();
 
-		}
-		catch (IOException e)
-
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 
 		}
@@ -121,21 +111,17 @@ public class GamesMenuController implements Initializable
 
 	@Override
 
-	public void initialize(URL location, ResourceBundle resources)
-	{
+	public void initialize (URL location, ResourceBundle resources) {
 
 		Gamer currentLoggedIn = ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn());
 
-		if (isForFaveGames)
-		{
-
-
+		if (isForFaveGames) {
 			if (!currentLoggedIn.getFaveGames().contains("BattleSea"))
-				anchorPane.getChildren().remove(battlseaButton);
+				gridpane.getChildren().remove(battlseaButton);
 
 
 			if (!currentLoggedIn.getFaveGames().contains("Reversi"))
-				anchorPane.getChildren().remove(reversiButton);
+				gridpane.getChildren().remove(reversiButton);
 
 		}
 	}

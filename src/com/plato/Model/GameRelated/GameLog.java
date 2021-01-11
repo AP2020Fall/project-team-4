@@ -38,7 +38,7 @@ public class GameLog {
 	public static Integer getPlayedCount (Gamer gamer, String gameName) {
 		int count = 0;
 		for (Game game : getListOfGames(gameName)) {
-			if (game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
+			if (game.getListOfPlayers().get(0).getGamer().getUsername().equals(gamer.getUsername()) || game.getListOfPlayers().get(1).getGamer().getUsername().equals(gamer.getUsername()))
 				count++;
 		}
 		return count;
@@ -59,8 +59,8 @@ public class GameLog {
 		int count = 0;
 		for (Game game : getListOfGames(gameName)) {
 			if (game.getConclusion().equals(GameConclusion.PLAYER1_WIN) || game.getConclusion().equals(GameConclusion.PLAYER2_WIN))
-				if (game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
-					if (game.getWinner().equals(gamer))
+				if (game.getListOfPlayers().get(0).getGamer().getUsername().equals(gamer.getUsername()) || game.getListOfPlayers().get(1).getGamer().getUsername().equals(gamer.getUsername()))
+					if (game.getWinner().getUsername().equals(gamer.getUsername()))
 						count++;
 		}
 		return count;
@@ -73,8 +73,8 @@ public class GameLog {
 		int count = 0;
 		for (Game game : getListOfGames(gameName)) {
 			if (game.getConclusion().equals(GameConclusion.PLAYER1_WIN) || game.getConclusion().equals(GameConclusion.PLAYER2_WIN))
-				if (game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
-					if (!game.getWinner().equals(gamer))
+				if (game.getListOfPlayers().get(0).getGamer().getUsername().equals(gamer.getUsername()) || game.getListOfPlayers().get(1).getGamer().getUsername().equals(gamer.getUsername()))
+					if (!game.getWinner().getUsername().equals(gamer.getUsername()))
 						count++;
 		}
 		return count;
@@ -86,7 +86,7 @@ public class GameLog {
 	public static Integer getDrawCount (Gamer gamer, String gameName) {
 		int count = 0;
 		for (Game game : getListOfGames(gameName)) {
-			if (game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
+			if (game.getListOfPlayers().get(0).getGamer().getUsername().equals(gamer.getUsername()) || game.getListOfPlayers().get(1).getGamer().getUsername().equals(gamer.getUsername()))
 				if (game.getConclusion().equals(GameConclusion.DRAW))
 					count++;
 		}
@@ -99,8 +99,14 @@ public class GameLog {
 	public static LinkedList<Gamer> getAllGamersWhoPlayedGame (String gameName) {
 		LinkedList<Gamer> listOfGamers = new LinkedList<>();
 		for (Game game : getListOfGames(gameName)) {
-			listOfGamers.add(game.getListOfPlayers().get(0).getGamer());
-			listOfGamers.add(game.getListOfPlayers().get(1).getGamer());
+			Gamer gamer1 = (game.getListOfPlayers().get(0).getGamer());
+			Gamer gamer2 = (game.getListOfPlayers().get(1).getGamer());
+
+			if (listOfGamers.stream().noneMatch(gamer -> gamer.getUsername().equals(gamer1.getUsername())))
+				listOfGamers.add(gamer1);
+
+			if (listOfGamers.stream().noneMatch(gamer -> gamer.getUsername().equals(gamer2.getUsername())))
+				listOfGamers.add(gamer2);
 		}
 		return listOfGamers;
 	}
@@ -121,7 +127,7 @@ public class GameLog {
 	public static LinkedList<Game> getGameHistory (Gamer gamer) {
 		LinkedList<Game> gamesHistory = new LinkedList<>();
 		for (Game game : getAllFinishedGames()) {
-			if (game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
+			if (game.getListOfPlayers().get(0).getGamer().getUsername().equals(gamer.getUsername()) || game.getListOfPlayers().get(1).getGamer().getUsername().equals(gamer.getUsername()))
 				gamesHistory.add(game);
 		}
 		return gamesHistory;
@@ -145,7 +151,7 @@ public class GameLog {
 		LinkedList<Game> gamesReversed = getAllFinishedGames();
 		Collections.reverse(getAllFinishedGames());
 		for (Game game : gamesReversed) {
-			if (game.getListOfPlayers().get(0).getGamer().equals(gamer) || game.getListOfPlayers().get(1).getGamer().equals(gamer))
+			if (game.getListOfPlayers().get(0).getGamer().getUsername().equals(gamer.getUsername()) || game.getListOfPlayers().get(1).getGamer().getUsername().equals(gamer.getUsername()))
 				return game.getGameName();
 		}
 		return null;
