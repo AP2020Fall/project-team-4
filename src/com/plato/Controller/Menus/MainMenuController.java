@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
+	// a
 	private static boolean gamerOrAdmin;
 	public HBox buttons;
 	public Pane pane;
@@ -38,11 +39,13 @@ public class MainMenuController implements Initializable {
 		}
 		pane.setMinWidth(775);
 		pane.setMaxWidth(1550);
-		pane.setMinHeight(600);
+		pane.setMinHeight(700);
 		pane.setMaxHeight(pane.getMinHeight());
 
 		Stage stage = MainController.getInstance().getPrimaryStage();
-		stage.setMinHeight(600 + 195 + 30);
+		stage.setMinWidth(pane.getMinWidth());
+		stage.setMaxWidth(pane.getMaxWidth());
+		stage.setMinHeight(700 + 195 + 30);
 		stage.setMaxHeight(stage.getMinHeight());
 		stage.setHeight(stage.getMinHeight());
 
@@ -63,10 +66,10 @@ public class MainMenuController implements Initializable {
 			pane.getChildren().clear();
 			EventsTabController.setGamerOrAdmin(gamerOrAdmin);
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/EventsTab.fxml").toURI().toURL()));
-			MainController.getInstance().getPrimaryStage().setMinHeight(700 + 195 + 30);
 			MainController.getInstance().getPrimaryStage().setMaxHeight(MainController.getInstance().getPrimaryStage().getMinHeight());
 //			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
 			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
+			pane.getChildren().get(0).setLayoutY(0);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -88,8 +91,8 @@ public class MainMenuController implements Initializable {
 		System.out.println("MainMenuController.accountPage");
 		try {
 			pane.getChildren().clear();
-			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/AccountPage.fxml").toURI().toURL()));
 			AccountPageController.setGamerOrAdmin(gamerOrAdmin);
+			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/AccountPage.fxml").toURI().toURL()));
 			GridPane.setValignment(pane.getChildren().get(0), VPos.CENTER);
 			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
