@@ -1,6 +1,7 @@
 package Controller.Menus;
 
 
+
 import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
@@ -11,13 +12,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
+
 public class AccountPageController implements Initializable
+
+
 {
 
 	private static boolean gamerOrAdmin;
@@ -30,6 +35,7 @@ public class AccountPageController implements Initializable
 
 
 	@Override
+
 	public void initialize (URL location, ResourceBundle resources)
 	{
 
@@ -57,6 +63,7 @@ public class AccountPageController implements Initializable
 
 
 		} catch (IOException e)
+
 		{
 			e.printStackTrace();
 		}
