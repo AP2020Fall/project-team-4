@@ -68,17 +68,6 @@ public class RegisterMenuController implements Initializable {
 	}
 
 	public void signUp (ActionEvent actionEvent) {
-		Stage stage = new Stage();
-		try {
-			stage = MainController.getInstance().createAndReturnNewStage(
-					FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterForm.fxml").toURI().toURL()),
-					"Register Form",
-					true,
-					MainController.getInstance().getPrimaryStage()
-			);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		String password = (showPwOrNot.getImage().getUrl().contains("invisible") ? pwFieldpwShown : pwFieldpwHidden).getText();
 		try {
@@ -96,11 +85,21 @@ public class RegisterMenuController implements Initializable {
 				return;
 			}
 		}
+		try {
+			Stage stage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterForm.fxml").toURI().toURL()),
+					"Register Form",
+					true,
+					MainController.getInstance().getPrimaryStage()
+			);
 
-		RegisterFormController.setStage(stage);
-		RegisterFormController.setUsername(usernameTxtFld.getText());
-		RegisterFormController.setPassword(password);
-		stage.show();
+			RegisterFormController.setStage(stage);
+			RegisterFormController.setUsername(usernameTxtFld.getText());
+			RegisterFormController.setPassword(password);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void setStage (Stage stage) {

@@ -4,6 +4,7 @@ import Controller.GameRelated.GameController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
+import Model.GameRelated.Game;
 import Model.GameRelated.Player;
 import View.GameRelated.BattleSea.BattleSeaView;
 
@@ -66,8 +67,7 @@ public class BattleSeaController {
 		BattleSeaView.getInstance().displayRemainingTime(turnTimerTask.getSecondsRemaining());
 	}
 
-	public void displayRandomlyGeneratedBoard () {
-		LinkedList<Ship> randBoard = BattleSea.getRandBoard();
+	public void displayRandomlyGeneratedBoard (LinkedList<Ship> randBoard) {
 		BattleSeaView.getInstance().displayBoard(
 				this.getBoardAsStringBuilder(randBoard)
 		);
@@ -104,7 +104,7 @@ public class BattleSeaController {
 					String symbol = (Ship.getAllCoords(board).stream()
 							.anyMatch(shipCoord -> shipCoord[0] == finalX && shipCoord[1] == finalY)) ? "#" : " ";
 
-//					boardStrBldr.append(Color.BLUE.getVal() + symbol + Color.RESET.getVal());
+					boardStrBldr.append(symbol);
 				}
 				boardStrBldr.append((((x == 0 && y == 10) || (x == 10 && y == 0)) ? "" : " ") + (x != 10 ? "| " : ""));
 			}
@@ -315,6 +315,11 @@ public class BattleSeaController {
 			else
 				GameController.getInstance().getCurrentGameInSession().nextTurn();
 			command = "";
+			if (GameController.getInstance().getCurrentGameInSession().gameEnded()) {
+				Game currentGame = GameController.getInstance().getCurrentGameInSession();
+				GameController.getInstance().getCurrentGameInSession().concludeGame();
+				GameController.getInstance().displayGameConclusion(currentGame);
+			}
 		}
 
 		public int getSecondsRemaining () {

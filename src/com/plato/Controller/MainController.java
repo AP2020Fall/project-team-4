@@ -64,17 +64,17 @@ public class MainController extends Application {
 		String path;
 
 		if (!Admin.adminHasBeenCreated()) {
-			path = "src/com/plato/View/Menus/RegisterMenu.fxml";
 			RegisterMenuController.setStage(primaryStage);
+			path = "src/com/plato/View/Menus/RegisterMenu.fxml";
 		}
 
 		else if (AccountController.getInstance().getCurrentAccLoggedIn() == null) {
-			path = "src/com/plato/View/Menus/LoginMenu.fxml";
 			LoginMenuController.setStage(primaryStage);
+			path = "src/com/plato/View/Menus/LoginMenu.fxml";
 		}
 		else {
-			path = "src/com/plato/View/Menus/MainMenu.fxml";
 			MainMenuController.setGamerOrAdmin(AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer);
+			path = "src/com/plato/View/Menus/MainMenu.fxml";
 		}
 
 		try {
@@ -175,21 +175,21 @@ public class MainController extends Application {
 			case "Show played count" -> GameLogController.getInstance().displayPlayedCountOfGameByLoggedInPlayer();
 			case "Add to favorites" -> GameController.getInstance().addGameToFavesOfLoggedInGamer();
 			case "Continue previous games" -> GameController.getInstance().displayPrevGamesAndChooseToContinue();
-			case "Run Game" -> GameController.getInstance().runGame();
+//			case "Run Game" -> GameController.getInstance().runGame();
 
 			// gameplay battlesea menu
 			//		phase 1
-			case "Generate a Random Board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
+//			case "Generate a Random Board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
 			case "Choose between 5 randomly generated boards" -> BattleSeaController.getInstance().chooseBetween5RandomlyGeneratedBoards();
 			case "Display on-trial Board" -> BattleSeaController.getInstance().displayTrialBoard();
-			case "Move ship" -> ShipController.getInstance().editShipCoords();
-			case "Change ship direction" -> ShipController.getInstance().rotateShip();
+//			case "Move ship" -> ShipController.getInstance().moveShip();
+//			case "Change ship direction" -> ShipController.getInstance().rotateShip();
 			case "Finalize Board" -> {
 				BattleSeaController.getInstance().finalizeTrialBoard();
 
 				if (((BattleSea) GameController.getInstance().getCurrentGameInSession()).canStartBombing()) {
 //					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
-					BattleSeaController.getInstance().initTurnTimerStuff();
+//					BattleSeaController.getInstance().initTurnTimerStuff();
 				}
 			}
 			//		phase 2
@@ -216,7 +216,7 @@ public class MainController extends Application {
 			case "Display Board (Grid)" -> ReversiController.getInstance().displayGrid();
 			case "Display disks" -> ReversiController.getInstance().displayPrevMoves();
 			case "Display scores" -> ReversiController.getInstance().displayInGameScores();
-			case "Display final result" -> GameController.getInstance().displayGameConclusion();
+			case "Display final result" -> GameController.getInstance().displayGameConclusion(GameController.getInstance().getCurrentGameInSession());
 
 			// user editing menu
 			case "Change password" -> AccountController.getInstance().changePWCommand();

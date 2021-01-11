@@ -51,6 +51,19 @@ public class Ship {
 		return coords;
 	}
 
+	public static String getImgUrl (int Lsize, int Ssize) {
+		String size = Lsize + " " + Ssize;
+
+		return switch (size) {
+			case "5 2" -> "https://i.imgur.com/oJ05ht1.png";
+			case "5 1" -> "https://i.imgur.com/PeODDrk.png";
+			case "4 1" -> "https://i.imgur.com/hHcn8ds.png";
+			case "3 1" -> "https://i.imgur.com/CT4RjeJ.png";
+			case "2 1" -> "https://i.imgur.com/KsQnH87.png";
+			default -> throw new IllegalStateException("Unexpected value: " + size);
+		};
+	}
+
 	public boolean isDestroyed (PlayerBattleSea shipOwner) {
 		LinkedList<int[]> thisShipCoords = getAllCoords(new LinkedList<>(Collections.singletonList(this)));
 		int shipPartsBombedCount = (int) shipOwner.getOpponentBombsThrown(true).stream()
@@ -63,12 +76,10 @@ public class Ship {
 	}
 
 	public void changeDir () {
-		if (canChangeDir())
-			isVertical = !isVertical;
+		isVertical = !isVertical;
 	}
 
-	public boolean canChangeDir () {
-		LinkedList<Ship> board = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
+	public boolean canChangeDir (LinkedList<Ship> board) {
 		return isShipPosValid(board, leftMostX, topMostY, !isVertical());
 	}
 
@@ -85,11 +96,8 @@ public class Ship {
 	}
 
 	public boolean isShipPosValid (LinkedList<Ship> board, int newX, int newY, boolean newIsVertical) {
-
 		if (!BattleSea.checkCoordinates(newX) || !BattleSea.checkCoordinates(newY)) return false;
-
 		if (!BattleSea.checkCoordinates((newIsVertical ? newY : newX) + this.getL_SIZE() - 1)) return false;
-
 		if (!BattleSea.checkCoordinates((newIsVertical ? newX : newY) + this.getS_SIZE() - 1)) return false;
 
 		LinkedList<Ship> shipsExclThis = board.stream()
@@ -97,13 +105,15 @@ public class Ship {
 				.collect(Collectors.toCollection(LinkedList::new));
 
 		LinkedList<int[]> thisCoords =
-				getAllCoords(new LinkedList<>(Collections.singletonList(this)));
+//				getAllCoords(new LinkedList<>(Collections.singletonList(this)));
+				getAllCoords(new LinkedList<>(Collections.singleton(new Ship(newX, newY, newIsVertical, L_SIZE, S_SIZE))));
 
 		AtomicBoolean valid = new AtomicBoolean(true);
 		getAllCoords(shipsExclThis).forEach(coord -> {
-			for (int[] thisCoord : thisCoords)
+			for (int[] thisCoord : thisCoords) {
 				if (thisCoord[0] == coord[0] && thisCoord[1] == coord[1])
 					valid.set(false);
+			}
 		});
 		return valid.get();
 	}

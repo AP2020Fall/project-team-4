@@ -2,6 +2,7 @@ package Controller.GameRelated.Reversi;
 
 import Controller.GameRelated.GameController;
 import Model.AccountRelated.Gamer;
+import Model.GameRelated.Game;
 import Model.GameRelated.Reversi.Reversi;
 import View.GameRelated.GameView;
 import View.GameRelated.Reversi.ReversiView;
@@ -18,7 +19,9 @@ public class ReversiController {
 	public void nextTurn () {
 		try {
 			if (GameController.getInstance().getCurrentGameInSession().gameEnded()) {
+				Game currentGame = GameController.getInstance().getCurrentGameInSession();
 				GameController.getInstance().getCurrentGameInSession().concludeGame();
+				GameController.getInstance().displayGameConclusion(currentGame);
 				return;
 			}
 
