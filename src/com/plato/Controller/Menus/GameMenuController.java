@@ -5,27 +5,29 @@ import Controller.GameRelated.GameController;
 import Controller.MainController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 
 public class GameMenuController {
-	private static Stage stage;
 	private static String gameName;
 	public GridPane gameInfo;
 	public Label username2Error;
 	public TextField username2;
 
+
+
 	public static void setStage (Stage stage) {
-		GameMenuController.stage = stage;
-		GameMenuController.stage.setOnCloseRequest(e -> {
-			GameMenuController.stage = null;
-			gameName = "";
-		});
+		stage.setTitle(gameName);
+		stage.show();
 	}
 
 	public static void setGameName (String gameName) {
@@ -42,15 +44,28 @@ public class GameMenuController {
 			);
 			BattleSeaEditBoardPageController.setStage(battleSeaStage);
 			battleSeaStage.show();
-			stage.close();
+			//stage.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void startReversi () {
-		// TODO: 1/9/2021 AD
+		try{
+		Stage reversiStage= MainController.getInstance().createAndReturnNewStage(
+				FXMLLoader.load(new File("src/com/plato/View/Menus/ReversiGame.fxml").toURI().toURL()),
+				"Reversi",
+				true,
+				MainController.getInstance().getPrimaryStage()
+		);
+		ReversiGameController.setStage();
+		reversiStage.show();
+		//stage.close();
+	} catch (IOException e){
+			e.printStackTrace();
+		}
 	}
+
 
 	public void newGame (ActionEvent actionEvent) {
 		gameInfo.setVisible(true);

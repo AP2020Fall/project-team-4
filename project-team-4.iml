@@ -81,5 +81,6 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:15-ea+5" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-media:15-ea+5" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-media:win:15-ea+5" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
