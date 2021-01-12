@@ -5,6 +5,7 @@ import Controller.AccountRelated.EventController;
 import Model.AccountRelated.Event;
 import Model.AccountRelated.Gamer;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -17,10 +18,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -31,10 +35,7 @@ public class EventsTabController implements Initializable {
 	public CheckBox showUpcoming, showInSession, showParticipatingIn;
 	public Button createEventBtn;
 	public ListView<GridPane> eventsList;
-	public GridPane eventInfo;
-	public ImageView eventImg, eventGameImg;
-	public Label eventPrize, eventTitle, eventDetails;
-	public Button joinEventBtn;
+	public Pane eventInfo;
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		EventsTabController.gamerOrAdmin = gamerOrAdmin;
@@ -63,21 +64,20 @@ public class EventsTabController implements Initializable {
 		// TODO: 1/11/2021 AD
 	}
 
-	public void joinEvent (ActionEvent actionEvent) {
-		// TODO: 1/11/2021 AD
-	}
-
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
+		Event.addEvent("https://upload.wikimedia.org/wikipedia/commons/3/36/Large_bonfire.jpg", "Big Event", "BattleSea", 25, LocalDate.of(2021, 1, 11), LocalDate.of(2021, 1, 12));
 		updateList(Event.getAllEvents());
 	}
 
 	public void updateList (LinkedList<Event> eventsToShow) {
+		eventsList.getItems().clear();
 		eventsToShow.forEach(event -> {
 			eventsList.getItems().add(new GridPane() {{
 				ImageView eventPic = new ImageView() {{
 					setImage(new Image(event.getPictureUrl()));
-					resize(50, 50);
+					setFitHeight(150);
+					setFitWidth(150);
 					setSmooth(true);
 					setPreserveRatio(true);
 					setHalignment(this, HPos.CENTER);
@@ -89,23 +89,24 @@ public class EventsTabController implements Initializable {
 
 				Label eventName = new Label() {{
 					setText(event.getTitle());
-					setFont(Font.font("Arial", FontWeight.BOLD, 16));
+					setFont(Font.font("Arial", FontWeight.BOLD, 26));
 					setTextAlignment(TextAlignment.CENTER);
 					setHalignment(this, HPos.CENTER);
 					setValignment(this, VPos.CENTER);
-					setRowIndex(this, 1);
-					setColumnIndex(this, 0);
+					setRowIndex(this, 0);
+					setColumnIndex(this, 1);
 				}};
 
 				HBox coin = new HBox() {{
 					getChildren().add(new Label() {{
 						setText(String.valueOf(event.getEventScore()));
-						setFont(Font.font("Arial", 14));
+						setFont(Font.font("Arial", 24));
 						setTextAlignment(TextAlignment.CENTER);
 					}});
 					getChildren().add(new ImageView() {{
 						setImage(new Image("https://i.imgur.com/Iq0MAc7.png"));
-						resize(25, 25);
+						setFitWidth(30);
+						setFitHeight(30);
 						setSmooth(true);
 						setPreserveRatio(true);
 					}});
@@ -127,7 +128,7 @@ public class EventsTabController implements Initializable {
 								else
 									setText("start in \n" + event.getStart().until(LocalDate.now()) + "d");
 
-								setFont(Font.font("Arial", 10));
+								setFont(Font.font("Arial", 20));
 								setTextAlignment(TextAlignment.CENTER);
 								setRowIndex(this, 0);
 								setColumnIndex(this, 2);
@@ -139,12 +140,15 @@ public class EventsTabController implements Initializable {
 								if (event.participantExists(currentLoggedIn.getUsername())) {
 									setText("Drop-out");
 									setOnAction(e -> EventController.getInstance().participateInEvent(event.getEventID()));
+									System.out.println("event.getParticipants().size() = " + event.getParticipants().size());
 								}
 								else {
 									setText("Join");
 									setOnAction(e -> EventController.getInstance().stopParticipatingInEvent(event.getEventID()));
+									System.out.println("event.getParticipants().size() = " + event.getParticipants().size());
 								}
 
+								setFont(Font.font("Arial", FontWeight.BOLD, 27));
 								setTextAlignment(TextAlignment.CENTER);
 								setOnMouseEntered(e -> setOpacity(0.8));
 								setOnMouseExited(e -> setOpacity(1));
@@ -187,12 +191,18 @@ public class EventsTabController implements Initializable {
 				setOnMouseEntered(e -> setOpacity(0.8));
 				setOnMouseExited(e -> setOpacity(1));
 				setOnMouseClicked(e -> displayEventInfo(event.getEventID()));
+
+				setMinWidth(eventsList.getMinWidth());
+				setMaxWidth(eventsList.getMaxWidth());
+
+				setHgap(30);
+				setVgap(10);
 			}});
 		});
 	}
 
 	private void removeEvent (Event event) {
-		// TODO: 1/11/2021 AD
+		Event.removeEvent(event.getEventID());
 	}
 
 	private void editEvent (Event event) {
@@ -200,8 +210,15 @@ public class EventsTabController implements Initializable {
 	}
 
 	private void displayEventInfo (String eventID) {
-		//todo
-		eventInfo.setVisible(true);
+		try {
+			eventInfo.getChildren().clear();
+			EventPageController.setEvent(Event.getEvent(eventID));
+			eventInfo.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/EventPage.fxml").toURI().toURL()));
+			GridPane.setValignment(eventInfo.getChildren().get(0), VPos.CENTER);
+			GridPane.setHalignment(eventInfo.getChildren().get(0), HPos.CENTER);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
 

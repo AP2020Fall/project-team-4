@@ -370,25 +370,6 @@ public class EventController {
 		}
 	}
 
-	public void removeEvent () {
-		while (true)
-			try {
-//				Menu.printAskingForInput("Event ID:[/c to cancel] ");
-				String eventid = "";
-//				eventid = Menu.getInputLine();
-
-				if (eventid.trim().equalsIgnoreCase("/c")) return;
-
-				if (!Event.eventInSessionExists(eventid))
-					throw new EventDoesntExistException();
-
-				Event.removeEvent(eventid);
-				break;
-			} catch (EventDoesntExistException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-	}
-
 	private static class StartDateTimeHasAlreadyPassedException extends Exception {
 		public StartDateTimeHasAlreadyPassedException () {
 			super("Start date has already passed.");
