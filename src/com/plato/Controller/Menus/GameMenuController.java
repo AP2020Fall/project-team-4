@@ -5,6 +5,7 @@ import Controller.GameRelated.GameController;
 import Controller.MainController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,13 +15,18 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.ImageView;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class GameMenuController {
+public class GameMenuController implements Initializable {
 	private static String gameName;
 	public GridPane gameInfo;
 	public Label username2Error;
+	public Label gameTitle;
+	public ImageView gameIcon;
 	public TextField username2;
 
 
@@ -28,6 +34,15 @@ public class GameMenuController {
 	public static void setStage (Stage stage) {
 		stage.setTitle(gameName);
 		stage.show();
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		gameTitle.setText(gameName);
+		if(gameName.equals("Reversi")){
+
+		}
+		else if(gameName.equals("BattleSea")){}
 	}
 
 	public static void setGameName (String gameName) {
@@ -83,4 +98,6 @@ public class GameMenuController {
 			case "Reversi" -> startReversi();
 		}
 	}
+
+
 }

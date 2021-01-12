@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.GameMenuController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="450.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="550.0">
          <children>
-            <Label fx:id="gameTitle" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="132.0" layoutY="14.0" prefHeight="60.0" prefWidth="186.0" text="Reversi" textFill="#2f8c1a">
+            <Label fx:id="gameTitle" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="167.0" layoutY="14.0" prefHeight="60.0" prefWidth="186.0">
                <font>
-                  <Font name="Bauhaus 93" size="48.0" />
+                  <Font name="Bauhaus 93" size="36.0" />
                </font></Label>
-            <Button layoutX="80.0" layoutY="163.0" mnemonicParsing="false" style="-fx-background-radius: 87.5;" text="Button">
-               <graphic>
-                  <ImageView fitHeight="239.0" fitWidth="290.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic></Button>
+            <Button layoutX="80.0" layoutY="163.0" mnemonicParsing="false" style="-fx-background-radius: 87.5;" text="Button" >
+            <graphic>
+               <ImageView fitHeight="105.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="https://i.imgur.com/DiP3S8T.png" />
+               </ImageView>
+            </graphic>
+            </Button>>
+           
          </children>
       </Pane>
    </children>
