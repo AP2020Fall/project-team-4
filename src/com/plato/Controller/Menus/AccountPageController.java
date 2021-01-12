@@ -14,7 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -36,7 +35,6 @@ public class AccountPageController implements Initializable {
 	public ImageView uploadPfp;
 	public GridPane mainGridPane;
 	public ImageView logoutBtn;
-	public RowConstraints _2;
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		AccountPageController.gamerOrAdmin = gamerOrAdmin;

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<GridPane fx:id="messageGridPane" hgap="5.0" maxHeight="-Infinity" maxWidth="450.0" vgap="5.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.MessageTemplateController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="400.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+    </rowConstraints>
+    <ImageView fitHeight="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+        <Image url="https://i.imgur.com/4l0anrI.png?6" />
+    </ImageView>
+    <Label fx:id="msg" style="-fx-background-color: #2d59ff; -fx-background-radius: 20;" text="-" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+        <GridPane.margin>
+            <Insets bottom="2.0" left="18.0" right="90.0" />
+        </GridPane.margin>
+        <font>
+            <Font name="Arial" size="16.0" />
+        </font>
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="50.0" top="15.0" />
+        </padding>
+    </Label>
+    <Label fx:id="time" text="-" textFill="#a2a2a2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+        <GridPane.margin>
+            <Insets bottom="10.0" />
+        </GridPane.margin>
+        <padding>
+            <Insets right="3.0" />
+        </padding>
+        <font>
+            <Font name="AppleGothic Regular" size="10.0" />
+        </font>
+    </Label>
+    <HBox fx:id="dateHBox" alignment="CENTER" spacing="5.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+        <Line endX="100.0" stroke="#a1a1a1" />
+        <Label fx:id="date" style="-fx-background-color: #a4a4a4; -fx-background-radius: 3;" text="-" textFill="WHITE">
+            <font>
+                <Font name="AppleGothic Regular" size="11.0" />
+            </font>
+            <padding>
+                <Insets bottom="1.5" left="7.5" right="7.5" top="1.5" />
+            </padding>
+        </Label>
+        <Line endX="100.0" layoutX="11.0" layoutY="21.0" stroke="#a1a1a1" />
+    </HBox>
+</GridPane>
