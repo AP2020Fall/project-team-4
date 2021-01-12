@@ -1,14 +1,232 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.Menus.DisplayPersonalAccInfoController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<GridPane fx:id="mainGridPane" hgap="10.0" maxHeight="700.0" maxWidth="-Infinity" minHeight="700.0" prefHeight="400.0" prefWidth="600.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.DisplayPersonalAccInfoController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+   </rowConstraints>
+   <padding>
+      <Insets bottom="12.5" left="12.5" right="12.5" top="12.5" />
+   </padding>
+   <Button maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+   <ImageView fx:id="pfp" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+   <ImageView fx:id="uploadPfp" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadPfp" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+      <GridPane.margin>
+         <Insets left="200.0" />
+      </GridPane.margin>
+      <Image url="https://i.imgur.com/CxCk2qN.png" />
+   </ImageView>
+   <HBox alignment="CENTER" spacing="10.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <VBox alignment="CENTER" layoutX="306.0" layoutY="10.0" spacing="10.0">
+         <Label alignment="CENTER" minWidth="150.0" text="First Name" textAlignment="CENTER">
+            <font>
+               <Font name="Arial Bold" size="25.0" />
+            </font>
+         </Label>
+         <GridPane>
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+            <Label fx:id="firstName" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Avenir Book" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="firstNameTextField" maxWidth="200.0" promptText="First Name" visible="false">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+         </GridPane>
+         <Label onMouseClicked="#editFirstName" text="edit" textFill="RED">
+            <font>
+               <Font name="Arial" size="11.0" />
+            </font>
+            <VBox.margin>
+               <Insets left="100.0" />
+            </VBox.margin>
+         </Label>
+      </VBox>
+      <Line endY="60.0" />
+      <VBox alignment="CENTER" layoutX="203.0" layoutY="10.0" spacing="10.0">
+         <Label alignment="CENTER" minWidth="150.0" text="Last Name" textAlignment="CENTER">
+            <font>
+               <Font name="Arial Bold" size="25.0" />
+            </font>
+         </Label>
+         <GridPane>
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+            <Label fx:id="lastName" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Avenir Book" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="lastNameTextField" maxWidth="200.0" promptText="Last Name" visible="false">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+         </GridPane>
+         <Label onMouseClicked="#editLastName" text="edit" textFill="RED">
+            <font>
+               <Font name="Arial" size="11.0" />
+            </font>
+            <VBox.margin>
+               <Insets left="100.0" />
+            </VBox.margin>
+         </Label>
+      </VBox>
+   </HBox>
+   <VBox alignment="CENTER" spacing="10.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+      <Label alignment="CENTER" minWidth="150.0" text="Username" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Bold" size="25.0" />
+         </font>
+      </Label>
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" />
+         </rowConstraints>
+         <Label fx:id="username" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <font>
+               <Font name="Avenir Book" size="16.0" />
+            </font>
+         </Label>
+         <TextField fx:id="usernameTextField" maxWidth="200.0" promptText="Username" visible="false" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <font>
+               <Font name="Arial" size="13.0" />
+            </font>
+         </TextField>
+      </GridPane>
+      <Label onMouseClicked="#editUsername" text="edit" textFill="RED">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="100.0" />
+         </VBox.margin>
+      </Label>
+   </VBox>
+   <HBox alignment="CENTER" layoutX="30.0" layoutY="290.0" spacing="10.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+      <VBox alignment="CENTER" layoutX="306.0" layoutY="10.0" spacing="10.0">
+         <Label alignment="CENTER" minWidth="150.0" text="Email" textAlignment="CENTER">
+            <font>
+               <Font name="Arial Bold" size="25.0" />
+            </font>
+         </Label>
+         <GridPane>
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+            <Label fx:id="email" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Avenir Book" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailTextField" maxWidth="300.0" minWidth="300.0" promptText="Email" visible="false">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+         </GridPane>
+         <Label onMouseClicked="#editEmail" text="edit" textFill="RED">
+            <font>
+               <Font name="Arial" size="11.0" />
+            </font>
+            <VBox.margin>
+               <Insets left="100.0" />
+            </VBox.margin>
+         </Label>
+      </VBox>
+      <Line endY="60.0" />
+      <VBox alignment="CENTER" layoutX="203.0" layoutY="10.0" spacing="10.0">
+         <Label alignment="CENTER" minWidth="150.0" text="Phone Number" textAlignment="CENTER">
+            <font>
+               <Font name="Arial Bold" size="25.0" />
+            </font>
+         </Label>
+         <GridPane>
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+            <Label fx:id="phoneNumber" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Avenir Book" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="phoneNumberTextField" maxWidth="200.0" promptText="Phone Number" visible="false">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+         </GridPane>
+         <Label onMouseClicked="#editPhoneNum" text="edit" textFill="RED">
+            <font>
+               <Font name="Arial" size="11.0" />
+            </font>
+            <VBox.margin>
+               <Insets left="100.0" />
+            </VBox.margin>
+         </Label>
+      </VBox>
+   </HBox>
+   <HBox fx:id="coinHbox" alignment="CENTER" prefWidth="534.0" spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+      <Label fx:id="coins" text="-">
+         <font>
+            <Font name="Avenir Book" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="https://i.imgur.com/Iq0MAc7.pnghttps://i.imgur.com/Iq0MAc7.png" />
+      </ImageView>
+   </HBox>
+   <Label fx:id="allError" maxHeight="90.0" maxWidth="200.0" minHeight="90.0" minWidth="200.0" textFill="#06b5e1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+      <font>
+         <Font name="Arial" size="11.0" />
+      </font>
+   </Label>
+   <Button mnemonicParsing="false" onAction="#confirmAllEdits" style="-fx-background-radius: 15;" text="Confirm&#10;All Edits" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+      <font>
+         <Font name="Arial Bold" size="19.0" />
+      </font>
+   </Button>
+</GridPane>

@@ -7,7 +7,9 @@ g
     "month": 1,
     "day": 6
   },
-  "frnds": [],
+  "frnds": [
+    "heelo"
+  ],
   "faveGames": [
     "BattleSea"
   ],

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import com.gluonhq.charm.glisten.control.DropdownButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.AccountPageController">
+<GridPane fx:id="mainGridPane" hgap="5.0" maxHeight="700.0" maxWidth="-Infinity" minHeight="700.0" minWidth="-Infinity" vgap="5.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.AccountPageController">
     <columnConstraints>
 
 
         <ColumnConstraints hgrow="SOMETIMES" />
         <ColumnConstraints hgrow="SOMETIMES" />
         <ColumnConstraints hgrow="SOMETIMES" />
-      <ColumnConstraints hgrow="SOMETIMES" />
+        <ColumnConstraints hgrow="SOMETIMES" />
     </columnConstraints>
     <rowConstraints>
 
@@ -29,95 +29,334 @@
         <RowConstraints />
         <RowConstraints vgrow="SOMETIMES" />
         <RowConstraints vgrow="SOMETIMES" />
-      <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
     </rowConstraints>
-
-    <children>
-
-
-
-        <ImageView fx:id="pfp" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-            <GridPane.margin>
-
-
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-
-            </GridPane.margin></ImageView>
-
-
-        <Button mnemonicParsing="false" onAction="#logout" text="Logout" GridPane.rowIndex="1" GridPane.valignment="TOP">
-            <GridPane.margin>
-                <Insets />
-            </GridPane.margin>
-
-
-        </Button>
-
-        <ImageView fx:id="uploadPfp" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadPfp" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
-            <image>
-
-                <Image url="https://i.imgur.com/CxCk2qN.png" />
-            </image>
-            <GridPane.margin>
-
-                <Insets right="30.0" />
-            </GridPane.margin>
-
-
-        </ImageView>
-
-        <Label fx:id="username" text="-" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-
-            <font>
-
-                <Font size="17.0" />
-
-            </font>
-
-        </Label>
-
-      <Label text="plato age" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <Label text="username" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <GridPane fx:id="EditPassword" GridPane.columnIndex="3" GridPane.rowIndex="1">
-
-         <columnConstraints>
-
-             <ColumnConstraints fx:id="ViewPersonalInfo" hgrow="SOMETIMES" minWidth="10.0" />
-
-         </columnConstraints>
-
-          <rowConstraints>
-
-              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-
-         </rowConstraints>
-
-         <children>
-
-            <DropdownButton>
-
-                <items>
-
-                    <MenuItem text="Edit password" />
-
-                    <MenuItem text="View pwrsonal info" />
-
-                    <MenuItem text="Choice 3" />
-
-
-                </items>
-            </DropdownButton>
-         </children>
-      </GridPane>
-    </children>
 
 
     <padding>
 
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
 
     </padding>
 
+    <Label fx:id="username" text="-" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+
+        <font>
+
+            <Font name="Bangla MN" size="17.0" />
+
+        </font>
+        <GridPane.margin>
+            <Insets bottom="7.5" top="7.5" />
+        </GridPane.margin>
+
+    </Label>
+
+
+    <ImageView fx:id="pfp" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+        <GridPane.margin>
+
+
+            <Insets bottom="10.0" left="125.0" right="125.0" top="10.0" />
+
+        </GridPane.margin>
+    </ImageView>
+
+    <ImageView fx:id="uploadPfp" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadPfp" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+        <GridPane.margin>
+
+            <Insets left="190.0" />
+        </GridPane.margin>
+
+
+        <Image url="https://i.imgur.com/CxCk2qN.png" />
+    </ImageView>
+    <HBox alignment="CENTER" spacing="10.0" GridPane.columnSpan="4" GridPane.rowIndex="2">
+        <VBox alignment="CENTER" layoutX="306.0" layoutY="10.0" spacing="10.0">
+            <Label alignment="CENTER" minWidth="150.0" text="Friends" textAlignment="CENTER">
+                <font>
+                    <Font name="Arial Bold" size="22.0" />
+                </font>
+            </Label>
+            <Label fx:id="friends" text="-">
+                <font>
+                    <Font name="Avenir Book" size="16.0" />
+                </font>
+            </Label>
+        </VBox>
+        <Line endY="60.0" />
+        <VBox alignment="CENTER" layoutX="251.0" layoutY="10.0" spacing="10.0">
+            <Label alignment="CENTER" minWidth="150.0" text="Wins" textAlignment="CENTER">
+                <font>
+                    <Font name="Arial Bold" size="22.0" />
+                </font>
+            </Label>
+            <Label fx:id="wins" text="-">
+                <font>
+                    <Font name="Avenir Book" size="16.0" />
+                </font>
+            </Label>
+        </VBox>
+        <Line endY="60.0" layoutX="111.0" layoutY="11.0" />
+        <VBox alignment="CENTER" spacing="10.0">
+            <Label alignment="CENTER" minWidth="150.0" text="Plato Age" textAlignment="CENTER">
+                <font>
+                    <Font name="Arial Bold" size="22.0" />
+                </font>
+            </Label>
+            <Label fx:id="platoAge" text="-">
+                <font>
+                    <Font name="Avenir Book" size="16.0" />
+                </font>
+            </Label>
+        </VBox>
+    </HBox>
+    <HBox alignment="CENTER" spacing="5.0" GridPane.columnSpan="4" GridPane.rowIndex="3">
+        <Label fx:id="coins" text="-">
+            <font>
+                <Font name="Arial" size="22.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="https://i.imgur.com/Iq0MAc7.pnghttps://i.imgur.com/Iq0MAc7.png" />
+        </ImageView>
+    </HBox>
+    <Label alignment="CENTER" minWidth="150.0" text="Game Log" textAlignment="CENTER" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+        <font>
+            <Font name="Arial Bold" size="22.0" />
+        </font>
+        <GridPane.margin>
+            <Insets top="10.0" />
+        </GridPane.margin>
+    </Label>
+    <VBox GridPane.columnSpan="4" GridPane.rowIndex="5">
+        <GridPane.margin>
+            <Insets left="50.0" right="50.0" />
+        </GridPane.margin>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+            <ImageView fitHeight="125.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+                <GridPane.margin>
+                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                </GridPane.margin>
+                <Image url="https://i.imgur.com/IQNxj6N.png" />
+            </ImageView>
+            <ProgressBar fx:id="progressToNextLevelBattleSea" maxHeight="35.0" maxWidth="300.0" minHeight="35.0" minWidth="400.0" progress="0.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="2">
+                <GridPane.margin>
+                    <Insets bottom="30.0" right="20.0" />
+                </GridPane.margin>
+            </ProgressBar>
+            <Label fx:id="lvlBattleSea" text="Lvl -" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                <font>
+                    <Font name="Bangla MN" size="17.0" />
+                </font>
+                <GridPane.margin>
+                    <Insets top="7.5" />
+                </GridPane.margin>
+            </Label>
+            <HBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                <GridPane.margin>
+                    <Insets top="30.0" />
+                </GridPane.margin>
+                <VBox alignment="CENTER" layoutX="306.0" layoutY="10.0" spacing="5.0">
+                    <Label alignment="CENTER" minWidth="75.0" text="Played" textAlignment="CENTER">
+                        <font>
+                            <Font name="Arial Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="playedBattlesea" text="-">
+                        <font>
+                            <Font name="Avenir Book" size="16.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                <Line endY="50.0" />
+                <VBox alignment="CENTER" layoutX="251.0" layoutY="10.0" spacing="5.0">
+                    <Label alignment="CENTER" minWidth="75.0" text="Points" textAlignment="CENTER">
+                        <font>
+                            <Font name="Arial Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="pointsBattlesea" text="-">
+                        <font>
+                            <Font name="Avenir Book" size="16.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                <Line endY="50.0" layoutX="111.0" layoutY="11.0" />
+                <VBox alignment="CENTER" spacing="5.0">
+                    <Label alignment="CENTER" minWidth="75.0" text="Wins" textAlignment="CENTER">
+                        <font>
+                            <Font name="Arial Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="winsBattlesea" text="-">
+                        <font>
+                            <Font name="Avenir Book" size="16.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                <Line endY="50.0" layoutX="342.0" layoutY="14.0" />
+                <VBox alignment="CENTER" layoutX="352.0" layoutY="10.0" spacing="5.0">
+                    <Label alignment="CENTER" minWidth="75.0" text="Draws" textAlignment="CENTER">
+                        <font>
+                            <Font name="Arial Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="drawsBattlesea" text="-">
+                        <font>
+                            <Font name="Avenir Book" size="16.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                <Line endY="50.0" layoutX="513.0" layoutY="14.0" />
+                <VBox alignment="CENTER" layoutX="523.0" layoutY="10.0" spacing="5.0">
+                    <Label alignment="CENTER" minWidth="75.0" text="Losses" textAlignment="CENTER">
+                        <font>
+                            <Font name="Arial Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="lossesBattlesea" text="-">
+                        <font>
+                            <Font name="Avenir Book" size="16.0" />
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+        </GridPane>
+        <GridPane layoutX="10.0" layoutY="10.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+            <ImageView fitHeight="125.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+                <GridPane.margin>
+                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                </GridPane.margin>
+                <Image url="https://i.imgur.com/lKOxPw8.png" />
+            </ImageView>
+            <ProgressBar fx:id="progressToNextLevelReversi" maxHeight="35.0" maxWidth="300.0" minHeight="35.0" minWidth="400.0" progress="0.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="2">
+                <GridPane.margin>
+                    <Insets bottom="30.0" right="20.0" />
+                </GridPane.margin>
+            </ProgressBar>
+            <Label fx:id="lvlReversi" text="Lvl -" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                <font>
+                    <Font name="Bangla MN" size="17.0" />
+                </font>
+                <GridPane.margin>
+                    <Insets top="7.5" />
+                </GridPane.margin>
+            </Label>
+            <HBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                <GridPane.margin>
+                    <Insets top="30.0" />
+                </GridPane.margin>
+                <VBox alignment="CENTER" layoutX="306.0" layoutY="10.0" spacing="5.0">
+                    <Label alignment="CENTER" minWidth="75.0" text="Played" textAlignment="CENTER">
+                        <font>
+                            <Font name="Arial Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="playedReversi" text="-">
+                        <font>
+                            <Font name="Avenir Book" size="16.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                <Line endY="50.0" />
+                <VBox alignment="CENTER" layoutX="251.0" layoutY="10.0" spacing="5.0">
+                    <Label alignment="CENTER" minWidth="75.0" text="Points" textAlignment="CENTER">
+                        <font>
+                            <Font name="Arial Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="pointsReversi" text="-">
+                        <font>
+                            <Font name="Avenir Book" size="16.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                <Line endY="50.0" layoutX="111.0" layoutY="11.0" />
+                <VBox alignment="CENTER" spacing="5.0">
+                    <Label alignment="CENTER" minWidth="75.0" text="Wins" textAlignment="CENTER">
+                        <font>
+                            <Font name="Arial Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="winsReversi" text="-">
+                        <font>
+                            <Font name="Avenir Book" size="16.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                <Line endY="50.0" layoutX="342.0" layoutY="14.0" />
+                <VBox alignment="CENTER" layoutX="352.0" layoutY="10.0" spacing="5.0">
+                    <Label alignment="CENTER" minWidth="75.0" text="Draws" textAlignment="CENTER">
+                        <font>
+                            <Font name="Arial Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="drawsReversi" text="-">
+                        <font>
+                            <Font name="Avenir Book" size="16.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                <Line endY="50.0" layoutX="513.0" layoutY="14.0" />
+                <VBox alignment="CENTER" layoutX="523.0" layoutY="10.0" spacing="5.0">
+                    <Label alignment="CENTER" minWidth="75.0" text="Losses" textAlignment="CENTER">
+                        <font>
+                            <Font name="Arial Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="lossesReversi" text="-">
+                        <font>
+                            <Font name="Avenir Book" size="16.0" />
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+        </GridPane>
+    </VBox>
+    <Label onMouseClicked="#showDropDownMenu" rotate="90.0" text="..." GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+        <font>
+            <Font size="32.0"/>
+        </font>
+    </Label>
+    <ImageView fx:id="logoutBtn" fitHeight="70.0" fitWidth="200.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+        <Image url="https://i.imgur.com/V940bja.png" />
+    </ImageView>
+    <GridPane fx:id="dropDownMenu" layoutX="573.0" layoutY="55.0" maxHeight="60.0" maxWidth="110.0" minHeight="60.0" minWidth="110.0" style="-fx-background-color: white; -fx-border-color: grey; -fx-border-radius: 2; -fx-background-radius: 2;" visible="false" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+        <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+        <columnConstraints>
+            <ColumnConstraints />
+        </columnConstraints>
+        <effect>
+            <DropShadow color="#575656" offsetX="1.0" offsetY="1.0" />
+        </effect>
+        <GridPane.margin>
+            <Insets right="30.0" top="30.0" />
+        </GridPane.margin>
+        <Label alignment="CENTER" maxHeight="30.0" maxWidth="110.0" minHeight="30.0" minWidth="110.0" onMouseClicked="#editPassword" text="Edit Password" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <Label alignment="CENTER" maxHeight="30.0" maxWidth="110.0" minHeight="30.0" minWidth="110.0" onMouseClicked="#displayPersonalInfo" text="View Personal Info" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+    </GridPane>
 </GridPane>

@@ -160,4 +160,12 @@ public class GameLog {
 	public static int getLevel (Gamer gamer, String gameName) {
 		return getPoints(gamer, gameName) / 2;
 	}
+
+	/**
+	 * @return how many percent is remaining to proceed to next level
+	 */
+	public static double getProgressToNextLevel (Gamer gamer, String gameName) {
+		int points = getPoints(gamer, gameName);
+		return (points % 2) / 2.0;
+	}
 }

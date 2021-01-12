@@ -87,7 +87,8 @@ public abstract class Account {
 			case "username" -> setUsername(newVal);
 			case "password" -> setPassword(newVal);
 			case "email" -> setEmail(newVal);
-			case "phone num" -> setPhoneNum(newVal);
+			case "phone number" -> setPhoneNum(newVal);
+			case "pfp url" -> setPfpUrl(newVal);
 		}
 		MainController.getInstance().saveEverything();
 	}

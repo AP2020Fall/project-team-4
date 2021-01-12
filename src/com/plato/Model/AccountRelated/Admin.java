@@ -3,7 +3,7 @@ package Model.AccountRelated;
 import javafx.scene.image.Image;
 
 public class Admin extends Account {
-	public Admin (Image pfp, String firstName, String lastName, String username, String password, String email, String phoneNum) {
+	protected Admin (Image pfp, String firstName, String lastName, String username, String password, String email, String phoneNum) {
 		super(pfp, firstName, lastName, username, password, email, phoneNum);
 	}
 
