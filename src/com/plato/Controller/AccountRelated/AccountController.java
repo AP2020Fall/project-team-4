@@ -87,35 +87,37 @@ public class AccountController {
 	}
 
 	public void editAccField (String field, String newVal) throws MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException {
-		switch (field) {
-			case "First Name" -> {
+		switch (field.toLowerCase()) {
+			case "first name" -> {
 				if (!newVal.matches("[!-~]+"))
 					throw new MainController.InvalidFormatException("New first name");
 			}
-			case "Last Name" -> {
+			case "last name" -> {
 				if (!newVal.matches("[!-~]+"))
 					throw new MainController.InvalidFormatException("New last name");
 			}
-			case "Username" -> {
+			case "username" -> {
 				if (!newVal.matches("[!-~]+"))
 					throw new MainController.InvalidFormatException("New username");
 
 				if (Account.accountExists(newVal))
 					throw new AccountWithUsernameAlreadyExistsException();
 			}
-			case "Email" -> {
+			case "email" -> {
 				if (!Account.isEmailOK(newVal))
 					throw new InvalidEmailFormatException();
 			}
-			case "Phone Number" -> {
+			case "phone number" -> {
 				if (!Account.isPhoneNumOK(newVal))
 					throw new InvalidPhoneNumFormatException();
 			}
-			case "Pfp URL" -> {
+			case "pfp url" -> {
 				// FIXME: check url
 			}
+			default -> throw new IllegalStateException("Unexpected value: " + field.toLowerCase());
 		}
-		getCurrentAccLoggedIn().editField(field.toLowerCase(), newVal);
+//		getCurrentAccLoggedIn().editField(field.toLowerCase(), newVal);
+		Account.getAccount(currentAccLoggedIn.getUsername()).editField(field.toLowerCase(), newVal);
 	}
 
 	public void displayPersonalInfo () {
