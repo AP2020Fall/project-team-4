@@ -15,14 +15,6 @@
                <font>
                   <Font name="Bauhaus 93" size="36.0" />
                </font></Label>
-            <Button layoutX="80.0" layoutY="163.0" mnemonicParsing="false" style="-fx-background-radius: 87.5;" text="Button" >
-            <graphic>
-               <ImageView fitHeight="105.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="https://i.imgur.com/DiP3S8T.png" />
-               </ImageView>
-            </graphic>
-            </Button>>
-           
          </children>
       </Pane>
    </children>
