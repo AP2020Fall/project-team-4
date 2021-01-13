@@ -1,6 +1,7 @@
 package Model.AccountRelated;
 
 import Controller.IDGenerator;
+import Controller.MainController;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -32,11 +33,13 @@ public class Event {
 	// اطلاعات ایونت رو از کنترلر میگه و ایونت رو میسازه
 	public static void addEvent (String pictureUrl, String title, String gameName, double eventScore, LocalDate start, LocalDate end) {
 		events.addLast(new Event(pictureUrl, title, gameName, eventScore, start, end));
+		MainController.getInstance().saveEverything();
 	}
 
 	// بین ایونتها میگرده دنبال یه ایونتی که آیدیش این باشه
 	public static void removeEvent (String eventID) {
 		events.remove(getEvent(eventID));
+		MainController.getInstance().saveEverything();
 	}
 
 	// یین همه ایونتا میگرده و اونایی که این کاربر جزو شرکت کننده هاشون بوده رو برمیگردونه
@@ -55,6 +58,7 @@ public class Event {
 			if (event.isDue() && !event.awardsGiven)
 				event.giveAwardsOfOverdueEvent();
 		}
+		MainController.getInstance().saveEverything();
 	}
 
 	public static LinkedList<Event> getAllEvents () {
@@ -155,6 +159,7 @@ public class Event {
 				end = LocalDate.parse(newVal, dateTimeFormatter);
 				break;
 		}
+		MainController.getInstance().saveEverything();
 	}
 
 	// چک میکنه که آیا زمان شروع ایونت قبل یا خود امروز هست یا نه
@@ -181,11 +186,13 @@ public class Event {
 	// بازیکن را به لیست شرکت کنندگان ایونت اضافه میکند
 	public void addParticipant (Gamer gamer) {
 		participants.add(gamer);
+		MainController.getInstance().saveEverything();
 	}
 
 	// بازیکن را از لیست شرکت کنندگان ایونت حذف میکند
 	public void removeParticipant (Gamer gamer) {
 		participants.removeIf(participant -> participant.getUsername().equals(gamer.getUsername()));
+		MainController.getInstance().saveEverything();
 	}
 
 	// چک میکنه که آیا بازیکن تو ایونت شرکت میکنه یا نه

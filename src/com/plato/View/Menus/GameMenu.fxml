@@ -4,16 +4,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.Menus.GameMenuController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.GameMenuController">
 
-    <Button text="New game" onAction="#newGame" layoutX="200" layoutY="200"/>
-    <GridPane fx:id="gameInfo" visible="false">
-        <TextField promptText="Second Player Username" fx:id="username2" GridPane.rowIndex="0"
-                   GridPane.columnIndex="0"/>
-        <Label fx:id="username2Error" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-        <Button GridPane.rowIndex="0" GridPane.columnIndex="2" onAction="#gameInfoGiveDone"/>
+    <Button layoutX="200" layoutY="200" onAction="#newGame" text="New game"/>
+    <GridPane fx:id="gameInfo">
+        <TextField fx:id="username2" promptText="Second Player Username" GridPane.columnIndex="0"
+                   GridPane.rowIndex="0"/>
+        <Label fx:id="username2Error" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <Button onAction="#gameInfoGiveDone" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <columnConstraints>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints/>
+        </rowConstraints>
     </GridPane>
 </AnchorPane>

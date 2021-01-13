@@ -157,7 +157,7 @@ public class AccountPageController implements Initializable {
 		}
 	}
 
-	public void showDropDownMenu (MouseEvent mouseEvent) {
-		dropDownMenu.setVisible(true);
+	public void changeDropDownMenuVisibility (MouseEvent mouseEvent) {
+		dropDownMenu.setVisible(!dropDownMenu.isVisible());
 	}
 }

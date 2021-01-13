@@ -343,7 +343,7 @@
             </HBox>
         </GridPane>
     </VBox>
-    <Label onMouseClicked="#showDropDownMenu" rotate="90.0" text="..." GridPane.columnIndex="3"
+    <Label onMouseClicked="#changeDropDownMenuVisibility" rotate="90.0" text="..." GridPane.columnIndex="3"
            GridPane.halignment="RIGHT" GridPane.valignment="TOP">
         <font>
             <Font size="32.0"/>

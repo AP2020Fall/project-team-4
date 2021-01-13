@@ -24,7 +24,6 @@ public class BattleSea extends Game {
 		Collections.shuffle(gamers);
 		listOfPlayers.add(new PlayerBattleSea(gamers.get(0)));
 		listOfPlayers.add(new PlayerBattleSea(gamers.get(1)));
-
 	}
 
 	public static LinkedList<LinkedList<Ship>> get5RandBoards () {

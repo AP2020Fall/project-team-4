@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
@@ -124,9 +125,9 @@ public class EventsTabController implements Initializable {
 					getChildren().addAll(
 							new Label() {{
 								if (event.hasStarted())
-									setText("end in \n" + LocalDate.now().until(event.getEnd()) + "d");
+									setText("end in \n" + Math.toIntExact(ChronoUnit.DAYS.between(event.getEnd(), LocalDate.now())) + "d");
 								else
-									setText("start in \n" + event.getStart().until(LocalDate.now()) + "d");
+									setText("start in \n" + Math.toIntExact(ChronoUnit.DAYS.between(LocalDate.now(), event.getStart())) + "d");
 
 								setFont(Font.font("Arial", 20));
 								setTextAlignment(TextAlignment.CENTER);
@@ -139,13 +140,15 @@ public class EventsTabController implements Initializable {
 								// is already participating in event
 								if (event.participantExists(currentLoggedIn.getUsername())) {
 									setText("Drop-out");
-									setOnAction(e -> EventController.getInstance().participateInEvent(event.getEventID()));
-									System.out.println("event.getParticipants().size() = " + event.getParticipants().size());
+									setOnAction(e -> EventController.getInstance().stopParticipatingInEvent(event.getEventID()));
+									filter(new ActionEvent());
 								}
 								else {
 									setText("Join");
-									setOnAction(e -> EventController.getInstance().stopParticipatingInEvent(event.getEventID()));
-									System.out.println("event.getParticipants().size() = " + event.getParticipants().size());
+									setOnAction(e -> {
+										EventController.getInstance().participateInEvent(event.getEventID());
+										filter(new ActionEvent());
+									});
 								}
 
 								setFont(Font.font("Arial", FontWeight.BOLD, 27));
@@ -161,12 +164,13 @@ public class EventsTabController implements Initializable {
 				else
 					getChildren().addAll(
 							new Button() {{
-								setMinSize(40, 40);
-								setMaxSize(40, 40);
+								setMinSize(50, 50);
+								setMaxSize(50, 50);
 
 								setStyle("-fx-background-image: url('https://i.imgur.com/KDWC4LH.png');" +
 										"  -fx-background-size: 40 40;" +
-										"  -fx-background-radius: 20;");
+										"  -fx-background-radius: 20;" +
+										"  -fx-background-position: center;");
 
 								setOnAction(e -> editEvent(event));
 								setRowIndex(this, 0);
@@ -174,12 +178,13 @@ public class EventsTabController implements Initializable {
 								setRowSpan(this, 2);
 							}},
 							new Button() {{
-								setMinSize(40, 40);
-								setMaxSize(40, 40);
+								setMinSize(50, 50);
+								setMaxSize(50, 50);
 
 								setStyle("-fx-background-image: url('https://i.imgur.com/iZoXnCW.png?1');" +
 										"  -fx-background-size: 40 40;" +
-										"  -fx-background-radius: 20;");
+										"  -fx-background-radius: 20;" +
+										"  -fx-background-position: center;");
 
 								setOnAction(e -> removeEvent(event));
 								setRowIndex(this, 0);
@@ -203,6 +208,7 @@ public class EventsTabController implements Initializable {
 
 	private void removeEvent (Event event) {
 		Event.removeEvent(event.getEventID());
+		filter(new ActionEvent());
 	}
 
 	private void editEvent (Event event) {
