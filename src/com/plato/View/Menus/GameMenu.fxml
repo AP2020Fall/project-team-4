@@ -13,7 +13,7 @@
                <font>
                   <Font name="Bauhaus 93" size="36.0" />
                </font></Label>
-            <Button contentDisplay="TOP" layoutX="44.0" layoutY="174.0" mnemonicParsing="false" prefHeight="109.0" prefWidth="126.0" style="-fx-background-radius: 87.5; -fx-background-size: 50 50;" text="New Game" textAlignment="CENTER">
+            <Button contentDisplay="TOP" layoutX="44.0" layoutY="174.0" mnemonicParsing="false" prefHeight="109.0" prefWidth="126.0" style="-fx-background-radius: 87.5; -fx-background-size: 50 50;" text="New Game" textAlignment="CENTER" onAction="#newGame">
                <graphic>
                   <ImageView fitHeight="97.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                      <image>

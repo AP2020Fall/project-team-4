@@ -11,8 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.swing.text.html.ImageView;
@@ -26,8 +28,10 @@ public class GameMenuController implements Initializable {
 	public GridPane gameInfo;
 	public Label username2Error;
 	public Label gameTitle;
-	public ImageView gameIcon;
+	public ImageView backgroundImage;
 	public TextField username2;
+	public VBox vBox;
+	public Pane pane;
 
 
 
@@ -40,7 +44,7 @@ public class GameMenuController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		gameTitle.setText(gameName);
 		if(gameName.equals("Reversi")){
-
+			//pane.getChildren().subList(212 , 438).clear();
 		}
 		else if(gameName.equals("BattleSea")){}
 	}
@@ -83,7 +87,20 @@ public class GameMenuController implements Initializable {
 
 
 	public void newGame (ActionEvent actionEvent) {
-		gameInfo.setVisible(true);
+		//gameInfo.setVisible(true);
+		Label title = new Label(gameName);
+		title.setFont(new Font("Bauhaus 93" , 24));
+		VBox vBox = new VBox(title);
+		Scene scene = new Scene(vBox);
+		Stage stage = new Stage();
+		stage.setScene(scene);
+		stage.setTitle("New Game of " + gameName);
+		stage.setWidth(400);
+		stage.setHeight(450);
+		stage.initModality(Modality.WINDOW_MODAL);
+		TextField secondPlayer = new TextField();
+		stage.show();
+
 	}
 
 	public void gameInfoGiveDone (ActionEvent actionEvent) {
