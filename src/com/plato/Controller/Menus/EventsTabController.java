@@ -2,6 +2,7 @@ package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
 import Controller.AccountRelated.EventController;
+import Controller.MainController;
 import Model.AccountRelated.Event;
 import Model.AccountRelated.Gamer;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,7 +64,19 @@ public class EventsTabController implements Initializable {
 	}
 
 	public void createEvent (ActionEvent actionEvent) {
-		// TODO: 1/11/2021 AD
+		try {
+			EventCreateOrEditPageController.setIsForCreateOrInfo(true);
+			Stage stage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/EventCreateOrEditPage.fxml").toURI().toURL()),
+					"Create Event",
+					true,
+					MainController.getInstance().getPrimaryStage()
+			);
+			EventCreateOrEditPageController.setStage(stage);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -166,13 +180,14 @@ public class EventsTabController implements Initializable {
 					else
 						getChildren().addAll(
 								new Button() {{
-									setMinSize(50, 50);
-									setMaxSize(50, 50);
+									setMinSize(60, 50);
+									setMaxSize(60, 50);
 
 									setStyle("-fx-background-image: url('https://i.imgur.com/KDWC4LH.png');" +
 											"  -fx-background-size: 40 40;" +
 											"  -fx-background-radius: 20;" +
-											"  -fx-background-position: center;");
+											"  -fx-background-position: center;" +
+											"  -fx-background-image: no-repeat;");
 
 									setOnAction(e -> editEvent(event));
 									setRowIndex(this, 0);
@@ -184,9 +199,10 @@ public class EventsTabController implements Initializable {
 									setMaxSize(50, 50);
 
 									setStyle("-fx-background-image: url('https://i.imgur.com/iZoXnCW.png?1');" +
-											"  -fx-background-size: 40 40;" +
-											"  -fx-background-radius: 20;" +
-											"  -fx-background-position: center;");
+											"  -fx-background-size: 50 50;" +
+											"  -fx-background-radius: 25;" +
+											"  -fx-background-position: center;" +
+											"  -fx-background-image: no-repeat;");
 
 									setOnAction(e -> removeEvent(event));
 									setRowIndex(this, 0);
@@ -197,7 +213,7 @@ public class EventsTabController implements Initializable {
 
 					setOnMouseEntered(e -> setOpacity(0.8));
 					setOnMouseExited(e -> setOpacity(1));
-					setOnMouseClicked(e -> displayEventInfo(event.getEventID()));
+					setOnMouseClicked(e -> displayEventInfo(event));
 
 					setMinWidth(eventsList.getMinWidth());
 					setMaxWidth(eventsList.getMaxWidth());
@@ -213,14 +229,24 @@ public class EventsTabController implements Initializable {
 	}
 
 	private void editEvent (Event event) {
-		// TODO: 1/11/2021 AD  
-	}
-
-	private void displayEventInfo (String eventID) {
 		try {
 			eventInfo.getChildren().clear();
-			EventPageController.setEvent(Event.getEvent(eventID));
-			eventInfo.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/EventPage.fxml").toURI().toURL()));
+			EventCreateOrEditPageController.setEvent(event);
+			EventCreateOrEditPageController.setIsForCreateOrInfo(false);
+			eventInfo.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/EventCreateOrEditPage.fxml").toURI().toURL()));
+			GridPane.setValignment(eventInfo.getChildren().get(0), VPos.CENTER);
+			GridPane.setHalignment(eventInfo.getChildren().get(0), HPos.CENTER);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void displayEventInfo (Event event) {
+		try {
+			eventInfo.getChildren().clear();
+			EventCreateOrEditPageController.setEvent(event);
+			EventCreateOrEditPageController.setIsForCreateOrInfo(false);
+			eventInfo.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/EventCreateOrEditPage.fxml").toURI().toURL()));
 			GridPane.setValignment(eventInfo.getChildren().get(0), VPos.CENTER);
 			GridPane.setHalignment(eventInfo.getChildren().get(0), HPos.CENTER);
 		} catch (IOException e) {
