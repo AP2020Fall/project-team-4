@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
+	//b
 	private static boolean gamerOrAdmin;
 	public HBox buttons;
 	public GridPane pane;
