@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -59,6 +60,10 @@ public class GamesMenuController implements Initializable
 					true,
 					MainController.getInstance().getPrimaryStage()
 			);
+
+			Label gameTitle = new Label("Battle Sea");
+			gameTitle.setVisible(true);
+
 
 			GameMenuController.setStage(battleSeaMainMenu);
 			battleSeaMainMenu.show();

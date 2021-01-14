@@ -5,27 +5,48 @@ import Controller.GameRelated.GameController;
 import Controller.MainController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.ImageView;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class GameMenuController {
-	private static Stage stage;
+public class GameMenuController implements Initializable {
 	private static String gameName;
 	public GridPane gameInfo;
 	public Label username2Error;
+	public Label gameTitle;
+	public ImageView backgroundImage;
 	public TextField username2;
+	public VBox vBox;
+	public Pane pane;
+
+
 
 	public static void setStage (Stage stage) {
-		GameMenuController.stage = stage;
-		GameMenuController.stage.setOnCloseRequest(e -> {
-			GameMenuController.stage = null;
-			gameName = "";
-		});
+		stage.setTitle(gameName);
+		stage.show();
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		gameTitle.setText(gameName);
+		if(gameName.equals("Reversi")){
+			//pane.getChildren().subList(212 , 438).clear();
+		}
+		else if(gameName.equals("BattleSea")){}
 	}
 
 	public static void setGameName (String gameName) {
@@ -42,18 +63,44 @@ public class GameMenuController {
 			);
 			BattleSeaEditBoardPageController.setStage(battleSeaStage);
 			battleSeaStage.show();
-			stage.close();
+			//stage.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void startReversi () {
-		// TODO: 1/9/2021 AD
+		try{
+		Stage reversiStage= MainController.getInstance().createAndReturnNewStage(
+				FXMLLoader.load(new File("src/com/plato/View/Menus/ReversiGame.fxml").toURI().toURL()),
+				"Reversi",
+				true,
+				MainController.getInstance().getPrimaryStage()
+		);
+		ReversiGameController.setStage();
+		reversiStage.show();
+		//stage.close();
+	} catch (IOException e){
+			e.printStackTrace();
+		}
 	}
 
+
 	public void newGame (ActionEvent actionEvent) {
-		gameInfo.setVisible(true);
+		//gameInfo.setVisible(true);
+		Label title = new Label(gameName);
+		title.setFont(new Font("Bauhaus 93" , 24));
+		VBox vBox = new VBox(title);
+		Scene scene = new Scene(vBox);
+		Stage stage = new Stage();
+		stage.setScene(scene);
+		stage.setTitle("New Game of " + gameName);
+		stage.setWidth(400);
+		stage.setHeight(450);
+		stage.initModality(Modality.WINDOW_MODAL);
+		TextField secondPlayer = new TextField();
+		stage.show();
+
 	}
 
 	public void gameInfoGiveDone (ActionEvent actionEvent) {
@@ -68,4 +115,6 @@ public class GameMenuController {
 			case "Reversi" -> startReversi();
 		}
 	}
+
+
 }
