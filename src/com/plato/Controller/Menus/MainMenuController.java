@@ -86,8 +86,10 @@ public class MainMenuController implements Initializable {
 			EventsTabController.setGamerOrAdmin(gamerOrAdmin);
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/EventsTab.fxml").toURI().toURL()));
 			MainController.getInstance().getPrimaryStage().setMaxHeight(MainController.getInstance().getPrimaryStage().getMinHeight());
-			MainController.getInstance().getPrimaryStage().setMinWidth(1010);
-			MainController.getInstance().getPrimaryStage().setMaxWidth(MainController.getInstance().getPrimaryStage().getMinWidth());
+			if (!gamerOrAdmin) {
+				MainController.getInstance().getPrimaryStage().setMinWidth(1010);
+				MainController.getInstance().getPrimaryStage().setMaxWidth(MainController.getInstance().getPrimaryStage().getMinWidth());
+			}
 			GridPane.setHalignment(pane.getChildren().get(0), HPos.CENTER);
 			pane.getChildren().get(0).setLayoutY(0);
 		} catch (IOException e) {

@@ -23,7 +23,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class EventCreateOrEditPageController implements Initializable {
 	private static Stage stage;
@@ -192,7 +191,7 @@ public class EventCreateOrEditPageController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
-		if (event.isInSession())
+		if (event.hasStarted())
 			makeEventUnEditableAndUnremovable();
 
 		allErrors.setText("");
@@ -252,18 +251,11 @@ public class EventCreateOrEditPageController implements Initializable {
 		mainGridPane.getChildren().stream()
 				.filter(node -> node instanceof HBox)
 				.map(node -> ((HBox) node))
-				.forEach(hBox -> {
-					hBox.getChildren().stream()
-							.filter(node -> node instanceof VBox)
-							.map(node -> ((VBox) node))
-							.forEach(vBox -> {
-								vBox.getChildren().stream()
-										.filter(node -> node instanceof Label)
-										.map(node -> ((Label) node))
-										.collect(Collectors.toCollection(LinkedList::new))
-										.removeIf(editButton -> editButton.getText().equals("edit"));
-							});
-				});
+				.forEach(hBox ->
+						hBox.getChildren().stream()
+								.filter(node -> node instanceof VBox)
+								.map(node -> ((VBox) node))
+								.forEach(vBox -> vBox.getChildren().remove(vBox.getChildren().size() - 1)));
 	}
 
 	private void updateJoinOrDropOutBtn () {

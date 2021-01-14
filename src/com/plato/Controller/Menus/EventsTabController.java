@@ -215,6 +215,9 @@ public class EventsTabController implements Initializable {
 								}}
 						);
 
+					if (event.hasStarted())
+						getChildren().remove(getChildren().size() - 2, getChildren().size());
+
 					setOnMouseEntered(e -> setOpacity(0.8));
 					setOnMouseExited(e -> setOpacity(1));
 					setOnMouseClicked(e -> displayEventInfo(event));
