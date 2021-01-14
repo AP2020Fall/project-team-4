@@ -18,7 +18,7 @@ public abstract class Game {
 	protected String details = "";
 	private int turn = 0;
 	private GameConclusion conclusion = GameConclusion.IN_SESSION;
-	private LocalDateTime dateGameEnded;
+	private LocalDateTime dateGameEnded, dateGameStarted;
 
 	protected Game () {
 		this.gameID = IDGenerator.generateNext();
@@ -88,6 +88,7 @@ public abstract class Game {
 
 	public static void startGame (Game game) {
 		allGames.addLast(game);
+		game.dateGameStarted = LocalDateTime.now();
 	}
 
 	public static LinkedList<Game> getAllGames () {

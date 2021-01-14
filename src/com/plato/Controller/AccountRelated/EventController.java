@@ -3,15 +3,9 @@ package Controller.AccountRelated;
 import Controller.MainController;
 import Model.AccountRelated.Event;
 import Model.AccountRelated.Gamer;
-import Model.GameRelated.BattleSea.BattleSea;
-import Model.GameRelated.Reversi.Reversi;
-import View.AccountRelated.EventView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.LinkedList;
 
 public class EventController {
 	private static EventController eventController;
@@ -22,164 +16,24 @@ public class EventController {
 		return eventController;
 	}
 
-	public void createEvent () {
-		String title = "";
-		while (true)
-			try {
-//				Menu.printAskingForInput("Title:[/c to cancel] ");
-//				title = Menu.getInputLine();
+	public void createEvent (String title, String gameName, String picUrl, LocalDate start, LocalDate end, double eventPrize, String details) throws MainController.InvalidFormatException, GameNameCantBeEmptyException, StartDateTimeHasAlreadyPassedException, StartDateTimeIsAfterEndException, EndDateTimeHasAlreadyPassedException {
 
-				if (title.trim().equalsIgnoreCase("/c")) return;
+		if (!title.matches("[!-~]+"))
+			throw new MainController.InvalidFormatException("First name");
 
-				if (!title.matches("[!-~]+"))
-					throw new MainController.InvalidFormatException("First name");
+		if (gameName.isEmpty() || gameName.isBlank())
+			throw new GameNameCantBeEmptyException();
 
-				break;
-			} catch (MainController.InvalidFormatException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-		EventView.getInstance().displayAvailableGames();
+		if (start.isBefore(LocalDate.now()))
+			throw new StartDateTimeHasAlreadyPassedException();
 
-		String gameNum = "";
-		while (true) {
-//			Menu.printAskingForInput("Choose Game:[/c to cancel] ");
-//			gameNum = Menu.getInputLine();
+		if (end.isBefore(start))
+			throw new StartDateTimeIsAfterEndException();
 
-			if (gameNum.trim().equalsIgnoreCase("/c")) return;
+		if (end.isBefore(LocalDate.now()))
+			throw new EndDateTimeHasAlreadyPassedException();
 
-			if (gameNum.matches("[1-2]"))
-				break;
-//			Menu.printErrorMessage("Invalid input.");
-		}
-
-		String gameName = (Integer.parseInt(gameNum) == 1) ? BattleSea.class.getSimpleName() : Reversi.class.getSimpleName();
-
-		LocalDate start;
-		while (true) {
-			try {
-//				Menu.printAskingForInput("Start Date[d-MMM-yyyy][/c to cancel]: ");
-				String startStr = "";
-//				startStr = Menu.getInputLine();
-
-				if (startStr.trim().equalsIgnoreCase("/c")) return;
-
-				start = LocalDate.parse(startStr, DateTimeFormatter.ofPattern("d-MMM-yyyy"));
-
-				if (start.isBefore(LocalDate.now()))
-					throw new StartDateTimeHasAlreadyPassedException();
-				break;
-			} catch (DateTimeParseException e) {
-//				Menu.printErrorMessage("Invalid start date format.");
-			} catch (StartDateTimeHasAlreadyPassedException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-		}
-
-		LocalDate end;
-		while (true) {
-			try {
-//				Menu.printAskingForInput("End Date[d-MMM-yyyy][/c to cancel]: ");
-				String endStr = "";
-//				endStr = Menu.getInputLine();
-
-				if (endStr.trim().equalsIgnoreCase("/c")) return;
-
-				end = LocalDate.parse(endStr, DateTimeFormatter.ofPattern("d-MMM-yyyy"));
-
-				if (end.isBefore(start))
-					throw new StartDateTimeIsAfterEndException();
-
-				if (end.isBefore(LocalDate.now()))
-					throw new EndDateTimeHasAlreadyPassedException();
-				break;
-			} catch (DateTimeParseException e) {
-//				Menu.printErrorMessage("Invalid end date format.");
-			} catch (StartDateTimeIsAfterEndException | EndDateTimeHasAlreadyPassedException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-		}
-
-		double eventPrize;
-		while (true) {
-			try {
-//				Menu.printAskingForInput("Event Prize[/c to cancel]: ");
-				String prizeStr = "";
-//				prizeStr = Menu.getInputLine();
-
-				if (prizeStr.trim().equalsIgnoreCase("/c")) return;
-
-				eventPrize = Double.parseDouble(prizeStr);
-
-				break;
-			} catch (NumberFormatException e) {
-//				Menu.prin tErrorMessage("Invalid format.");
-			}
-		}
-
-		String picUrl = "";
-
-		Event.addEvent(picUrl, title, gameName, eventPrize, start, end);
-	}
-
-	public void displayInSessionEvents () {
-		LinkedList<String> events = new LinkedList<>() {{
-			for (Event inSessionEvent : Event.getAllInSessionEvents())
-				add("%s %s %s %s %s %.01f".formatted(
-						inSessionEvent.getTitle(),
-						inSessionEvent.getEventID(),
-						inSessionEvent.getGameName(),
-						inSessionEvent.getStart().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
-						inSessionEvent.getEnd().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
-						inSessionEvent.getEventScore()));
-		}};
-		if (events.size() == 0)
-			EventView.getInstance().displayNoCurrentlyInSessionEvents();
-		else
-			EventView.getInstance().displayEvents(events);
-	}
-
-	public void displayInSessionEventsParticipatingIn () {
-		LinkedList<String> events = new LinkedList<>() {{
-			for (Event inSessionEvent : Event.getInSessionEventsParticipatingIn(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()))) {
-				add("%s %s %s %s %s %.01f".formatted(
-						inSessionEvent.getTitle(),
-						inSessionEvent.getEventID(),
-						inSessionEvent.getGameName(),
-						inSessionEvent.getStart().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
-						inSessionEvent.getEnd().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
-						inSessionEvent.getEventScore()));
-			}
-		}};
-		if (events.size() == 0)
-			EventView.getInstance().displayNotParticipatingInAnyEvents();
-		else
-			EventView.getInstance().displayEvents(events);
-	}
-
-	public void displayEventInfo () {
-		String eventid = "";
-		while (true)
-			try {
-//				Menu.printAskingForInput("Event ID:[/c to cancel] ");
-//				eventid = Menu.getInputLine();
-
-				if (eventid.trim().equalsIgnoreCase("/c")) return;
-
-				if (Event.eventInSessionExists(eventid))
-					throw new EventDoesntExistException();
-
-				break;
-			} catch (EventDoesntExistException eventDoesntExist) {
-				eventDoesntExist.printStackTrace();
-			}
-		Event event = Event.getEvent(eventid);
-
-		EventView.getInstance().displayEventInfo(
-				event.getTitle(),
-				event.getGameName(),
-				event.getStart().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
-				event.getEnd().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")),
-				event.getEventScore());
+		Event.addEvent(picUrl, title, gameName, details, eventPrize, start, end);
 	}
 
 	public void participateInEvent (String eventid) {
@@ -190,199 +44,64 @@ public class EventController {
 		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).stopParticipatingInEvent(eventid);
 	}
 
-	public void editEvent () {
-		Event event;
-		while (true)
-			try {
-//				Menu.printAskingForInput("Event ID:[/c to cancel] ");
-				String eventid = "";
-//				eventid = Menu.getInputLine();
-
-				if (eventid.trim().equalsIgnoreCase("/c")) return;
-
-				if (!Event.eventExists(eventid))
-					throw new EventDoesntExistException();
-
-				if (!Event.getEvent(eventid).hasStarted())
-					throw new CantEditInSessionEventException();
-
-				event = Event.getEvent(eventid);
-				break;
-			} catch (EventDoesntExistException | CantEditInSessionEventException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
+	public void editEvent (Event event, String field, String newVal) throws MainController.InvalidFormatException, StartDateTimeHasAlreadyPassedException, StartDateTimeIsAfterEndException, EndDateTimeHasAlreadyPassedException, CantEditInSessionEventException {
+		if (event.isInSession())
+			throw new CantEditInSessionEventException();
 
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
-		LinkedList<String> availableFields = new LinkedList<>(Arrays.asList(
-				"Title",
-				"Game name",
-				"Event prize",
-				"Start date",
-				"End date"
-		));
-		EventView.getInstance().displayEditableFields(availableFields);
 
-		int field = 0;
-		try {
-			String fieldstr = "";
-//			fieldstr = (Menu.getInputLine());
+		switch (field.toLowerCase()) {
+			case "title" -> {
+				if (!newVal.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("New title");
 
-			if (!String.valueOf(fieldstr).matches("[1-5]"))
-				throw new NumberFormatException();
+				event.editField(field, newVal);
+			}
 
-			field = Integer.parseInt(fieldstr);
-		} catch (NumberFormatException e) {
-//			Menu.printErrorMessage(new MainController.InvalidInputException().getMessage());
+			case "game name" -> {
+				if (newVal.isEmpty() || newVal.isBlank())
+					throw new MainController.InvalidFormatException("New Game name");
+			}
+
+			case "prize", "details", "pic-url" -> {}
+
+
+			case "start date" -> {
+				LocalDate start = LocalDate.parse(newVal, dateTimeFormatter);
+				if (start.isBefore(LocalDate.now()))
+					throw new StartDateTimeHasAlreadyPassedException();
+
+				if (event.getEnd().isBefore(start))
+					throw new StartDateTimeIsAfterEndException();
+			}
+
+			case "end date" -> {
+				LocalDate end = LocalDate.parse(newVal, dateTimeFormatter);
+				if (end.isBefore(LocalDate.now()))
+					throw new EndDateTimeHasAlreadyPassedException();
+
+				if (event.getEnd().isBefore(end))
+					throw new StartDateTimeIsAfterEndException();
+			}
+
+			default -> throw new IllegalStateException("Unexpected value: " + field.toLowerCase());
 		}
-
-		switch (field) {
-			case 1 -> {
-				String title = "";
-				while (true)
-					try {
-//						Menu.printAskingForInput("New Title:[/c to cancel] ");
-//						title = Menu.getInputLine();
-
-						if (title.trim().equalsIgnoreCase("/c")) return;
-
-						if (!title.matches("[!-~]+"))
-							throw new MainController.InvalidFormatException("New title");
-
-						break;
-					} catch (MainController.InvalidFormatException e) {
-//						Menu.printErrorMessage(e.getMessage());
-					}
-//				Menu.displayAreYouSureMessage();
-//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//					event.editField("title", title);
-//					Menu.printSuccessfulOperation("Title changed successfully.");
-//				}
-			}
-
-			case 2 -> {
-				String gameNum = "";
-				EventView.getInstance().displayAvailableGames();
-				while (true)
-					try {
-//						Menu.printAskingForInput("Choose New Game:[/c to cancel] ");
-//						gameNum = Menu.getInputLine();
-
-						if (gameNum.trim().equalsIgnoreCase("/c")) return;
-
-						if (!gameNum.matches("[1-2]"))
-							throw new MainController.InvalidInputException();
-						break;
-					} catch (MainController.InvalidInputException e) {
-//						Menu.printErrorMessage(e.getMessage());
-					}
-
-				String gameName = (Integer.parseInt(gameNum) == 1) ? BattleSea.class.getSimpleName() : Reversi.class.getSimpleName();
-
-//				Menu.displayAreYouSureMessage();
-//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//					event.editField("game name", gameName);
-//					Menu.printSuccessfulOperation("Game name changed successfully.");
-//				}
-			}
-
-			case 3 -> {
-				String prize = "";
-				while (true)
-					try {
-//						Menu.printAskingForInput("New Event Prize Amount: [/c to cancel] ");
-//						prize = Menu.getInputLine();
-
-						if (prize.trim().equalsIgnoreCase("/c")) return;
-						Double.parseDouble(prize);
-						break;
-					} catch (NumberFormatException e) {
-//						Menu.printErrorMessage("Invalid format.");
-					}
-
-//				Menu.displayAreYouSureMessage();
-//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//					event.editField("event score", prize);
-//					Menu.printSuccessfulOperation("Event prize changed successfully.");
-//				}
-			}
-
-			case 4 -> {
-				String startDate = "";
-				while (true)
-					try {
-//						Menu.printAskingForInput("New Event Start Date: [/c to cancel] ");
-//						startDate = Menu.getInputLine();
-
-						if (startDate.trim().equalsIgnoreCase("/c")) return;
-
-						LocalDate start = LocalDate.parse(startDate, dateTimeFormatter);
-
-						if (start.isBefore(LocalDate.now()))
-							throw new StartDateTimeHasAlreadyPassedException();
-
-						if (event.getEnd().isBefore(start))
-							throw new StartDateTimeIsAfterEndException();
-
-						break;
-					} catch (DateTimeParseException e) {
-//						Menu.printErrorMessage("Invalid start date format.");
-					} catch (StartDateTimeHasAlreadyPassedException | StartDateTimeIsAfterEndException e) {
-//						Menu.printErrorMessage(e.getMessage());
-					}
-
-//				Menu.displayAreYouSureMessage();
-//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//					event.editField("start", startDate);
-//					Menu.printSuccessfulOperation("Start date changed successfully.");
-//				}
-			}
-
-			case 5 -> {
-				String endDate = "";
-				while (true)
-					try {
-//						Menu.printAskingForInput("New Event End Date: [/c to cancel] ");
-//						endDate = Menu.getInputLine();
-
-						if (endDate.trim().equalsIgnoreCase("/c")) return;
-
-						LocalDate end = LocalDate.parse(endDate, dateTimeFormatter);
-
-						if (end.isBefore(LocalDate.now()))
-							throw new EndDateTimeHasAlreadyPassedException();
-
-						if (event.getEnd().isBefore(end))
-							throw new StartDateTimeIsAfterEndException();
-
-						break;
-					} catch (DateTimeParseException e) {
-//						Menu.printErrorMessage("Invalid start date format.");
-					} catch (EndDateTimeHasAlreadyPassedException | StartDateTimeIsAfterEndException e) {
-//						Menu.printErrorMessage(e.getMessage());
-					}
-
-//				Menu.displayAreYouSureMessage();
-//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//					event.editField("end", endDate);
-//					Menu.printSuccessfulOperation("End date changed successfully.");
-//				}
-			}
-		}
+		event.editField(field, newVal);
 	}
 
-	private static class StartDateTimeHasAlreadyPassedException extends Exception {
+	public static class StartDateTimeHasAlreadyPassedException extends Exception {
 		public StartDateTimeHasAlreadyPassedException () {
 			super("Start date has already passed.");
 		}
 	}
 
-	private static class EndDateTimeHasAlreadyPassedException extends Exception {
+	public static class EndDateTimeHasAlreadyPassedException extends Exception {
 		public EndDateTimeHasAlreadyPassedException () {
 			super("End date has already passed.");
 		}
 	}
 
-	private static class StartDateTimeIsAfterEndException extends Exception {
+	public static class StartDateTimeIsAfterEndException extends Exception {
 		public StartDateTimeIsAfterEndException () {
 			super("End date must be after or on the same day as the start date.");
 		}
@@ -394,7 +113,7 @@ public class EventController {
 		}
 	}
 
-	private static class CantEditInSessionEventException extends Exception {
+	public static class CantEditInSessionEventException extends Exception {
 		public CantEditInSessionEventException () {
 			super("Can't edit an event that is in session.");
 		}
@@ -409,6 +128,12 @@ public class EventController {
 	private static class AlreadyParticipatingInEventException extends Exception {
 		public AlreadyParticipatingInEventException () {
 			super("You are already participating in this event");
+		}
+	}
+
+	public static class GameNameCantBeEmptyException extends Exception {
+		public GameNameCantBeEmptyException () {
+			super("Game Name can't be empty");
 		}
 	}
 }

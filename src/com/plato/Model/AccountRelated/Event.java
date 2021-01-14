@@ -12,17 +12,17 @@ public class Event {
 	private static LinkedList<Event> events = new LinkedList<>();
 	private final String eventID;
 	private String pictureUrl;
-	private String title;
-	private String gameName;
+	private String title, gameName, details;
 	private double eventScore;
 	private LocalDate start, end;
 	private LinkedList<Gamer> participants = new LinkedList<>();
 	private boolean awardsGiven = false; // true if an event has ended and its awards have been given, false otherwise
 
-	private Event (String pictureUrl, String title, String gameName, double eventScore, LocalDate start, LocalDate end) {
+	private Event (String pictureUrl, String title, String gameName, String details, double eventScore, LocalDate start, LocalDate end) {
 		this.pictureUrl = pictureUrl;
 		this.title = title;
 		this.gameName = gameName;
+		this.details = details;
 		this.eventScore = eventScore;
 		this.start = start;
 		this.end = end;
@@ -30,8 +30,8 @@ public class Event {
 	}
 
 	// اطلاعات ایونت رو از کنترلر میگه و ایونت رو میسازه
-	public static void addEvent (String pictureUrl, String title, String gameName, double eventScore, LocalDate start, LocalDate end) {
-		events.addLast(new Event(pictureUrl, title, gameName, eventScore, start, end));
+	public static void addEvent (String pictureUrl, String title, String gameName, String details, double eventScore, LocalDate start, LocalDate end) {
+		events.addLast(new Event(pictureUrl, title, gameName, details, eventScore, start, end));
 	}
 
 	// بین ایونتها میگرده دنبال یه ایونتی که آیدیش این باشه
@@ -100,7 +100,6 @@ public class Event {
 
 	// بین ایونتا دنبال این آیدی میگرده و اون ایونت رو پس میده
 	@SuppressWarnings("OptionalGetWithoutIsPresent")
-
 	public static Event getEvent (String eventID) {
 		return events.stream()
 				.filter(event -> event.getEventID().equals(eventID))
@@ -108,7 +107,6 @@ public class Event {
 	}
 
 	// بین ایونتا میگرده که آیا این آیدی وجود داره یا نه
-	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean eventExists (String eventID) {
 		return events.stream()
 				.anyMatch(event -> event.getEventID().equals(eventID));
@@ -135,25 +133,18 @@ public class Event {
 	}
 
 	// ویژگی گفته شده رو تغییر میده
-	@SuppressWarnings("EnhancedSwitchMigration")
 	public void editField (String field, String newVal) {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
 		switch (field.toLowerCase()) {
-			case "title":
-				title = newVal;
-				break;
-			case "game name":
-				gameName = newVal;
-				break;
-			case "event score":
-				eventScore = Double.parseDouble(newVal);
-				break;
-			case "start":
-				start = LocalDate.parse(newVal, dateTimeFormatter);
-				break;
-			case "end":
-				end = LocalDate.parse(newVal, dateTimeFormatter);
-				break;
+			case "title" -> title = newVal;
+			case "game name" -> gameName = newVal;
+			case "prize" -> eventScore = Double.parseDouble(newVal);
+			case "start date" -> start = LocalDate.parse(newVal, dateTimeFormatter);
+			case "end date" -> end = LocalDate.parse(newVal, dateTimeFormatter);
+			case "details" -> details = newVal;
+			case "pic-url" -> pictureUrl = newVal;
+
+			default -> throw new IllegalStateException("Unexpected value: " + field.toLowerCase());
 		}
 	}
 
@@ -222,6 +213,12 @@ public class Event {
 		return gameName;
 	}
 
+	public String getGamePicture () {
+		return gameName.toLowerCase().startsWith("b")
+				?
+				"https://i.imgur.com/IQNxj6N.png" : "https://i.imgur.com/lKOxPw8.png";
+	}
+
 	public double getEventScore () {
 		return eventScore;
 	}
@@ -240,5 +237,9 @@ public class Event {
 
 	public String getPictureUrl () {
 		return pictureUrl;
+	}
+
+	public String getDetails () {
+		return details;
 	}
 }

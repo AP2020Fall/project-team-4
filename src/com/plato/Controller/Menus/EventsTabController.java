@@ -39,6 +39,7 @@ public class EventsTabController implements Initializable {
 	public Button createEventBtn;
 	public ListView<GridPane> eventsList;
 	public Pane eventInfo;
+	public GridPane gridPane;
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		EventsTabController.gamerOrAdmin = gamerOrAdmin;
@@ -81,7 +82,10 @@ public class EventsTabController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
-		Event.addEvent("https://upload.wikimedia.org/wikipedia/commons/3/36/Large_bonfire.jpg", "Big Event", "BattleSea", 25, LocalDate.of(2021, 1, 11), LocalDate.of(2021, 1, 12));
+		if (gamerOrAdmin)
+			gridPane.getChildren().remove(createEventBtn);
+
+		Event.addEvent("https://upload.wikimedia.org/wikipedia/commons/3/36/Large_bonfire.jpg", "Big Event", "BattleSea", "details", 25, LocalDate.of(2021, 1, 11), LocalDate.of(2021, 1, 12));
 		updateList(Event.getAllEvents());
 	}
 
@@ -187,7 +191,7 @@ public class EventsTabController implements Initializable {
 											"  -fx-background-size: 40 40;" +
 											"  -fx-background-radius: 20;" +
 											"  -fx-background-position: center;" +
-											"  -fx-background-image: no-repeat;");
+											"  -fx-background-repeat: no-repeat;");
 
 									setOnAction(e -> editEvent(event));
 									setRowIndex(this, 0);
@@ -202,7 +206,7 @@ public class EventsTabController implements Initializable {
 											"  -fx-background-size: 50 50;" +
 											"  -fx-background-radius: 25;" +
 											"  -fx-background-position: center;" +
-											"  -fx-background-image: no-repeat;");
+											"  -fx-background-repeat: no-repeat;");
 
 									setOnAction(e -> removeEvent(event));
 									setRowIndex(this, 0);
