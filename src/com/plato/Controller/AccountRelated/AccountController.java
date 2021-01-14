@@ -7,9 +7,6 @@ import Model.AccountRelated.Gamer;
 import View.AccountRelated.AccountView;
 import javafx.scene.image.Image;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-
 public class AccountController {
 	private static AccountController accountController;
 	private Account currentAccLoggedIn = null;
@@ -21,16 +18,16 @@ public class AccountController {
 		return accountController;
 	}
 
-	public void login (String username, String password, boolean rememberMe) throws MainController.InvalidFormatException, NoAccountExistsWithUsernameException, PaswordIncorrectException{
+	public void login (String username, String password, boolean rememberMe) throws MainController.InvalidFormatException, NoAccountExistsWithUsernameException, PaswordIncorrectException {
 
-				if (!username.matches("[!-~]+"))
-					throw new MainController.InvalidFormatException("Username");
+		if (!username.matches("[!-~]+"))
+			throw new MainController.InvalidFormatException("Username");
 
-				if (!Account.accountExists(username))
-					throw new NoAccountExistsWithUsernameException();
+		if (!Account.accountExists(username))
+			throw new NoAccountExistsWithUsernameException();
 
-				if (!Account.getAccount(username).isPasswordCorrect(password))
-					throw new PaswordIncorrectException();
+		if (!Account.getAccount(username).isPasswordCorrect(password))
+			throw new PaswordIncorrectException();
 
 		saveLoginInfo = rememberMe;
 		currentAccLoggedIn = Account.getAccount(username);
@@ -75,181 +72,52 @@ public class AccountController {
 
 		if (!firstName.equals(""))
 			if (!Admin.adminHasBeenCreated())
-				Account.addAccount(Admin.class, new Image("https://i.pinimg.com/736x/fd/a1/3b/fda13b9d6d88f25a9d968901d319216a.jpg"), firstName, lastName, username, password, email, phoneNum, 0);
+				Account.addAccount(Admin.class, new Image("https://i.imgur.com/IIyNCG4.png"), firstName, lastName, username, password, email, phoneNum, 0);
 			else {
 				Account.addAccount(Gamer.class, pfp, firstName, lastName, username, password, email, phoneNum, initMoney);
 			}
 	}
 
-	public void changePWCommand () {
-		while (true)
-			try {
-//				Menu.printAskingForInput("Old password:[/c to cancel] ");
-				String oldPW = "";
-//				oldPW = Menu.getInputLine();
+	public void changePWCommand (String oldPW, String newPW) throws PaswordIncorrectException {
 
-				if (oldPW.trim().equalsIgnoreCase("/c")) return;
+		if (!AccountController.getInstance().getCurrentAccLoggedIn().isPasswordCorrect(oldPW))
+			throw new PaswordIncorrectException();
 
-				if (!AccountController.getInstance().getCurrentAccLoggedIn().isPasswordCorrect(oldPW))
-					throw new PaswordIncorrectException();
-				break;
-			} catch (PaswordIncorrectException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
-//		Menu.printAskingForInput("New password: ");
-		String newPW = "";
-//		newPW = Menu.getInputLine();
-
-//		Menu.displayAreYouSureMessage();
-//		if (Menu.getInputLine().trim().equalsIgnoreCase("y"))
 		AccountController.getInstance().getCurrentAccLoggedIn().editField("password", newPW);
 	}
 
-	public void editAccFieldCommand () {
-		LinkedList<String> availableFields = new LinkedList<>(Arrays.asList(
-				"First Name",
-				"Last Name",
-				"Username",
-				"Email",
-				"Phone Number"));
-		AccountView.getInstance().displayEditableFields(availableFields);
+	public void editAccField (String field, String newVal) throws MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException {
+		switch (field.toLowerCase()) {
+			case "first name" -> {
+				if (!newVal.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("New first name");
+			}
+			case "last name" -> {
+				if (!newVal.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("New last name");
+			}
+			case "username" -> {
+				if (!newVal.matches("[!-~]+"))
+					throw new MainController.InvalidFormatException("New username");
 
-		int field;
-		try {
-//			Menu.printAskingForInput("Choose field to edit:\n");
-			String fieldstr = "";
-//			fieldstr = Menu.getInputLine();
-
-			if (!String.valueOf(fieldstr).matches("[1-5]"))
-				throw new NumberFormatException();
-
-			field = Integer.parseInt(fieldstr);
-		} catch (NumberFormatException e) {
-//			Menu.printErrorMessage(new MainController.InvalidInputException().getMessage());
-			return;
+				if (Account.accountExists(newVal))
+					throw new AccountWithUsernameAlreadyExistsException();
+			}
+			case "email" -> {
+				if (!Account.isEmailOK(newVal))
+					throw new InvalidEmailFormatException();
+			}
+			case "phone number" -> {
+				if (!Account.isPhoneNumOK(newVal))
+					throw new InvalidPhoneNumFormatException();
+			}
+			case "pfp url" -> {
+				// FIXME: check url
+			}
+			default -> throw new IllegalStateException("Unexpected value: " + field.toLowerCase());
 		}
-
-		switch (field) {
-			case 1 -> {
-				String new1name = "";
-				while (true)
-					try {
-//						Menu.printAskingForInput("New First name:[/c to cancel] ");
-//						new1name = Menu.getInputLine();
-
-						if (new1name.trim().equalsIgnoreCase("/c")) return;
-
-						if (!new1name.matches("[!-~]+"))
-							throw new MainController.InvalidFormatException("New first name");
-
-						break;
-					} catch (MainController.InvalidFormatException e) {
-//						Menu.printErrorMessage(e.getMessage());
-					}
-//				Menu.displayAreYouSureMessage();
-//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//					getCurrentAccLoggedIn().editField("first name", new1name);
-//					Menu.printSuccessfulOperation("First name changed successfully.");
-//				}
-			}
-			case 2 -> {
-				String new2name = "";
-				while (true)
-					try {
-//						Menu.printAskingForInput("New Last name:[/c to cancel] ");
-//						new2name = Menu.getInputLine();
-
-						if (new2name.trim().equalsIgnoreCase("/c")) return;
-
-						if (!new2name.matches("[!-~]+"))
-							throw new MainController.InvalidFormatException("New last name");
-
-						break;
-					} catch (MainController.InvalidFormatException e) {
-//						Menu.printErrorMessage(e.getMessage());
-					}
-//				Menu.displayAreYouSureMessage();
-//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//					getCurrentAccLoggedIn().editField("last name", new2name);
-//					Menu.printSuccessfulOperation("Last name changed successfully.");
-//				}
-			}
-			case 3 -> {
-				String username = "";
-				while (true)
-					try {
-//						Menu.printAskingForInput("New Username:[/c to cancel] ");
-//						username = Menu.getInputLine();
-
-						if (username.trim().equalsIgnoreCase("/c")) return;
-
-						if (!username.matches("[!-~]+"))
-							throw new MainController.InvalidFormatException("New username");
-
-						if (Account.accountExists(username))
-							throw new AccountWithUsernameAlreadyExistsException();
-
-						break;
-					} catch (AccountWithUsernameAlreadyExistsException | MainController.InvalidFormatException e) {
-//						Menu.printErrorMessage(e.getMessage());
-					}
-
-//				Menu.displayAreYouSureMessage();
-//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//					getCurrentAccLoggedIn().editField("username", username);
-//					Menu.printSuccessfulOperation("Username changed successfully.");
-//				}
-			}
-			case 4 -> {
-				String newEmail = "";
-				while (true)
-					try {
-//						Menu.printAskingForInput("New email address:[/c to cancel] ");
-//						newEmail = Menu.getInputLine();
-
-						if (newEmail.trim().equalsIgnoreCase("/c")) return;
-
-						if (!Account.isEmailOK(newEmail))
-							throw new InvalidEmailFormatException();
-						break;
-					} catch (InvalidEmailFormatException e) {
-//						Menu.printErrorMessage(e.getMessage());
-					}
-
-//				Menu.displayAreYouSureMessage();
-//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//					getCurrentAccLoggedIn().editField("email", newEmail);
-//					Menu.printSuccessfulOperation("Email changed successfully.");
-//				}
-			}
-			case 5 -> {
-				String newPhoneNum = "";
-				while (true)
-					try {
-//						Menu.printAskingForInput("Phone Number:[/c to cancel] ");
-//						newPhoneNum = Menu.getInputLine();
-
-						if (newPhoneNum.trim().equalsIgnoreCase("/c")) return;
-
-						if (!Account.isPhoneNumOK(newPhoneNum))
-							throw new InvalidPhoneNumFormatException();
-						break;
-					} catch (InvalidPhoneNumFormatException e) {
-//						Menu.printErrorMessage(e.getMessage());
-					}
-
-//				Menu.displayAreYouSureMessage();
-//				if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//					getCurrentAccLoggedIn().editField("phone num", newPhoneNum);
-//					Menu.printSuccessfulOperation("Phone number changed successfully.");
-//				}
-			}
-			default -> {
-//				Menu.printErrorMessage("Invalid field.");
-			}
-		}
-
+//		getCurrentAccLoggedIn().editField(field.toLowerCase(), newVal);
+		Account.getAccount(currentAccLoggedIn.getUsername()).editField(field.toLowerCase(), newVal);
 	}
 
 	public void displayPersonalInfo () {

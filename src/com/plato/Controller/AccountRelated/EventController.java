@@ -116,12 +116,14 @@ public class EventController {
 			}
 		}
 
-		Event.addEvent(title, gameName, eventPrize, start, end);
+		String picUrl = "";
+
+		Event.addEvent(picUrl, title, gameName, eventPrize, start, end);
 	}
 
 	public void displayInSessionEvents () {
 		LinkedList<String> events = new LinkedList<>() {{
-			for (Event inSessionEvent : Event.getInSessionEvents())
+			for (Event inSessionEvent : Event.getAllInSessionEvents())
 				add("%s %s %s %s %s %.01f".formatted(
 						inSessionEvent.getTitle(),
 						inSessionEvent.getEventID(),
@@ -180,60 +182,12 @@ public class EventController {
 				event.getEventScore());
 	}
 
-	public void participateInEvent () {
-		String eventid = "";
-		while (true)
-			try {
-//				Menu.printAskingForInput("Event ID:[/c to cancel] ");
-//				eventid = Menu.getInputLine();
-
-				if (eventid.trim().equalsIgnoreCase("/c")) return;
-
-				if (!Event.eventExists(eventid) || !Event.eventInSessionExists(eventid))
-					throw new EventDoesntExistException();
-
-				if (Event.getEvent(eventid).participantExists(AccountController.getInstance().getCurrentAccLoggedIn().getUsername()))
-					throw new AlreadyParticipatingInEventException();
-
-				break;
-			} catch (EventDoesntExistException | AlreadyParticipatingInEventException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
-//		Menu.displayAreYouSureMessage();
-//		if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).participateInEvent(eventid);
-//			Menu.printSuccessfulOperation("You are now participating in this event.");
-//		}
+	public void participateInEvent (String eventid) {
+		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).participateInEvent(eventid);
 	}
 
-	public void stopParticipatingInEvent () {
-		Event event;
-		while (true)
-			try {
-//				Menu.printAskingForInput("Event ID:[/c to cancel] ");
-				String eventid = "";
-//				eventid = Menu.getInputLine();
-
-				if (eventid.trim().equalsIgnoreCase("/c")) return;
-
-				if (!Event.eventInSessionExists(eventid))
-					throw new EventDoesntExistException();
-
-				event = Event.getEvent(eventid);
-				if (!event.participantExists(AccountController.getInstance().getCurrentAccLoggedIn().getUsername()))
-					throw new NotParticipatingInEventException();
-
-				break;
-			} catch (EventDoesntExistException | NotParticipatingInEventException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
-
-//		Menu.displayAreYouSureMessage();
-//		if (Menu.getInputLine().trim().equalsIgnoreCase("y")) {
-//			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).stopParticipatingInEvent(event.getEventID());
-//			Menu.printSuccessfulOperation("You have stopped participating in this event.");
-//		}
+	public void stopParticipatingInEvent (String eventid) {
+		((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).stopParticipatingInEvent(eventid);
 	}
 
 	public void editEvent () {
@@ -414,25 +368,6 @@ public class EventController {
 //				}
 			}
 		}
-	}
-
-	public void removeEvent () {
-		while (true)
-			try {
-//				Menu.printAskingForInput("Event ID:[/c to cancel] ");
-				String eventid = "";
-//				eventid = Menu.getInputLine();
-
-				if (eventid.trim().equalsIgnoreCase("/c")) return;
-
-				if (!Event.eventInSessionExists(eventid))
-					throw new EventDoesntExistException();
-
-				Event.removeEvent(eventid);
-				break;
-			} catch (EventDoesntExistException e) {
-//				Menu.printErrorMessage(e.getMessage());
-			}
 	}
 
 	private static class StartDateTimeHasAlreadyPassedException extends Exception {

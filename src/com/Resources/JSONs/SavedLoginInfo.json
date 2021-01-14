@@ -1,22 +1,11 @@
-g
+a
 {
-  "awardsFromEvents": 0,
-  "money": 19.0,
-  "accountStartDate": {
-    "year": 2021,
-    "month": 1,
-    "day": 6
-  },
-  "frnds": [],
-  "faveGames": [
-    "BattleSea"
-  ],
-  "firstName": "c",
-  "lastName": "c",
-  "username": "c",
-  "password": "c",
-  "userID": "526048",
-  "email": "c@gmail.com",
+  "firstName": "d",
+  "lastName": "d",
+  "username": "dd",
+  "password": "dd",
+  "userID": "987283",
+  "email": "d@gmail.com",
   "phoneNum": "00011122233",
-  "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+  "pfpUrl": "https://i.imgur.com/IIyNCG4.png"
 }
