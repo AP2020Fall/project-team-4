@@ -1,12 +1,6 @@
 package Controller;
 
-import Controller.AccountRelated.*;
-import Controller.GameRelated.BattleSea.BattleSeaController;
-import Controller.GameRelated.BattleSea.BombController;
-import Controller.GameRelated.BattleSea.ShipController;
-import Controller.GameRelated.GameController;
-import Controller.GameRelated.GameLogController;
-import Controller.GameRelated.Reversi.ReversiController;
+import Controller.AccountRelated.AccountController;
 import Controller.Menus.LoginMenuController;
 import Controller.Menus.MainMenuController;
 import Controller.Menus.RegisterMenuController;
@@ -74,6 +68,7 @@ public class MainController extends Application {
 		}
 		else {
 			MainMenuController.setGamerOrAdmin(AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer);
+			LoginMenuController.setStage(primaryStage);
 			path = "src/com/plato/View/Menus/MainMenu.fxml";
 		}
 

@@ -27,6 +27,15 @@ public class RegisterMenuController implements Initializable {
 	public TextField pwFieldpwShown, usernameTxtFld;
 	public Label usernameError, AdminGamerTitle, passwordError;
 
+	public static Stage getStage () {
+		return stage;
+	}
+
+	public static void setStage (Stage stage) {
+		RegisterMenuController.stage = stage;
+		RegisterMenuController.stage.setOnCloseRequest(e -> RegisterMenuController.stage = null);
+	}
+
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
 		AdminGamerTitle.setText(((Admin.adminHasBeenCreated() ? "gamer" : "admin") + " sign-up").toUpperCase());
@@ -64,7 +73,6 @@ public class RegisterMenuController implements Initializable {
 		showPwOrNot.resize(25, 25);
 		showPwOrNot.setSmooth(true);
 		showPwOrNot.toFront();
-		stage.setOnCloseRequest(e -> stage = null);
 	}
 
 	public void signUp (ActionEvent actionEvent) {
@@ -100,13 +108,5 @@ public class RegisterMenuController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static void setStage (Stage stage) {
-		RegisterMenuController.stage = stage;
-	}
-
-	public static Stage getStage () {
-		return stage;
 	}
 }

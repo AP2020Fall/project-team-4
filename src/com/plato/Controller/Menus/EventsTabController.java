@@ -73,137 +73,138 @@ public class EventsTabController implements Initializable {
 
 	public void updateList (LinkedList<Event> eventsToShow) {
 		eventsList.getItems().clear();
-		eventsToShow.forEach(event -> {
-			eventsList.getItems().add(new GridPane() {{
-				ImageView eventPic = new ImageView() {{
-					setImage(new Image(event.getPictureUrl()));
-					setFitHeight(150);
-					setFitWidth(150);
-					setSmooth(true);
-					setPreserveRatio(true);
-					setHalignment(this, HPos.CENTER);
-					setValignment(this, VPos.CENTER);
-					setRowIndex(this, 0);
-					setColumnIndex(this, 0);
-					setRowSpan(this, 2);
-				}};
-
-				Label eventName = new Label() {{
-					setText(event.getTitle());
-					setFont(Font.font("Arial", FontWeight.BOLD, 26));
-					setTextAlignment(TextAlignment.CENTER);
-					setHalignment(this, HPos.CENTER);
-					setValignment(this, VPos.CENTER);
-					setRowIndex(this, 0);
-					setColumnIndex(this, 1);
-				}};
-
-				HBox coin = new HBox() {{
-					getChildren().add(new Label() {{
-						setText(String.valueOf(event.getEventScore()));
-						setFont(Font.font("Arial", 24));
-						setTextAlignment(TextAlignment.CENTER);
-					}});
-					getChildren().add(new ImageView() {{
-						setImage(new Image("https://i.imgur.com/Iq0MAc7.png"));
-						setFitWidth(30);
-						setFitHeight(30);
+		eventsToShow.forEach(event ->
+				eventsList.getItems().add(new GridPane() {{
+					ImageView eventPic = new ImageView() {{
+						setImage(new Image(event.getPictureUrl()));
+						setFitHeight(150);
+						setFitWidth(150);
 						setSmooth(true);
 						setPreserveRatio(true);
-					}});
-					setSpacing(5);
-					setAlignment(Pos.CENTER);
-					setHalignment(this, HPos.CENTER);
-					setValignment(this, VPos.CENTER);
-					setRowIndex(this, 1);
-					setColumnIndex(this, 1);
-				}};
+						setHalignment(this, HPos.CENTER);
+						setValignment(this, VPos.CENTER);
+						setRowIndex(this, 0);
+						setColumnIndex(this, 0);
+						setRowSpan(this, 2);
+					}};
 
-				getChildren().addAll(eventPic, eventName, coin);
+					Label eventName = new Label() {{
+						setText(event.getTitle());
+						setFont(Font.font("Arial", FontWeight.BOLD, 26));
+						setTextAlignment(TextAlignment.CENTER);
+						setHalignment(this, HPos.CENTER);
+						setValignment(this, VPos.CENTER);
+						setRowIndex(this, 0);
+						setColumnIndex(this, 1);
+					}};
 
-				if (gamerOrAdmin)
-					getChildren().addAll(
-							new Label() {{
-								if (event.hasStarted())
-									setText("end in \n" + Math.toIntExact(ChronoUnit.DAYS.between(event.getEnd(), LocalDate.now())) + "d");
-								else
-									setText("start in \n" + Math.toIntExact(ChronoUnit.DAYS.between(LocalDate.now(), event.getStart())) + "d");
+					HBox coin = new HBox() {{
+						getChildren().add(new Label() {{
+							setText(String.valueOf(event.getEventScore()));
+							setFont(Font.font("Arial", 24));
+							setTextAlignment(TextAlignment.CENTER);
+						}});
+						getChildren().add(new ImageView() {{
+							setImage(new Image("https://i.imgur.com/Iq0MAc7.png"));
+							setFitWidth(30);
+							setFitHeight(30);
+							setSmooth(true);
+							setPreserveRatio(true);
+						}});
+						setSpacing(5);
+						setAlignment(Pos.CENTER);
+						setHalignment(this, HPos.CENTER);
+						setValignment(this, VPos.CENTER);
+						setRowIndex(this, 1);
+						setColumnIndex(this, 1);
+					}};
 
-								setFont(Font.font("Arial", 20));
-								setTextAlignment(TextAlignment.CENTER);
-								setRowIndex(this, 0);
-								setColumnIndex(this, 2);
-								setRowSpan(this, 2);
-							}},
-							new Button() {{
-								Gamer currentLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
-								// is already participating in event
-								if (event.participantExists(currentLoggedIn.getUsername())) {
-									setText("Drop-out");
-									setOnAction(e -> EventController.getInstance().stopParticipatingInEvent(event.getEventID()));
-									filter(new ActionEvent());
-								}
-								else {
-									setText("Join");
-									setOnAction(e -> {
-										EventController.getInstance().participateInEvent(event.getEventID());
-										filter(new ActionEvent());
-									});
-								}
+					getChildren().addAll(eventPic, eventName, coin);
 
-								setFont(Font.font("Arial", FontWeight.BOLD, 27));
-								setTextAlignment(TextAlignment.CENTER);
-								setOnMouseEntered(e -> setOpacity(0.8));
-								setOnMouseExited(e -> setOpacity(1));
-								setRowIndex(this, 0);
-								setColumnIndex(this, 3);
-								setRowSpan(this, 2);
-							}}
-					);
+					if (gamerOrAdmin)
+						getChildren().addAll(
+								new Label() {{
+									if (event.hasStarted())
+										setText("end in \n" + Math.toIntExact(ChronoUnit.DAYS.between(event.getEnd(), LocalDate.now())) + "d");
+									else
+										setText("start in \n" + Math.toIntExact(ChronoUnit.DAYS.between(LocalDate.now(), event.getStart())) + "d");
 
-				else
-					getChildren().addAll(
-							new Button() {{
-								setMinSize(50, 50);
-								setMaxSize(50, 50);
+									setFont(Font.font("Arial", 20));
+									setTextAlignment(TextAlignment.CENTER);
+									setRowIndex(this, 0);
+									setColumnIndex(this, 2);
+									setRowSpan(this, 2);
+								}},
+								new Button() {{
+									Gamer currentLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+									// is already participating in event
+									if (event.participantExists(currentLoggedIn.getUsername())) {
+										setText("Drop-out");
+										setOnAction(e -> {
+											EventController.getInstance().stopParticipatingInEvent(event.getEventID());
+											filter(new ActionEvent());
+										});
+									}
+									else {
+										setText("Join");
+										setOnAction(e -> {
+											EventController.getInstance().participateInEvent(event.getEventID());
+											filter(new ActionEvent());
+										});
+									}
 
-								setStyle("-fx-background-image: url('https://i.imgur.com/KDWC4LH.png');" +
-										"  -fx-background-size: 40 40;" +
-										"  -fx-background-radius: 20;" +
-										"  -fx-background-position: center;");
+									setFont(Font.font("Arial", FontWeight.BOLD, 27));
+									setTextAlignment(TextAlignment.CENTER);
+									setOnMouseEntered(e -> setOpacity(0.8));
+									setOnMouseExited(e -> setOpacity(1));
+									setRowIndex(this, 0);
+									setColumnIndex(this, 3);
+									setRowSpan(this, 2);
+								}}
+						);
 
-								setOnAction(e -> editEvent(event));
-								setRowIndex(this, 0);
-								setColumnIndex(this, 2);
-								setRowSpan(this, 2);
-							}},
-							new Button() {{
-								setMinSize(50, 50);
-								setMaxSize(50, 50);
+					else
+						getChildren().addAll(
+								new Button() {{
+									setMinSize(50, 50);
+									setMaxSize(50, 50);
 
-								setStyle("-fx-background-image: url('https://i.imgur.com/iZoXnCW.png?1');" +
-										"  -fx-background-size: 40 40;" +
-										"  -fx-background-radius: 20;" +
-										"  -fx-background-position: center;");
+									setStyle("-fx-background-image: url('https://i.imgur.com/KDWC4LH.png');" +
+											"  -fx-background-size: 40 40;" +
+											"  -fx-background-radius: 20;" +
+											"  -fx-background-position: center;");
 
-								setOnAction(e -> removeEvent(event));
-								setRowIndex(this, 0);
-								setColumnIndex(this, 3);
-								setRowSpan(this, 2);
-							}}
-					);
+									setOnAction(e -> editEvent(event));
+									setRowIndex(this, 0);
+									setColumnIndex(this, 2);
+									setRowSpan(this, 2);
+								}},
+								new Button() {{
+									setMinSize(50, 50);
+									setMaxSize(50, 50);
 
-				setOnMouseEntered(e -> setOpacity(0.8));
-				setOnMouseExited(e -> setOpacity(1));
-				setOnMouseClicked(e -> displayEventInfo(event.getEventID()));
+									setStyle("-fx-background-image: url('https://i.imgur.com/iZoXnCW.png?1');" +
+											"  -fx-background-size: 40 40;" +
+											"  -fx-background-radius: 20;" +
+											"  -fx-background-position: center;");
 
-				setMinWidth(eventsList.getMinWidth());
-				setMaxWidth(eventsList.getMaxWidth());
+									setOnAction(e -> removeEvent(event));
+									setRowIndex(this, 0);
+									setColumnIndex(this, 3);
+									setRowSpan(this, 2);
+								}}
+						);
 
-				setHgap(30);
-				setVgap(10);
-			}});
-		});
+					setOnMouseEntered(e -> setOpacity(0.8));
+					setOnMouseExited(e -> setOpacity(1));
+					setOnMouseClicked(e -> displayEventInfo(event.getEventID()));
+
+					setMinWidth(eventsList.getMinWidth());
+					setMaxWidth(eventsList.getMaxWidth());
+
+					setHgap(30);
+					setVgap(10);
+				}}));
 	}
 
 	private void removeEvent (Event event) {

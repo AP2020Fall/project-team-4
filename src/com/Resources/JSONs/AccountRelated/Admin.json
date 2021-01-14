@@ -1,10 +1,10 @@
 {
-  "firstName": "d",
-  "lastName": "d",
-  "username": "dd",
-  "password": "dd",
-  "userID": "987283",
-  "email": "d@gmail.com",
+  "firstName": "admin",
+  "lastName": "admin",
+  "username": "admin",
+  "password": "pw",
+  "userID": "896427",
+  "email": "admin@gmail.com",
   "phoneNum": "00011122233",
   "pfpUrl": "https://i.imgur.com/IIyNCG4.png"
 }

@@ -34,7 +34,7 @@ public class LoginMenuController implements Initializable {
 
 	public static void setStage (Stage stage) {
 		LoginMenuController.stage = stage;
-		stage.setOnCloseRequest(windowEvent -> LoginMenuController.stage = null);
+		LoginMenuController.stage.setOnCloseRequest(e -> LoginMenuController.stage = null);
 	}
 
 	@Override
@@ -107,11 +107,13 @@ public class LoginMenuController implements Initializable {
 	public void signUp (MouseEvent mouseEvent) {
 		stage.close();
 		try {
-			MainController.getInstance().createAndReturnNewStage(FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterMenu.fxml").toURI().toURL()),
+			Stage regMenuStage = MainController.getInstance().createAndReturnNewStage(FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterMenu.fxml").toURI().toURL()),
 					"Register Menu",
 					true,
 					stage
-			).show();
+			);
+			RegisterMenuController.setStage(regMenuStage);
+			regMenuStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

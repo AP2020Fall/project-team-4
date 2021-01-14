@@ -71,17 +71,6 @@ public class RegisterFormController implements Initializable {
 	}
 
 	public void signUp (ActionEvent actionEvent) {
-		Stage loginStage = new Stage();
-		try {
-			loginStage = MainController.getInstance().createAndReturnNewStage(
-					FXMLLoader.load(new File("src/com/plato/View/Menus/LoginMenu.fxml").toURI().toURL()),
-					"Login Menu",
-					false,
-					stage
-			);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		double money;
 		try {
@@ -107,10 +96,21 @@ public class RegisterFormController implements Initializable {
 			}
 			return;
 		}
-		LoginMenuController.setStage(loginStage);
-		loginStage.show();
 		stage.close();
 		RegisterMenuController.getStage().close();
+
+		try {
+			Stage loginStage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/LoginMenu.fxml").toURI().toURL()),
+					"Login Menu",
+					false,
+					null
+			);
+			LoginMenuController.setStage(loginStage);
+			loginStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void setPassword (String password) {
