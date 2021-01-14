@@ -86,6 +86,10 @@ public abstract class Game {
 		return scoreBoard;
 	}
 
+	public static String getGamePictureUrl (String gameName) {
+		return (gameName.toLowerCase().startsWith("b")) ? "https://i.imgur.com/IQNxj6N.png" : "https://i.imgur.com/lKOxPw8.png";
+	}
+
 	public static void startGame (Game game) {
 		allGames.addLast(game);
 		game.dateGameStarted = LocalDateTime.now();

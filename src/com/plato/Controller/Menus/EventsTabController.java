@@ -85,7 +85,7 @@ public class EventsTabController implements Initializable {
 		if (gamerOrAdmin)
 			gridPane.getChildren().remove(createEventBtn);
 
-		Event.addEvent("https://upload.wikimedia.org/wikipedia/commons/3/36/Large_bonfire.jpg", "Big Event", "BattleSea", "details", 25, LocalDate.of(2021, 1, 11), LocalDate.of(2021, 1, 12));
+//		Event.addEvent("https://upload.wikimedia.org/wikipedia/commons/3/36/Large_bonfire.jpg", "Big Event", "BattleSea", "details", 25, LocalDate.of(2021, 1, 11), LocalDate.of(2021, 1, 12));
 		updateList(Event.getAllEvents());
 	}
 

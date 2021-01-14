@@ -33,7 +33,7 @@ public class EventController {
 		if (end.isBefore(LocalDate.now()))
 			throw new EndDateTimeHasAlreadyPassedException();
 
-		Event.addEvent(picUrl, title, gameName, details, eventPrize, start, end);
+//		Event.addEvent(picUrl, title, gameName, details, eventPrize, start, end); // fixme
 	}
 
 	public void participateInEvent (String eventid) {

@@ -3,9 +3,12 @@ package Controller.Menus;
 import Controller.AccountRelated.AccountController;
 import Controller.AccountRelated.EventController;
 import Controller.MainController;
+import Model.AccountRelated.Admin;
 import Model.AccountRelated.Event;
 import Model.AccountRelated.Gamer;
+import Model.GameRelated.Game;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -17,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,17 +33,18 @@ public class EventCreateOrEditPageController implements Initializable {
 	private static Event event;
 	private static boolean isForCreateOrInfo;
 	public ImageView eventImg, uploadEventImg;
-	public Label title, start, end, coins, details;
+	public Label title, start, end, coins, details, howToWinPrize;
 	public TextField titleTextField;
 	public ImageView gameImg;
 	public SplitMenuButton gameEditMenu, coinSplitMenu;
 	public DatePicker startDatePicker, endDatePicker;
 	public TextArea detailsTextArea;
-	public Button joinOrDropoutEventBtn, removeEventBtn, closeStageBtn, confirmEditsBtn, revertEditsBtn, createEventBtn, cancelBtn;
+	public Button joinOrDropoutEventBtn, removeEventBtn, closeStageBtn, confirmEditsBtn, revertEditsBtn, createEventBtn, cancelBtn, eventSettingsBtn;
 	public HBox topButtonsHbox, downBtnsHbox;
 	public GridPane mainGridPane;
 	public LinkedList<Label> editButtons = new LinkedList<>();
 	public Label allErrors;
+	public HBox gameHbox;
 
 	public static void setStage (Stage stage) {
 		EventCreateOrEditPageController.stage = stage;
@@ -52,6 +57,10 @@ public class EventCreateOrEditPageController implements Initializable {
 
 	public static void setEvent (Event event) {
 		EventCreateOrEditPageController.event = event;
+	}
+
+	public static Event getEvent () {
+		return event;
 	}
 
 	public void uploadImg (MouseEvent mouseEvent) {
@@ -191,8 +200,13 @@ public class EventCreateOrEditPageController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
-		if (event.hasStarted())
+		if (event != null && event.hasStarted())
 			makeEventUnEditableAndUnremovable();
+
+		if (isForCreateOrInfo || (!isForCreateOrInfo && AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin)) {
+			mainGridPane.getChildren().remove(gameHbox);
+			mainGridPane.getRowConstraints().remove(3);
+		}
 
 		allErrors.setText("");
 		startDatePicker.setValue(LocalDate.now());
@@ -218,8 +232,10 @@ public class EventCreateOrEditPageController implements Initializable {
 		endDatePicker.setConverter(startDatePicker.getConverter());
 
 		if (isForCreateOrInfo) {
-			topButtonsHbox.getChildren().remove(removeEventBtn);
+			topButtonsHbox.getChildren().removeAll(removeEventBtn, howToWinPrize, eventSettingsBtn);
+			mainGridPane.getRowConstraints().remove(2);
 			displayAllEditableParts();
+			makeEventUnEditableAndUnremovable();
 		}
 
 		else {
@@ -232,6 +248,7 @@ public class EventCreateOrEditPageController implements Initializable {
 			// gamer cant edit or delete
 			if (isForGamerOrAdmin) {
 				makeEventUnEditableAndUnremovable();
+				mainGridPane.getChildren().remove(eventSettingsBtn);
 			}
 			else {
 				topButtonsHbox.getChildren().remove(closeStageBtn);
@@ -309,12 +326,13 @@ public class EventCreateOrEditPageController implements Initializable {
 	public void updateDisplayInfo () {
 		eventImg.setImage(new Image(event.getPictureUrl()));
 		title.setText(event.getTitle());
-		gameImg.setImage(new Image(event.getGamePicture()));
+		gameImg.setImage(new Image(Game.getGamePictureUrl(event.getGameName())));
 		String format = "d MMM" + (event.getStart().getYear() != event.getEnd().getYear() ? "yyyy" : "");
 		start.setText(event.getStart().format(DateTimeFormatter.ofPattern(format)));
 		end.setText(event.getEnd().format(DateTimeFormatter.ofPattern(format)));
 		coins.setText(String.valueOf(event.getEventScore()));
 		details.setText(event.getDetails());
+		howToWinPrize.setText(event.getHowTo());
 	}
 
 	public void createEvent (ActionEvent actionEvent) {
@@ -331,5 +349,17 @@ public class EventCreateOrEditPageController implements Initializable {
 		} catch (MainController.InvalidFormatException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeIsAfterEndException | EventController.StartDateTimeHasAlreadyPassedException | EventController.GameNameCantBeEmptyException e) {
 			allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
 		}
+	}
+
+	public void openEventSettings (ActionEvent actionEvent) {
+		EventSettingsController.setIsForCreateOrEdit(title.getText().equals("-") || title.getText().isEmpty() || title.getText().isBlank());
+		Stage settingsStage = MainController.getInstance().createAndReturnNewStage(
+				FXMLLoader.load(new File("src/com/plato/View/Menus/EventSettings.fxml").toURI().toURL()),
+				"Event Condition to win",
+				true,
+				stage
+		);
+		EventSettingsController.setStage(stage);
+		settingsStage.show();
 	}
 }
