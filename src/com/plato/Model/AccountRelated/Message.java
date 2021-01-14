@@ -1,8 +1,6 @@
 package Model.AccountRelated;
 
 
-import Controller.MainController;
-
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -20,7 +18,6 @@ public class Message {
 		this.dateTime = LocalDateTime.now();
 
 		allMessages.addLast(this);
-		MainController.getInstance().saveEverything();
 	}
 
 	public static LinkedList<Message> getMessagesToGamer (Gamer gamer) {

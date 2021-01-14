@@ -1,7 +1,6 @@
 package Model.AccountRelated;
 
 import Controller.IDGenerator;
-import Controller.MainController;
 
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -21,17 +20,14 @@ public class AdminGameReco {
 
 	public static void addReco (String gameName, Gamer gamer) {
 		recommendations.addLast(new AdminGameReco(gameName, gamer));
-		MainController.getInstance().saveEverything();
 	}
 
 	public static void removeReco (String recoID) {
 		recommendations.remove(getRecommendation(recoID));
-		MainController.getInstance().saveEverything();
 	}
 
 	public static void removeReco (String gameName, Gamer gamer) {
 		recommendations.remove(getRecommendation(gamer, gameName));
-		MainController.getInstance().saveEverything();
 	}
 
 	public static LinkedList<AdminGameReco> getRecommendations (Gamer gamer) {

@@ -1,6 +1,5 @@
 package Model.AccountRelated;
 
-import Controller.MainController;
 import javafx.scene.image.Image;
 
 import java.time.LocalDate;
@@ -75,17 +74,14 @@ public class Gamer extends Account {
 
 	public void sendFrndReq (String usernameTo) {
 		FriendRequest.addFriendReq(this.getUsername(), usernameTo);
-		MainController.getInstance().saveEverything();
 	}
 
 	public void addFrnd (String friendUN) {
 		frnds.addLast(friendUN);
-		MainController.getInstance().saveEverything();
 	}
 
 	public void removeFrnd (String friendUN) {
 		frnds.remove(friendUN);
-		MainController.getInstance().saveEverything();
 	}
 
 	public boolean frndExists (String un) {
@@ -107,7 +103,6 @@ public class Gamer extends Account {
 	public void addToFaveGames (String gameName) {
 		if (!faveGames.contains(gameName))
 			faveGames.addLast(gameName);
-		MainController.getInstance().saveEverything();
 	}
 
 	public LinkedList<String> getFrnds () {
@@ -120,12 +115,10 @@ public class Gamer extends Account {
 
 	public void participateInEvent (String eventID) {
 		Event.getEvent(eventID).addParticipant(this);
-		MainController.getInstance().saveEverything();
 	}
 
 	public void stopParticipatingInEvent (String eventID) {
 		Event.getEvent(eventID).removeParticipant(this);
-		MainController.getInstance().saveEverything();
 	}
 
 	public int getDaysSinceRegistration () {

@@ -1,7 +1,5 @@
 package Model.AccountRelated;
 
-import Controller.MainController;
-
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
@@ -16,7 +14,6 @@ public class FriendRequest {
 
 	public static void addFriendReq (String fromUsername, String toUsername) {
 		allfriendRequests.add(new FriendRequest(fromUsername, toUsername));
-		MainController.getInstance().saveEverything();
 	}
 
 	public static void concludeFrndReq (String fromUsername, String toUsername, boolean accepted) {
@@ -28,7 +25,6 @@ public class FriendRequest {
 			allfriendRequests.removeIf(friendRequest ->
 					friendRequest.fromUsername.equals(toUsername) &&
 							friendRequest.toUsername.equals(fromUsername));
-		MainController.getInstance().saveEverything();
 	}
 
 	public static FriendRequest getFriendReq (String fromUsername, String toUsername) {
@@ -71,7 +67,6 @@ public class FriendRequest {
 			((Gamer) Account.getAccount(fromUsername)).addFrnd(toUsername);
 			((Gamer) Account.getAccount(toUsername)).addFrnd(fromUsername);
 		}
-		MainController.getInstance().saveEverything();
 	}
 
 	public String getFromUsername () {

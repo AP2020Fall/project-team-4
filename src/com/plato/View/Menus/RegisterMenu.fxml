@@ -2,5 +2,62 @@
 
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="10.0"
+          xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="Controller.Menus.RegisterMenuController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES"/>
+        <ColumnConstraints hgrow="SOMETIMES"/>
+        <ColumnConstraints hgrow="SOMETIMES"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+    </padding>
+    <Label fx:id="AdminGamerTitle" minWidth="300.0" text="SIGN-UP" GridPane.columnSpan="3" GridPane.halignment="CENTER"
+           GridPane.valignment="CENTER">
+        <font>
+            <Font name="Arial Bold" size="46.0"/>
+        </font>
+    </Label>
+    <Label text="Username" GridPane.rowIndex="1">
+        <font>
+            <Font name="Arial" size="14.0"/>
+        </font>
+    </Label>
+    <Label text="Password" GridPane.rowIndex="2">
+        <font>
+            <Font name="Arial" size="14.0"/>
+        </font>
+    </Label>
+    <Button mnemonicParsing="false" onAction="#signUp" text="SIGN-UP" GridPane.columnSpan="3"
+            GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+        <font>
+            <Font name="Arial Bold" size="17.0"/>
+        </font>
+        <opaqueInsets>
+            <Insets/>
+        </opaqueInsets>
+    </Button>
+    <TextField fx:id="usernameTxtFld" promptText="Username" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label fx:id="usernameError" minWidth="60.0" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER"
+           GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
+    <StackPane fx:id="pwStackPane" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <TextField promptText="Password"/>
+        <PasswordField promptText="Password"/>
+        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" StackPane.alignment="CENTER_RIGHT"/>
+    </StackPane>
+    <Label fx:id="passwordError" layoutX="271.0" layoutY="93.0" minWidth="60.0" wrapText="true" GridPane.columnIndex="2"
+           GridPane.rowIndex="2"/>
+</GridPane>
