@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -40,11 +41,10 @@ public class EventCreateOrEditPageController implements Initializable {
 	public DatePicker startDatePicker, endDatePicker;
 	public TextArea detailsTextArea;
 	public Button joinOrDropoutEventBtn, removeEventBtn, closeStageBtn, confirmEditsBtn, revertEditsBtn, createEventBtn, cancelBtn, eventSettingsBtn;
-	public HBox topButtonsHbox, downBtnsHbox;
+	public HBox topButtonsHbox, downBtnsHbox, gameHbox;
 	public GridPane mainGridPane;
-	public LinkedList<Label> editButtons = new LinkedList<>();
 	public Label allErrors;
-	public HBox gameHbox;
+	public LinkedList<Label> editButtons = new LinkedList<>();
 
 	public static void setStage (Stage stage) {
 		EventCreateOrEditPageController.stage = stage;
@@ -55,12 +55,12 @@ public class EventCreateOrEditPageController implements Initializable {
 		EventCreateOrEditPageController.isForCreateOrInfo = isForCreateOrInfo;
 	}
 
-	public static void setEvent (Event event) {
-		EventCreateOrEditPageController.event = event;
-	}
-
 	public static Event getEvent () {
 		return event;
+	}
+
+	public static void setEvent (Event event) {
+		EventCreateOrEditPageController.event = event;
 	}
 
 	public void uploadImg (MouseEvent mouseEvent) {
@@ -206,6 +206,8 @@ public class EventCreateOrEditPageController implements Initializable {
 		if (isForCreateOrInfo || (!isForCreateOrInfo && AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin)) {
 			mainGridPane.getChildren().remove(gameHbox);
 			mainGridPane.getRowConstraints().remove(3);
+
+
 		}
 
 		allErrors.setText("");
@@ -262,7 +264,8 @@ public class EventCreateOrEditPageController implements Initializable {
 		topButtonsHbox.getChildren().removeAll(closeStageBtn, removeEventBtn);
 		mainGridPane.getChildren().remove(uploadEventImg);
 
-		updateJoinOrDropOutBtn();
+		if (!isForCreateOrInfo)
+			updateJoinOrDropOutBtn();
 
 		// remove all edit buttons
 		mainGridPane.getChildren().stream()
@@ -314,15 +317,6 @@ public class EventCreateOrEditPageController implements Initializable {
 		editButtons.clear();
 	}
 
-	private void displayAllEditableParts () {
-		titleTextField.setVisible(true);
-		gameEditMenu.setVisible(true);
-		startDatePicker.setVisible(true);
-		endDatePicker.setVisible(true);
-		coinSplitMenu.setVisible(true);
-		detailsTextArea.setVisible(true);
-	}
-
 	public void updateDisplayInfo () {
 		eventImg.setImage(new Image(event.getPictureUrl()));
 		title.setText(event.getTitle());
@@ -333,6 +327,15 @@ public class EventCreateOrEditPageController implements Initializable {
 		coins.setText(String.valueOf(event.getEventScore()));
 		details.setText(event.getDetails());
 		howToWinPrize.setText(event.getHowTo());
+	}
+
+	private void displayAllEditableParts () {
+		titleTextField.setVisible(true);
+		gameEditMenu.setVisible(true);
+		startDatePicker.setVisible(true);
+		endDatePicker.setVisible(true);
+		coinSplitMenu.setVisible(true);
+		detailsTextArea.setVisible(true);
 	}
 
 	public void createEvent (ActionEvent actionEvent) {
@@ -352,14 +355,18 @@ public class EventCreateOrEditPageController implements Initializable {
 	}
 
 	public void openEventSettings (ActionEvent actionEvent) {
-		EventSettingsController.setIsForCreateOrEdit(title.getText().equals("-") || title.getText().isEmpty() || title.getText().isBlank());
-		Stage settingsStage = MainController.getInstance().createAndReturnNewStage(
-				FXMLLoader.load(new File("src/com/plato/View/Menus/EventSettings.fxml").toURI().toURL()),
-				"Event Condition to win",
-				true,
-				stage
-		);
-		EventSettingsController.setStage(stage);
-		settingsStage.show();
+		try {
+			EventSettingsController.setIsForCreateOrEdit(title.getText().equals("-") || title.getText().isEmpty() || title.getText().isBlank());
+			Stage settingsStage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/EventSettings.fxml").toURI().toURL()),
+					"Event Condition to win",
+					true,
+					stage
+			);
+			EventSettingsController.setStage(stage);
+			settingsStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -41,9 +41,6 @@
             <RowConstraints vgrow="SOMETIMES"/>
             <RowConstraints vgrow="SOMETIMES"/>
             <RowConstraints vgrow="SOMETIMES"/>
-            <RowConstraints vgrow="SOMETIMES"/>
-            <RowConstraints vgrow="SOMETIMES"/>
-            <RowConstraints vgrow="SOMETIMES"/>
         </rowConstraints>
         <ImageView fx:id="pfp1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true"
                    GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -70,22 +67,22 @@
                 <Insets left="20.0" right="20.0"/>
             </GridPane.margin>
         </Circle>
-        <Label fx:id="username1" text="-" GridPane.halignment="CENTER" GridPane.rowIndex="2"
+        <Label fx:id="username1" text="-" GridPane.halignment="CENTER" GridPane.rowIndex="1"
                GridPane.valignment="CENTER">
             <font>
                 <Font name="Arial" size="17.0"/>
             </font>
         </Label>
         <Label fx:id="username2" layoutX="93.0" layoutY="135.0" text="-" GridPane.columnIndex="1"
-               GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
             <font>
                 <Font name="Arial" size="17.0"/>
             </font>
         </Label>
-        <ProgressIndicator fx:id="timer1" progress="0.0" GridPane.halignment="CENTER" GridPane.rowIndex="3"
+        <ProgressIndicator fx:id="timer1" progress="0.0" GridPane.halignment="CENTER" GridPane.rowIndex="2"
                            GridPane.valignment="CENTER"/>
         <ProgressIndicator fx:id="timer2" layoutX="82.0" layoutY="165.0" progress="0.0" GridPane.columnIndex="1"
-                           GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER"/>
+                           GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER"/>
         <ImageView fx:id="pfp2" fitHeight="100.0" fitWidth="100.0" layoutX="63.0" layoutY="20.0" pickOnBounds="true"
                    preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER"
                    GridPane.valignment="CENTER">
