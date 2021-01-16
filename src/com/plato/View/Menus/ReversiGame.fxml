@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="10.0" maxHeight="900.0" maxWidth="900.0" minHeight="900.0" minWidth="900.0" style="-fx-background-color: rgb(165,133,75);" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.ReversiGameController">
+<GridPane hgap="10.0" maxHeight="950.0" maxWidth="900.0" minHeight="950.0" minWidth="900.0" style="-fx-background-color: rgb(165,133,75);" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.ReversiGameController">
     <columnConstraints>
         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="30.0" />
         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0" />
@@ -81,7 +81,7 @@
             <Image url="https://i.imgur.com/vKt2BwI.pnghttps://i.imgur.com/vKt2BwI.png" />
         </ImageView>
     </GridPane>
-   <TilePane fx:id="board" alignment="CENTER" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefColumns="8" prefRows="8" prefTileHeight="80.0" prefTileWidth="80.0" style="-fx-background-image: url(&quot;https://i.imgur.com/jyxjFJb.pnghttps://i.imgur.com/jyxjFJb.png&quot;); -fx-background-repeat: no-repeat; -fx-background-size: 640;" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+   <TilePane fx:id="board" alignment="CENTER" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefColumns="8" prefRows="8" prefTileHeight="80.0" prefTileWidth="80.0" style="-fx-background-image: url(&quot;https://i.imgur.com/jyxjFJb.pnghttps://i.imgur.com/jyxjFJb.png&quot;); -fx-background-repeat: no-repeat; -fx-background-size: 640;" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
       <GridPane.margin>
          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
       </GridPane.margin>
@@ -408,4 +408,124 @@
    </TilePane>
     <Button fx:id="confirmMoveBtn" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#confirmMove" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/v2ihpyg.pnghttps://i.imgur.com/v2ihpyg.png&quot;); -fx-background-color: transparent; -fx-background-size: 60; -fx-background-radius: 30; -fx-background-position: center;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
    <Button fx:id="showMovesBtn" layoutX="919.0" layoutY="567.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#showMoves" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/SVKhCKE.pnghttps://i.imgur.com/SVKhCKE.png&quot;); -fx-background-color: transparent; -fx-background-size: 75; -fx-background-radius: 37.5; -fx-background-position: center;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
+   <GridPane maxHeight="20.0" maxWidth="640.0" minHeight="20.0" minWidth="640.0" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.valignment="TOP">
+     <columnConstraints>
+       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+     </columnConstraints>
+     <rowConstraints>
+       <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+     </rowConstraints>
+      <children>
+         <Label text="A" textFill="WHITE">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="50.0" layoutY="11.0" text="B" textFill="WHITE" GridPane.columnIndex="1">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="136.0" layoutY="11.0" text="C" textFill="WHITE" GridPane.columnIndex="2">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="221.0" layoutY="11.0" text="D" textFill="WHITE" GridPane.columnIndex="3">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="303.0" layoutY="11.0" text="E" textFill="WHITE" GridPane.columnIndex="4">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="382.0" layoutY="11.0" text="F" textFill="WHITE" GridPane.columnIndex="5">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="459.0" layoutY="11.0" text="G" textFill="WHITE" GridPane.columnIndex="6">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="533.0" layoutY="11.0" text="H" textFill="WHITE" GridPane.columnIndex="7">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+      </children>
+      <GridPane.margin>
+         <Insets top="10.0" />
+      </GridPane.margin>
+   </GridPane>
+   <GridPane layoutX="140.0" layoutY="270.0" maxHeight="640.0" maxWidth="20.0" minHeight="640.0" minWidth="20.0" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <columnConstraints>
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <children>
+         <Label text="1" textFill="WHITE">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="16.0" layoutY="49.0" text="2" textFill="WHITE" GridPane.rowIndex="1">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="16.0" layoutY="143.0" text="3" textFill="WHITE" GridPane.rowIndex="2">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="16.0" layoutY="231.0" text="4" textFill="WHITE" GridPane.rowIndex="3">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="16.0" layoutY="316.0" text="5" textFill="WHITE" GridPane.rowIndex="4">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="16.0" layoutY="393.0" text="6" textFill="WHITE" GridPane.rowIndex="5">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="16.0" layoutY="468.0" text="7" textFill="WHITE" GridPane.rowIndex="6">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="16.0" layoutY="537.0" text="8" textFill="WHITE" GridPane.rowIndex="7">
+            <font>
+               <Font name="Apple Symbols" size="17.0" />
+            </font>
+         </Label>
+      </children>
+      <GridPane.margin>
+         <Insets bottom="10.0" left="10.0" right="60.0" top="10.0" />
+      </GridPane.margin>
+   </GridPane>
 </GridPane>
