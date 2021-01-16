@@ -36,10 +36,9 @@ enum Direction {
 
 public class Reversi extends Game {
 	private static String reversiDetails;
-	protected ArrayList<PlayerReversi> listOfPlayers = new ArrayList<>();
-
 	private final String[][] board = new String[8][8];
 	private final LinkedList<String> moves = new LinkedList<>();
+	protected ArrayList<PlayerReversi> listOfPlayers = new ArrayList<>();
 
 	public Reversi (ArrayList<Gamer> gamers) {
 		super();
@@ -48,10 +47,6 @@ public class Reversi extends Game {
 		Collections.shuffle(gamers);
 		listOfPlayers.add(new PlayerReversi(gamers.get(0), "b"));
 		listOfPlayers.add(new PlayerReversi(gamers.get(1), "w"));
-	}
-
-	public static boolean checkCoordinates (int number) {
-		return number >= 1 && number <= 8;
 	}
 
 	public static void setDetailsForReversi (String details) {
@@ -80,37 +75,6 @@ public class Reversi extends Game {
 	}
 
 	/**
-	 * should be called after next turn
-	 * if board is full or atleast one of them is 0 return new ArrayList()
-	 * otherwise check every blank coordinate and if player can place there add to arraylist and return the arraylist in the end
-	 *
-	 * @return all x and y's in result are 1<={x or y}<=8
-	 */
-	public ArrayList<String> getAvailableCoordinates () {
-		ArrayList<String> availableCoordinates = new ArrayList<>();
-		String color = ((PlayerReversi) getTurnPlayer()).getColor();
-		String otherColor = (color.equals("b")) ? "w" : "b";
-		if (!isBoardFull()) {
-			for (int y = 0; y < 8; y++)
-				for (int x = 0; x < 8; x++)
-					if (board[y][x].equals(color))
-						for (Direction dir : Direction.values())
-							if (checkCoordinates(y + dir.getDeltaY() + 1) && checkCoordinates(x + dir.getDeltaX() + 1)) {
-								if (board[y + dir.getDeltaY()][x + dir.getDeltaX()].equals(otherColor)) {
-									for (int i = y + dir.getDeltaY(), j = x + dir.getDeltaX(); checkCoordinates(i + 1) && checkCoordinates(j + 1); i += dir.getDeltaY(), j += dir.getDeltaX()) {
-										if (board[i][j].equals("-")) {
-											availableCoordinates.add(i + 1 + "," + (j + 1));
-											break;
-										}
-										else if (board[i][j].equals(color)) break;
-									}
-								}
-							}
-		}
-		return availableCoordinates;
-	}
-
-	/**
 	 * @param x from 0 to 7 inc
 	 * @param y from 0 to 7 inc
 	 */
@@ -131,15 +95,6 @@ public class Reversi extends Game {
 				}
 			}
 		}
-	}
-
-	/**
-	 * checks for available coordinates
-	 *
-	 * @return true if there are possible coordinates and false if there are no coordinates available
-	 */
-	public boolean canPlayerPlaceAnyDisks () {
-		return getAvailableCoordinates().size() != 0;
 	}
 
 	/**
@@ -206,17 +161,6 @@ public class Reversi extends Game {
 		return moves;
 	}
 
-	private boolean isBoardFull () {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (board[i][j].equals("-")) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
 	/**
 	 * should be called before changing turns
 	 */
@@ -228,6 +172,61 @@ public class Reversi extends Game {
 
 			return color.equals(((PlayerReversi) getPlayer(getTurnGamer())).getColor());
 		}
+	}
+
+	/**
+	 * checks for available coordinates
+	 *
+	 * @return true if there are possible coordinates and false if there are no coordinates available
+	 */
+	public boolean canPlayerPlaceAnyDisks () {
+		return getAvailableCoordinates().size() != 0;
+	}
+
+	/**
+	 * should be called after next turn
+	 * if board is full or atleast one of them is 0 return new ArrayList()
+	 * otherwise check every blank coordinate and if player can place there add to arraylist and return the arraylist in the end
+	 *
+	 * @return all x and y's in result are 1<={x or y}<=8
+	 */
+	public ArrayList<String> getAvailableCoordinates () {
+		ArrayList<String> availableCoordinates = new ArrayList<>();
+		String color = ((PlayerReversi) getTurnPlayer()).getColor();
+		String otherColor = (color.equals("b")) ? "w" : "b";
+		if (!isBoardFull()) {
+			for (int y = 0; y < 8; y++)
+				for (int x = 0; x < 8; x++)
+					if (board[y][x].equals(color))
+						for (Direction dir : Direction.values())
+							if (checkCoordinates(y + dir.getDeltaY() + 1) && checkCoordinates(x + dir.getDeltaX() + 1)) {
+								if (board[y + dir.getDeltaY()][x + dir.getDeltaX()].equals(otherColor)) {
+									for (int i = y + dir.getDeltaY(), j = x + dir.getDeltaX(); checkCoordinates(i + 1) && checkCoordinates(j + 1); i += dir.getDeltaY(), j += dir.getDeltaX()) {
+										if (board[i][j].equals("-")) {
+											availableCoordinates.add(i + 1 + "," + (j + 1));
+											break;
+										}
+										else if (board[i][j].equals(color)) break;
+									}
+								}
+							}
+		}
+		return availableCoordinates;
+	}
+
+	private boolean isBoardFull () {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[i][j].equals("-")) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public static boolean checkCoordinates (int number) {
+		return number >= 1 && number <= 8;
 	}
 
 	//empties board , blank space is shown with -
@@ -274,6 +273,22 @@ public class Reversi extends Game {
 
 	}
 
+	/**
+	 * @return getNumberOfBlack if playerNum=1
+	 * getNumberOfWhite if playerNum=2
+	 */
+	public int getInGameScore (int playerNum) {
+		switch (playerNum) {
+			case 1 -> {
+				return getNumberOfBlack();
+			}
+			case 2 -> {
+				return getNumberOfWhite();
+			}
+		}
+		return -1; // should never happen
+	}
+
 	public int getNumberOfBlack () {
 		int count = 0;
 		for (int i = 0; i < 8; i++) {
@@ -292,22 +307,6 @@ public class Reversi extends Game {
 			}
 		}
 		return count;
-	}
-
-	/**
-	 * @return getNumberOfBlack if playerNum=1
-	 * getNumberOfWhite if playerNum=2
-	 */
-	public int getInGameScore (int playerNum) {
-		switch (playerNum) {
-			case 1 -> {
-				return getNumberOfBlack();
-			}
-			case 2 -> {
-				return getNumberOfWhite();
-			}
-		}
-		return -1; // should never happen
 	}
 
 	public String[][] getBoard () {
