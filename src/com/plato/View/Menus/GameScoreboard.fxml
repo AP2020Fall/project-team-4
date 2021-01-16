@@ -1,14 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.Menus.GameScoreboardController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import javafx.scene.text.Font?>
+<GridPane hgap="3.0" maxHeight="700.0" maxWidth="700.0" minHeight="700.0" minWidth="700.0" vgap="7.5"
+          xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="Controller.Menus.GameScoreboardController">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="40.0"/>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="40.0" valignment="CENTER" vgrow="SOMETIMES"/>
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+    </padding>
+    <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false"
+            onAction="#closeStage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut"
+            style="-fx-background-size: 40; -fx-background-radius: 20; -fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-color: transparent;"
+            GridPane.halignment="LEFT" GridPane.valignment="TOP"/>
+    <ListView fx:id="scoreBoard" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
+    <GridPane hgap="7.5" layoutX="65.0" layoutY="343.0" maxHeight="75.0" minHeight="75.0" visible="false"
+              GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"/>
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints valignment="CENTER" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1"/>
+        <Label text="-" textFill="#eeff00" GridPane.columnIndex="2">
+            <font>
+                <Font name="American Typewriter" size="30.0"/>
+            </font>
+            <effect>
+                <Glow/>
+            </effect>
+        </Label>
+        <Label alignment="CENTER" layoutX="220.0" layoutY="32.0" text="20/23/10" textFill="#ffa300"
+               GridPane.columnIndex="4">
+            <font>
+                <Font name="American Typewriter" size="21.0"/>
+            </font>
+            <effect>
+                <Glow/>
+            </effect>
+        </Label>
+        <Label alignment="CENTER" layoutX="385.0" layoutY="35.0" text="26" textFill="#ffa300" GridPane.columnIndex="3">
+            <font>
+                <Font name="American Typewriter" size="21.0"/>
+            </font>
+            <effect>
+                <Glow/>
+            </effect>
+        </Label>
+        <Label alignment="CENTER" layoutX="439.0" layoutY="35.0" text="#26" textFill="#0097ff">
+            <font>
+                <Font name="American Typewriter" size="21.0"/>
+            </font>
+            <effect>
+                <Glow/>
+            </effect>
+        </Label>
+    </GridPane>
+</GridPane>

@@ -46,26 +46,22 @@
     </Label>
     <GridPane fx:id="timeBtnGridPane" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints valignment="CENTER" vgrow="SOMETIMES"/>
+            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
-        <Button fx:id="timeBtn" maxHeight="125.0" maxWidth="125.0" minHeight="125.0" minWidth="125.0"
-                mnemonicParsing="false" onAction="#setTime" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut"
-                style="-fx-background-radius: 50; -fx-background-size: 100; -fx-background-repeat: no-repeat; -fx-background-position: top center; -fx-background-image: url(&quot;https://i.imgur.com/kMdlyvE.png&quot;); -fx-background-color: transparent;"
-                text="Set Time" textFill="WHITE">
+        <Button fx:id="timeBtn" maxHeight="125.0" maxWidth="125.0" minHeight="125.0" minWidth="125.0" mnemonicParsing="false" onAction="#setTime" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 50; -fx-background-size: 100; -fx-background-repeat: no-repeat; -fx-background-position: top center; -fx-background-image: url(&quot;https://i.imgur.com/kMdlyvE.png&quot;); -fx-background-color: transparent;" text="Set Time" textFill="WHITE">
             <font>
-                <Font name="Arial Bold" size="15.0"/>
+                <Font name="Arial Bold" size="15.0" />
             </font>
             <padding>
-                <Insets top="100.0"/>
+                <Insets top="100.0" />
             </padding>
         </Button>
-        <MenuButton fx:id="timeLimitMenuInGameMenu" alignment="CENTER" maxWidth="130.0" minWidth="130.0"
-                    mnemonicParsing="false" popupSide="RIGHT" text="Time" textAlignment="CENTER" visible="false">
+        <MenuButton fx:id="timeLimitMenuInGameMenu" alignment="CENTER" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" popupSide="RIGHT" text="Time" textAlignment="CENTER" visible="false">
            <font>
-               <Font name="AppleMyungjo Regular" size="15.0"/>
+               <Font name="AppleMyungjo Regular" size="15.0" />
            </font>
         </MenuButton>
     </GridPane>

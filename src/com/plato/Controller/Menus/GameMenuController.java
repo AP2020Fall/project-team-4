@@ -4,6 +4,7 @@ import Controller.AccountRelated.AccountController;
 import Controller.GameRelated.GameController;
 import Controller.MainController;
 import Model.AccountRelated.Gamer;
+import Model.GameRelated.Game;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -198,8 +199,11 @@ public class GameMenuController implements Initializable {
 
 	public void displayScoreboard (ActionEvent actionEvent) {
 		confirmTimeInGameMenu();
+		if (Game.getScoreboard(gameName).size() == 1 && !Game.getScoreboard(gameName).get(0).startsWith("Rank:"))
+			return;
 		try {
 			GameScoreboardController.setGameName(gameName);
+
 			Stage scoreBoardStage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/GameScoreboard.fxml").toURI().toURL()),
 					gameName + " Scoreboard",
