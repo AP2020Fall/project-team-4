@@ -87,6 +87,11 @@ public class ReversiGameController implements Initializable {
 		for (int y = 0, currentGameBoardLength = currentGameBoard.length; y < currentGameBoardLength; y++)
 			for (int x = 0, rowLength = currentGameBoard[y].length; x < rowLength; x++) {
 				Label cell = (Label) board.getChildren().get(x + y * 8);
+				cell.setStyle(cell.getStyle() +
+						"  -fx-background-size: 60;" +
+						"  -fx-background-position: center;" +
+						"  -fx-background-repeat: no-repeat;");
+
 				switch (currentGameBoard[y][x]) {
 					case "w" -> {
 						cell.setStyle(cell.getStyle() +
@@ -99,10 +104,6 @@ public class ReversiGameController implements Initializable {
 					case "-" -> {}
 					default -> throw new IllegalStateException("Unexpected value: " + cell);
 				}
-				cell.setStyle(cell.getStyle() +
-						"  -fx-background-size: 60;" +
-						"  -fx-background-position: center;" +
-						"  -fx-background-repeat: no-repeat;");
 			}
 	}
 
