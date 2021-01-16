@@ -1,11 +1,20 @@
-a
+g
 {
-  "firstName": "d",
-  "lastName": "d",
-  "username": "admin",
-  "password": "pw",
-  "userID": "865750",
-  "email": "d@gmail.com",
+  "awardsFromEvents": 0,
+  "money": 20.0,
+  "accountStartDate": {
+    "year": 2021,
+    "month": 1,
+    "day": 14
+  },
+  "frnds": [],
+  "faveGames": [],
+  "firstName": "1",
+  "lastName": "1",
+  "username": "dorrin1",
+  "password": "11",
+  "userID": "270774",
+  "email": "1@gmail.com",
   "phoneNum": "00011122233",
-  "pfpUrl": "https://i.imgur.com/IIyNCG4.png"
+  "pfpUrl": "https://i.imgur.com/vMppUMs.png"
 }

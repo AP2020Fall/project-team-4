@@ -168,7 +168,7 @@ public class MainController extends Application {
 //			case "Show log of game" -> GameLogController.getInstance().displayLogOfGame();
 //			case "Show wins count" -> GameLogController.getInstance().displayWinCountOfGameByLoggedInPlayer();
 //			case "Show played count" -> GameLogController.getInstance().displayPlayedCountOfGameByLoggedInPlayer();
-//			case "Add to favorites" -> GameController.getInstance().addGameToFavesOfLoggedInGamer();
+//			case "Add to favorites" -> GameController.getInstance().addFaveGame();
 //			case "Continue previous games" -> GameController.getInstance().displayPrevGamesAndChooseToContinue();
 ////			case "Run Game" -> GameController.getInstance().runGame();
 ////

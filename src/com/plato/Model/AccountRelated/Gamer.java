@@ -25,17 +25,6 @@ public class Gamer extends Account {
 	// for serialization
 	public Gamer () {}
 
-	public static LinkedList<Gamer> getGamers () {
-		return getAccounts().stream()
-				.filter(account -> account instanceof Gamer)
-				.map(account -> ((Gamer) account))
-				.collect(Collectors.toCollection(LinkedList::new));
-	}
-
-	public static void setGamers (LinkedList<Gamer> gamers) {
-		getAccounts().addAll(gamers);
-	}
-
 	public static LinkedList<Gamer> getGamers (LinkedList<Gamer> gamerList, String usernameSearch) {
 		if (usernameSearch.length() == 0) return gamerList;
 
@@ -72,6 +61,22 @@ public class Gamer extends Account {
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
+	public static LinkedList<Gamer> getGamers () {
+		return getAccounts().stream()
+				.filter(account -> account instanceof Gamer)
+				.map(account -> ((Gamer) account))
+				.collect(Collectors.toCollection(LinkedList::new));
+	}
+
+	public static void setGamers (LinkedList<Gamer> gamers) {
+		getAccounts().addAll(gamers);
+	}
+
+	public boolean frndExists (String un) {
+		return frnds.stream()
+				.anyMatch(gamerUN -> gamerUN.equals(un));
+	}
+
 	public void sendFrndReq (String usernameTo) {
 		FriendRequest.addFriendReq(this.getUsername(), usernameTo);
 	}
@@ -82,11 +87,6 @@ public class Gamer extends Account {
 
 	public void removeFrnd (String friendUN) {
 		frnds.remove(friendUN);
-	}
-
-	public boolean frndExists (String un) {
-		return frnds.stream()
-				.anyMatch(gamerUN -> gamerUN.equals(un));
 	}
 
 	public Gamer getFrnd (String un) {
@@ -162,5 +162,10 @@ public class Gamer extends Account {
 
 	public void setAccountStartDate (LocalDate accountStartDate) {
 		this.accountStartDate = accountStartDate;
+	}
+
+	public void removeFaveGame (String gameName) {
+		if (faveGames.contains(gameName))
+		faveGames.remove(gameName);
 	}
 }

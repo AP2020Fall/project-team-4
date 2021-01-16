@@ -3,32 +3,37 @@ package Controller.Menus;
 import Controller.AccountRelated.AccountController;
 import Controller.GameRelated.GameController;
 import Controller.MainController;
+import Model.AccountRelated.Gamer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class GameMenuController implements Initializable {
 	private static String gameName;
 	private static Stage stage;
 	public Label gameTitle;
 	public TextField username2;
-	public MenuButton timeLimitMenu;
 	public Label timeLimitAskLabel;
+	public MenuButton timeLimitMenuInStartGameMenu;
 	public Label username2Error;
 	public GridPane newGamePropertyWindow;
 	public Button addToFaveGamesBtn;
 	public GridPane mainGridPane;
+	public Button timeBtn;
+	public MenuButton timeLimitMenuInGameMenu;
+	public GridPane timeBtnGridPane;
+	private String selectedTime = "30s";
 
 	public static void setStage (Stage stage) {
 		GameMenuController.stage = stage;
@@ -41,10 +46,57 @@ public class GameMenuController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
-		if (gameName.equals("Reversi")) {
-			//pane.getChildren().subList(212 , 438).clear();
+		gameTitle.setText(gameName);
+		Gamer currentGamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+
+		if (currentGamer.getFaveGames().contains(gameName))
+			addToFaveGamesBtn.setStyle(addToFaveGamesBtn.getStyle() + "-fx-background-image:url('https://i.imgur.com/UODKjrB.png')");
+
+		else
+			addToFaveGamesBtn.setStyle(addToFaveGamesBtn.getStyle() + "-fx-background-image:url('https://i.imgur.com/z4JgICV.png')");
+
+
+		switch (gameName) {
+			case "BattleSea" -> {
+				mainGridPane.setStyle(
+						"-fx-background-image: url('https://i.imgur.com/7po5Ihx.jpg');" +
+								"  -fx-background-size: 1000 600;" +
+								"  -fx-background-position: right center;");
+
+				timeLimitMenuInStartGameMenu.textProperty().addListener((observable, oldValue, newValue) -> selectedTime = newValue);
+				timeLimitMenuInGameMenu.textProperty().addListener((observable, oldValue, newValue) -> selectedTime = newValue);
+
+				// adding time options
+				for (int i = 10; i < 60; i += 10) {
+					timeLimitMenuInGameMenu.getItems().add(new MenuItem(i + "s") {{
+						setOnAction(e -> timeLimitMenuInGameMenu.setText(getText()));
+					}});
+					timeLimitMenuInStartGameMenu.getItems().add(new MenuItem(i + "s") {{
+						setOnAction(e -> timeLimitMenuInStartGameMenu.setText(getText()));
+					}});
+				}
+				for (int i = 1; i <= 5; i++) {
+					timeLimitMenuInGameMenu.getItems().add(new MenuItem(i + "m") {{
+						setOnAction(e -> timeLimitMenuInGameMenu.setText(getText()));
+					}});
+					timeLimitMenuInStartGameMenu.getItems().add(new MenuItem(i + "m") {{
+						setOnAction(e -> timeLimitMenuInStartGameMenu.setText(getText()));
+					}});
+				}
+			}
+			case "Reversi" -> {
+				mainGridPane.getChildren().remove(timeBtnGridPane);
+				newGamePropertyWindow.getChildren().removeAll(timeLimitAskLabel, timeLimitMenuInStartGameMenu);
+
+				mainGridPane.setStyle(
+						"-fx-background-image: url('https://i.imgur.com/VaeApyW.png');" +
+								"  -fx-background-size: 650;" +
+								"  -fx-background-position: center bottom;" +
+								"  -fx-background-repeat: no-repeat;" +
+								"  -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 55% , rgb(30,130,230), rgb(21,51,128));");
+			}
+			default -> throw new IllegalStateException("Unexpected value: " + gameName);
 		}
-		else if (gameName.equals("BattleSea")) {}
 	}
 
 	public void newGame (ActionEvent actionEvent) {
@@ -62,10 +114,22 @@ public class GameMenuController implements Initializable {
 //		TextField secondPlayer = new TextField();
 //		stage.show();
 
-		
+		newGamePropertyWindow.setVisible(true);
+		timeLimitMenuInStartGameMenu.setText(selectedTime);
+
+		confirmTimeInGameMenu();
 	}
 
-	public void gameInfoGiveDone (ActionEvent actionEvent) {
+	private void confirmTimeInGameMenu () {
+		timeBtn.setVisible(true);
+		timeLimitMenuInGameMenu.setVisible(false);
+	}
+
+	public void dontStartGame (ActionEvent actionEvent) {
+		newGamePropertyWindow.setVisible(false);
+	}
+
+	public void startGame (ActionEvent actionEvent) {
 		try {
 			GameController.getInstance().runGame(username2.getText(), gameName);
 		} catch (MainController.InvalidFormatException | GameController.CantPlayWithYourselfException | GameController.CantPlayWithAdminException | AccountController.NoAccountExistsWithUsernameException e) {
@@ -110,25 +174,72 @@ public class GameMenuController implements Initializable {
 		}
 	}
 
+	public void changeFaveStatus (ActionEvent actionEvent) {
+		Gamer currentGamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+		AtomicReference<String> noBgImgStyle = new AtomicReference<>("");
+		Arrays.asList(addToFaveGamesBtn.getStyle().split(";")).subList(0, addToFaveGamesBtn.getStyle().split(";").length - 1)
+				.forEach(style -> noBgImgStyle.set("%s;%s".formatted(noBgImgStyle.get(), style)));
 
-	public void dontStartGame (ActionEvent actionEvent) {
-	}
-
-	public void startGame (ActionEvent actionEvent) {
+		if (currentGamer.getFaveGames().contains(gameName)) {
+			currentGamer.removeFaveGame(gameName);
+			addToFaveGamesBtn.setStyle(noBgImgStyle.get().substring(1) +
+					";  -fx-background-image: url('https://i.imgur.com/z4JgICV.png');");
+		}
+		else {
+			currentGamer.addToFaveGames(gameName);
+			addToFaveGamesBtn.setStyle(noBgImgStyle.get().substring(1) +
+					";  -fx-background-image: url('https://i.imgur.com/UODKjrB.png');");
+		}
 	}
 
 	public void closeGame (ActionEvent actionEvent) {
-	}
-
-	public void addToFaveGames (ActionEvent actionEvent) {
+		stage.close();
 	}
 
 	public void displayScoreboard (ActionEvent actionEvent) {
+		confirmTimeInGameMenu();
+		try {
+			GameScoreboardController.setGameName(gameName);
+			Stage scoreBoardStage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/GameScoreboard.fxml").toURI().toURL()),
+					gameName + " Scoreboard",
+					true,
+					stage
+			);
+			GameScoreboardController.setStage(scoreBoardStage);
+			scoreBoardStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setTime (ActionEvent actionEvent) {
+		timeBtn.setVisible(false);
+		timeLimitMenuInGameMenu.setVisible(true);
 	}
 
 	public void displayLogOfGame (ActionEvent actionEvent) {
+		confirmTimeInGameMenu();
+		try {
+			GameLogController.setGameName(gameName);
+			Stage gameLogStage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/GameLog.fxml").toURI().toURL()),
+					gameName + " Log",
+					true,
+					stage
+			);
+			GameLogController.setStage(gameLogStage);
+			gameLogStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(0.8);
+	}
+
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 }

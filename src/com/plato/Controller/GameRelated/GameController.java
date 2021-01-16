@@ -20,12 +20,6 @@ public class GameController {
 
 	private Game currentGameInSession = null;
 
-	public static GameController getInstance () {
-		if (gameController == null)
-			gameController = new GameController();
-		return gameController;
-	}
-
 	// based on which menu _11GameMenu.getGameName() shows go to GameplayBattleSeaMenu or GameplayReversiMenu
 	public void runGame (String username2, String gameName) throws MainController.InvalidFormatException, AccountController.NoAccountExistsWithUsernameException, CantPlayWithAdminException, CantPlayWithYourselfException {
 		if (!username2.matches("[!-~]+"))
@@ -61,17 +55,9 @@ public class GameController {
 		setCurrentGameInSession(game);
 	}
 
-	public void addGameToFavesOfLoggedInGamer () {
-//		String gameName = ((_11GameMenu) Menu.getMenuIn()).getGameName();
-//		if (((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).getFaveGames().contains(gameName)) {
-//			Menu.printErrorMessage("This game is already in your favorites list");
-//			return;
-//		}
-//		Menu.displayAreYouSureMessage();
-//		if (Menu.getInputLine().equalsIgnoreCase("y")) {
-//			((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()).addToFaveGames(gameName);
-//			GameView.getInstance().displaySuccessfulFaveGameAdditionMessage(((_11GameMenu) Menu.getMenuIn()).getGameName());
-//		}
+	public void addFaveGame (String gameName) {
+		Gamer gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+		gamer.addToFaveGames(gameName);
 	}
 
 	public void displayGameHowToPlay () {
@@ -86,6 +72,20 @@ public class GameController {
 				GameController.getInstance().getCurrentGameInSession().gameEnded(),
 				gameController.getCurrentGameInSession().getTurnGamer().getUsername()
 		);
+	}
+
+	public Game getCurrentGameInSession () {
+		return currentGameInSession;
+	}
+
+	public void setCurrentGameInSession (Game currentGameInSession) {
+		getInstance().currentGameInSession = currentGameInSession;
+	}
+
+	public static GameController getInstance () {
+		if (gameController == null)
+			gameController = new GameController();
+		return gameController;
 	}
 
 	public void displayGameConclusion (Game game) {
@@ -113,14 +113,6 @@ public class GameController {
 	public void displayScoreboardOfGame () {
 //		LinkedList<String> scoreBoard = getScoreboard(((_11GameMenu) Menu.getMenuIn()).getGameName());
 //		GameView.getInstance().displayScoreboardOfGame(((_11GameMenu) Menu.getMenuIn()).getGameName(), scoreBoard);
-	}
-
-	public Game getCurrentGameInSession () {
-		return currentGameInSession;
-	}
-
-	public void setCurrentGameInSession (Game currentGameInSession) {
-		getInstance().currentGameInSession = currentGameInSession;
 	}
 
 	public void editDetails (String gameName) {
@@ -215,6 +207,11 @@ public class GameController {
 		else {
 //			Menu.getMenu("12R").enter();
 		}
+	}
+
+	public void removeFaveGame (String gameName) {
+		Gamer gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+		gamer.removeFaveGame(gameName);
 	}
 
 	public static class CantPlayWithYourselfException extends Exception {

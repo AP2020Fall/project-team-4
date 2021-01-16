@@ -1,0 +1,296 @@
+[
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 12.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 16
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "2",
+          "lastName": "2",
+          "username": "dorrin2",
+          "password": "22",
+          "userID": "084609",
+          "email": "2@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 20.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "270774",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "099598",
+    "turn": 0,
+    "conclusion": "IN_SESSION",
+    "dateGameStarted": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 16
+      },
+      "time": {
+        "hour": 13,
+        "minute": 46,
+        "second": 26,
+        "nano": 371588000
+      }
+    }
+  },
+  {
+    "listOfPlayers": [
+      {
+        "color": "b",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 20.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 14
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "1",
+          "lastName": "1",
+          "username": "dorrin1",
+          "password": "11",
+          "userID": "270774",
+          "email": "1@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      },
+      {
+        "color": "w",
+        "gamer": {
+          "awardsFromEvents": 0,
+          "money": 12.0,
+          "accountStartDate": {
+            "year": 2021,
+            "month": 1,
+            "day": 16
+          },
+          "frnds": [],
+          "faveGames": [],
+          "firstName": "2",
+          "lastName": "2",
+          "username": "dorrin2",
+          "password": "22",
+          "userID": "084609",
+          "email": "2@gmail.com",
+          "phoneNum": "00011122233",
+          "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+        }
+      }
+    ],
+    "board": [
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "w",
+        "b",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "b",
+        "w",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ]
+    ],
+    "moves": [],
+    "gameID": "091907",
+    "turn": 0,
+    "conclusion": "IN_SESSION",
+    "dateGameStarted": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 16
+      },
+      "time": {
+        "hour": 13,
+        "minute": 46,
+        "second": 28,
+        "nano": 163582000
+      }
+    }
+  }
+]
