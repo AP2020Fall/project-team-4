@@ -57,9 +57,9 @@ public class ReversiGameController implements Initializable {
 
 		confirmMoveBtn.setVisible(false);
 
-		updateAvailableCoordinates();
-
 		updateBoard();
+
+		updateAvailableCoordinates();
 	}
 
 	public void updateAvailableCoordinates () {
@@ -108,14 +108,12 @@ public class ReversiGameController implements Initializable {
 							"  -fx-background-image: url('https://i.imgur.com/8djkzwC.png');");
 					case "b" -> cell.setStyle(cell.getStyle() +
 							"  -fx-background-image: url('https://i.imgur.com/vKt2BwI.png');");
-					case "-" -> updateAvailableCoordinates();
+					case "-" -> {
+//						updateAvailableCoordinates();
+					}
 					default -> throw new IllegalStateException("Unexpected value: " + cell);
 				}
 			}
-	}
-
-	public void closeGame (ActionEvent actionEvent) {
-		stage.close();
 	}
 
 	public void putMarkIfPossible (MouseEvent mouseEvent) {
@@ -127,7 +125,6 @@ public class ReversiGameController implements Initializable {
 			confirmMoveBtn.setVisible(true);
 
 			updateBoard();
-
 //			board.getChildren().stream()
 //					.map(node -> ((Label) node))
 //					.forEach(cell -> {
@@ -140,6 +137,20 @@ public class ReversiGameController implements Initializable {
 		}
 	}
 
+	public void confirmMove (ActionEvent actionEvent) {
+		ReversiController.getInstance().nextTurn();
+
+		confirmMoveBtn.setVisible(false);
+
+		updateTurnIndicators();
+
+		updateAvailableCoordinates();
+	}
+
+	public void showMoves (ActionEvent actionEvent) {
+		// TODO: 1/16/2021 AD
+	}
+
 	public int getXFrom1 (int index) {
 		int x = (index + 1) % 8;
 		x = (x == 0 ? 8 : x);
@@ -150,14 +161,6 @@ public class ReversiGameController implements Initializable {
 		int y = (index + 1) / 8 + 1;
 		y = (y == 9 ? 8 : y);
 		return y;
-	}
-
-	public void confirmMove (ActionEvent actionEvent) {
-		// TODO: 1/15/2021 AD
-	}
-
-	public void showMoves (ActionEvent actionEvent) {
-		// TODO: 1/16/2021 AD
 	}
 
 	public void mouseIsOver (MouseEvent mouseEvent) {
@@ -174,5 +177,9 @@ public class ReversiGameController implements Initializable {
 		// TODO: 1/16/2021 AD
 
 //		System.out.println("x,y = " + getXFrom1(board.getChildren().indexOf(mouseEvent.getSource())) + "," + getYFrom1(board.getChildren().indexOf(mouseEvent.getSource())));
+	}
+
+	public void closeGame (ActionEvent actionEvent) {
+		stage.close();
 	}
 }

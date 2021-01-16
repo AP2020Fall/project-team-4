@@ -5,6 +5,8 @@ import Controller.IDGenerator;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Reversi.Reversi;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -17,6 +19,7 @@ public abstract class Game {
 	private final String gameID;
 	protected String details = "";
 	private int turn = 0;
+	private IntegerProperty turnNumProperty = new SimpleIntegerProperty(0);
 	private GameConclusion conclusion = GameConclusion.IN_SESSION;
 	private LocalDateTime dateGameEnded, dateGameStarted;
 
@@ -112,12 +115,24 @@ public abstract class Game {
 	 * if turn = 1 it is player two turn
 	 */
 	public void nextTurn () {
-		if (turn == 0) {turn = 1;}
-		else if (turn == 1) {turn = 0;}
+		if (turn == 0) turn = 1;
+		else if (turn == 1) turn = 0;
+		turnNumProperty.set(turn);
+	}
+
+	public IntegerProperty getTurnNumProperty () {
+		return turnNumProperty;
 	}
 
 	public Gamer getTurnGamer () {
 		return getListOfPlayers().get(turn).getGamer();
+	}
+
+	public LinkedList<Player> getListOfPlayers () {
+		if (this instanceof Reversi)
+			return new LinkedList<>(((Reversi) this).getListOfReversiPlayers());
+		else
+			return new LinkedList<>(((BattleSea) this).getListOfBattleSeaPlayers());
 	}
 
 	public Player getTurnPlayer () {
@@ -156,9 +171,9 @@ public abstract class Game {
 		GameController.getInstance().setCurrentGameInSession(null);
 	}
 
-	public abstract boolean gameEnded ();
-
 	public abstract Gamer getWinner ();
+
+	public abstract boolean gameEnded ();
 
 	public String getGameName () {
 		return getClass().getSimpleName();
@@ -173,13 +188,6 @@ public abstract class Game {
 	}
 
 	public abstract int getInGameScore (int playerNum);
-
-	public LinkedList<Player> getListOfPlayers () {
-		if (this instanceof Reversi)
-			return new LinkedList<>(((Reversi) this).getListOfReversiPlayers());
-		else
-			return new LinkedList<>(((BattleSea) this).getListOfBattleSeaPlayers());
-	}
 
 	public String getDetails () {
 		return details;

@@ -136,6 +136,12 @@ public class Reversi extends Game {
 		return false;
 	}
 
+	@Override
+	public void nextTurn () {
+		super.nextTurn();
+		hasMadeMoveOfTurn.set(false);
+	}
+
 	/**
 	 * @param startx from 0 to 7
 	 * @param starty from 0 to 7

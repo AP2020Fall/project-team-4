@@ -31,22 +31,13 @@ public class ReversiController {
 	}
 
 	public void nextTurn () {
-		try {
-			if (GameController.getInstance().getCurrentGameInSession().gameEnded()) {
-				Game currentGame = GameController.getInstance().getCurrentGameInSession();
-				GameController.getInstance().getCurrentGameInSession().concludeGame();
-				GameController.getInstance().displayGameConclusion(currentGame);
-				return;
-			}
-
-			if (!((Reversi) GameController.getInstance().getCurrentGameInSession()).hasPlayerMoved().get() &&
-					((Reversi) GameController.getInstance().getCurrentGameInSession()).canPlayerPlaceAnyDisks())
-				throw new HasntMadeMoveInCurrentTurnException();
-
-		} catch (HasntMadeMoveInCurrentTurnException e) {
-//			Menu.printErrorMessage(e.getMessage());
+		if (GameController.getInstance().getCurrentGameInSession().gameEnded()) {
+			Game currentGame = GameController.getInstance().getCurrentGameInSession();
+			GameController.getInstance().getCurrentGameInSession().concludeGame();
+			GameController.getInstance().displayGameConclusion(currentGame);
 			return;
 		}
+
 		GameController.getInstance().getCurrentGameInSession().nextTurn();
 	}
 
