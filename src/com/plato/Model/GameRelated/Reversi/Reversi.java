@@ -2,6 +2,8 @@ package Model.GameRelated.Reversi;
 
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +41,7 @@ public class Reversi extends Game {
 	private final String[][] board = new String[8][8];
 	private final LinkedList<String> moves = new LinkedList<>();
 	protected ArrayList<PlayerReversi> listOfPlayers = new ArrayList<>();
+	private BooleanProperty hasMadeMoveOfTurn = new SimpleBooleanProperty(false);
 
 	public Reversi (ArrayList<Gamer> gamers) {
 		super();
@@ -72,6 +75,10 @@ public class Reversi extends Game {
 	 */
 	public static void setAllGames (LinkedList<Reversi> allGames) {
 		Game.getAllGames().addAll(allGames);
+	}
+
+	public static boolean checkCoordinates (int number) {
+		return number >= 1 && number <= 8;
 	}
 
 	/**
@@ -164,14 +171,15 @@ public class Reversi extends Game {
 	/**
 	 * should be called before changing turns
 	 */
-	public boolean hasPlayerMoved () {
-		if (moves.size() == 0) return false;
-		else if (!canPlayerPlaceAnyDisks()) return true;
+	public BooleanProperty hasPlayerMoved () {
+		if (moves.size() == 0) hasMadeMoveOfTurn.set(false);
+		else if (!canPlayerPlaceAnyDisks()) hasMadeMoveOfTurn.set(true);
 		else {
 			String color = moves.getLast().substring(0, 1);
 
-			return color.equals(((PlayerReversi) getPlayer(getTurnGamer())).getColor());
+			hasMadeMoveOfTurn.set(color.equals(((PlayerReversi) getPlayer(getTurnGamer())).getColor()));
 		}
+		return hasMadeMoveOfTurn;
 	}
 
 	/**
@@ -212,21 +220,6 @@ public class Reversi extends Game {
 							}
 		}
 		return availableCoordinates;
-	}
-
-	private boolean isBoardFull () {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (board[i][j].equals("-")) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
-	public static boolean checkCoordinates (int number) {
-		return number >= 1 && number <= 8;
 	}
 
 	//empties board , blank space is shown with -
@@ -307,6 +300,17 @@ public class Reversi extends Game {
 			}
 		}
 		return count;
+	}
+
+	private boolean isBoardFull () {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[i][j].equals("-")) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	public String[][] getBoard () {
