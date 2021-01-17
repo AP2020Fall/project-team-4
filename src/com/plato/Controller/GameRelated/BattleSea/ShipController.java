@@ -17,20 +17,17 @@ public class ShipController {
 		return shipController;
 	}
 
-	public void moveShip (LinkedList<Ship> board, Ship chosenShip, int newXInt, int newYInt) {
-		try {
-			if (!BattleSea.checkCoordinates((newXInt)))
+	public void moveShip (LinkedList<Ship> board, Ship chosenShip, int newX, int newY) throws InvalidCoordinateException {
+			if (!BattleSea.checkCoordinates((newX)))
 				throw new InvalidCoordinateException();
 
-			if (!BattleSea.checkCoordinates((newYInt)))
+			if (!BattleSea.checkCoordinates((newY)))
 				throw new InvalidCoordinateException();
 
-			if (!chosenShip.canMove(newXInt, newYInt))
+			if (!chosenShip.canMove(newX, newY))
 				throw new InvalidCoordinateException();
 
-			chosenShip.move(newXInt, newYInt);
-
-		} catch (InvalidCoordinateException e) {}
+			chosenShip.move(newX, newY);
 	}
 
 	public void rotateShip (LinkedList<Ship> board, Ship chosenShip) throws CantChangeDirException {
@@ -76,7 +73,7 @@ public class ShipController {
 		}};
 	}
 
-	private static class InvalidCoordinateException extends Exception {
+	public static class InvalidCoordinateException extends Exception {
 		public InvalidCoordinateException () {
 			super("Invalid coordinate");
 		}

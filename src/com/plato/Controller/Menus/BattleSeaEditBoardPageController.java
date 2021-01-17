@@ -14,7 +14,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
@@ -41,12 +40,9 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	public Label username2, username1;
 	public Circle turnIndicator2, turnIndicator1;
 	public GridPane board;
-	public GridPane board5, board4, board3, board2, board1; // random boards
-	public GridPane genRandBoardWindow;
-	public ImageView ship5_2, ship5_1, ship4_1, ship3_1, ship2_1_1, ship2_1_2;
+	public Label ship5_2, ship5_1, ship4_1, ship3_1, ship2_1_1, ship2_1_2;
 	private PlayerBattleSea player1, player2;
 	private LinkedList<Ship> currentBoard;
-	private LinkedList<LinkedList<Ship>> currentRandBoards;
 	private IntegerProperty editingTurn = new SimpleIntegerProperty(-1);
 
 	public static void setStage (Stage stage) {
@@ -139,17 +135,6 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		timer.setAutoReverse(false);
 
 		timer.play();
-
-		board1.setOnMouseEntered(e -> board1.setOpacity(0.8));
-		board1.setOnMouseExited(e -> board1.setOpacity(1));
-		board2.setOnMouseEntered(e -> board2.setOpacity(0.8));
-		board2.setOnMouseExited(e -> board2.setOpacity(1));
-		board3.setOnMouseEntered(e -> board3.setOpacity(0.8));
-		board3.setOnMouseExited(e -> board3.setOpacity(1));
-		board4.setOnMouseEntered(e -> board4.setOpacity(0.8));
-		board4.setOnMouseExited(e -> board4.setOpacity(1));
-		board5.setOnMouseEntered(e -> board5.setOpacity(0.8));
-		board5.setOnMouseExited(e -> board5.setOpacity(1));
 	}
 
 	public void closeStage (ActionEvent actionEvent) {
@@ -164,21 +149,23 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	}
 
 	public void generate5RandBoards (ActionEvent actionEvent) {
-		genRandBoardWindow.setVisible(true);
-		currentRandBoards = BattleSea.get5RandBoards();
-
-		setBoard(currentRandBoards.get(0), board1);
-		setBoard(currentRandBoards.get(1), board2);
-		setBoard(currentRandBoards.get(2), board3);
-		setBoard(currentRandBoards.get(3), board4);
-		setBoard(currentRandBoards.get(4), board5);
-	}
-
-	public void generate1RandBoard (ActionEvent actionEvent) {
-		LinkedList<Ship> randBoard = BattleSea.getRandBoard();
-		BattleSeaController.getInstance().displayRandomlyGeneratedBoard(randBoard);
-
-		setBoard(randBoard, board);
+		LinkedList<LinkedList<Ship>> randBoards = BattleSea.get5RandBoards();
+		try {
+			BattleSea5RandBoardsController.setCurrentRandBoards(randBoards);
+			Stage generate5RandBoardsStage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/BattleSea5RandBoards.fxml").toURI().toURL()),
+					"5 Random Boards",
+					true,
+					stage
+			);
+			BattleSea5RandBoardsController.setStage(generate5RandBoardsStage);
+			BattleSea5RandBoardsController.selectedBoardProperty().addListener(observable ->
+					setBoard(randBoards.get(BattleSea5RandBoardsController.selectedBoardProperty().get()-1), board)
+			);
+			generate5RandBoardsStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setBoard (LinkedList<Ship> board, GridPane boardToShowShipsIn) {
@@ -197,9 +184,9 @@ public class BattleSeaEditBoardPageController implements Initializable {
 					size += "_2";
 			}
 			String finalSize = size;
-			ImageView shipToMove = boardToShowShipsIn.getChildren().stream()
+			Label shipToMove = boardToShowShipsIn.getChildren().stream()
 					.filter(node -> node.getId().contains(finalSize))
-					.map(node -> ((ImageView) node))
+					.map(node -> ((Label) node))
 					.findAny().get();
 
 			shipToMove.setRotate(ship.isVertical() ? 0 : 90);
@@ -209,30 +196,18 @@ public class BattleSeaEditBoardPageController implements Initializable {
 
 			GridPane.setColumnSpan(shipToMove, ship.isVertical() ? ship.getS_SIZE() : ship.getL_SIZE());
 			GridPane.setRowSpan(shipToMove, ship.isVertical() ? ship.getL_SIZE() : ship.getS_SIZE());
-
-			double margin = switch (boardToShowShipsIn.getId()) {
-				case "board1", "board2", "board3", "board4", "board5" -> .1;
-				case "board" -> 1;
-				default -> throw new IllegalStateException("Unexpected value: " + boardToShowShipsIn.getId());
-			};
-			GridPane.setMargin(shipToMove, new Insets(margin, margin, margin, margin));
 		});
 	}
 
-	public void chooseRandBoard (MouseEvent mouseEvent) {
-		setBoard(
-				currentRandBoards.get(Integer.parseInt(String.valueOf((((GridPane) mouseEvent.getSource()).getId().charAt(5)))) - 1),
-				board
-		);
-		closeGen5RandBoard(new ActionEvent());
-	}
+	public void generate1RandBoard (ActionEvent actionEvent) {
+		LinkedList<Ship> randBoard = BattleSea.getRandBoard();
+		BattleSeaController.getInstance().displayRandomlyGeneratedBoard(randBoard);
 
-	public void closeGen5RandBoard (ActionEvent actionEvent) {
-		genRandBoardWindow.setVisible(false);
+		setBoard(randBoard, board);
 	}
 
 	public void rotateShip (MouseEvent mouseEvent) {
-		ImageView shipImageView = ((ImageView) mouseEvent.getSource());
+		Label shipImageView = ((Label) mouseEvent.getSource());
 		Ship ship = currentBoard.stream()
 				.filter(ship1 -> ship1.getLeftMostX() == GridPane.getColumnIndex(shipImageView) + 1 && ship1.getTopMostY() == GridPane.getRowIndex(shipImageView) + 1)
 				.findAny().get();
@@ -245,25 +220,55 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		}
 	}
 
-	public void updateShipPos (MouseEvent mouseEvent) {
-		ImageView shipImgView = (ImageView) mouseEvent.getSource();
+//	public void updateShipPos (MouseEvent mouseEvent) {
+//		ImageView shipImgView = (ImageView) mouseEvent.getSource();
+//		Ship ship = currentBoard.stream()
+//				.filter(ship1 -> ship1.getLeftMostX() - 1 == GridPane.getColumnIndex(shipImgView) && ship1.getTopMostY() - 1 == GridPane.getRowIndex(shipImgView))
+//				.findAny().get();
+//
+//		double destXOfImageView = mouseEvent.getSceneX() - shipImgView.getLayoutBounds().getWidth() / 2;
+//		double destYOfImageView = mouseEvent.getSceneY() - shipImgView.getLayoutBounds().getHeight() / 2;
+//		int destXOfShip = ((int) ((destXOfImageView - board.getLayoutBounds().getMinX()) / 70)),
+//				destYOfShip = ((int) ((destYOfImageView - board.getLayoutBounds().getMinY()) / 70));
+//
+//		System.out.println("destXOfImageView = " + destXOfImageView + "\t\tdestYOfImageView = " + destYOfImageView);
+//		System.out.println("destXOfShip = " + destXOfShip + "\t\t\tdestYOfShip = " + destYOfShip);
+//
+//		int oldShipX = ship.getLeftMostX(), oldShipY = ship.getTopMostY();
+////		int boardGridPaneX = grid.getLayoutBounds().getMinX() +
+//
+//		ShipController.getInstance().moveShip(currentBoard, ship, destXOfShip, destYOfShip);
+//
+//		setBoard(currentBoard, board);
+//	}
+
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Label)
+			((Label) mouseEvent.getSource()).setOpacity(0.8);
+	}
+
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Label)
+			((Label) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void moveShipIfPossible (MouseEvent mouseEvent) {
+		Label shipToMove = (Label) mouseEvent.getSource();
 		Ship ship = currentBoard.stream()
-				.filter(ship1 -> ship1.getLeftMostX() - 1 == GridPane.getColumnIndex(shipImgView) && ship1.getTopMostY() - 1 == GridPane.getRowIndex(shipImgView))
+				.filter(ship1 -> ship1.getLeftMostX() - 1 == GridPane.getColumnIndex(shipToMove) && ship1.getTopMostY() - 1 == GridPane.getRowIndex(shipToMove))
 				.findAny().get();
 
-		double destXOfImageView = mouseEvent.getSceneX() - shipImgView.getLayoutBounds().getWidth() / 2;
-		double destYOfImageView = mouseEvent.getSceneY() - shipImgView.getLayoutBounds().getHeight() / 2;
-		int destXOfShip = ((int) ((destXOfImageView - board.getLayoutBounds().getMinX()) / 70)),
-				destYOfShip = ((int) ((destYOfImageView - board.getLayoutBounds().getMinY()) / 70));
+		int newX = (int) ((mouseEvent.getSceneX() - board.getBoundsInParent().getMinX()) / (board.getBoundsInParent().getWidth() / board.getColumnCount())),
+				newY = (int) ((mouseEvent.getSceneY() - board.getBoundsInParent().getMinY()) / (board.getBoundsInParent().getHeight() / board.getRowCount()));
 
-		System.out.println("destXOfImageView = " + destXOfImageView + "\t\tdestYOfImageView = " + destYOfImageView);
-		System.out.println("destXOfShip = " + destXOfShip + "\t\t\tdestYOfShip = " + destYOfShip);
+		try {
+			ShipController.getInstance().moveShip(currentBoard, ship, newX + 1, newY + 1);
 
-		int oldShipX = ship.getLeftMostX(), oldShipY = ship.getTopMostY();
-//		int boardGridPaneX = grid.getLayoutBounds().getMinX() +
-
-		ShipController.getInstance().moveShip(currentBoard, ship, destXOfShip, destYOfShip);
-
-		setBoard(currentBoard, board);
+			GridPane.setColumnIndex(shipToMove, newX);
+			GridPane.setRowIndex(shipToMove, newY);
+//			((DropShadow) shipToMove.getEffect()).setColor(Color.GREEN.darker());
+		} catch (ShipController.InvalidCoordinateException e) {
+//			((DropShadow) shipToMove.getEffect()).setColor(Color.RED.brighter());
+		}
 	}
 }
