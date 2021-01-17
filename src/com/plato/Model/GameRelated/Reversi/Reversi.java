@@ -86,7 +86,7 @@ public class Reversi extends Game {
 	 * @param y from 0 to 7 inc
 	 */
 	public void placeDisk (int x, int y) {
-		if (canPlayerPlaceAnyDisks())
+		if (canPlayerPlaceAnyDisks()){
 			if (canPlayerPlaceDiskHere(x, y)) {
 				checkDirections(x, y);
 				// converting y and x to 1-8 system
@@ -100,7 +100,11 @@ public class Reversi extends Game {
 					board[y - 1][x - 1] = "w";
 					addMove(x, y, "white");
 				}
-			}
+			}}
+		else{
+			addMove(-1,-1,((PlayerReversi) getTurnPlayer()).getColor());
+			nextTurn();
+		}
 	}
 
 	/**
@@ -246,7 +250,8 @@ public class Reversi extends Game {
 	}
 
 	public void addMove (int x, int y, String color) {
-		moves.addLast(color + " placed disk in coordinate (" + x + "," + y + ")");
+		if(y>0 && x>0) moves.addLast(color + " placed disk in coordinate (" + x + "," + y + ")");
+		else{moves.addLast(color + "couldn't move");}
 	}
 
 	public LinkedList<String> getMoves () {
@@ -305,7 +310,7 @@ public class Reversi extends Game {
 //							}
 //		}
 		if (isBoardFull()) return availableCoordinates;
-		if (getNumberOfWhite() == 0) return availableCoordinates;
+		if (getNumberOfWhite() == 0 ) return availableCoordinates;
 		if (getNumberOfBlack() == 0) return availableCoordinates;
 
 		for (int y = 0; y < 8; y++)
