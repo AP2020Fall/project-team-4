@@ -132,7 +132,7 @@ public class BattleSeaPlayPageController implements Initializable {
 
 	private void updateBombs (LinkedList<Bomb> bombs, GridPane boardToShowBombsIn) {
 		boardToShowBombsIn.getChildren()
-				.removeIf(node -> GridPane.getRowSpan(node) == 1); // remove only bombs
+				.removeIf(node -> GridPane.getColumnSpan(node) == 1 && GridPane.getRowSpan(node) == 1); // remove only bombs
 
 		bombs.forEach(bomb -> {
 			boardToShowBombsIn.getChildren().add(
@@ -182,7 +182,7 @@ public class BattleSeaPlayPageController implements Initializable {
 		opponentBoardGridpane.getChildren().get(++index).setId("Oship%d_%d_%d".formatted(2, 1, 1));
 		opponentBoardGridpane.getChildren().get(++index).setId("Oship%d_%d_%d".formatted(2, 1, 2));
 
-		 index = -1;
+		index = -1;
 		yourBoardGridpane.getChildren().get(++index).setId("Yship%d_%d".formatted(5, 2));
 		yourBoardGridpane.getChildren().get(++index).setId("Yship%d_%d".formatted(5, 1));
 		yourBoardGridpane.getChildren().get(++index).setId("Yship%d_%d".formatted(4, 1));
