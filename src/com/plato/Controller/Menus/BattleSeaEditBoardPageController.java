@@ -103,12 +103,14 @@ public class BattleSeaEditBoardPageController implements Initializable {
 						.finalizeBoard(currentBoard);
 
 				try {
-					MainController.getInstance().createAndReturnNewStage(
-							FXMLLoader.load(new File("src/com/plato/View/Menus/BattleSeaPlayPage.fxml").toURI().toURL()),
-							"BattleSea Game",
-							true,
-							MainController.getInstance().getPrimaryStage()
-					).show();
+					Stage gameStage = MainController.getInstance().createAndReturnNewStage(
+									FXMLLoader.load(new File("src/com/plato/View/Menus/BattleSeaPlayPage.fxml").toURI().toURL()),
+									"BattleSea Game",
+									true,
+									MainController.getInstance().getPrimaryStage()
+							);
+					BattleSeaPlayPageController.setStage(gameStage);
+					gameStage.show();
 					stage.close();
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -160,7 +162,7 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			);
 			BattleSea5RandBoardsController.setStage(generate5RandBoardsStage);
 			BattleSea5RandBoardsController.selectedBoardProperty().addListener(observable ->
-					setBoard(randBoards.get(BattleSea5RandBoardsController.selectedBoardProperty().get()-1), board)
+					setBoard(randBoards.get(BattleSea5RandBoardsController.selectedBoardProperty().get() - 1), board)
 			);
 			generate5RandBoardsStage.show();
 		} catch (IOException e) {
