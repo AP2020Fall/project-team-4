@@ -26,6 +26,7 @@ public class ReversiGameController implements Initializable {
 	public Label usernameW, usernameB;
 	public Button confirmMoveBtn, showMovesBtn;
 	public TilePane board;
+	public Label pointsW, pointsB;
 	private PlayerReversi player1, player2;
 
 	public static void setStage (Stage stage) {
@@ -40,6 +41,11 @@ public class ReversiGameController implements Initializable {
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
 		currentGame = (Reversi) GameController.getInstance().getCurrentGameInSession();
+
+		currentGame.pointsBProperty().addListener(observable -> updatePoints());
+		currentGame.pointsWProperty().addListener(observable -> updatePoints());
+
+		currentGame.updatePointProperties();
 
 		currentGame.hasPlayerMoved().addListener((observable, oldValue, newValue) -> {
 			updateAvailableCoordinates();
@@ -60,6 +66,11 @@ public class ReversiGameController implements Initializable {
 		updateBoard();
 
 		updateAvailableCoordinates();
+	}
+
+	private void updatePoints () {
+		pointsW.setText(String.valueOf(currentGame.pointsWProperty().get()));
+		pointsB.setText(String.valueOf(currentGame.pointsBProperty().get()));
 	}
 
 	public void updateAvailableCoordinates () {
@@ -108,9 +119,7 @@ public class ReversiGameController implements Initializable {
 							"  -fx-background-image: url('https://i.imgur.com/8djkzwC.png');");
 					case "b" -> cell.setStyle(cell.getStyle() +
 							"  -fx-background-image: url('https://i.imgur.com/vKt2BwI.png');");
-					case "-" -> {
-//						updateAvailableCoordinates();
-					}
+					case "-" -> {}
 					default -> throw new IllegalStateException("Unexpected value: " + cell);
 				}
 			}
@@ -125,13 +134,8 @@ public class ReversiGameController implements Initializable {
 			confirmMoveBtn.setVisible(true);
 
 			updateBoard();
-//			board.getChildren().stream()
-//					.map(node -> ((Label) node))
-//					.forEach(cell -> {
-//						if (currentGame.hasPlayerMoved() && (!cell.getStyle().contains("8djkzwC.png") ||!cell.getStyle().contains("vKt2BwI.png"))) {
-//							cell.setStyle("-fx-background-color: #6f9434;");
-//						}
-//					});
+
+			currentGame.updatePointProperties();
 		} catch (ReversiController.PlayerHasAlreadyPlacedDiskException e) {
 			System.out.println(e.getMessage());
 		}
@@ -145,6 +149,9 @@ public class ReversiGameController implements Initializable {
 		updateTurnIndicators();
 
 		updateAvailableCoordinates();
+
+		System.out.println("Move History");
+		ReversiController.getInstance().displayPrevMoves();
 	}
 
 	public void showMoves (ActionEvent actionEvent) {

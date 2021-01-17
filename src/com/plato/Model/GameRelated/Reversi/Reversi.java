@@ -3,7 +3,9 @@ package Model.GameRelated.Reversi;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +44,8 @@ public class Reversi extends Game {
 	private final LinkedList<String> moves = new LinkedList<>();
 	protected ArrayList<PlayerReversi> listOfPlayers = new ArrayList<>();
 	private BooleanProperty hasMadeMoveOfTurn = new SimpleBooleanProperty(false);
+	private IntegerProperty pointsW = new SimpleIntegerProperty(0),
+			pointsB = new SimpleIntegerProperty(0);
 
 	public Reversi (ArrayList<Gamer> gamers) {
 		super();
@@ -77,16 +81,12 @@ public class Reversi extends Game {
 		Game.getAllGames().addAll(allGames);
 	}
 
-	public static boolean checkCoordinates (int number) {
-		return number >= 1 && number <= 8;
-	}
-
 	/**
 	 * @param x from 0 to 7 inc
 	 * @param y from 0 to 7 inc
 	 */
 	public void placeDisk (int x, int y) {
-		if (canPlayerPlaceAnyDisks()) {
+		if (canPlayerPlaceAnyDisks())
 			if (canPlayerPlaceDiskHere(x, y)) {
 				checkDirections(x, y);
 				// converting y and x to 1-8 system
@@ -101,7 +101,6 @@ public class Reversi extends Game {
 					addMove(x, y, "white");
 				}
 			}
-		}
 	}
 
 	/**
@@ -125,13 +124,11 @@ public class Reversi extends Game {
 		String color = ((PlayerReversi) getTurnPlayer()).getColor();
 		String otherColor = (color.equals("b")) ? "w" : "b";
 
-		for (Direction dir : Direction.values())
-			if (dir.equals(direction))
-				if (checkCoordinates(x + dir.getDeltaX() + 1) && checkCoordinates(y + dir.getDeltaY() + 1))
-					if (board[y + dir.getDeltaY()][x + dir.getDeltaX()].equals(otherColor))
-						for (int i = y + dir.getDeltaY(), j = x + dir.getDeltaX(); checkCoordinates(i + 1) && checkCoordinates(j + 1); i += dir.getDeltaY(), j += dir.getDeltaX())
-							if (board[i][j].equals(color))
-								return true;
+		if (checkCoordinates(x + direction.getDeltaX() + 1) && checkCoordinates(y + direction.getDeltaY() + 1))
+			if (board[y + direction.getDeltaY()][x + direction.getDeltaX()].equals(otherColor))
+				for (int i = y + direction.getDeltaY(), j = x + direction.getDeltaX(); checkCoordinates(i + 1) && checkCoordinates(j + 1); i += direction.getDeltaY(), j += direction.getDeltaX())
+					if (board[i][j].equals(color))
+						return true;
 
 		return false;
 	}
@@ -140,6 +137,88 @@ public class Reversi extends Game {
 	public void nextTurn () {
 		super.nextTurn();
 		hasMadeMoveOfTurn.set(false);
+	}
+
+	@Override
+	public Gamer getWinner () {
+		if (getNumberOfBlack() > getNumberOfWhite())
+			return (listOfPlayers.get(0).getColor().equals("b")) ? listOfPlayers.get(0).getGamer() : listOfPlayers.get(1).getGamer();
+		else if (getNumberOfBlack() < getNumberOfWhite())
+			return (listOfPlayers.get(0).getColor().equals("b")) ? listOfPlayers.get(1).getGamer() : listOfPlayers.get(0).getGamer();
+		else return null;
+
+	}
+
+	public void updatePointProperties () {
+		if (pointsB.get()!= getNumberOfBlack())
+			pointsB.set(getNumberOfBlack());
+		if (pointsW.get()!= getNumberOfWhite())
+			pointsW.set(getNumberOfWhite());
+	}
+
+	public IntegerProperty pointsBProperty () {
+		return pointsB;
+	}
+
+	public IntegerProperty pointsWProperty () {
+		return pointsW;
+	}
+
+	/**
+	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended :O
+	 */
+	@Override
+	public boolean gameEnded () {
+		if (getNumberOfBlack() == 0) return true;
+		else if (getNumberOfWhite() == 0) return true;
+		else return isBoardFull();
+	}
+
+	/**
+	 * @return getNumberOfBlack if playerNum=1
+	 * getNumberOfWhite if playerNum=2
+	 */
+	public int getInGameScore (int playerNum) {
+		switch (playerNum) {
+			case 1 -> {
+				return getNumberOfBlack();
+			}
+			case 2 -> {
+				return getNumberOfWhite();
+			}
+		}
+		return -1; // should never happen
+	}
+
+	private boolean isBoardFull () {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[i][j].equals("-")) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public int getNumberOfBlack () {
+		int count = 0;
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[i][j].equals("b")) count++;
+			}
+		}
+		return count;
+	}
+
+	public int getNumberOfWhite () {
+		int count = 0;
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[i][j].equals("w")) count++;
+			}
+		}
+		return count;
 	}
 
 	/**
@@ -208,24 +287,59 @@ public class Reversi extends Game {
 		ArrayList<String> availableCoordinates = new ArrayList<>();
 		String color = ((PlayerReversi) getTurnPlayer()).getColor();
 		String otherColor = (color.equals("b")) ? "w" : "b";
-		if (!isBoardFull()) {
-			for (int y = 0; y < 8; y++)
-				for (int x = 0; x < 8; x++)
-					if (board[y][x].equals(color))
-						for (Direction dir : Direction.values())
-							if (checkCoordinates(y + dir.getDeltaY() + 1) && checkCoordinates(x + dir.getDeltaX() + 1)) {
-								if (board[y + dir.getDeltaY()][x + dir.getDeltaX()].equals(otherColor)) {
-									for (int i = y + dir.getDeltaY(), j = x + dir.getDeltaX(); checkCoordinates(i + 1) && checkCoordinates(j + 1); i += dir.getDeltaY(), j += dir.getDeltaX()) {
-										if (board[i][j].equals("-")) {
-											availableCoordinates.add(i + 1 + "," + (j + 1));
-											break;
-										}
-										else if (board[i][j].equals(color)) break;
+//		if (!isBoardFull()) {
+//			for (int y = 0; y < 8; y++)
+//				for (int x = 0; x < 8; x++)
+//					if (board[y][x].equals(color))
+//						for (Direction dir : Direction.values())
+//							if (checkCoordinates(y + dir.getDeltaY() + 1) && checkCoordinates(x + dir.getDeltaX() + 1)) {
+//								if (board[y + dir.getDeltaY()][x + dir.getDeltaX()].equals(otherColor)) {
+//									for (int i = y + dir.getDeltaY(), j = x + dir.getDeltaX(); checkCoordinates(i + 1) && checkCoordinates(j + 1); i += dir.getDeltaY(), j += dir.getDeltaX()) {
+//										if (board[i][j].equals("-")) {
+//											availableCoordinates.add(i + 1 + "," + (j + 1));
+//											break;
+//										}
+//										else if (board[i][j].equals(color)) break;
+//									}
+//								}
+//							}
+//		}
+		if (isBoardFull()) return availableCoordinates;
+		if (getNumberOfWhite() == 0) return availableCoordinates;
+		if (getNumberOfBlack() == 0) return availableCoordinates;
+
+		for (int y = 0; y < 8; y++)
+			for (int x = 0; x < 8; x++) {
+//				System.out.println("board[y][x] = " + board[y + 1][x + 1]);
+				if (board[y][x].equals(color))
+					for (Direction dir : Direction.values()) {
+//						System.out.printf("Checking in direction %s%n", dir.toString().toLowerCase());
+//						System.out.printf("checking neighbour at (x,y)=(%d,%d)%n", x + dir.getDeltaX() + 1, y + dir.getDeltaY() + 1);
+						if (checkCoordinates(y + dir.getDeltaY() + 1) && checkCoordinates(x + dir.getDeltaX() + 1)) {
+//							System.out.println("board[" + (y + dir.getDeltaY() + 1) + "][" + (x + dir.getDeltaX() + 1) + "] = " + board[y + dir.getDeltaY()][x + dir.getDeltaX()]);
+							if (board[y + dir.getDeltaY()][x + dir.getDeltaX()].equals(otherColor)) {
+//								System.out.println("checking step by step");
+								for (int i = y + dir.getDeltaY(), j = x + dir.getDeltaX(); checkCoordinates(i + 1) && checkCoordinates(j + 1); i += dir.getDeltaY(), j += dir.getDeltaX()) {
+//									System.out.printf("board[%d][%d] = %s%n", i + 1, j + 1, board[i][j]);
+									if (board[i][j].equals("-")) {
+										availableCoordinates.add(i + 1 + "," + (j + 1));
+//										System.out.println("added to available coordinates");
+										break;
+									}
+									else if (board[i][j].equals(color)) {
+//										System.out.println("direction " + dir.toString().toLowerCase() + " is useless");
+										break;
 									}
 								}
 							}
-		}
+						}
+					}
+			}
 		return availableCoordinates;
+	}
+
+	public static boolean checkCoordinates (int number) {
+		return number >= 1 && number <= 8;
 	}
 
 	//empties board , blank space is shown with -
@@ -250,73 +364,6 @@ public class Reversi extends Game {
 				}
 			}
 		}
-	}
-
-	/**
-	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended :O
-	 */
-	@Override
-	public boolean gameEnded () {
-		if (getNumberOfBlack() == 0) return true;
-		else if (getNumberOfWhite() == 0) return true;
-		else return isBoardFull();
-	}
-
-	@Override
-	public Gamer getWinner () {
-		if (getNumberOfBlack() > getNumberOfWhite())
-			return (listOfPlayers.get(0).getColor().equals("b")) ? listOfPlayers.get(0).getGamer() : listOfPlayers.get(1).getGamer();
-		else if (getNumberOfBlack() < getNumberOfWhite())
-			return (listOfPlayers.get(0).getColor().equals("b")) ? listOfPlayers.get(1).getGamer() : listOfPlayers.get(0).getGamer();
-		else return null;
-
-	}
-
-	/**
-	 * @return getNumberOfBlack if playerNum=1
-	 * getNumberOfWhite if playerNum=2
-	 */
-	public int getInGameScore (int playerNum) {
-		switch (playerNum) {
-			case 1 -> {
-				return getNumberOfBlack();
-			}
-			case 2 -> {
-				return getNumberOfWhite();
-			}
-		}
-		return -1; // should never happen
-	}
-
-	public int getNumberOfBlack () {
-		int count = 0;
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (board[i][j].equals("b")) count++;
-			}
-		}
-		return count;
-	}
-
-	public int getNumberOfWhite () {
-		int count = 0;
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (board[i][j].equals("w")) count++;
-			}
-		}
-		return count;
-	}
-
-	private boolean isBoardFull () {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (board[i][j].equals("-")) {
-					return false;
-				}
-			}
-		}
-		return true;
 	}
 
 	public String[][] getBoard () {
