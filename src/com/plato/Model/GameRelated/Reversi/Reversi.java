@@ -310,9 +310,10 @@ public class Reversi extends Game {
 //							}
 //		}
 		if (isBoardFull()) return availableCoordinates;
-		if (getNumberOfWhite() == 0 ) return availableCoordinates;
-		if (getNumberOfBlack() == 0) return availableCoordinates;
+		if (getNumberOfWhite() == 0 && ((PlayerReversi) getTurnPlayer()).getColor().equals(color)) return availableCoordinates;
+		if (getNumberOfBlack() == 0 && ((PlayerReversi) getTurnPlayer()).getColor().equals(color)) return availableCoordinates;
 
+		//going through the whole board
 		for (int y = 0; y < 8; y++)
 			for (int x = 0; x < 8; x++) {
 //				System.out.println("board[y][x] = " + board[y + 1][x + 1]);
@@ -327,7 +328,7 @@ public class Reversi extends Game {
 								for (int i = y + dir.getDeltaY(), j = x + dir.getDeltaX(); checkCoordinates(i + 1) && checkCoordinates(j + 1); i += dir.getDeltaY(), j += dir.getDeltaX()) {
 //									System.out.printf("board[%d][%d] = %s%n", i + 1, j + 1, board[i][j]);
 									if (board[i][j].equals("-")) {
-										availableCoordinates.add(i + 1 + "," + (j + 1));
+										availableCoordinates.add((i + 1) + "," + (j + 1));
 //										System.out.println("added to available coordinates");
 										break;
 									}
