@@ -46,7 +46,8 @@ public class BattleSeaPlayPageController implements Initializable {
 	private IntegerProperty secondsRemaining = new SimpleIntegerProperty(maxTime);
 	private Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
 		secondsRemaining.set(secondsRemaining.get() - 1);
-		updateAllPage();
+		if (!currentGame.gameEnded())
+			updateAllPage();
 	}));
 
 	public static void setStage (Stage stage) {
@@ -82,14 +83,15 @@ public class BattleSeaPlayPageController implements Initializable {
 		secondsRemaining.addListener(observable -> {
 			if (bombThrown)
 				timer.stop();
-			updateAllPage();
+			if (!currentGame.gameEnded())
+				updateAllPage();
 		});
 
 		timer.setCycleCount(maxTime);
 		timer.setAutoReverse(false);
 
 		timer.statusProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue == Animation.Status.STOPPED && !currentGame.gameHasEnded()) {
+			if (newValue == Animation.Status.STOPPED && !currentGame.gameEnded()) {
 				secondsRemaining.set(maxTime);
 
 				if (bombThrown) {

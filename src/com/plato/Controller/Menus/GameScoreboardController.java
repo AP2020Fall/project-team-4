@@ -51,6 +51,7 @@ public class GameScoreboardController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
+		System.out.println("GameScoreboardController.initialize");
 		LinkedList<String> scoreBoardLinkedList = Game.getScoreboard(gameName);
 
 		scoreBoardLinkedList.forEach(System.out::println);

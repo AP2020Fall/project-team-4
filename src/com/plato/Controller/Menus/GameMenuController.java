@@ -103,19 +103,6 @@ public class GameMenuController implements Initializable {
 	}
 
 	public void newGame (ActionEvent actionEvent) {
-//		//gameInfo.setVisible(true);
-//		Label title = new Label(gameName);
-//		title.setFont(new Font("Bauhaus 93", 24));
-//		VBox vBox = new VBox(title);
-//		Scene scene = new Scene(vBox);
-//		Stage stage = new Stage();
-//		stage.setScene(scene);
-//		stage.setTitle("New Game of " + gameName);
-//		stage.setWidth(400);
-//		stage.setHeight(450);
-//		stage.initModality(Modality.WINDOW_MODAL);
-//		TextField secondPlayer = new TextField();
-//		stage.show();
 
 		newGamePropertyWindow.setVisible(true);
 		timeLimitMenuInStartGameMenu.setText(selectedTime);
@@ -209,11 +196,11 @@ public class GameMenuController implements Initializable {
 
 	public void displayScoreboard (ActionEvent actionEvent) {
 		confirmTimeInGameMenu();
+		Game.getScoreboard(gameName).forEach(System.out::println);
 		if (Game.getScoreboard(gameName).size() == 1 && !Game.getScoreboard(gameName).get(0).startsWith("Rank:"))
 			return;
 		try {
 			GameScoreboardController.setGameName(gameName);
-
 			Stage scoreBoardStage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/GameScoreboard.fxml").toURI().toURL()),
 					gameName + " Scoreboard",
