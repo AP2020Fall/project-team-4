@@ -1,12 +1,12 @@
 package Controller.Menus;
 
-import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.GameController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -30,12 +30,12 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
 
 public class BattleSeaPlayPageController implements Initializable {
 	private static Stage stage;
 	private static BattleSea currentGame;
 	private static int maxTime;
+	private static boolean bombThrown = false;
 	public ImageView pfp1, pfp2;
 	public Circle turnIndicator1, turnIndicator2;
 	public Label username1, username2;
@@ -44,14 +44,8 @@ public class BattleSeaPlayPageController implements Initializable {
 	public TilePane clickableOpponentBoardTilePane;
 	private PlayerBattleSea player1, player2;
 	private IntegerProperty secondsRemaining = new SimpleIntegerProperty(maxTime);
-	private boolean bombThrown = false;
 	private Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
 		secondsRemaining.set(secondsRemaining.get() - 1);
-		if (bombThrown)
-			resetTimer();
-		if (secondsRemaining.intValue() == -1) {
-			resetTimer();
-		}
 		updateAllPage();
 	}));
 
@@ -60,7 +54,6 @@ public class BattleSeaPlayPageController implements Initializable {
 		BattleSeaPlayPageController.stage.setOnCloseRequest(e -> {
 			BattleSeaPlayPageController.stage = null;
 			currentGame = null;
-			BattleSeaController.getInstance().getTurnTimer().cancel();
 		});
 	}
 
@@ -68,22 +61,8 @@ public class BattleSeaPlayPageController implements Initializable {
 		BattleSeaPlayPageController.maxTime = maxTime;
 	}
 
-	private void resetTimer () {
-		secondsRemaining.set(maxTime);
-
-		// if bomb wasn't successful go to next turn
-		if (bombThrown) {
-			if (((PlayerBattleSea) currentGame.getTurnPlayer())
-					.getBombsThrown().getLast().wasSuccessful())
-				currentGame.nextTurn();
-		}
-		else
-			currentGame.nextTurn();
-		bombThrown = false;
-		if (currentGame.gameEnded()) {
-			currentGame.concludeGame();
-			// todo display game conclusion window
-		}
+	public static void bombThrown () {
+		bombThrown = true;
 	}
 
 	@Override
@@ -100,26 +79,55 @@ public class BattleSeaPlayPageController implements Initializable {
 		pfp1.setImage(new Image(player1.getGamer().getPfpUrl()));
 		pfp2.setImage(new Image(player2.getGamer().getPfpUrl()));
 
-		secondsRemaining.addListener(observable -> updateAllPage());
+		secondsRemaining.addListener(observable -> {
+			if (bombThrown)
+				timer.stop();
+			updateAllPage();
+		});
 
 		timer.setCycleCount(maxTime);
 		timer.setAutoReverse(false);
-		timer.setOnFinished(event -> {
 
+		timer.statusProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue == Animation.Status.STOPPED && !currentGame.gameHasEnded()) {
+				secondsRemaining.set(maxTime);
+
+				if (bombThrown) {
+					if (!((PlayerBattleSea) currentGame.getTurnPlayer())
+							.getBombsThrown().getLast().wasSuccessful())
+						currentGame.nextTurn();
+				}
+				else
+					currentGame.nextTurn();
+				bombThrown = false;
+				if (currentGame.gameEnded()) {
+					timer.stop();
+					currentGame.concludeGame();
+					// todo display game conclusion window
+					System.out.println("Game Ended ");
+				}
+
+				timer.playFromStart();
+			}
 		});
 
-		timer.playFromStart();
+		timer.play();
 
 		updateAllPage();
+	}
+
+	public double getTimePercentageRemaining () {
+		return ((double) maxTime - secondsRemaining.doubleValue()) / ((double) maxTime);
 	}
 
 	private void updateTimers () {
 		timer1.setVisible(turnIndicator1.isVisible());
 		timer2.setVisible(turnIndicator2.isVisible());
 
-		double percentage = Math.max(Math.min(BattleSeaController.getInstance().getTimePercentageRemaining(), 1.0), 0.0);
+		double percentage = Math.max(Math.min(
+				getTimePercentageRemaining()
+				, 1.0), 0.0);
 
-		System.out.println("BattleSeaController.getInstance().getTimePercentageRemaining() = " + percentage);
 		timer1.setProgress(percentage);
 		timer2.setProgress(percentage);
 	}
@@ -198,10 +206,12 @@ public class BattleSeaPlayPageController implements Initializable {
 	}
 
 	private void updateBombs (LinkedList<Bomb> bombs, GridPane boardToShowBombsIn) {
-		boardToShowBombsIn.getChildren().stream()
-				.filter(node -> GridPane.getColumnSpan(node) == 1 && GridPane.getRowSpan(node) == 1) // remove only bombs
-				.collect(Collectors.toCollection(LinkedList::new))
-				.clear();
+//		boardToShowBombsIn.getChildren().stream()
+//				.filter(node -> GridPane.getColumnSpan(node) == 1 && GridPane.getRowSpan(node) == 1) // remove only bombs
+//				.collect(Collectors.toCollection(LinkedList::new))
+//				.clear();
+		boardToShowBombsIn.getChildren()
+				.removeIf(node -> GridPane.getColumnSpan(node) == 1 && GridPane.getRowSpan(node) == 1); // remove only bombs
 
 		bombs.forEach(bomb -> {
 			boardToShowBombsIn.getChildren().add(
@@ -222,10 +232,8 @@ public class BattleSeaPlayPageController implements Initializable {
 						@Override
 						public void handle (MouseEvent event) {
 							try {
-								if (BombController.getInstance().canThrowBomb(getXFrom1(index), getYFrom1(index))) {
+								if (BombController.getInstance().canThrowBomb(getXFrom1(index), getYFrom1(index)))
 									((Label) event.getSource()).setOpacity(0.3);
-									System.out.printf("(x,y) = (%d,%d)%n", getXFrom1(index), getYFrom1(index));
-								}
 							} catch (BombController.CoordinateAlreadyBombedException e) {
 								coord.removeEventHandler(MouseEvent.MOUSE_ENTERED, this);
 							}

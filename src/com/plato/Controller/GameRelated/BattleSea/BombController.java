@@ -1,6 +1,7 @@
 package Controller.GameRelated.BattleSea;
 
 import Controller.GameRelated.GameController;
+import Controller.Menus.BattleSeaPlayPageController;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import View.GameRelated.BattleSea.BombView;
@@ -22,13 +23,12 @@ public class BombController {
 
 		if (canThrowBomb(x, y)) {
 			currentPlayer.throwBomb(x, y);
-			BattleSeaController.getInstance().getTurnTimerTask().bomb();
+			BattleSeaPlayPageController.bombThrown();
 
 			Bomb lastBomb = currentPlayer.getBombsThrown().getLast();
 
 			if (!lastBomb.wasSuccessful())
-				BattleSeaController.getInstance().getTurnTimerTask().bomb();
-			System.out.printf("Bomb thrown at (x,y)=(%d,%d). %s successful%n", lastBomb.getX(), lastBomb.getY(), (lastBomb.wasSuccessful() ? "was" : "wasn't"));
+				BattleSeaPlayPageController.bombThrown();
 		}
 	}
 

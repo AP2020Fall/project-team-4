@@ -4,23 +4,16 @@ import Controller.GameRelated.GameController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
-import Model.GameRelated.Game;
 import Model.GameRelated.Player;
 import View.GameRelated.BattleSea.BattleSeaView;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.InputMismatchException;
 import java.util.LinkedList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class BattleSeaController {
 	private static BattleSeaController battleSeaController;
-	private final TurnTimerTask turnTimerTask = new TurnTimerTask();
 	private LinkedList<Ship> trialPlayerBoard1;
 	private LinkedList<Ship> trialPlayerBoard2;
-	private Timer turnTimer;
 
 	public static BattleSeaController getInstance () {
 		if (battleSeaController == null)
@@ -164,10 +157,6 @@ public class BattleSeaController {
 		trialPlayerBoard2 = null;
 	}
 
-	public void displayRemainingTime () {
-		BattleSeaView.getInstance().displayRemainingTime(turnTimerTask.secondsRemainingProperty().intValue());
-	}
-
 	public void displayRandomlyGeneratedBoard (LinkedList<Ship> randBoard) {
 		BattleSeaView.getInstance().displayBoard(
 				this.getBoardAsStringBuilder(randBoard)
@@ -261,75 +250,5 @@ public class BattleSeaController {
 		BattleSeaView.getInstance().displayBoard(
 				getBoardAsStringBuilder(getCurrentlyEditingTrialBoard())
 		);
-	}
-
-	public Timer getTurnTimer () {
-		return turnTimer;
-	}
-
-	public void initTurnTimerStuff () {
-		turnTimer = new Timer();
-		turnTimer.scheduleAtFixedRate(turnTimerTask, 1000, 1000);
-		turnTimerTask.resetTimer();
-	}
-
-	public TurnTimerTask getTurnTimerTask () {
-		return turnTimerTask;
-	}
-
-	public double getTimePercentageRemaining () {
-		return (((double) turnTimerTask.MAX_SECONDS) - turnTimerTask.secondsRemaining.doubleValue()) / ((double) turnTimerTask.MAX_SECONDS);
-	}
-
-	public static class TurnTimerTask extends TimerTask {
-		private int MAX_SECONDS = 30;
-		private IntegerProperty secondsRemaining = new SimpleIntegerProperty(MAX_SECONDS);
-		private String command = "";
-
-		@Override
-		public void run () {
-			secondsRemaining.set(secondsRemaining.get() - 1);
-			System.out.println("secondsRemaining.get() = " + secondsRemaining.get());
-
-			if (command.equals("bomb")) {
-				resetTimer();
-			}
-
-			if (secondsRemaining.intValue() == -1) {
-				BattleSea currentGame = (BattleSea) GameController.getInstance().getCurrentGameInSession();
-				if (command.equals(""))
-					BattleSeaView.getInstance().displayOutOfTimeMessage(
-							currentGame.getOpponentOf(currentGame.getTurnPlayer()).getUsername()
-					);
-				resetTimer();
-			}
-		}
-
-		public void resetTimer () {
-			secondsRemaining.set(MAX_SECONDS);
-			// if bomb wasn't successful go to next turn
-			if (command.equals("bomb")) {
-				if (!((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
-						.getTurnPlayer())
-						.getBombsThrown().getLast().wasSuccessful())
-					GameController.getInstance().getCurrentGameInSession().nextTurn();
-			}
-			else
-				GameController.getInstance().getCurrentGameInSession().nextTurn();
-			command = "";
-			if (GameController.getInstance().getCurrentGameInSession().gameEnded()) {
-				Game currentGame = GameController.getInstance().getCurrentGameInSession();
-				GameController.getInstance().getCurrentGameInSession().concludeGame();
-				GameController.getInstance().displayGameConclusion(currentGame);
-			}
-		}
-
-		public IntegerProperty secondsRemainingProperty () {
-			return secondsRemaining;
-		}
-
-		public void bomb () {
-			this.command = "bomb";
-		}
 	}
 }
