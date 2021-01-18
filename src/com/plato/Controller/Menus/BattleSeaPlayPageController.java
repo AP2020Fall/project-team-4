@@ -6,10 +6,7 @@ import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
-import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
@@ -43,6 +40,7 @@ public class BattleSeaPlayPageController implements Initializable {
 	public Circle turnIndicator1, turnIndicator2;
 	public Label username1, username2;
 	public ProgressBar timer1, timer2;
+	public Label timerNum1, timerNum2;
 	public GridPane opponentBoardGridpane, yourBoardGridpane;
 	public TilePane clickableOpponentBoardTilePane;
 	private PlayerBattleSea player1, player2;
@@ -111,7 +109,6 @@ public class BattleSeaPlayPageController implements Initializable {
 					// todo display game conclusion window
 					System.out.println("Game Ended ");
 				}
-
 				timer.playFromStart();
 			}
 		});
@@ -128,6 +125,8 @@ public class BattleSeaPlayPageController implements Initializable {
 	private void updateTimers () {
 		timer1.setVisible(turnIndicator1.isVisible());
 		timer2.setVisible(turnIndicator2.isVisible());
+		timerNum1.setVisible(turnIndicator1.isVisible());
+		timerNum2.setVisible(turnIndicator2.isVisible());
 
 		double percentage = Math.max(Math.min(
 				getTimePercentageRemaining()
@@ -135,6 +134,8 @@ public class BattleSeaPlayPageController implements Initializable {
 
 		timer1.setProgress(percentage);
 		timer2.setProgress(percentage);
+		timerNum1.setText(secondsRemaining.intValue() + "s");
+		timerNum2.setText(timerNum1.getText());
 	}
 
 	private void updateTurnIndicators () {
@@ -146,6 +147,7 @@ public class BattleSeaPlayPageController implements Initializable {
 		turnIndicator2.setVisible(!turnIndicator1.isVisible());
 		timer1.setVisible(turnIndicator1.isVisible());
 		timer2.setVisible(turnIndicator2.isVisible());
+
 	}
 
 	public void updateOpponentBoard () {
@@ -169,65 +171,61 @@ public class BattleSeaPlayPageController implements Initializable {
 	 * @param x from 0
 	 * @param y from 0
 	 */
-	private synchronized void animateSuccessFulBomb (Image image, int x, int y) {
+	private void animateSuccessFulBomb (Image image, int x, int y, int index) {
 		System.out.printf("trying to animate bomb at (x,y)=(%d,%d)%n", x + 1, y + 1);
 
-		float fps = 5; //frames per second I.E. 24
-		final int[] currentCol = {0}, currentRow = {0};
-		int cols = 3;//Number of columns/rows on the sprite sheet
-		int rows = 4;
-		int totalFrames = 12;//Total number of frames in the sequence
-		int frameWidth = 60, frameHeight = 60;
+		stage.setResizable(true);
+
+		class SpriteAnimation extends Transition {
+
+			private final ImageView imageView;
+			private final int count;
+			private final int columns;
+			private final int offsetX, offsetY;
+			private final int width, height;
+
+			private int lastIndex;
+
+			public SpriteAnimation (ImageView imageView) {
+				this.imageView = imageView;
+				this.count = 12;
+				this.columns = 12;
+				this.offsetX = 0;
+				this.offsetY = 0;
+				this.width = 60;
+				this.height = 60;
+				setCycleDuration(Duration.seconds(1.5));
+				setInterpolator(Interpolator.LINEAR);
+			}
+
+			protected void interpolate (double k) {
+				final int index = Math.min((int) Math.floor(k * count), count - 1);
+				if (index != lastIndex) {
+					final int x = (index % columns) * width + offsetX;
+					final int y = (index / columns) * height + offsetY;
+					imageView.setViewport(new Rectangle2D(x, y, width, height));
+					lastIndex = index;
+				}
+			}
+		}
 
 		//Image view that will display our sprite
 		ImageView imageView = new ImageView() {{
 			setImage(image);
-			setFitWidth(frameWidth);
-			setFitHeight(frameHeight);
+			setFitWidth(60);
+			setFitHeight(60);
 			setSmooth(true);
-			opponentBoardGridpane.getChildren().add(this);
-
-			GridPane.setColumnIndex(this, x);
-			GridPane.setRowIndex(this, y);
-			GridPane.setColumnSpan(this, 1);
-			GridPane.setRowSpan(this, 1);
+			clickableOpponentBoardTilePane.getChildren().add(index, this);
 		}};
-		System.out.println("imageView.getBoundsInParent() = " + imageView.getBoundsInParent().toString());
-		imageView.setViewport(new Rectangle2D(
-				0, 0,
-				frameWidth, frameHeight));
 
-		final long[] lastFrame = {System.nanoTime()};
-
-		new AnimationTimer() {
-			@Override
-			public void handle (long now) {
-				timer.pause();
-				int frameJump = (int) Math.floor((now - lastFrame[0]) / (1000000000 / fps)); //Determine how many frames we need to advance to maintain frame rate independence
-
-				//Do a bunch of math to determine where the viewport needs to be positioned on the sprite sheet
-				if (frameJump >= 1) {
-					lastFrame[0] = now;
-					int addRows = (int) Math.floor((float) frameJump / (float) cols);
-					int frameAdd = frameJump - (addRows * cols);
-
-					if (currentCol[0] + frameAdd >= cols) {
-						currentRow[0] += addRows + 1;
-						currentCol[0] = frameAdd - (cols - currentCol[0]);
-					}
-					else {
-						currentRow[0] += addRows;
-						currentCol[0] += frameAdd;
-					}
-
-					if (currentRow[0] > rows) {
-						this.stop();
-						timer.play();
-					}
-					imageView.setViewport(new Rectangle2D(currentCol[0] * frameWidth, currentRow[0] * frameHeight, frameWidth, frameHeight));
-				}
+		Animation animation = new SpriteAnimation(imageView);
+		animation.setCycleCount(1);
+		animation.statusProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue == Animation.Status.STOPPED) {
+				clickableOpponentBoardTilePane.getChildren().removeIf(node -> node instanceof ImageView);
 			}
-		}.start();
+		});
+		animation.play();
 	}
 
 	public void updateYourBoard () {
@@ -299,7 +297,7 @@ public class BattleSeaPlayPageController implements Initializable {
 						@Override
 						public void handle (MouseEvent event) {
 							try {
-								if (!bombThrown && BombController.getInstance().canThrowBomb(getXFrom1(index), getYFrom1(index)))
+								if (BombController.getInstance().canThrowBomb(getXFrom1(index), getYFrom1(index)))
 									((Label) event.getSource()).setOpacity(0.3);
 							} catch (BombController.CoordinateAlreadyBombedException e) {
 								coord.removeEventHandler(MouseEvent.MOUSE_ENTERED, this);
@@ -314,26 +312,22 @@ public class BattleSeaPlayPageController implements Initializable {
 											opponentPlayer = ((PlayerBattleSea) currentGame.getOpponentOf(currentPlayer));
 
 									try {
-										if (!bombThrown) {
-											BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
+										BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
 
-											bombThrown = true;
+										bombThrown = true;
 
-											// animate explosions if ship is destroyed
-											if (opponentPlayer.shipExistsInXY(getXFrom1(index), getYFrom1(index))) {
-												Ship shipToBeBombed = opponentPlayer.getShipAboutToBeBombed(getXFrom1(index), getYFrom1(index));
+										// animate explosions if ship is destroyed
+										if (opponentPlayer.shipExistsInXY(getXFrom1(index), getYFrom1(index))) {
+											Ship shipToBeBombed = opponentPlayer.getShipAboutToBeBombed(getXFrom1(index), getYFrom1(index));
 
-												if (shipToBeBombed.isDestroyed(opponentPlayer)) {
-													Image explosionSprite = new Image("https://i.imgur.com/CR4yAGd.png");
+											if (shipToBeBombed.isDestroyed(opponentPlayer)) {
+												Image explosionSprite = new Image("https://i.imgur.com/1XaaYWo.png");
 
-													Ship.getAllCoords(new LinkedList<>(Collections.singletonList(shipToBeBombed))).forEach(coord ->
-															animateSuccessFulBomb(
-																	explosionSprite,
-																	coord[0] - 1, coord[1] - 1));
-//												opponentBoardGridpane.getChildren().removeIf(node -> node instanceof ImageView);
-												}
+												Ship.getAllCoords(new LinkedList<>(Collections.singletonList(shipToBeBombed))).forEach(coord ->
+														animateSuccessFulBomb(
+																explosionSprite,
+																coord[0] - 1, coord[1] - 1, getIndexFromXY(coord[0] - 1, coord[1] - 1)));
 											}
-											updateAllPage();
 										}
 									} catch (BombController.CoordinateAlreadyBombedException exception) {
 										coord.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
@@ -345,6 +339,10 @@ public class BattleSeaPlayPageController implements Initializable {
 					coord.addEventHandler(MouseEvent.MOUSE_ENTERED, onEntered);
 					coord.addEventHandler(MouseEvent.MOUSE_EXITED, onExited);
 				});
+	}
+
+	private int getIndexFromXY (int x, int y) {
+		return 10 * y + x;
 	}
 
 	private void updateAllPage () {
