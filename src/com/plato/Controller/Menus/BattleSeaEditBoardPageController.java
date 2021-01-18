@@ -222,28 +222,6 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		}
 	}
 
-//	public void updateShipPos (MouseEvent mouseEvent) {
-//		ImageView shipImgView = (ImageView) mouseEvent.getSource();
-//		Ship ship = currentBoard.stream()
-//				.filter(ship1 -> ship1.getLeftMostX() - 1 == GridPane.getColumnIndex(shipImgView) && ship1.getTopMostY() - 1 == GridPane.getRowIndex(shipImgView))
-//				.findAny().get();
-//
-//		double destXOfImageView = mouseEvent.getSceneX() - shipImgView.getLayoutBounds().getWidth() / 2;
-//		double destYOfImageView = mouseEvent.getSceneY() - shipImgView.getLayoutBounds().getHeight() / 2;
-//		int destXOfShip = ((int) ((destXOfImageView - board.getLayoutBounds().getMinX()) / 70)),
-//				destYOfShip = ((int) ((destYOfImageView - board.getLayoutBounds().getMinY()) / 70));
-//
-//		System.out.println("destXOfImageView = " + destXOfImageView + "\t\tdestYOfImageView = " + destYOfImageView);
-//		System.out.println("destXOfShip = " + destXOfShip + "\t\t\tdestYOfShip = " + destYOfShip);
-//
-//		int oldShipX = ship.getLeftMostX(), oldShipY = ship.getTopMostY();
-////		int boardGridPaneX = grid.getLayoutBounds().getMinX() +
-//
-//		ShipController.getInstance().moveShip(currentBoard, ship, destXOfShip, destYOfShip);
-//
-//		setBoard(currentBoard, board);
-//	}
-
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Label)
 			((Label) mouseEvent.getSource()).setOpacity(0.8);

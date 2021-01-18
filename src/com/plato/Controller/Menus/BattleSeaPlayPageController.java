@@ -1,11 +1,13 @@
 package Controller.Menus;
 
+import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.GameController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -30,6 +33,7 @@ public class BattleSeaPlayPageController implements Initializable {
 	public Label username1, username2;
 	public ProgressIndicator timer1, timer2;
 	public GridPane opponentBoardGridpane, yourBoardGridpane;
+	public TilePane clickableOpponentBoardTilePane;
 	private PlayerBattleSea player1, player2;
 
 	public static void setStage (Stage stage) {
@@ -55,8 +59,7 @@ public class BattleSeaPlayPageController implements Initializable {
 		pfp2.setImage(new Image(player2.getGamer().getPfpUrl()));
 
 		updateTurnIndicators();
-		updateOpponentBoard();
-		updateYourBoard();
+		updateAllPage();
 	}
 
 	private void updateTurnIndicators () {
@@ -80,6 +83,8 @@ public class BattleSeaPlayPageController implements Initializable {
 		for (Ship ship : opponentBoard)
 			getShipView(opponentBoardGridpane, ship).setVisible(ship.isDestroyed(currentPlayer));
 
+		updateBombThrowability();
+
 		updateBombs(currentPlayer.getBombsThrown(), opponentBoardGridpane);
 	}
 
@@ -91,7 +96,6 @@ public class BattleSeaPlayPageController implements Initializable {
 
 		updateBombs(currentPlayer.getOpponentBombsThrown(), yourBoardGridpane);
 	}
-
 
 	public void setBoard (LinkedList<Ship> board, GridPane boardToShowShipsIn) {
 		AtomicBoolean firstSmallShipIsMoved = new AtomicBoolean(false);
@@ -139,6 +143,72 @@ public class BattleSeaPlayPageController implements Initializable {
 					getBombLabel(bomb, (boardToShowBombsIn.getId().toLowerCase().startsWith("o")))
 			);
 		});
+	}
+
+	private void updateBombThrowability () {
+		clickableOpponentBoardTilePane.getChildren().stream()
+				.filter(node -> node instanceof Label)
+				.map(node -> ((Label) node))
+				.forEach(coord -> {
+					int index = clickableOpponentBoardTilePane.getChildren().indexOf(coord);
+
+					EventHandler<MouseEvent> onEntered = new EventHandler<>() {
+						@Override
+						public void handle (MouseEvent event) {
+							try {
+								if (BombController.getInstance().canThrowBomb(getXFrom1(index), getYFrom1(index))) {
+									((Label) event.getSource()).setOpacity(0.3);
+									System.out.printf("(x,y) = (%d,%d)%n", getXFrom1(index), getYFrom1(index));
+								}
+							} catch (BombController.InvalidCoordinateException | BombController.CoordinateAlreadyBombedException e) {
+								coord.removeEventHandler(MouseEvent.MOUSE_ENTERED, this);
+							}
+						}
+					},
+							onExited = new EventHandler<>() {
+								@Override
+								public void handle (MouseEvent event) {
+									try {
+										if (BombController.getInstance().canThrowBomb(getXFrom1(index), getYFrom1(index)))
+											((Label) event.getSource()).setOpacity(0);
+									} catch (BombController.InvalidCoordinateException | BombController.CoordinateAlreadyBombedException e) {
+										coord.removeEventHandler(MouseEvent.MOUSE_EXITED, this);
+									}
+								}
+							},
+							onClick = new EventHandler<>() {
+								@Override
+								public void handle (MouseEvent e) {
+									try {
+										BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
+
+										updateAllPage();
+									} catch (BombController.InvalidCoordinateException | BombController.CoordinateAlreadyBombedException exception) {
+										coord.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+									}
+								}
+							};
+					coord.addEventHandler(MouseEvent.MOUSE_CLICKED, onClick);
+					coord.addEventHandler(MouseEvent.MOUSE_ENTERED, onEntered);
+					coord.addEventHandler(MouseEvent.MOUSE_EXITED, onExited);
+				});
+	}
+
+	private void updateAllPage () {
+		updateYourBoard();
+		updateOpponentBoard();
+	}
+
+	public int getXFrom1 (int index) {
+		int x = (index + 1) % 10;
+		x = (x == 0 ? 10 : x);
+		return x;
+	}
+
+	public int getYFrom1 (int index) {
+		int y = (index + 1) / 10;
+//		y = (y == 11 ? 10 : y);
+		return y;
 	}
 
 	private Label getBombLabel (Bomb bomb, boolean isForBigBoard) {

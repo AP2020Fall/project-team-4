@@ -177,7 +177,7 @@ public class MainController extends Application {
 ////			case "Generate a Random Board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
 ////			case "Choose between 5 randomly generated boards" -> BattleSeaController.getInstance().chooseBetween5RandomlyGeneratedBoards();
 ////			case "Display on-trial Board" -> BattleSeaController.getInstance().displayTrialBoard();
-////			case "Move ship" -> ShipController.getInstance().moveShip(); // todo
+////			case "Move ship" -> ShipController.getInstance().moveShip();
 ////			case "Change ship direction" -> ShipController.getInstance().rotateShip();
 ////			case "Finalize Board" -> {
 ////				BattleSeaController.getInstance().finalizeTrialBoard();
