@@ -4,6 +4,7 @@ import Controller.GameRelated.GameController;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Player;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,25 @@ public class PlayerBattleSea extends Player {
 		return this.getBombsThrown().stream()
 				.filter(bomb -> bomb.getX() == x && bomb.getY() == y)
 				.findAny().get();
+	}
+
+	public Ship getShipAboutToBeBombed (int x, int y) {
+		return getShips(true).stream()
+				.filter(ship -> {
+					LinkedList<int[]> coords = Ship.getAllCoords(new LinkedList<>(Arrays.asList(ship)));
+
+					return coords.stream().anyMatch(coord -> coord[0] == x && coord[1] == y);
+				})
+				.findAny().get();
+	}
+
+	public boolean shipExistsInXY (int x, int y) {
+		return getShips(true).stream()
+				.anyMatch(ship -> {
+					LinkedList<int[]> coords = Ship.getAllCoords(new LinkedList<>(Arrays.asList(ship)));
+
+					return coords.stream().anyMatch(coord -> coord[0] == x && coord[1] == y);
+				});
 	}
 
 	public LinkedList<Bomb> getBombsThrown () {

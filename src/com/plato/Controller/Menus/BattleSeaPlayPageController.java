@@ -7,6 +7,7 @@ import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
 import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -14,6 +15,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -27,6 +29,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -153,12 +156,78 @@ public class BattleSeaPlayPageController implements Initializable {
 		setBoard(opponentBoard, opponentBoardGridpane);
 
 		// show only completely destroyed ships
-		for (Ship ship : opponentBoard)
+		for (Ship ship : opponentBoard) {
 			getShipView(opponentBoardGridpane, ship).setVisible(ship.isDestroyed(opponentPlayer));
+		}
 
 		updateBombThrowability();
 
 		updateBombs(currentPlayer.getBombsThrown(), opponentBoardGridpane);
+	}
+
+	/**
+	 * @param x from 0
+	 * @param y from 0
+	 */
+	private synchronized void animateSuccessFulBomb (Image image, int x, int y) {
+		System.out.printf("trying to animate bomb at (x,y)=(%d,%d)%n", x + 1, y + 1);
+
+		float fps = 5; //frames per second I.E. 24
+		final int[] currentCol = {0}, currentRow = {0};
+		int cols = 3;//Number of columns/rows on the sprite sheet
+		int rows = 4;
+		int totalFrames = 12;//Total number of frames in the sequence
+		int frameWidth = 60, frameHeight = 60;
+
+		//Image view that will display our sprite
+		ImageView imageView = new ImageView() {{
+			setImage(image);
+			setFitWidth(frameWidth);
+			setFitHeight(frameHeight);
+			setSmooth(true);
+			opponentBoardGridpane.getChildren().add(this);
+
+			GridPane.setColumnIndex(this, x);
+			GridPane.setRowIndex(this, y);
+			GridPane.setColumnSpan(this, 1);
+			GridPane.setRowSpan(this, 1);
+		}};
+		System.out.println("imageView.getBoundsInParent() = " + imageView.getBoundsInParent().toString());
+		imageView.setViewport(new Rectangle2D(
+				0, 0,
+				frameWidth, frameHeight));
+
+		final long[] lastFrame = {System.nanoTime()};
+
+		new AnimationTimer() {
+			@Override
+			public void handle (long now) {
+				timer.pause();
+				int frameJump = (int) Math.floor((now - lastFrame[0]) / (1000000000 / fps)); //Determine how many frames we need to advance to maintain frame rate independence
+
+				//Do a bunch of math to determine where the viewport needs to be positioned on the sprite sheet
+				if (frameJump >= 1) {
+					lastFrame[0] = now;
+					int addRows = (int) Math.floor((float) frameJump / (float) cols);
+					int frameAdd = frameJump - (addRows * cols);
+
+					if (currentCol[0] + frameAdd >= cols) {
+						currentRow[0] += addRows + 1;
+						currentCol[0] = frameAdd - (cols - currentCol[0]);
+					}
+					else {
+						currentRow[0] += addRows;
+						currentCol[0] += frameAdd;
+					}
+
+					if (currentRow[0] > rows) {
+						this.stop();
+						timer.play();
+					}
+					imageView.setViewport(new Rectangle2D(currentCol[0] * frameWidth, currentRow[0] * frameHeight, frameWidth, frameHeight));
+				}
+			}
+		}.start();
 	}
 
 	public void updateYourBoard () {
@@ -208,10 +277,6 @@ public class BattleSeaPlayPageController implements Initializable {
 	}
 
 	private void updateBombs (LinkedList<Bomb> bombs, GridPane boardToShowBombsIn) {
-//		boardToShowBombsIn.getChildren().stream()
-//				.filter(node -> GridPane.getColumnSpan(node) == 1 && GridPane.getRowSpan(node) == 1) // remove only bombs
-//				.collect(Collectors.toCollection(LinkedList::new))
-//				.clear();
 		boardToShowBombsIn.getChildren()
 				.removeIf(node -> GridPane.getColumnSpan(node) == 1 && GridPane.getRowSpan(node) == 1); // remove only bombs
 
@@ -234,7 +299,7 @@ public class BattleSeaPlayPageController implements Initializable {
 						@Override
 						public void handle (MouseEvent event) {
 							try {
-								if (BombController.getInstance().canThrowBomb(getXFrom1(index), getYFrom1(index)))
+								if (!bombThrown && BombController.getInstance().canThrowBomb(getXFrom1(index), getYFrom1(index)))
 									((Label) event.getSource()).setOpacity(0.3);
 							} catch (BombController.CoordinateAlreadyBombedException e) {
 								coord.removeEventHandler(MouseEvent.MOUSE_ENTERED, this);
@@ -245,11 +310,31 @@ public class BattleSeaPlayPageController implements Initializable {
 							onClick = new EventHandler<>() {
 								@Override
 								public void handle (MouseEvent e) {
-									try {
-										BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
+									PlayerBattleSea currentPlayer = (PlayerBattleSea) currentGame.getTurnPlayer(),
+											opponentPlayer = ((PlayerBattleSea) currentGame.getOpponentOf(currentPlayer));
 
-										bombThrown = true;
-										updateAllPage();
+									try {
+										if (!bombThrown) {
+											BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
+
+											bombThrown = true;
+
+											// animate explosions if ship is destroyed
+											if (opponentPlayer.shipExistsInXY(getXFrom1(index), getYFrom1(index))) {
+												Ship shipToBeBombed = opponentPlayer.getShipAboutToBeBombed(getXFrom1(index), getYFrom1(index));
+
+												if (shipToBeBombed.isDestroyed(opponentPlayer)) {
+													Image explosionSprite = new Image("https://i.imgur.com/CR4yAGd.png");
+
+													Ship.getAllCoords(new LinkedList<>(Collections.singletonList(shipToBeBombed))).forEach(coord ->
+															animateSuccessFulBomb(
+																	explosionSprite,
+																	coord[0] - 1, coord[1] - 1));
+//												opponentBoardGridpane.getChildren().removeIf(node -> node instanceof ImageView);
+												}
+											}
+											updateAllPage();
+										}
 									} catch (BombController.CoordinateAlreadyBombedException exception) {
 										coord.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
 									}
