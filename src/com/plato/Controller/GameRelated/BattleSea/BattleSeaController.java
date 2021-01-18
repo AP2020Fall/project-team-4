@@ -4,65 +4,16 @@ import Controller.GameRelated.GameController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
-import Model.GameRelated.Player;
-import View.GameRelated.BattleSea.BattleSeaView;
 
-import java.util.InputMismatchException;
 import java.util.LinkedList;
 
 public class BattleSeaController {
 	private static BattleSeaController battleSeaController;
-	private LinkedList<Ship> trialPlayerBoard1;
-	private LinkedList<Ship> trialPlayerBoard2;
 
 	public static BattleSeaController getInstance () {
 		if (battleSeaController == null)
 			battleSeaController = new BattleSeaController();
 		return battleSeaController;
-	}
-
-	public void chooseBetween5RandomlyGeneratedBoards () {
-		LinkedList<LinkedList<Ship>> fiveRandBoards = BattleSea.get5RandBoards();
-		BattleSeaView.getInstance().displayAll5RandomBoards(
-				getBoardAsLinkedListOfStringBuilders(fiveRandBoards)
-		);
-
-		int boardChoice = 0;
-		while (true)
-			try {
-//				Menu.printAskingForInput("Your board choice: ");
-//				boardChoice = Integer.parseInt(Menu.getInputLine());
-
-				if (boardChoice < 1 || boardChoice > 5)
-					throw new InputMismatchException();
-				break;
-			} catch (InputMismatchException e) {
-//				Menu.printErrorMessage("Invalid input.");
-			}
-
-		LinkedList<Ship> chosenBoard = fiveRandBoards.get(boardChoice - 1);
-
-		BattleSeaView.getInstance().displayBoard(
-				this.getBoardAsStringBuilder(chosenBoard)
-		);
-		setTrialPlayerBoard(chosenBoard);
-		updateGamePlayMenu();
-	}
-
-	public LinkedList<StringBuilder> getBoardAsLinkedListOfStringBuilders (LinkedList<LinkedList<Ship>> fiveBoards) {
-		LinkedList<StringBuilder> boardStrBldrs = new LinkedList<>();
-
-		for (int i = 0; i < 5; i++) {
-			boardStrBldrs.add(new StringBuilder());
-
-			boardStrBldrs.getLast().append("%n%d. %n%n".formatted(i + 1));
-
-			boardStrBldrs.getLast().append(getBoardAsStringBuilder(fiveBoards.get(i)));
-
-			boardStrBldrs.getLast().append("\n");
-		}
-
-		return boardStrBldrs;
 	}
 
 	// only used in editing phase therefore no need to display bombs
@@ -90,85 +41,6 @@ public class BattleSeaController {
 		}
 
 		return boardStrBldr;
-	}
-
-	public void setTrialPlayerBoard (LinkedList<Ship> trialPlayerBoard) {
-		LinkedList<Player> players = GameController.getInstance().getCurrentGameInSession().getListOfPlayers();
-
-		if (((PlayerBattleSea) players.get(0)).getShips() == null)
-			trialPlayerBoard1 = trialPlayerBoard;
-		else if (((PlayerBattleSea) players.get(1)).getShips() == null) trialPlayerBoard2 = trialPlayerBoard;
-	}
-
-	public void updateGamePlayMenu () {
-		BattleSea currentGame = ((BattleSea) GameController.getInstance().getCurrentGameInSession());
-
-//		if (currentGame.getListOfBattleSeaPlayers().get(0).getShips() == null && trialPlayerBoard1 != null)
-//			battleseaGPMenu.setTrialBoardExists(true);
-//		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() == null)
-//			battleseaGPMenu.setTrialBoardExists(true);
-//		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() != null) {
-//			battleseaGPMenu.nextPhase();
-//			initTurnTimerStuff();
-//			resetTrialPlayerBoards();
-//		}
-//		else
-//			battleseaGPMenu.setTrialBoardExists(false);
-//
-//		if (currentGame.canStartBombing()) {
-//			battleseaGPMenu.nextPhase();
-//			initTurnTimerStuff();
-//			resetTrialPlayerBoards();
-//		}
-	}
-
-	public void finalizeTrialBoard () {
-		((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
-				.getListOfPlayers().get(getCurrentlyEditingTrialBoardNum() - 1))
-				.finalizeBoard(getCurrentlyEditingTrialBoard());
-
-		resetTrialPlayerBoards();
-		updateGamePlayMenu();
-	}
-
-	private int getCurrentlyEditingTrialBoardNum () {
-		if (trialPlayerBoard1 == null && trialPlayerBoard2 == null)
-			return 0;
-		if (trialPlayerBoard1 != null)
-			return 1;
-		if (trialPlayerBoard2 != null)
-			return 2;
-		return 0;
-	}
-
-	public LinkedList<Ship> getCurrentlyEditingTrialBoard () {
-
-		if (trialPlayerBoard1 != null)
-			return trialPlayerBoard1;
-
-		else if (trialPlayerBoard2 != null)
-			return trialPlayerBoard2;
-
-		return null;
-	}
-
-	public void resetTrialPlayerBoards () {
-		trialPlayerBoard1 = null;
-		trialPlayerBoard2 = null;
-	}
-
-	public void displayRandomlyGeneratedBoard (LinkedList<Ship> randBoard) {
-		BattleSeaView.getInstance().displayBoard(
-				this.getBoardAsStringBuilder(randBoard)
-		);
-		setTrialPlayerBoard(randBoard);
-		updateGamePlayMenu();
-	}
-
-	public void displayCurrentPlayerBoard () {
-		BattleSeaView.getInstance().displayBoard(
-				getBoardAsStringBuilder(true)
-		);
 	}
 
 	public StringBuilder getBoardAsStringBuilder (boolean boardIsForCurrentPlayer) {
@@ -236,19 +108,5 @@ public class BattleSeaController {
 		}
 
 		return boardStrBldr;
-	}
-
-	public void displayOpponentBoard () {
-		BattleSeaView.getInstance().displayBoard(
-				getBoardAsStringBuilder(false)
-		);
-	}
-
-	public void displayTrialBoard () {
-		if (getCurrentlyEditingTrialBoard() == null) return;
-
-		BattleSeaView.getInstance().displayBoard(
-				getBoardAsStringBuilder(getCurrentlyEditingTrialBoard())
-		);
 	}
 }

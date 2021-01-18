@@ -73,11 +73,17 @@
             <font>
                 <Font name="Arial Bold" size="19.0" />
             </font>
+         <effect>
+            <DropShadow color="#0d00ff" spread="0.74" />
+         </effect>
         </Label>
         <Label fx:id="username2" layoutX="93.0" layoutY="135.0" text="-" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <font>
                 <Font name="Arial Bold" size="19.0" />
             </font>
+         <effect>
+            <DropShadow color="#0d00ff" spread="0.74" />
+         </effect>
         </Label>
       <ProgressBar fx:id="timer2" maxHeight="15.0" maxWidth="90.0" minHeight="15.0" minWidth="90.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <padding>

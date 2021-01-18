@@ -7,6 +7,7 @@ import Controller.MainController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
+import View.GameRelated.BattleSea.BattleSeaView;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
@@ -92,11 +93,11 @@ public class BattleSeaEditBoardPageController implements Initializable {
 
 				try {
 					Stage gameStage = MainController.getInstance().createAndReturnNewStage(
-									FXMLLoader.load(new File("src/com/plato/View/Menus/BattleSeaPlayPage.fxml").toURI().toURL()),
-									"BattleSea Game",
-									true,
-									MainController.getInstance().getPrimaryStage()
-							);
+							FXMLLoader.load(new File("src/com/plato/View/Menus/BattleSeaPlayPage.fxml").toURI().toURL()),
+							"BattleSea Game",
+							true,
+							MainController.getInstance().getPrimaryStage()
+					);
 					BattleSeaPlayPageController.setStage(gameStage);
 					gameStage.show();
 					stage.close();
@@ -107,30 +108,6 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		});
 
 		editingTurn.set(1);
-//		Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-//			System.out.println("secondsRemainingProperty().intValue() = " + BattleSeaController.getInstance().getTurnTimerTask().secondsRemainingProperty().intValue());
-//			System.out.println("getTimePercentageRemaining() = " + BattleSeaController.getInstance().getTimePercentageRemaining());
-//			timer1.setProgress(BattleSeaController.getInstance().getTimePercentageRemaining());
-//			timer2.setProgress(BattleSeaController.getInstance().getTimePercentageRemaining());
-//			seconds.incrementAndGet();
-//		}));
-//		timer.setOnFinished(e -> {
-//			if (editingTurn.intValue() == 1) {
-//				editingTurn.set(2);
-//				seconds.set(-1);
-//				timer.playFromStart();
-//			}
-//			else {
-//				editingTurn.set(-1);
-//				timer.stop();
-//			}
-//		});
-//		timer.setCycleCount(BattleSeaController.getInstance().getMaxSeconds());
-//		timer.setAutoReverse(false);
-//
-//		timer.play();
-//
-//		BattleSeaController.getInstance().initTurnTimerStuff();
 	}
 
 	public void closeStage (ActionEvent actionEvent) {
@@ -197,7 +174,6 @@ public class BattleSeaEditBoardPageController implements Initializable {
 
 	public void generate1RandBoard (ActionEvent actionEvent) {
 		LinkedList<Ship> randBoard = BattleSea.getRandBoard();
-		BattleSeaController.getInstance().displayRandomlyGeneratedBoard(randBoard);
 
 		setBoard(randBoard, board);
 	}
@@ -210,7 +186,10 @@ public class BattleSeaEditBoardPageController implements Initializable {
 
 		try {
 			ShipController.getInstance().rotateShip(currentBoard, ship);
+
 			setBoard(currentBoard, board);
+
+			BattleSeaView.getInstance().displayBoard(BattleSeaController.getInstance().getBoardAsStringBuilder(currentBoard));
 		} catch (ShipController.CantChangeDirException e) {
 			System.out.println(e.getMessage());
 		}
@@ -244,9 +223,11 @@ public class BattleSeaEditBoardPageController implements Initializable {
 
 			GridPane.setColumnIndex(shipToMove, newX);
 			GridPane.setRowIndex(shipToMove, newY);
-//			((DropShadow) shipToMove.getEffect()).setColor(Color.GREEN.darker());
+
+			BattleSeaView.getInstance().displayBoard(BattleSeaController.getInstance().getBoardAsStringBuilder(currentBoard));
 		} catch (ShipController.InvalidCoordinateException e) {
-//			((DropShadow) shipToMove.getEffect()).setColor(Color.RED.brighter());
+//			System.out.printf("Cannot move ship to (x,y)=(%d,%d)%n", newX + 1, newY + 1);
+//			BattleSeaView.getInstance().displayBoard(currentBoard);
 		}
 	}
 }

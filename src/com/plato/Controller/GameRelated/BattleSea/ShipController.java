@@ -24,10 +24,10 @@ public class ShipController {
 			if (!BattleSea.checkCoordinates((newY)))
 				throw new InvalidCoordinateException();
 
-			if (!chosenShip.canMove(newX, newY))
+			if (!chosenShip.canMove(board, newX, newY))
 				throw new InvalidCoordinateException();
 
-			chosenShip.move(newX, newY);
+			chosenShip.move(board, newX, newY);
 	}
 
 	public void rotateShip (LinkedList<Ship> board, Ship chosenShip) throws CantChangeDirException {

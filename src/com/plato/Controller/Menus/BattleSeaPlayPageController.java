@@ -84,7 +84,7 @@ public class BattleSeaPlayPageController implements Initializable {
 		secondsRemaining.addListener(observable -> {
 			if (bombThrown)
 				timer.stop();
-			if (!currentGame.gameEnded())
+			if (!currentGame.gameHasEnded())
 				updateAllPage();
 		});
 
@@ -222,7 +222,10 @@ public class BattleSeaPlayPageController implements Initializable {
 		animation.setCycleCount(1);
 		animation.statusProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue == Animation.Status.STOPPED) {
-				clickableOpponentBoardTilePane.getChildren().removeIf(node -> node instanceof ImageView);
+				synchronized (this) {
+					notify();
+				}
+//				clickableOpponentBoardTilePane.getChildren().removeIf(node -> node instanceof ImageView);
 			}
 		});
 		animation.play();
@@ -324,9 +327,14 @@ public class BattleSeaPlayPageController implements Initializable {
 												Image explosionSprite = new Image("https://i.imgur.com/1XaaYWo.png");
 
 												Ship.getAllCoords(new LinkedList<>(Collections.singletonList(shipToBeBombed))).forEach(coord ->
-														animateSuccessFulBomb(
-																explosionSprite,
-																coord[0] - 1, coord[1] - 1, getIndexFromXY(coord[0] - 1, coord[1] - 1)));
+														{
+															animateSuccessFulBomb(
+																	explosionSprite,
+																	coord[0] - 1, coord[1] - 1, getIndexFromXY(coord[0] - 1, coord[1] - 1));
+														}
+
+												);
+												clickableOpponentBoardTilePane.getChildren().removeIf(node -> node instanceof ImageView);
 											}
 										}
 									} catch (BombController.CoordinateAlreadyBombedException exception) {
