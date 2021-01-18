@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.GameController;
 import Model.GameRelated.BattleSea.BattleSea;
@@ -11,7 +12,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,6 +25,7 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class BattleSeaPlayPageController implements Initializable {
 	private static Stage stage;
@@ -31,7 +33,7 @@ public class BattleSeaPlayPageController implements Initializable {
 	public ImageView pfp1, pfp2;
 	public Circle turnIndicator1, turnIndicator2;
 	public Label username1, username2;
-	public ProgressIndicator timer1, timer2;
+	public ProgressBar timer1, timer2;
 	public GridPane opponentBoardGridpane, yourBoardGridpane;
 	public TilePane clickableOpponentBoardTilePane;
 	private PlayerBattleSea player1, player2;
@@ -41,6 +43,7 @@ public class BattleSeaPlayPageController implements Initializable {
 		BattleSeaPlayPageController.stage.setOnCloseRequest(e -> {
 			BattleSeaPlayPageController.stage = null;
 			currentGame = null;
+			BattleSeaController.getInstance().getTurnTimer().cancel();
 		});
 	}
 
@@ -58,8 +61,43 @@ public class BattleSeaPlayPageController implements Initializable {
 		pfp1.setImage(new Image(player1.getGamer().getPfpUrl()));
 		pfp2.setImage(new Image(player2.getGamer().getPfpUrl()));
 
-		updateTurnIndicators();
+//		Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+//			System.out.println("secondsRemainingProperty().intValue() = " + BattleSeaController.getInstance().getTurnTimerTask().secondsRemainingProperty().intValue());
+//			System.out.println("getTimePercentageRemaining() = " + BattleSeaController.getInstance().getTimePercentageRemaining());
+//			timer1.setProgress(BattleSeaController.getInstance().getTimePercentageRemaining());
+//			timer2.setProgress(BattleSeaController.getInstance().getTimePercentageRemaining());
+//		}));
+//		timer.setOnFinished(e -> {
+//			if (currentGame.getTurnNumProperty().intValue() == 1) {
+//				timer.playFromStart();
+//			}
+//			else {
+//				timer.stop();
+//			}
+//		});
+//		timer.setCycleCount(BattleSeaController.getInstance().getMaxSeconds());
+//		timer.setAutoReverse(false);
+//
+//		timer.play();
+
+		BattleSeaController.getInstance().getTurnTimerTask().secondsRemainingProperty().addListener(observable -> {
+			updateAllPage();
+		});
+
+		BattleSeaController.getInstance().initTurnTimerStuff();
+
 		updateAllPage();
+	}
+
+	private void updateTimers () {
+		timer1.setVisible(turnIndicator1.isVisible());
+		timer2.setVisible(turnIndicator2.isVisible());
+
+		double percentage = Math.max(Math.min(BattleSeaController.getInstance().getTimePercentageRemaining(), 1.0), 0.0);
+
+		System.out.println("BattleSeaController.getInstance().getTimePercentageRemaining() = " + percentage);
+		timer1.setProgress(percentage);
+		timer2.setProgress(percentage);
 	}
 
 	private void updateTurnIndicators () {
@@ -74,14 +112,15 @@ public class BattleSeaPlayPageController implements Initializable {
 	}
 
 	public void updateOpponentBoard () {
-		PlayerBattleSea currentPlayer = (PlayerBattleSea) currentGame.getTurnPlayer();
+		PlayerBattleSea currentPlayer = (PlayerBattleSea) currentGame.getTurnPlayer(),
+				opponentPlayer = ((PlayerBattleSea) currentGame.getOpponentOf(currentPlayer));
 		LinkedList<Ship> opponentBoard = currentPlayer.getOpponentShips();
 
 		setBoard(opponentBoard, opponentBoardGridpane);
 
 		// show only completely destroyed ships
 		for (Ship ship : opponentBoard)
-			getShipView(opponentBoardGridpane, ship).setVisible(ship.isDestroyed(currentPlayer));
+			getShipView(opponentBoardGridpane, ship).setVisible(ship.isDestroyed(opponentPlayer));
 
 		updateBombThrowability();
 
@@ -135,8 +174,10 @@ public class BattleSeaPlayPageController implements Initializable {
 	}
 
 	private void updateBombs (LinkedList<Bomb> bombs, GridPane boardToShowBombsIn) {
-		boardToShowBombsIn.getChildren()
-				.removeIf(node -> GridPane.getColumnSpan(node) == 1 && GridPane.getRowSpan(node) == 1); // remove only bombs
+		boardToShowBombsIn.getChildren().stream()
+				.filter(node -> GridPane.getColumnSpan(node) == 1 && GridPane.getRowSpan(node) == 1) // remove only bombs
+				.collect(Collectors.toCollection(LinkedList::new))
+				.clear();
 
 		bombs.forEach(bomb -> {
 			boardToShowBombsIn.getChildren().add(
@@ -152,7 +193,8 @@ public class BattleSeaPlayPageController implements Initializable {
 				.forEach(coord -> {
 					int index = clickableOpponentBoardTilePane.getChildren().indexOf(coord);
 
-					EventHandler<MouseEvent> onEntered = new EventHandler<>() {
+					EventHandler<MouseEvent>
+							onEntered = new EventHandler<>() {
 						@Override
 						public void handle (MouseEvent event) {
 							try {
@@ -160,22 +202,12 @@ public class BattleSeaPlayPageController implements Initializable {
 									((Label) event.getSource()).setOpacity(0.3);
 									System.out.printf("(x,y) = (%d,%d)%n", getXFrom1(index), getYFrom1(index));
 								}
-							} catch (BombController.InvalidCoordinateException | BombController.CoordinateAlreadyBombedException e) {
+							} catch (BombController.CoordinateAlreadyBombedException e) {
 								coord.removeEventHandler(MouseEvent.MOUSE_ENTERED, this);
 							}
 						}
 					},
-							onExited = new EventHandler<>() {
-								@Override
-								public void handle (MouseEvent event) {
-									try {
-										if (BombController.getInstance().canThrowBomb(getXFrom1(index), getYFrom1(index)))
-											((Label) event.getSource()).setOpacity(0);
-									} catch (BombController.InvalidCoordinateException | BombController.CoordinateAlreadyBombedException e) {
-										coord.removeEventHandler(MouseEvent.MOUSE_EXITED, this);
-									}
-								}
-							},
+							onExited = event -> ((Label) event.getSource()).setOpacity(0),
 							onClick = new EventHandler<>() {
 								@Override
 								public void handle (MouseEvent e) {
@@ -183,11 +215,12 @@ public class BattleSeaPlayPageController implements Initializable {
 										BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
 
 										updateAllPage();
-									} catch (BombController.InvalidCoordinateException | BombController.CoordinateAlreadyBombedException exception) {
+									} catch (BombController.CoordinateAlreadyBombedException exception) {
 										coord.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
 									}
 								}
 							};
+
 					coord.addEventHandler(MouseEvent.MOUSE_CLICKED, onClick);
 					coord.addEventHandler(MouseEvent.MOUSE_ENTERED, onEntered);
 					coord.addEventHandler(MouseEvent.MOUSE_EXITED, onExited);
@@ -195,8 +228,10 @@ public class BattleSeaPlayPageController implements Initializable {
 	}
 
 	private void updateAllPage () {
+		updateTurnIndicators();
 		updateYourBoard();
 		updateOpponentBoard();
+		updateTimers();
 	}
 
 	public int getXFrom1 (int index) {
@@ -206,8 +241,8 @@ public class BattleSeaPlayPageController implements Initializable {
 	}
 
 	public int getYFrom1 (int index) {
-		int y = (index + 1) / 10;
-//		y = (y == 11 ? 10 : y);
+		int y = (index + 1) / 10 + 1;
+		if (getXFrom1(index) == 10) y--;
 		return y;
 	}
 
@@ -224,8 +259,10 @@ public class BattleSeaPlayPageController implements Initializable {
 			setMinSize(imgSize, imgSize);
 			setMaxSize(imgSize, imgSize);
 
-			GridPane.setColumnIndex(this, bomb.getX());
-			GridPane.setRowIndex(this, bomb.getY());
+			GridPane.setColumnIndex(this, bomb.getX() - 1);
+			GridPane.setRowIndex(this, bomb.getY() - 1);
+			GridPane.setRowSpan(this, 1);
+			GridPane.setColumnSpan(this, 1);
 		}};
 	}
 

@@ -1,7 +1,6 @@
 package Controller.GameRelated.BattleSea;
 
 import Controller.GameRelated.GameController;
-import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import View.GameRelated.BattleSea.BombView;
@@ -18,26 +17,23 @@ public class BombController {
 		return bombController;
 	}
 
-	public void throwBomb (int x, int y) throws InvalidCoordinateException, CoordinateAlreadyBombedException {
+	public void throwBomb (int x, int y) throws CoordinateAlreadyBombedException {
 		PlayerBattleSea currentPlayer = ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getTurnPlayer());
 
 		if (canThrowBomb(x, y)) {
 			currentPlayer.throwBomb(x, y);
 			BattleSeaController.getInstance().getTurnTimerTask().bomb();
 
-			if (!currentPlayer.getBombsThrown().getLast().wasSuccessful())
+			Bomb lastBomb = currentPlayer.getBombsThrown().getLast();
+
+			if (!lastBomb.wasSuccessful())
 				BattleSeaController.getInstance().getTurnTimerTask().bomb();
+			System.out.printf("Bomb thrown at (x,y)=(%d,%d). %s successful%n", lastBomb.getX(), lastBomb.getY(), (lastBomb.wasSuccessful() ? "was" : "wasn't"));
 		}
 	}
 
-	public boolean canThrowBomb (int x, int y) throws InvalidCoordinateException, CoordinateAlreadyBombedException {
+	public boolean canThrowBomb (int x, int y) throws CoordinateAlreadyBombedException {
 		PlayerBattleSea currentPlayer = ((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getTurnPlayer());
-
-		if (!BattleSea.checkCoordinates(x))
-			throw new InvalidCoordinateException();
-
-		if (!BattleSea.checkCoordinates(y))
-			throw new InvalidCoordinateException();
 
 		if (currentPlayer.hasBeenBombedBefore(x, y))
 			throw new CoordinateAlreadyBombedException();

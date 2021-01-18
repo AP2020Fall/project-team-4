@@ -7,8 +7,6 @@ import Controller.MainController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
@@ -16,14 +14,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +32,6 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	private static Stage stage;
 	public Button generate1RandBoardButton;
 	public ImageView pfp2, pfp1;
-	public ProgressIndicator timer2, timer1;
 	public Label username2, username1;
 	public Circle turnIndicator2, turnIndicator1;
 	public GridPane board;
@@ -76,20 +71,14 @@ public class BattleSeaEditBoardPageController implements Initializable {
 
 		editingTurn.addListener((observable, oldValue, newValue) -> {
 			if (newValue.intValue() == 1) {
-				timer1.setVisible(true);
-				timer2.setVisible(false);
-
 				turnIndicator1.setVisible(true);
-				turnIndicator2.setVisible(false);
+				turnIndicator2.setVisible(!turnIndicator1.isVisible());
 
 				generate1RandBoardButton.fire();
 			}
 			else if (newValue.intValue() == 2) {
-				timer1.setVisible(false);
-				timer2.setVisible(true);
-
 				turnIndicator1.setVisible(false);
-				turnIndicator2.setVisible(true);
+				turnIndicator2.setVisible(!turnIndicator1.isVisible());
 
 				((BattleSea) GameController.getInstance().getCurrentGameInSession()).getListOfBattleSeaPlayers().get(0)
 						.finalizeBoard(currentBoard);
@@ -98,7 +87,6 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			}
 
 			else if (oldValue.intValue() == 2) {
-
 				((BattleSea) GameController.getInstance().getCurrentGameInSession()).getListOfBattleSeaPlayers().get(1)
 						.finalizeBoard(currentBoard);
 
@@ -119,24 +107,30 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		});
 
 		editingTurn.set(1);
-
-		Timeline timer = new Timeline(new KeyFrame(Duration.minutes(1), e -> {
-
-		}));
-		timer.setOnFinished(e -> {
-			if (editingTurn.intValue() == 1) {
-				editingTurn.set(2);
-				timer.playFromStart();
-			}
-			else {
-				editingTurn.set(-1);
-				timer.stop();
-			}
-		});
-		timer.setCycleCount(5);
-		timer.setAutoReverse(false);
-
-		timer.play();
+//		Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+//			System.out.println("secondsRemainingProperty().intValue() = " + BattleSeaController.getInstance().getTurnTimerTask().secondsRemainingProperty().intValue());
+//			System.out.println("getTimePercentageRemaining() = " + BattleSeaController.getInstance().getTimePercentageRemaining());
+//			timer1.setProgress(BattleSeaController.getInstance().getTimePercentageRemaining());
+//			timer2.setProgress(BattleSeaController.getInstance().getTimePercentageRemaining());
+//			seconds.incrementAndGet();
+//		}));
+//		timer.setOnFinished(e -> {
+//			if (editingTurn.intValue() == 1) {
+//				editingTurn.set(2);
+//				seconds.set(-1);
+//				timer.playFromStart();
+//			}
+//			else {
+//				editingTurn.set(-1);
+//				timer.stop();
+//			}
+//		});
+//		timer.setCycleCount(BattleSeaController.getInstance().getMaxSeconds());
+//		timer.setAutoReverse(false);
+//
+//		timer.play();
+//
+//		BattleSeaController.getInstance().initTurnTimerStuff();
 	}
 
 	public void closeStage (ActionEvent actionEvent) {

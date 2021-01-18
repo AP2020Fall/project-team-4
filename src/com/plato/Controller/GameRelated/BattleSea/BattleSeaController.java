@@ -7,6 +7,8 @@ import Model.GameRelated.BattleSea.Ship;
 import Model.GameRelated.Game;
 import Model.GameRelated.Player;
 import View.GameRelated.BattleSea.BattleSeaView;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.InputMismatchException;
 import java.util.LinkedList;
@@ -15,9 +17,9 @@ import java.util.TimerTask;
 
 public class BattleSeaController {
 	private static BattleSeaController battleSeaController;
+	private final TurnTimerTask turnTimerTask = new TurnTimerTask();
 	private LinkedList<Ship> trialPlayerBoard1;
 	private LinkedList<Ship> trialPlayerBoard2;
-	private final TurnTimerTask turnTimerTask = new TurnTimerTask();
 	private Timer turnTimer;
 
 	public static BattleSeaController getInstance () {
@@ -54,37 +56,20 @@ public class BattleSeaController {
 		updateGamePlayMenu();
 	}
 
-	public void finalizeTrialBoard () {
-		((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
-				.getListOfPlayers().get(getCurrentlyEditingTrialBoardNum() - 1))
-				.finalizeBoard(getCurrentlyEditingTrialBoard());
+	public LinkedList<StringBuilder> getBoardAsLinkedListOfStringBuilders (LinkedList<LinkedList<Ship>> fiveBoards) {
+		LinkedList<StringBuilder> boardStrBldrs = new LinkedList<>();
 
-		resetTrialPlayerBoards();
-		updateGamePlayMenu();
-	}
+		for (int i = 0; i < 5; i++) {
+			boardStrBldrs.add(new StringBuilder());
 
-	public void displayRemainingTime () {
-		BattleSeaView.getInstance().displayRemainingTime(turnTimerTask.getSecondsRemaining());
-	}
+			boardStrBldrs.getLast().append("%n%d. %n%n".formatted(i + 1));
 
-	public void displayRandomlyGeneratedBoard (LinkedList<Ship> randBoard) {
-		BattleSeaView.getInstance().displayBoard(
-				this.getBoardAsStringBuilder(randBoard)
-		);
-		setTrialPlayerBoard(randBoard);
-		updateGamePlayMenu();
-	}
+			boardStrBldrs.getLast().append(getBoardAsStringBuilder(fiveBoards.get(i)));
 
-	public void displayCurrentPlayerBoard () {
-		BattleSeaView.getInstance().displayBoard(
-				getBoardAsStringBuilder(true)
-		);
-	}
+			boardStrBldrs.getLast().append("\n");
+		}
 
-	public void displayOpponentBoard () {
-		BattleSeaView.getInstance().displayBoard(
-				getBoardAsStringBuilder(false)
-		);
+		return boardStrBldrs;
 	}
 
 	// only used in editing phase therefore no need to display bombs
@@ -112,6 +97,89 @@ public class BattleSeaController {
 		}
 
 		return boardStrBldr;
+	}
+
+	public void setTrialPlayerBoard (LinkedList<Ship> trialPlayerBoard) {
+		LinkedList<Player> players = GameController.getInstance().getCurrentGameInSession().getListOfPlayers();
+
+		if (((PlayerBattleSea) players.get(0)).getShips() == null)
+			trialPlayerBoard1 = trialPlayerBoard;
+		else if (((PlayerBattleSea) players.get(1)).getShips() == null) trialPlayerBoard2 = trialPlayerBoard;
+	}
+
+	public void updateGamePlayMenu () {
+		BattleSea currentGame = ((BattleSea) GameController.getInstance().getCurrentGameInSession());
+
+//		if (currentGame.getListOfBattleSeaPlayers().get(0).getShips() == null && trialPlayerBoard1 != null)
+//			battleseaGPMenu.setTrialBoardExists(true);
+//		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() == null)
+//			battleseaGPMenu.setTrialBoardExists(true);
+//		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() != null) {
+//			battleseaGPMenu.nextPhase();
+//			initTurnTimerStuff();
+//			resetTrialPlayerBoards();
+//		}
+//		else
+//			battleseaGPMenu.setTrialBoardExists(false);
+//
+//		if (currentGame.canStartBombing()) {
+//			battleseaGPMenu.nextPhase();
+//			initTurnTimerStuff();
+//			resetTrialPlayerBoards();
+//		}
+	}
+
+	public void finalizeTrialBoard () {
+		((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
+				.getListOfPlayers().get(getCurrentlyEditingTrialBoardNum() - 1))
+				.finalizeBoard(getCurrentlyEditingTrialBoard());
+
+		resetTrialPlayerBoards();
+		updateGamePlayMenu();
+	}
+
+	private int getCurrentlyEditingTrialBoardNum () {
+		if (trialPlayerBoard1 == null && trialPlayerBoard2 == null)
+			return 0;
+		if (trialPlayerBoard1 != null)
+			return 1;
+		if (trialPlayerBoard2 != null)
+			return 2;
+		return 0;
+	}
+
+	public LinkedList<Ship> getCurrentlyEditingTrialBoard () {
+
+		if (trialPlayerBoard1 != null)
+			return trialPlayerBoard1;
+
+		else if (trialPlayerBoard2 != null)
+			return trialPlayerBoard2;
+
+		return null;
+	}
+
+	public void resetTrialPlayerBoards () {
+		trialPlayerBoard1 = null;
+		trialPlayerBoard2 = null;
+	}
+
+	public void displayRemainingTime () {
+		BattleSeaView.getInstance().displayRemainingTime(turnTimerTask.secondsRemainingProperty().intValue());
+	}
+
+	public void displayRandomlyGeneratedBoard (LinkedList<Ship> randBoard) {
+		BattleSeaView.getInstance().displayBoard(
+				this.getBoardAsStringBuilder(randBoard)
+		);
+		setTrialPlayerBoard(randBoard);
+		updateGamePlayMenu();
+	}
+
+	public void displayCurrentPlayerBoard () {
+		BattleSeaView.getInstance().displayBoard(
+				getBoardAsStringBuilder(true)
+		);
 	}
 
 	public StringBuilder getBoardAsStringBuilder (boolean boardIsForCurrentPlayer) {
@@ -181,20 +249,10 @@ public class BattleSeaController {
 		return boardStrBldr;
 	}
 
-	public LinkedList<StringBuilder> getBoardAsLinkedListOfStringBuilders (LinkedList<LinkedList<Ship>> fiveBoards) {
-		LinkedList<StringBuilder> boardStrBldrs = new LinkedList<>();
-
-		for (int i = 0; i < 5; i++) {
-			boardStrBldrs.add(new StringBuilder());
-
-			boardStrBldrs.getLast().append("%n%d. %n%n".formatted(i + 1));
-
-			boardStrBldrs.getLast().append(getBoardAsStringBuilder(fiveBoards.get(i)));
-
-			boardStrBldrs.getLast().append("\n");
-		}
-
-		return boardStrBldrs;
+	public void displayOpponentBoard () {
+		BattleSeaView.getInstance().displayBoard(
+				getBoardAsStringBuilder(false)
+		);
 	}
 
 	public void displayTrialBoard () {
@@ -203,63 +261,6 @@ public class BattleSeaController {
 		BattleSeaView.getInstance().displayBoard(
 				getBoardAsStringBuilder(getCurrentlyEditingTrialBoard())
 		);
-	}
-
-	public void setTrialPlayerBoard (LinkedList<Ship> trialPlayerBoard) {
-		LinkedList<Player> players = GameController.getInstance().getCurrentGameInSession().getListOfPlayers();
-
-		if (((PlayerBattleSea) players.get(0)).getShips() == null)
-			trialPlayerBoard1 = trialPlayerBoard;
-		else if (((PlayerBattleSea) players.get(1)).getShips() == null) trialPlayerBoard2 = trialPlayerBoard;
-	}
-
-	public LinkedList<Ship> getCurrentlyEditingTrialBoard () {
-
-		if (trialPlayerBoard1 != null)
-			return trialPlayerBoard1;
-
-		else if (trialPlayerBoard2 != null)
-			return trialPlayerBoard2;
-
-		return null;
-	}
-
-	private int getCurrentlyEditingTrialBoardNum () {
-		if (trialPlayerBoard1 == null && trialPlayerBoard2 == null)
-			return 0;
-		if (trialPlayerBoard1 != null)
-			return 1;
-		if (trialPlayerBoard2 != null)
-			return 2;
-		return 0;
-	}
-
-	public void resetTrialPlayerBoards () {
-		trialPlayerBoard1 = null;
-		trialPlayerBoard2 = null;
-	}
-
-	public void updateGamePlayMenu () {
-//		_12_1GameplayBattleSeaMenu battleseaGPMenu = ((_12_1GameplayBattleSeaMenu) Menu.getMenuIn());
-		BattleSea currentGame = ((BattleSea) GameController.getInstance().getCurrentGameInSession());
-
-//		if (currentGame.getListOfBattleSeaPlayers().get(0).getShips() == null && trialPlayerBoard1 != null)
-//			battleseaGPMenu.setTrialBoardExists(true);
-//		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() == null)
-//			battleseaGPMenu.setTrialBoardExists(true);
-//		else if (trialPlayerBoard2 != null && currentGame.getListOfBattleSeaPlayers().get(1).getShips() != null) {
-//			battleseaGPMenu.nextPhase();
-//			initTurnTimerStuff();
-//			resetTrialPlayerBoards();
-//		}
-//		else
-//			battleseaGPMenu.setTrialBoardExists(false);
-//
-//		if (currentGame.canStartBombing()) {
-//			battleseaGPMenu.nextPhase();
-//			initTurnTimerStuff();
-//			resetTrialPlayerBoards();
-//		}
 	}
 
 	public Timer getTurnTimer () {
@@ -280,20 +281,25 @@ public class BattleSeaController {
 		turnTimerTask.MAX_SECONDS = maxTime;
 	}
 
-	static class TurnTimerTask extends TimerTask {
+	public double getTimePercentageRemaining () {
+		return (((double) turnTimerTask.MAX_SECONDS) - turnTimerTask.secondsRemaining.doubleValue()) / ((double) turnTimerTask.MAX_SECONDS);
+	}
+
+	public static class TurnTimerTask extends TimerTask {
 		private int MAX_SECONDS = 30;
-		private int secondsRemaining = MAX_SECONDS;
+		private IntegerProperty secondsRemaining = new SimpleIntegerProperty(MAX_SECONDS);
 		private String command = "";
 
 		@Override
 		public void run () {
-			secondsRemaining--;
+			secondsRemaining.set(secondsRemaining.get() - 1);
+			System.out.println("secondsRemaining.get() = " + secondsRemaining.get());
 
 			if (command.equals("bomb")) {
 				resetTimer();
 			}
 
-			if (secondsRemaining == -1) {
+			if (secondsRemaining.intValue() == -1) {
 				BattleSea currentGame = (BattleSea) GameController.getInstance().getCurrentGameInSession();
 				if (command.equals(""))
 					BattleSeaView.getInstance().displayOutOfTimeMessage(
@@ -304,7 +310,7 @@ public class BattleSeaController {
 		}
 
 		public void resetTimer () {
-			secondsRemaining = MAX_SECONDS;
+			secondsRemaining.set(MAX_SECONDS);
 			// if bomb wasn't successful go to next turn
 			if (command.equals("bomb")) {
 				if (!((PlayerBattleSea) GameController.getInstance().getCurrentGameInSession()
@@ -322,7 +328,7 @@ public class BattleSeaController {
 			}
 		}
 
-		public int getSecondsRemaining () {
+		public IntegerProperty secondsRemainingProperty () {
 			return secondsRemaining;
 		}
 

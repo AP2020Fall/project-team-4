@@ -1,6 +1,7 @@
 package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
+import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.GameController;
 import Controller.MainController;
 import Model.AccountRelated.Gamer;
@@ -19,6 +20,8 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GameMenuController implements Initializable {
 	private static String gameName;
@@ -145,6 +148,7 @@ public class GameMenuController implements Initializable {
 
 	public void startBattleSea () {
 		try {
+			BattleSeaController.getInstance().setMaxTime(getMaxTimeSeconds());
 			Stage battleSeaStage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/BattleSeaEditBoardPage.fxml").toURI().toURL()),
 					"BattleSea",
@@ -157,6 +161,13 @@ public class GameMenuController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public int getMaxTimeSeconds () {
+		Matcher matcher = Pattern.compile("(?<num>[0-9]+)[m|s]").matcher(selectedTime); matcher.find();
+		int time = Integer.parseInt(matcher.group("num"));
+		time = selectedTime.endsWith("m") ? time * 60 : time;
+		return time;
 	}
 
 	private void startReversi () {
