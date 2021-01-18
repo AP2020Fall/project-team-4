@@ -277,10 +277,6 @@ public class BattleSeaController {
 		return turnTimerTask;
 	}
 
-	public void setMaxTime (int maxTime) {
-		turnTimerTask.MAX_SECONDS = maxTime;
-	}
-
 	public double getTimePercentageRemaining () {
 		return (((double) turnTimerTask.MAX_SECONDS) - turnTimerTask.secondsRemaining.doubleValue()) / ((double) turnTimerTask.MAX_SECONDS);
 	}

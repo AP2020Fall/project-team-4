@@ -1,7 +1,6 @@
 package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
-import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.GameController;
 import Controller.MainController;
 import Model.AccountRelated.Gamer;
@@ -148,7 +147,7 @@ public class GameMenuController implements Initializable {
 
 	public void startBattleSea () {
 		try {
-			BattleSeaController.getInstance().setMaxTime(getMaxTimeSeconds());
+			BattleSeaPlayPageController.setMaxTime(getMaxTimeSeconds());
 			Stage battleSeaStage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/BattleSeaEditBoardPage.fxml").toURI().toURL()),
 					"BattleSea",

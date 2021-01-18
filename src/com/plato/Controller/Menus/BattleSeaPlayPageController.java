@@ -7,6 +7,10 @@ import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
@@ -20,6 +24,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.LinkedList;
@@ -30,6 +35,7 @@ import java.util.stream.Collectors;
 public class BattleSeaPlayPageController implements Initializable {
 	private static Stage stage;
 	private static BattleSea currentGame;
+	private static int maxTime;
 	public ImageView pfp1, pfp2;
 	public Circle turnIndicator1, turnIndicator2;
 	public Label username1, username2;
@@ -37,6 +43,17 @@ public class BattleSeaPlayPageController implements Initializable {
 	public GridPane opponentBoardGridpane, yourBoardGridpane;
 	public TilePane clickableOpponentBoardTilePane;
 	private PlayerBattleSea player1, player2;
+	private IntegerProperty secondsRemaining = new SimpleIntegerProperty(maxTime);
+	private boolean bombThrown = false;
+	private Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+		secondsRemaining.set(secondsRemaining.get() - 1);
+		if (bombThrown)
+			resetTimer();
+		if (secondsRemaining.intValue() == -1) {
+			resetTimer();
+		}
+		updateAllPage();
+	}));
 
 	public static void setStage (Stage stage) {
 		BattleSeaPlayPageController.stage = stage;
@@ -45,6 +62,28 @@ public class BattleSeaPlayPageController implements Initializable {
 			currentGame = null;
 			BattleSeaController.getInstance().getTurnTimer().cancel();
 		});
+	}
+
+	public static void setMaxTime (int maxTime) {
+		BattleSeaPlayPageController.maxTime = maxTime;
+	}
+
+	private void resetTimer () {
+		secondsRemaining.set(maxTime);
+
+		// if bomb wasn't successful go to next turn
+		if (bombThrown) {
+			if (((PlayerBattleSea) currentGame.getTurnPlayer())
+					.getBombsThrown().getLast().wasSuccessful())
+				currentGame.nextTurn();
+		}
+		else
+			currentGame.nextTurn();
+		bombThrown = false;
+		if (currentGame.gameEnded()) {
+			currentGame.concludeGame();
+			// todo display game conclusion window
+		}
 	}
 
 	@Override
@@ -61,30 +100,15 @@ public class BattleSeaPlayPageController implements Initializable {
 		pfp1.setImage(new Image(player1.getGamer().getPfpUrl()));
 		pfp2.setImage(new Image(player2.getGamer().getPfpUrl()));
 
-//		Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-//			System.out.println("secondsRemainingProperty().intValue() = " + BattleSeaController.getInstance().getTurnTimerTask().secondsRemainingProperty().intValue());
-//			System.out.println("getTimePercentageRemaining() = " + BattleSeaController.getInstance().getTimePercentageRemaining());
-//			timer1.setProgress(BattleSeaController.getInstance().getTimePercentageRemaining());
-//			timer2.setProgress(BattleSeaController.getInstance().getTimePercentageRemaining());
-//		}));
-//		timer.setOnFinished(e -> {
-//			if (currentGame.getTurnNumProperty().intValue() == 1) {
-//				timer.playFromStart();
-//			}
-//			else {
-//				timer.stop();
-//			}
-//		});
-//		timer.setCycleCount(BattleSeaController.getInstance().getMaxSeconds());
-//		timer.setAutoReverse(false);
-//
-//		timer.play();
+		secondsRemaining.addListener(observable -> updateAllPage());
 
-		BattleSeaController.getInstance().getTurnTimerTask().secondsRemainingProperty().addListener(observable -> {
-			updateAllPage();
+		timer.setCycleCount(maxTime);
+		timer.setAutoReverse(false);
+		timer.setOnFinished(event -> {
+
 		});
 
-		BattleSeaController.getInstance().initTurnTimerStuff();
+		timer.playFromStart();
 
 		updateAllPage();
 	}
@@ -214,6 +238,7 @@ public class BattleSeaPlayPageController implements Initializable {
 									try {
 										BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
 
+										bombThrown = true;
 										updateAllPage();
 									} catch (BombController.CoordinateAlreadyBombedException exception) {
 										coord.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
