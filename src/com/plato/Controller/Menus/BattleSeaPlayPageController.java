@@ -246,7 +246,9 @@ public class BattleSeaPlayPageController implements Initializable {
 							onExited = event -> ((Label) event.getSource()).setOpacity(0),
 							onClick = new EventHandler<>() {
 								@Override
-								public void handle (MouseEvent e) {throwBombIfPossible(index, coord, this);}
+								public void handle (MouseEvent e) {
+									throwBombIfPossible(index, coord, this);
+								}
 							};
 
 					coord.addEventHandler(MouseEvent.MOUSE_CLICKED, onClick);
@@ -260,23 +262,21 @@ public class BattleSeaPlayPageController implements Initializable {
 				opponentPlayer = ((PlayerBattleSea) currentGame.getOpponentOf(currentPlayer));
 
 		try {
-			BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
+			if (!bombThrown) {
+				BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
+				System.out.println("bomb thrown at (x,y)=(%d,%d)".formatted(getXFrom1(index), getYFrom1(index)));
 
-			bombThrown = true;
+				bombThrown = true;
 
-			// animate explosions if ship is destroyed
-			if (opponentPlayer.shipExistsInXY(getXFrom1(index), getYFrom1(index))) {
-				Ship shipToBeBombed = opponentPlayer.getShipAboutToBeBombed(getXFrom1(index), getYFrom1(index));
+				// animate explosions if ship is destroyed
+				if (opponentPlayer.shipExistsInXY(getXFrom1(index), getYFrom1(index))) {
+					Ship shipToBeBombed = opponentPlayer.getShipAboutToBeBombed(getXFrom1(index), getYFrom1(index));
 
-				if (shipToBeBombed.isDestroyed(opponentPlayer)) {
-					Image explosionSprite = new Image("https://i.imgur.com/1XaaYWo.png");
+					if (shipToBeBombed.isDestroyed(opponentPlayer)) {
+						Image explosionSprite = new Image("https://i.imgur.com/1XaaYWo.png");
 
-					Ship.getAllCoords(new LinkedList<>(Collections.singletonList(shipToBeBombed))).forEach(coord ->
-							animateSuccessFulBomb(
-									explosionSprite,
-									coord[0] - 1, coord[1] - 1, getIndexFromXY(coord[0] - 1, coord[1] - 1))
-
-					);
+						animateSuccessFulBomb(explosionSprite, shipToBeBombed);
+					}
 				}
 			}
 		} catch (BombController.CoordinateAlreadyBombedException exception) {
@@ -288,10 +288,7 @@ public class BattleSeaPlayPageController implements Initializable {
 	 * @param x from 0
 	 * @param y from 0
 	 */
-	private void animateSuccessFulBomb (Image image, int x, int y, int index) {
-		System.out.printf("trying to animate bomb at (x,y)=(%d,%d)%n", x + 1, y + 1);
-
-		stage.setResizable(true);
+	private void animateSuccessFulBomb (Image image, Ship shipToBeBombed) {
 
 		class SpriteAnimation extends Transition {
 
@@ -319,18 +316,28 @@ public class BattleSeaPlayPageController implements Initializable {
 			}
 		}
 
-		//Image view that will display our sprite
-		ImageView imageView = new ImageView() {{
-			setImage(image);
-			setFitWidth(60);
-			setFitHeight(60);
-			setSmooth(true);
-			clickableOpponentBoardTilePane.getChildren().add(index, this);
-		}};
+		LinkedList<SpriteAnimation> spriteAnimations = new LinkedList<>();
+		for (int[] coord : Ship.getAllCoords(new LinkedList<>(Collections.singletonList(shipToBeBombed)))) {
+			int x = coord[0] - 1, y = coord[1] - 1, index = getIndexFromXY(x, y);
 
-		Animation animation = new SpriteAnimation(imageView);
-		animation.setCycleCount(1);
-		animation.play();
+			System.out.printf("trying to animate bomb at (x,y)=(%d,%d)%n", x + 1, y + 1);
+			//Image view that will display our sprite
+			ImageView imageView = new ImageView() {{
+				setImage(image);
+				setFitWidth(60);
+				setFitHeight(60);
+				setSmooth(true);
+				clickableOpponentBoardTilePane.getChildren().add(index, this);
+			}};
+
+			Animation animation = new SpriteAnimation(imageView);
+			animation.setCycleCount(1);
+			animation.play();
+			animation.setOnFinished(e -> {
+				if (spriteAnimations.stream().noneMatch(spriteAnimation -> spriteAnimation.getStatus() == Animation.Status.RUNNING))
+					clickableOpponentBoardTilePane.getChildren().removeIf(node -> node instanceof ImageView);
+			});
+		}
 	}
 
 	private int getIndexFromXY (int x, int y) {
