@@ -167,70 +167,6 @@ public class BattleSeaPlayPageController implements Initializable {
 		updateBombs(currentPlayer.getBombsThrown(), opponentBoardGridpane);
 	}
 
-	/**
-	 * @param x from 0
-	 * @param y from 0
-	 */
-	private void animateSuccessFulBomb (Image image, int x, int y, int index) {
-		System.out.printf("trying to animate bomb at (x,y)=(%d,%d)%n", x + 1, y + 1);
-
-		stage.setResizable(true);
-
-		class SpriteAnimation extends Transition {
-
-			private final ImageView imageView;
-			private final int count;
-			private final int columns;
-			private final int offsetX, offsetY;
-			private final int width, height;
-
-			private int lastIndex;
-
-			public SpriteAnimation (ImageView imageView) {
-				this.imageView = imageView;
-				this.count = 12;
-				this.columns = 12;
-				this.offsetX = 0;
-				this.offsetY = 0;
-				this.width = 60;
-				this.height = 60;
-				setCycleDuration(Duration.seconds(1.5));
-				setInterpolator(Interpolator.LINEAR);
-			}
-
-			protected void interpolate (double k) {
-				final int index = Math.min((int) Math.floor(k * count), count - 1);
-				if (index != lastIndex) {
-					final int x = (index % columns) * width + offsetX;
-					final int y = (index / columns) * height + offsetY;
-					imageView.setViewport(new Rectangle2D(x, y, width, height));
-					lastIndex = index;
-				}
-			}
-		}
-
-		//Image view that will display our sprite
-		ImageView imageView = new ImageView() {{
-			setImage(image);
-			setFitWidth(60);
-			setFitHeight(60);
-			setSmooth(true);
-			clickableOpponentBoardTilePane.getChildren().add(index, this);
-		}};
-
-		Animation animation = new SpriteAnimation(imageView);
-		animation.setCycleCount(1);
-		animation.statusProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue == Animation.Status.STOPPED) {
-				synchronized (this) {
-					notify();
-				}
-//				clickableOpponentBoardTilePane.getChildren().removeIf(node -> node instanceof ImageView);
-			}
-		});
-		animation.play();
-	}
-
 	public void updateYourBoard () {
 		PlayerBattleSea currentPlayer = (PlayerBattleSea) currentGame.getTurnPlayer();
 		LinkedList<Ship> yourBoard = currentPlayer.getShips();
@@ -310,43 +246,91 @@ public class BattleSeaPlayPageController implements Initializable {
 							onExited = event -> ((Label) event.getSource()).setOpacity(0),
 							onClick = new EventHandler<>() {
 								@Override
-								public void handle (MouseEvent e) {
-									PlayerBattleSea currentPlayer = (PlayerBattleSea) currentGame.getTurnPlayer(),
-											opponentPlayer = ((PlayerBattleSea) currentGame.getOpponentOf(currentPlayer));
-
-									try {
-										BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
-
-										bombThrown = true;
-
-										// animate explosions if ship is destroyed
-										if (opponentPlayer.shipExistsInXY(getXFrom1(index), getYFrom1(index))) {
-											Ship shipToBeBombed = opponentPlayer.getShipAboutToBeBombed(getXFrom1(index), getYFrom1(index));
-
-											if (shipToBeBombed.isDestroyed(opponentPlayer)) {
-												Image explosionSprite = new Image("https://i.imgur.com/1XaaYWo.png");
-
-												Ship.getAllCoords(new LinkedList<>(Collections.singletonList(shipToBeBombed))).forEach(coord ->
-														{
-															animateSuccessFulBomb(
-																	explosionSprite,
-																	coord[0] - 1, coord[1] - 1, getIndexFromXY(coord[0] - 1, coord[1] - 1));
-														}
-
-												);
-												clickableOpponentBoardTilePane.getChildren().removeIf(node -> node instanceof ImageView);
-											}
-										}
-									} catch (BombController.CoordinateAlreadyBombedException exception) {
-										coord.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
-									}
-								}
+								public void handle (MouseEvent e) {throwBombIfPossible(index, coord, this);}
 							};
 
 					coord.addEventHandler(MouseEvent.MOUSE_CLICKED, onClick);
 					coord.addEventHandler(MouseEvent.MOUSE_ENTERED, onEntered);
 					coord.addEventHandler(MouseEvent.MOUSE_EXITED, onExited);
 				});
+	}
+
+	private void throwBombIfPossible (int index, Label coord, EventHandler<MouseEvent> onClickHandler) {
+		PlayerBattleSea currentPlayer = (PlayerBattleSea) currentGame.getTurnPlayer(),
+				opponentPlayer = ((PlayerBattleSea) currentGame.getOpponentOf(currentPlayer));
+
+		try {
+			BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
+
+			bombThrown = true;
+
+			// animate explosions if ship is destroyed
+			if (opponentPlayer.shipExistsInXY(getXFrom1(index), getYFrom1(index))) {
+				Ship shipToBeBombed = opponentPlayer.getShipAboutToBeBombed(getXFrom1(index), getYFrom1(index));
+
+				if (shipToBeBombed.isDestroyed(opponentPlayer)) {
+					Image explosionSprite = new Image("https://i.imgur.com/1XaaYWo.png");
+
+					Ship.getAllCoords(new LinkedList<>(Collections.singletonList(shipToBeBombed))).forEach(coord ->
+							animateSuccessFulBomb(
+									explosionSprite,
+									coord[0] - 1, coord[1] - 1, getIndexFromXY(coord[0] - 1, coord[1] - 1))
+
+					);
+				}
+			}
+		} catch (BombController.CoordinateAlreadyBombedException exception) {
+			coord.removeEventHandler(MouseEvent.MOUSE_CLICKED, onClickHandler);
+		}
+	}
+
+	/**
+	 * @param x from 0
+	 * @param y from 0
+	 */
+	private void animateSuccessFulBomb (Image image, int x, int y, int index) {
+		System.out.printf("trying to animate bomb at (x,y)=(%d,%d)%n", x + 1, y + 1);
+
+		stage.setResizable(true);
+
+		class SpriteAnimation extends Transition {
+
+			private final ImageView imageView;
+			private int lastIndex;
+
+			public SpriteAnimation (ImageView imageView) {
+				this.imageView = imageView;
+				setCycleDuration(Duration.seconds(1.5));
+				setInterpolator(Interpolator.LINEAR);
+			}
+
+			protected void interpolate (double k) {
+				final int count = 12,
+						columns = 12,
+						width = 60, height = 60,
+						index = Math.min((int) Math.floor(k * count), count - 1);
+
+				if (index != lastIndex) {
+					final int x = (index % columns) * width,
+							y = (index / columns) * height;
+					imageView.setViewport(new Rectangle2D(x, y, width, height));
+					lastIndex = index;
+				}
+			}
+		}
+
+		//Image view that will display our sprite
+		ImageView imageView = new ImageView() {{
+			setImage(image);
+			setFitWidth(60);
+			setFitHeight(60);
+			setSmooth(true);
+			clickableOpponentBoardTilePane.getChildren().add(index, this);
+		}};
+
+		Animation animation = new SpriteAnimation(imageView);
+		animation.setCycleCount(1);
+		animation.play();
 	}
 
 	private int getIndexFromXY (int x, int y) {
