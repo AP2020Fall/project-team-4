@@ -191,8 +191,6 @@ public class AccountPageController implements Initializable {
 					true,
 					MainController.getInstance().getPrimaryStage()
 			);
-			Label gameTitle = new Label("Battle Sea");
-			gameTitle.setVisible(true);
 			GameMenuController.setStage(battleSeaMainMenu);
 			battleSeaMainMenu.show();
 		} catch (IOException e) {

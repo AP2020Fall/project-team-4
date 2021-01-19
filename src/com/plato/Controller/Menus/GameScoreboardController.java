@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,6 +22,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
 import java.util.LinkedList;
@@ -51,15 +53,19 @@ public class GameScoreboardController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
-		System.out.println("GameScoreboardController.initialize");
 		LinkedList<String> scoreBoardLinkedList = Game.getScoreboard(gameName);
 
+		scoreBoard.setStyle("-fx-background-color: #003768;  " +
+				"-fx-control-inner-background: #003768;");
+
 		scoreBoardLinkedList.forEach(System.out::println);
+
+		scoreBoard.getItems().add(generateScoreboardEntry(0, 0, 0, 0, 0, null));
+
 		for (String scoreBoardEntry : scoreBoardLinkedList) {
-			String regex = "Rank: (?<rank>[0-9]+),\tUsername: (?<un>[!-~]+),\tPoints: (?<pts>[0-9]+),\tWins: (?<w>[0-9]+),\tLosses: (?<l>[0-9]+),\tDraws: (?<d>[0-9]+),\tPlayed Count: (?<play>[0-9]+)";
+			String regex = "Rank: (?<rank>[-0-9]+), {2}Username: (?<un>[!-~]+), {2}Points: (?<pts>[-0-9]+), {2}Wins: (?<w>[-0-9]+), {2}Losses: (?<l>[-0-9]+), {2}Draws: (?<d>[-0-9]+), {2}Played Count: (?<play>[-0-9]+)";
 			Matcher matcher = Pattern.compile(regex).matcher(scoreBoardEntry);
 			if (!matcher.matches()) break;
-			matcher.find();
 
 			int rank = Integer.parseInt(matcher.group("rank")),
 					pts = Integer.parseInt(matcher.group("pts")),
@@ -70,66 +76,114 @@ public class GameScoreboardController implements Initializable {
 			String username = matcher.group("un");
 			Gamer gamer = (Gamer) Account.getAccount(username);
 
-			scoreBoard.getItems().add(new GridPane() {{
-				// setting up gridpane
-				setHgap(7.5);
-				setMaxHeight(75);
-				setMinHeight(getMaxHeight());
-				for (int i = 0; i < 5; i++)
-					getColumnConstraints().add(new ColumnConstraints() {{
-						setHalignment(HPos.CENTER);
-					}});
-				getRowConstraints().add(new RowConstraints() {{
-					setValignment(VPos.CENTER);
-				}});
+			scoreBoard.getItems().add(generateScoreboardEntry(rank, pts, wins, losses, draws, gamer));
+		}
+	}
 
-				// adding gamer rank
-				getChildren().add(new Label("#" + rank) {{
-					setAlignment(Pos.CENTER);
-					setTextFill(Color.valueOf("#0097ff"));
-					setFont(Font.font("American Typewriter", 21));
-					setEffect(new Glow());
-					setColumnIndex(this, 0);
-				}});
+	@NotNull
+	private GridPane generateScoreboardEntry (int rank, int pts, int wins, int losses, int draws, Gamer gamer) {
+		return new GridPane() {{
+			// setting up gridpane
+			setHgap(7.5);
+			setMaxWidth(575);
 
-				// adding gamer pfp
+			for (int i = 0; i < 5; i++)
+				getColumnConstraints().add(new ColumnConstraints() {{
+					setHalignment(HPos.CENTER);
+				}});
+			getRowConstraints().add(new RowConstraints() {{
+				setValignment(VPos.CENTER);
+				setMinHeight(100);
+				setMaxHeight(getMinHeight());
+			}});
+
+			// adding gamer rank
+			getChildren().add(new Label("#" + rank) {{
+				setAlignment(Pos.CENTER);
+				setTextFill(Color.valueOf("#0097ff"));
+				setFont(Font.font("American Typewriter", 21));
+				setEffect(new Glow());
+				setMinWidth(75);
+				setMaxWidth(getMinWidth());
+				setColumnIndex(this, 0);
+				if (gamer == null) {
+					setText("Rank");
+					setFont(Font.font(getFont().getFamily(), 20));
+					setTextFill(Color.WHITE);
+				}
+			}});
+
+			// adding gamer pfp
+			if (gamer != null)
 				getChildren().add(new ImageView() {{
 					setImage(new Image(gamer.getPfpUrl()));
-					setFitHeight(75);
-					setFitWidth(150);
 					setPickOnBounds(true);
 					setPreserveRatio(true);
+					setMinWidth(150);
+					setMaxWidth(getMinWidth());
+					setViewport(new Rectangle2D(0, (getImage().getHeight() - getImage().getWidth() / 2) / 2, getImage().getWidth(), getImage().getWidth() / 2));
+					setFitWidth(150);
 					setColumnIndex(this, 1);
 				}});
 
-				// adding gamer username
-				getChildren().add(new Label(gamer.getUsername()) {{
-					setTextFill(Color.valueOf("#eeff00"));
-					setFont(Font.font("American Typewriter", 30));
-					setEffect(new Glow());
-					setColumnIndex(this, 2);
-				}});
+			// adding gamer username
 
-				// adding gamer points
-				getChildren().add(new Label() {{
-					setText(pts + "pts");
-					setAlignment(Pos.CENTER);
-					setTextFill(Color.valueOf("#ffa300"));
-					setFont(Font.font("American Typewriter", 21));
-					setEffect(new Glow());
-					setColumnIndex(this, 3);
-				}});
+			getChildren().add(new Label() {{
+				setTextFill(Color.valueOf("#eeff00"));
+				setFont(Font.font("American Typewriter", 30));
+				setEffect(new Glow());
+				setMinWidth(225);
+				setMaxWidth(getMinWidth());
+				setColumnIndex(this, 2);
 
-				// adding gamer stats "W/D/L"
-				getChildren().add(new Label("%d/%d/%d".formatted(wins, draws, losses)) {{
+				if (gamer == null) {
+					setText("Gamer");
+					setFont(Font.font(getFont().getFamily(), 20));
+					setTextFill(Color.WHITE);
+					setMinWidth(390);
+					setMaxWidth(getMinWidth());
 					setAlignment(Pos.CENTER);
-					setTextFill(Color.valueOf("#ffa300"));
-					setFont(Font.font("American Typewriter", 21));
-					setEffect(new Glow());
-					setColumnIndex(this, 4);
-				}});
+					setColumnIndex(this, 1);
+					setColumnSpan(this, 2);
+				}
+				else {
+					setText(gamer.getUsername());
+				}
 			}});
-		}
+
+			// adding gamer points
+			getChildren().add(new Label() {{
+				setText(String.valueOf(pts));
+				setAlignment(Pos.CENTER);
+				setTextFill(Color.valueOf("#ffa300"));
+				setFont(Font.font("American Typewriter", 21));
+				setEffect(new Glow());
+				setMinWidth(75);
+				setMaxWidth(getMinWidth());
+				setColumnIndex(this, 3);
+				if (gamer == null) {
+					setText("Pts");
+					setFont(Font.font(getFont().getFamily(), 20));
+					setTextFill(Color.WHITE);
+				}
+			}});
+
+			// adding gamer stats "W/D/L"
+			getChildren().add(new Label("%d/%d/%d".formatted(wins, draws, losses)) {{
+				setAlignment(Pos.CENTER);
+				setTextFill(Color.valueOf("#ffa300"));
+				setFont(Font.font("American Typewriter", 21));
+				setEffect(new Glow());
+				setMinWidth(75);
+				setMaxWidth(getMinWidth());
+				setColumnIndex(this, 4);
+				if (gamer == null) {
+					setText("W/D/L");
+					setFont(Font.font(getFont().getFamily(), 20));
+					setTextFill(Color.WHITE);
+				}
+			}});
+		}};
 	}
 
 	public void closeStage (ActionEvent actionEvent) {

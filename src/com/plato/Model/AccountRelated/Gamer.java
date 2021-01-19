@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class Gamer extends Account {
-
 	private int awardsFromEvents = 0;
 	private double money;
 	private LocalDate accountStartDate;

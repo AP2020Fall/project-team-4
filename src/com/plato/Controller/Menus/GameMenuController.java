@@ -45,6 +45,7 @@ public class GameMenuController implements Initializable {
 
 	public static void setGameName (String gameName) {
 		GameMenuController.gameName = gameName;
+		System.out.println("GameMenuController.setGameName");
 	}
 
 	@Override
@@ -196,7 +197,6 @@ public class GameMenuController implements Initializable {
 
 	public void displayScoreboard (ActionEvent actionEvent) {
 		confirmTimeInGameMenu();
-		Game.getScoreboard(gameName).forEach(System.out::println);
 		if (Game.getScoreboard(gameName).size() == 1 && !Game.getScoreboard(gameName).get(0).startsWith("Rank:"))
 			return;
 		try {

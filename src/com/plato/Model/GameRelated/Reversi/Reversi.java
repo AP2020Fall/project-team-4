@@ -149,21 +149,6 @@ public class Reversi extends Game {
 
 	}
 
-	public void updatePointProperties () {
-		if (pointsB.get()!= getNumberOfBlack())
-			pointsB.set(getNumberOfBlack());
-		if (pointsW.get()!= getNumberOfWhite())
-			pointsW.set(getNumberOfWhite());
-	}
-
-	public IntegerProperty pointsBProperty () {
-		return pointsB;
-	}
-
-	public IntegerProperty pointsWProperty () {
-		return pointsW;
-	}
-
 	/**
 	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended :O
 	 */
@@ -219,6 +204,21 @@ public class Reversi extends Game {
 			}
 		}
 		return count;
+	}
+
+	public void updatePointProperties () {
+		if (pointsB.get() != getNumberOfBlack())
+			pointsB.set(getNumberOfBlack());
+		if (pointsW.get() != getNumberOfWhite())
+			pointsW.set(getNumberOfWhite());
+	}
+
+	public IntegerProperty pointsBProperty () {
+		return pointsB;
+	}
+
+	public IntegerProperty pointsWProperty () {
+		return pointsW;
 	}
 
 	/**

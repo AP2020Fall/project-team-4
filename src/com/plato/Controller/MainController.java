@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.hildan.fxgson.FxGson;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -30,12 +31,6 @@ public class MainController extends Application {
 	private final GsonBuilder gsonBuilder = new GsonBuilder();
 	private Gson gson;
 	private Stage primaryStage;
-
-	public static MainController getInstance () {
-		if (mainController == null)
-			mainController = new MainController();
-		return mainController;
-	}
 
 	public static void main (String[] args) {
 		launch(args);
@@ -79,6 +74,12 @@ public class MainController extends Application {
 		}
 
 		primaryStage.show();
+	}
+
+	public static MainController getInstance () {
+		if (mainController == null)
+			mainController = new MainController();
+		return mainController;
 	}
 //
 //	private void dealWithInput (int command) {
@@ -236,112 +237,6 @@ public class MainController extends Application {
 //
 //		saveEverything();
 //	}
-
-	public void serialize () throws IOException {
-		// SavedLoginInfo.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/SavedLoginInfo.json")) {
-			printWriter.print("");
-		}
-		if (AccountController.getInstance().getCurrentAccLoggedIn() != null) // if is logged-in
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/SavedLoginInfo.json"))) {
-				if (AccountController.getInstance().saveLoginInfo()) { // skip if said no to remember me
-					writer.write((AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "a" : "g") + "\n");
-					writer.write(gson.toJson(AccountController.getInstance().getCurrentAccLoggedIn()));
-				}
-			}
-
-
-		// Admin.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Admin.json")) {
-			printWriter.print("");
-		}
-		if (Admin.adminHasBeenCreated())
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Admin.json"))) {
-
-				writer.write(gson.toJson(Admin.getAdmin()));
-			}
-
-
-		// Gamer.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Gamer.json")) {
-			printWriter.print("");
-		}
-		if (Gamer.getGamers().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Gamer.json"))) {
-
-				writer.write(gson.toJson(Gamer.getGamers()));
-			}
-
-		// AdminGameReco.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json")) {
-			printWriter.print("");
-		}
-		if (AdminGameReco.getRecommendations().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json"))) {
-
-				writer.write(gson.toJson(AdminGameReco.getRecommendations()));
-			}
-
-		// Event.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Event.json")) {
-			printWriter.print("");
-		}
-		if (Event.getAllEvents().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Event.json"))) {
-
-				writer.write(gson.toJson(Event.getAllEvents()));
-			}
-
-		// FriendRequest.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/FriendRequest.json")) {
-			printWriter.print("");
-		}
-		if (FriendRequest.getAllfriendRequests().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/FriendRequest.json"))) {
-
-				writer.write(gson.toJson(FriendRequest.getAllfriendRequests()));
-			}
-
-		// Message.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Message.json")) {
-			printWriter.print("");
-		}
-		if (Message.getAllMessages().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Message.json"))) {
-
-				writer.write(gson.toJson(Message.getAllMessages()));
-			}
-
-		// BattleSea.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/BattleSea.json")) {
-			printWriter.print("");
-		}
-		if (BattleSea.getAllBattleSeaGames().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/GameRelated/BattleSea.json"))) {
-
-				writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
-			}
-
-		// Reversi.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/Reversi.json")) {
-			printWriter.print("");
-		}
-		if (Reversi.getAllReversiGames().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/GameRelated/Reversi.json"))) {
-
-				writer.write(gson.toJson(Reversi.getAllReversiGames()));
-			}
-
-		// IDGenerator.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/IDGenerator.json")) {
-			printWriter.print("");
-		}
-		if (IDGenerator.getAllIDsGenerated().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/IDGenerator.json"))) {
-
-				writer.write(gson.toJson(IDGenerator.getAllIDsGenerated()));
-			}
-	}
 
 	public void saveEverything () {
 		try {
@@ -503,7 +398,115 @@ public class MainController extends Application {
 	private void initGsonAndItsBuilder () {
 		gsonBuilder.setDateFormat("yyyy-MMM-dd HH:mm:ss");
 		gsonBuilder.setPrettyPrinting();
-		gson = gsonBuilder.create();
+		gsonBuilder.serializeNulls();
+		gson = FxGson.addFxSupport(gsonBuilder)
+				.create();
+	}
+
+	public void serialize () throws IOException {
+		// SavedLoginInfo.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/SavedLoginInfo.json")) {
+			printWriter.print("");
+		}
+		if (AccountController.getInstance().getCurrentAccLoggedIn() != null) // if is logged-in
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/SavedLoginInfo.json"))) {
+				if (AccountController.getInstance().saveLoginInfo()) { // skip if said no to remember me
+					writer.write((AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "a" : "g") + "\n");
+					writer.write(gson.toJson(AccountController.getInstance().getCurrentAccLoggedIn()));
+				}
+			}
+
+
+		// Admin.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Admin.json")) {
+			printWriter.print("");
+		}
+		if (Admin.adminHasBeenCreated())
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Admin.json"))) {
+
+				writer.write(gson.toJson(Admin.getAdmin()));
+			}
+
+
+		// Gamer.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Gamer.json")) {
+			printWriter.print("");
+		}
+		if (Gamer.getGamers().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Gamer.json"))) {
+
+				writer.write(gson.toJson(Gamer.getGamers()));
+			}
+
+		// AdminGameReco.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json")) {
+			printWriter.print("");
+		}
+		if (AdminGameReco.getRecommendations().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json"))) {
+
+				writer.write(gson.toJson(AdminGameReco.getRecommendations()));
+			}
+
+		// Event.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Event.json")) {
+			printWriter.print("");
+		}
+		if (Event.getAllEvents().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Event.json"))) {
+
+				writer.write(gson.toJson(Event.getAllEvents()));
+			}
+
+		// FriendRequest.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/FriendRequest.json")) {
+			printWriter.print("");
+		}
+		if (FriendRequest.getAllfriendRequests().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/FriendRequest.json"))) {
+
+				writer.write(gson.toJson(FriendRequest.getAllfriendRequests()));
+			}
+
+		// Message.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Message.json")) {
+			printWriter.print("");
+		}
+		if (Message.getAllMessages().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Message.json"))) {
+
+				writer.write(gson.toJson(Message.getAllMessages()));
+			}
+
+		// BattleSea.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/BattleSea.json")) {
+			printWriter.print("");
+		}
+		if (BattleSea.getAllBattleSeaGames().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/GameRelated/BattleSea.json"))) {
+
+				writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
+			}
+
+		// Reversi.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/Reversi.json")) {
+			printWriter.print("");
+		}
+		if (Reversi.getAllReversiGames().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/GameRelated/Reversi.json"))) {
+
+				writer.write(gson.toJson(Reversi.getAllReversiGames()));
+			}
+
+		// IDGenerator.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/IDGenerator.json")) {
+			printWriter.print("");
+		}
+		if (IDGenerator.getAllIDsGenerated().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/IDGenerator.json"))) {
+
+				writer.write(gson.toJson(IDGenerator.getAllIDsGenerated()));
+			}
 	}
 
 	/**

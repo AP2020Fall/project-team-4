@@ -2,15 +2,18 @@ package Controller.Menus;
 
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.GameController;
+import Controller.MainController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
+import Model.GameRelated.GameLog;
 import javafx.animation.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
@@ -25,6 +28,8 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -45,10 +50,21 @@ public class BattleSeaPlayPageController implements Initializable {
 	public TilePane clickableOpponentBoardTilePane;
 	private PlayerBattleSea player1, player2;
 	private IntegerProperty secondsRemaining = new SimpleIntegerProperty(maxTime);
-	private Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-		secondsRemaining.set(secondsRemaining.get() - 1);
-		if (!currentGame.gameEnded())
-			updateAllPage();
+	private Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<>() {
+		@Override
+		public void handle (ActionEvent e) {
+			secondsRemaining.set(secondsRemaining.get() - 1);
+			if (!currentGame.gameEnded())
+				BattleSeaPlayPageController.this.updateAllPage();
+			else {
+				timer.stop();
+				currentGame.concludeGame();
+				System.out.println(GameLog.getAllGamersWhoPlayedGame(currentGame.getGameName()).size());
+				MainController.getInstance().saveEverything();
+				displayGameConclusion();
+				System.out.println("Game Ended ");
+			}
+		}
 	}));
 
 	public static void setStage (Stage stage) {
@@ -56,6 +72,7 @@ public class BattleSeaPlayPageController implements Initializable {
 		BattleSeaPlayPageController.stage.setOnCloseRequest(e -> {
 			BattleSeaPlayPageController.stage = null;
 			currentGame = null;
+			GameController.getInstance().setCurrentGameInSession(null);
 		});
 	}
 
@@ -92,23 +109,21 @@ public class BattleSeaPlayPageController implements Initializable {
 		timer.setAutoReverse(false);
 
 		timer.statusProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue == Animation.Status.STOPPED && !currentGame.gameEnded()) {
-				secondsRemaining.set(maxTime);
+			if (newValue == Animation.Status.STOPPED) {
+				if (!currentGame.gameEnded()) {
+					secondsRemaining.set(maxTime);
 
-				if (bombThrown) {
-					if (!((PlayerBattleSea) currentGame.getTurnPlayer())
-							.getBombsThrown().getLast().wasSuccessful())
+					if (bombThrown) {
+						if (!((PlayerBattleSea) currentGame.getTurnPlayer())
+								.getBombsThrown().getLast().wasSuccessful())
+							currentGame.nextTurn();
+					}
+					else
 						currentGame.nextTurn();
+					bombThrown = false;
 				}
 				else
-					currentGame.nextTurn();
-				bombThrown = false;
-				if (currentGame.gameEnded()) {
 					timer.stop();
-					currentGame.concludeGame();
-					// todo display game conclusion window
-					System.out.println("Game Ended ");
-				}
 				timer.playFromStart();
 			}
 		});
@@ -116,6 +131,22 @@ public class BattleSeaPlayPageController implements Initializable {
 		timer.play();
 
 		updateAllPage();
+	}
+
+	private void displayGameConclusion () {
+		try {
+			GameConclusionWindowController.setGame(currentGame);
+			Stage concStage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/GameConclusionWindow.fxml").toURI().toURL()),
+					"",
+					true,
+					stage
+			);
+			GameConclusionWindowController.setStage(concStage);
+			concStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public double getTimePercentageRemaining () {
@@ -284,10 +315,6 @@ public class BattleSeaPlayPageController implements Initializable {
 		}
 	}
 
-	/**
-	 * @param x from 0
-	 * @param y from 0
-	 */
 	private void animateSuccessFulBomb (Image image, Ship shipToBeBombed) {
 
 		class SpriteAnimation extends Transition {
