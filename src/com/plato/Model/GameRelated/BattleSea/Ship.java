@@ -1,6 +1,5 @@
 package Model.GameRelated.BattleSea;
 
-import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.GameController;
 
 import java.util.Collections;
@@ -83,13 +82,12 @@ public class Ship {
 		return isShipPosValid(board, leftMostX, topMostY, !isVertical());
 	}
 
-	public boolean canMove (int x, int y) {
-		LinkedList<Ship> board = BattleSeaController.getInstance().getCurrentlyEditingTrialBoard();
+	public boolean canMove (LinkedList<Ship> board, int x, int y) {
 		return isShipPosValid(board, x, y, isVertical());
 	}
 
-	public void move (int x, int y) {
-		if (canMove(x, y)) {
+	public void move (LinkedList<Ship> board, int x, int y) {
+		if (canMove(board, x, y)) {
 			this.leftMostX = x;
 			this.topMostY = y;
 		}

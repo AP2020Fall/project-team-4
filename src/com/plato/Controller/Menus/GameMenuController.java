@@ -19,6 +19,8 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GameMenuController implements Initializable {
 	private static String gameName;
@@ -43,6 +45,7 @@ public class GameMenuController implements Initializable {
 
 	public static void setGameName (String gameName) {
 		GameMenuController.gameName = gameName;
+		System.out.println("GameMenuController.setGameName");
 	}
 
 	@Override
@@ -101,19 +104,6 @@ public class GameMenuController implements Initializable {
 	}
 
 	public void newGame (ActionEvent actionEvent) {
-//		//gameInfo.setVisible(true);
-//		Label title = new Label(gameName);
-//		title.setFont(new Font("Bauhaus 93", 24));
-//		VBox vBox = new VBox(title);
-//		Scene scene = new Scene(vBox);
-//		Stage stage = new Stage();
-//		stage.setScene(scene);
-//		stage.setTitle("New Game of " + gameName);
-//		stage.setWidth(400);
-//		stage.setHeight(450);
-//		stage.initModality(Modality.WINDOW_MODAL);
-//		TextField secondPlayer = new TextField();
-//		stage.show();
 
 		newGamePropertyWindow.setVisible(true);
 		timeLimitMenuInStartGameMenu.setText(selectedTime);
@@ -145,6 +135,7 @@ public class GameMenuController implements Initializable {
 
 	public void startBattleSea () {
 		try {
+			BattleSeaPlayPageController.setMaxTime(getMaxTimeSeconds());
 			Stage battleSeaStage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/BattleSeaEditBoardPage.fxml").toURI().toURL()),
 					"BattleSea",
@@ -157,6 +148,13 @@ public class GameMenuController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public int getMaxTimeSeconds () {
+		Matcher matcher = Pattern.compile("(?<num>[0-9]+)[m|s]").matcher(selectedTime); matcher.find();
+		int time = Integer.parseInt(matcher.group("num"));
+		time = selectedTime.endsWith("m") ? time * 60 : time;
+		return time;
 	}
 
 	private void startReversi () {
@@ -203,7 +201,6 @@ public class GameMenuController implements Initializable {
 			return;
 		try {
 			GameScoreboardController.setGameName(gameName);
-
 			Stage scoreBoardStage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/GameScoreboard.fxml").toURI().toURL()),
 					gameName + " Scoreboard",

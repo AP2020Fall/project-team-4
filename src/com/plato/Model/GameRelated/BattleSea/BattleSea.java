@@ -15,6 +15,7 @@ public class BattleSea extends Game {
 			"2 1 2"
 	));
 	private static String battleseaDetails;
+
 	private ArrayList<PlayerBattleSea> listOfPlayers = new ArrayList<>();
 
 	public BattleSea (ArrayList<Gamer> gamers) {

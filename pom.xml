@@ -39,7 +39,7 @@
                     <mainClass>Controller.MainController</mainClass>
 <!--                    <options>-->
 <!--                        <option>&#45;&#45;add-modules</option>-->
-<!--                        <option>javafx.controls,javafx.fxml</option>-->
+<!--                        <option>javafx.controls,javafx.fxml,javafx.base</option>-->
 <!--                        <option>&#45;&#45;add-exports</option>-->
 <!--                        <option>javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED</option>-->
 <!--                        <option>&#45;&#45;add-modules javafx.controls,javafx.fxml &#45;&#45;add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED</option>-->
@@ -103,6 +103,11 @@
             <artifactId>junit</artifactId>
             <version>4.13</version>
             <scope>test</scope>
+        </dependency>
+        <dependency><!-- https://mvnrepository.com/artifact/org.hildan.fxgson/fx-gson -->
+            <groupId>org.hildan.fxgson</groupId>
+            <artifactId>fx-gson</artifactId>
+            <version>3.1.2</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>

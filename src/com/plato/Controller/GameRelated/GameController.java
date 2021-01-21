@@ -1,7 +1,6 @@
 package Controller.GameRelated;
 
 import Controller.AccountRelated.AccountController;
-import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Admin;
@@ -199,14 +198,6 @@ public class GameController {
 			}
 
 		currentGameInSession = unfinishedGames.get(gameChoice - 1);
-		if (currentGameInSession instanceof BattleSea) {
-//			Menu.getMenu("12B").enter();
-
-			BattleSeaController.getInstance().updateGamePlayMenu();
-		}
-		else {
-//			Menu.getMenu("12R").enter();
-		}
 	}
 
 	public void removeFaveGame (String gameName) {

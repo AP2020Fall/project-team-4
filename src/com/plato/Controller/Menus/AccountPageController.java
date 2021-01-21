@@ -32,9 +32,7 @@ public class AccountPageController implements Initializable {
 	public ProgressBar progressToNextLevelBattleSea, progressToNextLevelReversi;
 	public Label lvlBattleSea, playedBattlesea, pointsBattlesea, winsBattlesea, drawsBattlesea, lossesBattlesea;
 	public Label lvlReversi, playedReversi, pointsReversi, winsReversi, drawsReversi, lossesReversi;
-	public ImageView uploadPfp;
 	public GridPane mainGridPane;
-	public ImageView logoutBtn;
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		AccountPageController.gamerOrAdmin = gamerOrAdmin;
@@ -90,15 +88,6 @@ public class AccountPageController implements Initializable {
 			drawsReversi.setText(String.valueOf(GameLog.getDrawCount(gamer, "Reversi")));
 			lossesReversi.setText(String.valueOf(GameLog.getLossCount(gamer, "Reversi")));
 
-			uploadPfp.setOnMouseEntered(e -> uploadPfp.setOpacity(0.8));
-			uploadPfp.setOnMouseExited(e -> uploadPfp.setOpacity(1));
-		}
-		logoutBtn.setOnMouseEntered(e -> logoutBtn.setOpacity(0.8));
-		logoutBtn.setOnMouseExited(e -> logoutBtn.setOpacity(1));
-		for (int i = 0; i < 2; i++) {
-			Label label = (Label) dropDownMenu.getChildren().get(i);
-			label.setOnMouseEntered(e -> label.setOpacity(0.8));
-			label.setOnMouseExited(e -> label.setOpacity(1));
 		}
 	}
 
@@ -159,5 +148,53 @@ public class AccountPageController implements Initializable {
 
 	public void changeDropDownMenuVisibility (MouseEvent mouseEvent) {
 		dropDownMenu.setVisible(!dropDownMenu.isVisible());
+	}
+
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Label)
+			((Label) mouseEvent.getSource()).setOpacity(1);
+
+		else if (mouseEvent.getSource() instanceof ImageView)
+			((ImageView) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Label)
+			((Label) mouseEvent.getSource()).setOpacity(0.8);
+
+		else if (mouseEvent.getSource() instanceof ImageView)
+			((ImageView) mouseEvent.getSource()).setOpacity(0.8);
+	}
+
+	public void openReversiMainMenu (MouseEvent mouseEvent) {
+		try {
+			GameMenuController.setGameName("Reversi");
+			Stage reversiMainMenu = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/GameMenu.fxml").toURI().toURL()),
+					"Reversi Main Menu",
+					true,
+					MainController.getInstance().getPrimaryStage()
+			);
+			GameMenuController.setStage(reversiMainMenu);
+			reversiMainMenu.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void openBattleSeaMainMenu (MouseEvent mouseEvent) {
+		try {
+			GameMenuController.setGameName("BattleSea");
+			Stage battleSeaMainMenu = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/GameMenu.fxml").toURI().toURL()),
+					"BattleSea Main Menu",
+					true,
+					MainController.getInstance().getPrimaryStage()
+			);
+			GameMenuController.setStage(battleSeaMainMenu);
+			battleSeaMainMenu.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

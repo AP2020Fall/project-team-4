@@ -1,6 +1,5 @@
 package Model.GameRelated;
 
-import Controller.GameRelated.GameController;
 import Controller.IDGenerator;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
@@ -76,7 +75,7 @@ public abstract class Game {
 								prevRankPlayCount.get() != playCount))
 					rank.incrementAndGet();
 
-				scoreBoard.addLast("Rank: %d,\tUsername: %s,\tPoints: %d,\tWins: %d,\tLosses: %d,\tDraws: %d,\tPlayed Count: %d".formatted(
+				scoreBoard.addLast("Rank: %d,  Username: %s,  Points: %d,  Wins: %d,  Losses: %d,  Draws: %d,  Played Count: %d".formatted(
 						rank.get(), username, pts, wins, losses, draws, playCount
 				));
 				prevRankPts.set(pts);
@@ -165,10 +164,6 @@ public abstract class Game {
 			conclusion = (GameConclusion.PLAYER2_WIN);
 		// set end time
 		dateGameEnded = LocalDateTime.now();
-		// going back to game menu
-//		Menu.getMenuIn().back();
-		// getting rid of current game in session
-		GameController.getInstance().setCurrentGameInSession(null);
 	}
 
 	public abstract Gamer getWinner ();
