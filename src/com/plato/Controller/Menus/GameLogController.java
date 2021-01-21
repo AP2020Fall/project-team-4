@@ -101,15 +101,16 @@ public class GameLogController implements Initializable {
 			setVgap(5);
 			setMinSize(400, 200);
 			setMaxSize(getMinWidth(), getMinHeight());
+			setPadding(new Insets(0,15,0,15));
 //			setLayoutX((gameLogList.getMinWidth() - this.getMinWidth()) / 2);
 //			setAlignment(Pos.CENTER);
-			setGridLinesVisible(true);
+//			setGridLinesVisible(true);
 
 			for (int i = 0; i < 3; i++) {
 				int finalI = i;
 				getColumnConstraints().add(new ColumnConstraints() {{
 					setHalignment(HPos.CENTER);
-					setPercentWidth((finalI == 2) ? 20 : 40);
+					setPercentWidth((finalI == 2) ? 25 : 37.5);
 				}});
 			}
 			for (int i = 0; i < 5; i++)
