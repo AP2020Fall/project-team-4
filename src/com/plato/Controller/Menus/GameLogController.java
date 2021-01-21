@@ -2,7 +2,6 @@ package Controller.Menus;
 
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
-import Model.GameRelated.GameConclusion;
 import Model.GameRelated.GameLog;
 import javafx.fxml.Initializable;
 import javafx.geometry.*;
@@ -86,7 +85,6 @@ public class GameLogController implements Initializable {
 									game.getInGameScore(1),
 									game.getInGameScore(2)
 							},
-							game.getConclusion(),
 							game.getDateGameEnded(),
 							i == 0 || !gameHistory.get(i).getDateGameEnded().toLocalDate().equals(gameHistory.get(i - 1).getDateGameEnded().toLocalDate()
 							)
@@ -98,7 +96,6 @@ public class GameLogController implements Initializable {
 
 	private GridPane generateGameLogEntry (Gamer[] gamers,
 										   int[] scores,
-										   GameConclusion conclusion,
 										   LocalDateTime endDateTime,
 										   boolean showDate) {
 		return new GridPane() {{
