@@ -74,20 +74,24 @@ public class GameLogController implements Initializable {
 
 		LinkedList<Game> gameHistory = GameLog.getGameHistory(gameName);
 
-		gameHistory.forEach(game ->
-				gameLogList.getItems().add(generateGameLogEntry(
-						new Gamer[]{
-								game.getListOfPlayers().get(0).getGamer(),
-								game.getListOfPlayers().get(1).getGamer()
-						},
-						new int[]{
-								game.getInGameScore(1),
-								game.getInGameScore(2)
-						},
-						game.getConclusion(),
-						game.getDateGameEnded()
-				))
-		);
+		for (int i = 0; i < gameHistory.size(); i++) {
+			Game game = gameHistory.get(i);
+			gameLogList.getItems().add(
+					generateGameLogEntry(
+							new Gamer[]{
+									game.getListOfPlayers().get(0).getGamer(),
+									game.getListOfPlayers().get(1).getGamer()
+							},
+							new int[]{
+									game.getInGameScore(1),
+									game.getInGameScore(2)
+							},
+							game.getConclusion(),
+							game.getDateGameEnded(),
+							i == 0 || !gameHistory.get(i).getDateGameEnded().toLocalDate().equals(gameHistory.get(i - 1).getDateGameEnded().toLocalDate()
+							)
+					));
+		}
 
 		gameLogList.getItems().forEach(gridPane -> gridPane.setAlignment(Pos.CENTER));
 	}
@@ -95,16 +99,14 @@ public class GameLogController implements Initializable {
 	private GridPane generateGameLogEntry (Gamer[] gamers,
 										   int[] scores,
 										   GameConclusion conclusion,
-										   LocalDateTime endDateTime) {
+										   LocalDateTime endDateTime,
+										   boolean showDate) {
 		return new GridPane() {{
 			setHgap(5);
 			setVgap(5);
 			setMinSize(400, 200);
 			setMaxSize(getMinWidth(), getMinHeight());
-			setPadding(new Insets(0,15,0,15));
-//			setLayoutX((gameLogList.getMinWidth() - this.getMinWidth()) / 2);
-//			setAlignment(Pos.CENTER);
-//			setGridLinesVisible(true);
+			setPadding(new Insets(0, 15, 0, 15));
 
 			for (int i = 0; i < 3; i++) {
 				int finalI = i;
@@ -200,6 +202,10 @@ public class GameLogController implements Initializable {
 
 				setColumnSpan(this, 3);
 			}});
+			if (!showDate) {
+				getChildren().removeIf(node -> node instanceof HBox);
+				getRowConstraints().remove(0);
+			}
 		}};
 	}
 
