@@ -1,5 +1,6 @@
 package Model.GameRelated.Reversi;
 
+import Controller.Menus.ReversiGameController;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import javafx.beans.property.BooleanProperty;
@@ -230,6 +231,7 @@ public class Reversi extends Game {
 	 */
 	private void changeColor (int startx, int starty, int destx, int desty, Direction direction) {
 		board[desty][destx] = ((PlayerReversi) getTurnPlayer()).getColor();
+		ReversiGameController.addToChangingDisks(destx, desty);
 		if (doesAnyDiskChangeColor(destx, desty, direction))
 			changeColor(destx, desty, destx + direction.getDeltaX(), desty + direction.getDeltaY(), direction);
 	}

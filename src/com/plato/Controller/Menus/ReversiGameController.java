@@ -4,6 +4,7 @@ import Controller.GameRelated.GameController;
 import Controller.GameRelated.Reversi.ReversiController;
 import Model.GameRelated.Reversi.PlayerReversi;
 import Model.GameRelated.Reversi.Reversi;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,13 +15,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 public class ReversiGameController implements Initializable {
 	private static Stage stage;
 	private static Reversi currentGame;
+	private static LinkedList<String> changingDisks = new LinkedList<>();
 	public Circle turnIndicatorW, turnIndicatorB;
 	public ImageView pfpW, pfpB;
 	public Label usernameW, usernameB;
@@ -36,6 +40,17 @@ public class ReversiGameController implements Initializable {
 			currentGame = null;
 			GameController.getInstance().setCurrentGameInSession(null);
 		});
+	}
+
+	/**
+	 * @param x from 0 to 7
+	 * @param y from 0 to 7
+	 */
+	public static void addToChangingDisks (int x, int y) {
+		if (!changingDisks.contains("%d %d".formatted(x, y)))
+			if (!currentGame.getBoard()[y][x].equals("-"))
+				changingDisks.add("%d %d".formatted(x, y));
+		System.out.println("currentGame.getBoard()[" + (y + 1) + "][" + (x + 1) + "] = " + currentGame.getBoard()[y][x]);
 	}
 
 	@Override
@@ -83,13 +98,10 @@ public class ReversiGameController implements Initializable {
 
 				if (currentGameBoard[y][x].equals("-")) {
 					if (!currentGame.hasPlayerMoved().get() && currentGame.getAvailableCoordinates().contains("%d,%d".formatted(y + 1, x + 1)))
-						cell.setStyle("-fx-background-color: #6f9434;" +
-								"  -fx-background-size: 25;" +
+						cell.setStyle("-fx-background-size: 25;" +
 								"  -fx-background-position: center;" +
 								"  -fx-background-repeat: no-repeat;" +
 								"  -fx-background-image: url('https://i.imgur.com/aVt01yG.png');");
-					else
-						cell.setStyle("-fx-background-color: #6f9434;");
 				}
 			}
 	}
@@ -109,8 +121,7 @@ public class ReversiGameController implements Initializable {
 		for (int y = 0, currentGameBoardLength = currentGameBoard.length; y < currentGameBoardLength; y++)
 			for (int x = 0, rowLength = currentGameBoard[y].length; x < rowLength; x++) {
 				Label cell = (Label) board.getChildren().get(x + y * 8);
-				cell.setStyle("-fx-background-color: #6f9434;" +
-						"  -fx-background-size: 60;" +
+				cell.setStyle("-fx-background-size: 60;" +
 						"  -fx-background-position: center;" +
 						"  -fx-background-repeat: no-repeat;");
 
@@ -131,13 +142,65 @@ public class ReversiGameController implements Initializable {
 		try {
 			ReversiController.getInstance().placeDisk(getXFrom1(index), getYFrom1(index));
 
-			confirmMoveBtn.setVisible(true);
+			showColorChanges();
 
-			updateBoard();
+			confirmMoveBtn.setVisible(true);
 
 			currentGame.updatePointProperties();
 		} catch (ReversiController.PlayerHasAlreadyPlacedDiskException e) {
 			System.out.println(e.getMessage());
+		}
+	}
+
+	public int getXFrom1 (int index) {
+		int x = (index + 1) % 8;
+		x = (x == 0 ? 8 : x);
+		return x;
+	}
+
+	public int getYFrom1 (int index) {
+		int y = (index + 1) / 8 + 1;
+		y = (y == 9 ? 8 : y);
+		return y;
+	}
+
+	private void showColorChanges () {
+		System.out.println("ReversiGameController.showColorChanges");
+		for (int i = 0; i < changingDisks.size(); i++) {
+			String changingDiskCoord = changingDisks.get(i);
+			int x = Integer.parseInt(changingDiskCoord.split(" ")[0]),
+					y = Integer.parseInt(changingDiskCoord.split(" ")[1]);
+
+			Label cell = (Label) board.getChildren().get(x + 8 * y);
+
+			RotateTransition rotateTransition = new RotateTransition(Duration.millis(500), cell);
+			rotateTransition.setByAngle(180);
+			rotateTransition.setCycleCount(1);
+			int finalI = i;
+			rotateTransition.setOnFinished(event -> {
+				System.out.println("changingDiskCoord = " + (x + 1) + " " + (y + 1));
+				System.out.println("index = " + x + 8 * y);
+
+				cell.setStyle("-fx-background-size: 60;" +
+						"  -fx-background-position: center;" +
+						"  -fx-background-repeat: no-repeat;");
+
+				switch (currentGame.getBoard()[y][x]) {
+					case "w" -> cell.setStyle(cell.getStyle() +
+							"  -fx-background-image: url('https://i.imgur.com/8djkzwC.png');");
+					case "b" -> cell.setStyle(cell.getStyle() +
+							"  -fx-background-image: url('https://i.imgur.com/vKt2BwI.png');");
+					case "-" -> {}
+					default -> throw new IllegalStateException("Unexpected value: " + cell);
+				}
+
+				if (finalI == changingDisks.size() - 1) {
+					changingDisks.clear();
+				}
+
+				updateBoard();
+			});
+			rotateTransition.play();
 		}
 	}
 
@@ -156,18 +219,6 @@ public class ReversiGameController implements Initializable {
 
 	public void showMoves (ActionEvent actionEvent) {
 		// TODO: 1/16/2021 AD
-	}
-
-	public int getXFrom1 (int index) {
-		int x = (index + 1) % 8;
-		x = (x == 0 ? 8 : x);
-		return x;
-	}
-
-	public int getYFrom1 (int index) {
-		int y = (index + 1) / 8 + 1;
-		y = (y == 9 ? 8 : y);
-		return y;
 	}
 
 	public void mouseIsOver (MouseEvent mouseEvent) {
