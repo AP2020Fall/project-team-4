@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -551,6 +552,10 @@ public class MainController extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e) {}
+	}
+
+	public static void playButtonClickSound () {
+		new AudioClip(Paths.get("src/com/Resources/Sounds/button.wav").toUri().toString()).play(0.2);
 	}
 
 	public Stage getPrimaryStage () {
