@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
 
+<SplitPane dividerPositions="0.40480961923847697" minWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.GamingHistoryTabController">
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.GamingHistoryTabController">
-   <children>
-
-      <ListView fx:id="GamingHistory" prefHeight="400.0" prefWidth="600.0" />
-
-   </children><![CDATA[
-
-]]></AnchorPane>
+   <GridPane maxHeight="750.0" maxWidth="600.0" minHeight="750.0" minWidth="600.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints vgrow="SOMETIMES"/>
+         <RowConstraints vgrow="SOMETIMES"/>
+      </rowConstraints>
+      <ListView fx:id="gamingHistoryList" maxHeight="600.0" maxWidth="600.0" minHeight="600.0" minWidth="600.0"
+                GridPane.rowIndex="1"/>
+   </GridPane>
+   <GridPane fx:id="gameInfo" alignment="CENTER" maxWidth="700.0" minWidth="700.0">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints vgrow="SOMETIMES"/>
+      </rowConstraints>
+   </GridPane>
+</SplitPane>
