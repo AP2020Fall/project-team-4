@@ -160,7 +160,7 @@ public class ReversiGameController implements Initializable {
 
 	public int getYFrom1 (int index) {
 		int y = (index + 1) / 8 + 1;
-		y = (y == 9 ? 8 : y);
+		if (getXFrom1(index) == 8) y--;
 		return y;
 	}
 
