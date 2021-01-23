@@ -7,7 +7,6 @@ import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
-import Model.GameRelated.GameLog;
 import javafx.animation.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -58,7 +57,6 @@ public class BattleSeaPlayPageController implements Initializable {
 				BattleSeaPlayPageController.this.updateAllPage();
 			else {
 				currentGame.concludeGame();
-				System.out.println(GameLog.getAllGamersWhoPlayedGame(currentGame.getGameName()).size());
 				MainController.getInstance().saveEverything();
 				displayGameConclusion();
 				timer.stop();

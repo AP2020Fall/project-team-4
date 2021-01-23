@@ -2,10 +2,12 @@ package Controller.Menus;
 
 import Controller.GameRelated.GameController;
 import Controller.GameRelated.Reversi.ReversiController;
+import Controller.MainController;
 import Model.GameRelated.Reversi.PlayerReversi;
 import Model.GameRelated.Reversi.Reversi;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +19,8 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -207,14 +211,37 @@ public class ReversiGameController implements Initializable {
 	public void confirmMove (ActionEvent actionEvent) {
 		ReversiController.getInstance().nextTurn();
 
-		confirmMoveBtn.setVisible(false);
+		if (currentGame.gameHasEnded()) {
+			MainController.getInstance().saveEverything();
+			displayGameConclusion();
+		}
+		else {
 
-		updateTurnIndicators();
+			confirmMoveBtn.setVisible(false);
 
-		updateAvailableCoordinates();
+			updateTurnIndicators();
 
-		System.out.println("Move History");
-		ReversiController.getInstance().displayPrevMoves();
+			updateAvailableCoordinates();
+
+			System.out.println("Move History");
+			ReversiController.getInstance().displayPrevMoves();
+		}
+	}
+
+	private void displayGameConclusion () {
+		try {
+			GameConclusionWindowController.setGame(currentGame);
+			Stage concStage = MainController.getInstance().createAndReturnNewStage(
+					FXMLLoader.load(new File("src/com/plato/View/Menus/GameConclusionWindow.fxml").toURI().toURL()),
+					"",
+					true,
+					stage
+			);
+			GameConclusionWindowController.setStage(concStage);
+			concStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void showMoves (ActionEvent actionEvent) {
