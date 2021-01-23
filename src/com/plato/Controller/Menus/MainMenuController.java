@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -19,7 +20,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
-	//b
 	private static boolean gamerOrAdmin;
 	public HBox buttons;
 	public GridPane pane;
@@ -51,27 +51,6 @@ public class MainMenuController implements Initializable {
 		stage.setHeight(stage.getMinHeight());
 
 		stage.setWidth(gamerOrAdmin ? stage.getMaxWidth() : stage.getMinWidth());
-
-//		pane.setMinWidth(775);
-//		pane.setMaxWidth(1550);
-//		pane.setMinHeight(700);
-//		pane.setMaxHeight(pane.getMinHeight());
-//
-//		Stage stage = MainController.getInstance().getPrimaryStage();
-//		pane.minWidthProperty().addListener((observable, oldValue, newValue) -> stage.setMinWidth(newValue.doubleValue()));
-//		stage.setMinHeight(700 + 195 + 30);
-//		pane.maxWidthProperty().addListener(((observable, oldValue, newValue) -> stage.setMaxWidth(newValue.doubleValue())));
-//		pane.maxHeightProperty().addListener(((observable, oldValue, newValue) -> stage.setMaxHeight(newValue.doubleValue())));
-
-//		stage.setMinWidth(pane.getMinWidth());
-//		stage.setMaxWidth(pane.getMaxWidth());
-//		stage.setMaxHeight(stage.getMinHeight());
-//		stage.setHeight(stage.getMinHeight());
-
-		buttons.getChildren().forEach(button -> {
-			button.setOnMouseEntered(e -> button.setOpacity(0.8));
-			button.setOnMouseExited(e -> button.setOpacity(1));
-		});
 
 		buttons.getChildren().stream()
 				.map(node -> ((Button) node))
@@ -195,5 +174,13 @@ public class MainMenuController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(0.8);
+	}
+
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 }

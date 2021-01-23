@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.MainMenuController">
    <GridPane fx:id="pane">
@@ -21,7 +16,7 @@
      </rowConstraints>
    </GridPane>
     <HBox fx:id="buttons" alignment="CENTER" maxHeight="195.0" minHeight="195.0" spacing="15.0">
-        <Button fx:id="b0" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#eventsTab" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Events" textAlignment="CENTER">
+        <Button fx:id="b0" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#eventsTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Events" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="https://i.imgur.com/drYpwZK.pnghttps://i.imgur.com/drYpwZK.png" />
@@ -30,11 +25,8 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
-         <padding>
-            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
-         </padding>
         </Button>
-        <Button fx:id="b1" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#usersTab" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Users" textAlignment="CENTER">
+        <Button fx:id="b1" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#usersTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Users" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="https://i.imgur.com/nRZLjJT.pnghttps://i.imgur.com/nRZLjJT.png" />
@@ -43,11 +35,8 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
-         <padding>
-            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
-         </padding>
         </Button>
-        <Button fx:id="b2" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPage" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Account" textAlignment="CENTER">
+        <Button fx:id="b2" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Account" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="https://i.imgur.com/QwfFgRI.pnghttps://i.imgur.com/QwfFgRI.png" />
@@ -56,11 +45,8 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
-         <padding>
-            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
-         </padding>
         </Button>
-        <Button fx:id="b3" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="30.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#eventsTab" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Events" textAlignment="CENTER">
+        <Button fx:id="b3" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="30.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#eventsTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Events" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="https://i.imgur.com/drYpwZK.pnghttps://i.imgur.com/drYpwZK.png" />
@@ -69,11 +55,8 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
-         <padding>
-            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
-         </padding>
         </Button>
-        <Button fx:id="b4" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="300.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamingHistoryPage" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Gaming&#10;History" textAlignment="CENTER">
+        <Button fx:id="b4" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="300.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamingHistoryPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Gaming&#10;History" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="110.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="https://i.imgur.com/SVKhCKE.pnghttps://i.imgur.com/SVKhCKE.png" />
@@ -82,11 +65,8 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
-         <padding>
-            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
-         </padding>
         </Button>
-        <Button fx:id="b5" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="435.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamesTab" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Games" textAlignment="CENTER">
+        <Button fx:id="b5" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="435.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamesTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Games" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="https://i.imgur.com/tVkxjeF.pnghttps://i.imgur.com/tVkxjeF.png" />
@@ -95,11 +75,8 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
-         <padding>
-            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
-         </padding>
         </Button>
-        <Button fx:id="b6" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="570.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#faveGamesTab" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Favourite&#10;Games" textAlignment="CENTER">
+        <Button fx:id="b6" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="570.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#faveGamesTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Favourite&#10;Games" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="105.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="https://i.imgur.com/aypOXrd.png?1https://i.imgur.com/aypOXrd.png?1" />
@@ -108,11 +85,8 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
-         <padding>
-            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
-         </padding>
         </Button>
-        <Button fx:id="b7" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="705.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#friendsPage" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Friends" textAlignment="CENTER">
+        <Button fx:id="b7" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="705.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#friendsPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Friends" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="https://i.imgur.com/uROCGRe.pnghttps://i.imgur.com/uROCGRe.png" />
@@ -121,11 +95,8 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
-         <padding>
-            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
-         </padding>
         </Button>
-        <Button fx:id="b8" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="460.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPage" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Account" textAlignment="CENTER">
+        <Button fx:id="b8" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="460.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Account" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="https://i.imgur.com/QwfFgRI.pnghttps://i.imgur.com/QwfFgRI.png" />
@@ -134,11 +105,8 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
-         <padding>
-            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
-         </padding>
         </Button>
-        <Button fx:id="b9" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="1535.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#messagesTab" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5;" text="Messages" textAlignment="CENTER">
+        <Button fx:id="b9" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="1535.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#messagesTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Messages" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="125.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="https://i.imgur.com/kFLDyxh.pnghttps://i.imgur.com/kFLDyxh.png" />
@@ -147,9 +115,6 @@
             <font>
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
-         <padding>
-            <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
-         </padding>
         </Button>
       <padding>
          <Insets left="20.0" right="20.0" />

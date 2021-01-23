@@ -10,9 +10,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,7 +21,7 @@ public class UserProfileForAdminController implements Initializable {
 	private static Gamer gamer;
 	public CheckBox doRecoReversi, doRecoBattleSea;
 	public Label username, email, messageError;
-	public Rectangle pfp;
+	public ImageView pfp;
 	public TextArea msg;
 	public GridPane msgGrdPn;
 	public Button backBtn, sendBtn;
@@ -32,10 +32,7 @@ public class UserProfileForAdminController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		Image pfpImage = new Image(gamer.getPfpUrl());
-		pfp.setFill(new ImagePattern(pfpImage));
-		pfp.setHeight(130);
-		pfp.setWidth(130);
+		pfp.setImage(new Image(gamer.getPfpUrl()));
 
 		username.setText(gamer.getUsername());
 
@@ -57,11 +54,6 @@ public class UserProfileForAdminController implements Initializable {
 			else
 				AdminGameReco.removeReco("BattleSea", gamer);
 		});
-
-		backBtn.setOnMouseEntered(e -> backBtn.setOpacity(0.8));
-		backBtn.setOnMouseExited(e -> backBtn.setOpacity(1));
-		sendBtn.setOnMouseEntered(e -> sendBtn.setOpacity(0.8));
-		sendBtn.setOnMouseExited(e -> sendBtn.setOpacity(1));
 	}
 
 	public void sendMsg (ActionEvent actionEvent) {
@@ -80,5 +72,13 @@ public class UserProfileForAdminController implements Initializable {
 	public void cancelSendingMsg (ActionEvent actionEvent) {
 		msgGrdPn.setVisible(false);
 		msg.setText("");
+	}
+
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(0.8);
+	}
+
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 }

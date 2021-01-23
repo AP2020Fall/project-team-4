@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,7 +19,7 @@ public class FriendProfileController implements Initializable {
 	public Label username, platoAge, fullName;
 	public Label reversiDraws, reversiScore, reversiWins, reversiLosses;
 	public Label battleseaScore, battleseaWins, battleseaLosses, battleseaDraws;
-	public Rectangle pfp;
+	public ImageView pfp;
 
 	public static Gamer getFrnd () {
 		return frnd;
@@ -33,11 +31,7 @@ public class FriendProfileController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		Image pfpImage = new Image(frnd.getPfpUrl());
-
-		pfp.setFill(new ImagePattern(pfpImage));
-		pfp.setHeight(130);
-		pfp.setWidth(130);
+		pfp.setImage(new Image(frnd.getPfpUrl()));
 
 		username.setText(frnd.getUsername());
 

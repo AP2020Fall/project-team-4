@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class RegisterFormController implements Initializable {
 	private static Stage stage;
+	private static String username, password;
 	public ImageView pfp, coinImg, uploadPfp;
 	public SplitMenuButton coinMenu;
 	public TextField firstName, lastName, email, phoneNum;
@@ -30,7 +31,23 @@ public class RegisterFormController implements Initializable {
 	public HBox coinHBox;
 	public GridPane mainGridPane;
 	private boolean isForAdmin;
-	private static String username, password;
+
+	public static void setPassword (String password) {
+		RegisterFormController.password = password;
+	}
+
+	public static void setUsername (String username) {
+		RegisterFormController.username = username;
+	}
+
+	public static void setStage (Stage stage) {
+		RegisterFormController.stage = stage;
+		stage.setOnCloseRequest(windowEvent -> {
+			username = null;
+			password = null;
+			RegisterFormController.stage = null;
+		});
+	}
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
@@ -44,16 +61,18 @@ public class RegisterFormController implements Initializable {
 			coinMenu.getItems().add(new MenuItem(String.valueOf(i)));
 			coinMenu.getItems().get(i).setOnAction(actionEvent -> coinMenu.setText(((MenuItem) actionEvent.getSource()).getText()));
 		}
-		coinImg.setOnMouseEntered(mouseEvent -> coinImg.setOpacity(0.8));
-		coinImg.setOnMouseExited(mouseEvent -> coinImg.setOpacity(1));
-		uploadPfp.setOnMouseEntered(mouseEvent -> uploadPfp.setOpacity(0.8));
-		uploadPfp.setOnMouseExited(mouseEvent -> uploadPfp.setOpacity(1));
 
 		if (isForAdmin) {
 			mainGridPane.getChildren().remove(pfp);
 			mainGridPane.getChildren().remove(uploadPfp);
 			mainGridPane.getChildren().remove(coinHBox);
 		}
+	}
+
+	public static void adjustWidthBasedOnTextLength (Label label) {
+		label.textProperty().addListener((observable, oldValue, newValue) -> {
+			label.setPrefWidth(label.getText().length() * 7); // why 7? Totally trial number.
+		});
 	}
 
 	public void uploadPfp (MouseEvent mouseEvent) {
@@ -104,30 +123,15 @@ public class RegisterFormController implements Initializable {
 		}
 	}
 
-	public static void setPassword (String password) {
-		RegisterFormController.password = password;
-	}
-
-	public static void setUsername (String username) {
-		RegisterFormController.username = username;
-	}
-
-	public static void setStage (Stage stage) {
-		RegisterFormController.stage = stage;
-		stage.setOnCloseRequest(windowEvent -> {
-			username = null;
-			password = null;
-			RegisterFormController.stage = null;
-		});
-	}
-
 	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
 
-	public static void adjustWidthBasedOnTextLength(Label label) {
-		label.textProperty().addListener((observable, oldValue, newValue) -> {
-			label.setPrefWidth(label.getText().length() * 7); // why 7? Totally trial number.
-		});
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Label) mouseEvent.getSource()).setOpacity(0.8);
+	}
+
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((ImageView) mouseEvent.getSource()).setOpacity(1);
 	}
 }
