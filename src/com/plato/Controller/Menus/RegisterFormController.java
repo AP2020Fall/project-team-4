@@ -10,17 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -61,13 +58,7 @@ public class RegisterFormController implements Initializable {
 
 	public void uploadPfp (MouseEvent mouseEvent) {
 		System.out.println("RegisterFormController.uploadPfp");
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
-		try {
-			pfp.setImage(new Image(String.valueOf(fileChooser.showOpenDialog(stage).toURI().toURL())));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (NullPointerException e) {}
+		MainController.openUploadPfpWindow(stage, pfp);
 	}
 
 	public void signUp (ActionEvent actionEvent) {

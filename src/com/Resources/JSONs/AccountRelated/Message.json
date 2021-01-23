@@ -33,5 +33,153 @@
       "phoneNum": "00011122233",
       "pfpUrl": "https://i.imgur.com/vMppUMs.png"
     }
+  },
+  {
+    "text": "message",
+    "dateTime": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 23
+      },
+      "time": {
+        "hour": 17,
+        "minute": 11,
+        "second": 51,
+        "nano": 456495000
+      }
+    },
+    "gamer": {
+      "awardsFromEvents": 0,
+      "money": 20.0,
+      "accountStartDate": {
+        "year": 2021,
+        "month": 1,
+        "day": 14
+      },
+      "frnds": [],
+      "faveGames": [
+        "BattleSea"
+      ],
+      "firstName": "1",
+      "lastName": "1",
+      "username": "dorrin1",
+      "password": "11",
+      "userID": "270774",
+      "email": "1@gmail.com",
+      "phoneNum": "00011122233",
+      "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+    }
+  },
+  {
+    "text": "hello",
+    "dateTime": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 23
+      },
+      "time": {
+        "hour": 17,
+        "minute": 11,
+        "second": 56,
+        "nano": 385798000
+      }
+    },
+    "gamer": {
+      "awardsFromEvents": 0,
+      "money": 20.0,
+      "accountStartDate": {
+        "year": 2021,
+        "month": 1,
+        "day": 14
+      },
+      "frnds": [],
+      "faveGames": [
+        "BattleSea"
+      ],
+      "firstName": "1",
+      "lastName": "1",
+      "username": "dorrin1",
+      "password": "11",
+      "userID": "270774",
+      "email": "1@gmail.com",
+      "phoneNum": "00011122233",
+      "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+    }
+  },
+  {
+    "text": "Specifies the start angle value for this RotateTransition.",
+    "dateTime": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 23
+      },
+      "time": {
+        "hour": 17,
+        "minute": 12,
+        "second": 17,
+        "nano": 23902000
+      }
+    },
+    "gamer": {
+      "awardsFromEvents": 0,
+      "money": 20.0,
+      "accountStartDate": {
+        "year": 2021,
+        "month": 1,
+        "day": 14
+      },
+      "frnds": [],
+      "faveGames": [
+        "BattleSea"
+      ],
+      "firstName": "1",
+      "lastName": "1",
+      "username": "dorrin1",
+      "password": "11",
+      "userID": "270774",
+      "email": "1@gmail.com",
+      "phoneNum": "00011122233",
+      "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+    }
+  },
+  {
+    "text": "It is not possible to change fromAngle of a running RotateTransition. If the value of fromAngle is changed for a running RotateTransition, the animation has to be stopped and started again to pick up the new value",
+    "dateTime": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 23
+      },
+      "time": {
+        "hour": 17,
+        "minute": 12,
+        "second": 25,
+        "nano": 894376000
+      }
+    },
+    "gamer": {
+      "awardsFromEvents": 0,
+      "money": 20.0,
+      "accountStartDate": {
+        "year": 2021,
+        "month": 1,
+        "day": 14
+      },
+      "frnds": [],
+      "faveGames": [
+        "BattleSea"
+      ],
+      "firstName": "1",
+      "lastName": "1",
+      "username": "dorrin1",
+      "password": "11",
+      "userID": "270774",
+      "email": "1@gmail.com",
+      "phoneNum": "00011122233",
+      "pfpUrl": "https://i.imgur.com/vMppUMs.png"
+    }
   }
 ]

@@ -112,7 +112,7 @@ public class AccountPageController implements Initializable {
 	}
 
 	public void uploadPfp (MouseEvent mouseEvent) {
-		// TODO: 1/11/2021 AD  
+		MainController.openUploadPfpWindow(MainController.getInstance().getPrimaryStage(), pfp);
 	}
 
 	public void editPassword (MouseEvent actionEvent) {

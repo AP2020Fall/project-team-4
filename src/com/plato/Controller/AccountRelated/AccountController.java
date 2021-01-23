@@ -111,9 +111,7 @@ public class AccountController {
 				if (!Account.isPhoneNumOK(newVal))
 					throw new InvalidPhoneNumFormatException();
 			}
-			case "pfp url" -> {
-				// FIXME: check url
-			}
+			case "pfp url" -> {}
 			default -> throw new IllegalStateException("Unexpected value: " + field.toLowerCase());
 		}
 //		getCurrentAccLoggedIn().editField(field.toLowerCase(), newVal);
