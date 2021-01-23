@@ -7,7 +7,6 @@ import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
-import Model.GameRelated.GameLog;
 import javafx.animation.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -57,11 +56,10 @@ public class BattleSeaPlayPageController implements Initializable {
 			if (!currentGame.gameEnded())
 				BattleSeaPlayPageController.this.updateAllPage();
 			else {
-				timer.stop();
 				currentGame.concludeGame();
-				System.out.println(GameLog.getAllGamersWhoPlayedGame(currentGame.getGameName()).size());
 				MainController.getInstance().saveEverything();
 				displayGameConclusion();
+				timer.stop();
 				System.out.println("Game Ended ");
 			}
 		}
@@ -100,7 +98,7 @@ public class BattleSeaPlayPageController implements Initializable {
 
 		secondsRemaining.addListener(observable -> {
 			if (bombThrown)
-				timer.stop();
+				timer.playFromStart();
 			if (!currentGame.gameHasEnded())
 				updateAllPage();
 		});
@@ -121,10 +119,8 @@ public class BattleSeaPlayPageController implements Initializable {
 					else
 						currentGame.nextTurn();
 					bombThrown = false;
+					timer.playFromStart();
 				}
-				else
-					timer.stop();
-				timer.playFromStart();
 			}
 		});
 
@@ -296,8 +292,6 @@ public class BattleSeaPlayPageController implements Initializable {
 			if (!bombThrown) {
 				BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
 				System.out.println("bomb thrown at (x,y)=(%d,%d)".formatted(getXFrom1(index), getYFrom1(index)));
-
-				bombThrown = true;
 
 				// animate explosions if ship is destroyed
 				if (opponentPlayer.shipExistsInXY(getXFrom1(index), getYFrom1(index))) {

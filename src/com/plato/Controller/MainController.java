@@ -15,12 +15,19 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.hildan.fxgson.FxGson;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -531,6 +538,24 @@ public class MainController extends Application {
 		primaryStage.setOnCloseRequest(e -> saveEverything());
 
 		return primaryStage;
+	}
+
+	public static void openUploadPfpWindow (Stage parentStage, ImageView imageViewToUpdate) {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
+		try {
+			File image = fileChooser.showOpenDialog(parentStage);
+			Path from = Paths.get(image.toURI()),
+					to = Paths.get("src/com/Resources/ProfilePics/" + image.getName());
+			Files.copy(from, to);
+			imageViewToUpdate.setImage(new Image(String.valueOf(image.toURI().toURL())));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {}
+	}
+
+	public static void playButtonClickSound () {
+		new AudioClip(Paths.get("src/com/Resources/Sounds/button.wav").toUri().toString()).play(0.2);
 	}
 
 	public Stage getPrimaryStage () {

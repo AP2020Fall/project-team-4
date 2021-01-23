@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -191,7 +192,8 @@ public class EventsTabController implements Initializable {
 											"  -fx-background-size: 40 40;" +
 											"  -fx-background-radius: 20;" +
 											"  -fx-background-position: center;" +
-											"  -fx-background-repeat: no-repeat;");
+											"  -fx-background-repeat: no-repeat;" +
+											"  -fx-background-color: transparent;");
 
 									setOnAction(e -> editEvent(event));
 									setRowIndex(this, 0);
@@ -206,7 +208,8 @@ public class EventsTabController implements Initializable {
 											"  -fx-background-size: 50 50;" +
 											"  -fx-background-radius: 25;" +
 											"  -fx-background-position: center;" +
-											"  -fx-background-repeat: no-repeat;");
+											"  -fx-background-repeat: no-repeat;" +
+											"  -fx-background-color: transparent;");
 
 									setOnAction(e -> removeEvent(event));
 									setRowIndex(this, 0);
@@ -259,6 +262,14 @@ public class EventsTabController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(0.8);
+	}
+
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 }
 

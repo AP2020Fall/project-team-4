@@ -33,8 +33,7 @@ public class ReversiController {
 	public void nextTurn () {
 		if (GameController.getInstance().getCurrentGameInSession().gameEnded()) {
 			Game currentGame = GameController.getInstance().getCurrentGameInSession();
-			GameController.getInstance().getCurrentGameInSession().concludeGame();
-			GameController.getInstance().displayGameConclusion(currentGame);
+			currentGame.concludeGame();
 			return;
 		}
 

@@ -9,17 +9,21 @@ import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
+import static Controller.MainController.playButtonClickSound;
+
 public class MainMenuController implements Initializable {
-	//b
 	private static boolean gamerOrAdmin;
 	public HBox buttons;
 	public GridPane pane;
@@ -52,35 +56,19 @@ public class MainMenuController implements Initializable {
 
 		stage.setWidth(gamerOrAdmin ? stage.getMaxWidth() : stage.getMinWidth());
 
-//		pane.setMinWidth(775);
-//		pane.setMaxWidth(1550);
-//		pane.setMinHeight(700);
-//		pane.setMaxHeight(pane.getMinHeight());
-//
-//		Stage stage = MainController.getInstance().getPrimaryStage();
-//		pane.minWidthProperty().addListener((observable, oldValue, newValue) -> stage.setMinWidth(newValue.doubleValue()));
-//		stage.setMinHeight(700 + 195 + 30);
-//		pane.maxWidthProperty().addListener(((observable, oldValue, newValue) -> stage.setMaxWidth(newValue.doubleValue())));
-//		pane.maxHeightProperty().addListener(((observable, oldValue, newValue) -> stage.setMaxHeight(newValue.doubleValue())));
-
-//		stage.setMinWidth(pane.getMinWidth());
-//		stage.setMaxWidth(pane.getMaxWidth());
-//		stage.setMaxHeight(stage.getMinHeight());
-//		stage.setHeight(stage.getMinHeight());
-
-		buttons.getChildren().forEach(button -> {
-			button.setOnMouseEntered(e -> button.setOpacity(0.8));
-			button.setOnMouseExited(e -> button.setOpacity(1));
-		});
-
 		buttons.getChildren().stream()
 				.map(node -> ((Button) node))
 				.filter(button -> button.getText().equals("Account"))
 				.forEach(Button::fire);
+
+		AudioClip bm = new AudioClip(Paths.get("src/com/Resources/Sounds/WhereIsMyMind.wav").toUri().toString());
+		bm.setCycleCount(AudioClip.INDEFINITE);
+		bm.play(0.3);
 	}
 
 	public void eventsTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.eventsTab");
+		playButtonClickSound();
 		try {
 			pane.getChildren().clear();
 			EventsTabController.setGamerOrAdmin(gamerOrAdmin);
@@ -99,6 +87,7 @@ public class MainMenuController implements Initializable {
 
 	public void usersTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.usersTab");
+		playButtonClickSound();
 		try {
 			pane.getChildren().clear();
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/UsersTab.fxml").toURI().toURL()));
@@ -111,6 +100,7 @@ public class MainMenuController implements Initializable {
 
 	public void accountPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.accountPage");
+		playButtonClickSound();
 		try {
 			pane.getChildren().clear();
 			AccountPageController.setGamerOrAdmin(gamerOrAdmin);
@@ -124,6 +114,7 @@ public class MainMenuController implements Initializable {
 
 	public void gamingHistoryPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.gamingHistoryPage");
+		playButtonClickSound();
 		try {
 			pane.getChildren().clear();
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/GamingHistoryTab.fxml").toURI().toURL()));
@@ -136,6 +127,7 @@ public class MainMenuController implements Initializable {
 
 	public void gamesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.gamesTab");
+		playButtonClickSound();
 		try {
 			GamesMenuController.setIsForFaveGames(false);
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
@@ -153,6 +145,7 @@ public class MainMenuController implements Initializable {
 
 	public void faveGamesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.faveGamesTab");
+		playButtonClickSound();
 		try {
 			GamesMenuController.setIsForFaveGames(true);
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
@@ -170,6 +163,7 @@ public class MainMenuController implements Initializable {
 
 	public void friendsPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.friendsPage");
+		playButtonClickSound();
 		try {
 			pane.getChildren().clear();
 			pane.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/FriendsTab.fxml").toURI().toURL()));
@@ -182,6 +176,7 @@ public class MainMenuController implements Initializable {
 
 	public void messagesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.messagesTab");
+		playButtonClickSound();
 		try {
 			AdminMsgsController.setGamer(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()));
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
@@ -195,5 +190,13 @@ public class MainMenuController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(0.8);
+	}
+
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 }

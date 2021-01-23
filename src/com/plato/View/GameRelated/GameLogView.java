@@ -37,9 +37,9 @@ public class GameLogView {
 	}
 
 	public void displayLogOfGame (String gameName, int allPlayedCount, LinkedList<String> gameHistory) {
-//		Menu.println("%s:".formatted(gameName));
-//		Menu.println("\tPlay count: %d".formatted(allPlayedCount));
-//		gameHistory.forEach(entry -> Menu.println("\t\t" + entry));
+		System.out.printf("%s:%n", gameName);
+		System.out.printf("\tPlay count: %d%n", allPlayedCount);
+		gameHistory.forEach(entry -> System.out.println("\t\t" + entry));
 	}
 
 	public void displayAllPointsOfPlayer (int points) {

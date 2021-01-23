@@ -13,18 +13,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-
-
-public class GamesMenuController implements Initializable
-
-{
+public class GamesMenuController implements Initializable {
 	private static Stage stage;
 	private static boolean isForFaveGames;
 	public Button battlseaButton;
@@ -32,20 +27,12 @@ public class GamesMenuController implements Initializable
 	public GridPane gridpane;
 
 
-	public static void setIsForFaveGames (boolean forFaveGames)
-	{
-
-		// todo when fxml is called this method should be called
+	public static void setIsForFaveGames (boolean forFaveGames) {
 		isForFaveGames = forFaveGames;
-
 	}
 
 
-
-
-
-	public static void setStage (Stage stage)
-	{
+	public static void setStage (Stage stage) {
 
 		GamesMenuController.stage = stage;
 		GamesMenuController.stage.setOnCloseRequest(e -> GamesMenuController.stage = null);
@@ -69,10 +56,7 @@ public class GamesMenuController implements Initializable
 			GameMenuController.setStage(battleSeaMainMenu);
 			battleSeaMainMenu.show();
 			stage.close();
-		}
-
-		catch (IOException e)
-		{
+		} catch (IOException e) {
 
 			e.printStackTrace();
 		}

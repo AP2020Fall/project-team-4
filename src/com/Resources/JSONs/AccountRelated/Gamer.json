@@ -7,8 +7,12 @@
       "month": 1,
       "day": 14
     },
-    "frnds": [],
-    "faveGames": [],
+    "frnds": [
+      "dorrin2"
+    ],
+    "faveGames": [
+      "BattleSea"
+    ],
     "firstName": "1",
     "lastName": "1",
     "username": "dorrin1",
@@ -26,7 +30,9 @@
       "month": 1,
       "day": 16
     },
-    "frnds": [],
+    "frnds": [
+      "dorrin1"
+    ],
     "faveGames": [],
     "firstName": "2",
     "lastName": "2",
