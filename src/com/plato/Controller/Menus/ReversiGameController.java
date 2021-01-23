@@ -9,13 +9,21 @@ import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.TilePane;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -35,6 +43,8 @@ public class ReversiGameController implements Initializable {
 	public Button confirmMoveBtn, showMovesBtn;
 	public TilePane board;
 	public Label pointsW, pointsB;
+	public GridPane historyGridPane;
+	public ListView<GridPane> moveHistoryList;
 	private PlayerReversi player1, player2;
 
 	public static void setStage (Stage stage) {
@@ -245,7 +255,66 @@ public class ReversiGameController implements Initializable {
 	}
 
 	public void showMoves (ActionEvent actionEvent) {
-		// TODO: 1/16/2021 AD
+		moveHistoryList.getItems().clear();
+
+		for (int i = 0; i < currentGame.getMoves().size(); i += 2) {
+			String move = currentGame.getMoves().get(i);
+
+			int finalI = i;
+			moveHistoryList.getItems().add(new GridPane() {{
+				getRowConstraints().add(new RowConstraints() {{
+					setValignment(VPos.CENTER);
+					setMinHeight(20);
+					setMaxHeight(getMinHeight());
+				}});
+				for (int i = 0; i < 3; i++) {
+					int finalI = i;
+					getColumnConstraints().add(new ColumnConstraints() {{
+						setHalignment(HPos.CENTER);
+						setMinWidth(finalI == 0 ? 35 : 105);
+						setMaxWidth(getMinWidth());
+					}});
+				}
+
+				// number of the pair of move
+				getChildren().add(new Label((finalI / 2 + 1) + ".") {{
+					setTextAlignment(TextAlignment.CENTER);
+					setFont(Font.font("Arial", 14));
+
+					setColumnIndex(this, 0);
+					setRowIndex(this, 0);
+				}});
+
+				// black move
+				int x = Integer.parseInt(move.split(" ")[1]), y = Integer.parseInt(move.split(" ")[2]);
+				String placement = Character.toString("ABCDEFGH".charAt(x - 1)) + y;
+				getChildren().add(new Label(placement) {{
+					setTextAlignment(TextAlignment.CENTER);
+					setFont(Font.font("Arial", 14));
+
+					setColumnIndex(this, 1);
+					setRowIndex(this, 0);
+				}});
+
+				// white move if available
+				getChildren().add(new Label() {{
+					setTextAlignment(TextAlignment.CENTER);
+					setFont(Font.font("Arial", 14));
+
+					if (finalI + 1 < currentGame.getMoves().size()) {
+						String move2 = currentGame.getMoves().get(finalI + 1);
+						int x2 = Integer.parseInt(move2.split(" ")[1]), y2 = Integer.parseInt(move2.split(" ")[2]);
+						String placement2 = String.valueOf("ABCDEFGH".charAt(x2 - 1)) + y2;
+						setText(placement2);
+					}
+
+					setColumnIndex(this, 2);
+					setRowIndex(this, 0);
+				}});
+			}});
+		}
+
+		historyGridPane.setVisible(true);
 	}
 
 	public void mouseIsOver (MouseEvent mouseEvent) {
@@ -266,5 +335,9 @@ public class ReversiGameController implements Initializable {
 
 	public void closeGame (ActionEvent actionEvent) {
 		stage.close();
+	}
+
+	public void closeMoveHistory (ActionEvent actionEvent) {
+		historyGridPane.setVisible(false);
 	}
 }

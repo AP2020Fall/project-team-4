@@ -4,6 +4,7 @@
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
@@ -748,5 +750,45 @@
                 <Font name="Apple Symbols" size="17.0" />
             </font>
         </Label>
+    </GridPane>
+    <GridPane fx:id="historyGridPane" maxHeight="350.0" maxWidth="250.0" minHeight="350.0" minWidth="250.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false" GridPane.columnSpan="4" GridPane.rowSpan="2">
+        <columnConstraints>
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="110.0" minWidth="110.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="110.0" minWidth="110.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="300.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <effect>
+            <DropShadow offsetX="1.0" offsetY="1.0">
+                <color>
+                    <Color red="0.43421053886413574" green="0.43421053886413574" blue="0.43421053886413574" />
+                </color>
+            </DropShadow>
+        </effect>
+        <Label text="History" GridPane.columnSpan="3">
+           <font>
+               <Font name="Arial Bold" size="17.0" />
+           </font>
+        </Label>
+        <Label layoutX="106.0" layoutY="65.0" text="BLACK" textFill="#868686" GridPane.columnIndex="1" GridPane.rowIndex="1">
+           <font>
+               <Font name="Arial Italic" size="13.0" />
+           </font>
+        </Label>
+        <Label layoutX="43.0" layoutY="186.0" text="WHITE" textFill="#868686" GridPane.columnIndex="2" GridPane.rowIndex="1">
+           <font>
+               <Font name="Arial Italic" size="13.0" />
+           </font>
+        </Label>
+        <ListView fx:id="moveHistoryList" maxHeight="300.0" maxWidth="250.0" minHeight="300.0" minWidth="250.0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+      <Button maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#closeMoveHistory" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.pnghttps://i.imgur.com/9ki490h.png&quot;); -fx-background-color: transparent; -fx-background-size: 20; -fx-background-radius: 10;" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </Button>
     </GridPane>
 </GridPane>

@@ -247,8 +247,13 @@ public class Reversi extends Game {
 		}
 	}
 
+	/**
+	 * @param x from 1 to 8
+	 * @param y from 1 to 8
+	 * @param color disk color
+	 */
 	public void addMove (int x, int y, String color) {
-		moves.addLast(color + " placed disk in coordinate (" + x + "," + y + ")");
+		moves.addLast("%s %d %d".formatted(color, x, y));
 	}
 
 	public LinkedList<String> getMoves () {
