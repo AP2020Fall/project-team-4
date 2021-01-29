@@ -12,13 +12,11 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import static Controller.MainController.playButtonClickSound;
@@ -61,9 +59,9 @@ public class MainMenuController implements Initializable {
 				.filter(button -> button.getText().equals("Account"))
 				.forEach(Button::fire);
 
-		AudioClip bm = new AudioClip(Paths.get("src/com/Resources/Sounds/WhereIsMyMind.wav").toUri().toString());
-		bm.setCycleCount(AudioClip.INDEFINITE);
-		bm.play(0.3);
+//		AudioClip bm = new AudioClip(Paths.get("src/com/Resources/Sounds/WhereIsMyMind.wav").toUri().toString());
+//		bm.setCycleCount(AudioClip.INDEFINITE);
+//		bm.play(0.3);
 	}
 
 	public void eventsTab (ActionEvent actionEvent) {
