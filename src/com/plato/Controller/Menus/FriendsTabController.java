@@ -48,7 +48,7 @@ public class FriendsTabController implements Initializable {
 
 			Circle circle = new Circle(40);
 
-			frndsList.getItems().add(new GridPane() {{
+			frndsList.getItems().add(new GridPane() { {
 				getRowConstraints().add(new RowConstraints() {{
 					setMinHeight(circle.getRadius() * 2);
 					setMaxHeight(circle.getRadius() * 2);

@@ -231,7 +231,6 @@ public class Reversi extends Game {
 	 */
 	private void changeColor (int startx, int starty, int destx, int desty, Direction direction) {
 		board[desty][destx] = ((PlayerReversi) getTurnPlayer()).getColor();
-		ReversiGameController.addToChangingDisks(destx, desty);
 		if (doesAnyDiskChangeColor(destx, desty, direction))
 			changeColor(destx, desty, destx + direction.getDeltaX(), desty + direction.getDeltaY(), direction);
 	}
@@ -253,7 +252,7 @@ public class Reversi extends Game {
 	 * @param color disk color
 	 */
 	public void addMove (int x, int y, String color) {
-		moves.addLast("%s %d %d".formatted(color, x, y));
+		moves.addLast(color + " placed disk in coordinate (" + x + "," + y + ")");
 	}
 
 	public LinkedList<String> getMoves () {
@@ -312,8 +311,8 @@ public class Reversi extends Game {
 //							}
 //		}
 		if (isBoardFull()) return availableCoordinates;
-		if (getNumberOfWhite() == 0) return availableCoordinates;
-		if (getNumberOfBlack() == 0) return availableCoordinates;
+		if (getNumberOfWhite() == 0 && ((PlayerReversi) getTurnPlayer()).getColor().equals(color)) return availableCoordinates;
+		if (getNumberOfBlack() == 0 && ((PlayerReversi) getTurnPlayer()).getColor().equals(color)) return availableCoordinates;
 
 		for (int y = 0; y < 8; y++)
 			for (int x = 0; x < 8; x++) {
@@ -329,7 +328,7 @@ public class Reversi extends Game {
 								for (int i = y + dir.getDeltaY(), j = x + dir.getDeltaX(); checkCoordinates(i + 1) && checkCoordinates(j + 1); i += dir.getDeltaY(), j += dir.getDeltaX()) {
 //									System.out.printf("board[%d][%d] = %s%n", i + 1, j + 1, board[i][j]);
 									if (board[i][j].equals("-")) {
-										availableCoordinates.add(i + 1 + "," + (j + 1));
+										availableCoordinates.add((i + 1) + "," + (j + 1));
 //										System.out.println("added to available coordinates");
 										break;
 									}
