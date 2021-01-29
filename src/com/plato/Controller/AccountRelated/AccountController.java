@@ -161,7 +161,10 @@ public class AccountController {
 		return saveLoginInfo;
 	}
 
-	public static class NoAccountExistsWithUsernameException extends Exception {
+    public void editAccFieldCommand() {
+    }
+
+    public static class NoAccountExistsWithUsernameException extends Exception {
 		public NoAccountExistsWithUsernameException () {
 			super("No account exists with this username.");
 		}
