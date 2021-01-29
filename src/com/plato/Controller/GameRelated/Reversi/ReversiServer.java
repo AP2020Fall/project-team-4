@@ -38,6 +38,13 @@ public class ReversiServer {
                     if(input.equals("close Move History")){
                         System.out.println("move history closed");
                     }
+                    else{
+                        dataOutputStream.writeUTF("Reversi Menu closed");
+                        dataOutputStream.flush();
+                        clientSocket.close();
+                        System.out.println("Reversi Server disconnected");
+                        break;
+                    }
                 }
             }
             catch (IOException e){

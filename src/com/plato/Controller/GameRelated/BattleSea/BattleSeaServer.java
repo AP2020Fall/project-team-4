@@ -43,6 +43,7 @@ public class BattleSeaServer {
                     if (input.startsWith("")){
 
                     }
+
                 }
             }
             catch (IOException e){
