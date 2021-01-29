@@ -18,251 +18,259 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" hgap="5.0" maxHeight="700.0" maxWidth="500.0" minHeight="700.0" minWidth="500.0" vgap="7.5" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.EventCreateOrEditPageController">
-   <columnConstraints>
-      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints vgrow="SOMETIMES" />
-      <RowConstraints vgrow="SOMETIMES" />
+<GridPane fx:id="mainGridPane" alignment="CENTER" hgap="5.0" maxHeight="750.0" maxWidth="500.0" minHeight="750.0" minWidth="500.0" vgap="7.5" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.EventCreateOrEditPageController">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
       <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
       <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-   </rowConstraints>
-   <ImageView fx:id="eventImg" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP" />
-   <ImageView fx:id="uploadEventImg" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadImg" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
-      <GridPane.margin>
-         <Insets left="200.0" top="130.0" />
-      </GridPane.margin>
-      <Image url="https://i.imgur.com/CxCk2qN.png" />
-   </ImageView>
-   <HBox alignment="CENTER" spacing="10.0" GridPane.rowIndex="1">
-      <VBox alignment="CENTER" spacing="10.0">
-         <GridPane>
-            <columnConstraints>
-               <ColumnConstraints hgrow="SOMETIMES"/>
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints vgrow="SOMETIMES"/>
-            </rowConstraints>
-            <Label fx:id="title" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="Avenir Book" size="16.0"/>
-               </font>
-            </Label>
-            <TextField fx:id="titleTextField" maxWidth="200.0" promptText="Title" visible="false">
-               <font>
-                  <Font name="Arial" size="13.0"/>
-               </font>
-            </TextField>
-         </GridPane>
-         <Label onMouseClicked="#editTitle" text="edit" textFill="RED">
-            <font>
-               <Font name="Arial" size="11.0"/>
-            </font>
-            <VBox.margin>
-               <Insets left="100.0"/>
-            </VBox.margin>
-         </Label>
-      </VBox>
-   </HBox>
-   <HBox alignment="CENTER" spacing="10.0" GridPane.rowIndex="2">
-      <VBox alignment="CENTER" spacing="10.0">
-         <GridPane>
-            <columnConstraints>
-               <ColumnConstraints hgrow="SOMETIMES"/>
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints vgrow="SOMETIMES"/>
-            </rowConstraints>
-            <ImageView fx:id="gameImg" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
-            <SplitMenuButton fx:id="gameEditMenu" alignment="CENTER" maxHeight="30.0" maxWidth="160.0"
-                             minHeight="30.0" minWidth="160.0" mnemonicParsing="false" textAlignment="CENTER"
-                             visible="false" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Reversi"/>
-                  <MenuItem mnemonicParsing="false" text="BattleSea"/>
-               </items>
-               <font>
-                  <Font name="Arial" size="17.0"/>
-               </font>
-            </SplitMenuButton>
-         </GridPane>
-         <Label onMouseClicked="#editGame" text="edit" textFill="RED">
-            <font>
-               <Font name="Arial" size="11.0"/>
-            </font>
-            <VBox.margin>
-               <Insets left="100.0"/>
-            </VBox.margin>
-         </Label>
-      </VBox>
-   </HBox>
-   <HBox alignment="CENTER" layoutX="10.0" layoutY="262.0" spacing="10.0" GridPane.rowIndex="3">
-      <VBox alignment="CENTER" spacing="10.0">
-         <GridPane>
-            <columnConstraints>
-               <ColumnConstraints hgrow="SOMETIMES"/>
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints vgrow="SOMETIMES"/>
-            </rowConstraints>
-            <Label fx:id="start" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="Avenir Book" size="16.0"/>
-               </font>
-            </Label>
-            <DatePicker fx:id="startDatePicker" maxWidth="200.0" promptText="Start Date" visible="false"/>
-         </GridPane>
-         <Label onMouseClicked="#editStartDate" text="edit" textFill="RED">
-            <font>
-               <Font name="Arial" size="11.0"/>
-            </font>
-            <VBox.margin>
-               <Insets left="100.0"/>
-            </VBox.margin>
-         </Label>
-      </VBox>
-      <Line endX="15.0" strokeWidth="2.0"/>
-      <VBox alignment="CENTER" layoutX="161.0" layoutY="10.0" spacing="10.0">
-         <GridPane>
-            <columnConstraints>
-               <ColumnConstraints hgrow="SOMETIMES"/>
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints vgrow="SOMETIMES"/>
-            </rowConstraints>
-            <Label fx:id="end" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="Avenir Book" size="16.0"/>
-               </font>
-            </Label>
-            <DatePicker fx:id="endDatePicker" promptText="End Date" visible="false"/>
-         </GridPane>
-         <Label onMouseClicked="#editEndDate" text="edit" textFill="RED">
-            <font>
-               <Font name="Arial" size="11.0"/>
-            </font>
-            <VBox.margin>
-               <Insets left="100.0"/>
-            </VBox.margin>
-         </Label>
-      </VBox>
-   </HBox>
-   <HBox alignment="CENTER" layoutX="10.0" layoutY="247.0" spacing="10.0" GridPane.rowIndex="4">
-      <VBox alignment="CENTER" spacing="10.0">
-         <HBox spacing="5.0">
+    </rowConstraints>
+    <ImageView fx:id="eventImg" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP" />
+    <ImageView fx:id="uploadEventImg" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadImg" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
+        <GridPane.margin>
+            <Insets left="200.0" top="130.0" />
+        </GridPane.margin>
+        <Image url="https://i.imgur.com/CxCk2qN.png" />
+    </ImageView>
+    <HBox alignment="CENTER" spacing="10.0" GridPane.rowIndex="1">
+        <VBox alignment="CENTER" spacing="10.0">
             <GridPane>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES"/>
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints vgrow="SOMETIMES"/>
-               </rowConstraints>
-               <Label fx:id="coins" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                  <font>
-                     <Font name="Avenir Book" size="16.0"/>
-                  </font>
-               </Label>
-               <SplitMenuButton fx:id="coinSplitMenu" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false"
-                                visible="false">
-                  <items>
-                     <MenuItem mnemonicParsing="false" text="Action 1"/>
-                     <MenuItem mnemonicParsing="false" text="Action 2"/>
-                  </items>
-               </SplitMenuButton>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label fx:id="title" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="Avenir Book" size="20.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="titleTextField" maxWidth="200.0" promptText="Title" visible="false">
+                    <font>
+                        <Font name="Arial" size="13.0" />
+                    </font>
+                </TextField>
             </GridPane>
-            <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="https://i.imgur.com/Iq0MAc7.pnghttps://i.imgur.com/Iq0MAc7.png"/>
-            </ImageView>
-         </HBox>
-         <Label onMouseClicked="#editCoins" text="edit" textFill="RED">
-            <font>
-               <Font name="Arial" size="11.0"/>
-            </font>
-            <VBox.margin>
-               <Insets left="60.0"/>
-            </VBox.margin>
-         </Label>
-      </VBox>
-   </HBox>
-   <HBox alignment="CENTER" layoutX="10.0" layoutY="221.0" spacing="10.0" GridPane.rowIndex="5">
-      <VBox alignment="CENTER" spacing="10.0">
-         <GridPane>
-            <columnConstraints>
-               <ColumnConstraints hgrow="SOMETIMES"/>
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints vgrow="SOMETIMES"/>
-            </rowConstraints>
-            <Label fx:id="details" alignment="CENTER" maxWidth="400.0" minHeight="100.0" minWidth="400.0"
-                   style="-fx-border-color: silver;" text="-" textAlignment="CENTER" GridPane.halignment="CENTER"
-                   GridPane.valignment="CENTER">
-               <font>
-                  <Font name="Avenir Book" size="16.0"/>
-               </font>
+            <Label onMouseClicked="#editTitle" text="edit" textFill="RED">
+                <font>
+                    <Font name="Arial" size="11.0" />
+                </font>
+                <VBox.margin>
+                    <Insets left="100.0" />
+                </VBox.margin>
             </Label>
-            <TextArea fx:id="detailsTextArea" maxHeight="100.0" maxWidth="400.0" minHeight="100.0"
-                      minWidth="400.0" promptText="Details" visible="false" GridPane.halignment="CENTER"
-                      GridPane.valignment="CENTER"/>
-         </GridPane>
-         <Label onMouseClicked="#editDetails" text="edit" textFill="RED">
+        </VBox>
+    </HBox>
+    <HBox fx:id="gameHbox" alignment="CENTER" spacing="10.0" GridPane.rowIndex="3">
+        <VBox alignment="CENTER" spacing="10.0">
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="SOMETIMES" />
+                </rowConstraints>
+                <ImageView fx:id="gameImg" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <SplitMenuButton fx:id="gameEditMenu" alignment="CENTER" maxHeight="30.0" maxWidth="160.0" minHeight="30.0" minWidth="160.0" mnemonicParsing="false" textAlignment="CENTER" visible="false" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Reversi" />
+                        <MenuItem mnemonicParsing="false" text="BattleSea" />
+                    </items>
+                    <font>
+                        <Font name="Arial" size="17.0" />
+                    </font>
+                </SplitMenuButton>
+            </GridPane>
+            <Label onMouseClicked="#editGame" text="edit" textFill="RED">
+                <font>
+                    <Font name="Arial" size="11.0" />
+                </font>
+                <VBox.margin>
+                    <Insets left="100.0" />
+                </VBox.margin>
+            </Label>
+        </VBox>
+    </HBox>
+    <HBox alignment="CENTER" layoutX="10.0" layoutY="262.0" spacing="10.0" GridPane.rowIndex="4">
+        <VBox alignment="CENTER" spacing="10.0">
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label fx:id="start" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="Avenir Book" size="16.0" />
+                    </font>
+                </Label>
+                <DatePicker fx:id="startDatePicker" maxWidth="200.0" promptText="Start Date" visible="false" />
+            </GridPane>
+            <Label onMouseClicked="#editStartDate" text="edit" textFill="RED">
+                <font>
+                    <Font name="Arial" size="11.0" />
+                </font>
+                <VBox.margin>
+                    <Insets left="100.0" />
+                </VBox.margin>
+            </Label>
+        </VBox>
+        <Line endX="10.0" strokeWidth="2.0">
+         <HBox.margin>
+            <Insets bottom="20.0" />
+         </HBox.margin></Line>
+        <VBox alignment="CENTER" layoutX="161.0" layoutY="10.0" spacing="10.0">
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label fx:id="end" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="Avenir Book" size="16.0" />
+                    </font>
+                </Label>
+                <DatePicker fx:id="endDatePicker" promptText="End Date" visible="false" />
+            </GridPane>
+            <Label onMouseClicked="#editEndDate" text="edit" textFill="RED">
+                <font>
+                    <Font name="Arial" size="11.0" />
+                </font>
+                <VBox.margin>
+                    <Insets left="100.0" />
+                </VBox.margin>
+            </Label>
+        </VBox>
+    </HBox>
+    <HBox alignment="CENTER" layoutX="10.0" layoutY="247.0" spacing="10.0" GridPane.rowIndex="5">
+        <VBox alignment="CENTER" spacing="10.0">
+            <HBox spacing="5.0">
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <Label fx:id="coins" text="-" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <font>
+                            <Font name="Avenir Book" size="16.0" />
+                        </font>
+                    </Label>
+                    <SplitMenuButton fx:id="coinSplitMenu" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" visible="false">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                            <MenuItem mnemonicParsing="false" text="Action 2" />
+                        </items>
+                    </SplitMenuButton>
+                </GridPane>
+                <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="https://i.imgur.com/Iq0MAc7.pnghttps://i.imgur.com/Iq0MAc7.png" />
+                </ImageView>
+            </HBox>
+            <Label onMouseClicked="#editCoins" text="edit" textFill="RED">
+                <font>
+                    <Font name="Arial" size="11.0" />
+                </font>
+                <VBox.margin>
+                    <Insets left="60.0" />
+                </VBox.margin>
+            </Label>
+        </VBox>
+    </HBox>
+    <HBox alignment="CENTER" layoutX="10.0" layoutY="221.0" spacing="10.0" GridPane.rowIndex="6">
+        <VBox alignment="CENTER" spacing="10.0">
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label fx:id="details" alignment="CENTER" maxWidth="400.0" minHeight="100.0" minWidth="400.0" style="-fx-border-color: silver;" text="-" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="Avenir Book" size="16.0" />
+                    </font>
+                </Label>
+                <TextArea fx:id="detailsTextArea" maxHeight="100.0" maxWidth="400.0" minHeight="100.0" minWidth="400.0" promptText="Details" visible="false" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            </GridPane>
+            <Label onMouseClicked="#editDetails" text="edit" textFill="RED">
+                <font>
+                    <Font name="Arial" size="11.0" />
+                </font>
+                <VBox.margin>
+                    <Insets left="400.0" />
+                </VBox.margin>
+            </Label>
+        </VBox>
+    </HBox>
+    <HBox fx:id="topButtonsHbox" maxHeight="50.0" maxWidth="100.0" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+        <Button fx:id="closeStageBtn" layoutX="10.0" layoutY="10.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-radius: 25; -fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 50 50;" textFill="#ffb200">
             <font>
-               <Font name="Arial" size="11.0"/>
+                <Font name="Arial Bold Italic" size="27.0" />
             </font>
-            <VBox.margin>
-               <Insets left="400.0"/>
-            </VBox.margin>
-         </Label>
-      </VBox>
-   </HBox>
-   <Button fx:id="joinEventBtn" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" onAction="#joinEvent" prefHeight="50.0" prefWidth="110.0" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Join" textFill="#ffb200" GridPane.rowIndex="6">
+        </Button>
+        <Button fx:id="removeEventBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#removeEvent" style="-fx-background-radius: 25; -fx-background-image: url(&quot;https://i.imgur.com/iZoXnCW.png?1&quot;); -fx-background-size: 50 50;" textFill="#ffb200">
+            <font>
+                <Font name="Arial Bold Italic" size="27.0" />
+            </font>
+        </Button>
+    </HBox>
+    <HBox fx:id="downBtnsHbox" alignment="CENTER" spacing="40.0" GridPane.rowIndex="7">
+       <Button fx:id="joinOrDropoutEventBtn" maxHeight="50.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Join" textFill="#ffb200">
+           <font>
+               <Font name="Arial Bold Italic" size="27.0" />
+           </font>
+       </Button>
+      <Button fx:id="createEventBtn" layoutX="10.0" layoutY="35.0" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" onAction="#createEvent" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Create" textFill="#ffb200">
+         <font>
+            <Font name="Arial Bold Italic" size="27.0" />
+         </font>
+      </Button>
+      <Button fx:id="cancelBtn" layoutX="160.0" layoutY="35.0" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Cancel" textFill="#ffb200">
+         <font>
+            <Font name="Arial Bold Italic" size="27.0" />
+         </font>
+      </Button>
+        <Button fx:id="confirmEditsBtn" minHeight="100.0" mnemonicParsing="false" onAction="#confirmEdits" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Confirm&#10;Edits" textAlignment="CENTER" textFill="#ffb200">
+            <font>
+                <Font name="Arial Bold Italic" size="27.0" />
+            </font>
+        </Button>
+        <Button fx:id="revertEditsBtn" maxHeight="100.0" maxWidth="140.0" minHeight="100.0" minWidth="140.0" mnemonicParsing="false" onAction="#revertEdits" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Revert&#10;Edits" textAlignment="CENTER" textFill="#ffb200">
+            <font>
+                <Font name="Arial Bold Italic" size="27.0" />
+            </font>
+        </Button>
+        <Label fx:id="allErrors" text="error" textFill="#ff4444">
+            <font>
+                <Font name="Arial Bold" size="11.0" />
+            </font>
+        </Label>
+    </HBox>
+   <Label fx:id="howToWinPrize" text="-" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
       <font>
-         <Font name="Arial Bold Italic" size="27.0" />
+         <Font name="Avenir Book" size="17.0" />
       </font>
+   </Label>
+   <Button fx:id="eventSettingsBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#openEventSettings" style="-fx-background-image: url(&quot;https://i.imgur.com/RDAVfUp.pnghttps://i.imgur.com/RDAVfUp.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <GridPane.margin>
+         <Insets right="10.0" top="10.0" />
+      </GridPane.margin>
    </Button>
-   <HBox fx:id="topButtonsHbox" maxHeight="50.0" maxWidth="100.0" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-      <Button fx:id="closeStageBtn" layoutX="10.0" layoutY="10.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0"
-              minWidth="50.0" mnemonicParsing="false" onAction="#closeStage"
-              style="-fx-background-radius: 25; -fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 50 50;"
-              textFill="#ffb200">
-         <font>
-            <Font name="Arial Bold Italic" size="27.0"/>
-         </font>
-      </Button>
-      <Button fx:id="removeEventBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0"
-              mnemonicParsing="false" onAction="#removeEvent"
-              style="-fx-background-radius: 25; -fx-background-image: url(&quot;https://i.imgur.com/iZoXnCW.png?1&quot;); -fx-background-size: 50 50;"
-              textFill="#ffb200">
-         <font>
-            <Font name="Arial Bold Italic" size="27.0"/>
-         </font>
-      </Button>
-   </HBox>
-   <HBox alignment="CENTER" spacing="40.0" GridPane.rowIndex="7">
-      <Button fx:id="confirmEditsBtn" minHeight="100.0" mnemonicParsing="false" onAction="#confirmEdits"
-              style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Confirm&#10;Edits"
-              textAlignment="CENTER" textFill="#ffb200">
-         <font>
-            <Font name="Arial Bold Italic" size="27.0"/>
-         </font>
-      </Button>
-      <Button fx:id="revertEditsBtn" maxHeight="100.0" maxWidth="140.0" minHeight="100.0" minWidth="140.0"
-              mnemonicParsing="false" onAction="#revertEdits"
-              style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Revert&#10;Edits"
-              textAlignment="CENTER" textFill="#ffb200">
-         <font>
-            <Font name="Arial Bold Italic" size="27.0"/>
-         </font>
-      </Button>
-      <Label text="error" textFill="#ff4444">
-         <font>
-            <Font name="Arial Bold" size="11.0"/>
-         </font>
-      </Label>
-   </HBox>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
 </GridPane>

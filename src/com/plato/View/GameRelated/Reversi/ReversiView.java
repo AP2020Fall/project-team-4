@@ -36,19 +36,16 @@ public class ReversiView {
 	 */
 	public void displayMoveHistory (LinkedList<String> moves) {
 		if (moves.size() == 0) {
-//			Menu.println("No moves made yet.");
+			System.out.println("No moves made yet.");
 			return;
 		}
 		for (String move : moves)
+		{
 			System.out.println(move);
+		}
 	}
 
 	public void displayAvailableCoords (ArrayList<String> availableCoordinates) {
-		if (availableCoordinates.size() == 0) {
-//			Menu.println("You cannot make any moves");
-			return;
-		}
-		System.out.println("Available Coordinates : ");
 		for (String coord : availableCoordinates)
 			System.out.printf(
 					"x = %d, y = %d%n",

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane fx:id="gridPane" hgap="7.5" maxHeight="300.0" maxWidth="400.0" minHeight="300.0" minWidth="400.0" vgap="7.5" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.EventSettingsController">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+    </padding>
+    <VBox alignment="CENTER" spacing="15.0">
+        <Label text="Who should win this?">
+            <font>
+                <Font name="Apple SD Gothic Neo Regular" size="19.0" />
+            </font>
+        </Label>
+        <MenuButton fx:id="eventTypeMenu" alignment="CENTER" maxHeight="50.0" maxWidth="350.0" minHeight="50.0" minWidth="350.0" mnemonicParsing="false" popupSide="RIGHT" text="Event Type" textAlignment="CENTER">
+            <font>
+                <Font name="AppleMyungjo Regular" size="16.0" />
+            </font>
+            <items>
+                <MenuItem mnemonicParsing="false" onAction="#isMVPInGame" text="MVP of game " />
+                <MenuItem mnemonicParsing="false" onAction="#isLoginTimes" text="Logged in &quot;N&quot; times" />
+                <MenuItem mnemonicParsing="false" onAction="#isPlayTimes" text="Played a game &quot;N&quot; times" />
+                <MenuItem mnemonicParsing="false" onAction="#isWinTimes" text="Won a game &quot;N&quot; times" />
+                <MenuItem mnemonicParsing="false" onAction="#isWinTimesNonStop" text="&quot;N&quot; Consecutive wins" />
+            </items>
+        </MenuButton>
+    </VBox>
+    <MenuButton fx:id="gameMenu" alignment="CENTER" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" popupSide="RIGHT" text="Game name" textAlignment="CENTER" GridPane.rowIndex="1">
+        <font>
+            <Font name="AppleMyungjo Regular" size="16.0" />
+        </font>
+        <items>
+            <MenuItem mnemonicParsing="false" text="BattleSea" />
+            <MenuItem mnemonicParsing="false" text="Reversi" />
+        </items>
+    </MenuButton>
+    <MenuButton fx:id="minReqMenu" alignment="CENTER" layoutX="147.0" layoutY="180.0" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" popupSide="RIGHT" text="Minimum Requirement" textAlignment="CENTER" GridPane.rowIndex="2">
+        <font>
+            <Font name="AppleMyungjo Regular" size="16.0" />
+        </font>
+    </MenuButton>
+    <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.pnghttps://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 40 40; -fx-background-radius: 20;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+</GridPane>

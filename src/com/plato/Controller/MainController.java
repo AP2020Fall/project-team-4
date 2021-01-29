@@ -15,11 +15,19 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.hildan.fxgson.FxGson;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -30,12 +38,6 @@ public class MainController extends Application {
 	private final GsonBuilder gsonBuilder = new GsonBuilder();
 	private Gson gson;
 	private Stage primaryStage;
-
-	public static MainController getInstance () {
-		if (mainController == null)
-			mainController = new MainController();
-		return mainController;
-	}
 
 	public static void main (String[] args) {
 		launch(args);
@@ -80,115 +82,124 @@ public class MainController extends Application {
 
 		primaryStage.show();
 	}
+
+	public static MainController getInstance () {
+		if (mainController == null)
+			mainController = new MainController();
+		return mainController;
+	}
 //
 //	private void dealWithInput (int command) {
-//		LinkedList<String> menuOpts = new LinkedList<>();
-////		menuOpts = Menu.getMenuIn().getOptions();
-////
-////		command--; // to use for accessing menuOpts indexes
-//		String commandOption = menuOpts.get(command).trim();
-////
-//		switch (commandOption) {
-////			case "Exit program" -> saveEverything();
-////			case "Back" -> {
-////				Menu.getMenuIn().back();
-////			}
-////			case "Go to Account Menu", "Go to Games Menu", "Go to Friends Menu",
-////					"Open Reversi Game Menu", "Open BattleSea Game Menu" -> {
-////				enterAppropriateMenu();
-////			}
-////
-////			 register-login menu
-////			case "Register Gamer", "Register Admin" -> AccountController.getInstance().register();
-////			case "Login" -> AccountController.getInstance().login();
-////			case "Delete Account" -> AccountController.getInstance().deleteAccount();
+//	LinkedList<String> menuOpts = new LinkedList<>();
+//		//menuOpts = Menu.getMenuIn().getOptions();
+//
+//		command--; // to use for accessing menuOpts indexes
+//	String commandOption = menuOpts.get(command).trim();
+//
+//switch (commandOption) {
+//			case "Exit program" -> saveEverything();
+//		case "Back" -> {
+//			//Menu.getMenuIn().back();
+//
+//
+//			}
+//			case "Go to Account Menu", "Go to Games Menu", "Go to Friends Menu",
+//					"Open Reversi Game Menu", "Open BattleSea Game Menu" -> {
+//				enterAppropriateMenu();
+//
+//			}
+//
+//			// register-login menu
+//		case "Register Gamer", "Register Admin" -> AccountController.getInstance().register();
+//		case "Login" -> AccountController.getInstance().login();
+//			case "Delete Account" -> AccountController.getInstance().deleteAccount();
 //
 //			// main menu
 //			case "Show Points" -> {
-////				if (Menu.getMenuIn() instanceof _3MainMenu)
-////					GameLogController.getInstance().displayAllPointsOfPlayer();
-////				if (Menu.getMenuIn() instanceof _11GameMenu)
-////					GameLogController.getInstance().displayPtsLoggedInPlayerEarnedFromGame();
+//				if (Menu.getMenuIn() instanceof _3MainMenu)
+//
+//					GameLogController.getInstance().displayAllPointsOfPlayer();
+//	if (Menu.getMenuIn() instanceof _11GameMenu)
+//					GameLogController.getInstance().displayPtsLoggedInPlayerEarnedFromGame();
 //			}
-////			case "View Favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
-//			case "View Platobot’s messages" -> MessageController.getInstance().displayAdminMessages();
-//			case "View last played" -> GameLogController.getInstance().displayLastGamePlayed();
+//			case "View Favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
+//			case "View Platobot’s messages" -> MessageController.getInstance().displayAdminMessages();case "View last played" -> GameLogController.getInstance().displayLastGamePlayed();
 //			case "View admin’s suggestions" -> AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
 //			case "View Events" -> {
 //				EventController.getInstance().displayInSessionEvents();
-////				enterAppropriateMenu();
+//				enterAppropriateMenu();
+//		}
+//		case "Add Event" -> EventController.getInstance().createEvent();
+//			case "Add suggestion" -> AdminGameRecoController.getInstance().giveRecommendationToGamer();
+//			case "View suggestions" -> {
+//				AdminGameRecoController.getInstance().displayAllAdminRecos();
+//				enterAppropriateMenu();
 //			}
-//			case "Add Event" -> EventController.getInstance().createEvent();
-////			case "Add suggestion" -> AdminGameRecoController.getInstance().giveRecommendationToGamer();
-////			case "View suggestions" -> {
-////				AdminGameRecoController.getInstance().displayAllAdminRecos();
-////				enterAppropriateMenu();
-////			}
-////			case "Send message" -> MessageController.getInstance().sendMsg();
-//			case "Edit Details of BattleSea", "Edit Details of Reversi" -> {
+//			case "Send message" -> MessageController.getInstance().sendMsg();
+//		case "Edit Details of BattleSea", "Edit Details of Reversi" -> {
 //				String gameName = commandOption.split(" ")[commandOption.split(" ").length - 1];
 //				GameController.getInstance().editDetails(gameName);
 //			}
-////			case "View Users" -> {
-////				GamerController.getInstance().displayAllUsernames();
-////				enterAppropriateMenu();
-////			}
-////
-////			 suggestions menu
-////			case "Choose suggested game" -> AdminGameRecoController.getInstance().chooseRecoGame();
-////			case "Remove suggestion" -> AdminGameRecoController.getInstance().removeReco();
-////
-////			 events menu
-////			case "View event info" -> EventController.getInstance().displayEventInfo();
-////			case "Participate in event" -> EventController.getInstance().participateInEvent();
-////			case "Show Events participating in" -> EventController.getInstance().displayInSessionEventsParticipatingIn();
-////			case "Stop participating in Event" -> EventController.getInstance().stopParticipatingInEvent();
-//			case "Edit Event" -> EventController.getInstance().editEvent();
-////			case "Remove Event" -> EventController.getInstance().removeEvent();
+//			case "View Users" -> {
+//				GamerController.getInstance().displayAllUsernames();
+//				enterAppropriateMenu();
+//			}
+//
+//			// suggestions menu
+//			case "Choose suggested game" -> AdminGameRecoController.getInstance().chooseRecoGame();
+//			case "Remove suggestion" -> AdminGameRecoController.getInstance().removeReco();
+//
+//			// events menu
+//			case "View event info" -> EventController.getInstance().displayEventInfo();
+//			case "Participate in event" -> EventController.getInstance().participateInEvent();
+//			case "Show Events participating in" -> EventController.getInstance().displayInSessionEventsParticipatingIn();
+//			case "Stop participating in Event" -> EventController.getInstance().stopParticipatingInEvent();
+//		case "Edit Event" -> EventController.getInstance().editEvent();
+//			case "Remove Event" -> EventController.getInstance().removeEvent();
 //
 //			// friend menu
-//			case "Show friends" -> GamerController.getInstance().displayFriendsUsernames();
-////			case "Send Friend Request" -> FriendRequestController.getInstance().sendFrndRequest();
-////			case "Show Friend Requests" -> FriendRequestController.getInstance().displayFrndReqsPlayerGotten();
-////
-////			 gamer user management menu
-////			case "View user profile" -> GamerController.getInstance().displayUserProfileToAdmin();
+//	         case "Show friends" -> GamerController.getInstance().displayFriendsUsernames();
+//			case "Send Friend Request" -> FriendRequestController.getInstance().sendFrndRequest();case "Show Friend Requests" -> FriendRequestController.getInstance().displayFrndReqsPlayerGotten();
+//
+//			// gamer user management menu
+//			case "View user profile" -> GamerController.getInstance().displayUserProfileToAdmin();
 //
 //			// friend management menu
-////			case "View friend profile" -> GamerController.getInstance().displayFriendPersonalInfo();
-////			case "Remove Friend" -> GamerController.getInstance().removeFriend();
+//            case "View friend profile" -> GamerController.getInstance().displayFriendPersonalInfo();
+//			case "Remove Friend" -> GamerController.getInstance().removeFriend();
 //
-//			// friend request management menu
-////			case "Accept Friend Request" -> FriendRequestController.getInstance().acceptFriendReq();
-////			case "Decline Friend Request" -> FriendRequestController.getInstance().declineFriendReq();
+//		// friend request management menu
 //
-//			// game menu
+//	case "Accept Friend Request" -> FriendRequestController.getInstance().acceptFriendReq();
+//			case "Decline Friend Request" -> FriendRequestController.getInstance().declineFriendReq();
+//
+//		// game menu
 //			case "Show scoreboard" -> GameController.getInstance().displayScoreboardOfGame();
 //			case "Details" -> GameController.getInstance().displayGameHowToPlay();
 //			case "Show log of game" -> GameLogController.getInstance().displayLogOfGame();
 //			case "Show wins count" -> GameLogController.getInstance().displayWinCountOfGameByLoggedInPlayer();
 //			case "Show played count" -> GameLogController.getInstance().displayPlayedCountOfGameByLoggedInPlayer();
-//			case "Add to favorites" -> GameController.getInstance().addGameToFavesOfLoggedInGamer();
+//			case "Add to favorites" -> GameController.getInstance().addFaveGame();
 //			case "Continue previous games" -> GameController.getInstance().displayPrevGamesAndChooseToContinue();
-////			case "Run Game" -> GameController.getInstance().runGame();
-////
-////			 gameplay battlesea menu
-////					phase 1
-////			case "Generate a Random Board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
-////			case "Choose between 5 randomly generated boards" -> BattleSeaController.getInstance().chooseBetween5RandomlyGeneratedBoards();
-////			case "Display on-trial Board" -> BattleSeaController.getInstance().displayTrialBoard();
-////			case "Move ship" -> ShipController.getInstance().moveShip(); // todo
-////			case "Change ship direction" -> ShipController.getInstance().rotateShip();
-////			case "Finalize Board" -> {
-////				BattleSeaController.getInstance().finalizeTrialBoard();
-////
-////				if (((BattleSea) GameController.getInstance().getCurrentGameInSession()).canStartBombing()) {
-////					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
-////					BattleSeaController.getInstance().initTurnTimerStuff();
-////				}
-////			}
-////					phase 2
-//			case "Boom (Throw Bomb)" -> BombController.getInstance().throwBomb();
+//			case "Run Game" -> GameController.getInstance().runGame();
+//
+//			// gameplay battlesea menu
+//				//	phase 1
+//			case "Generate a Random Board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
+//		case "Choose between 5 randomly generated boards" -> BattleSeaController.getInstance().chooseBetween5RandomlyGeneratedBoards();
+//			case "Display on-trial Board" -> BattleSeaController.getInstance().displayTrialBoard();
+//			case "Move ship" -> ShipController.getInstance().moveShip();
+//			case "Change ship direction" -> ShipController.getInstance().rotateShip();
+//			case "Finalize Board" -> {
+//				BattleSeaController.getInstance().finalizeTrialBoard();
+//
+//				if (((BattleSea) GameController.getInstance().getCurrentGameInSession()).canStartBombing()) {
+//					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
+//					BattleSeaController.getInstance().initTurnTimerStuff();
+//				}
+//			}
+//				//	phase 2
+//		case "Boom (Throw Bomb)" -> BombController.getInstance().throwBomb();
 //			case "Time?" -> BattleSeaController.getInstance().displayRemainingTime();
 //			case "Whose turn?", "Whose turn now?" -> GameController.getInstance().displayTurn();
 //			case "Display all my ships" -> ShipController.getInstance().displayAllShipsOfCurrentPlayer();
@@ -203,8 +214,7 @@ public class MainController extends Application {
 //			case "Display all my unboomed ships" -> ShipController.getInstance().displayHealthyShipsOfCurrentPlayer();
 //			case "Display my board" -> BattleSeaController.getInstance().displayCurrentPlayerBoard();
 //			case "Display my opponent’s board" -> BattleSeaController.getInstance().displayOpponentBoard();
-//
-//			// gameplay reversi menu
+//			//gameplay reversi menu
 //			case "Place Disk" -> ReversiController.getInstance().placeDisk();
 //			case "Next Turn" -> ReversiController.getInstance().nextTurn();
 //			case "Display available coordinates" -> ReversiController.getInstance().displayAvailableCoords();
@@ -213,14 +223,14 @@ public class MainController extends Application {
 //			case "Display scores" -> ReversiController.getInstance().displayInGameScores();
 //			case "Display final result" -> GameController.getInstance().displayGameConclusion(GameController.getInstance().getCurrentGameInSession());
 //
-//			// user editing menu
+//	//	 user editing menu
 //			case "Change password" -> AccountController.getInstance().changePWCommand();
 //			case "Edit Personal info" -> AccountController.getInstance().editAccFieldCommand();
 //
-//			// account menu
+//	//	 account menu
 //			case "View personal info (w/ money)", "View personal info (w/o money)" -> {
 //				AccountController.getInstance().displayPersonalInfo();
-////				enterAppropriateMenu();
+//				enterAppropriateMenu();
 //			}
 //			case "View plato statistics" -> GamerController.getInstance().displayAccountStats();
 //			case "View Gaming History" -> GameLogController.getInstance().displayFullGamingHistoryOfGamer();
@@ -230,117 +240,14 @@ public class MainController extends Application {
 //			case "View my Reversi statistics" -> GameLogController.getInstance().displayPlayerStatsInGame("Reversi");
 //			case "Logout" -> {
 //				AccountController.getInstance().logout();
-////				Menu.getMenu("2").enter();
+//			//	Menu.getMenu("2").enter();
 //			}
 //		}
 //
 //		saveEverything();
 //	}
 
-	public void serialize () throws IOException {
-		// SavedLoginInfo.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/SavedLoginInfo.json")) {
-			printWriter.print("");
-		}
-		if (AccountController.getInstance().getCurrentAccLoggedIn() != null) // if is logged-in
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/SavedLoginInfo.json"))) {
-				if (AccountController.getInstance().saveLoginInfo()) { // skip if said no to remember me
-					writer.write((AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "a" : "g") + "\n");
-					writer.write(gson.toJson(AccountController.getInstance().getCurrentAccLoggedIn()));
-				}
-			}
-
-
-		// Admin.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Admin.json")) {
-			printWriter.print("");
-		}
-		if (Admin.adminHasBeenCreated())
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Admin.json"))) {
-
-				writer.write(gson.toJson(Admin.getAdmin()));
-			}
-
-
-		// Gamer.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Gamer.json")) {
-			printWriter.print("");
-		}
-		if (Gamer.getGamers().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Gamer.json"))) {
-
-				writer.write(gson.toJson(Gamer.getGamers()));
-			}
-
-		// AdminGameReco.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json")) {
-			printWriter.print("");
-		}
-		if (AdminGameReco.getRecommendations().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json"))) {
-
-				writer.write(gson.toJson(AdminGameReco.getRecommendations()));
-			}
-
-		// Event.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Event.json")) {
-			printWriter.print("");
-		}
-		if (Event.getAllEvents().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Event.json"))) {
-
-				writer.write(gson.toJson(Event.getAllEvents()));
-			}
-
-		// FriendRequest.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/FriendRequest.json")) {
-			printWriter.print("");
-		}
-		if (FriendRequest.getAllfriendRequests().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/FriendRequest.json"))) {
-
-				writer.write(gson.toJson(FriendRequest.getAllfriendRequests()));
-			}
-
-		// Message.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Message.json")) {
-			printWriter.print("");
-		}
-		if (Message.getAllMessages().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Message.json"))) {
-
-				writer.write(gson.toJson(Message.getAllMessages()));
-			}
-
-		// BattleSea.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/BattleSea.json")) {
-			printWriter.print("");
-		}
-		if (BattleSea.getAllBattleSeaGames().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/GameRelated/BattleSea.json"))) {
-
-				writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
-			}
-
-		// Reversi.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/Reversi.json")) {
-			printWriter.print("");
-		}
-		if (Reversi.getAllReversiGames().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/GameRelated/Reversi.json"))) {
-
-				writer.write(gson.toJson(Reversi.getAllReversiGames()));
-			}
-
-		// IDGenerator.json
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/IDGenerator.json")) {
-			printWriter.print("");
-		}
-		if (IDGenerator.getAllIDsGenerated().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/IDGenerator.json"))) {
-
-				writer.write(gson.toJson(IDGenerator.getAllIDsGenerated()));
-			}
+	private void enterAppropriateMenu() {
 	}
 
 	public void saveEverything () {
@@ -503,7 +410,115 @@ public class MainController extends Application {
 	private void initGsonAndItsBuilder () {
 		gsonBuilder.setDateFormat("yyyy-MMM-dd HH:mm:ss");
 		gsonBuilder.setPrettyPrinting();
-		gson = gsonBuilder.create();
+		gsonBuilder.serializeNulls();
+		gson = FxGson.addFxSupport(gsonBuilder)
+				.create();
+	}
+
+	public void serialize () throws IOException {
+		// SavedLoginInfo.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/SavedLoginInfo.json")) {
+			printWriter.print("");
+		}
+		if (AccountController.getInstance().getCurrentAccLoggedIn() != null) // if is logged-in
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/SavedLoginInfo.json"))) {
+				if (AccountController.getInstance().saveLoginInfo()) { // skip if said no to remember me
+					writer.write((AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "a" : "g") + "\n");
+					writer.write(gson.toJson(AccountController.getInstance().getCurrentAccLoggedIn()));
+				}
+			}
+
+
+		// Admin.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Admin.json")) {
+			printWriter.print("");
+		}
+		if (Admin.adminHasBeenCreated())
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Admin.json"))) {
+
+				writer.write(gson.toJson(Admin.getAdmin()));
+			}
+
+
+		// Gamer.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Gamer.json")) {
+			printWriter.print("");
+		}
+		if (Gamer.getGamers().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Gamer.json"))) {
+
+				writer.write(gson.toJson(Gamer.getGamers()));
+			}
+
+		// AdminGameReco.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json")) {
+			printWriter.print("");
+		}
+		if (AdminGameReco.getRecommendations().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json"))) {
+
+				writer.write(gson.toJson(AdminGameReco.getRecommendations()));
+			}
+
+		// Event.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Event.json")) {
+			printWriter.print("");
+		}
+		if (Event.getAllEvents().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Event.json"))) {
+
+				writer.write(gson.toJson(Event.getAllEvents()));
+			}
+
+		// FriendRequest.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/FriendRequest.json")) {
+			printWriter.print("");
+		}
+		if (FriendRequest.getAllfriendRequests().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/FriendRequest.json"))) {
+
+				writer.write(gson.toJson(FriendRequest.getAllfriendRequests()));
+			}
+
+		// Message.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Message.json")) {
+			printWriter.print("");
+		}
+		if (Message.getAllMessages().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Message.json"))) {
+
+				writer.write(gson.toJson(Message.getAllMessages()));
+			}
+
+		// BattleSea.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/BattleSea.json")) {
+			printWriter.print("");
+		}
+		if (BattleSea.getAllBattleSeaGames().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/GameRelated/BattleSea.json"))) {
+
+				writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
+			}
+
+		// Reversi.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/Reversi.json")) {
+			printWriter.print("");
+		}
+		if (Reversi.getAllReversiGames().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/GameRelated/Reversi.json"))) {
+
+				writer.write(gson.toJson(Reversi.getAllReversiGames()));
+			}
+
+		// IDGenerator.json
+		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/IDGenerator.json")) {
+			printWriter.print("");
+		}
+		if (IDGenerator.getAllIDsGenerated().size() > 0)
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/IDGenerator.json"))) {
+
+				writer.write(gson.toJson(IDGenerator.getAllIDsGenerated()));
+			}
 	}
 
 	/**
@@ -528,6 +543,24 @@ public class MainController extends Application {
 		primaryStage.setOnCloseRequest(e -> saveEverything());
 
 		return primaryStage;
+	}
+
+	public static void openUploadPfpWindow (Stage parentStage, ImageView imageViewToUpdate) {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
+		try {
+			File image = fileChooser.showOpenDialog(parentStage);
+			Path from = Paths.get(image.toURI()),
+					to = Paths.get("src/com/Resources/ProfilePics/" + image.getName());
+			Files.copy(from, to);
+			imageViewToUpdate.setImage(new Image(String.valueOf(image.toURI().toURL())));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {}
+	}
+
+	public static void playButtonClickSound () {
+		new AudioClip(Paths.get("src/com/Resources/Sounds/button.wav").toUri().toString()).play(0.2);
 	}
 
 	public Stage getPrimaryStage () {

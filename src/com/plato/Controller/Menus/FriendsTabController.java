@@ -48,7 +48,7 @@ public class FriendsTabController implements Initializable {
 
 			Circle circle = new Circle(40);
 
-			frndsList.getItems().add(new GridPane() {{
+			frndsList.getItems().add(new GridPane() { {
 				getRowConstraints().add(new RowConstraints() {{
 					setMinHeight(circle.getRadius() * 2);
 					setMaxHeight(circle.getRadius() * 2);
@@ -77,8 +77,9 @@ public class FriendsTabController implements Initializable {
 					setMinSize(50, 50);
 					setMaxSize(50, 50);
 					setStyle("-fx-background-image: url('https://i.imgur.com/iZoXnCW.png?1');" +
-							" -fx-background-size: 50 50;" +
-							" -fx-background-radius: 25;");
+							" -fx-background-size: 50;" +
+							" -fx-background-radius: 25;" +
+							" -fx-background-color: transparent;");
 					setFont(Font.font("Arial", 14));
 					setTextAlignment(TextAlignment.CENTER);
 					setPadding(new Insets(5, 5, 5, 5));

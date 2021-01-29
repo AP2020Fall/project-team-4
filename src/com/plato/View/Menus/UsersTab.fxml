@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <SplitPane dividerPositions="0.410427807486631" maxHeight="1000.0" maxWidth="1500.0" minHeight="500.0" minWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.UsersTabController">
-    <GridPane maxHeight="700.0" minHeight="700.0">
+    <GridPane maxHeight="750.0" minHeight="750.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" percentWidth="50.0" />

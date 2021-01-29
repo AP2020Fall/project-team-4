@@ -1,14 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.Menus.GameLogController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import javafx.scene.text.Font?>
+<GridPane hgap="5.0" maxHeight="800.0" maxWidth="450.0" minHeight="800.0" minWidth="450.0"
+          style="-fx-background-color: #001a32;" vgap="5.0" xmlns="http://javafx.com/javafx/15.0.1"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.GameLogController">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="100.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES"/>
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </padding>
+    <ImageView fx:id="gamePicture" fitHeight="100.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true"/>
+    <Label maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" onMouseClicked="#closeStage"
+           onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut"
+           style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-radius: 20; -fx-background-size: 40; -fx-background-color: transparent;"
+           GridPane.halignment="LEFT" GridPane.valignment="TOP"/>
+    <ListView fx:id="gameLogList" maxWidth="430.0" minWidth="430.0" style="-fx-background-color: #003768;"
+              GridPane.rowIndex="1">
+        <GridPane.margin>
+            <Insets top="20.0"/>
+        </GridPane.margin>
+    </ListView>
+    <Label fx:id="playedNum" alignment="CENTER" text="- Plays" textFill="WHITE" GridPane.halignment="LEFT"
+           GridPane.valignment="BOTTOM">
+        <GridPane.margin>
+            <Insets bottom="-25.0" left="10.0"/>
+        </GridPane.margin>
+        <effect>
+            <Glow/>
+        </effect>
+        <font>
+            <Font name="American Typewriter" size="16.0"/>
+        </font>
+    </Label>
+    <Label fx:id="gameTitle" alignment="CENTER" text="-" textAlignment="CENTER" textFill="WHITE">
+        <font>
+            <Font name="AppleGothic Regular" size="40.0"/>
+        </font>
+        <effect>
+            <DropShadow height="15.0" offsetX="2.0" offsetY="2.0" radius="7.0" spread="0.65" width="15.0"/>
+        </effect>
+    </Label>
+    <!--    <GridPane hgap="5.0" maxHeight="200.0" maxWidth="400.0" minHeight="200.0" minWidth="400.0" vgap="5.0" visible="false" GridPane.rowIndex="1">-->
+    <!--        <columnConstraints>-->
+    <!--            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="37.5" />-->
+    <!--            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="37.5" />-->
+    <!--            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="25.0" />-->
+    <!--        </columnConstraints>-->
+    <!--        <rowConstraints>-->
+    <!--            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />-->
+    <!--            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />-->
+    <!--            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />-->
+    <!--            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />-->
+    <!--            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />-->
+    <!--        </rowConstraints>-->
+    <!--        <ImageView fx:id="pfp1" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" GridPane.rowSpan="2" />-->
+    <!--        <ImageView fx:id="pfp2" fitHeight="75.0" fitWidth="75.0" layoutX="153.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2" />-->
+    <!--        <Label fx:id="username1" text="Label" textFill="WHITE" GridPane.rowIndex="3">-->
+    <!--            <font>-->
+    <!--                <Font name="Arial" size="17.0" />-->
+    <!--            </font>-->
+    <!--            <effect>-->
+    <!--                <Glow />-->
+    <!--            </effect>-->
+    <!--        </Label>-->
+    <!--        <Label fx:id="username2" layoutX="144.0" layoutY="160.0" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">-->
+    <!--            <font>-->
+    <!--                <Font name="Arial" size="17.0" />-->
+    <!--            </font>-->
+    <!--            <effect>-->
+    <!--                <Glow />-->
+    <!--            </effect>-->
+    <!--        </Label>-->
+    <!--        <Label fx:id="score1" layoutX="144.0" layoutY="160.0" text="15" textFill="#fbff00" GridPane.rowIndex="4">-->
+    <!--            <font>-->
+    <!--                <Font name="American Typewriter" size="34.0" />-->
+    <!--            </font>-->
+    <!--            <effect>-->
+    <!--                <Glow />-->
+    <!--            </effect>-->
+    <!--        </Label>-->
+    <!--        <Label fx:id="score2" layoutX="143.0" layoutY="165.0" text="15" textFill="#fbff00" GridPane.columnIndex="1" GridPane.rowIndex="4">-->
+    <!--            <font>-->
+    <!--                <Font name="American Typewriter" size="34.0" />-->
+    <!--            </font>-->
+    <!--            <effect>-->
+    <!--                <Glow />-->
+    <!--            </effect>-->
+    <!--        </Label>-->
+    <!--        <Label fx:id="timeGameEnded" alignment="CENTER_RIGHT" layoutX="314.0" layoutY="135.0" minWidth="50.0" text="23:45 pm" textFill="#9bafff" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">-->
+    <!--            <font>-->
+    <!--                <Font name="Apple Braille Outline 6 Dot" size="15.0" />-->
+    <!--            </font>-->
+    <!--            <effect>-->
+    <!--                <Glow />-->
+    <!--            </effect>-->
+    <!--            <GridPane.margin>-->
+    <!--                <Insets right="10.0" />-->
+    <!--            </GridPane.margin>-->
+    <!--        </Label>-->
+    <!--        <HBox alignment="CENTER" minHeight="30.0" spacing="10.0" GridPane.columnSpan="3">-->
+    <!--            <Line startX="-100.0" stroke="#5c7dff" strokeWidth="2.0" />-->
+    <!--            <Label fx:id="dateGameEnded" alignment="CENTER" minHeight="25.0" minWidth="100.0" style="-fx-background-color: #5c7dff; -fx-background-radius: 3;" text="20/10/2000" textFill="WHITE">-->
+    <!--                <font>-->
+    <!--                    <Font name="Apple Braille Outline 8 Dot" size="15.0" />-->
+    <!--                </font>-->
+    <!--                <effect>-->
+    <!--                    <Glow />-->
+    <!--                </effect>-->
+    <!--            </Label>-->
+    <!--            <Line layoutX="205.0" layoutY="27.0" startX="-100.0" stroke="#5c7dff" strokeWidth="2.0" />-->
+    <!--        </HBox>-->
+    <!--        <GridPane.margin>-->
+    <!--            <Insets />-->
+    <!--        </GridPane.margin>-->
+    <!--    </GridPane>-->
+</GridPane>

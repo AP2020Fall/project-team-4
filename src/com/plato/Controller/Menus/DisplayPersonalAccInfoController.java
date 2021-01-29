@@ -163,6 +163,6 @@ public class DisplayPersonalAccInfoController implements Initializable {
 	}
 
 	public void uploadPfp (MouseEvent mouseEvent) {
-		// TODO: 1/12/2021 AD
+		MainController.openUploadPfpWindow(stage, pfp);
 	}
 }

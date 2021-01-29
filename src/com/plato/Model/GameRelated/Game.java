@@ -1,10 +1,11 @@
 package Model.GameRelated;
 
-import Controller.GameRelated.GameController;
 import Controller.IDGenerator;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Reversi.Reversi;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -17,8 +18,9 @@ public abstract class Game {
 	private final String gameID;
 	protected String details = "";
 	private int turn = 0;
+	private IntegerProperty turnNumProperty = new SimpleIntegerProperty(0);
 	private GameConclusion conclusion = GameConclusion.IN_SESSION;
-	private LocalDateTime dateGameEnded;
+	private LocalDateTime dateGameEnded, dateGameStarted;
 
 	protected Game () {
 		this.gameID = IDGenerator.generateNext();
@@ -73,7 +75,7 @@ public abstract class Game {
 								prevRankPlayCount.get() != playCount))
 					rank.incrementAndGet();
 
-				scoreBoard.addLast("Rank: %d,\tUsername: %s,\tPoints: %d,\tWins: %d,\tLosses: %d,\tDraws: %d,\tPlayed Count: %d".formatted(
+				scoreBoard.addLast("Rank: %d,  Username: %s,  Points: %d,  Wins: %d,  Losses: %d,  Draws: %d,  Played Count: %d".formatted(
 						rank.get(), username, pts, wins, losses, draws, playCount
 				));
 				prevRankPts.set(pts);
@@ -86,8 +88,13 @@ public abstract class Game {
 		return scoreBoard;
 	}
 
+	public static String getGamePictureUrl (String gameName) {
+		return (gameName.toLowerCase().startsWith("b")) ? "https://i.imgur.com/IQNxj6N.png" : "https://i.imgur.com/lKOxPw8.png";
+	}
+
 	public static void startGame (Game game) {
 		allGames.addLast(game);
+		game.dateGameStarted = LocalDateTime.now();
 	}
 
 	public static LinkedList<Game> getAllGames () {
@@ -107,12 +114,24 @@ public abstract class Game {
 	 * if turn = 1 it is player two turn
 	 */
 	public void nextTurn () {
-		if (turn == 0) {turn = 1;}
-		else if (turn == 1) {turn = 0;}
+		if (turn == 0) turn = 1;
+		else if (turn == 1) turn = 0;
+		turnNumProperty.set(turn);
+	}
+
+	public IntegerProperty getTurnNumProperty () {
+		return turnNumProperty;
 	}
 
 	public Gamer getTurnGamer () {
 		return getListOfPlayers().get(turn).getGamer();
+	}
+
+	public LinkedList<Player> getListOfPlayers () {
+		if (this instanceof Reversi)
+			return new LinkedList<>(((Reversi) this).getListOfReversiPlayers());
+		else
+			return new LinkedList<>(((BattleSea) this).getListOfBattleSeaPlayers());
 	}
 
 	public Player getTurnPlayer () {
@@ -145,15 +164,11 @@ public abstract class Game {
 			conclusion = (GameConclusion.PLAYER2_WIN);
 		// set end time
 		dateGameEnded = LocalDateTime.now();
-		// going back to game menu
-//		Menu.getMenuIn().back();
-		// getting rid of current game in session
-		GameController.getInstance().setCurrentGameInSession(null);
 	}
 
-	public abstract boolean gameEnded ();
-
 	public abstract Gamer getWinner ();
+
+	public abstract boolean gameEnded ();
 
 	public String getGameName () {
 		return getClass().getSimpleName();
@@ -168,13 +183,6 @@ public abstract class Game {
 	}
 
 	public abstract int getInGameScore (int playerNum);
-
-	public LinkedList<Player> getListOfPlayers () {
-		if (this instanceof Reversi)
-			return new LinkedList<>(((Reversi) this).getListOfReversiPlayers());
-		else
-			return new LinkedList<>(((BattleSea) this).getListOfBattleSeaPlayers());
-	}
 
 	public String getDetails () {
 		return details;

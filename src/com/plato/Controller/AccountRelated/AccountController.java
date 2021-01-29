@@ -111,9 +111,7 @@ public class AccountController {
 				if (!Account.isPhoneNumOK(newVal))
 					throw new InvalidPhoneNumFormatException();
 			}
-			case "pfp url" -> {
-				// FIXME: check url
-			}
+			case "pfp url" -> {}
 			default -> throw new IllegalStateException("Unexpected value: " + field.toLowerCase());
 		}
 //		getCurrentAccLoggedIn().editField(field.toLowerCase(), newVal);
@@ -163,7 +161,10 @@ public class AccountController {
 		return saveLoginInfo;
 	}
 
-	public static class NoAccountExistsWithUsernameException extends Exception {
+    public void editAccFieldCommand() {
+    }
+
+    public static class NoAccountExistsWithUsernameException extends Exception {
 		public NoAccountExistsWithUsernameException () {
 			super("No account exists with this username.");
 		}

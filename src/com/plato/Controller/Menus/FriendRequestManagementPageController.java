@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -32,7 +33,6 @@ public class FriendRequestManagementPageController implements Initializable {
 	public GridPane sendFrndReqWindow;
 	public TextField search;
 	public Label clearSearch;
-	public Button btn3, btn2, btn1;
 
 	public static void setStage (Stage stage) {
 		FriendRequestManagementPageController.stage = stage;
@@ -187,15 +187,6 @@ public class FriendRequestManagementPageController implements Initializable {
 				add(acceptBtn, 3, 0);
 			}});
 		}
-
-		btn1.setOnMouseEntered(e -> btn1.setOpacity(0.8));
-		btn1.setOnMouseExited(e -> btn1.setOpacity(1));
-		btn2.setOnMouseEntered(e -> btn2.setOpacity(0.8));
-		btn2.setOnMouseExited(e -> btn2.setOpacity(1));
-		btn3.setOnMouseEntered(e -> btn3.setOpacity(0.8));
-		btn3.setOnMouseExited(e -> btn3.setOpacity(1));
-		clearSearch.setOnMouseEntered(e -> clearSearch.setOpacity(0.8));
-		clearSearch.setOnMouseExited(e -> clearSearch.setOpacity(1));
 		clearSearch.setOnMouseClicked(e -> search.setText(""));
 
 		search.textProperty().addListener((observableValue, s, t1) -> updateAvailableGamersList());
@@ -204,5 +195,19 @@ public class FriendRequestManagementPageController implements Initializable {
 	public void closeFriendReqSendingWindow (ActionEvent actionEvent) {
 		sendFrndReqWindow.setVisible(false);
 		search.setText("");
+	}
+
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Button)
+			((Button) mouseEvent.getSource()).setOpacity(0.8);
+		else if (mouseEvent.getSource() instanceof Label)
+			((Label) mouseEvent.getSource()).setOpacity(0.8);
+	}
+
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Button)
+			((Button) mouseEvent.getSource()).setOpacity(1);
+		else if (mouseEvent.getSource() instanceof Label)
+			((Label) mouseEvent.getSource()).setOpacity(1);
 	}
 }

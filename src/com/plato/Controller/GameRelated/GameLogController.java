@@ -36,11 +36,27 @@ public class GameLogController {
 //		GameLogView.getInstance().displayCountForPlayerWinningGame(count, ((_11GameMenu) Menu.getMenuIn()).getGameName());
 	}
 
-	public void displayLogOfGame () {
-//		int allPlayedCount = GameLog.getPlayedCount(((_11GameMenu) Menu.getMenuIn()).getGameName());
-//		LinkedList<String> gameHistory = getGameHistoryAsStrings(GameLog.getGameHistory(((_11GameMenu) Menu.getMenuIn()).getGameName()));
-//
-//		GameLogView.getInstance().displayLogOfGame(((_11GameMenu) Menu.getMenuIn()).getGameName(), allPlayedCount, gameHistory);
+	public void displayLogOfGame (String gameName) {
+		int allPlayedCount = GameLog.getPlayedCount(gameName);
+		LinkedList<String> gameHistory = getGameHistoryAsStrings(GameLog.getGameHistory(gameName));
+
+		GameLogView.getInstance().displayLogOfGame(gameName, allPlayedCount, gameHistory);
+	}
+
+	public LinkedList<String> getGameHistoryAsStrings (LinkedList<Game> gamesHistory) {
+		LinkedList<String> gamesHistoryAsStrings = new LinkedList<>();
+
+		gamesHistory.forEach(game ->
+				gamesHistoryAsStrings.add("%s, %s %d-%d %s".formatted(
+						game.getDateGameEnded().format(DateTimeFormatter.ofPattern("yyyy-MMM-dd")),
+						game.getListOfPlayers().get(0).getUsername(),
+						game.getInGameScore(1),
+						game.getInGameScore(2),
+						game.getListOfPlayers().get(1).getUsername()
+				))
+		);
+
+		return gamesHistoryAsStrings;
 	}
 
 	public void displayAllPointsOfPlayer () {
@@ -71,22 +87,6 @@ public class GameLogController {
 		LinkedList<String> historyStrs = getGameHistoryAsStrings(history);
 
 		GameLogView.getInstance().displayGamingHistoryOfGamer(gamename, historyStrs);
-	}
-
-	public LinkedList<String> getGameHistoryAsStrings (LinkedList<Game> gamesHistory) {
-		LinkedList<String> gamesHistoryAsStrings = new LinkedList<>();
-
-		gamesHistory.forEach(game ->
-				gamesHistoryAsStrings.add("%s, %s %d-%d %s".formatted(
-						game.getDateGameEnded().format(DateTimeFormatter.ofPattern("yyyy-MMM-dd")),
-						game.getListOfPlayers().get(0).getUsername(),
-						game.getInGameScore(1),
-						game.getInGameScore(2),
-						game.getListOfPlayers().get(1).getUsername()
-				))
-		);
-
-		return gamesHistoryAsStrings;
 	}
 
 	public void displayPlayerStatsInGame (String gamename) {

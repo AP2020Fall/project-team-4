@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.Menus.GameScoreboardController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<GridPane hgap="3.0" maxHeight="800.0" maxWidth="690.0" minHeight="800.0" minWidth="690.0" style="-fx-background-color: #001a32;" vgap="7.5" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.GameScoreboardController">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="40.0" />
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+    </padding>
+    <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#closeStage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-size: 40; -fx-background-radius: 20; -fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-color: transparent;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+    <ListView fx:id="scoreBoard" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <GridPane.margin>
+         <Insets />
+      </GridPane.margin></ListView>
+</GridPane>

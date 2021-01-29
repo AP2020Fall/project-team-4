@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="mainGridPane" hgap="10.0" maxHeight="700.0" maxWidth="500.0" minHeight="700.0" minWidth="500.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.DisplayPersonalAccInfoController">
+<GridPane fx:id="mainGridPane" hgap="10.0" maxHeight="750.0" maxWidth="500.0" minHeight="750.0" minWidth="500.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Menus.DisplayPersonalAccInfoController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" />
     </columnConstraints>

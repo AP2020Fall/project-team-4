@@ -1,21 +1,21 @@
 [
   {
     "awardsFromEvents": 0,
-    "money": 20.0,
+    "money": 8.0,
     "accountStartDate": {
       "year": 2021,
       "month": 1,
-      "day": 14
+      "day": 29
     },
     "frnds": [],
     "faveGames": [],
-    "firstName": "1",
-    "lastName": "1",
-    "username": "dorrin1",
-    "password": "11",
-    "userID": "270774",
-    "email": "1@gmail.com",
-    "phoneNum": "00011122233",
+    "firstName": "fatemeh",
+    "lastName": "fotouhi",
+    "username": "fatemehfo",
+    "password": "fo23",
+    "userID": "804226",
+    "email": "fatemeh23@gmail.com",
+    "phoneNum": "09123456789",
     "pfpUrl": "https://i.imgur.com/vMppUMs.png"
   }
 ]
