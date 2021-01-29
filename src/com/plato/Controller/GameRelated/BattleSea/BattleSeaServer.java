@@ -44,10 +44,10 @@ public class BattleSeaServer {
 
                     }
                 }
-
-
             }
-            catch ()
+            catch (IOException e){
+                System.out.println("error");
+            }
         }
     }
 

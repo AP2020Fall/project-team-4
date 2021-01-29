@@ -29,7 +29,21 @@ public class ReversiServer {
             handleClient();
         }
 
-        private void handleClient(){}
+        private void handleClient(){
+            try{
+                String input = "" ;
+                while (true){
+                    input =dataInputStream.readUTF();
+                    System.out.println("client sent : " + input);
+                    if(input.equals("close Move History")){
+                        System.out.println("move history closed");
+                    }
+                }
+            }
+            catch (IOException e){
+
+            }
+        }
     }
 
     static class ReversiServerImp{

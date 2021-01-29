@@ -339,5 +339,6 @@ public class ReversiGameController implements Initializable {
 
 	public void closeMoveHistory (ActionEvent actionEvent) {
 		historyGridPane.setVisible(false);
+		System.out.println("close Move History");
 	}
 }
