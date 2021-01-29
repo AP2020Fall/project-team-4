@@ -19,7 +19,7 @@
         <Button fx:id="b0" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#eventsTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Events" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="https://i.imgur.com/drYpwZK.pnghttps://i.imgur.com/drYpwZK.png" />
+                    <Image url="@../../../Resources/Images/eventButton.png" />
                 </ImageView>
             </graphic>
             <font>
@@ -29,7 +29,7 @@
         <Button fx:id="b1" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#usersTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Users" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="https://i.imgur.com/nRZLjJT.pnghttps://i.imgur.com/nRZLjJT.png" />
+                    <Image url="@../../../Resources/Images/gamerIcon.png" />
                 </ImageView>
             </graphic>
             <font>
@@ -39,7 +39,7 @@
         <Button fx:id="b2" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Account" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="https://i.imgur.com/QwfFgRI.pnghttps://i.imgur.com/QwfFgRI.png" />
+                    <Image url="@../../../Resources/Images/accountIcon.png" />
                 </ImageView>
             </graphic>
             <font>
@@ -49,7 +49,7 @@
         <Button fx:id="b3" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="30.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#eventsTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Events" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="https://i.imgur.com/drYpwZK.pnghttps://i.imgur.com/drYpwZK.png" />
+                    <Image url="@../../../Resources/Images/eventButton.png" />
                 </ImageView>
             </graphic>
             <font>
@@ -59,7 +59,7 @@
         <Button fx:id="b4" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="300.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamingHistoryPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Gaming&#10;History" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="110.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="https://i.imgur.com/SVKhCKE.pnghttps://i.imgur.com/SVKhCKE.png" />
+                    <Image url="@../../../Resources/Images/historyButton.png" />
                 </ImageView>
             </graphic>
             <font>
@@ -69,7 +69,7 @@
         <Button fx:id="b5" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="435.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamesTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Games" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="https://i.imgur.com/tVkxjeF.pnghttps://i.imgur.com/tVkxjeF.png" />
+                    <Image url="@../../../Resources/Images/gameButton.png" />
                 </ImageView>
             </graphic>
             <font>
@@ -79,7 +79,7 @@
         <Button fx:id="b6" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="570.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#faveGamesTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Favourite&#10;Games" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="105.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="https://i.imgur.com/aypOXrd.png?1https://i.imgur.com/aypOXrd.png?1" />
+                    <Image url="@../../../Resources/Images/favouriteGame.png" />
                 </ImageView>
             </graphic>
             <font>
@@ -89,7 +89,7 @@
         <Button fx:id="b7" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="705.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#friendsPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Friends" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="https://i.imgur.com/uROCGRe.pnghttps://i.imgur.com/uROCGRe.png" />
+                    <Image url="@../../../Resources/Images/friend.png" />
                 </ImageView>
             </graphic>
             <font>
@@ -99,7 +99,7 @@
         <Button fx:id="b8" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="460.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Account" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="https://i.imgur.com/QwfFgRI.pnghttps://i.imgur.com/QwfFgRI.png" />
+                    <Image url="@../../../Resources/Images/accountIcon.png" />
                 </ImageView>
             </graphic>
             <font>
@@ -109,7 +109,7 @@
         <Button fx:id="b9" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="1535.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#messagesTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Messages" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="125.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="https://i.imgur.com/kFLDyxh.pnghttps://i.imgur.com/kFLDyxh.png" />
+                    <Image url="@../../../Resources/Images/messageIcon.png" />
                 </ImageView>
             </graphic>
             <font>

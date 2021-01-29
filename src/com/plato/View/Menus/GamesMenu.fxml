@@ -16,19 +16,19 @@
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
 
-   <Button fx:id="reversiButton" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" onAction="#reversiMainMenu" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/lKOxPw8.pnghttps://i.imgur.com/lKOxPw8.png&quot;); -fx-background-radius: 50; -fx-background-size: 100 100; -fx-background-position: center; -fx-background-color: transparent;" GridPane.columnIndex="1">
+   <Button fx:id="reversiButton" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" onAction="#reversiMainMenu" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;@../../../Resources/Images/reversiIcon.png&quot;); -fx-background-radius: 50; -fx-background-size: 100 100; -fx-background-position: center; -fx-background-color: transparent;" GridPane.columnIndex="1">
       <GridPane.margin>
          <Insets left="10.0" right="10.0" top="50.0" />
       </GridPane.margin>
    </Button>
 
-   <Button fx:id="battlseaButton" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" onAction="#battleSeaMainMenu" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/IQNxj6N.png&quot;); -fx-background-size: 100 100; -fx-background-position: center; -fx-background-radius: 50; -fx-background-color: transparent;">
+   <Button fx:id="battlseaButton" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" onAction="#battleSeaMainMenu" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;@../../../Resources/Images/battleseaIcon.png&quot;); -fx-background-size: 100 100; -fx-background-position: center; -fx-background-radius: 50; -fx-background-color: transparent;">
       <GridPane.margin>
          <Insets left="10.0" right="10.0" top="50.0" />
       </GridPane.margin>
    </Button>
 
-   <Button maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" onAction="#closeStage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 50 50; -fx-background-radius: 25; -fx-background-color: transparent;" GridPane.valignment="TOP">
+   <Button maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" onAction="#closeStage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 50 50; -fx-background-radius: 25; -fx-background-color: transparent;" GridPane.valignment="TOP">
       <opaqueInsets>
          <Insets />
       </opaqueInsets>

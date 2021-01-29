@@ -38,7 +38,7 @@
                 </font>
             </CheckBox>
         </VBox>
-        <Button fx:id="createEventBtn" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#createEvent" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/iHRpKIE.pnghttps://i.imgur.com/iHRpKIE.png&quot;); -fx-background-radius: 37.5; -fx-background-size: 75 75;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+        <Button fx:id="createEventBtn" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#createEvent" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;@../../../Resources/Images/addButton.png&quot;); -fx-background-radius: 37.5; -fx-background-size: 75 75;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </GridPane.margin>

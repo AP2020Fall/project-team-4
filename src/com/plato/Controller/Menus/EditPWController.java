@@ -1,6 +1,7 @@
 package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
+import Controller.MainController;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -35,8 +36,8 @@ public class EditPWController implements Initializable {
 			newPwFieldpwHidden = (PasswordField) newPwStackPane.getChildren().get(1);
 			newShowPwOrNot = (ImageView) newPwStackPane.getChildren().get(2);
 
-			Image showImg = new Image("https://cdn1.iconfinder.com/data/icons/essentials-pack/96/show_view_eye_visible_on-256.png"),
-					hideImg = new Image("https://cdn1.iconfinder.com/data/icons/essentials-pack/96/hidden_invisible_hide_eye_private-256.png");
+			Image showImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/eyeVisible.png"))),
+					hideImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/hiddenEye.png")));
 
 			newShowPwOrNot.setImage(showImg);
 			newPwFieldpwHidden.toFront();
@@ -68,8 +69,8 @@ public class EditPWController implements Initializable {
 			oldPwFieldpwHidden = (PasswordField) oldPwStackPane.getChildren().get(1);
 			oldShowPwOrNot = (ImageView) oldPwStackPane.getChildren().get(2);
 
-			Image showImg = new Image("https://cdn1.iconfinder.com/data/icons/essentials-pack/96/show_view_eye_visible_on-256.png"),
-					hideImg = new Image("https://cdn1.iconfinder.com/data/icons/essentials-pack/96/hidden_invisible_hide_eye_private-256.png");
+			Image showImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/eyeVisible.png"))),
+					hideImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/hiddenEye.png")));
 
 			oldShowPwOrNot.setImage(showImg);
 			oldPwFieldpwHidden.toFront();

@@ -19,7 +19,7 @@
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
     </padding>
-    <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#closeStage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-size: 40; -fx-background-radius: 20; -fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-color: transparent;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+    <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#closeStage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-size: 40; -fx-background-radius: 20; -fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-color: transparent;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
     <ListView fx:id="scoreBoard" GridPane.columnSpan="2" GridPane.rowIndex="1">
       <GridPane.margin>
          <Insets />

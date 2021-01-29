@@ -28,7 +28,7 @@
         <GridPane.margin>
             <Insets bottom="10.0" />
         </GridPane.margin>
-        <Image url="https://i.imgur.com/vMppUMs.png" />
+        <Image url="@../../../Resources/Images/noProfilePicture.png" />
     </ImageView>
     <Label text="First Name" GridPane.rowIndex="1">
         <font>
@@ -41,7 +41,7 @@
         <GridPane.margin>
             <Insets bottom="15.0" />
         </GridPane.margin>
-        <Image url="https://i.imgur.com/CxCk2qN.png" />
+        <Image url="@../../../Resources/Images/addButton.png" />
     </ImageView>
     <Label text="Last Name" GridPane.rowIndex="2">
         <font>
@@ -71,7 +71,7 @@
             </font>
         </SplitMenuButton>
         <ImageView fx:id="coinImg" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="https://i.imgur.com/Iq0MAc7.png" />
+            <Image url="@../../../Resources/Images/coin.png" />
         </ImageView>
     </HBox>
     <HBox alignment="CENTER" spacing="5.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">

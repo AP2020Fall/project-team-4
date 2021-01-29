@@ -46,8 +46,8 @@ public class LoginMenuController implements Initializable {
 		pwFieldpwHidden = (PasswordField) pwStackPane.getChildren().get(1);
 		showPwOrNot = (ImageView) pwStackPane.getChildren().get(2);
 
-		Image showImg = new Image("https://cdn1.iconfinder.com/data/icons/essentials-pack/96/show_view_eye_visible_on-256.png"),
-				hideImg = new Image("https://cdn1.iconfinder.com/data/icons/essentials-pack/96/hidden_invisible_hide_eye_private-256.png");
+		Image showImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/eyeVisible.png"))),
+				hideImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/hiddenEye.png")));
 
 		showPwOrNot.setImage(showImg);
 		pwFieldpwHidden.toFront();
