@@ -14,6 +14,8 @@ public class ReversiClient {
             }
             catch (IOException e) {
                 System.err.println("Error Reversi Client");
+                System.err.println("Error Reversi Client");
+
             }
 
         }
