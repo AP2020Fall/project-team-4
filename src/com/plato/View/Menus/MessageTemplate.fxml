@@ -20,7 +20,7 @@
         <RowConstraints vgrow="SOMETIMES" />
     </rowConstraints>
     <ImageView fitHeight="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-        <Image url="https://i.imgur.com/4l0anrI.png?6" />
+        <Image url="@../../../Resources/Images/arrow.png" />
     </ImageView>
     <Label fx:id="msg" style="-fx-background-color: #2d59ff; -fx-background-radius: 20;" text="-" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
         <GridPane.margin>

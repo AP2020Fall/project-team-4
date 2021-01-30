@@ -51,6 +51,7 @@ public class BattleSeaServer {
                         System.out.println("BattleSeaServer disconnected");
                         break;
                     }
+
                 }
             }
             catch (IOException e){

@@ -87,10 +87,10 @@
             <CheckBox fx:id="doRecoReversi" mnemonicParsing="false" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <CheckBox fx:id="doRecoBattleSea" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <ImageView fitHeight="75.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                <Image url="https://i.imgur.com/lKOxPw8.pnghttps://i.imgur.com/lKOxPw8.png" />
+                <Image url="@../../../Resources/Images/reversiIcon.png" />
             </ImageView>
             <ImageView fitHeight="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                <Image url="https://i.imgur.com/IQNxj6N.pnghttps://i.imgur.com/IQNxj6N.png" />
+                <Image url="@../../../Resources/Images/battleseaIcon.png" />
             </ImageView>
             <GridPane.margin>
                 <Insets left="25.0" right="25.0" />
@@ -111,7 +111,7 @@
             <effect>
                 <DropShadow color="#575656" offsetX="1.0" offsetY="1.0" />
             </effect>
-            <Button fx:id="sendBtn" layoutX="10.0" layoutY="10.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#sendMessageDone" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 30; -fx-background-image: url(&quot;https://i.imgur.com/hh9SLPw.png&quot;); -fx-background-size: 35; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: BLACK;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="sendBtn" layoutX="10.0" layoutY="10.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#sendMessageDone" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 30; -fx-background-image: url(&quot;@../../../Resources/Images/paperAirplane.png&quot;); -fx-background-size: 35; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: BLACK;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                 <GridPane.margin>
                     <Insets left="7.5" right="10.0" />
                 </GridPane.margin>
@@ -121,7 +121,7 @@
                     <Insets bottom="15.0" left="5.0" right="5.0" top="5.0" />
                 </GridPane.margin>
             </TextArea>
-            <Button fx:id="backBtn" layoutX="275.0" layoutY="96.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#cancelSendingMsg" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 50; -fx-background-color: transparent;" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <Button fx:id="backBtn" layoutX="275.0" layoutY="96.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#cancelSendingMsg" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 50; -fx-background-color: transparent;" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                 <GridPane.margin>
                     <Insets left="10.0" top="10.0" />
                 </GridPane.margin>
@@ -135,7 +135,7 @@
             </GridPane.margin>
          </Label>
         </GridPane>
-        <Button maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#sendMsg" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/i4FTzLQ.pnghttps://i.imgur.com/i4FTzLQ.pnghttps://i.imgur.com/i4FTzLQ.pnghttps://i.imgur.com/i4FTzLQ.png&quot;); -fx-background-size: 40; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+        <Button maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#sendMsg" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;@../../../Resources/Images/letter.png&quot;); -fx-background-size: 40; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
             <GridPane.margin>
                 <Insets right="10.0" />
             </GridPane.margin>

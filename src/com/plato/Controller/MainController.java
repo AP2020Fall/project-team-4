@@ -25,6 +25,7 @@ import org.hildan.fxgson.FxGson;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -88,6 +89,14 @@ public class MainController extends Application {
 			mainController = new MainController();
 		return mainController;
 	}
+
+	public static Image setImageFromFile(String address){
+		try{
+			return new Image(String.valueOf(new File(address).toURI().toURL()));
+		} catch (MalformedURLException e){
+			e.printStackTrace();
+		}
+	return null;}
 //
 //	private void dealWithInput (int command) {
 //	LinkedList<String> menuOpts = new LinkedList<>();

@@ -298,7 +298,7 @@ public class BattleSeaPlayPageController implements Initializable {
 					Ship shipToBeBombed = opponentPlayer.getShipAboutToBeBombed(getXFrom1(index), getYFrom1(index));
 
 					if (shipToBeBombed.isDestroyed(opponentPlayer)) {
-						Image explosionSprite = new Image("https://i.imgur.com/1XaaYWo.png");
+						Image explosionSprite = new Image("src/com/Resources/Images/explosion.png");
 
 						animateSuccessFulBomb(explosionSprite, shipToBeBombed);
 					}
@@ -386,7 +386,7 @@ public class BattleSeaPlayPageController implements Initializable {
 
 	private Label getBombLabel (Bomb bomb, boolean isForBigBoard) {
 		return new Label() {{
-			String imgUrl = (bomb.wasSuccessful() ? "https://i.imgur.com/EH897Ol.png" : "https://i.imgur.com/MFUJ8DN.png");
+			String imgUrl = (bomb.wasSuccessful() ? "src/com/Resources/Images/successfulBomb.png" : "src/com/Resources/Images/redX.png");
 			int imgSize = (isForBigBoard ? 60 : 30);
 
 			setStyle("-fx-background-image: url('" + imgUrl + "');" +
