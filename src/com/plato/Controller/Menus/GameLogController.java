@@ -52,13 +52,13 @@ public class GameLogController implements Initializable {
 		playedNum.setText(playedNum.getText().replaceAll("-", String.valueOf(GameLog.getPlayedCount(gameName))));
 		switch (gameName) {
 			case "BattleSea" -> {
-				Image image = new Image("src/com/Resources/Images/battleseaBackground.png");
+				Image image = MainController.getImageFromFile("src/com/Resources/Images/battleseaBackground.png");
 				gamePicture.setImage(image);
 				gamePicture.setViewport(new Rectangle2D(image.getWidth() / 3, image.getHeight() / 3,
 						image.getWidth() * 2 / 3, image.getWidth() * 2 / 3 / 4));
 			}
 			case "Reversi" -> {
-				Image image = new Image("src/com/Resources/Images/reversiBackground.png");
+				Image image = MainController.getImageFromFile("src/com/Resources/Images/reversiBackground.png");
 				gamePicture.setImage(image);
 				gamePicture.setViewport(new Rectangle2D(0, image.getHeight() / 3,
 						image.getWidth(), image.getWidth() / 4));
