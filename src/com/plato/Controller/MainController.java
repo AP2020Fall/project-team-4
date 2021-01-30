@@ -97,6 +97,8 @@ public class MainController extends Application {
 			e.printStackTrace();
 		}
 	return null;}
+
+
 //
 //	private void dealWithInput (int command) {
 //	LinkedList<String> menuOpts = new LinkedList<>();

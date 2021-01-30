@@ -333,7 +333,7 @@ public class ReversiGameController implements Initializable {
 //		System.out.println("x,y = " + getXFrom1(board.getChildren().indexOf(mouseEvent.getSource())) + "," + getYFrom1(board.getChildren().indexOf(mouseEvent.getSource())));
 	}
 
-	public void closeGame (ActionEvent actionEvent) {
+	public static void closeGame (ActionEvent actionEvent) {
 		stage.close();
 	}
 
