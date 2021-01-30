@@ -42,6 +42,14 @@ public class BattleSeaServer {
                     System.out.println("client sent : "+ input);
                     if (input.startsWith("")){
 
+
+                    }
+                    else {
+                        dataOutputStream.writeUTF("BattleSeaMenu closed");
+                        dataOutputStream.flush();
+                        clientSocket.close();
+                        System.out.println("BattleSeaServer disconnected");
+                        break;
                     }
 
                 }
