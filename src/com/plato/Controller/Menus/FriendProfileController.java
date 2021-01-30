@@ -52,7 +52,7 @@ public class FriendProfileController implements Initializable {
 
 		if (frnd.getFaveGames().contains("Reversi"))
 			faveGames.getChildren().add(new ImageView(){{
-				setImage(new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/reversiIcon.png"))));
+				setImage(new Image("src/com/Resources/Images/reversiIcon.png"));
 				setFitHeight(75);
 				setPickOnBounds(true);
 				setPreserveRatio(true);
@@ -60,7 +60,7 @@ public class FriendProfileController implements Initializable {
 
 		if (frnd.getFaveGames().contains("BattleSea"))
 			faveGames.getChildren().add(new ImageView(){{
-				setImage(new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/battleseaIcon.png"))));
+				setImage(new Image("src/com/Resources/Images/battleseaIcon.png"));
 				setFitHeight(75);
 				setPickOnBounds(true);
 				setPreserveRatio(true);

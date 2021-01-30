@@ -38,8 +38,8 @@ public class DeleteAccountController implements Initializable {
 		pwFieldpwHidden = (PasswordField) pwStackPane.getChildren().get(1);
 		showPwOrNot = (ImageView) pwStackPane.getChildren().get(2);
 
-		Image showImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/eyeVisible.png"))),
-				hideImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/hiddenEye.png")));
+		Image showImg = new Image("src/com/Resources/Images/eyeVisible.png"),
+				hideImg = new Image("src/com/Resources/Images/hiddenEye.png");
 
 		showPwOrNot.setImage(showImg);
 		pwFieldpwHidden.toFront();

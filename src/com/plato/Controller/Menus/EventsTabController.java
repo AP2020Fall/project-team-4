@@ -124,7 +124,7 @@ public class EventsTabController implements Initializable {
 							setTextAlignment(TextAlignment.CENTER);
 						}});
 						getChildren().add(new ImageView() {{
-							setImage(new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/coin.png"))));
+							setImage(new Image("src/com/Resources/Images/coin.png"));
 							setFitWidth(30);
 							setFitHeight(30);
 							setSmooth(true);

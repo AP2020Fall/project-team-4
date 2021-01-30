@@ -36,8 +36,8 @@ public class EditPWController implements Initializable {
 			newPwFieldpwHidden = (PasswordField) newPwStackPane.getChildren().get(1);
 			newShowPwOrNot = (ImageView) newPwStackPane.getChildren().get(2);
 
-			Image showImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/eyeVisible.png"))),
-					hideImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/hiddenEye.png")));
+			Image showImg = new Image("src/com/Resources/Images/eyeVisible.png"),
+					hideImg = new Image("src/com/Resources/Images/hiddenEye.png");
 
 			newShowPwOrNot.setImage(showImg);
 			newPwFieldpwHidden.toFront();
@@ -69,8 +69,8 @@ public class EditPWController implements Initializable {
 			oldPwFieldpwHidden = (PasswordField) oldPwStackPane.getChildren().get(1);
 			oldShowPwOrNot = (ImageView) oldPwStackPane.getChildren().get(2);
 
-			Image showImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/eyeVisible.png"))),
-					hideImg = new Image(String.valueOf(MainController.setImageFromFile("src/com/Resources/Images/hiddenEye.png")));
+			Image showImg = new Image("src/com/Resources/Images/eyeVisible.png"),
+					hideImg = new Image("src/com/Resources/Images/hiddenEye.png");
 
 			oldShowPwOrNot.setImage(showImg);
 			oldPwFieldpwHidden.toFront();
