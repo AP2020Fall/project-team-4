@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -69,7 +70,9 @@ public class DeleteAccountController implements Initializable {
 	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
-
+	public void closeStageWrite(ActionEvent actionEvent) {
+		MainController.write("DeletAccount.closeStage");
+	}
 	public void removeAccount (ActionEvent actionEvent) {
 //		Stage stage = new Stage();
 //		try {
@@ -106,5 +109,8 @@ public class DeleteAccountController implements Initializable {
 
 		DeleteAccountController.stage.close();
 //		stage.show();
+	}
+	public void removeAccountWrite(ActionEvent actionEvent) {
+		MainController.write("DeletAccount.removeAccount");
 	}
 }
