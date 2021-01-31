@@ -63,10 +63,16 @@ public class GamesMenuController implements Initializable {
 
 	}
 
+	public void battleSeaMainMenuWrite(ActionEvent actionEvent){
+		MainController.write("GamesMenu.battleSeaMainMenu");
+	}
 
 	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
+	}
 
+	public void closeStageWrite(ActionEvent actionEvent){
+		MainController.write("GamesMenu.closeStage");
 	}
 
 	public void reversiMainMenu (ActionEvent actionEvent) {
@@ -99,6 +105,10 @@ public class GamesMenuController implements Initializable {
 
 	}
 
+	public void reversiMenu(ActionEvent actionEvent){
+		MainController.write("GamesMenu.reversiMenu");
+	}
+
 	@Override
 
 	public void initialize (URL location, ResourceBundle resources) {
@@ -120,7 +130,15 @@ public class GamesMenuController implements Initializable {
 		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
+	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		MainController.write("GamesMenu.mouseIsOver");
+	}
+
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		MainController.write("GamesMenu.mouseIsOut");
 	}
 }
