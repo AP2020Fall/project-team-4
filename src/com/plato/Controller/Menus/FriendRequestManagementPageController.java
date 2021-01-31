@@ -2,6 +2,7 @@ package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
 import Controller.AccountRelated.FriendRequestController;
+import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.FriendRequest;
 import Model.AccountRelated.Gamer;
@@ -43,7 +44,9 @@ public class FriendRequestManagementPageController implements Initializable {
 		sendFrndReqWindow.setVisible(true);
 		updateAvailableGamersList();
 	}
-
+	public void friendRequestManagementPageWrite(ActionEvent actionEvent) {
+		MainController.write("FriendRequestManagementPage.sendFriendReq");
+	}
 	private void updateAvailableGamersList () {
 		Gamer currentLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
 		availableForFrndReqList.getItems().clear();
@@ -116,6 +119,9 @@ public class FriendRequestManagementPageController implements Initializable {
 
 	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
+	}
+	public void closeStageWrite(ActionEvent actionEvent) {
+		MainController.write("FriendRequestManagementPage.closeStage");
 	}
 
 	@Override
@@ -196,6 +202,9 @@ public class FriendRequestManagementPageController implements Initializable {
 		sendFrndReqWindow.setVisible(false);
 		search.setText("");
 	}
+	public void closeFriendReqSendingWindowWrite(ActionEvent actionEvent) {
+		MainController.write("FriendRequestManagementPage.closeFriendRequestSendingWindow");
+	}
 
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Button)
@@ -203,11 +212,17 @@ public class FriendRequestManagementPageController implements Initializable {
 		else if (mouseEvent.getSource() instanceof Label)
 			((Label) mouseEvent.getSource()).setOpacity(0.8);
 	}
+	public void mouseIsOverWrite(MouseEvent mouseEvent) {
+		MainController.write("FriendRequestManagementPage.mouseIsOver");
+	}
 
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Button)
 			((Button) mouseEvent.getSource()).setOpacity(1);
 		else if (mouseEvent.getSource() instanceof Label)
 			((Label) mouseEvent.getSource()).setOpacity(1);
+	}
+	public void mouseIsOutWrite(MouseEvent mouseEvent) {
+		MainController.write("FriendRequestManagementPage.mouseIsOut");
 	}
 }
