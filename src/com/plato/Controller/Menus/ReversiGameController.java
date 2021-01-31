@@ -357,10 +357,16 @@ public class ReversiGameController implements Initializable {
 		stage.close();
 	}
 
-
+	public void closeGameWrite(ActionEvent actionEvent){
+		MainController.write("ReversiGame.mouseIsOverCell");
+	}
 
 	public void closeMoveHistory (ActionEvent actionEvent) {
 		historyGridPane.setVisible(false);
 		System.out.println("close Move History");
+	}
+
+	public void closeMoveHistoryWrite(ActionEvent actionEvent){
+		MainController.write("ReversiGame.closeMoveHistory");
 	}
 }
