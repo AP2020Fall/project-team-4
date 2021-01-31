@@ -66,21 +66,27 @@ public class EventCreateOrEditPageController implements Initializable {
 	public void uploadImg (MouseEvent mouseEvent) {
 		// TODO: 1/14/2021 AD
 	}
-
+	public void uploadImgWrite(MouseEvent mouseEvent) {
+		MainController.write("EventCreateOrEditPage.uploadImg");
+	}
 	public void editTitle (MouseEvent mouseEvent) {
 		titleTextField.setVisible(!titleTextField.isVisible());
 		((Label) mouseEvent.getSource()).setText(titleTextField.isVisible() ? "cancel" : "edit");
 		titleTextField.setText(title.getText());
 		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-
+	public void editTitleWrite(MouseEvent mouseEvent) {
+		MainController.write("EventCreateOrEditPage.editTitle");
+	}
 	public void editGame (MouseEvent mouseEvent) {
 		gameEditMenu.setVisible(!gameEditMenu.isVisible());
 		((Label) mouseEvent.getSource()).setText(gameEditMenu.isVisible() ? "cancel" : "edit");
 		gameEditMenu.setText(event.getGameName());
 		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-
+	public void editGameWrite(MouseEvent mouseEvent) {
+		MainController.write("EventCreateOrEditPage.editGame");
+	}
 	public void editStartDate (MouseEvent mouseEvent) {
 		startDatePicker.setVisible(!startDatePicker.isVisible());
 		((Label) mouseEvent.getSource()).setText(startDatePicker.isVisible() ? "cancel" : "edit");
@@ -90,7 +96,9 @@ public class EventCreateOrEditPageController implements Initializable {
 		);
 		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-
+	public void editStartDateWrite(MouseEvent mouseEvent) {
+		MainController.write("EventCreateOrEditPage.editStartDate");
+	}
 	public void editEndDate (MouseEvent mouseEvent) {
 		endDatePicker.setVisible(!endDatePicker.isVisible());
 		((Label) mouseEvent.getSource()).setText(endDatePicker.isVisible() ? "cancel" : "edit");
@@ -100,27 +108,35 @@ public class EventCreateOrEditPageController implements Initializable {
 		);
 		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-
+	public void editEndDateWrite(MouseEvent mouseEvent) {
+		MainController.write("EventCreateOrEditPage.editEndDateWrite");
+	}
 	public void editCoins (MouseEvent mouseEvent) {
 		coinSplitMenu.setVisible(!coinSplitMenu.isVisible());
 		((Label) mouseEvent.getSource()).setText(coinSplitMenu.isVisible() ? "cancel" : "edit");
 		coinSplitMenu.setText(coins.getText());
 		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-
+	public void editCoinsWrite(MouseEvent mouseEvent) {
+		MainController.write("EventCreateOrEditPage.editCoins");
+	}
 	public void editDetails (MouseEvent mouseEvent) {
 		detailsTextArea.setVisible(!detailsTextArea.isVisible());
 		((Label) mouseEvent.getSource()).setText(detailsTextArea.isVisible() ? "cancel" : "edit");
 		detailsTextArea.setText(details.getText());
 		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-
+	public void editDetailsWrite(MouseEvent mouseEvent) {
+		MainController.write("EventCreateOrEditPage.editDetails");
+	}
 	public void removeEvent (ActionEvent actionEvent) {
 		Event.removeEvent(event.getEventID());
 		mainGridPane.getChildren().clear();
 		mainGridPane.setVisible(false);
 	}
-
+	public void removeEventWrite(ActionEvent actionEvent) {
+		MainController.write("EventCreateOrEditPage.removeEvent");
+	}
 	public void revertEdits (ActionEvent actionEvent) {
 		titleTextField.setVisible(false);
 		startDatePicker.setVisible(false);
@@ -129,7 +145,9 @@ public class EventCreateOrEditPageController implements Initializable {
 		detailsTextArea.setVisible(false);
 		coinSplitMenu.setVisible(false);
 	}
-
+	public void revertEditsWrite(ActionEvent actionEvent) {
+		MainController.write("EventCreateOrEditPage.removeEvent");
+	}
 	public void confirmEdits (ActionEvent actionEvent) {
 		try {
 			if (titleTextField.isVisible()) {
@@ -138,8 +156,8 @@ public class EventCreateOrEditPageController implements Initializable {
 				} catch (EventController.StartDateTimeIsAfterEndException | MainController.InvalidFormatException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException e) {
 					allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
 				}
-			}
 
+			}
 			if (gameEditMenu.isVisible()) {
 				try {
 					EventController.getInstance().editEvent(event, "game menu", gameEditMenu.getText());
@@ -193,11 +211,15 @@ public class EventCreateOrEditPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
+	public void confirmEditWrite(ActionEvent actionEvent) {
+		MainController.write("EventCreateOrEditPage.confirmEdit");
+	}
 	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
-
+	public void closeStageWrite(ActionEvent actionEvent) {
+		MainController.write("EventCreateOrEditPage.closeStage");
+	}
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
 		if (event != null && event.hasStarted())
@@ -353,7 +375,9 @@ public class EventCreateOrEditPageController implements Initializable {
 			allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
 		}
 	}
-
+	public void createEventWrite(ActionEvent actionEvent) {
+		MainController.write("EventCreateOrEditPage.createEvent");
+	}
 	public void openEventSettings (ActionEvent actionEvent) {
 		try {
 			EventSettingsController.setIsForCreateOrEdit(title.getText().equals("-") || title.getText().isEmpty() || title.getText().isBlank());
@@ -368,5 +392,8 @@ public class EventCreateOrEditPageController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public void openEventSettingsWrite(ActionEvent actionEvent) {
+		MainController.write("EventCreateOrEditPage.openEventSetting");
 	}
 }
