@@ -38,7 +38,7 @@ public class LoginMenuController implements Initializable {
 	public TextField username;
 	public static String host = "127.0.0.1";
 	public static int port = 5056;
-	public static Socket clientsocket = null;
+	public static Socket clientSocket;
 
 	public static void setStage (Stage stage) {
 		LoginMenuController.stage = stage;
@@ -153,7 +153,7 @@ public class LoginMenuController implements Initializable {
 		try{
 			InetAddress ip = InetAddress.getByName("localhost");
 			Socket socket = new Socket(ip , 5056);
-			clientsocket = new Socket(ip , 5056);
+			clientSocket = new Socket(ip , 5056);
 			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
 		}catch (Exception e){
