@@ -16,8 +16,6 @@ public class ReversiClient {
                 System.err.println("Error Reversi Client");
 //                System.err.println("Error Reversi Client");
 
-
-
             }
 
         }

@@ -51,7 +51,7 @@
     </Button>
     <GridPane fx:id="board1" hgap="2.5" maxHeight="250.0" maxWidth="250.0" minHeight="250.0" minWidth="250.0"
               onMouseClicked="#selectBoard" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut"
-              style="-fx-background-image: url(&quot;@../../../Resources/Images/backButton&quot;); -fx-background-size: 250; -fx-background-position: center;"
+              style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 250; -fx-background-position: center;"
               vgap="2.5" GridPane.rowIndex="1">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="10.0"/>
@@ -84,14 +84,14 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
         </GridPane.margin>
         <Label maxHeight="115.0" maxWidth="46.0" minHeight="115.0" minWidth="46.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFourAirplanes.png&quot;); -fx-background-size: 48 120; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/oJ05ht1.png&quot;); -fx-background-size: 48 120; -fx-background-position: center;"
                GridPane.columnSpan="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="18.0" layoutY="24.0" maxHeight="115.0" maxWidth="23.0" minHeight="115.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipOne.png&quot;); -fx-background-size: 23 115; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/PeODDrk.png&quot;); -fx-background-size: 23 115; -fx-background-position: center;"
                GridPane.columnIndex="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
@@ -99,7 +99,7 @@
         </Label>
         <Label layoutX="155.0" layoutY="24.0" maxHeight="92.0" maxWidth="23.0" minHeight="92.0"
                minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipTwo.png&quot;); -fx-background-size: 23 92; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/hHcn8ds.png&quot;); -fx-background-size: 23 92; -fx-background-position: center;"
                GridPane.columnIndex="3" GridPane.rowSpan="4">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
@@ -107,7 +107,7 @@
         </Label>
         <Label layoutX="224.0" layoutY="22.0" maxHeight="69.0" maxWidth="23.0" minHeight="69.0"
                minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipThree.png&quot;); -fx-background-size: 23 69; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/CT4RjeJ.png&quot;); -fx-background-size: 23 69; -fx-background-position: center;"
                GridPane.columnIndex="4" GridPane.rowSpan="3">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
@@ -115,7 +115,7 @@
         </Label>
         <Label layoutX="293.0" layoutY="20.0" maxHeight="46.0" maxWidth="23.0" minHeight="46.0"
                minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFour.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/KsQnH87.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
                GridPane.columnIndex="5" GridPane.rowSpan="2">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
@@ -123,7 +123,7 @@
         </Label>
         <Label layoutX="362.0" layoutY="18.0" maxHeight="46.0" maxWidth="23.0" minHeight="46.0"
                minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFour.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/KsQnH87.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
                GridPane.columnIndex="6" GridPane.rowSpan="2">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
@@ -133,7 +133,7 @@
     <GridPane fx:id="board2" hgap="2.5" layoutX="22.0" layoutY="178.0" maxHeight="250.0" maxWidth="250.0"
               minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoard" onMouseEntered="#mouseIsOver"
               onMouseExited="#mouseIsOut"
-              style="-fx-background-image: url(&quot;@../../../Resources/Images/BattleSeaBoard.png&quot;); -fx-background-size: 250; -fx-background-position: center;"
+              style="-fx-background-image: url(&quot;https://i.imgur.com/G0z1Rx2.png?2&quot;); -fx-background-size: 250; -fx-background-position: center;"
               vgap="2.5" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="10.0"/>
@@ -166,42 +166,42 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
         </GridPane.margin>
         <Label maxHeight="115.0" maxWidth="46.0" minHeight="115.0" minWidth="46.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFourAirplanes.png&quot;); -fx-background-size: 48 120; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/oJ05ht1.png&quot;); -fx-background-size: 48 120; -fx-background-position: center;"
                GridPane.columnSpan="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="18.0" layoutY="24.0" maxHeight="115.0" maxWidth="23.0" minHeight="115.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipOne.png&quot;); -fx-background-size: 23 115; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/PeODDrk.png&quot;); -fx-background-size: 23 115; -fx-background-position: center;"
                GridPane.columnIndex="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="155.0" layoutY="24.0" maxHeight="92.0" maxWidth="23.0" minHeight="92.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipTwo.png&quot;); -fx-background-size: 23 92; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/hHcn8ds.png&quot;); -fx-background-size: 23 92; -fx-background-position: center;"
                GridPane.columnIndex="3" GridPane.rowSpan="4">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="224.0" layoutY="22.0" maxHeight="69.0" maxWidth="23.0" minHeight="69.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipThree.png&quot;); -fx-background-size: 23 69; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/CT4RjeJ.png&quot;); -fx-background-size: 23 69; -fx-background-position: center;"
                GridPane.columnIndex="4" GridPane.rowSpan="3">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="293.0" layoutY="20.0" maxHeight="46.0" maxWidth="23.0" minHeight="46.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFour.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/KsQnH87.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
                GridPane.columnIndex="5" GridPane.rowSpan="2">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="362.0" layoutY="18.0" maxHeight="46.0" maxWidth="23.0" minHeight="46.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFour.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/KsQnH87.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
                GridPane.columnIndex="6" GridPane.rowSpan="2">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
@@ -211,7 +211,7 @@
     <GridPane fx:id="board3" hgap="2.5" layoutX="22.0" layoutY="178.0" maxHeight="250.0" maxWidth="250.0"
               minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoard" onMouseEntered="#mouseIsOver"
               onMouseExited="#mouseIsOut"
-              style="-fx-background-image: url(&quot;@../../../Resources/Images/battleSeaBoard.png&quot;); -fx-background-size: 250; -fx-background-position: center;"
+              style="-fx-background-image: url(&quot;https://i.imgur.com/G0z1Rx2.png?2&quot;); -fx-background-size: 250; -fx-background-position: center;"
               vgap="2.5" GridPane.rowIndex="2">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="10.0"/>
@@ -244,42 +244,42 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
         </GridPane.margin>
         <Label maxHeight="115.0" maxWidth="46.0" minHeight="115.0" minWidth="46.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFourAirplanes.png&quot;); -fx-background-size: 48 120; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/oJ05ht1.png&quot;); -fx-background-size: 48 120; -fx-background-position: center;"
                GridPane.columnSpan="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="18.0" layoutY="24.0" maxHeight="115.0" maxWidth="23.0" minHeight="115.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipOne.png&quot;); -fx-background-size: 23 115; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/PeODDrk.png&quot;); -fx-background-size: 23 115; -fx-background-position: center;"
                GridPane.columnIndex="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="155.0" layoutY="24.0" maxHeight="92.0" maxWidth="23.0" minHeight="92.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipTwo.png&quot;); -fx-background-size: 23 92; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/hHcn8ds.png&quot;); -fx-background-size: 23 92; -fx-background-position: center;"
                GridPane.columnIndex="3" GridPane.rowSpan="4">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="224.0" layoutY="22.0" maxHeight="69.0" maxWidth="23.0" minHeight="69.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipThree.png&quot;); -fx-background-size: 23 69; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/CT4RjeJ.png&quot;); -fx-background-size: 23 69; -fx-background-position: center;"
                GridPane.columnIndex="4" GridPane.rowSpan="3">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="293.0" layoutY="20.0" maxHeight="46.0" maxWidth="23.0" minHeight="46.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFour.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/KsQnH87.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
                GridPane.columnIndex="5" GridPane.rowSpan="2">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="362.0" layoutY="18.0" maxHeight="46.0" maxWidth="23.0" minHeight="46.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFour.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/KsQnH87.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
                GridPane.columnIndex="6" GridPane.rowSpan="2">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
@@ -289,7 +289,7 @@
     <GridPane fx:id="board4" hgap="2.5" layoutX="349.0" layoutY="178.0" maxHeight="250.0" maxWidth="250.0"
               minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoard" onMouseEntered="#mouseIsOver"
               onMouseExited="#mouseIsOut"
-              style="-fx-background-image: url(&quot;@../../../Resources/Images/battleSeaBoard.png&quot;); -fx-background-size: 250; -fx-background-position: center;"
+              style="-fx-background-image: url(&quot;https://i.imgur.com/G0z1Rx2.png?2&quot;); -fx-background-size: 250; -fx-background-position: center;"
               vgap="2.5" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="10.0"/>
@@ -322,42 +322,42 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
         </GridPane.margin>
         <Label maxHeight="115.0" maxWidth="46.0" minHeight="115.0" minWidth="46.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFourAirplanes.png&quot;); -fx-background-size: 48 120; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/oJ05ht1.png&quot;); -fx-background-size: 48 120; -fx-background-position: center;"
                GridPane.columnSpan="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="18.0" layoutY="24.0" maxHeight="115.0" maxWidth="23.0" minHeight="115.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipOne.png&quot;); -fx-background-size: 23 115; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/PeODDrk.png&quot;); -fx-background-size: 23 115; -fx-background-position: center;"
                GridPane.columnIndex="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="155.0" layoutY="24.0" maxHeight="92.0" maxWidth="23.0" minHeight="92.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipTwo.png&quot;); -fx-background-size: 23 92; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/hHcn8ds.png&quot;); -fx-background-size: 23 92; -fx-background-position: center;"
                GridPane.columnIndex="3" GridPane.rowSpan="4">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="224.0" layoutY="22.0" maxHeight="69.0" maxWidth="23.0" minHeight="69.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipThree.png&quot;); -fx-background-size: 23 69; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/CT4RjeJ.png&quot;); -fx-background-size: 23 69; -fx-background-position: center;"
                GridPane.columnIndex="4" GridPane.rowSpan="3">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="293.0" layoutY="20.0" maxHeight="46.0" maxWidth="23.0" minHeight="46.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFour.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/KsQnH87.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
                GridPane.columnIndex="5" GridPane.rowSpan="2">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="362.0" layoutY="18.0" maxHeight="46.0" maxWidth="23.0" minHeight="46.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFour.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/KsQnH87.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
                GridPane.columnIndex="6" GridPane.rowSpan="2">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
@@ -367,7 +367,7 @@
     <GridPane fx:id="board5" hgap="2.5" layoutX="349.0" layoutY="487.0" maxHeight="250.0" maxWidth="250.0"
               minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoard" onMouseEntered="#mouseIsOver"
               onMouseExited="#mouseIsOut"
-              style="-fx-background-image: url(&quot;@../../../Resources/Images/battleSeaBoard.png&quot;); -fx-background-size: 250; -fx-background-position: center;"
+              style="-fx-background-image: url(&quot;https://i.imgur.com/G0z1Rx2.png?2&quot;); -fx-background-size: 250; -fx-background-position: center;"
               vgap="2.5" GridPane.columnSpan="2" GridPane.rowIndex="3">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="10.0"/>
@@ -400,42 +400,42 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
         </GridPane.margin>
         <Label maxHeight="115.0" maxWidth="46.0" minHeight="115.0" minWidth="46.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFourAirplanes.png&quot;); -fx-background-size: 48 120; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/oJ05ht1.png&quot;); -fx-background-size: 48 120; -fx-background-position: center;"
                GridPane.columnSpan="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="18.0" layoutY="24.0" maxHeight="115.0" maxWidth="23.0" minHeight="115.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipOne.png&quot;); -fx-background-size: 23 115; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/PeODDrk.png&quot;); -fx-background-size: 23 115; -fx-background-position: center;"
                GridPane.columnIndex="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="155.0" layoutY="24.0" maxHeight="92.0" maxWidth="23.0" minHeight="92.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipTwo.png&quot;); -fx-background-size: 23 92; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/hHcn8ds.png&quot;); -fx-background-size: 23 92; -fx-background-position: center;"
                GridPane.columnIndex="3" GridPane.rowSpan="4">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="224.0" layoutY="22.0" maxHeight="69.0" maxWidth="23.0" minHeight="69.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipThree.png&quot;); -fx-background-size: 23 69; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/CT4RjeJ.png&quot;); -fx-background-size: 23 69; -fx-background-position: center;"
                GridPane.columnIndex="4" GridPane.rowSpan="3">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="293.0" layoutY="20.0" maxHeight="46.0" maxWidth="23.0" minHeight="46.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFour.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/KsQnH87.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
                GridPane.columnIndex="5" GridPane.rowSpan="2">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>
             </effect>
         </Label>
         <Label layoutX="362.0" layoutY="18.0" maxHeight="46.0" maxWidth="23.0" minHeight="46.0" minWidth="23.0"
-               style="-fx-background-image: url(&quot;@../../../Resources/Images/shipFour.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
+               style="-fx-background-image: url(&quot;https://i.imgur.com/KsQnH87.png&quot;); -fx-background-size: 23 46; -fx-background-position: center;"
                GridPane.columnIndex="6" GridPane.rowSpan="2">
             <effect>
                 <DropShadow height="24.05" radius="9.245000000000001" width="14.93"/>

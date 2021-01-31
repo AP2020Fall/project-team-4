@@ -56,5 +56,5 @@
             <Font name="AppleMyungjo Regular" size="16.0" />
         </font>
     </MenuButton>
-    <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 40 40; -fx-background-radius: 20;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+    <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 40 40; -fx-background-radius: 20;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
 </GridPane>
