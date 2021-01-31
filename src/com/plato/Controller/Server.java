@@ -74,8 +74,10 @@ class ClientHandler extends Thread {
             }
 
             try {
+
                 this.dataInputStream.close();
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -84,5 +86,3 @@ class ClientHandler extends Thread {
     }
 }
 
-    }
-}
