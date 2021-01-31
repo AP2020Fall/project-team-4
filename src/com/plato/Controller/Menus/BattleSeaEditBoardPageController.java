@@ -44,9 +44,7 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	private PlayerBattleSea player1, player2;
 	private LinkedList<Ship> currentBoard;
 	private IntegerProperty editingTurn = new SimpleIntegerProperty(-1);
-	public static String host = "127.0.0.1";
-	public static int port = 5056;
-	public static Socket clientSocket;
+
 
 	public static void setStage (Stage stage) {
 		stage.setMinWidth(1000);
@@ -122,7 +120,7 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	}
 
 	public void closeStageWrite(ActionEvent actionEvent){
-		write("BattleSeaEditBoardPage.closeStage",actionEvent);
+		MainController.write("BattleSeaEditBoardPage.closeStage");
 
 	}
 
@@ -132,8 +130,8 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			case 2 -> editingTurn.set(-1);
 		}
 	}
-	public void doneEditingWrite(ActionEvent actionEvent) {
-		write("BattleSeaEditBoardPage.doneEditing", actionEvent);
+	public void doneEditingWrite (ActionEvent actionEvent){
+		MainController.write("BattleSeaEditBoardPage.doneEditing");
 	}
 
 		public void generate5RandBoards (ActionEvent actionEvent) {
@@ -155,8 +153,9 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void generate5RandBoardsWrite(ActionEvent actionEvent) {
-		write("BattleSeaEditBoardPage.generate5RandBoards", actionEvent);
+	public void generate5RandBoardsWrite(ActionEvent actionEvent){
+		MainController.write("BattleSeaEditBoardPage.generate5RandBoards");
+
 	}
 	public void setBoard (LinkedList<Ship> board, GridPane boardToShowShipsIn) {
 		currentBoard = board;
@@ -194,8 +193,9 @@ public class BattleSeaEditBoardPageController implements Initializable {
 
 		setBoard(randBoard, board);
 	}
-	public void generate1RandBoardWrite(ActionEvent actionEvent) {
-		write("BattleSeaEditBoardPage.generate1RandBoard", actionEvent);
+	public void generate1RandBoardWrite(ActionEvent actionEvent){
+		MainController.write("BattleSeaEditBoardPage.generate1RandBoardWrite");
+
 	}
 	public void rotateShip (MouseEvent mouseEvent) {
 		Label shipImageView = ((Label) mouseEvent.getSource());
@@ -213,7 +213,9 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			System.out.println(e.getMessage());
 		}
 	}
-
+	public void rotateShipWrite(MouseEvent mouseEvent) {
+		MainController.write("BattleSeaEditBoardPage.rotateShip");
+	}
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Label)
 			((Label) mouseEvent.getSource()).setOpacity(0.8);
@@ -221,13 +223,18 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOut (MouseEvent mouseEvent) {
+		public void mouseIsOverWrite(MouseEvent mouseEvent) {
+			MainController.write("BattleSeaEditBoardPage.mouseEvent");
+		}
+			public void mouseIsOut (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Label)
 			((Label) mouseEvent.getSource()).setOpacity(1);
 		else if (mouseEvent.getSource() instanceof Button)
 			((Button) mouseEvent.getSource()).setOpacity(1);
 	}
-
+	public void mouseIsOutWrite(MouseEvent mouseEvent) {
+		MainController.write("BattleSeaEditBoardPage.mouseIsOut");
+	}
 	public void moveShipIfPossible (MouseEvent mouseEvent) {
 		Label shipToMove = (Label) mouseEvent.getSource();
 		Ship ship = currentBoard.stream()
@@ -250,19 +257,8 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		}
 	}
 
+	public void moveShipIfPossibleWrite (MouseEvent mouseEvent) {
+		MainController.write("BattleSeaEditBoardPage.moveShipIfPossible");
 
-
-	public void write(String message , ActionEvent actionEvent){
-		try{
-			InetAddress ip = InetAddress.getByName("localhost");
-			Socket socket = new Socket(ip , 5056);
-			clientSocket = new Socket(ip , 5056);
-			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-			System.out.println(dataInputStream.readUTF());
-			dataOutputStream.writeUTF(message);
-		}catch (Exception e){
-			System.out.println(e.getMessage());
-		}
 	}
 }
