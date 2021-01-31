@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+import Controller.MainController;
 import Model.AccountRelated.Admin;
 import Model.AccountRelated.Gamer;
 import Model.AccountRelated.Message;
@@ -56,4 +57,8 @@ public class AdminMsgsController implements Initializable {
 	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
+	public void closeStageWrite(ActionEvent actionEvent) {
+		MainController.write("AdminMsgs.closeStage");
+	}
+
 }
