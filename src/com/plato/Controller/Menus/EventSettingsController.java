@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+import Controller.MainController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -88,24 +89,32 @@ public class EventSettingsController implements Initializable {
 
 		resetPage(actionEvent);
 	}
-
+	public void isLoginTimesWrite(ActionEvent actionEvent) {
+		MainController.write("EventSettings.isLoginTimes");
+	}
 	public void resetPage (ActionEvent actionEvent) {
 		minReqMenu.setText("Minimum Requirement");
 		gameMenu.setText("Game name");
 		eventTypeMenu.setText(((MenuItem) actionEvent.getSource()).getText());
 	}
-
+	public void resetPageWrite(ActionEvent actionEvent) {
+		MainController.write("EventSettings.resetPage");
+	}
 	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
-
+	public void closeStageWrite(ActionEvent actionEvent) {
+		MainController.write("EventSettings.closeStage");
+	}
 	public void isMVPInGame (ActionEvent actionEvent) {
 		gameMenu.setVisible(true);
 		minReqMenu.setVisible(false);
 
 		resetPage(actionEvent);
 	}
-
+	public void ismVPInGameWrite(ActionEvent actionEvent) {
+		MainController.write("EventSettings.isMVPInGame");
+	}
 	public void isPlayTimes (ActionEvent actionEvent) {
 		minReqMenu.setVisible(true);
 		gameMenu.setVisible(true);
@@ -122,7 +131,9 @@ public class EventSettingsController implements Initializable {
 
 		resetPage(actionEvent);
 	}
-
+	public void isPlayTimeWrite(ActionEvent actionEvent) {
+		MainController.write("EventSettings.isPlayTimes");
+	}
 	public void isWinTimes (ActionEvent actionEvent) {
 		minReqMenu.setVisible(true);
 		gameMenu.setVisible(true);
@@ -139,7 +150,9 @@ public class EventSettingsController implements Initializable {
 
 		resetPage(actionEvent);
 	}
-
+	public void isWinTimesWrite(ActionEvent actionEvent) {
+		MainController.write("EventSettings.isWinTimes");
+	}
 	public void isWinTimesNonStop (ActionEvent actionEvent) {
 		minReqMenu.setVisible(true);
 		gameMenu.setVisible(true);
@@ -155,5 +168,8 @@ public class EventSettingsController implements Initializable {
 		}
 
 		resetPage(actionEvent);
+	}
+	public void isWinTimesNonStopWrite(ActionEvent actionEvent) {
+		MainController.write("EventSettings.isWinTimesNonStop");
 	}
 }
