@@ -1,5 +1,6 @@
 package Controller.GameRelated.Reversi;
 
+import Controller.Menus.ReversiGameController;
 import Model.AccountRelated.Gamer;
 
 import java.io.*;
@@ -28,6 +29,7 @@ public class ReversiServer {
         public void run(){
             handleClient();
         }
+
 
         private void handleClient(){
             try{

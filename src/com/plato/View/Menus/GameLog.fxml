@@ -24,7 +24,7 @@
     <ImageView fx:id="gamePicture" fitHeight="100.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true"/>
     <Label maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" onMouseClicked="#closeStage"
            onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut"
-           style="-fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-radius: 20; -fx-background-size: 40; -fx-background-color: transparent;"
+           style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-radius: 20; -fx-background-size: 40; -fx-background-color: transparent;"
            GridPane.halignment="LEFT" GridPane.valignment="TOP"/>
     <ListView fx:id="gameLogList" maxWidth="430.0" minWidth="430.0" style="-fx-background-color: #003768;"
               GridPane.rowIndex="1">

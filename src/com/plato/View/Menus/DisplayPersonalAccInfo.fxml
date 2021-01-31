@@ -29,7 +29,7 @@
     <padding>
         <Insets bottom="12.5" left="12.5" right="12.5" top="12.5" />
     </padding>
-    <Button maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+    <Button maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
     <ImageView fx:id="pfp" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
     <ImageView fx:id="uploadPfp" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadPfp" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
         <GridPane.margin>
