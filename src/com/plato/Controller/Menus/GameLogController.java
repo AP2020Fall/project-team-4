@@ -4,6 +4,7 @@ import Controller.MainController;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import Model.GameRelated.GameLog;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.*;
 import javafx.scene.control.Label;
@@ -207,15 +208,27 @@ public class GameLogController implements Initializable {
 		}};
 	}
 
-	public void mouseIsOver (MouseEvent mouseEvent) {
+	public static void closeStage (ActionEvent actionEvent) {
+		stage.close();
+	}
+
+	public void closeStageWrite(ActionEvent actionEvent){
+		MainController.write("GameLog.closeStage");
+	}
+
+	public static void mouseIsOver (MouseEvent mouseEvent) {
 		((Label) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOut (MouseEvent mouseEvent) {
-		((Label) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		MainController.write("GameLog.mouseIsOver");
 	}
 
-	public void closeStage (MouseEvent mouseEvent) {
-		stage.close();
+	public static void mouseIsOut (MouseEvent mouseEvent) {
+		((ImageView) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		MainController.write("GameLog.mouseIsOut");
 	}
 }
