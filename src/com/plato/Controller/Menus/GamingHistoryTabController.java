@@ -112,6 +112,8 @@ public class GamingHistoryTabController implements Initializable {
     }
 
 
+
+
     public void displayGameInfo(Game game){
         try{
             gameInfo.getChildren().clear();

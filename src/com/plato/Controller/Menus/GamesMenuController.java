@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -116,11 +117,19 @@ public class GamesMenuController implements Initializable {
 		}
 	}
 
-	public void mouseIsOver (MouseEvent mouseEvent) {
-		((Button) mouseEvent.getSource()).setOpacity(0.8);
+	public static void mouseIsOver (MouseEvent mouseEvent) {
+		((Label) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOut (MouseEvent mouseEvent) {
-		((Button) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		MainController.write("GamesMenu.mouseIsOver");
+	}
+
+	public static void mouseIsOut (MouseEvent mouseEvent) {
+		((ImageView) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		MainController.write("GamesMenu.mouseIsOut");
 	}
 }
