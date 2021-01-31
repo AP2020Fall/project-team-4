@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+import Controller.MainController;
 import Model.GameRelated.BattleSea.Ship;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -92,9 +93,15 @@ public class BattleSea5RandBoardsController implements Initializable {
 
 		closeGen5RandBoard(new ActionEvent());
 	}
+	public void selectBoardWrite(MouseEvent mouseEvent) {
+		MainController.write("BattleSea5RandBoards.selectBoardWrite");
+	}
 
 	public void closeGen5RandBoard (ActionEvent actionEvent) {
 		stage.close();
+	}
+	public void closeGen5RandBoardWrite(ActionEvent actionEvent) {
+		MainController.write("BattleSea5RandBoards.closeGen5RandBoardWrite");
 	}
 
 	public void mouseIsOut (MouseEvent mouseEvent) {
