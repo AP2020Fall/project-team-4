@@ -1,6 +1,7 @@
 package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
+import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
@@ -74,7 +75,7 @@ public class GamingHistoryTabController implements Initializable {
                     }});
 
 //                    ImageView icon = new ImageView() {{
-//                        if(game.getGameName().equals("Reversi")) setImage(i.imgur.com/lKOxPw8.png);
+//                        if(game.getGameName().equals("Reversi")) setImage(MainController.getImageFromFile("src/com/Resources/Images/eyeVisible.png"));
 //                        else if(game.getGameName().equals("BattleSea")) setImage();
 //                        setSmooth(true);
 //                        setPreserveRatio(true);
@@ -105,6 +106,12 @@ public class GamingHistoryTabController implements Initializable {
                 }});
         }
     }
+
+    public void updateListOfGamesWrite(ActionEvent actionEvent){
+        MainController.write("GamingHistoryTab.updateListOfGames");
+    }
+
+
 
 
     public void displayGameInfo(Game game){

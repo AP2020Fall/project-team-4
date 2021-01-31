@@ -111,6 +111,10 @@ public class GameMenuController implements Initializable {
 		confirmTimeInGameMenu();
 	}
 
+	public void newGameWrite(ActionEvent actionEvent){
+		MainController.write("GameMenu");
+	}
+
 	private void confirmTimeInGameMenu () {
 		timeBtn.setVisible(true);
 		timeLimitMenuInGameMenu.setVisible(false);
@@ -118,6 +122,10 @@ public class GameMenuController implements Initializable {
 
 	public void dontStartGame (ActionEvent actionEvent) {
 		newGamePropertyWindow.setVisible(false);
+	}
+
+	public void dontStartGameWrite(ActionEvent actionEvent){
+		MainController.write("GameMenu.dontStartGame");
 	}
 
 	public void startGame (ActionEvent actionEvent) {
@@ -131,6 +139,10 @@ public class GameMenuController implements Initializable {
 			case "BattleSea" -> startBattleSea();
 			case "Reversi" -> startReversi();
 		}
+	}
+
+	public void startGameWrite(ActionEvent actionEvent){
+		MainController.write("GameMenu.startGame");
 	}
 
 	public void startBattleSea () {
@@ -191,8 +203,16 @@ public class GameMenuController implements Initializable {
 		}
 	}
 
+	public void changeFaveStatusWrite(ActionEvent actionEvent){
+		MainController.write("GameMenu.changeFaveStatusWrite");
+	}
+
 	public void closeGame (ActionEvent actionEvent) {
 		stage.close();
+	}
+
+	public void closeGameWrite(ActionEvent actionEvent){
+		MainController.write("GameMenu.closeGame");
 	}
 
 	public void displayScoreboard (ActionEvent actionEvent) {
@@ -214,9 +234,17 @@ public class GameMenuController implements Initializable {
 		}
 	}
 
+	public void displayScoreboardWrite(ActionEvent actionEvent){
+		MainController.write("GameMenu.displayScoreboard");
+	}
+
 	public void setTime (ActionEvent actionEvent) {
 		timeBtn.setVisible(false);
 		timeLimitMenuInGameMenu.setVisible(true);
+	}
+
+	public void setTimeWrite(ActionEvent actionEvent){
+		MainController.write("GameMenu.setTimer");
 	}
 
 	public void displayLogOfGame (ActionEvent actionEvent) {
@@ -236,11 +264,23 @@ public class GameMenuController implements Initializable {
 		}
 	}
 
+	public void displayLogOfGameWrite(ActionEvent actionEvent){
+		MainController.write("GameMenu.displayLogOfGame");
+	}
+
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
+	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		MainController.write("GameMenu.mouseIsOver");
+	}
+
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		MainController.write("GameMenu.mouseIsOut");
 	}
 }

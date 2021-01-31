@@ -83,6 +83,10 @@ public class MainMenuController implements Initializable {
 		}
 	}
 
+	public void eventsTabWrite(ActionEvent actionEvent){
+		MainController.write("MainMenu.eventsTab");
+	}
+
 	public void usersTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.usersTab");
 		playButtonClickSound();
@@ -94,6 +98,10 @@ public class MainMenuController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void usersTabWrite(ActionEvent actionEvent){
+		MainController.write("MainMenu.usersTab");
 	}
 
 	public void accountPage (ActionEvent actionEvent) {
@@ -110,6 +118,10 @@ public class MainMenuController implements Initializable {
 		}
 	}
 
+	public void accountPageWriter(ActionEvent actionEvent){
+		MainController.write("MainMenu.accountPage");
+	}
+
 	public void gamingHistoryPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.gamingHistoryPage");
 		playButtonClickSound();
@@ -121,6 +133,10 @@ public class MainMenuController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void gamingHistory(ActionEvent actionEvent){
+		MainController.write("MainMenu.gamingHistory");
 	}
 
 	public void gamesTab (ActionEvent actionEvent) {
@@ -141,6 +157,10 @@ public class MainMenuController implements Initializable {
 		}
 	}
 
+	public void gamesTabWrite(ActionEvent actionEvent){
+		MainController.write("MainMenu.gamesTab");
+	}
+
 	public void faveGamesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.faveGamesTab");
 		playButtonClickSound();
@@ -159,6 +179,10 @@ public class MainMenuController implements Initializable {
 		}
 	}
 
+	public void faveGamesTabWrite(ActionEvent actionEvent){
+		MainController.write("MainMenu.faveGamesTab");
+	}
+
 	public void friendsPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.friendsPage");
 		playButtonClickSound();
@@ -170,6 +194,10 @@ public class MainMenuController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void friendsPageWrite(ActionEvent actionEvent){
+		MainController.write("MainMenu.friendsPageWrite");
 	}
 
 	public void messagesTab (ActionEvent actionEvent) {
@@ -189,12 +217,23 @@ public class MainMenuController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	public void messagesTabWrite(ActionEvent actionEvent){
+		MainController.write("MainMenu.messagesTab");
+	}
 
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
+	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		MainController.write("MainMenu.mouseIsOver");
+	}
+
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		MainController.write("MainMenu.mouseIsOut");
 	}
 }

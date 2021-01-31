@@ -1,7 +1,9 @@
 package Controller.Menus;
 
+import Controller.MainController;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -53,15 +55,27 @@ public class GameConclusionWindowController implements Initializable {
 		score2.setText(String.valueOf(game.getInGameScore(2)));
 	}
 
-	public void closeStage (MouseEvent mouseEvent) {
+	public static void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
 
-	public void mouseIsOver (MouseEvent mouseEvent) {
+	public void closeStageWrite(ActionEvent actionEvent){
+		MainController.write("GameConclusionWindow.closeStage");
+	}
+
+	public static void mouseIsOver (MouseEvent mouseEvent) {
 		((Label) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOut (MouseEvent mouseEvent) {
-		((Label) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		MainController.write("GameConclusionWindow.mouseIsOver");
+	}
+
+	public static void mouseIsOut (MouseEvent mouseEvent) {
+		((ImageView) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		MainController.write("GameConclusionWindow.mouseIsOut");
 	}
 }

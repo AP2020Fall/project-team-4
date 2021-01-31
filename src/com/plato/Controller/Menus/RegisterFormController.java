@@ -80,6 +80,10 @@ public class RegisterFormController implements Initializable {
 		MainController.openUploadPfpWindow(stage, pfp);
 	}
 
+	public void uploadPfpWrite(MouseEvent mouseEvent){
+		MainController.write("RegisterForm.uploadPfp");
+	}
+
 	public void signUp (ActionEvent actionEvent) {
 
 		double money;
@@ -123,15 +127,31 @@ public class RegisterFormController implements Initializable {
 		}
 	}
 
+	public void signUpWrite(ActionEvent actionEvent){
+		MainController.write("RegisterForm.signUp");
+	}
+
 	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
+	}
+
+	public void closeStageWrite(ActionEvent actionEvent){
+		MainController.write("RegisterForm.closeStage");
 	}
 
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		((Label) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
+	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		MainController.write("RegisterForm.mouseIsOver");
+	}
+
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		((ImageView) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		MainController.write("RegisterForm.mouseIsOut");
 	}
 }

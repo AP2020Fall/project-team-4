@@ -1,5 +1,7 @@
 package Controller;
 
+        import Controller.Menus.GameConclusionWindowController;
+
         import java.io.*;
         import java.text.*;
         import java.util.*;
@@ -27,7 +29,6 @@ public class Server {
                 DataOutputStream dataOutputStream =new DataOutputStream(socket.getOutputStream());
 
                // System.out.println("Assigning new thread for this client");
-
 
                 Thread thread = new ClientHandler(socket, dataInputStream);
 
@@ -60,14 +61,38 @@ class ClientHandler extends Thread {
             try {
                 String received = this.dataInputStream.readUTF();
                 System.out.println(received);
-                if (!received.equals("Exit")) {
-                    continue;
+                String className = received.split("\\.")[0];
+                String methodName = received.split("\\.")[1];
+                switch (received){
+                    case "GameConclusionWindow":
+                        if(methodName.equals("closeStage")) {
+                            GameConclusionWindowController.closeStage();
+                            break;}
+                        else if(methodName.equals("mouseIsOver")){
+                            GameConclusionWindowController.mouseIsOver();
+                            break;}
+                        else if(methodName.equals("mouseIsOut")){
+                            GameConclusionWindowController.mouseIsOut();
+                        }
+                    case "GameLog":
+                    case "GameMenu":
+                    case "GameScoreboard":
+                    case "GamesMenu":
+                    case "GamingHistoryTab":
+                    case "LoginMenu":
+                    case "MainMenu":
+                    case "MessageTemplate":
+                    case "RegisterForm":
+                    case "RegisterMenu":
+                    case "ReversiGame":
+                    case "SendFriendRequestPage":
+                    case "UserProfileForAdmin":
+                    case "UsersTab":
                 }
-
-                System.out.println("Client " + this.socket + " sends exit...");
-                System.out.println("Closing this connection.");
-                this.socket.close();
-                System.out.println("Connection closed");
+//                System.out.println("Client " + this.socket + " sends exit...");
+//                System.out.println("Closing this connection.");
+//                this.socket.close();
+//                System.out.println("Connection closed");
             } catch (IOException exception) {
                 exception.printStackTrace();
                 continue;
