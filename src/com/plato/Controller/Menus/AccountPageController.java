@@ -6,6 +6,7 @@ import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.GameLog;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -110,11 +111,16 @@ public class AccountPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	public void logoutWrite(MouseEvent actionEvent) {
+		MainController.write("AccountPage.logout");
+	}
 
 	public void uploadPfp (MouseEvent mouseEvent) {
 		MainController.openUploadPfpWindow(MainController.getInstance().getPrimaryStage(), pfp);
 	}
-
+	public void uploadPfpWrite(MouseEvent mouseEvent) {
+		MainController.write("AccountPage.uploadPfp");
+	}
 	public void editPassword (MouseEvent actionEvent) {
 		try {
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
@@ -129,7 +135,9 @@ public class AccountPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
+	public void editPasswordWrite(MouseEvent actionEvent) {
+		MainController.write("AccountPage.editPassword");
+	}
 	public void displayPersonalInfo (MouseEvent actionEvent) {
 		try {
 			DisplayPersonalAccInfoController.setAccount(AccountController.getInstance().getCurrentAccLoggedIn());
@@ -145,11 +153,15 @@ public class AccountPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
+	public void displayPersonalInfoWrite(MouseEvent actionEvent) {
+		MainController.write("AccountPage.displayPersonalInfo");
+	}
 	public void changeDropDownMenuVisibility (MouseEvent mouseEvent) {
 		dropDownMenu.setVisible(!dropDownMenu.isVisible());
 	}
-
+	public void changeDropDownMenuVisibilityWrite(MouseEvent mouseEvent) {
+		MainController.write("AccountPage.changeDropDownMenuVisibility");
+	}
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Label)
 			((Label) mouseEvent.getSource()).setOpacity(1);
@@ -157,7 +169,9 @@ public class AccountPageController implements Initializable {
 		else if (mouseEvent.getSource() instanceof ImageView)
 			((ImageView) mouseEvent.getSource()).setOpacity(1);
 	}
-
+	public void mouseIsOutWrite(MouseEvent mouseEvent) {
+		MainController.write("AccountPage.mouseIsOut");
+	}
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Label)
 			((Label) mouseEvent.getSource()).setOpacity(0.8);
@@ -165,7 +179,9 @@ public class AccountPageController implements Initializable {
 		else if (mouseEvent.getSource() instanceof ImageView)
 			((ImageView) mouseEvent.getSource()).setOpacity(0.8);
 	}
-
+	public void mouseIsOverWrite(MouseEvent mouseEvent) {
+		MainController.write("AccountPage.mouseIsOver");
+	}
 	public void openReversiMainMenu (MouseEvent mouseEvent) {
 		try {
 			GameMenuController.setGameName("Reversi");
@@ -181,7 +197,9 @@ public class AccountPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
+	public void openReversiMainMenuWrite(MouseEvent mouseEvent) {
+		MainController.write("AccountPage.openReversiMainMenu");
+	}
 	public void openBattleSeaMainMenu (MouseEvent mouseEvent) {
 		try {
 			GameMenuController.setGameName("BattleSea");
@@ -196,5 +214,7 @@ public class AccountPageController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}public void openBattleSeaMainMenuWrite(MouseEvent mouseEvent) {
+		MainController.write("AccountPage.openBattleSeaMainMenu");
 	}
 }
