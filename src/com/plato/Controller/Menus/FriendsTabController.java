@@ -104,6 +104,11 @@ public class FriendsTabController implements Initializable {
 	public void updateFrndListWrite(ActionEvent actionEvent) {
 		MainController.write("FriendsTab.updateFrndList");
 	}
+
+	public void updateFrndsListWrite(ActionEvent actionEvent){
+		MainController.write("FriendsTab.update");
+	}
+
 	private void unfriend (String frndUN) {
 		GamerController.getInstance().removeFriend(frndUN);
 
@@ -144,4 +149,6 @@ public class FriendsTabController implements Initializable {
 	public void displayFrndRequestsWrite(ActionEvent actionEvent) {
 		MainController.write("FriendsTab.displayFrndRequest");
 	}
+
+
 }

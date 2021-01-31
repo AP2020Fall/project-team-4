@@ -216,6 +216,7 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	public void rotateShipWrite(MouseEvent mouseEvent) {
 		MainController.write("BattleSeaEditBoardPage.rotateShip");
 	}
+
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Label)
 			((Label) mouseEvent.getSource()).setOpacity(0.8);
@@ -226,6 +227,7 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		public void mouseIsOverWrite(MouseEvent mouseEvent) {
 			MainController.write("BattleSeaEditBoardPage.mouseEvent");
 		}
+
 			public void mouseIsOut (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Label)
 			((Label) mouseEvent.getSource()).setOpacity(1);
