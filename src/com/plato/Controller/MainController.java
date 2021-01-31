@@ -25,8 +25,7 @@ import org.hildan.fxgson.FxGson;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,6 +39,7 @@ public class MainController extends Application {
 	private final GsonBuilder gsonBuilder = new GsonBuilder();
 	private Gson gson;
 	private Stage primaryStage;
+	public static Socket clientSocket;
 
 	public static void main (String[] args) {
 		launch(args);
@@ -49,6 +49,20 @@ public class MainController extends Application {
 		if (mainController == null)
 			mainController = new MainController();
 		return mainController;
+	}
+
+	public static void write(String message){
+		try{
+			InetAddress ip = InetAddress.getByName("localhost");
+			Socket socket = new Socket(ip , 5056);
+			clientSocket = new Socket(ip , 5056);
+			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+			System.out.println(dataInputStream.readUTF());
+			dataOutputStream.writeUTF(message);
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public static Image getImageFromFile (String address) {
@@ -244,6 +258,8 @@ public class MainController extends Application {
 	public static void playButtonClickSound () {
 		new AudioClip(Paths.get("src/com/Resources/Sounds/button.wav").toUri().toString()).play(0.2);
 	}
+
+
 
 	@Override
 	public void start (Stage primaryStage) {

@@ -166,6 +166,10 @@ public class ReversiGameController implements Initializable {
 		}
 	}
 
+	public void putMarkIfPossibleWrite(MouseEvent mouseEvent){
+		MainController.write("ReversiGame.putMarkIfPossible");
+	}
+
 	public int getXFrom1 (int index) {
 		int x = (index + 1) % 8;
 		x = (x == 0 ? 8 : x);
@@ -236,6 +240,10 @@ public class ReversiGameController implements Initializable {
 			System.out.println("Move History");
 			ReversiController.getInstance().displayPrevMoves();
 		}
+	}
+
+	public void confirmMoveWrite(ActionEvent actionEvent){
+		MainController.write("LoginMenu.confirmMove");
 	}
 
 	private void displayGameConclusion () {
@@ -317,14 +325,26 @@ public class ReversiGameController implements Initializable {
 		historyGridPane.setVisible(true);
 	}
 
+	public void showMovesWrite(ActionEvent actionEvent){
+		MainController.write("LoginMenu.showMoves");
+	}
+
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Button)
 			((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
+	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		MainController.write("LoginMenu.mouseIsOverWrite");
+	}
+
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Button)
 			((Button) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		MainController.write("LoginMenu.mouseIsOut");
 	}
 
 	public void mouseIsOverCell (MouseEvent mouseEvent) {
@@ -336,6 +356,8 @@ public class ReversiGameController implements Initializable {
 	public void closeGame (ActionEvent actionEvent) {
 		stage.close();
 	}
+
+
 
 	public void closeMoveHistory (ActionEvent actionEvent) {
 		historyGridPane.setVisible(false);
