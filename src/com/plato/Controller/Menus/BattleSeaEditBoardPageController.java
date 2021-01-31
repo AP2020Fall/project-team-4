@@ -259,6 +259,8 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			clientSocket = new Socket(ip , 5056);
 			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+			System.out.println(dataInputStream.readUTF());
+			dataOutputStream.writeUTF(message);
 		}catch (Exception e){
 			System.out.println(e.getMessage());
 		}
