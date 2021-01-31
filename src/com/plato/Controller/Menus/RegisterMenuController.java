@@ -109,4 +109,8 @@ public class RegisterMenuController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+
+	public void signUpWrite(ActionEvent actionEvent){
+		MainController.write("RegisterMenu.signUp");
+	}
 }
