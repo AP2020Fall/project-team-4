@@ -67,6 +67,10 @@ public class BattleSeaPlayPageController implements Initializable {
 				System.out.println("Game Ended ");
 			}
 		}
+		public void handleWrite(ActionEvent actionEvent) {
+			MainController.write("BattleSeaPlayPage.handle");
+		}
+
 	}));
 
 	public static void setStage (Stage stage) {
@@ -411,23 +415,10 @@ public class BattleSeaPlayPageController implements Initializable {
 	public void closeGame (ActionEvent actionEvent) {
 		stage.close();
 	}
-
-
-	public void closeGameWrite(ActionEvent actionEvent){
-		write("LoginMenu.deleteAccount" , actionEvent);
+	public void closeGameWrite(ActionEvent actionEvent) {
+		MainController.write("BattleSeaPlayPage.closeGame");
 	}
 
-	public void write(String message , ActionEvent actionEvent){
-		try{
-			InetAddress ip = InetAddress.getByName("localhost");
-			Socket socket = new Socket(ip , 5056);
-			Socket clientsocket = new Socket(ip, 5056);
-			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-		}catch (Exception e){
-			System.out.println(e.getMessage());
-		}
-	}
 
 
 	public void mouseIsOver (MouseEvent mouseEvent) {
@@ -435,10 +426,19 @@ public class BattleSeaPlayPageController implements Initializable {
 			((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
+	public void mouseIsOverWrite(MouseEvent mouseEvent) {
+		MainController.write("BattleSeaPlayPage.mouseIsOverWrite");
+	}
+
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Button)
 			((Button) mouseEvent.getSource()).setOpacity(1);
 	}
+
+	public void mouseIsOutWrite(MouseEvent mouseEvent) {
+		MainController.write("BattleSeaPlayPage.mouseIsOut");
+	}
+
 
 	private void setShipLabelIDs () {
 		int index = -1;
