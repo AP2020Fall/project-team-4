@@ -1,6 +1,7 @@
 package Controller.Menus;
 
 import Controller.AccountRelated.MessageController;
+import Controller.MainController;
 import Model.AccountRelated.AdminGameReco;
 import Model.AccountRelated.Gamer;
 import javafx.event.ActionEvent;
@@ -60,6 +61,10 @@ public class UserProfileForAdminController implements Initializable {
 		msgGrdPn.setVisible(true);
 	}
 
+	public void sendMsgWrite(ActionEvent actionEvent){
+		MainController.write("UserProfileForAdmin.sendMsg");
+	}
+
 	public void sendMessageDone (ActionEvent actionEvent) {
 		try {
 			MessageController.getInstance().sendMsg(gamer, msg.getText());
@@ -69,16 +74,32 @@ public class UserProfileForAdminController implements Initializable {
 		}
 	}
 
+	public void sendMessageDoneWrite(ActionEvent actionEvent){
+		MainController.write("UserProfileForAdmin.sendMessageDone");
+	}
+
 	public void cancelSendingMsg (ActionEvent actionEvent) {
 		msgGrdPn.setVisible(false);
 		msg.setText("");
+	}
+
+	public void cancelSendingWrite(ActionEvent actionEvent){
+		MainController.write("UserProfileForAdmin.cancelSending");
 	}
 
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
+	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		MainController.write("UserProfileForAdmin.mouseIsOver");
+	}
+
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		MainController.write("UserProfileForAdmin.mouseIsOut");
 	}
 }
