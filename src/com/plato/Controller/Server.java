@@ -63,18 +63,21 @@ class ClientHandler extends Thread {
                 System.out.println(received);
                 String className = received.split("\\.")[0];
                 String methodName = received.split("\\.")[1];
-                switch (received){
+                switch (className){
                     case "GameConclusionWindow":
                         if(methodName.equals("closeStage")) {
-                            GameConclusionWindowController.closeStage();
+                         // GameConclusionWindowController.closeStage();
                             break;}
                         else if(methodName.equals("mouseIsOver")){
-                            GameConclusionWindowController.mouseIsOver();
+                           // GameConclusionWindowController.mouseIsOver();
                             break;}
                         else if(methodName.equals("mouseIsOut")){
-                            GameConclusionWindowController.mouseIsOut();
+                           // GameConclusionWindowController.mouseIsOut();
                         }
                     case "GameLog":
+                        if(methodName.equals("closeStage")){}
+                        else if(methodName.equals("mouseIsOver")){}
+                        else if(methodName.equals("mouseIsOut")){}
                     case "GameMenu":
                     case "GameScoreboard":
                     case "GamesMenu":
