@@ -79,9 +79,9 @@
 
             <Insets left="190.0" />
         </GridPane.margin>
-      <image>
-         <Image url="@../../../Resources/Images/addButton.png" />
-      </image>
+        <image>
+            <Image url="@../../../Resources/Images/addButton.png" />
+        </image>
     </ImageView>
 
     <HBox alignment="CENTER" spacing="10.0" GridPane.columnSpan="4" GridPane.rowIndex="2">
@@ -147,9 +147,9 @@
         </Label>
 
         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Resources/Images/coin.png" />
-         </image>
+            <image>
+                <Image url="@../../../Resources/Images/coin.png" />
+            </image>
         </ImageView>
 
     </HBox>
@@ -186,9 +186,9 @@
                 <GridPane.margin>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </GridPane.margin>
-            <image>
-               <Image url="@../../../Resources/Images/battleseaIcon.png" />
-            </image>
+                <image>
+                    <Image url="@../../../Resources/Images/battleseaIcon.png" />
+                </image>
             </ImageView>
             <ProgressBar fx:id="progressToNextLevelBattleSea" maxHeight="35.0" maxWidth="300.0" minHeight="35.0" minWidth="400.0" progress="0.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="2">
                 <GridPane.margin>
@@ -323,9 +323,9 @@
                 <GridPane.margin>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </GridPane.margin>
-            <image>
-               <Image url="@../../../Resources/Images/reversiIcon.png" />
-            </image>
+                <image>
+                    <Image url="@../../../Resources/Images/reversiIcon.png" />
+                </image>
             </ImageView>
             <ProgressBar fx:id="progressToNextLevelReversi" maxHeight="35.0" maxWidth="300.0" minHeight="35.0" minWidth="400.0" progress="0.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="2">
                 <GridPane.margin>
@@ -434,9 +434,9 @@
 
     </Label>
     <ImageView fitHeight="70.0" fitWidth="200.0" onMouseClicked="#logout" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-      <image>
-         <Image url="@../../../Resources/Images/door.png" />
-      </image>
+        <image>
+            <Image url="@../../../Resources/Images/door.png" />
+        </image>
     </ImageView>
     <GridPane fx:id="dropDownMenu" layoutX="573.0" layoutY="55.0" maxHeight="60.0" maxWidth="110.0" minHeight="60.0" minWidth="110.0" style="-fx-background-color: white; -fx-border-color: grey; -fx-border-radius: 2; -fx-background-radius: 2;" visible="false" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
 

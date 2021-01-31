@@ -269,7 +269,7 @@
          <Font name="Avenir Book" size="17.0" />
       </font>
    </Label>
-   <Button fx:id="eventSettingsBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#openEventSettings" style="-fx-background-image: url(&quot;@../../../Resources/Images/settingButton.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+   <Button fx:id="eventSettingsBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#openEventSettings" style="-fx-background-image: url(&quot;https://i.imgur.com/RDAVfUp.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
       <GridPane.margin>
          <Insets right="10.0" top="10.0" />
       </GridPane.margin>

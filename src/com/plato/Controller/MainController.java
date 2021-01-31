@@ -26,6 +26,7 @@ import org.hildan.fxgson.FxGson;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -44,59 +45,43 @@ public class MainController extends Application {
 		launch(args);
 	}
 
-	@Override
-	public void start (Stage primaryStage) {
-		getInstance().primaryStage = primaryStage;
-		primaryStage.setResizable(false);
-		primaryStage.setOnCloseRequest(e -> saveEverything());
-		DayPassController.getInstance().start();
-
-		try {
-			getInstance().deserialize();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		// is signed in
-		String path;
-
-		if (!Admin.adminHasBeenCreated()) {
-			RegisterMenuController.setStage(primaryStage);
-			path = "src/com/plato/View/Menus/RegisterMenu.fxml";
-		}
-
-		else if (AccountController.getInstance().getCurrentAccLoggedIn() == null) {
-			LoginMenuController.setStage(primaryStage);
-			path = "src/com/plato/View/Menus/LoginMenu.fxml";
-		}
-		else {
-			MainMenuController.setGamerOrAdmin(AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer);
-			LoginMenuController.setStage(primaryStage);
-			path = "src/com/plato/View/Menus/MainMenu.fxml";
-		}
-
-		try {
-			primaryStage.setScene(new Scene(FXMLLoader.load(new File(path).toURI().toURL())));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		primaryStage.show();
-	}
-
 	public static MainController getInstance () {
 		if (mainController == null)
 			mainController = new MainController();
 		return mainController;
 	}
 
-	public static Image setImageFromFile(String address){
-		try{
+	public static Image getImageFromFile (String address) {
+		try {
 			return new Image(String.valueOf(new File(address).toURI().toURL()));
-		} catch (MalformedURLException e){
+		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-	return null;}
+		return null;
+	}
+
+	public static URL getImageUrlFromFile (String address) {
+		try {
+			return new File(address).toURI().toURL();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static void openUploadPfpWindow (Stage parentStage, ImageView imageViewToUpdate) {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
+		try {
+			File image = fileChooser.showOpenDialog(parentStage);
+			Path from = Paths.get(image.toURI()),
+					to = Paths.get("src/com/Resources/ProfilePics/" + image.getName());
+			Files.copy(from, to);
+			imageViewToUpdate.setImage(new Image(String.valueOf(image.toURI().toURL())));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {}
+	}
 //
 //	private void dealWithInput (int command) {
 //	LinkedList<String> menuOpts = new LinkedList<>();
@@ -256,7 +241,51 @@ public class MainController extends Application {
 //		saveEverything();
 //	}
 
-	private void enterAppropriateMenu() {
+	public static void playButtonClickSound () {
+		new AudioClip(Paths.get("src/com/Resources/Sounds/button.wav").toUri().toString()).play(0.2);
+	}
+
+	@Override
+	public void start (Stage primaryStage) {
+		getInstance().primaryStage = primaryStage;
+		primaryStage.setResizable(false);
+		primaryStage.setOnCloseRequest(e -> saveEverything());
+		DayPassController.getInstance().start();
+
+		try {
+			getInstance().deserialize();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// is signed in
+		String path;
+
+		if (!Admin.adminHasBeenCreated()) {
+			RegisterMenuController.setStage(primaryStage);
+			path = "src/com/plato/View/Menus/RegisterMenu.fxml";
+		}
+
+		else if (AccountController.getInstance().getCurrentAccLoggedIn() == null) {
+			LoginMenuController.setStage(primaryStage);
+			path = "src/com/plato/View/Menus/LoginMenu.fxml";
+		}
+		else {
+			MainMenuController.setGamerOrAdmin(AccountController.getInstance().getCurrentAccLoggedIn() instanceof Gamer);
+			LoginMenuController.setStage(primaryStage);
+			path = "src/com/plato/View/Menus/MainMenu.fxml";
+		}
+
+		try {
+			primaryStage.setScene(new Scene(FXMLLoader.load(new File(path).toURI().toURL())));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		primaryStage.show();
+	}
+
+	private void enterAppropriateMenu () {
 	}
 
 	public void saveEverything () {
@@ -552,24 +581,6 @@ public class MainController extends Application {
 		primaryStage.setOnCloseRequest(e -> saveEverything());
 
 		return primaryStage;
-	}
-
-	public static void openUploadPfpWindow (Stage parentStage, ImageView imageViewToUpdate) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
-		try {
-			File image = fileChooser.showOpenDialog(parentStage);
-			Path from = Paths.get(image.toURI()),
-					to = Paths.get("src/com/Resources/ProfilePics/" + image.getName());
-			Files.copy(from, to);
-			imageViewToUpdate.setImage(new Image(String.valueOf(image.toURI().toURL())));
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (NullPointerException e) {}
-	}
-
-	public static void playButtonClickSound () {
-		new AudioClip(Paths.get("src/com/Resources/Sounds/button.wav").toUri().toString()).play(0.2);
 	}
 
 	public Stage getPrimaryStage () {
