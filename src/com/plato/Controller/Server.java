@@ -56,30 +56,33 @@ class ClientHandler extends Thread {
 
     @Override
     public void run() {
-        String received;
-        while (true) {
+        while(true) {
             try {
-
-
-                received = dataInputStream.readUTF();
+                String received = this.dataInputStream.readUTF();
                 System.out.println(received);
-               // if (received.equals("Exit")) {
-                   // System.out.println("Client " + this.socket + " sends exit...");
-                    //System.out.println("Closing this connection.");
-                    //this.socket.close();
-                   // System.out.println("Connection closed");
-                   // break;
-               // }
+                if (!received.equals("Exit")) {
+                    continue;
+                }
 
-            } catch (IOException e) {
+                System.out.println("Client " + this.socket + " sends exit...");
+                System.out.println("Closing this connection.");
+                this.socket.close();
+                System.out.println("Connection closed");
+            } catch (IOException exception) {
+                exception.printStackTrace();
+                continue;
+            }
+
+            try {
+                this.dataInputStream.close();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            return;
         }
-      //  try {
-       //     dataInputStream.close();
-        //} catch (Exception e) {
-        //    e.printStackTrace();
-       // }
+    }
+}
 
     }
 }
