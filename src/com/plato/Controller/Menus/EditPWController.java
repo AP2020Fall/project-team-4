@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -109,8 +110,13 @@ public class EditPWController implements Initializable {
 			oldPasswordError.setText(e.getMessage());
 		}
 	}
-
+	public void confirmPasswordEditWrite(ActionEvent actionEvent) {
+		MainController.write("EditPW.confirmPasswordEdit");
+	}
 	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
+	}
+	public void closeStageWrite(ActionEvent actionEvent) {
+		MainController.write("EditPW.closeStage");
 	}
 }
