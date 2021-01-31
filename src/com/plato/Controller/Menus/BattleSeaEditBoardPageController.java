@@ -22,8 +22,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -40,6 +44,9 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	private PlayerBattleSea player1, player2;
 	private LinkedList<Ship> currentBoard;
 	private IntegerProperty editingTurn = new SimpleIntegerProperty(-1);
+	public static String host = "127.0.0.1";
+	public static int port = 5056;
+	public static Socket clientSocket;
 
 	public static void setStage (Stage stage) {
 		stage.setMinWidth(1000);
@@ -114,14 +121,22 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		stage.close();
 	}
 
+	public void closeStageWrite(ActionEvent actionEvent){
+		write("BattleSeaEditBoardPage.closeStage",actionEvent);
+
+	}
+
 	public void doneEditing (ActionEvent actionEvent) {
 		switch (editingTurn.intValue()) {
 			case 1 -> editingTurn.set(2);
 			case 2 -> editingTurn.set(-1);
 		}
 	}
+	public void doneEditingWrite(ActionEvent actionEvent) {
+		write("BattleSeaEditBoardPage.doneEditing", actionEvent);
+	}
 
-	public void generate5RandBoards (ActionEvent actionEvent) {
+		public void generate5RandBoards (ActionEvent actionEvent) {
 		LinkedList<LinkedList<Ship>> randBoards = BattleSea.get5RandBoards();
 		try {
 			BattleSea5RandBoardsController.setCurrentRandBoards(randBoards);
@@ -140,7 +155,9 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
+	public void generate5RandBoardsWrite(ActionEvent actionEvent) {
+		write("BattleSeaEditBoardPage.generate5RandBoards", actionEvent);
+	}
 	public void setBoard (LinkedList<Ship> board, GridPane boardToShowShipsIn) {
 		currentBoard = board;
 
@@ -177,7 +194,9 @@ public class BattleSeaEditBoardPageController implements Initializable {
 
 		setBoard(randBoard, board);
 	}
-
+	public void generate1RandBoardWrite(ActionEvent actionEvent) {
+		write("BattleSeaEditBoardPage.generate1RandBoard", actionEvent);
+	}
 	public void rotateShip (MouseEvent mouseEvent) {
 		Label shipImageView = ((Label) mouseEvent.getSource());
 		Ship ship = currentBoard.stream()
@@ -228,6 +247,22 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		} catch (ShipController.InvalidCoordinateException e) {
 //			System.out.printf("Cannot move ship to (x,y)=(%d,%d)%n", newX + 1, newY + 1);
 //			BattleSeaView.getInstance().displayBoard(currentBoard);
+		}
+	}
+
+
+
+	public void write(String message , ActionEvent actionEvent){
+		try{
+			InetAddress ip = InetAddress.getByName("localhost");
+			Socket socket = new Socket(ip , 5056);
+			clientSocket = new Socket(ip , 5056);
+			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+			System.out.println(dataInputStream.readUTF());
+			dataOutputStream.writeUTF(message);
+		}catch (Exception e){
+			System.out.println(e.getMessage());
 		}
 	}
 }

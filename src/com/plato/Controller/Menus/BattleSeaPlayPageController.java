@@ -27,8 +27,12 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URL;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -407,6 +411,24 @@ public class BattleSeaPlayPageController implements Initializable {
 	public void closeGame (ActionEvent actionEvent) {
 		stage.close();
 	}
+
+
+	public void closeGameWrite(ActionEvent actionEvent){
+		write("LoginMenu.deleteAccount" , actionEvent);
+	}
+
+	public void write(String message , ActionEvent actionEvent){
+		try{
+			InetAddress ip = InetAddress.getByName("localhost");
+			Socket socket = new Socket(ip , 5056);
+			Socket clientsocket = new Socket(ip, 5056);
+			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+
 
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Button)
