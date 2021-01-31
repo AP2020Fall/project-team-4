@@ -131,6 +131,8 @@ public class LoginMenuController implements Initializable {
 		}
 	}
 
+	public void signUpWrite(MouseEvent mouseEvent){MainController.write("LoginMenu.signUp");}
+
 	public void deleteAccount (MouseEvent mouseEvent) {
 		try {
 			Stage deleteAccStage = MainController.getInstance().createAndReturnNewStage(FXMLLoader.load(new File("src/com/plato/View/Menus/DeleteAccount.fxml").toURI().toURL()),
@@ -145,19 +147,9 @@ public class LoginMenuController implements Initializable {
 		}
 	}
 
-	public void deleteAccountToWrite(ActionEvent actionEvent){
-		write("LoginMenu.deleteAccount" , actionEvent);
+	public void deleteAccountWrite(ActionEvent actionEvent){
+		MainController.write("LoginMenu.deleteAccount");
 	}
 
-	public void write(String message , ActionEvent actionEvent){
-		try{
-			InetAddress ip = InetAddress.getByName("localhost");
-			Socket socket = new Socket(ip , 5056);
-			clientSocket = new Socket(ip , 5056);
-			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-		}catch (Exception e){
-			System.out.println(e.getMessage());
-		}
-	}
+
 }
