@@ -211,23 +211,11 @@ public class GameLogController implements Initializable {
 		((Label) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOverWrite(MouseEvent mouseEvent){
-		MainController.write("GameLog.mouseIsOver");
-	}
-
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		((Label) mouseEvent.getSource()).setOpacity(1);
 	}
 
-	public void mouseIsOutWrite(MouseEvent mouseEvent){
-		MainController.write("GameLog.mouseIsOutWrite");
-	}
-
 	public void closeStage (MouseEvent mouseEvent) {
 		stage.close();
-	}
-
-	public void closeStageWrite(MouseEvent mouseEvent){
-		MainController.write("GameLog.closeStage");
 	}
 }

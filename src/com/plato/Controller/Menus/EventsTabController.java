@@ -64,7 +64,9 @@ public class EventsTabController implements Initializable {
 
 		updateList(Event.getSortedEvents(eventsToShow));
 	}
-
+	public void filterWrite(ActionEvent actionEvent) {
+		MainController.write("EventsTab.filter");
+	}
 	public void createEvent (ActionEvent actionEvent) {
 		try {
 			EventCreateOrEditPageController.setIsForCreateOrInfo(true);
@@ -80,7 +82,9 @@ public class EventsTabController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
+	public void creatEventWrite(ActionEvent actionEvent) {
+		MainController.write("EventsTab.createEvent");
+	}
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
 		if (gamerOrAdmin)
@@ -267,12 +271,17 @@ public class EventsTabController implements Initializable {
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
-
+	public void mouseIsOutWrite(MouseEvent mouseEvent) {
+		MainController.write("EventsTab.mouseIsOut");
+	}
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
-}
 
+	public void mouseIsOverWrite(MouseEvent mouseEvent) {
+		MainController.write("EventsTab.mouseIsOver");
+	}
+}
 
 
 

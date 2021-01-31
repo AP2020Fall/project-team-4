@@ -101,6 +101,9 @@ public class FriendsTabController implements Initializable {
 			}});
 		}
 	}
+	public void updateFrndListWrite(ActionEvent actionEvent) {
+		MainController.write("FriendsTab.updateFrndList");
+	}
 
 	public void updateFrndsListWrite(ActionEvent actionEvent){
 		MainController.write("FriendsTab.update");
@@ -143,8 +146,9 @@ public class FriendsTabController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
-	public void displayFrndRequestsWrite(ActionEvent actionEvent){
-		MainController.write("FriendsTab.displayFrndRequests");
+	public void displayFrndRequestsWrite(ActionEvent actionEvent) {
+		MainController.write("FriendsTab.displayFrndRequest");
 	}
+
+
 }

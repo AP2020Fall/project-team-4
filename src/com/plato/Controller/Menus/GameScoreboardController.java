@@ -1,6 +1,5 @@
 package Controller.Menus;
 
-import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
@@ -191,23 +190,11 @@ public class GameScoreboardController implements Initializable {
 		stage.close();
 	}
 
-	public void closeStageWrite(ActionEvent actionEvent){
-		MainController.write("GameScoreboard.closeStage");
-	}
-
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOverWrite(MouseEvent mouseEvent){
-		MainController.write("GameScoreboard.mouseIsOver");
-	}
-
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(1);
-	}
-
-	public void mouseIsOutWrite(MouseEvent mouseEvent){
-		MainController.write("GameScoreboard.mouseIsOut");
 	}
 }

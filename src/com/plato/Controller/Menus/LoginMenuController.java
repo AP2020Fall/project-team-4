@@ -115,10 +115,6 @@ public class LoginMenuController implements Initializable {
 		}
 	}
 
-	public void loginWrite(ActionEvent actionEvent){
-		MainController.write("LoginMenu.login");
-	}
-
 
 	public void signUp (MouseEvent mouseEvent) {
 		stage.close();
