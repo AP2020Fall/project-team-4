@@ -2,6 +2,7 @@ package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
 import Controller.MainController;
+import Controller.Server;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import javafx.event.ActionEvent;
@@ -17,8 +18,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -31,6 +36,9 @@ public class LoginMenuController implements Initializable {
 	public Label delAccLbl, sgnUpLbl, usernameError, passwordError;
 	public CheckBox rememberMe;
 	public TextField username;
+	public static String host = "127.0.0.1";
+	public static int port = 5056;
+	public static Socket clientsocket = null;
 
 	public static void setStage (Stage stage) {
 		LoginMenuController.stage = stage;
@@ -107,6 +115,7 @@ public class LoginMenuController implements Initializable {
 		}
 	}
 
+
 	public void signUp (MouseEvent mouseEvent) {
 		stage.close();
 		try {
@@ -133,6 +142,22 @@ public class LoginMenuController implements Initializable {
 			DeleteAccountController.setStage(deleteAccStage);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void deleteAccountToWrite(ActionEvent actionEvent){
+		write("LoginMenu.deleteAccount" , actionEvent);
+	}
+
+	public void write(String message , ActionEvent actionEvent){
+		try{
+			InetAddress ip = InetAddress.getByName("localhost");
+			Socket socket = new Socket(ip , 5056);
+			clientsocket = new Socket(ip , 5056);
+			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+		}catch (Exception e){
+			System.out.println(e.getMessage());
 		}
 	}
 }
