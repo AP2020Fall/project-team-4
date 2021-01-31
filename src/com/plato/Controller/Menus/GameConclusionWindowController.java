@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+import Controller.MainController;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import javafx.fxml.Initializable;
@@ -57,11 +58,23 @@ public class GameConclusionWindowController implements Initializable {
 		stage.close();
 	}
 
+	public void closeStageWrite(MouseEvent mouseEvent){
+		MainController.write("GameConclusionWindow.closeStage");
+	}
+
 	public void mouseIsOver (MouseEvent mouseEvent) {
 		((Label) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
+	public void mouseIsOverWrite(MainController mainController){
+		MainController.write("GameConclusionWindow.");
+	}
+
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		((Label) mouseEvent.getSource()).setOpacity(1);
+	}
+
+	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		MainController.write("GameConclusionWindow.mouseIsOut");
 	}
 }
