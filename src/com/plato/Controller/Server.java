@@ -94,10 +94,26 @@ class ClientHandler extends Thread {
                             accountPageController.openBattleSeaMainMenu();
                      break;
 
+                    case "BattleSea5RandBoard":
+                        BattleSea5RandBoardsController battleSea5RandBoardsController = new BattleSea5RandBoardsController();
+                        if (methodName.equals("mouseIsOver"))
+                            battleSea5RandBoardsController.mouseIsOut();
+
+                        else  if (methodName.equals(("mouseIsOut")))
+                            battleSea5RandBoardsController.mouseIsOut();
+
+                        else if (methodName.equals("closeGen5RandBoard"))
+                        battleSea5RandBoardsController.closeGen5RandBoard();
+
+                         else if (methodName.equals("selectBoard"))
+                            battleSea5RandBoardsController.selectBoard();
+                         break;
+
                     case"AdminMsgsController":
                         AdminMsgsController adminMsgsController = new AdminMsgsController();
                         if (methodName.equals("closeStage")) adminMsgsController.closeStage();
                      break;
+
 
                     case "GameConclusionWindow":
                         GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();

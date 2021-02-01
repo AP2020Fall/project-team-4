@@ -22,6 +22,32 @@ public class BattleSea5RandBoardsController implements Initializable {
 	private static LinkedList<LinkedList<Ship>> currentRandBoards;
 	private static IntegerProperty selectedBoard = new SimpleIntegerProperty(-1);
 	public GridPane board1, board2, board3, board4, board5;
+	private ActionEvent actionEvent;
+	private MouseEvent mouseEvent;
+
+	public BattleSea5RandBoardsController() {
+	}
+
+	public BattleSea5RandBoardsController(ActionEvent actionEvent, MouseEvent mouseEvent) {
+		this.actionEvent = actionEvent;
+		this.mouseEvent = mouseEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
 
 	public static void setStage (Stage stage) {
 		BattleSea5RandBoardsController.stage = stage;
@@ -88,27 +114,40 @@ public class BattleSea5RandBoardsController implements Initializable {
 		});
 	}
 
-	public void selectBoard (MouseEvent mouseEvent) {
-		selectedBoard.set(Integer.parseInt(String.valueOf(((GridPane) mouseEvent.getSource()).getId().charAt(5))));
-
-		closeGen5RandBoard(new ActionEvent());
+	public void selectBoard () {
+		selectedBoard.set(Integer.parseInt(String.valueOf(((GridPane) getMouseEvent().getSource()).getId().charAt(5))));
+		closeGen5RandBoardWrite(new ActionEvent());
 	}
-	public void selectBoardWrite(MouseEvent mouseEvent) {
+	public void selectBoardWrite(MouseEvent mouseEvent)
+	{
+		setMouseEvent(mouseEvent);
 		MainController.write("BattleSea5RandBoards.selectBoardWrite");
 	}
 
-	public void closeGen5RandBoard (ActionEvent actionEvent) {
+	public void closeGen5RandBoard () {
 		stage.close();
 	}
 	public void closeGen5RandBoardWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("BattleSea5RandBoards.closeGen5RandBoardWrite");
 	}
 
-	public void mouseIsOut (MouseEvent mouseEvent) {
-		((GridPane) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOut () {
+		((GridPane) getMouseEvent().getSource()).setOpacity(1);
+	}
+	public void mouseIsOutWrite(MouseEvent mouseEvent)
+	{
+		setMouseEvent(mouseEvent);
+		MainController.write("mouseEvent");
 	}
 
-	public void mouseIsOver (MouseEvent mouseEvent) {
-		((GridPane) mouseEvent.getSource()).setOpacity(0.8);
+	public void mouseIsOver () {
+		((GridPane) getMouseEvent().getSource()).setOpacity(0.8);
+	}
+
+	public void mouseIsOverWrite(MouseEvent mouseEvent)
+	{
+		setMouseEvent(mouseEvent);
+		MainController.write("mouseEvent");
 	}
 }
