@@ -1,6 +1,7 @@
 package Controller;
 
         import Controller.Menus.GameConclusionWindowController;
+        import Controller.Menus.GameMenuController;
 
         import java.io.*;
         import java.text.*;
@@ -65,20 +66,26 @@ class ClientHandler extends Thread {
                 String methodName = received.split("\\.")[1];
                 switch (className){
                     case "GameConclusionWindow":
+                        GameConclusionWindowController obj = new GameConclusionWindowController();
                         if(methodName.equals("closeStage")) {
-                         // GameConclusionWindowController.closeStage();
+                          GameConclusionWindowController.closeStage();
                             break;}
                         else if(methodName.equals("mouseIsOver")){
-                           // GameConclusionWindowController.mouseIsOver();
+                            obj.mouseIsOver();
                             break;}
                         else if(methodName.equals("mouseIsOut")){
-                           // GameConclusionWindowController.mouseIsOut();
+                           obj.mouseIsOut();
                         }
                     case "GameLog":
                         if(methodName.equals("closeStage")){}
                         else if(methodName.equals("mouseIsOver")){}
                         else if(methodName.equals("mouseIsOut")){}
                     case "GameMenu":
+                        GameMenuController gameMenuController = new GameMenuController();
+                        if(methodName.equals("newGame")){
+                            gameMenuController.newGame();
+                        }
+
                     case "GameScoreboard":
                     case "GamesMenu":
                     case "GamingHistoryTab":

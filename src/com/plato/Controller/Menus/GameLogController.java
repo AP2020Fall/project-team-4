@@ -34,6 +34,32 @@ public class GameLogController implements Initializable {
 	public ImageView gamePicture;
 	public ListView<GridPane> gameLogList;
 	public Label gameTitle, playedNum;
+	ActionEvent actionEvent;
+	MouseEvent mouseEvent;
+
+	public GameLogController(ActionEvent actionEvent, MouseEvent mouseEvent) {
+		this.actionEvent = actionEvent;
+		this.mouseEvent = mouseEvent;
+	}
+
+	public GameLogController() {
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
 
 	public static void setGameName (String gameName) {
 		GameLogController.gameName = gameName;

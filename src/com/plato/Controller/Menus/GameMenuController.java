@@ -37,6 +37,32 @@ public class GameMenuController implements Initializable {
 	public MenuButton timeLimitMenuInGameMenu;
 	public GridPane timeBtnGridPane;
 	private String selectedTime = "30s";
+	private ActionEvent actionEvent;
+	private MouseEvent mouseEvent;
+
+	public GameMenuController(ActionEvent actionEvent, MouseEvent mouseEvent) {
+		this.actionEvent = actionEvent;
+		this.mouseEvent = mouseEvent;
+	}
+
+	public GameMenuController() {
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
 
 	public static void setStage (Stage stage) {
 		GameMenuController.stage = stage;
@@ -103,8 +129,7 @@ public class GameMenuController implements Initializable {
 		}
 	}
 
-	public void newGame (ActionEvent actionEvent) {
-
+	public void newGame () {
 		newGamePropertyWindow.setVisible(true);
 		timeLimitMenuInStartGameMenu.setText(selectedTime);
 
@@ -112,7 +137,7 @@ public class GameMenuController implements Initializable {
 	}
 
 	public void newGameWrite(ActionEvent actionEvent){
-		MainController.write("GameMenu");
+		MainController.write("GameMenu.newGame");
 	}
 
 	private void confirmTimeInGameMenu () {
@@ -276,11 +301,12 @@ public class GameMenuController implements Initializable {
 		MainController.write("GameMenu.mouseIsOver");
 	}
 
-	public void mouseIsOut (MouseEvent mouseEvent) {
-		((Button) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOut () {
+		((Button) getMouseEvent().getSource()).setOpacity(1);
 	}
 
 	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("GameMenu.mouseIsOut");
 	}
 }
