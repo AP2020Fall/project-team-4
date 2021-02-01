@@ -91,10 +91,7 @@ public class GamesMenuController implements Initializable {
 	}
 
 
-	public void closeStage (ActionEvent actionEvent) {
-		stage.close();
 
-	}
 
 	public void reversiMainMenu (ActionEvent actionEvent) {
 
@@ -141,6 +138,15 @@ public class GamesMenuController implements Initializable {
 				gridpane.getChildren().remove(reversiButton);
 
 		}
+	}
+
+	public void closeStage () {
+		stage.close();
+	}
+
+	public void closeStageWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
+		MainController.write("GamesMenu.closeStage");
 	}
 
 	public void mouseIsOver () {

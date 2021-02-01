@@ -67,9 +67,9 @@ public class BattleSeaPlayPageController implements Initializable {
 				System.out.println("Game Ended ");
 			}
 		}
-		public void handleWrite(ActionEvent actionEvent) {
-			MainController.write("BattleSeaPlayPage.handle");
-		}
+//		public void handleWrite(ActionEvent actionEvent) {
+//			MainController.write("BattleSeaPlayPage.handle");
+//		}
 
 	}));
 
