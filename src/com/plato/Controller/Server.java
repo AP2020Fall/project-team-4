@@ -175,6 +175,16 @@ class ClientHandler extends Thread {
 
                         break;
 
+                    case "DeleteAccountController":
+                        DeleteAccountController deleteAccountController = new DeleteAccountController();
+                        if (methodName.equals("closeStage"))
+                            deleteAccountController.closeStage();
+
+                        else if (methodName.equals("removeAccount"))
+                            deleteAccountController.removeAccount();
+
+                        break;
+
                     case "GameConclusionWindow":
                         GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();
                         if(methodName.equals("closeStage")) GameConclusionWindowController.closeStage();
