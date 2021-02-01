@@ -25,6 +25,7 @@ public class Server{
 
         //running loop for getting client requests
         while (true) {
+            System.out.println("Waiting for client...");
             Socket socket = null;
 
             try {

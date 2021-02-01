@@ -40,12 +40,13 @@ public class MainController extends Application {
 	private final GsonBuilder gsonBuilder = new GsonBuilder();
 	private Gson gson;
 	private Stage primaryStage;
+	public static String host = "127.0.0.1";
+	public static int port = 5056;
 	public static Socket clientSocket;
 
 	public static void main (String[] args) throws IOException {
 		launch(args);
-		Server.main(args);
-		Client.main(args);
+
 	}
 
 	public static MainController getInstance () {
