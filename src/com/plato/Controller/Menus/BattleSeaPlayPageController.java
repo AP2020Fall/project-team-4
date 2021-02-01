@@ -81,7 +81,6 @@ public class BattleSeaPlayPageController implements Initializable {
 	}
 
 	private Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<>() {
-
 		@Override
 		public void handle (ActionEvent e) {
 			secondsRemaining.set(secondsRemaining.get() - 1);
@@ -95,7 +94,9 @@ public class BattleSeaPlayPageController implements Initializable {
 				System.out.println("Game Ended ");
 			}
 		}
-
+		public void handleWrite(ActionEvent actionEvent) {
+			MainController.write("BattleSeaPlayPage.handle");
+		}
 
 	}));
 
@@ -438,34 +439,30 @@ public class BattleSeaPlayPageController implements Initializable {
 		}};
 	}
 
-	public static void closeGame() {
+	public void closeGame (ActionEvent actionEvent) {
 		stage.close();
 	}
 	public void closeGameWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
 		MainController.write("BattleSeaPlayPage.closeGame");
 	}
 
 
 
-	public static void mouseIsOver() {
-		if (getActionEvent().getSource() instanceof Button)
+	public void mouseIsOver() {
+		if (getMouseEvent().getSource() instanceof Button)
 			((Button) getMouseEvent().getSource()).setOpacity(0.8);
 	}
 
 	public void mouseIsOverWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
 		MainController.write("BattleSeaPlayPage.mouseIsOverWrite");
 	}
 
-	public void mouseIsOut () {
-		if (getMouseEvent().getSource() instanceof Button)
-			((Button) getMouseEvent().getSource()).setOpacity(1);
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Button)
+			((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 
-	public void mouseIsOutWrite(MouseEvent mouseEvent)
-	{
-		setMouseEvent(mouseEvent);
+	public void mouseIsOutWrite(MouseEvent mouseEvent) {
 		MainController.write("BattleSeaPlayPage.mouseIsOut");
 	}
 

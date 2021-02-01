@@ -8,6 +8,7 @@ import Model.AccountRelated.*;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
 import Model.GameRelated.Reversi.Reversi;
+import View.Client;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -41,8 +42,14 @@ public class MainController extends Application {
 	private Stage primaryStage;
 	public static Socket clientSocket;
 
-	public static void main (String[] args) {
+	public static void main (String[] args) throws IOException {
 		launch(args);
+//		Server.run();
+//		Client.run();
+		Server server = new Server(5056 , "local host");
+		Thread thread = new Thread(server);
+		thread.start();
+
 	}
 
 	public static MainController getInstance () {
