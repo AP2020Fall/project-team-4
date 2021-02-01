@@ -24,6 +24,32 @@ public class DeleteAccountController implements Initializable {
 	public ImageView showPwOrNot;
 	public PasswordField pwFieldpwHidden;
 	public TextField pwFieldpwShown;
+	private MouseEvent mouseEvent;
+	private ActionEvent actionEvent;
+
+	public DeleteAccountController() {
+	}
+
+	public DeleteAccountController(MouseEvent mouseEvent, ActionEvent actionEvent) {
+		this.mouseEvent = mouseEvent;
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
 
 	public static void setStage (Stage stage) {
 		DeleteAccountController.stage = stage;
@@ -67,13 +93,14 @@ public class DeleteAccountController implements Initializable {
 		showPwOrNot.toFront();
 	}
 
-	public void closeStage (ActionEvent actionEvent) {
+	public void closeStage () {
 		stage.close();
 	}
-	public void closeStageWrite(ActionEvent actionEvent) {
+	public void closeStageWrite(ActionEvent actionEvent)
+	{setActionEvent(actionEvent);
 		MainController.write("DeletAccount.closeStage");
 	}
-	public void removeAccount (ActionEvent actionEvent) {
+	public void removeAccount () {
 //		Stage stage = new Stage();
 //		try {
 //			stage = MainController.getInstance().createAndReturnNewStage(
@@ -110,7 +137,9 @@ public class DeleteAccountController implements Initializable {
 		DeleteAccountController.stage.close();
 //		stage.show();
 	}
-	public void removeAccountWrite(ActionEvent actionEvent) {
+	public void removeAccountWrite(ActionEvent actionEvent)
+	{
+		setActionEvent(actionEvent);
 		MainController.write("DeletAccount.removeAccount");
 	}
 }
