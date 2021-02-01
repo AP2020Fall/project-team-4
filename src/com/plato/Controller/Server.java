@@ -221,6 +221,48 @@ class ClientHandler extends Thread {
 
                         break;
 
+                    case "EventCreateOrEditPage":
+                        EventCreateOrEditPageController eventCreateOrEditPageController = new EventCreateOrEditPageController();
+                        if (methodName.equals("uploadImg"))
+                            eventCreateOrEditPageController.uploadImg();
+
+                        else if (methodName.equals("editTitle"))
+                            eventCreateOrEditPageController.editTitle();
+
+                        else if (methodName.equals("editGame"))
+                            eventCreateOrEditPageController.editGame();
+
+                        else if (methodName.equals("editStartDate"))
+                            eventCreateOrEditPageController.editStartDate();
+
+                        else if (methodName.equals("editEndDate"))
+                            eventCreateOrEditPageController.editEndDate();
+
+                        else if (methodName.equals("editCoin"))
+                            eventCreateOrEditPageController.editCoins();
+
+                        else if (methodName.equals("editDetails"))
+                            eventCreateOrEditPageController.editDetails();
+
+                        else if (methodName.equals("removeEvent"))
+                            eventCreateOrEditPageController.removeEvent();
+
+                        else if (methodName.equals("revertEdit"))
+                            eventCreateOrEditPageController.revertEdits();
+
+                        else if (methodName.equals("confirmEdits"))
+                            eventCreateOrEditPageController.confirmEdits();
+
+                        else if(methodName.equals("closeStage"))
+                            eventCreateOrEditPageController.closeStage();
+
+                        else if (methodName.equals("createEvent"))
+                            eventCreateOrEditPageController.createEvent();
+
+                        else if (methodName.equals("openEventSettings"))
+                            eventCreateOrEditPageController.openEventSettings();
+
+                        break;
 
                     case "GameConclusionWindow":
                         GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();
