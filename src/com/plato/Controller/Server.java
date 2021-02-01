@@ -287,6 +287,18 @@ class ClientHandler extends Thread {
 
                         break;
 
+                    case"FriendsTab":
+                        FriendsTabController friendsTabController = new FriendsTabController();
+
+                        if (methodName.equals("displayFrndReguests"))
+                            friendsTabController.displayFrndRequests();
+
+                        else if (methodName.equals("updateFrndsList"))
+                            friendsTabController.updateFrndsList();
+
+                        break;
+
+
                     case "GameConclusionWindow":
                         GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();
                         if(methodName.equals("closeStage")) gameConclusionWindowController.closeStage();

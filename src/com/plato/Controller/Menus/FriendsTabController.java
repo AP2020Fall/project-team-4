@@ -25,6 +25,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -33,13 +34,36 @@ import java.util.ResourceBundle;
 public class FriendsTabController implements Initializable {
 	public GridPane frndProfile;
 	public ListView<GridPane> frndsList;
+	private MouseEvent mouseEvent;
+	private ActionEvent actionEvent;
+
+	public FriendsTabController() {
+		this.mouseEvent = null;
+		this.actionEvent = null;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		updateFrndsList(new ActionEvent());
+		updateFrndListWrite(new ActionEvent());
 	}
 
-	public void updateFrndsList (ActionEvent actionEvent) {
+	public void updateFrndsList () {
 		frndsList.getItems().clear();
 
 		Gamer currentAccLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
@@ -102,12 +126,10 @@ public class FriendsTabController implements Initializable {
 		}
 	}
 	public void updateFrndListWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("FriendsTab.updateFrndList");
 	}
 
-	public void updateFrndsListWrite(ActionEvent actionEvent){
-		MainController.write("FriendsTab.update");
-	}
 
 	private void unfriend (String frndUN) {
 		GamerController.getInstance().removeFriend(frndUN);
@@ -131,7 +153,7 @@ public class FriendsTabController implements Initializable {
 		}
 	}
 
-	public void displayFrndRequests (ActionEvent actionEvent) {
+	public void displayFrndRequests () {
 		Stage stage;
 		try {
 			stage = MainController.getInstance().createAndReturnNewStage(
@@ -147,6 +169,7 @@ public class FriendsTabController implements Initializable {
 		}
 	}
 	public void displayFrndRequestsWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("FriendsTab.displayFrndRequest");
 	}
 
