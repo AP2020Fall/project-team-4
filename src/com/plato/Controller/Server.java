@@ -128,8 +128,37 @@ class ClientHandler extends Thread {
 
                     case"AdminMsgsController":
                         AdminMsgsController adminMsgsController = new AdminMsgsController();
-                        if (methodName.equals("closeStage")) adminMsgsController.closeStage();
+                        if (methodName.equals("closeStage"))
+                            adminMsgsController.closeStage();
                      break;
+
+                    case"BattleSeaEditBoardPage":
+                        BattleSeaEditBoardPageController battleSeaEditBoardPageController = new BattleSeaEditBoardPageController();
+                        if (methodName.equals("closeStage"))
+                            battleSeaEditBoardPageController.closeStage();
+
+                        else if (methodName.equals("doneEditing"))
+                            battleSeaEditBoardPageController.doneEditing();
+
+                        else if (methodName.equals("generate5RandBoard"))
+                            battleSeaEditBoardPageController.generate5RandBoards();
+
+                        else if (methodName.equals("generate1RandBoard"))
+                            battleSeaEditBoardPageController.generate1RandBoard();
+
+                        else if (methodName.equals("rotateShip"))
+                            battleSeaEditBoardPageController.rotateShip();
+
+                        else if (methodName.equals("mouseIsOver"))
+                            battleSeaEditBoardPageController.mouseIsOver();
+
+                        else if (methodName.equals("mouseIsOut"))
+                            battleSeaEditBoardPageController.mouseIsOut();
+
+                        else if (methodName.equals("moveShipIfPossible"))
+                            battleSeaEditBoardPageController.moveShipIfPossible();
+
+                        break;
 
 
                     case "GameConclusionWindow":
