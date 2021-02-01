@@ -26,12 +26,11 @@ public class EditPWController implements Initializable {
 	private MouseEvent mouseEvent;
 	private ActionEvent actionEvent;
 
-	public EditPWController() {
-	}
 
-	public EditPWController(MouseEvent mouseEvent, ActionEvent actionEvent) {
-		this.mouseEvent = mouseEvent;
-		this.actionEvent = actionEvent;
+
+	public EditPWController() {
+		this.mouseEvent = null;
+		this.actionEvent = null;
 	}
 
 	public MouseEvent getMouseEvent() {

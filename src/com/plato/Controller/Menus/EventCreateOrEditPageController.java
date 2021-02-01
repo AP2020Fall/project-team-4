@@ -48,12 +48,10 @@ public class EventCreateOrEditPageController implements Initializable {
 	private MouseEvent mouseEvent;
 	private  ActionEvent actionEvent;
 
-	public EventCreateOrEditPageController() {
-	}
 
-	public EventCreateOrEditPageController(MouseEvent mouseEvent, ActionEvent actionEvent) {
-		this.mouseEvent = mouseEvent;
-		this.actionEvent = actionEvent;
+	public EventCreateOrEditPageController() {
+		this.mouseEvent = null;
+		this.actionEvent =null;
 	}
 
 	public MouseEvent getMouseEvent() {
