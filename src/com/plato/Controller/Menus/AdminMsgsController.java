@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -24,6 +25,32 @@ public class AdminMsgsController implements Initializable {
 	private static Gamer gamer;
 	public ImageView adminPfp;
 	public ListView<GridPane> msgList;
+	private ActionEvent actionEvent;
+	private MouseEvent mouseEvent;
+
+	public AdminMsgsController() {
+	}
+
+	public AdminMsgsController(ActionEvent actionEvent, MouseEvent mouseEvent) {
+		this.actionEvent = actionEvent;
+		this.mouseEvent = mouseEvent;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
 
 	public static void setStage (Stage stage) {
 		AdminMsgsController.stage = stage;
@@ -54,10 +81,13 @@ public class AdminMsgsController implements Initializable {
 			} catch (IOException e) { e.printStackTrace(); }
 	}
 
-	public void closeStage (ActionEvent actionEvent) {
+	public void closeStage () {
 		stage.close();
 	}
-	public void closeStageWrite(ActionEvent actionEvent) {
+
+	public void closeStageWrite(ActionEvent actionEvent)
+	{
+		setActionEvent(actionEvent);
 		MainController.write("AdminMsgs.closeStage");
 	}
 
