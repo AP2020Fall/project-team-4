@@ -175,6 +175,7 @@ class ClientHandler extends Thread {
 
                     case "DeleteAccount":
                         DeleteAccountController deleteAccountController = new DeleteAccountController();
+
                         if (methodName.equals("closeStage"))
                             deleteAccountController.closeStage();
 
@@ -295,6 +296,17 @@ class ClientHandler extends Thread {
 
                         else if (methodName.equals("updateFrndsList"))
                             friendsTabController.updateFrndsList();
+
+                        break;
+
+                    case "EventsTabController":
+                        EventsTabController eventsTabController = new EventsTabController();
+
+                        if (methodName.equals("mouseIsOut"))
+                            eventsTabController.mouseIsOut();
+
+                        else if (methodName.equals("mouseIsOver"))
+                            eventsTabController.mouseIsOver();
 
                         break;
 

@@ -41,6 +41,29 @@ public class EventsTabController implements Initializable {
 	public ListView<GridPane> eventsList;
 	public Pane eventInfo;
 	public GridPane gridPane;
+	private MouseEvent mouseEvent;
+	private ActionEvent actionEvent;
+
+	public EventsTabController() {
+		this.mouseEvent = null;
+		this.actionEvent = null;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		EventsTabController.gamerOrAdmin = gamerOrAdmin;
@@ -268,17 +291,19 @@ public class EventsTabController implements Initializable {
 		}
 	}
 
-	public void mouseIsOut (MouseEvent mouseEvent) {
+	public void mouseIsOut () {
 		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 	public void mouseIsOutWrite(MouseEvent mouseEvent) {
+		setMouseEvent(mouseEvent);
 		MainController.write("EventsTab.mouseIsOut");
 	}
-	public void mouseIsOver (MouseEvent mouseEvent) {
-		((Button) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOver () {
+		((Button) getMouseEvent().getSource()).setOpacity(1);
 	}
 
 	public void mouseIsOverWrite(MouseEvent mouseEvent) {
+		setMouseEvent(mouseEvent);
 		MainController.write("EventsTab.mouseIsOver");
 	}
 }
