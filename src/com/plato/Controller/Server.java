@@ -126,7 +126,7 @@ class ClientHandler extends Thread {
                             battleSea5RandBoardsController.selectBoard();
                          break;
 
-                    case"AdminMsgsController":
+                    case"AdminMsgs":
                         AdminMsgsController adminMsgsController = new AdminMsgsController();
                         if (methodName.equals("closeStage"))
                             adminMsgsController.closeStage();
@@ -161,7 +161,7 @@ class ClientHandler extends Thread {
 
                         break;
 
-                    case "BattleSeaPlayPageController":
+                    case "BattleSeaPlayPage":
                         BattleSeaPlayPageController battleSeaPlayPageController = new BattleSeaPlayPageController();
 
                         if(methodName.equals("closeGame"))
@@ -175,7 +175,7 @@ class ClientHandler extends Thread {
 
                         break;
 
-                    case "DeleteAccountController":
+                    case "DeleteAccount":
                         DeleteAccountController deleteAccountController = new DeleteAccountController();
                         if (methodName.equals("closeStage"))
                             deleteAccountController.closeStage();
@@ -185,9 +185,39 @@ class ClientHandler extends Thread {
 
                         break;
 
+                    case "DisplayPersonalInfo":
+                        DisplayPersonalAccInfoController displayPersonalAccInfoController = new DisplayPersonalAccInfoController();
+
+                        if(methodName.equals("closeStage"))
+                            displayPersonalAccInfoController.closeStage();
+
+                        else if (methodName.equals("editFirstName"))
+                            displayPersonalAccInfoController.editFirstName();
+
+                        else if( methodName.equals("editLastName"))
+                            displayPersonalAccInfoController.editLastName();
+
+                        else if (methodName.equals("editUsername"))
+                            displayPersonalAccInfoController.editUsername();
+
+                        else if (methodName.equals("editMail"))
+                            displayPersonalAccInfoController.editEmail();
+
+                        else if (methodName.equals("editPhonNum"))
+                            displayPersonalAccInfoController.editPhoneNum();
+
+                        else if (methodName.equals("confirmAllEdits"))
+                            displayPersonalAccInfoController.confirmAllEdits();
+
+                        else if (methodName.equals("uploadPfp"))
+                            displayPersonalAccInfoController.uploadPfp();
+
+                        break;
+
+
                     case "GameConclusionWindow":
                         GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();
-                        if(methodName.equals("closeStage")) GameConclusionWindowController.closeStage();
+                        if(methodName.equals("closeStage")) gameConclusionWindowController.closeStage();
                         else if(methodName.equals("mouseIsOver")) gameConclusionWindowController.mouseIsOver();
                         else if(methodName.equals("mouseIsOut")) gameConclusionWindowController.mouseIsOut();
 

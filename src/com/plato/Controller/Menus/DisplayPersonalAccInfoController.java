@@ -33,6 +33,32 @@ public class DisplayPersonalAccInfoController implements Initializable {
 	public HBox coinHbox;
 	public GridPane mainGridPane;
 	public LinkedList<Label> editButtons = new LinkedList<>();
+	private MouseEvent mouseEvent;
+	private ActionEvent actionEvent;
+
+	public DisplayPersonalAccInfoController() {
+	}
+
+	public DisplayPersonalAccInfoController(MouseEvent mouseEvent, ActionEvent actionEvent) {
+		this.mouseEvent = mouseEvent;
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
 
 	public static void setStage (Stage stage) {
 		DisplayPersonalAccInfoController.stage = stage;
@@ -61,10 +87,12 @@ public class DisplayPersonalAccInfoController implements Initializable {
 		}
 	}
 
-	public void closeStage (ActionEvent actionEvent) {
+	public void closeStage () {
 		stage.close();
 	}
-	public void closeStageWrite(ActionEvent actionEvent) {
+	public void closeStageWrite(ActionEvent actionEvent)
+	{
+		setActionEvent(actionEvent);
 		MainController.write("DisplayPersonalInfo.closeStage");
 	}
 	public void updateFieldViews () {
@@ -80,52 +108,60 @@ public class DisplayPersonalAccInfoController implements Initializable {
 		editButtons.clear();
 	}
 
-	public void editFirstName (MouseEvent mouseEvent) {
+	public void editFirstName () {
 		firstNameTextField.setVisible(!firstNameTextField.isVisible());
-		((Label) mouseEvent.getSource()).setText(firstNameTextField.isVisible() ? "cancel" : "edit");
+		((Label) getMouseEvent().getSource()).setText(firstNameTextField.isVisible() ? "cancel" : "edit");
 		firstNameTextField.setText(firstName.getText());
-		editButtons.add(((Label) mouseEvent.getSource()));
+		editButtons.add(((Label) getMouseEvent().getSource()));
 	}
 	public void editFirstNameWrite(MouseEvent mouseEvent) {
+		setMouseEvent(mouseEvent);
 		MainController.write("DisplayPersonalInfo.editFirstName");
 	}
-	public void editLastName (MouseEvent mouseEvent) {
+	public void editLastName () {
 		lastNameTextField.setVisible(!lastNameTextField.isVisible());
-		((Label) mouseEvent.getSource()).setText(lastNameTextField.isVisible() ? "cancel" : "edit");
+		((Label) getMouseEvent().getSource()).setText(lastNameTextField.isVisible() ? "cancel" : "edit");
 		lastNameTextField.setText(lastName.getText());
-		editButtons.add(((Label) mouseEvent.getSource()));
+		editButtons.add(((Label) getMouseEvent().getSource()));
 	}
-	public void editLastNameWrite(MouseEvent mouseEvent) {
+	public void editLastNameWrite(MouseEvent mouseEvent)
+	{
+		setMouseEvent(mouseEvent);
 		MainController.write("DisplayPersonalInfo.editLastName");
 	}
-	public void editUsername (MouseEvent mouseEvent) {
+	public void editUsername () {
 		usernameTextField.setVisible(!usernameTextField.isVisible());
-		((Label) mouseEvent.getSource()).setText(usernameTextField.isVisible() ? "cancel" : "edit");
+		((Label) getMouseEvent().getSource()).setText(usernameTextField.isVisible() ? "cancel" : "edit");
 		usernameTextField.setText(username.getText());
-		editButtons.add(((Label) mouseEvent.getSource()));
+		editButtons.add(((Label) getMouseEvent().getSource()));
 	}
-	public void editUsernameWrite(MouseEvent mouseEvent) {
+	public void editUsernameWrite(MouseEvent mouseEvent)
+	{
+		setMouseEvent(mouseEvent);
 		MainController.write("DisplayPersonalInfo.editUsername");
 	}
-	public void editEmail (MouseEvent mouseEvent) {
+	public void editEmail () {
 		emailTextField.setVisible(!emailTextField.isVisible());
-		((Label) mouseEvent.getSource()).setText(emailTextField.isVisible() ? "cancel" : "edit");
+		((Label) getMouseEvent().getSource()).setText(emailTextField.isVisible() ? "cancel" : "edit");
 		emailTextField.setText(email.getText());
-		editButtons.add(((Label) mouseEvent.getSource()));
+		editButtons.add(((Label) getMouseEvent().getSource()));
 	}
-	public void editEmailWrite(MouseEvent mouseEvent) {
+	public void editEmailWrite(MouseEvent mouseEvent)
+	{
+		setMouseEvent(mouseEvent);
 		MainController.write("DisplayPersonalInfo.editEmail");
 	}
-	public void editPhoneNum (MouseEvent mouseEvent) {
+	public void editPhoneNum () {
 		phoneNumberTextField.setVisible(!phoneNumberTextField.isVisible());
-		((Label) mouseEvent.getSource()).setText(phoneNumberTextField.isVisible() ? "cancel" : "edit");
+		((Label) getMouseEvent().getSource()).setText(phoneNumberTextField.isVisible() ? "cancel" : "edit");
 		phoneNumberTextField.setText(phoneNumber.getText());
-		editButtons.add(((Label) mouseEvent.getSource()));
+		editButtons.add(((Label) getMouseEvent().getSource()));
 	}
 	public void editPhoneNumWrite(MouseEvent mouseEvent) {
+		setMouseEvent(mouseEvent);
 		MainController.write("DisplayPersonalInfo.editPhoneNum");
 	}
-	public void confirmAllEdits (ActionEvent actionEvent) {
+	public void confirmAllEdits () {
 		if (firstNameTextField.isVisible()) {
 			try {
 				AccountController.getInstance().editAccField("first name", firstNameTextField.getText());
@@ -173,14 +209,17 @@ public class DisplayPersonalAccInfoController implements Initializable {
 
 		updateFieldViews();
 	}
-	public void confirmAllEditsWrite(ActionEvent actionEvent) {
+	public void confirmAllEditsWrite(ActionEvent actionEvent)
+	{
+		setActionEvent(actionEvent);
 		MainController.write("DisplayPersonalInfo.confirmAllEdits");
 	}
-	public void uploadPfp (MouseEvent mouseEvent)
+	public void uploadPfp ()
 	{
 		MainController.openUploadPfpWindow(stage, pfp);
 	}
 	public void setUploadPfpWrite(MouseEvent mouseEvent) {
+		setMouseEvent(mouseEvent);
 		MainController.write("DisplayPersonalInfo.uploadPfp");
 	}
 }
