@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 
 public class Client {
-    public static void run () throws IOException {
+    public static void main (String[] args) throws IOException {
         System.out.println("client started");
         try {
             Scanner scanner = new Scanner(System.in);

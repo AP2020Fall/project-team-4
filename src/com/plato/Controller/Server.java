@@ -8,25 +8,22 @@ import java.util.*;
 import java.net.*;
 
 
-public class Server implements Runnable{
+public class Server{
     private int port;
     private String host;
+    private static ServerSocket serverSocket;
 
+    //constructor
     public Server(int port, String host) {
         this.port = port;
         this.host = host;
     }
 
-    public void run() {
+    public static void main(String[] args) throws IOException{
         System.out.println("server started");
-        ServerSocket serverSocket = null;
-        try {
-            serverSocket = new ServerSocket(5056);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        serverSocket = new ServerSocket(5056);
 
-
+        //running loop for getting client requests
         while (true) {
             Socket socket = null;
 
@@ -36,12 +33,11 @@ public class Server implements Runnable{
 
                 System.out.println("A new client has connected : " + socket);
 
-
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 
                 DataOutputStream dataOutputStream =new DataOutputStream(socket.getOutputStream());
 
-                // System.out.println("Assigning new thread for this client");
+                System.out.println("Assigning new thread for this client");
 
                 Thread thread = new ClientHandler(socket, dataInputStream);
 
@@ -52,9 +48,9 @@ public class Server implements Runnable{
                     socket.close();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
+                    System.out.println("socket closed due to exception");
+                    e.printStackTrace();
                 }
-                System.out.println("socket closed due to exception");
-                e.printStackTrace();
             }
         }
     }
@@ -66,7 +62,7 @@ class ClientHandler extends Thread {
     final Socket socket;
     final DataInputStream dataInputStream;
 
-
+    //constructor
     public ClientHandler(Socket socket, DataInputStream dataInputStream1) {
         this.socket = socket;
         this. dataInputStream= dataInputStream1;
@@ -76,6 +72,7 @@ class ClientHandler extends Thread {
     public void run() {
         while(true) {
             try {
+                //receive from client
                 String received = this.dataInputStream.readUTF();
                 System.out.println(received);
                 String className = received.split("\\.")[0];
@@ -278,7 +275,6 @@ class ClientHandler extends Thread {
             }
 
             try {
-
                 this.dataInputStream.close();
             }
             catch (Exception e) {

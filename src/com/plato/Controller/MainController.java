@@ -44,12 +44,8 @@ public class MainController extends Application {
 
 	public static void main (String[] args) throws IOException {
 		launch(args);
-//		Server.run();
-//		Client.run();
-		Server server = new Server(5056 , "local host");
-		Thread thread = new Thread(server);
-		thread.start();
-
+		Server.main(args);
+		Client.main(args);
 	}
 
 	public static MainController getInstance () {
