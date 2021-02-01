@@ -1,9 +1,6 @@
 package Controller;
 
-import Controller.Menus.AccountPageController;
-import Controller.Menus.GameConclusionWindowController;
-import Controller.Menus.GameLogController;
-import Controller.Menus.GameMenuController;
+import Controller.Menus.*;
 
 import java.io.*;
 import java.text.*;
@@ -69,109 +66,54 @@ class ClientHandler extends Thread {
                 switch (className){
                     case"AccountPage":
                         AccountPageController accountPageController = new AccountPageController();
-                        if (methodName.equals("logout")) {
-                            accountPageController.logout();
-                            break;
-                        }
-                        else if (methodName.equals("uploadPfp")){
-                            accountPageController.uploadPfp();
-                            break;
-                        }
-                        else if (methodName.equals("editPassword")){
-                            accountPageController.editPassword();
-                            break;}
-                        else if (methodName.equals("displayPersonInfo")){
-                            accountPageController.displayPersonalInfo();
-                            break;
-                        }
-                        else if (methodName.equals("changeDropDownMenuVisibility")){
-                            accountPageController.changeDropDownMenuVisibility();
-                            break;}
-                        else if (methodName.equals("mouseIsOut")) {
-                            accountPageController.mouseIsOut();
-                            break;}
-                        else if (methodName.equals(("mouseIsOver"))){
-                            accountPageController.mouseIsOut();
-                            break;}
-                        else if (methodName.equals("openReversiMainMenu")){
-                            accountPageController.openReversiMainMenu();
-                            break;}
-                        else if (methodName.equals("openBattlSeaMainMenu")){
-                            accountPageController.openBattleSeaMainMenu();
-                            break;
-                        }
+                        if (methodName.equals("logout")) accountPageController.logout();
+
+                        else if (methodName.equals("uploadPfp")) accountPageController.uploadPfp();
+
+                        else if (methodName.equals("editPassword")) accountPageController.editPassword();
+
+                        else if (methodName.equals("displayPersonInfo"))accountPageController.displayPersonalInfo();
+
+                        else if (methodName.equals("changeDropDownMenuVisibility"))accountPageController.changeDropDownMenuVisibility();
+
+                        else if (methodName.equals("mouseIsOut")) accountPageController.mouseIsOut();
+
+                        else if (methodName.equals(("mouseIsOver"))) accountPageController.mouseIsOut();
+
+                        else if (methodName.equals("openReversiMainMenu")) accountPageController.openReversiMainMenu();
+
+                        else if (methodName.equals("openBattlSeaMainMenu")) accountPageController.openBattleSeaMainMenu();
 
                     case "GameConclusionWindow":
-                        GameConclusionWindowController obj = new GameConclusionWindowController();
-                        if(methodName.equals("closeStage")) {
-                            GameConclusionWindowController.closeStage();
-                            break;}
-                        else if(methodName.equals("mouseIsOver")){
-                            obj.mouseIsOver();
-                            break;}
-                        else if(methodName.equals("mouseIsOut")){
-                            obj.mouseIsOut();
-                            break;
-                        }
+                        GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();
+                        if(methodName.equals("closeStage")) GameConclusionWindowController.closeStage();
+                        else if(methodName.equals("mouseIsOver")) gameConclusionWindowController.mouseIsOver();
+                        else if(methodName.equals("mouseIsOut")) gameConclusionWindowController.mouseIsOut();
+
                     case "GameLog":
                         GameLogController gameLogController = new GameLogController();
-                        if(methodName.equals("closeStage")){
-                            gameLogController.closeStage();
-                            break;
-                        }
-                        else if(methodName.equals("mouseIsOver")){
-                            gameLogController.mouseIsOver();
-                            break;
-                        }
-                        else if(methodName.equals("mouseIsOut")){
-                            gameLogController.mouseIsOut();
-                            break;
-                        }
+                        if(methodName.equals("closeStage")) gameLogController.closeStage();
+                        else if(methodName.equals("mouseIsOver")) gameLogController.mouseIsOver();
+                        else if(methodName.equals("mouseIsOut")) gameLogController.mouseIsOut();
+
                     case "GameMenu":
                         GameMenuController gameMenuController = new GameMenuController();
-                        if(methodName.equals("newGame")){
-                            gameMenuController.newGame();
-                            break;
-                        }
-                        else if(methodName.equals("dontStartGame")){
-                            gameMenuController.dontStartGame();
-                            break;
-                        }
-                        else if(methodName.equals("startGame")){
-                            gameMenuController.startGame();
-                            break;
-                        }
-                        else if(methodName.equals("changeFaveStatus")){
-                            gameMenuController.changeFaveStatus();
-                            break;
-                        }
-                        else if(methodName.equals("closeGame")){
-                            gameMenuController.closeGame();
-                            break;
-                        }
-                        else if(methodName.equals("displayScoreboard")){
-                            gameMenuController.displayScoreboard();
-                            break;
-                        }
-                        else if(methodName.equals("setTime")){
-                            gameMenuController.setTime();
-                            break;
-                        }
-                        else if(methodName.equals("displayLogOfGame")){
-                            gameMenuController.displayLogOfGame();
-                            break;
-                        }
-                        else if(methodName.equals("mouseIsOver")){
-                            gameMenuController.mouseIsOver();
-                            break;
-                        }
-                        else if(methodName.equals("mouseIsOut")){
-                            gameMenuController.mouseIsOut();
-                            break;
-                        }
+                        if(methodName.equals("newGame")) gameMenuController.newGame();
+                        else if(methodName.equals("dontStartGame")) gameMenuController.dontStartGame();
+                        else if(methodName.equals("startGame")) gameMenuController.startGame();
+                        else if(methodName.equals("changeFaveStatus")) gameMenuController.changeFaveStatus();
+                        else if(methodName.equals("closeGame")) gameMenuController.closeGame();
+                        else if(methodName.equals("displayScoreboard")) gameMenuController.displayScoreboard();
+                        else if(methodName.equals("setTime")) gameMenuController.setTime();
+                        else if(methodName.equals("displayLogOfGame")) gameMenuController.displayLogOfGame();
+                        else if(methodName.equals("mouseIsOver"))gameMenuController.mouseIsOver();
+                        else if(methodName.equals("mouseIsOut")) gameMenuController.mouseIsOut();
                         break;
                     case "GameScoreboard":
-                        // if(){}
+                        GameScoreboardController gameScoreboardController = new GameScoreboardController();
+                         if(methodName.equals("closeStage")) gameScoreboardController.closeStage();
+                         else if(methodName.equals("mouseIsOver")) gameScoreboardController.mouseIsOver();
+                         else if(methodName.equals("mouseIsOut")) gameScoreboardController.mouseIsOut();
                         break;
                     case "GamesMenu":
                     case "GamingHistoryTab":

@@ -26,7 +26,33 @@ public class GamesMenuController implements Initializable {
 	public Button battlseaButton;
 	public Button reversiButton;
 	public GridPane gridpane;
+	private ActionEvent actionEvent;
+	private MouseEvent mouseEvent;
 
+
+	public GamesMenuController(ActionEvent actionEvent, MouseEvent mouseEvent) {
+		this.actionEvent = actionEvent;
+		this.mouseEvent = mouseEvent;
+	}
+
+	public GamesMenuController() {
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
 
 	public static void setIsForFaveGames (boolean forFaveGames) {
 		isForFaveGames = forFaveGames;
@@ -117,19 +143,21 @@ public class GamesMenuController implements Initializable {
 		}
 	}
 
-	public static void mouseIsOver (MouseEvent mouseEvent) {
-		((Label) mouseEvent.getSource()).setOpacity(0.8);
+	public void mouseIsOver () {
+		((Label) getMouseEvent().getSource()).setOpacity(0.8);
 	}
 
 	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("GamesMenu.mouseIsOver");
 	}
 
-	public static void mouseIsOut (MouseEvent mouseEvent) {
-		((ImageView) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOut () {
+		((ImageView) getMouseEvent().getSource()).setOpacity(1);
 	}
 
 	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("GamesMenu.mouseIsOut");
 	}
 }
