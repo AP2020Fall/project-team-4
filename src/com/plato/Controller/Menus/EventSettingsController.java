@@ -10,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,6 +21,31 @@ public class EventSettingsController implements Initializable {
 	public MenuButton eventTypeMenu, gameMenu, minReqMenu;
 	public GridPane gridPane;
 	private StringProperty eventSettings;
+	private MouseEvent mouseEvent;
+	private ActionEvent actionEvent;
+
+
+
+	public EventSettingsController() {
+		this.mouseEvent = null;
+		this.actionEvent = null;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
 
 	public static void setStage (Stage stage) {
 		EventSettingsController.stage = stage;
@@ -73,7 +99,7 @@ public class EventSettingsController implements Initializable {
 		return "%s|%s|%s".formatted(eventTypeMenu.getText(), gameMenu.getText(), minReqMenu.getText());
 	}
 
-	public void isLoginTimes (ActionEvent actionEvent) {
+	public void isLoginTimes () {
 		gameMenu.setVisible(false);
 		minReqMenu.setVisible(true);
 
@@ -87,35 +113,39 @@ public class EventSettingsController implements Initializable {
 			}});
 		}
 
-		resetPage(actionEvent);
+		resetPageWrite(getActionEvent());
 	}
 	public void isLoginTimesWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("EventSettings.isLoginTimes");
 	}
-	public void resetPage (ActionEvent actionEvent) {
+	public void resetPage () {
 		minReqMenu.setText("Minimum Requirement");
 		gameMenu.setText("Game name");
 		eventTypeMenu.setText(((MenuItem) actionEvent.getSource()).getText());
 	}
 	public void resetPageWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("EventSettings.resetPage");
 	}
-	public void closeStage (ActionEvent actionEvent) {
+	public void closeStage () {
 		stage.close();
 	}
 	public void closeStageWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("EventSettings.closeStage");
 	}
-	public void isMVPInGame (ActionEvent actionEvent) {
+	public void isMVPInGame () {
 		gameMenu.setVisible(true);
 		minReqMenu.setVisible(false);
 
-		resetPage(actionEvent);
+		resetPageWrite(getActionEvent());
 	}
 	public void ismVPInGameWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("EventSettings.isMVPInGame");
 	}
-	public void isPlayTimes (ActionEvent actionEvent) {
+	public void isPlayTimes () {
 		minReqMenu.setVisible(true);
 		gameMenu.setVisible(true);
 
@@ -129,12 +159,13 @@ public class EventSettingsController implements Initializable {
 			}});
 		}
 
-		resetPage(actionEvent);
+		resetPageWrite(getActionEvent());
 	}
 	public void isPlayTimeWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("EventSettings.isPlayTimes");
 	}
-	public void isWinTimes (ActionEvent actionEvent) {
+	public void isWinTimes () {
 		minReqMenu.setVisible(true);
 		gameMenu.setVisible(true);
 
@@ -148,12 +179,13 @@ public class EventSettingsController implements Initializable {
 			}});
 		}
 
-		resetPage(actionEvent);
+		resetPageWrite(getActionEvent());
 	}
 	public void isWinTimesWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("EventSettings.isWinTimes");
 	}
-	public void isWinTimesNonStop (ActionEvent actionEvent) {
+	public void isWinTimesNonStop () {
 		minReqMenu.setVisible(true);
 		gameMenu.setVisible(true);
 
@@ -167,9 +199,10 @@ public class EventSettingsController implements Initializable {
 			}});
 		}
 
-		resetPage(actionEvent);
+		resetPageWrite(getActionEvent());
 	}
 	public void isWinTimesNonStopWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("EventSettings.isWinTimesNonStop");
 	}
 }

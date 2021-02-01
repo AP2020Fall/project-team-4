@@ -265,6 +265,28 @@ class ClientHandler extends Thread {
 
                         break;
 
+                    case "EventSettings":
+                        EventSettingsController eventSettingsController = new EventSettingsController();
+                        if (methodName.equals("isLoginTime"))
+                            eventSettingsController.isLoginTimes();
+
+                        else if (methodName.equals("resetPage"))
+                            eventSettingsController.resetPage();
+
+                        else if (methodName.equals("closeStage"))
+                            eventSettingsController.closeStage();
+
+                        else if (methodName.equals("isMVPInGame"))
+                            eventSettingsController.isMVPInGame();
+
+                        else if (methodName.equals("isPlayTime"))
+                            eventSettingsController.isPlayTimes();
+
+                        else if (methodName.equals("isWinTime"))
+                            eventSettingsController.isWinTimes();
+
+                        break;
+
                     case "GameConclusionWindow":
                         GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();
                         if(methodName.equals("closeStage")) gameConclusionWindowController.closeStage();
