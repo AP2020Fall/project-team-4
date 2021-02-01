@@ -34,6 +34,32 @@ public class GameLogController implements Initializable {
 	public ImageView gamePicture;
 	public ListView<GridPane> gameLogList;
 	public Label gameTitle, playedNum;
+	ActionEvent actionEvent;
+	MouseEvent mouseEvent;
+
+	public GameLogController(ActionEvent actionEvent, MouseEvent mouseEvent) {
+		this.actionEvent = actionEvent;
+		this.mouseEvent = mouseEvent;
+	}
+
+	public GameLogController() {
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
 
 	public static void setGameName (String gameName) {
 		GameLogController.gameName = gameName;
@@ -208,27 +234,30 @@ public class GameLogController implements Initializable {
 		}};
 	}
 
-	public static void closeStage (ActionEvent actionEvent) {
+	public void closeStage () {
 		stage.close();
 	}
 
 	public void closeStageWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
 		MainController.write("GameLog.closeStage");
 	}
 
-	public static void mouseIsOver (MouseEvent mouseEvent) {
-		((Label) mouseEvent.getSource()).setOpacity(0.8);
+	public void mouseIsOver () {
+		((Label) getMouseEvent().getSource()).setOpacity(0.8);
 	}
 
 	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("GameLog.mouseIsOver");
 	}
 
-	public static void mouseIsOut (MouseEvent mouseEvent) {
-		((ImageView) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOut () {
+		((ImageView) getMouseEvent().getSource()).setOpacity(1);
 	}
 
 	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("GameLog.mouseIsOut");
 	}
 }

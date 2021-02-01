@@ -21,6 +21,32 @@ public class GameConclusionWindowController implements Initializable {
 	public ImageView pfp1, pfp2;
 	public Label username1, username2;
 	public Label score1, score2;
+	private ActionEvent actionEvent;
+	private MouseEvent mouseEvent;
+
+	public GameConclusionWindowController(ActionEvent actionEvent, MouseEvent mouseEvent) {
+		this.actionEvent = actionEvent;
+		this.mouseEvent = mouseEvent;
+	}
+
+	public GameConclusionWindowController() {
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
 
 	public static void setGame (Game game) {
 		GameConclusionWindowController.game = game;
@@ -55,27 +81,30 @@ public class GameConclusionWindowController implements Initializable {
 		score2.setText(String.valueOf(game.getInGameScore(2)));
 	}
 
-	public static void closeStage (ActionEvent actionEvent) {
+	public static void closeStage () {
 		stage.close();
 	}
 
 	public void closeStageWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
 		MainController.write("GameConclusionWindow.closeStage");
 	}
 
-	public static void mouseIsOver (MouseEvent mouseEvent) {
-		((Label) mouseEvent.getSource()).setOpacity(0.8);
+	public void mouseIsOver () {
+		((Label) getMouseEvent().getSource()).setOpacity(0.8);
 	}
 
 	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("GameConclusionWindow.mouseIsOver");
 	}
 
-	public static void mouseIsOut (MouseEvent mouseEvent) {
-		((ImageView) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOut () {
+		((ImageView) getMouseEvent().getSource()).setOpacity(1);
 	}
 
 	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("GameConclusionWindow.mouseIsOut");
 	}
 }
