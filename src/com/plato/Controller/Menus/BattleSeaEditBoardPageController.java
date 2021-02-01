@@ -47,13 +47,12 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	private MouseEvent mouseEvent;
 	private ActionEvent actionEvent;
 
-	public BattleSeaEditBoardPageController(MouseEvent mouseEvent, ActionEvent actionEvent) {
-		this.mouseEvent = mouseEvent;
-		this.actionEvent = actionEvent;
+	public BattleSeaEditBoardPageController() {
+		this.mouseEvent = null;
+		this.actionEvent = null;
 	}
 
-	public BattleSeaEditBoardPageController() {
-	}
+
 
 	public MouseEvent getMouseEvent() {
 		return mouseEvent;

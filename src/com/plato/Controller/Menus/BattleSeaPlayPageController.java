@@ -56,12 +56,10 @@ public class BattleSeaPlayPageController implements Initializable {
 	private MouseEvent mouseEvent;
 	private ActionEvent actionEvent;
 
-	public BattleSeaPlayPageController() {
-	}
 
-	public BattleSeaPlayPageController(MouseEvent mouseEvent, ActionEvent actionEvent) {
-		this.mouseEvent = mouseEvent;
-		this.actionEvent = actionEvent;
+	public BattleSeaPlayPageController() {
+		this.mouseEvent = null;
+		this.actionEvent = null;
 	}
 
 	public MouseEvent getMouseEvent() {

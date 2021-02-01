@@ -36,12 +36,11 @@ public class DisplayPersonalAccInfoController implements Initializable {
 	private MouseEvent mouseEvent;
 	private ActionEvent actionEvent;
 
-	public DisplayPersonalAccInfoController() {
-	}
 
-	public DisplayPersonalAccInfoController(MouseEvent mouseEvent, ActionEvent actionEvent) {
-		this.mouseEvent = mouseEvent;
-		this.actionEvent = actionEvent;
+
+	public DisplayPersonalAccInfoController() {
+		this.mouseEvent = null;
+		this.actionEvent =null;
 	}
 
 	public MouseEvent getMouseEvent() {
