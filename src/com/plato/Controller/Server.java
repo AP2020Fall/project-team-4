@@ -8,10 +8,23 @@ import java.util.*;
 import java.net.*;
 
 
-public class Server {
-    public static void run () throws IOException {
+public class Server implements Runnable{
+    private int port;
+    private String host;
+
+    public Server(int port, String host) {
+        this.port = port;
+        this.host = host;
+    }
+
+    public void run() {
         System.out.println("server started");
-        ServerSocket serverSocket = new ServerSocket(5056);
+        ServerSocket serverSocket = null;
+        try {
+            serverSocket = new ServerSocket(5056);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         while (true) {
@@ -35,7 +48,11 @@ public class Server {
                 thread.start();
 
             } catch (Exception e) {
-                socket.close();
+                try {
+                    socket.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
                 System.out.println("socket closed due to exception");
                 e.printStackTrace();
             }
