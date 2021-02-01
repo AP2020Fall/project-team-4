@@ -89,9 +89,18 @@ class ClientHandler extends Thread {
                             break;}
                         else if (methodName.equals("mouseIsOut")) {
                             accountPageController.mouseIsOut();
+                            break;}
+                        else if (methodName.equals(("mouseIsOver"))){
+                            accountPageController.mouseIsOut();
+                            break;}
+                        else if (methodName.equals("openReversiMainMenu")){
+                            accountPageController.openReversiMainMenu();
+                            break;}
+                        else if (methodName.equals("openBattlSeaMainMenu")){
+                            accountPageController.openBattleSeaMainMenu();
                             break;
-
                         }
+
                     case "GameConclusionWindow":
                         GameConclusionWindowController obj = new GameConclusionWindowController();
                         if(methodName.equals("closeStage")) {
