@@ -38,12 +38,9 @@ public class GameScoreboardController implements Initializable {
 	private ActionEvent actionEvent;
 	private MouseEvent mouseEvent;
 
-	public GameScoreboardController(ActionEvent actionEvent, MouseEvent mouseEvent) {
-		this.actionEvent = actionEvent;
-		this.mouseEvent = mouseEvent;
-	}
-
 	public GameScoreboardController() {
+		this.actionEvent = null;
+		this.mouseEvent = null;
 	}
 
 	public ActionEvent getActionEvent() {

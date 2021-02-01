@@ -37,7 +37,7 @@
             <Font name="Arial" size="14.0" />
         </font>
     </Label>
-    <Button mnemonicParsing="false" onAction="#signUp" text="SIGN-UP" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+    <Button mnemonicParsing="false" onAction="#signUpWrite" text="SIGN-UP" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
         <font>
             <Font name="Arial Bold" size="17.0" />
         </font>

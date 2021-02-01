@@ -1,6 +1,7 @@
 package Controller;
 
 import Controller.Menus.*;
+import Model.GameRelated.Reversi.Reversi;
 
 import java.io.*;
 import java.text.*;
@@ -363,16 +364,65 @@ class ClientHandler extends Thread {
                          else if(methodName.equals("mouseIsOut")) gameScoreboardController.mouseIsOut();
                         break;
                     case "GamesMenu":
+                        GamesMenuController gamesMenuController = new GamesMenuController();
+                        if(methodName.equals("closeStage")) gamesMenuController.closeStage();
+                        else if(methodName.equals("mouseIsOver")) gamesMenuController.mouseIsOver();
+                        else if(methodName.equals("mouseIsOut")) gamesMenuController.mouseIsOut();
+                        else if(methodName.equals("battleSeaMainMenu")) gamesMenuController.battleSeaMainMenu();
+                        else if(methodName.equals("reversiMainMenu")) gamesMenuController.reversiMainMenu();
+                        break;
                     case "GamingHistoryTab":
+                        GamingHistoryTabController gamingHistoryTabController = new GamingHistoryTabController();
+                        if(methodName.equals("updateListOfGames")) gamingHistoryTabController.updateListOfGames();
+                        break;
                     case "LoginMenu":
+                        LoginMenuController loginMenuController = new LoginMenuController();
+                        if(methodName.equals("login")) loginMenuController.login();
+                        else if(methodName.equals("signUp")) loginMenuController.signUp();
+                        else if(methodName.equals("deleteAccount")) loginMenuController.deleteAccount();
                     case "MainMenu":
-                    case "MessageTemplate":
+                        MainMenuController mainMenuController = new MainMenuController();
+                        if(methodName.equals("eventsTab")) mainMenuController.eventsTab();
+                        else if(methodName.equals("usersTab")) mainMenuController.usersTab();
+                        else if(methodName.equals("accountPage")) mainMenuController.accountPage();
+                        else if(methodName.equals("gamingHistoryPage")) mainMenuController.gamingHistoryPage();
+                        else if(methodName.equals("gamesTab")) mainMenuController.gamesTab();
+                        else if(methodName.equals("faveGamesTab")) mainMenuController.faveGamesTab();
+                        else if(methodName.equals("friendsPage")) mainMenuController.friendsPage();
+                        else if(methodName.equals("messagesTab")) mainMenuController.messagesTab();
+                        else if(methodName.equals("mouseIsOut")) mainMenuController.mouseIsOut();
+                        else if(methodName.equals("mouseIsOver")) mainMenuController.mouseIsOver();
+                        break;
                     case "RegisterForm":
+                        RegisterFormController registerFormController = new RegisterFormController();
+                        if(methodName.equals("signUp")) registerFormController.signUp();
+                        else if(methodName.equals("uploadPfp")) registerFormController.uploadPfp();
+                        else if(methodName.equals("closeStage")) registerFormController.closeStage();
+                        else if(methodName.equals("mouseIsOver")) registerFormController.mouseIsOver();
+                        else if(methodName.equals("mouseIsOut")) registerFormController.mouseIsOut();
+                        break;
                     case "RegisterMenu":
+                        RegisterMenuController registerMenuController = new RegisterMenuController();
+                        registerMenuController.signUp();
+                        break;
                     case "ReversiGame":
-                    case "SendFriendRequestPage":
+                        ReversiGameController reversiGameController = new ReversiGameController();
+                        if(methodName.equals("putMarkIfPossible")) reversiGameController.putMarkIfPossible();
+                        else if(methodName.equals("confirmMove")) reversiGameController.confirmMove();
+                        else if(methodName.equals("showMoves")) reversiGameController.showMoves();
+                        else if(methodName.equals("mouseIsOut")) reversiGameController.mouseIsOut();
+                        else if(methodName.equals("mouseIsOver")) reversiGameController.mouseIsOver();
+                        else if(methodName.equals("closeGame")) reversiGameController.closeGame();
+                        else if(methodName.equals("closeMoveHistory")) reversiGameController.closeMoveHistory();
+                        break;
                     case "UserProfileForAdmin":
-                    case "UsersTab":
+                        UserProfileForAdminController userProfileForAdminController = new UserProfileForAdminController();
+                        if(methodName.equals("sendMsg")) userProfileForAdminController.sendMsg();
+                        else if(methodName.equals("sendMessageDone")) userProfileForAdminController.sendMessageDone();
+                        else if(methodName.equals("cancelSending")) userProfileForAdminController.cancelSendingMsg();
+                        else if(methodName.equals("mouseIsOver")) userProfileForAdminController.mouseIsOver();
+                        else if(methodName.equals("mouseIsOut")) userProfileForAdminController.mouseIsOut();
+                        break;
                 }
 //                System.out.println("Client " + this.socket + " sends exit...");
 //                System.out.println("Closing this connection.");

@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -26,6 +27,29 @@ public class RegisterMenuController implements Initializable {
 	public PasswordField pwFieldpwHidden;
 	public TextField pwFieldpwShown, usernameTxtFld;
 	public Label usernameError, AdminGamerTitle, passwordError;
+	private ActionEvent actionEvent;
+	private MouseEvent mouseEvent;
+
+	public RegisterMenuController() {
+		this.actionEvent = null;
+		this.mouseEvent = null;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
 
 	public static Stage getStage () {
 		return stage;
@@ -75,7 +99,7 @@ public class RegisterMenuController implements Initializable {
 		showPwOrNot.toFront();
 	}
 
-	public void signUp (ActionEvent actionEvent) {
+	public void signUp () {
 
 		String password = (showPwOrNot.getImage().getUrl().contains("invisible") ? pwFieldpwShown : pwFieldpwHidden).getText();
 		try {
@@ -111,6 +135,7 @@ public class RegisterMenuController implements Initializable {
 	}
 
 	public void signUpWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
 		MainController.write("RegisterMenu.signUp");
 	}
 }
