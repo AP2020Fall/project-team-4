@@ -165,13 +165,13 @@ class ClientHandler extends Thread {
                         BattleSeaPlayPageController battleSeaPlayPageController = new BattleSeaPlayPageController();
 
                         if(methodName.equals("closeGame"))
-                            BattleSeaPlayPageController.closeGame();
+                            battleSeaPlayPageController.closeGame();
 
                         else if (methodName.equals("mouseIsOver"))
-                            BattleSeaPlayPageController.mouseIsOver();
+                            battleSeaPlayPageController.mouseIsOver();
 
                         else if (methodName.equals("mouseIsOut"))
-                            BattleSeaPlayPageController.mouseIsOver();
+                            battleSeaPlayPageController.mouseIsOver();
 
                         break;
 

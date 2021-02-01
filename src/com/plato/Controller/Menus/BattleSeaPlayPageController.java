@@ -439,10 +439,11 @@ public class BattleSeaPlayPageController implements Initializable {
 		}};
 	}
 
-	public void closeGame (ActionEvent actionEvent) {
+	public void closeGame () {
 		stage.close();
 	}
 	public void closeGameWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("BattleSeaPlayPage.closeGame");
 	}
 
