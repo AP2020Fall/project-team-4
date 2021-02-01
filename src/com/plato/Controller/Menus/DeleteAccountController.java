@@ -27,12 +27,10 @@ public class DeleteAccountController implements Initializable {
 	private MouseEvent mouseEvent;
 	private ActionEvent actionEvent;
 
-	public DeleteAccountController() {
-	}
 
-	public DeleteAccountController(MouseEvent mouseEvent, ActionEvent actionEvent) {
-		this.mouseEvent = mouseEvent;
-		this.actionEvent = actionEvent;
+	public DeleteAccountController() {
+		this.mouseEvent = null;
+		this.actionEvent = null;
 	}
 
 	public MouseEvent getMouseEvent() {

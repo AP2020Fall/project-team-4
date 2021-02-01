@@ -28,12 +28,11 @@ public class AdminMsgsController implements Initializable {
 	private ActionEvent actionEvent;
 	private MouseEvent mouseEvent;
 
-	public AdminMsgsController() {
-	}
 
-	public AdminMsgsController(ActionEvent actionEvent, MouseEvent mouseEvent) {
-		this.actionEvent = actionEvent;
-		this.mouseEvent = mouseEvent;
+
+	public AdminMsgsController() {
+		this.actionEvent = null;
+		this.mouseEvent = null;
 	}
 
 	public ActionEvent getActionEvent() {

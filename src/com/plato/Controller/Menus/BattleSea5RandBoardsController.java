@@ -25,12 +25,12 @@ public class BattleSea5RandBoardsController implements Initializable {
 	private ActionEvent actionEvent;
 	private MouseEvent mouseEvent;
 
-	public BattleSea5RandBoardsController() {
-	}
 
-	public BattleSea5RandBoardsController(ActionEvent actionEvent, MouseEvent mouseEvent) {
-		this.actionEvent = actionEvent;
-		this.mouseEvent = mouseEvent;
+
+
+	public BattleSea5RandBoardsController() {
+		this.actionEvent =null;
+		this.mouseEvent = null;
 	}
 
 	public void setActionEvent(ActionEvent actionEvent) {

@@ -37,13 +37,13 @@ public class AccountPageController implements Initializable {
 	private ActionEvent actionEvent;
 	private MouseEvent mouseEvent;
 
-	public AccountPageController(ActionEvent actionEvent, MouseEvent mouseEvent) {
-		this.actionEvent = actionEvent;
-		this.mouseEvent = mouseEvent;
+	public AccountPageController() {
+		this.actionEvent = null;
+		this.mouseEvent = null;
 	}
 
-	public AccountPageController() {
-	}
+
+
 
 	public ActionEvent getActionEvent() {
 		return actionEvent;
