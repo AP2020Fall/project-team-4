@@ -1,14 +1,14 @@
 package Controller;
 
 import Controller.Menus.AccountPageController;
-        import Controller.Menus.GameConclusionWindowController;
-        import Controller.Menus.GameLogController;
-        import Controller.Menus.GameMenuController;
+import Controller.Menus.GameConclusionWindowController;
+import Controller.Menus.GameLogController;
+import Controller.Menus.GameMenuController;
 
-        import java.io.*;
-        import java.text.*;
-        import java.util.*;
-        import java.net.*;
+import java.io.*;
+import java.text.*;
+import java.util.*;
+import java.net.*;
 
 
 public class Server {
@@ -31,7 +31,7 @@ public class Server {
 
                 DataOutputStream dataOutputStream =new DataOutputStream(socket.getOutputStream());
 
-               // System.out.println("Assigning new thread for this client");
+                // System.out.println("Assigning new thread for this client");
 
                 Thread thread = new ClientHandler(socket, dataInputStream);
 
@@ -95,20 +95,20 @@ class ClientHandler extends Thread {
                     case "GameConclusionWindow":
                         GameConclusionWindowController obj = new GameConclusionWindowController();
                         if(methodName.equals("closeStage")) {
-                          GameConclusionWindowController.closeStage();
+                            GameConclusionWindowController.closeStage();
                             break;}
                         else if(methodName.equals("mouseIsOver")){
                             obj.mouseIsOver();
                             break;}
                         else if(methodName.equals("mouseIsOut")){
-                           obj.mouseIsOut();
-                           break;
+                            obj.mouseIsOut();
+                            break;
                         }
                     case "GameLog":
                         GameLogController gameLogController = new GameLogController();
                         if(methodName.equals("closeStage")){
                             gameLogController.closeStage();
-                        break;
+                            break;
                         }
                         else if(methodName.equals("mouseIsOver")){
                             gameLogController.mouseIsOver();
@@ -161,10 +161,10 @@ class ClientHandler extends Thread {
                             break;
                         }
                         break;
-                        case "GameScoreboard":
-                           // if(){}
+                    case "GameScoreboard":
+                        // if(){}
                         break;
-                        case "GamesMenu":
+                    case "GamesMenu":
                     case "GamingHistoryTab":
                     case "LoginMenu":
                     case "MainMenu":
