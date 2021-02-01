@@ -16,7 +16,7 @@
      </rowConstraints>
    </GridPane>
     <HBox fx:id="buttons" alignment="CENTER" maxHeight="195.0" minHeight="195.0" spacing="15.0">
-        <Button fx:id="b0" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#eventsTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Events" textAlignment="CENTER">
+        <Button fx:id="b0" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#eventsTabWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Events" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../Resources/Images/eventButton.png" />
@@ -26,7 +26,7 @@
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="b1" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#usersTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Users" textAlignment="CENTER">
+        <Button fx:id="b1" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#usersTabWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Users" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../Resources/Images/gamerIcon.png" />
@@ -36,7 +36,7 @@
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="b2" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Account" textAlignment="CENTER">
+        <Button fx:id="b2" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPageWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Account" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../Resources/Images/accountIcon.png" />
@@ -46,7 +46,7 @@
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="b3" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="30.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#eventsTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Events" textAlignment="CENTER">
+        <Button fx:id="b3" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="30.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#eventsTabWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Events" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../Resources/Images/eventButton.png" />
@@ -56,7 +56,7 @@
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="b4" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="300.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamingHistoryPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Gaming&#10;History" textAlignment="CENTER">
+        <Button fx:id="b4" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="300.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamingHistoryPageWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Gaming&#10;History" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="110.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../Resources/Images/historyButton.png" />
@@ -66,7 +66,7 @@
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="b5" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="435.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamesTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Games" textAlignment="CENTER">
+        <Button fx:id="b5" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="435.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#gamesTabWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Games" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../Resources/Images/gameButton.png" />
@@ -76,7 +76,7 @@
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="b6" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="570.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#faveGamesTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Favourite&#10;Games" textAlignment="CENTER">
+        <Button fx:id="b6" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="570.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#faveGamesTabWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Favourite&#10;Games" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="105.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../Resources/Images/favouriteGame.png" />
@@ -86,7 +86,7 @@
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="b7" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="705.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#friendsPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Friends" textAlignment="CENTER">
+        <Button fx:id="b7" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="705.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#friendsPageWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Friends" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../Resources/Images/friend.png" />
@@ -96,7 +96,7 @@
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="b8" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="460.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Account" textAlignment="CENTER">
+        <Button fx:id="b8" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="460.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#accountPageWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Account" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../Resources/Images/accountIcon.png" />
@@ -106,7 +106,7 @@
                 <Font name="Avenir Next Condensed Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="b9" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="1535.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#messagesTab" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Messages" textAlignment="CENTER">
+        <Button fx:id="b9" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="1535.0" layoutY="15.0" maxHeight="175.0" maxWidth="175.0" minHeight="175.0" minWidth="175.0" mnemonicParsing="false" onAction="#messagesTabWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" prefHeight="175.0" prefWidth="175.0" style="-fx-background-radius: 87.5; -fx-background-color: transparent;" text="Messages" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="125.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../Resources/Images/messageIcon.png" />

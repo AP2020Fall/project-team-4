@@ -40,12 +40,9 @@ public class GameMenuController implements Initializable {
 	private ActionEvent actionEvent;
 	private MouseEvent mouseEvent;
 
-	public GameMenuController(ActionEvent actionEvent, MouseEvent mouseEvent) {
-		this.actionEvent = actionEvent;
-		this.mouseEvent = mouseEvent;
-	}
-
 	public GameMenuController() {
+		this.actionEvent = null;
+		this.mouseEvent = null;
 	}
 
 	public ActionEvent getActionEvent() {

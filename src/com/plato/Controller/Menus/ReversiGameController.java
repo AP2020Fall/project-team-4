@@ -46,6 +46,30 @@ public class ReversiGameController implements Initializable {
 	public GridPane historyGridPane;
 	public ListView<GridPane> moveHistoryList;
 	private PlayerReversi player1, player2;
+	private ActionEvent actionEvent;
+	private MouseEvent mouseEvent;
+
+
+	public ReversiGameController() {
+		this.actionEvent = null;
+		this.mouseEvent = null;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
 
 	public static void setStage (Stage stage) {
 		ReversiGameController.stage = stage;
@@ -150,8 +174,8 @@ public class ReversiGameController implements Initializable {
 			}
 	}
 
-	public void putMarkIfPossible (MouseEvent mouseEvent) {
-		int index = board.getChildren().indexOf(mouseEvent.getSource());
+	public void putMarkIfPossible () {
+		int index = board.getChildren().indexOf(getMouseEvent().getSource());
 
 		try {
 			ReversiController.getInstance().placeDisk(getXFrom1(index), getYFrom1(index));
@@ -167,6 +191,7 @@ public class ReversiGameController implements Initializable {
 	}
 
 	public void putMarkIfPossibleWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("ReversiGame.putMarkIfPossible");
 	}
 
@@ -222,7 +247,7 @@ public class ReversiGameController implements Initializable {
 		}
 	}
 
-	public void confirmMove (ActionEvent actionEvent) {
+	public void confirmMove () {
 		ReversiController.getInstance().nextTurn();
 
 		if (currentGame.gameHasEnded()) {
@@ -243,6 +268,7 @@ public class ReversiGameController implements Initializable {
 	}
 
 	public void confirmMoveWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
 		MainController.write("LoginMenu.confirmMove");
 	}
 
@@ -262,7 +288,7 @@ public class ReversiGameController implements Initializable {
 		}
 	}
 
-	public void showMoves (ActionEvent actionEvent) {
+	public void showMoves () {
 		moveHistoryList.getItems().clear();
 
 		for (int i = 0; i < currentGame.getMoves().size(); i += 2) {
@@ -326,24 +352,27 @@ public class ReversiGameController implements Initializable {
 	}
 
 	public void showMovesWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
 		MainController.write("LoginMenu.showMoves");
 	}
 
-	public void mouseIsOver (MouseEvent mouseEvent) {
-		if (mouseEvent.getSource() instanceof Button)
-			((Button) mouseEvent.getSource()).setOpacity(0.8);
+	public void mouseIsOver () {
+		if (getMouseEvent().getSource() instanceof Button)
+			((Button) getMouseEvent().getSource()).setOpacity(0.8);
 	}
 
 	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("LoginMenu.mouseIsOverWrite");
 	}
 
-	public void mouseIsOut (MouseEvent mouseEvent) {
-		if (mouseEvent.getSource() instanceof Button)
-			((Button) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOut () {
+		if (getMouseEvent().getSource() instanceof Button)
+			((Button) getMouseEvent().getSource()).setOpacity(1);
 	}
 
 	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("LoginMenu.mouseIsOut");
 	}
 
@@ -353,20 +382,22 @@ public class ReversiGameController implements Initializable {
 //		System.out.println("x,y = " + getXFrom1(board.getChildren().indexOf(mouseEvent.getSource())) + "," + getYFrom1(board.getChildren().indexOf(mouseEvent.getSource())));
 	}
 
-	public void closeGame (ActionEvent actionEvent) {
+	public void closeGame () {
 		stage.close();
 	}
 
 	public void closeGameWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
 		MainController.write("ReversiGame.mouseIsOverCell");
 	}
 
-	public void closeMoveHistory (ActionEvent actionEvent) {
+	public void closeMoveHistory () {
 		historyGridPane.setVisible(false);
 		System.out.println("close Move History");
 	}
 
 	public void closeMoveHistoryWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
 		MainController.write("ReversiGame.closeMoveHistory");
 	}
 }

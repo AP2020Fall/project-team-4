@@ -66,7 +66,7 @@ public class GamesMenuController implements Initializable {
 	}
 
 
-	public void battleSeaMainMenu (ActionEvent actionEvent) {
+	public void battleSeaMainMenu () {
 		try {
 			GameMenuController.setGameName("BattleSea");
 			Stage battleSeaMainMenu = MainController.getInstance().createAndReturnNewStage(
@@ -91,9 +91,14 @@ public class GamesMenuController implements Initializable {
 	}
 
 
+	public void battleSeaMainMenuWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
+		MainController.write("GamesMenu.battleSeaMainMenu");
+	}
 
 
-	public void reversiMainMenu (ActionEvent actionEvent) {
+
+	public void reversiMainMenu () {
 
 		try {
 
@@ -121,6 +126,11 @@ public class GamesMenuController implements Initializable {
 
 		}
 
+	}
+
+	public void reversiMainMenuWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
+		MainController.write("GamesMenu.reversiMainMenu");
 	}
 
 	@Override

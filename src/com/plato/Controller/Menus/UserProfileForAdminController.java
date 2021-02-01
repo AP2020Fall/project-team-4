@@ -26,6 +26,29 @@ public class UserProfileForAdminController implements Initializable {
 	public TextArea msg;
 	public GridPane msgGrdPn;
 	public Button backBtn, sendBtn;
+	private ActionEvent actionEvent;
+	private MouseEvent mouseEvent;
+
+	public UserProfileForAdminController() {
+		this.actionEvent = null;
+		this.mouseEvent = null;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
 
 	public static void setGamer (Gamer gamer) {
 		UserProfileForAdminController.gamer = gamer;
@@ -57,49 +80,54 @@ public class UserProfileForAdminController implements Initializable {
 		});
 	}
 
-	public void sendMsg (ActionEvent actionEvent) {
+	public void sendMsg () {
 		msgGrdPn.setVisible(true);
 	}
 
 	public void sendMsgWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
 		MainController.write("UserProfileForAdmin.sendMsg");
 	}
 
-	public void sendMessageDone (ActionEvent actionEvent) {
+	public void sendMessageDone () {
 		try {
 			MessageController.getInstance().sendMsg(gamer, msg.getText());
-			cancelSendingMsg(actionEvent);
+			cancelSendingWrite(getActionEvent());
 		} catch (MessageController.EmptyMessageException e) {
 			messageError.setText(e.getMessage());
 		}
 	}
 
 	public void sendMessageDoneWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
 		MainController.write("UserProfileForAdmin.sendMessageDone");
 	}
 
-	public void cancelSendingMsg (ActionEvent actionEvent) {
+	public void cancelSendingMsg () {
 		msgGrdPn.setVisible(false);
 		msg.setText("");
 	}
 
 	public void cancelSendingWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
 		MainController.write("UserProfileForAdmin.cancelSending");
 	}
 
-	public void mouseIsOver (MouseEvent mouseEvent) {
-		((Button) mouseEvent.getSource()).setOpacity(0.8);
+	public void mouseIsOver () {
+		((Button) getMouseEvent().getSource()).setOpacity(0.8);
 	}
 
 	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("UserProfileForAdmin.mouseIsOver");
 	}
 
-	public void mouseIsOut (MouseEvent mouseEvent) {
-		((Button) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOut () {
+		((Button) getMouseEvent().getSource()).setOpacity(1);
 	}
 
 	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("UserProfileForAdmin.mouseIsOut");
 	}
 }

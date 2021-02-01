@@ -24,12 +24,9 @@ public class GameConclusionWindowController implements Initializable {
 	private ActionEvent actionEvent;
 	private MouseEvent mouseEvent;
 
-	public GameConclusionWindowController(ActionEvent actionEvent, MouseEvent mouseEvent) {
-		this.actionEvent = actionEvent;
-		this.mouseEvent = mouseEvent;
-	}
-
 	public GameConclusionWindowController() {
+		this.actionEvent = null;
+		this.mouseEvent = null;
 	}
 
 	public ActionEvent getActionEvent() {

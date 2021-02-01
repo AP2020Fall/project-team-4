@@ -37,13 +37,11 @@ public class GameLogController implements Initializable {
 	ActionEvent actionEvent;
 	MouseEvent mouseEvent;
 
-	public GameLogController(ActionEvent actionEvent, MouseEvent mouseEvent) {
-		this.actionEvent = actionEvent;
-		this.mouseEvent = mouseEvent;
+	public GameLogController() {
+		this.actionEvent = null;
+		this.mouseEvent = null;
 	}
 
-	public GameLogController() {
-	}
 
 	public ActionEvent getActionEvent() {
 		return actionEvent;

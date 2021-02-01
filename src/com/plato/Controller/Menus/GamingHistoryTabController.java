@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -37,10 +38,35 @@ public class GamingHistoryTabController implements Initializable {
     private static String gameName;
     private static Stage stage;
     private static Account account;
-
     public GridPane gameInfo;
     public ListView<GridPane> gamingHistoryList;
     public GridPane gameStats;
+    private ActionEvent actionEvent;
+    private MouseEvent mouseEvent;
+
+    public GamingHistoryTabController(ActionEvent actionEvent, MouseEvent mouseEvent) {
+        this.actionEvent = actionEvent;
+        this.mouseEvent = mouseEvent;
+    }
+
+    public GamingHistoryTabController() {
+    }
+
+    public ActionEvent getActionEvent() {
+        return actionEvent;
+    }
+
+    public void setActionEvent(ActionEvent actionEvent) {
+        this.actionEvent = actionEvent;
+    }
+
+    public MouseEvent getMouseEvent() {
+        return mouseEvent;
+    }
+
+    public void setMouseEvent(MouseEvent mouseEvent) {
+        this.mouseEvent = mouseEvent;
+    }
 
     public static void setStage(Stage stage){
         GamingHistoryTabController.stage = stage;
@@ -53,10 +79,10 @@ public class GamingHistoryTabController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       updateListOfGames(new ActionEvent());
+       updateListOfGamesWrite(new ActionEvent());
     }
 
-    public void updateListOfGames(ActionEvent actionEvent){
+    public void updateListOfGames(){
         gamingHistoryList.getItems().clear();
         Gamer currentAccLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
         for(Game game : GameLog.getGameHistory(currentAccLoggedIn)){
@@ -108,6 +134,7 @@ public class GamingHistoryTabController implements Initializable {
     }
 
     public void updateListOfGamesWrite(ActionEvent actionEvent){
+        setActionEvent(actionEvent);
         MainController.write("GamingHistoryTab.updateListOfGames");
     }
 
