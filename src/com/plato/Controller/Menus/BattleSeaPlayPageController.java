@@ -53,7 +53,35 @@ public class BattleSeaPlayPageController implements Initializable {
 	public TilePane clickableOpponentBoardTilePane;
 	private PlayerBattleSea player1, player2;
 	private IntegerProperty secondsRemaining = new SimpleIntegerProperty(maxTime);
+	private MouseEvent mouseEvent;
+	private ActionEvent actionEvent;
+
+	public BattleSeaPlayPageController() {
+	}
+
+	public BattleSeaPlayPageController(MouseEvent mouseEvent, ActionEvent actionEvent) {
+		this.mouseEvent = mouseEvent;
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
 	private Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<>() {
+
 		@Override
 		public void handle (ActionEvent e) {
 			secondsRemaining.set(secondsRemaining.get() - 1);
@@ -67,9 +95,7 @@ public class BattleSeaPlayPageController implements Initializable {
 				System.out.println("Game Ended ");
 			}
 		}
-		public void handleWrite(ActionEvent actionEvent) {
-			MainController.write("BattleSeaPlayPage.handle");
-		}
+
 
 	}));
 
@@ -412,30 +438,34 @@ public class BattleSeaPlayPageController implements Initializable {
 		}};
 	}
 
-	public void closeGame (ActionEvent actionEvent) {
+	public static void closeGame() {
 		stage.close();
 	}
 	public void closeGameWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("BattleSeaPlayPage.closeGame");
 	}
 
 
 
-	public void mouseIsOver (MouseEvent mouseEvent) {
-		if (mouseEvent.getSource() instanceof Button)
-			((Button) mouseEvent.getSource()).setOpacity(0.8);
+	public static void mouseIsOver() {
+		if (getActionEvent().getSource() instanceof Button)
+			((Button) getMouseEvent().getSource()).setOpacity(0.8);
 	}
 
 	public void mouseIsOverWrite(MouseEvent mouseEvent) {
+		setMouseEvent(mouseEvent);
 		MainController.write("BattleSeaPlayPage.mouseIsOverWrite");
 	}
 
-	public void mouseIsOut (MouseEvent mouseEvent) {
-		if (mouseEvent.getSource() instanceof Button)
-			((Button) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOut () {
+		if (getMouseEvent().getSource() instanceof Button)
+			((Button) getMouseEvent().getSource()).setOpacity(1);
 	}
 
-	public void mouseIsOutWrite(MouseEvent mouseEvent) {
+	public void mouseIsOutWrite(MouseEvent mouseEvent)
+	{
+		setMouseEvent(mouseEvent);
 		MainController.write("BattleSeaPlayPage.mouseIsOut");
 	}
 

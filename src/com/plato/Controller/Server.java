@@ -116,6 +116,7 @@ class ClientHandler extends Thread {
                      break;
 
                     case"BattleSeaEditBoardPage":
+
                         BattleSeaEditBoardPageController battleSeaEditBoardPageController = new BattleSeaEditBoardPageController();
                         if (methodName.equals("closeStage"))
                             battleSeaEditBoardPageController.closeStage();
@@ -143,6 +144,19 @@ class ClientHandler extends Thread {
 
                         break;
 
+                    case "BattleSeaPlayPageController":
+                        BattleSeaPlayPageController battleSeaPlayPageController = new BattleSeaPlayPageController();
+
+                        if(methodName.equals("closeGame"))
+                            BattleSeaPlayPageController.closeGame();
+
+                        else if (methodName.equals("mouseIsOver"))
+                            BattleSeaPlayPageController.mouseIsOver();
+
+                        else if (methodName.equals("mouseIsOut"))
+                            BattleSeaPlayPageController.mouseIsOver();
+
+                        break;
 
                     case "GameConclusionWindow":
                         GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();
