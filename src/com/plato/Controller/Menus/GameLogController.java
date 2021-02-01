@@ -234,27 +234,30 @@ public class GameLogController implements Initializable {
 		}};
 	}
 
-	public static void closeStage (ActionEvent actionEvent) {
+	public void closeStage () {
 		stage.close();
 	}
 
 	public void closeStageWrite(ActionEvent actionEvent){
+		setActionEvent(actionEvent);
 		MainController.write("GameLog.closeStage");
 	}
 
-	public static void mouseIsOver (MouseEvent mouseEvent) {
-		((Label) mouseEvent.getSource()).setOpacity(0.8);
+	public void mouseIsOver () {
+		((Label) getMouseEvent().getSource()).setOpacity(0.8);
 	}
 
 	public void mouseIsOverWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("GameLog.mouseIsOver");
 	}
 
-	public static void mouseIsOut (MouseEvent mouseEvent) {
-		((ImageView) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOut () {
+		((ImageView) getMouseEvent().getSource()).setOpacity(1);
 	}
 
 	public void mouseIsOutWrite(MouseEvent mouseEvent){
+		setMouseEvent(mouseEvent);
 		MainController.write("GameLog.mouseIsOut");
 	}
 }
