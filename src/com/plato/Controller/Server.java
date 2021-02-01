@@ -214,6 +214,16 @@ class ClientHandler extends Thread {
 
                         break;
 
+                    case "EditPW":
+                        EditPWController editPWController = new EditPWController();
+                        if(methodName.equals("confirmPasswordEdit"))
+                            editPWController.confirmPasswordEdit();
+
+                        else if (methodName.equals("closeStage"))
+                            editPWController.closeStage();
+
+                        break;
+
 
                     case "GameConclusionWindow":
                         GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();

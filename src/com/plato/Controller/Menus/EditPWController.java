@@ -23,6 +23,32 @@ public class EditPWController implements Initializable {
 	public ImageView newShowPwOrNot, oldShowPwOrNot;
 	public PasswordField newPwFieldpwHidden, oldPwFieldpwHidden;
 	public TextField newPwFieldpwShown, oldPwFieldpwShown;
+	private MouseEvent mouseEvent;
+	private ActionEvent actionEvent;
+
+	public EditPWController() {
+	}
+
+	public EditPWController(MouseEvent mouseEvent, ActionEvent actionEvent) {
+		this.mouseEvent = mouseEvent;
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
 
 	public static void setStage (Stage stage) {
 		EditPWController.stage = stage;
@@ -99,24 +125,28 @@ public class EditPWController implements Initializable {
 		}
 	}
 
-	public void confirmPasswordEdit (ActionEvent actionEvent) {
+	public void confirmPasswordEdit () {
 		String oldPassword = (oldShowPwOrNot.getImage().getUrl().contains("invisible") ? oldPwFieldpwShown : oldPwFieldpwHidden).getText(),
 				newPassword = (newShowPwOrNot.getImage().getUrl().contains("invisible") ? newPwFieldpwShown : newPwFieldpwHidden).getText();
 
 		try {
 			AccountController.getInstance().changePWCommand(oldPassword, newPassword);
-			closeStage(actionEvent);
+			closeStage();
 		} catch (AccountController.PaswordIncorrectException e) {
 			oldPasswordError.setText(e.getMessage());
 		}
 	}
-	public void confirmPasswordEditWrite(ActionEvent actionEvent) {
+	public void confirmPasswordEditWrite(ActionEvent actionEvent)
+	{
+		setActionEvent(actionEvent);
 		MainController.write("EditPW.confirmPasswordEdit");
 	}
-	public void closeStage (ActionEvent actionEvent) {
+	public void closeStage ()
+	{
 		stage.close();
 	}
 	public void closeStageWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("EditPW.closeStage");
 	}
 }
