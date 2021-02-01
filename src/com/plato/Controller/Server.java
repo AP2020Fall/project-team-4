@@ -66,23 +66,32 @@ class ClientHandler extends Thread {
                 switch (className){
                     case"AccountPage":
                         AccountPageController accountPageController = new AccountPageController();
-                        if (methodName.equals("logout")) accountPageController.logout();
+                        if (methodName.equals("logout"))
+                            accountPageController.logout();
 
-                        else if (methodName.equals("uploadPfp")) accountPageController.uploadPfp();
+                        else if (methodName.equals("uploadPfp"))
+                            accountPageController.uploadPfp();
 
-                        else if (methodName.equals("editPassword")) accountPageController.editPassword();
+                        else if (methodName.equals("editPassword"))
+                            accountPageController.editPassword();
 
-                        else if (methodName.equals("displayPersonInfo"))accountPageController.displayPersonalInfo();
+                        else if (methodName.equals("displayPersonInfo"))
+                            accountPageController.displayPersonalInfo();
 
-                        else if (methodName.equals("changeDropDownMenuVisibility"))accountPageController.changeDropDownMenuVisibility();
+                        else if (methodName.equals("changeDropDownMenuVisibility"))
+                            accountPageController.changeDropDownMenuVisibility();
 
-                        else if (methodName.equals("mouseIsOut")) accountPageController.mouseIsOut();
+                        else if (methodName.equals("mouseIsOut"))
+                            accountPageController.mouseIsOut();
 
-                        else if (methodName.equals(("mouseIsOver"))) accountPageController.mouseIsOut();
+                        else if (methodName.equals(("mouseIsOver")))
+                            accountPageController.mouseIsOut();
 
-                        else if (methodName.equals("openReversiMainMenu")) accountPageController.openReversiMainMenu();
+                        else if (methodName.equals("openReversiMainMenu"))
+                            accountPageController.openReversiMainMenu();
 
-                        else if (methodName.equals("openBattlSeaMainMenu")) accountPageController.openBattleSeaMainMenu();
+                        else if (methodName.equals("openBattlSeaMainMenu"))
+                            accountPageController.openBattleSeaMainMenu();
                      break;
 
                     case"AdminMsgsController":
