@@ -83,6 +83,12 @@ class ClientHandler extends Thread {
                         else if (methodName.equals("openReversiMainMenu")) accountPageController.openReversiMainMenu();
 
                         else if (methodName.equals("openBattlSeaMainMenu")) accountPageController.openBattleSeaMainMenu();
+                     break;
+
+                    case"AdminMsgsController":
+                        AdminMsgsController adminMsgsController = new AdminMsgsController();
+                        if (methodName.equals("closeStage")) adminMsgsController.closeStage();
+                     break;
 
                     case "GameConclusionWindow":
                         GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();
