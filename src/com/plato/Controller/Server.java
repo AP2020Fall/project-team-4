@@ -310,6 +310,26 @@ class ClientHandler extends Thread {
 
                         break;
 
+                    case "FriendRequestManagementPage":
+                        FriendRequestManagementPageController friendRequestManagementPageController = new FriendRequestManagementPageController();
+
+                        if (methodName.equals("sendFriendReq"))
+                            friendRequestManagementPageController.sendFriendReq();
+
+                        else if (methodName.equals("closeStage"))
+                            friendRequestManagementPageController.closeStage();
+
+                        else if (methodName.equals("closeFriendReqSendingWindow"))
+                            friendRequestManagementPageController.closeFriendReqSendingWindow();
+
+                        else if (methodName.equals("mouseIsOver"))
+                            friendRequestManagementPageController.mouseIsOver();
+
+                        else if (methodName.equals("mouseIsOut"))
+                            friendRequestManagementPageController.mouseIsOut();
+
+                        break;
+
 
                     case "GameConclusionWindow":
                         GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();
