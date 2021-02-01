@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.Menus.AccountPageController;
         import Controller.Menus.GameConclusionWindowController;
         import Controller.Menus.GameLogController;
         import Controller.Menus.GameMenuController;
@@ -66,6 +67,31 @@ class ClientHandler extends Thread {
                 String className = received.split("\\.")[0];
                 String methodName = received.split("\\.")[1];
                 switch (className){
+                    case"AccountPage":
+                        AccountPageController accountPageController = new AccountPageController();
+                        if (methodName.equals("logout")) {
+                            accountPageController.logout();
+                            break;
+                        }
+                        else if (methodName.equals("uploadPfp")){
+                            accountPageController.uploadPfp();
+                            break;
+                        }
+                        else if (methodName.equals("editPassword")){
+                            accountPageController.editPassword();
+                            break;}
+                        else if (methodName.equals("displayPersonInfo")){
+                            accountPageController.displayPersonalInfo();
+                            break;
+                        }
+                        else if (methodName.equals("changeDropDownMenuVisibility")){
+                            accountPageController.changeDropDownMenuVisibility();
+                            break;}
+                        else if (methodName.equals("mouseIsOut")) {
+                            accountPageController.mouseIsOut();
+                            break;
+
+                        }
                     case "GameConclusionWindow":
                         GameConclusionWindowController obj = new GameConclusionWindowController();
                         if(methodName.equals("closeStage")) {
@@ -136,7 +162,7 @@ class ClientHandler extends Thread {
                         }
                         break;
                         case "GameScoreboard":
-                            //if(){}
+                           // if(){}
                         break;
                         case "GamesMenu":
                     case "GamingHistoryTab":

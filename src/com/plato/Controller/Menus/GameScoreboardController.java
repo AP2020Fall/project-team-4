@@ -35,6 +35,32 @@ public class GameScoreboardController implements Initializable {
 	private static Stage stage;
 	private static String gameName;
 	public ListView<GridPane> scoreBoard;
+	private ActionEvent actionEvent;
+	private MouseEvent mouseEvent;
+
+	public GameScoreboardController(ActionEvent actionEvent, MouseEvent mouseEvent) {
+		this.actionEvent = actionEvent;
+		this.mouseEvent = mouseEvent;
+	}
+
+	public GameScoreboardController() {
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
 
 	public static void setGameName (String gameName) {
 		GameScoreboardController.gameName = gameName;
