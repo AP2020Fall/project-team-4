@@ -34,17 +34,41 @@ public class FriendRequestManagementPageController implements Initializable {
 	public GridPane sendFrndReqWindow;
 	public TextField search;
 	public Label clearSearch;
+	private  MouseEvent mouseEvent;
+	private  ActionEvent actionEvent;
+
+	public FriendRequestManagementPageController() {
+		this.mouseEvent =null;
+		this.actionEvent = null;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
 
 	public static void setStage (Stage stage) {
 		FriendRequestManagementPageController.stage = stage;
 		FriendRequestManagementPageController.stage.setOnCloseRequest(e -> FriendRequestManagementPageController.stage = null);
 	}
 
-	public void sendFriendReq (ActionEvent actionEvent) {
+	public void sendFriendReq () {
 		sendFrndReqWindow.setVisible(true);
 		updateAvailableGamersList();
 	}
 	public void friendRequestManagementPageWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("FriendRequestManagementPage.sendFriendReq");
 	}
 	private void updateAvailableGamersList () {
@@ -117,10 +141,11 @@ public class FriendRequestManagementPageController implements Initializable {
 		frndReqsGottenList.getItems().removeIf(item -> ((Label) item.getChildren().get(1)).getText().equals(usernameFrom));
 	}
 
-	public void closeStage (ActionEvent actionEvent) {
+	public void closeStage () {
 		stage.close();
 	}
 	public void closeStageWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("FriendRequestManagementPage.closeStage");
 	}
 
@@ -198,31 +223,34 @@ public class FriendRequestManagementPageController implements Initializable {
 		search.textProperty().addListener((observableValue, s, t1) -> updateAvailableGamersList());
 	}
 
-	public void closeFriendReqSendingWindow (ActionEvent actionEvent) {
+	public void closeFriendReqSendingWindow () {
 		sendFrndReqWindow.setVisible(false);
 		search.setText("");
 	}
 	public void closeFriendReqSendingWindowWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("FriendRequestManagementPage.closeFriendRequestSendingWindow");
 	}
 
-	public void mouseIsOver (MouseEvent mouseEvent) {
-		if (mouseEvent.getSource() instanceof Button)
-			((Button) mouseEvent.getSource()).setOpacity(0.8);
-		else if (mouseEvent.getSource() instanceof Label)
-			((Label) mouseEvent.getSource()).setOpacity(0.8);
+	public void mouseIsOver () {
+		if (getMouseEvent().getSource() instanceof Button)
+			((Button) getMouseEvent().getSource()).setOpacity(0.8);
+		else if (getMouseEvent().getSource() instanceof Label)
+			((Label) getMouseEvent().getSource()).setOpacity(0.8);
 	}
 	public void mouseIsOverWrite(MouseEvent mouseEvent) {
+		setMouseEvent(mouseEvent);
 		MainController.write("FriendRequestManagementPage.mouseIsOver");
 	}
 
-	public void mouseIsOut (MouseEvent mouseEvent) {
-		if (mouseEvent.getSource() instanceof Button)
-			((Button) mouseEvent.getSource()).setOpacity(1);
-		else if (mouseEvent.getSource() instanceof Label)
-			((Label) mouseEvent.getSource()).setOpacity(1);
+	public void mouseIsOut () {
+		if (getMouseEvent().getSource() instanceof Button)
+			((Button) getMouseEvent().getSource()).setOpacity(1);
+		else if (getMouseEvent().getSource() instanceof Label)
+			((Label)getMouseEvent().getSource()).setOpacity(1);
 	}
 	public void mouseIsOutWrite(MouseEvent mouseEvent) {
+		setMouseEvent(mouseEvent);
 		MainController.write("FriendRequestManagementPage.mouseIsOut");
 	}
 }
