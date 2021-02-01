@@ -3,6 +3,7 @@ package Controller.Menus;
 import Controller.MainController;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.GameLog;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,6 +23,29 @@ public class FriendProfileController implements Initializable {
 	public Label reversiDraws, reversiScore, reversiWins, reversiLosses;
 	public Label battleseaScore, battleseaWins, battleseaLosses, battleseaDraws;
 	public ImageView pfp;
+    private MouseEvent mouseEvent;
+    private ActionEvent actionEvent;
+
+	public FriendProfileController() {
+		this.mouseEvent = null;
+		this.actionEvent = null;
+	}
+
+	public MouseEvent getMouseEvent() {
+		return mouseEvent;
+	}
+
+	public ActionEvent getActionEvent() {
+		return actionEvent;
+	}
+
+	public void setMouseEvent(MouseEvent mouseEvent) {
+		this.mouseEvent = mouseEvent;
+	}
+
+	public void setActionEvent(ActionEvent actionEvent) {
+		this.actionEvent = actionEvent;
+	}
 
 	public static Gamer getFrnd () {
 		return frnd;
