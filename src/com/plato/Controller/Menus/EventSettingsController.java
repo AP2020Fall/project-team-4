@@ -141,7 +141,7 @@ public class EventSettingsController implements Initializable {
 
 		resetPageWrite(getActionEvent());
 	}
-	public void ismVPInGameWrite(ActionEvent actionEvent) {
+	public void isMVPInGameWrite(ActionEvent actionEvent) {
 		setActionEvent(actionEvent);
 		MainController.write("EventSettings.isMVPInGame");
 	}

@@ -34,7 +34,7 @@
       <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
     </rowConstraints>
     <ImageView fx:id="eventImg" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP" />
-    <ImageView fx:id="uploadEventImg" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadImg" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
+    <ImageView fx:id="uploadEventImg" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadImgWrite" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
         <GridPane.margin>
             <Insets left="200.0" top="130.0" />
         </GridPane.margin>
@@ -221,12 +221,12 @@
         </VBox>
     </HBox>
     <HBox fx:id="topButtonsHbox" maxHeight="50.0" maxWidth="100.0" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-        <Button fx:id="closeStageBtn" layoutX="10.0" layoutY="10.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-radius: 25; -fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 50 50;" textFill="#ffb200">
+        <Button fx:id="closeStageBtn" layoutX="10.0" layoutY="10.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeStageWrite" style="-fx-background-radius: 25; -fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 50 50;" textFill="#ffb200">
             <font>
                 <Font name="Arial Bold Italic" size="27.0" />
             </font>
         </Button>
-        <Button fx:id="removeEventBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#removeEvent" style="-fx-background-radius: 25; -fx-background-image: url(&quot;@../../../Resources/Images/removeButton.png&quot;); -fx-background-size: 50 50;" textFill="#ffb200">
+        <Button fx:id="removeEventBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#removeEventWrite" style="-fx-background-radius: 25; -fx-background-image: url(&quot;@../../../Resources/Images/removeButton.png&quot;); -fx-background-size: 50 50;" textFill="#ffb200">
             <font>
                 <Font name="Arial Bold Italic" size="27.0" />
             </font>
@@ -238,22 +238,22 @@
                <Font name="Arial Bold Italic" size="27.0" />
            </font>
        </Button>
-      <Button fx:id="createEventBtn" layoutX="10.0" layoutY="35.0" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" onAction="#createEvent" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Create" textFill="#ffb200">
+      <Button fx:id="createEventBtn" layoutX="10.0" layoutY="35.0" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" onAction="#createEventWrite" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Create" textFill="#ffb200">
          <font>
             <Font name="Arial Bold Italic" size="27.0" />
          </font>
       </Button>
-      <Button fx:id="cancelBtn" layoutX="160.0" layoutY="35.0" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Cancel" textFill="#ffb200">
+      <Button fx:id="cancelBtn" layoutX="160.0" layoutY="35.0" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" onAction="#closeStageWrite" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Cancel" textFill="#ffb200">
          <font>
             <Font name="Arial Bold Italic" size="27.0" />
          </font>
       </Button>
-        <Button fx:id="confirmEditsBtn" minHeight="100.0" mnemonicParsing="false" onAction="#confirmEdits" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Confirm&#10;Edits" textAlignment="CENTER" textFill="#ffb200">
+        <Button fx:id="confirmEditsBtn" minHeight="100.0" mnemonicParsing="false" onAction="#confirmEditsWrite" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Confirm&#10;Edits" textAlignment="CENTER" textFill="#ffb200">
             <font>
                 <Font name="Arial Bold Italic" size="27.0" />
             </font>
         </Button>
-        <Button fx:id="revertEditsBtn" maxHeight="100.0" maxWidth="140.0" minHeight="100.0" minWidth="140.0" mnemonicParsing="false" onAction="#revertEdits" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Revert&#10;Edits" textAlignment="CENTER" textFill="#ffb200">
+        <Button fx:id="revertEditsBtn" maxHeight="100.0" maxWidth="140.0" minHeight="100.0" minWidth="140.0" mnemonicParsing="false" onAction="#revertEditsWrite" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Revert&#10;Edits" textAlignment="CENTER" textFill="#ffb200">
             <font>
                 <Font name="Arial Bold Italic" size="27.0" />
             </font>
@@ -269,7 +269,7 @@
          <Font name="Avenir Book" size="17.0" />
       </font>
    </Label>
-   <Button fx:id="eventSettingsBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#openEventSettings" style="-fx-background-image: url(&quot;https://i.imgur.com/RDAVfUp.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+   <Button fx:id="eventSettingsBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#openEventSettingsWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/RDAVfUp.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
       <GridPane.margin>
          <Insets right="10.0" top="10.0" />
       </GridPane.margin>

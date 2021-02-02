@@ -244,7 +244,7 @@ public class EventCreateOrEditPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void confirmEditWrite(ActionEvent actionEvent) {
+	public void confirmEditsWrite(ActionEvent actionEvent) {
 		setActionEvent(actionEvent);
 		MainController.write("EventCreateOrEditPage.confirmEdit");
 	}
