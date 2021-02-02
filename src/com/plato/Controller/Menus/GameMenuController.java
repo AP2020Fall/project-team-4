@@ -3,8 +3,10 @@ package Controller.Menus;
 import Controller.AccountRelated.AccountController;
 import Controller.GameRelated.GameController;
 import Controller.MainController;
+import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,8 +15,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.Socket;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -37,29 +43,10 @@ public class GameMenuController implements Initializable {
 	public MenuButton timeLimitMenuInGameMenu;
 	public GridPane timeBtnGridPane;
 	private String selectedTime = "30s";
-	private ActionEvent actionEvent;
-	private MouseEvent mouseEvent;
-
-	public GameMenuController() {
-		this.actionEvent = null;
-		this.mouseEvent = null;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private Socket socket;
+	private Object Account;
 
 	public static void setStage (Stage stage) {
 		GameMenuController.stage = stage;
@@ -74,7 +61,18 @@ public class GameMenuController implements Initializable {
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
 		gameTitle.setText(gameName);
-		Gamer currentGamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+		try {
+			dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
+			dataOutputStream.flush();
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+		Gamer currentGamer = null;
+		try {
+			currentGamer = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
 
 		if (currentGamer.getFaveGames().contains(gameName))
 			addToFaveGamesBtn.setStyle(addToFaveGamesBtn.getStyle() + "-fx-background-image:url('https://i.imgur.com/UODKjrB.png')");
@@ -126,16 +124,12 @@ public class GameMenuController implements Initializable {
 		}
 	}
 
-	public void newGame () {
+	public void newGame (ActionEvent actionEvent) {
+
 		newGamePropertyWindow.setVisible(true);
 		timeLimitMenuInStartGameMenu.setText(selectedTime);
 
 		confirmTimeInGameMenu();
-	}
-
-	public void newGameWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GameMenu.newGame");
 	}
 
 	private void confirmTimeInGameMenu () {
@@ -143,19 +137,16 @@ public class GameMenuController implements Initializable {
 		timeLimitMenuInGameMenu.setVisible(false);
 	}
 
-	public void dontStartGame () {
+	public void dontStartGame (ActionEvent actionEvent) {
 		newGamePropertyWindow.setVisible(false);
 	}
 
-	public void dontStartGameWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GameMenu.dontStartGame");
-	}
-
-	public void startGame () {
+	public void startGame (ActionEvent actionEvent) {
 		try {
-			GameController.getInstance().runGame(username2.getText(), gameName);
-		} catch (MainController.InvalidFormatException | GameController.CantPlayWithYourselfException | GameController.CantPlayWithAdminException | AccountController.NoAccountExistsWithUsernameException e) {
+			dataOutputStream.writeUTF("runGame_" + username2.getText() + "_" + gameName);
+			dataOutputStream.flush();
+			//GameController.getInstance().runGame(username2.getText(), gameName);
+		} catch (IOException e) {
 			username2Error.setText(e.getMessage());
 			return;
 		}
@@ -163,11 +154,6 @@ public class GameMenuController implements Initializable {
 			case "BattleSea" -> startBattleSea();
 			case "Reversi" -> startReversi();
 		}
-	}
-
-	public void startGameWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GameMenu.startGame");
 	}
 
 	public void startBattleSea () {
@@ -210,8 +196,19 @@ public class GameMenuController implements Initializable {
 		}
 	}
 
-	public void changeFaveStatus () {
-		Gamer currentGamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+	public void changeFaveStatus (ActionEvent actionEvent) {
+		try {
+			dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
+			dataOutputStream.flush();
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+		Gamer currentGamer = null;
+		try {
+			currentGamer = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
 		AtomicReference<String> noBgImgStyle = new AtomicReference<>("");
 		Arrays.asList(addToFaveGamesBtn.getStyle().split(";")).subList(0, addToFaveGamesBtn.getStyle().split(";").length - 1)
 				.forEach(style -> noBgImgStyle.set("%s;%s".formatted(noBgImgStyle.get(), style)));
@@ -228,21 +225,11 @@ public class GameMenuController implements Initializable {
 		}
 	}
 
-	public void changeFaveStatusWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GameMenu.changeFaveStatusWrite");
-	}
-
-	public void closeGame () {
+	public void closeGame (ActionEvent actionEvent) {
 		stage.close();
 	}
 
-	public void closeGameWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GameMenu.closeGame");
-	}
-
-	public void displayScoreboard () {
+	public void displayScoreboard (ActionEvent actionEvent) {
 		confirmTimeInGameMenu();
 		if (Game.getScoreboard(gameName).size() == 1 && !Game.getScoreboard(gameName).get(0).startsWith("Rank:"))
 			return;
@@ -261,22 +248,12 @@ public class GameMenuController implements Initializable {
 		}
 	}
 
-	public void displayScoreboardWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GameMenu.displayScoreboard");
-	}
-
-	public void setTime () {
+	public void setTime (ActionEvent actionEvent) {
 		timeBtn.setVisible(false);
 		timeLimitMenuInGameMenu.setVisible(true);
 	}
 
-	public void setTimeWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GameMenu.setTime");
-	}
-
-	public void displayLogOfGame () {
+	public void displayLogOfGame (ActionEvent actionEvent) {
 		confirmTimeInGameMenu();
 		try {
 			GameLogController.setGameName(gameName);
@@ -293,26 +270,11 @@ public class GameMenuController implements Initializable {
 		}
 	}
 
-	public void displayLogOfGameWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GameMenu.displayLogOfGame");
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOver () {
-		((Button) getMouseEvent().getSource()).setOpacity(0.8);
-	}
-
-	public void mouseIsOverWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("GameMenu.mouseIsOver");
-	}
-
-	public void mouseIsOut () {
-		((Button) getMouseEvent().getSource()).setOpacity(1);
-	}
-
-	public void mouseIsOutWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("GameMenu.mouseIsOut");
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 }
