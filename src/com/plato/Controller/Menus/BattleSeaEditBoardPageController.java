@@ -43,6 +43,7 @@ public class BattleSeaEditBoardPageController implements Initializable {
 	private static DataOutputStream dataOutputStream;
 	private static DataInputStream dataInputStream;
 	private static Socket socket;
+	private static BattleSeaEditBoardPageController battleSeaEditBoardPageController;
 
 	public static void setStage (Stage stage) {
 		stage.setMinWidth(1000);
@@ -51,6 +52,19 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		stage.setMaxHeight(stage.getMinWidth());
 		BattleSeaEditBoardPageController.stage = stage;
 		BattleSeaEditBoardPageController.stage.setOnCloseRequest(e -> BattleSeaEditBoardPageController.stage = null);
+	}
+
+	public static BattleSeaEditBoardPageController getInstance () {
+		if (battleSeaEditBoardPageController == null)
+			battleSeaEditBoardPageController = new BattleSeaEditBoardPageController();
+		return battleSeaEditBoardPageController;
+	}
+
+
+
+
+	public LinkedList<Ship> getCurrentBoard() {
+		return currentBoard;
 	}
 
 	@Override
@@ -224,13 +238,13 @@ public class BattleSeaEditBoardPageController implements Initializable {
 				newY = (int) ((mouseEvent.getSceneY() - board.getBoundsInParent().getMinY()) / (board.getBoundsInParent().getHeight() / board.getRowCount()));
 
 		try {
-			dataOutputStream.writeUTF("moveShip_");
+			dataOutputStream.writeUTF("moveShip_"+ (newX+1) + "_" + (newY+1));
 			dataOutputStream.flush();
 			ShipController.getInstance().moveShip(currentBoard, ship, newX + 1, newY + 1);
 
 			GridPane.setColumnIndex(shipToMove, newX);
 			GridPane.setRowIndex(shipToMove, newY);
-// TODO: 2/2/2021
+
 			BattleSeaView.getInstance().displayBoard(BattleSeaController.getInstance().getBoardAsStringBuilder(currentBoard));
 		} catch (ShipController.InvalidCoordinateException | IOException e) {
 //			System.out.printf("Cannot move ship to (x,y)=(%d,%d)%n", newX + 1, newY + 1);
