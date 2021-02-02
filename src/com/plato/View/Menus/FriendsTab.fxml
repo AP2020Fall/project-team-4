@@ -19,7 +19,7 @@
         <ListView fx:id="frndsList" maxHeight="600.0" maxWidth="600.0" minHeight="600.0" minWidth="600.0"
                   GridPane.rowIndex="1"/>
         <Button maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false"
-                onAction="#displayFrndRequests"
+                onAction="#displayFrndRequestsWrite"
                 style="-fx-background-image: url(&quot;https://i.imgur.com/8zsNgqY.png&quot;); -fx-border-image-repeat: no-repeat; -fx-background-size: 75 75; -fx-background-radius: 37.5;"
                 textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
             <GridPane.margin>
@@ -30,7 +30,7 @@
             </font>
         </Button>
         <Button layoutX="525.0" layoutY="47.0" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0"
-                mnemonicParsing="false" onAction="#updateFrndsList"
+                mnemonicParsing="false" onAction="#updateFrndsListWrite"
                 style="-fx-background-image: url(&quot;https://i.imgur.com/Fikb6FE.png&quot;); -fx-background-size: 75 75; -fx-background-radius: 37.5; -fx-border-image-repeat: no-repeat; -fx-background-position: center;"
                 textAlignment="CENTER">
             <font>
