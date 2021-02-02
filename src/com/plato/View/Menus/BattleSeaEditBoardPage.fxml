@@ -28,7 +28,7 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-    <Button maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#closeStage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 75 75; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+    <Button maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#closeStageWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 75 75; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;" GridPane.halignment="LEFT" GridPane.valignment="TOP">
         <GridPane.margin>
             <Insets />
         </GridPane.margin>
@@ -110,22 +110,22 @@
         <padding>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
         </padding>
-        <Label fx:id="ship5_2" maxHeight="325.0" maxWidth="130.0" minHeight="325.0" minWidth="130.0" onMouseClicked="#rotateShip" onMouseDragged="#moveShipIfPossible" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/oJ05ht1.png&quot;); -fx-background-size: 130 325; -fx-background-position: center;" GridPane.columnSpan="2" GridPane.rowSpan="5">
+        <Label fx:id="ship5_2" maxHeight="325.0" maxWidth="130.0" minHeight="325.0" minWidth="130.0" onMouseClicked="#rotateShipWrite" onMouseDragged="#moveShipIfPossibleWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/oJ05ht1.png&quot;); -fx-background-size: 130 325; -fx-background-position: center;" GridPane.columnSpan="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="27.08" radius="17.5925" spread="0.11" width="45.29" />
             </effect>
         </Label>
-        <Label fx:id="ship5_1" layoutX="18.0" layoutY="24.0" maxHeight="325.0" maxWidth="65.0" minHeight="325.0" minWidth="65.0" onMouseClicked="#rotateShip" onMouseDragged="#moveShipIfPossible" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/PeODDrk.png&quot;); -fx-background-size: 65 325; -fx-background-position: center;" GridPane.columnIndex="2" GridPane.rowSpan="5">
+        <Label fx:id="ship5_1" layoutX="18.0" layoutY="24.0" maxHeight="325.0" maxWidth="65.0" minHeight="325.0" minWidth="65.0" onMouseClicked="#rotateShipWrite" onMouseDragged="#moveShipIfPossibleWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/PeODDrk.png&quot;); -fx-background-size: 65 325; -fx-background-position: center;" GridPane.columnIndex="2" GridPane.rowSpan="5">
             <effect>
                 <DropShadow height="27.08" radius="17.5925" spread="0.11" width="45.29" />
             </effect>
         </Label>
-        <Label fx:id="ship4_1" layoutX="155.0" layoutY="24.0" maxHeight="260.0" maxWidth="65.0" minHeight="260.0" minWidth="65.0" onMouseClicked="#rotateShip" onMouseDragged="#moveShipIfPossible" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/hHcn8ds.png&quot;); -fx-background-size: 65 260; -fx-background-position: center;" GridPane.columnIndex="3" GridPane.rowSpan="4">
+        <Label fx:id="ship4_1" layoutX="155.0" layoutY="24.0" maxHeight="260.0" maxWidth="65.0" minHeight="260.0" minWidth="65.0" onMouseClicked="#rotateShipWrite" onMouseDragged="#moveShipIfPossibleWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/hHcn8ds.png&quot;); -fx-background-size: 65 260; -fx-background-position: center;" GridPane.columnIndex="3" GridPane.rowSpan="4">
             <effect>
                 <DropShadow height="27.08" radius="17.5925" spread="0.11" width="45.29" />
             </effect>
         </Label>
-        <Label fx:id="ship3_1" layoutX="224.0" layoutY="22.0" maxHeight="195.0" maxWidth="65.0" minHeight="195.0" minWidth="65.0" onMouseClicked="#rotateShip" onMouseDragged="#moveShipIfPossible" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;https://i.imgur.com/CT4RjeJ.png&quot;); -fx-background-size: 65 195; -fx-background-position: center;" GridPane.columnIndex="4" GridPane.rowSpan="3">
+        <Label fx:id="ship3_1" layoutX="224.0" layoutY="22.0" maxHeight="195.0" maxWidth="65.0" minHeight="195.0" minWidth="65.0" onMouseClicked="#rotateShip" onMouseDragged="#moveShipIfPossibleWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/CT4RjeJ.png&quot;); -fx-background-size: 65 195; -fx-background-position: center;" GridPane.columnIndex="4" GridPane.rowSpan="3">
             <effect>
                 <DropShadow height="27.08" radius="17.5925" spread="0.11" width="45.29" />
             </effect>
@@ -146,9 +146,9 @@
             <Insets />
         </GridPane.margin>
         <HBox alignment="CENTER" spacing="10.0">
-            <Button fx:id="generate1RandBoardButton" maxHeight="75.0" maxWidth="100.0" minHeight="75.0" minWidth="100.0" mnemonicParsing="false" onAction="#generate1RandBoard" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;@../../../Resources/Images/oneButton.png&quot;); -fx-background-size: 75 60; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;" />
-            <Button maxHeight="75.0" maxWidth="100.0" minHeight="75.0" minWidth="100.0" mnemonicParsing="false" onAction="#generate5RandBoards" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;@../../../Resources/Images/fiveButton.png&quot;); -fx-background-size: 75 60; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;" />
+            <Button fx:id="generate1RandBoardButton" maxHeight="75.0" maxWidth="100.0" minHeight="75.0" minWidth="100.0" mnemonicParsing="false" onAction="#generate1RandBoardWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;@../../../Resources/Images/oneButton.png&quot;); -fx-background-size: 75 60; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;" />
+            <Button maxHeight="75.0" maxWidth="100.0" minHeight="75.0" minWidth="100.0" mnemonicParsing="false" onAction="#generate5RandBoardsWrite" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;@../../../Resources/Images/fiveButton.png&quot;); -fx-background-size: 75 60; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;" />
         </HBox>
-        <Button maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#doneEditing" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;@../../../Resources/Images/checkButton.png&quot;); -fx-background-size: 75 75; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;" />
+        <Button maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#doneEditingWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;@../../../Resources/Images/checkButton.png&quot;); -fx-background-size: 75 75; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;" />
     </VBox>
 </GridPane>
