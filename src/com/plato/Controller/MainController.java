@@ -39,7 +39,7 @@ public class MainController extends Application {
 	private static MainController mainController;
 	private final GsonBuilder gsonBuilder = new GsonBuilder();
 	private Gson gson;
-	private Stage primaryStage;
+	public Stage primaryStage;
 	public static String host = "127.0.0.1";
 	public static int port = 5056;
 	public static Socket clientSocket;
@@ -628,7 +628,7 @@ public class MainController extends Application {
 		}
 	}
 
-	private static class DayPassController extends Thread {
+	public static class DayPassController extends Thread {
 		private static DayPassController dayPassController = new DayPassController();
 		private int lastDayUpdated;
 
