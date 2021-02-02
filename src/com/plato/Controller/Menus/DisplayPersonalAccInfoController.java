@@ -217,7 +217,7 @@ public class DisplayPersonalAccInfoController implements Initializable {
 	{
 		MainController.openUploadPfpWindow(stage, pfp);
 	}
-	public void setUploadPfpWrite(MouseEvent mouseEvent) {
+	public void uploadPfpWrite(MouseEvent mouseEvent) {
 		setMouseEvent(mouseEvent);
 		MainController.write("DisplayPersonalInfo.uploadPfp");
 	}
