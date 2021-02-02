@@ -106,6 +106,25 @@ class ClientHandler extends Thread {
                 case "logOut" :
                     AccountController.getInstance().logout();
                     break;
+                case "displayAvaiableCoords" :
+                    ReversiController.getInstance().displayAvailableCoords();
+                    break;
+                case "placeDisk":
+                    x = Integer.parseInt(receivedInfo[1]);
+                    y = Integer.parseInt(receivedInfo[2]);
+                    ReversiController.getInstance().placeDisk(x,y);
+                    break;
+                case "ReversinextTurn" :
+                    ReversiController.getInstance().nextTurn();
+                    break;
+                case "ReversiDisplayPrevMoves" :
+                    ReversiController.getInstance().displayPrevMoves();
+                    break;
+                case "editAccField" :
+
+                    AccountController.getInstance().editAccField (receivedInfo[1],receivedInfo[2]);
+                    break;
+
 
             }
         }catch (IOException | BombController.CoordinateAlreadyBombedException e){
