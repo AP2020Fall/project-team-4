@@ -1,8 +1,11 @@
 package Controller;
 
+import Controller.GameRelated.BattleSea.BombController;
+import Controller.GameRelated.BattleSea.ShipController;
 import Controller.GameRelated.Reversi.ReversiController;
 import Controller.Menus.*;
 import View.Client;
+import View.GameRelated.BattleSea.BattleSeaView;
 
 import java.io.*;
 import java.net.*;
@@ -67,8 +70,32 @@ class ClientHandler extends Thread {
             //receive from client
             String received = dataInputStream.readUTF();
             String[] receivedInfo = received.split("_");
-            switch (receivedInfo[0]){}
-        }catch (IOException e){
+            switch (receivedInfo[0]){
+                case"canThrowBomb":
+                    int x = Integer.parseInt(receivedInfo[1]);
+                    int y = Integer.parseInt(receivedInfo[2]);
+                    if (BombController.getInstance().canThrowBomb(x,y))
+                        dataOutputStream.writeUTF("true");
+                    else dataOutputStream.writeUTF("false");
+                    break;
+                case"throwBomb":
+                     x = Integer.parseInt(receivedInfo[1]);
+                    y = Integer.parseInt(receivedInfo[2]);
+                   BombController.getInstance().throwBomb(x,y);
+                   break;
+
+                case"displayBoard":
+                    // TODO: 2/2/2021
+                    BattleSeaView.getInstance().displayBoard();
+                    break;
+
+                case"moveShip":
+                    x = Integer.parseInt(receivedInfo[1]);
+                    y = Integer.parseInt(receivedInfo[2]);
+                  ShipController.getInstance().moveShip(x,y);
+                    break;
+            }
+        }catch (IOException | BombController.CoordinateAlreadyBombedException e){
             System.out.println("connection closed!");
             e.printStackTrace();
         }

@@ -27,11 +27,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.net.InetAddress;
+import java.io.*;
 import java.net.Socket;
 import java.net.URL;
 import java.util.Collections;
@@ -41,6 +37,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BattleSeaPlayPageController implements Initializable {
 	private static Stage stage;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static Socket socket;
 	private static BattleSea currentGame;
 	private static int maxTime;
 	private static boolean bombThrown = false;
@@ -53,31 +52,6 @@ public class BattleSeaPlayPageController implements Initializable {
 	public TilePane clickableOpponentBoardTilePane;
 	private PlayerBattleSea player1, player2;
 	private IntegerProperty secondsRemaining = new SimpleIntegerProperty(maxTime);
-	private MouseEvent mouseEvent;
-	private ActionEvent actionEvent;
-
-
-	public BattleSeaPlayPageController() {
-		this.mouseEvent = null;
-		this.actionEvent = null;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
 	private Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<>() {
 		@Override
 		public void handle (ActionEvent e) {
@@ -99,6 +73,13 @@ public class BattleSeaPlayPageController implements Initializable {
 		BattleSeaPlayPageController.stage.setOnCloseRequest(e -> {
 			BattleSeaPlayPageController.stage = null;
 			currentGame = null;
+			try {
+				dataOutputStream.writeUTF("setCurrentGamInSession_null");
+				dataOutputStream.flush();
+			} catch (IOException exception) {
+				exception.printStackTrace();
+			}
+
 			GameController.getInstance().setCurrentGameInSession(null);
 		});
 	}
@@ -292,9 +273,11 @@ public class BattleSeaPlayPageController implements Initializable {
 						@Override
 						public void handle (MouseEvent event) {
 							try {
-								if (BombController.getInstance().canThrowBomb(getXFrom1(index), getYFrom1(index)))
+								dataOutputStream.writeUTF("canThrowBomb_"+getXFrom1(index)+"_"+getYFrom1(index));
+								dataOutputStream.flush();
+								if (dataInputStream.readUTF().equals("true"))
 									((Label) event.getSource()).setOpacity(0.3);
-							} catch (BombController.CoordinateAlreadyBombedException e) {
+							} catch (IOException e) {
 								coord.removeEventHandler(MouseEvent.MOUSE_ENTERED, this);
 							}
 						}
@@ -319,6 +302,8 @@ public class BattleSeaPlayPageController implements Initializable {
 
 		try {
 			if (!bombThrown) {
+				dataOutputStream.writeUTF("throwBomb_"+getXFrom1(index)+"_"+getYFrom1(index));
+				dataOutputStream.flush();
 				BombController.getInstance().throwBomb(getXFrom1(index), getYFrom1(index));
 				System.out.println("bomb thrown at (x,y)=(%d,%d)".formatted(getXFrom1(index), getYFrom1(index)));
 
@@ -333,12 +318,12 @@ public class BattleSeaPlayPageController implements Initializable {
 					}
 				}
 			}
-		} catch (BombController.CoordinateAlreadyBombedException exception) {
+		} catch (BombController.CoordinateAlreadyBombedException | IOException exception) {
 			coord.removeEventHandler(MouseEvent.MOUSE_CLICKED, onClickHandler);
 		}
 	}
 
-	private void animateSuccessFulBomb (Image image, Ship shipToBeBombed) {
+	private void animateSuccessFulBomb (Image image, Ship shipToBeBombed) throws IOException {
 
 		class SpriteAnimation extends Transition {
 
@@ -367,6 +352,9 @@ public class BattleSeaPlayPageController implements Initializable {
 		}
 
 		LinkedList<SpriteAnimation> spriteAnimations = new LinkedList<>();
+		//dataOutputStream.writeUTF("getAllCoords_");
+		//dataOutputStream.flush();
+		// TODO: 2/2/2021
 		for (int[] coord : Ship.getAllCoords(new LinkedList<>(Collections.singletonList(shipToBeBombed)))) {
 			int x = coord[0] - 1, y = coord[1] - 1, index = getIndexFromXY(x, y);
 
@@ -433,34 +421,19 @@ public class BattleSeaPlayPageController implements Initializable {
 		}};
 	}
 
-	public void closeGame () {
+	public void closeGame (ActionEvent actionEvent) {
 		stage.close();
 	}
-	public void closeGameWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("BattleSeaPlayPage.closeGame");
-	}
 
-
-
-	public void mouseIsOver() {
-		if (getMouseEvent().getSource() instanceof Button)
-			((Button) getMouseEvent().getSource()).setOpacity(0.8);
-	}
-
-	public void mouseIsOverWrite(MouseEvent mouseEvent) {
-		MainController.write("BattleSeaPlayPage.mouseIsOverWrite");
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Button)
+			((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
 	public void mouseIsOut (MouseEvent mouseEvent) {
 		if (mouseEvent.getSource() instanceof Button)
 			((Button) mouseEvent.getSource()).setOpacity(1);
 	}
-
-	public void mouseIsOutWrite(MouseEvent mouseEvent) {
-		MainController.write("BattleSeaPlayPage.mouseIsOut");
-	}
-
 
 	private void setShipLabelIDs () {
 		int index = -1;
