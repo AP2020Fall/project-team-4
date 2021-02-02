@@ -102,6 +102,7 @@ class ClientHandler extends Thread {
                 case"getCurrentAccLoggedIn":
                     AccountController.getInstance().getCurrentAccLoggedIn();
                     break;
+
                 case "logOut" :
                     AccountController.getInstance().logout();
                     break;
@@ -110,8 +111,15 @@ class ClientHandler extends Thread {
         }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){
             System.out.println("connection closed!");
             e.printStackTrace();
+        } catch (MainController.InvalidFormatException e) {
+            e.printStackTrace();
+        } catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
+            e.printStackTrace();
+
+        } catch (ReversiController.PlayerHasAlreadyPlacedDiskException e) {
+            e.printStackTrace();
         }
-        }
+    }
 
         private void clientDisconnected() throws IOException{
         socket.close();
