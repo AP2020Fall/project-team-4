@@ -10,6 +10,7 @@ import Model.GameRelated.BattleSea.Ship;
 import View.Client;
 import View.GameRelated.BattleSea.BattleSeaView;
 import javafx.scene.layout.GridPane;
+import Controller.AccountRelated.AccountController;
 
 import java.io.*;
 import java.net.*;
@@ -98,6 +99,12 @@ class ClientHandler extends Thread {
 //                    y = Integer.parseInt(receivedInfo[2]);
 //                  ShipController.getInstance().moveShip(BattleSeaEditBoardPageController.getInstance().getCurrentBoard(),ship,x,y);
 //                    break;
+                case"getCurrentAccLoggedIn":
+                    AccountController.getInstance().getCurrentAccLoggedIn();
+                    break;
+                case "logOut" :
+                    AccountController.getInstance().logout();
+                    break;
             }
         }catch (IOException | BombController.CoordinateAlreadyBombedException e){
             System.out.println("connection closed!");
