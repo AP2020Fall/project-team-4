@@ -106,14 +106,17 @@ class ClientHandler extends Thread {
                 case "logOut" :
                     AccountController.getInstance().logout();
                     break;
+
                 case "displayAvaiableCoords" :
                     ReversiController.getInstance().displayAvailableCoords();
                     break;
+
                 case "placeDisk":
                     x = Integer.parseInt(receivedInfo[1]);
                     y = Integer.parseInt(receivedInfo[2]);
                     ReversiController.getInstance().placeDisk(x,y);
                     break;
+
                 case "ReversinextTurn" :
                     ReversiController.getInstance().nextTurn();
                     break;
@@ -121,13 +124,16 @@ class ClientHandler extends Thread {
                     ReversiController.getInstance().displayPrevMoves();
                     break;
                 case "editAccField" :
+
                     AccountController.getInstance().editAccField (receivedInfo[1],receivedInfo[2]);
                     break;
                 case "displayLogOfGame" :
                     Controller.GameRelated.GameLogController.getInstance().displayLogOfGame(receivedInfo[1]);
                     break;
 
-
+                case "changePWCommand" :
+                    AccountController.getInstance().changePWCommand(receivedInfo[1],receivedInfo[2]);
+                    break;
             }
         }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){
             System.out.println("connection closed!");
@@ -137,6 +143,10 @@ class ClientHandler extends Thread {
         } catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
             e.printStackTrace();
 
+        } catch (ReversiController.PlayerHasAlreadyPlacedDiskException e) {
+            e.printStackTrace();
+        } catch (AccountController.PaswordIncorrectException e) {
+            e.printStackTrace();
         }
     }
 

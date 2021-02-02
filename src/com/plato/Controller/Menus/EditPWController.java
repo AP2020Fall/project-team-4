@@ -13,6 +13,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,6 +29,9 @@ public class EditPWController implements Initializable {
 	public TextField newPwFieldpwShown, oldPwFieldpwShown;
 	private MouseEvent mouseEvent;
 	private ActionEvent actionEvent;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static Socket socket;
 
 
 
@@ -129,9 +136,11 @@ public class EditPWController implements Initializable {
 				newPassword = (newShowPwOrNot.getImage().getUrl().contains("invisible") ? newPwFieldpwShown : newPwFieldpwHidden).getText();
 
 		try {
-			AccountController.getInstance().changePWCommand(oldPassword, newPassword);
+			dataOutputStream.writeUTF("changePWCommand_"+oldPassword+"_"+newPassword);
+			dataOutputStream.flush();
+		//	AccountController.getInstance().changePWCommand(oldPassword, newPassword);
 			closeStage();
-		} catch (AccountController.PaswordIncorrectException e) {
+		} catch (IOException e) {
 			oldPasswordError.setText(e.getMessage());
 		}
 	}
