@@ -78,7 +78,7 @@ public class GameConclusionWindowController implements Initializable {
 		score2.setText(String.valueOf(game.getInGameScore(2)));
 	}
 
-	public static void closeStage () {
+	public void closeStage () {
 		stage.close();
 	}
 
