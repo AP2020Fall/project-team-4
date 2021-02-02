@@ -114,6 +114,21 @@ class ClientHandler extends Thread {
                     break;
 
 
+
+                case "displayAvaiableCoords" :
+                    ReversiController.getInstance().displayAvailableCoords();
+                    break;
+                case "placeDisk":
+                    x = Integer.parseInt(receivedInfo[1]);
+                    y = Integer.parseInt(receivedInfo[2]);
+                    ReversiController.getInstance().placeDisk(x,y);
+                    break;
+                case "ReversinextTurn" :
+                    ReversiController.getInstance().nextTurn();
+                    break;
+                case "ReversiDisplayPrevMoves" :
+                    ReversiController.getInstance().displayPrevMoves();
+                    break;
             }
         }catch (IOException | BombController.CoordinateAlreadyBombedException e){
             System.out.println("connection closed!");
@@ -121,6 +136,9 @@ class ClientHandler extends Thread {
         } catch (MainController.InvalidFormatException e) {
             e.printStackTrace();
         } catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
+            e.printStackTrace();
+
+        } catch (ReversiController.PlayerHasAlreadyPlacedDiskException e) {
             e.printStackTrace();
         }
     }
