@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.AccountRelated.AccountController;
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.BattleSea.ShipController;
 import Controller.GameRelated.Reversi.ReversiController;
@@ -84,17 +85,25 @@ class ClientHandler extends Thread {
                    BombController.getInstance().throwBomb(x,y);
                    break;
 
-                case"displayBoard":
+                //case"displayBoard":
                     // TODO: 2/2/2021
-                    BattleSeaView.getInstance().displayBoard();
+                   // BattleSeaView.getInstance().displayBoard();
+                   // break;
+
+              //  case"moveShip":
+
+                //  ShipController.getInstance().moveShip(x,y);
+                  //  break;
+
+                case"getCurrentAccLoggedIn":
+                    AccountController.getInstance().getCurrentAccLoggedIn();
                     break;
 
-                case"moveShip":
-                    x = Integer.parseInt(receivedInfo[1]);
-                    y = Integer.parseInt(receivedInfo[2]);
-                  ShipController.getInstance().moveShip(x,y);
+                case"logOut":
+                    AccountController.getInstance().logout();
                     break;
             }
+
         }catch (IOException | BombController.CoordinateAlreadyBombedException e){
             System.out.println("connection closed!");
             e.printStackTrace();

@@ -17,8 +17,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,6 +39,9 @@ public class AccountPageController implements Initializable {
 	public GridPane mainGridPane;
 	private ActionEvent actionEvent;
 	private MouseEvent mouseEvent;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static Socket socket;
 
 	public AccountPageController() {
 		this.actionEvent = null;
@@ -68,7 +74,16 @@ public class AccountPageController implements Initializable {
 	@Override
 
 	public void initialize (URL location, ResourceBundle resources) {
-
+		try {
+			dataOutputStream.writeUTF("getCurrentAccLoggedIn");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			dataOutputStream.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		Account currentLoggedIn = AccountController.getInstance().getCurrentAccLoggedIn();
 
 		pfp.setImage(new Image(currentLoggedIn.getPfpUrl()));
@@ -118,7 +133,9 @@ public class AccountPageController implements Initializable {
 		}
 	}
 
-	public void logout () {
+	public void logout () throws IOException {
+		dataOutputStream.writeUTF("logOut");
+		dataOutputStream.flush();
 		AccountController.getInstance().logout();
 		try {
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
