@@ -4,11 +4,15 @@ import Controller.AccountRelated.AccountController;
 import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.BattleSea.ShipController;
+import Controller.GameRelated.GameController;
 import Controller.GameRelated.Reversi.ReversiController;
 import Controller.Menus.*;
+import Model.AccountRelated.Account;
 import Model.GameRelated.BattleSea.Ship;
+import Model.GameRelated.Game;
 import View.Client;
 import View.GameRelated.BattleSea.BattleSeaView;
+import com.google.gson.Gson;
 import javafx.scene.layout.GridPane;
 import Controller.AccountRelated.AccountController;
 
@@ -100,7 +104,9 @@ class ClientHandler extends Thread {
 //                  ShipController.getInstance().moveShip(BattleSeaEditBoardPageController.getInstance().getCurrentBoard(),ship,x,y);
 //                    break;
                 case"getCurrentAccLoggedIn":
-                    AccountController.getInstance().getCurrentAccLoggedIn();
+                    Account account = AccountController.getInstance().getCurrentAccLoggedIn();
+                    dataOutputStream.writeUTF(new Gson().toJson(account));
+                    dataOutputStream.flush();
                     break;
 
                 case "logOut" :
@@ -134,6 +140,15 @@ class ClientHandler extends Thread {
                 case "changePWCommand" :
                     AccountController.getInstance().changePWCommand(receivedInfo[1],receivedInfo[2]);
                     break;
+                case "runGame" :
+                    GameController.getInstance().runGame(receivedInfo[1] , receivedInfo[2]);
+                    break;
+                case "getAccount":
+                    account = Account.getAccount(receivedInfo[1]);
+                    dataOutputStream.writeUTF(new Gson().toJson(account));
+                    dataOutputStream.flush();
+                    break;
+
             }
         }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){
             System.out.println("connection closed!");
@@ -143,9 +158,13 @@ class ClientHandler extends Thread {
         } catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
             e.printStackTrace();
 
-        } catch (ReversiController.PlayerHasAlreadyPlacedDiskException e) {
-            e.printStackTrace();
         } catch (AccountController.PaswordIncorrectException e) {
+            e.printStackTrace();
+        } catch (AccountController.NoAccountExistsWithUsernameException e) {
+            e.printStackTrace();
+        } catch (GameController.CantPlayWithYourselfException e) {
+            e.printStackTrace();
+        } catch (GameController.CantPlayWithAdminException e) {
             e.printStackTrace();
         }
     }
