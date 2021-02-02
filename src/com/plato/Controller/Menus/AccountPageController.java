@@ -85,7 +85,7 @@ public class AccountPageController implements Initializable {
 			e.printStackTrace();
 		}
 		Account currentLoggedIn = AccountController.getInstance().getCurrentAccLoggedIn();
-
+// TODO: 2/2/2021
 		pfp.setImage(new Image(currentLoggedIn.getPfpUrl()));
 		username.setText(currentLoggedIn.getUsername());
 
@@ -136,7 +136,7 @@ public class AccountPageController implements Initializable {
 	public void logout () throws IOException {
 		dataOutputStream.writeUTF("logOut");
 		dataOutputStream.flush();
-		AccountController.getInstance().logout();
+		//AccountController.getInstance().logout();
 		try {
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/LoginMenu.fxml").toURI().toURL()),
