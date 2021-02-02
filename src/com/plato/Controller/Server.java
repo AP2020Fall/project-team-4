@@ -67,9 +67,7 @@ class ClientHandler extends Thread {
             //receive from client
             String received = dataInputStream.readUTF();
             String[] receivedInfo = received.split("_");
-            if(receivedInfo[0].equals("placeDisk")){
-
-            }
+            switch (receivedInfo[0]){}
         }catch (IOException e){
             System.out.println("connection closed!");
             e.printStackTrace();
