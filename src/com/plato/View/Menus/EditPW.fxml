@@ -46,12 +46,12 @@
         </font>
     </Label>
     <HBox alignment="CENTER" spacing="30.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
-        <Button mnemonicParsing="false" onAction="#closeStage" text="Cancel">
+        <Button mnemonicParsing="false" onAction="#closeStageWrite" text="Cancel">
             <font>
                 <Font name="Arial" size="15.0" />
             </font>
         </Button>
-        <Button mnemonicParsing="false" onAction="#confirmPasswordEdit" text="Confirm">
+        <Button mnemonicParsing="false" onAction="#confirmPasswordEditWrite" text="Confirm">
             <font>
                 <Font name="Arial" size="15.0" />
             </font>
