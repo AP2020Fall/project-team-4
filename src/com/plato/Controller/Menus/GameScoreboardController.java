@@ -1,9 +1,9 @@
 package Controller.Menus;
 
-import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
@@ -25,6 +25,10 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -35,29 +39,9 @@ public class GameScoreboardController implements Initializable {
 	private static Stage stage;
 	private static String gameName;
 	public ListView<GridPane> scoreBoard;
-	private ActionEvent actionEvent;
-	private MouseEvent mouseEvent;
-
-	public GameScoreboardController() {
-		this.actionEvent = null;
-		this.mouseEvent = null;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
+	private DataInputStream dataInputStream;
+	private DataOutputStream dataOutputStream;
+	private Object Account;
 
 	public static void setGameName (String gameName) {
 		GameScoreboardController.gameName = gameName;
@@ -77,6 +61,7 @@ public class GameScoreboardController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
+		// TODO: 2/3/2021
 		LinkedList<String> scoreBoardLinkedList = Game.getScoreboard(gameName);
 
 		scoreBoard.setStyle("-fx-background-color: #003768;  " +
@@ -98,7 +83,18 @@ public class GameScoreboardController implements Initializable {
 					draws = Integer.parseInt(matcher.group("d")),
 					played = Integer.parseInt(matcher.group("play"));
 			String username = matcher.group("un");
-			Gamer gamer = (Gamer) Account.getAccount(username);
+			try {
+				dataOutputStream.writeUTF("getAccount_" + username);
+				dataOutputStream.flush();
+			} catch (IOException exception) {
+				exception.printStackTrace();
+			}
+			Gamer gamer = null;
+			try {
+				gamer = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+			} catch (IOException exception) {
+				exception.printStackTrace();
+			}
 
 			scoreBoard.getItems().add(generateScoreboardEntry(rank, pts, wins, losses, draws, gamer));
 		}
@@ -210,30 +206,15 @@ public class GameScoreboardController implements Initializable {
 		}};
 	}
 
-	public void closeStage () {
+	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
 
-	public void closeStageWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GameScoreboard.closeStage");
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOver () {
-		((Label) getMouseEvent().getSource()).setOpacity(0.8);
-	}
-
-	public void mouseIsOverWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("GameScoreboard.mouseIsOver");
-	}
-
-	public void mouseIsOut () {
-		((ImageView) getMouseEvent().getSource()).setOpacity(1);
-	}
-
-	public void mouseIsOutWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("GameScoreboard.mouseIsOut");
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 }
