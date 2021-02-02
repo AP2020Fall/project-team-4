@@ -45,8 +45,17 @@ public class MainController extends Application {
 	public static Socket clientSocket;
 
 	public static void main (String[] args) throws IOException {
-		launch(args);
+		startServerAndClient(args);
+		//launch(args);
+	}
 
+	public static void startingMainController(String[] args){
+		launch(args);
+	}
+
+	public static void startServerAndClient(String[] args) throws IOException{
+		Server.main(args);
+	//	Client.main(args);
 	}
 
 	public static MainController getInstance () {

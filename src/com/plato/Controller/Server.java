@@ -2,6 +2,7 @@ package Controller;
 
 import Controller.Menus.*;
 import Model.GameRelated.Reversi.Reversi;
+import View.Client;
 
 import java.io.*;
 import java.text.*;
@@ -10,47 +11,52 @@ import java.net.*;
 
 
 public class Server{
-    private int port;
-    private String host;
+    private final int port;
     private static ServerSocket serverSocket;
+    private static Socket socket = null;
+
 
     //constructor
     public Server(int port, String host) {
         this.port = port;
-        this.host = host;
     }
 
     public static void main(String[] args) throws IOException{
-        System.out.println("server started");
+        System.out.println("Server : server started");
         serverSocket = new ServerSocket(5056);
 
         //running loop for getting client requests
         while (true) {
-            System.out.println("Waiting for client...");
-            Socket socket = null;
+            System.out.println("Server : Waiting for client...");
 
             try {
 
+                Client.main(args);
+
                 socket = serverSocket.accept();
 
-                System.out.println("A new client has connected : " + socket);
+                System.out.println("Server : A new client has connected : " + socket);
 
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 
                 DataOutputStream dataOutputStream =new DataOutputStream(socket.getOutputStream());
 
-                System.out.println("Assigning new thread for this client");
+                System.out.println("Server : Assigning new thread for this client");
 
                 Thread thread = new ClientHandler(socket, dataInputStream);
 
                 thread.start();
+
+            //    thread.run();
+
+                MainController.startingMainController(args);
 
             } catch (Exception e) {
                 try {
                     socket.close();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
-                    System.out.println("socket closed due to exception");
+                    System.out.println("Server : socket closed due to exception");
                     e.printStackTrace();
                 }
             }
@@ -72,366 +78,300 @@ class ClientHandler extends Thread {
 
     @Override
     public void run() {
-        while(true) {
-            try {
-                //receive from client
-                String received = this.dataInputStream.readUTF();
-                System.out.println(received);
-                String className = received.split("\\.")[0];
-                String methodName = received.split("\\.")[1];
-                switch (className){
-                    case"AccountPage":
-                        AccountPageController accountPageController = new AccountPageController();
-                        if (methodName.equals("logout"))
-                            accountPageController.logout();
+        System.out.println("Server : Waiting for client to send request");
+        String received = null;
+        try {
+            received = this.dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-                        else if (methodName.equals("uploadPfp"))
-                            accountPageController.uploadPfp();
+        while(received != null) {
+            //receive from client
+            System.out.println(received);
+            String className = received.split("\\.")[0];
+            String methodName = received.split("\\.")[1];
+            switch (className){
+                case"AccountPage":
+                    AccountPageController accountPageController = new AccountPageController();
+                    switch (methodName) {
+                        case "logout" -> accountPageController.logout();
+                        case "uploadPfp" -> accountPageController.uploadPfp();
+                        case "editPassword" -> accountPageController.editPassword();
+                        case "displayPersonInfo" -> accountPageController.displayPersonalInfo();
+                        case "changeDropDownMenuVisibility" -> accountPageController.changeDropDownMenuVisibility();
+                        case "mouseIsOut" -> accountPageController.mouseIsOut();
+                        case ("mouseIsOver") -> accountPageController.mouseIsOut();
+                        case "openReversiMainMenu" -> accountPageController.openReversiMainMenu();
+                        case "openBattleSeaMainMenu" -> accountPageController.openBattleSeaMainMenu();
+                    }
+                 break;
 
-                        else if (methodName.equals("editPassword"))
-                            accountPageController.editPassword();
-
-                        else if (methodName.equals("displayPersonInfo"))
-                            accountPageController.displayPersonalInfo();
-
-                        else if (methodName.equals("changeDropDownMenuVisibility"))
-                            accountPageController.changeDropDownMenuVisibility();
-
-                        else if (methodName.equals("mouseIsOut"))
-                            accountPageController.mouseIsOut();
-
-                        else if (methodName.equals(("mouseIsOver")))
-                            accountPageController.mouseIsOut();
-
-                        else if (methodName.equals("openReversiMainMenu"))
-                            accountPageController.openReversiMainMenu();
-
-                        else if (methodName.equals("openBattlSeaMainMenu"))
-                            accountPageController.openBattleSeaMainMenu();
+                case "BattleSea5RandBoard":
+                    BattleSea5RandBoardsController battleSea5RandBoardsController = new BattleSea5RandBoardsController();
+                    switch (methodName) {
+                        case "mouseIsOver" -> battleSea5RandBoardsController.mouseIsOut();
+                        case ("mouseIsOut") -> battleSea5RandBoardsController.mouseIsOut();
+                        case "closeGen5RandBoard" -> battleSea5RandBoardsController.closeGen5RandBoard();
+                        case "selectBoard" -> battleSea5RandBoardsController.selectBoard();
+                    }
                      break;
 
-                    case "BattleSea5RandBoard":
-                        BattleSea5RandBoardsController battleSea5RandBoardsController = new BattleSea5RandBoardsController();
-                        if (methodName.equals("mouseIsOver"))
-                            battleSea5RandBoardsController.mouseIsOut();
-
-                        else  if (methodName.equals(("mouseIsOut")))
-                            battleSea5RandBoardsController.mouseIsOut();
-
-                        else if (methodName.equals("closeGen5RandBoard"))
-                        battleSea5RandBoardsController.closeGen5RandBoard();
-
-                         else if (methodName.equals("selectBoard"))
-                            battleSea5RandBoardsController.selectBoard();
-                         break;
-
-                    case"AdminMsgs":
-                        AdminMsgsController adminMsgsController = new AdminMsgsController();
-                        if (methodName.equals("closeStage"))
-                            adminMsgsController.closeStage();
-                     break;
-
-                    case"BattleSeaEditBoardPage":
-
-                        BattleSeaEditBoardPageController battleSeaEditBoardPageController = new BattleSeaEditBoardPageController();
-                        if (methodName.equals("closeStage"))
-                            battleSeaEditBoardPageController.closeStage();
-
-                        else if (methodName.equals("doneEditing"))
-                            battleSeaEditBoardPageController.doneEditing();
-
-                        else if (methodName.equals("generate5RandBoard"))
-                            battleSeaEditBoardPageController.generate5RandBoards();
-
-                        else if (methodName.equals("generate1RandBoard"))
-                            battleSeaEditBoardPageController.generate1RandBoard();
-
-                        else if (methodName.equals("rotateShip"))
-                            battleSeaEditBoardPageController.rotateShip();
-
-                        else if (methodName.equals("mouseIsOver"))
-                            battleSeaEditBoardPageController.mouseIsOver();
-
-                        else if (methodName.equals("mouseIsOut"))
-                            battleSeaEditBoardPageController.mouseIsOut();
-
-                        else if (methodName.equals("moveShipIfPossible"))
-                            battleSeaEditBoardPageController.moveShipIfPossible();
-
-                        break;
-
-                    case "BattleSeaPlayPage":
-                        BattleSeaPlayPageController battleSeaPlayPageController = new BattleSeaPlayPageController();
-
-                        if(methodName.equals("closeGame"))
-                            battleSeaPlayPageController.closeGame();
-
-                        else if (methodName.equals("mouseIsOver"))
-                            battleSeaPlayPageController.mouseIsOver();
-
-                        else if (methodName.equals("mouseIsOut"))
-                            battleSeaPlayPageController.mouseIsOver();
-
-                        break;
-
-                    case "DeleteAccount":
-                        DeleteAccountController deleteAccountController = new DeleteAccountController();
-
-                        if (methodName.equals("closeStage"))
-                            deleteAccountController.closeStage();
-
-                        else if (methodName.equals("removeAccount"))
-                            deleteAccountController.removeAccount();
-
-                        break;
-
-                    case "DisplayPersonalInfo":
-                        DisplayPersonalAccInfoController displayPersonalAccInfoController = new DisplayPersonalAccInfoController();
-
-                        if(methodName.equals("closeStage"))
-                            displayPersonalAccInfoController.closeStage();
-
-                        else if (methodName.equals("editFirstName"))
-                            displayPersonalAccInfoController.editFirstName();
-
-                        else if( methodName.equals("editLastName"))
-                            displayPersonalAccInfoController.editLastName();
-
-                        else if (methodName.equals("editUsername"))
-                            displayPersonalAccInfoController.editUsername();
-
-                        else if (methodName.equals("editMail"))
-                            displayPersonalAccInfoController.editEmail();
-
-                        else if (methodName.equals("editPhonNum"))
-                            displayPersonalAccInfoController.editPhoneNum();
-
-                        else if (methodName.equals("confirmAllEdits"))
-                            displayPersonalAccInfoController.confirmAllEdits();
-
-                        else if (methodName.equals("uploadPfp"))
-                            displayPersonalAccInfoController.uploadPfp();
-
-                        break;
-
-                    case "EditPW":
-                        EditPWController editPWController = new EditPWController();
-                        if(methodName.equals("confirmPasswordEdit"))
-                            editPWController.confirmPasswordEdit();
-
-                        else if (methodName.equals("closeStage"))
-                            editPWController.closeStage();
-
-                        break;
-
-                    case "EventCreateOrEditPage":
-                        EventCreateOrEditPageController eventCreateOrEditPageController = new EventCreateOrEditPageController();
-                        if (methodName.equals("uploadImg"))
-                            eventCreateOrEditPageController.uploadImg();
-
-                        else if (methodName.equals("editTitle"))
-                            eventCreateOrEditPageController.editTitle();
-
-                        else if (methodName.equals("editGame"))
-                            eventCreateOrEditPageController.editGame();
-
-                        else if (methodName.equals("editStartDate"))
-                            eventCreateOrEditPageController.editStartDate();
-
-                        else if (methodName.equals("editEndDate"))
-                            eventCreateOrEditPageController.editEndDate();
-
-                        else if (methodName.equals("editCoin"))
-                            eventCreateOrEditPageController.editCoins();
-
-                        else if (methodName.equals("editDetails"))
-                            eventCreateOrEditPageController.editDetails();
-
-                        else if (methodName.equals("removeEvent"))
-                            eventCreateOrEditPageController.removeEvent();
-
-                        else if (methodName.equals("revertEdit"))
-                            eventCreateOrEditPageController.revertEdits();
-
-                        else if (methodName.equals("confirmEdits"))
-                            eventCreateOrEditPageController.confirmEdits();
-
-                        else if(methodName.equals("closeStage"))
-                            eventCreateOrEditPageController.closeStage();
-
-                        else if (methodName.equals("createEvent"))
-                            eventCreateOrEditPageController.createEvent();
-
-                        else if (methodName.equals("openEventSettings"))
-                            eventCreateOrEditPageController.openEventSettings();
-
-                        break;
-
-                    case "EventSettings":
-                        EventSettingsController eventSettingsController = new EventSettingsController();
-                        if (methodName.equals("isLoginTime"))
-                            eventSettingsController.isLoginTimes();
-
-                        else if (methodName.equals("resetPage"))
-                            eventSettingsController.resetPage();
-
-                        else if (methodName.equals("closeStage"))
-                            eventSettingsController.closeStage();
-
-                        else if (methodName.equals("isMVPInGame"))
-                            eventSettingsController.isMVPInGame();
-
-                        else if (methodName.equals("isPlayTime"))
-                            eventSettingsController.isPlayTimes();
-
-                        else if (methodName.equals("isWinTime"))
-                            eventSettingsController.isWinTimes();
-
-                        break;
-
-                    case"FriendsTab":
-                        FriendsTabController friendsTabController = new FriendsTabController();
-
-                        if (methodName.equals("displayFrndReguests"))
-                            friendsTabController.displayFrndRequests();
-
-                        else if (methodName.equals("updateFrndsList"))
-                            friendsTabController.updateFrndsList();
-
-                        break;
-
-                    case "EventsTabController":
-                        EventsTabController eventsTabController = new EventsTabController();
-
-                        if (methodName.equals("mouseIsOut"))
-                            eventsTabController.mouseIsOut();
-
-                        else if (methodName.equals("mouseIsOver"))
-                            eventsTabController.mouseIsOver();
-
-                        break;
-
-                    case "FriendRequestManagementPage":
-                        FriendRequestManagementPageController friendRequestManagementPageController = new FriendRequestManagementPageController();
-
-                        if (methodName.equals("sendFriendReq"))
-                            friendRequestManagementPageController.sendFriendReq();
-
-                        else if (methodName.equals("closeStage"))
-                            friendRequestManagementPageController.closeStage();
-
-                        else if (methodName.equals("closeFriendReqSendingWindow"))
-                            friendRequestManagementPageController.closeFriendReqSendingWindow();
-
-                        else if (methodName.equals("mouseIsOver"))
-                            friendRequestManagementPageController.mouseIsOver();
-
-                        else if (methodName.equals("mouseIsOut"))
-                            friendRequestManagementPageController.mouseIsOut();
-
-                        break;
-
-
-                    case "GameConclusionWindow":
-                        GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();
-                        if(methodName.equals("closeStage")) gameConclusionWindowController.closeStage();
-                        else if(methodName.equals("mouseIsOver")) gameConclusionWindowController.mouseIsOver();
-                        else if(methodName.equals("mouseIsOut")) gameConclusionWindowController.mouseIsOut();
-
-                    case "GameLog":
-                        GameLogController gameLogController = new GameLogController();
-                        if(methodName.equals("closeStage")) gameLogController.closeStage();
-                        else if(methodName.equals("mouseIsOver")) gameLogController.mouseIsOver();
-                        else if(methodName.equals("mouseIsOut")) gameLogController.mouseIsOut();
-
-                    case "GameMenu":
-                        GameMenuController gameMenuController = new GameMenuController();
-                        if(methodName.equals("newGame")) gameMenuController.newGame();
-                        else if(methodName.equals("dontStartGame")) gameMenuController.dontStartGame();
-                        else if(methodName.equals("startGame")) gameMenuController.startGame();
-                        else if(methodName.equals("changeFaveStatus")) gameMenuController.changeFaveStatus();
-                        else if(methodName.equals("closeGame")) gameMenuController.closeGame();
-                        else if(methodName.equals("displayScoreboard")) gameMenuController.displayScoreboard();
-                        else if(methodName.equals("setTime")) gameMenuController.setTime();
-                        else if(methodName.equals("displayLogOfGame")) gameMenuController.displayLogOfGame();
-                        else if(methodName.equals("mouseIsOver"))gameMenuController.mouseIsOver();
-                        else if(methodName.equals("mouseIsOut")) gameMenuController.mouseIsOut();
-                        break;
-                    case "GameScoreboard":
-                        GameScoreboardController gameScoreboardController = new GameScoreboardController();
-                         if(methodName.equals("closeStage")) gameScoreboardController.closeStage();
-                         else if(methodName.equals("mouseIsOver")) gameScoreboardController.mouseIsOver();
-                         else if(methodName.equals("mouseIsOut")) gameScoreboardController.mouseIsOut();
-                        break;
-                    case "GamesMenu":
-                        GamesMenuController gamesMenuController = new GamesMenuController();
-                        if(methodName.equals("closeStage")) gamesMenuController.closeStage();
-                        else if(methodName.equals("mouseIsOver")) gamesMenuController.mouseIsOver();
-                        else if(methodName.equals("mouseIsOut")) gamesMenuController.mouseIsOut();
-                        else if(methodName.equals("battleSeaMainMenu")) gamesMenuController.battleSeaMainMenu();
-                        else if(methodName.equals("reversiMainMenu")) gamesMenuController.reversiMainMenu();
-                        break;
-                    case "GamingHistoryTab":
-                        GamingHistoryTabController gamingHistoryTabController = new GamingHistoryTabController();
-                        if(methodName.equals("updateListOfGames")) gamingHistoryTabController.updateListOfGames();
-                        break;
-                    case "LoginMenu":
-                        LoginMenuController loginMenuController = new LoginMenuController();
-                        if(methodName.equals("login")) loginMenuController.login();
-                        else if(methodName.equals("signUp")) loginMenuController.signUp();
-                        else if(methodName.equals("deleteAccount")) loginMenuController.deleteAccount();
-                    case "MainMenu":
-                        MainMenuController mainMenuController = new MainMenuController();
-                        if(methodName.equals("eventsTab")) mainMenuController.eventsTab();
-                        else if(methodName.equals("usersTab")) mainMenuController.usersTab();
-                        else if(methodName.equals("accountPage")) mainMenuController.accountPage();
-                        else if(methodName.equals("gamingHistoryPage")) mainMenuController.gamingHistoryPage();
-                        else if(methodName.equals("gamesTab")) mainMenuController.gamesTab();
-                        else if(methodName.equals("faveGamesTab")) mainMenuController.faveGamesTab();
-                        else if(methodName.equals("friendsPage")) mainMenuController.friendsPage();
-                        else if(methodName.equals("messagesTab")) mainMenuController.messagesTab();
-                        else if(methodName.equals("mouseIsOut")) mainMenuController.mouseIsOut();
-                        else if(methodName.equals("mouseIsOver")) mainMenuController.mouseIsOver();
-                        break;
-                    case "RegisterForm":
-                        RegisterFormController registerFormController = new RegisterFormController();
-                        if(methodName.equals("signUp")) registerFormController.signUp();
-                        else if(methodName.equals("uploadPfp")) registerFormController.uploadPfp();
-                        else if(methodName.equals("closeStage")) registerFormController.closeStage();
-                        else if(methodName.equals("mouseIsOver")) registerFormController.mouseIsOver();
-                        else if(methodName.equals("mouseIsOut")) registerFormController.mouseIsOut();
-                        break;
-                    case "RegisterMenu":
-                        RegisterMenuController registerMenuController = new RegisterMenuController();
-                        registerMenuController.signUp();
-                        break;
-                    case "ReversiGame":
-                        ReversiGameController reversiGameController = new ReversiGameController();
-                        if(methodName.equals("putMarkIfPossible")) reversiGameController.putMarkIfPossible();
-                        else if(methodName.equals("confirmMove")) reversiGameController.confirmMove();
-                        else if(methodName.equals("showMoves")) reversiGameController.showMoves();
-                        else if(methodName.equals("mouseIsOut")) reversiGameController.mouseIsOut();
-                        else if(methodName.equals("mouseIsOver")) reversiGameController.mouseIsOver();
-                        else if(methodName.equals("closeGame")) reversiGameController.closeGame();
-                        else if(methodName.equals("closeMoveHistory")) reversiGameController.closeMoveHistory();
-                        break;
-                    case "UserProfileForAdmin":
-                        UserProfileForAdminController userProfileForAdminController = new UserProfileForAdminController();
-                        if(methodName.equals("sendMsg")) userProfileForAdminController.sendMsg();
-                        else if(methodName.equals("sendMessageDone")) userProfileForAdminController.sendMessageDone();
-                        else if(methodName.equals("cancelSending")) userProfileForAdminController.cancelSendingMsg();
-                        else if(methodName.equals("mouseIsOver")) userProfileForAdminController.mouseIsOver();
-                        else if(methodName.equals("mouseIsOut")) userProfileForAdminController.mouseIsOut();
-                        break;
-                }
+                case"AdminMsgs":
+                    AdminMsgsController adminMsgsController = new AdminMsgsController();
+                    if (methodName.equals("closeStage"))
+                        adminMsgsController.closeStage();
+                 break;
+
+                case"BattleSeaEditBoardPage":
+
+                    BattleSeaEditBoardPageController battleSeaEditBoardPageController = new BattleSeaEditBoardPageController();
+                    switch (methodName) {
+                        case "closeStage" -> battleSeaEditBoardPageController.closeStage();
+                        case "doneEditing" -> battleSeaEditBoardPageController.doneEditing();
+                        case "generate5RandBoard" -> battleSeaEditBoardPageController.generate5RandBoards();
+                        case "generate1RandBoard" -> battleSeaEditBoardPageController.generate1RandBoard();
+                        case "rotateShip" -> battleSeaEditBoardPageController.rotateShip();
+                        case "mouseIsOver" -> battleSeaEditBoardPageController.mouseIsOver();
+                        case "mouseIsOut" -> battleSeaEditBoardPageController.mouseIsOut();
+                        case "moveShipIfPossible" -> battleSeaEditBoardPageController.moveShipIfPossible();
+                    }
+
+                    break;
+
+                case "BattleSeaPlayPage":
+                    BattleSeaPlayPageController battleSeaPlayPageController = new BattleSeaPlayPageController();
+
+                    switch (methodName) {
+                        case "closeGame" -> battleSeaPlayPageController.closeGame();
+                        case "mouseIsOver" -> battleSeaPlayPageController.mouseIsOver();
+                        case "mouseIsOut" -> battleSeaPlayPageController.mouseIsOver();
+                    }
+
+                    break;
+
+                case "DeleteAccount":
+                    DeleteAccountController deleteAccountController = new DeleteAccountController();
+
+                    if (methodName.equals("closeStage"))
+                        deleteAccountController.closeStage();
+
+                    else if (methodName.equals("removeAccount"))
+                        deleteAccountController.removeAccount();
+
+                    break;
+
+                case "DisplayPersonalInfo":
+                    DisplayPersonalAccInfoController displayPersonalAccInfoController = new DisplayPersonalAccInfoController();
+
+                    switch (methodName) {
+                        case "closeStage" -> displayPersonalAccInfoController.closeStage();
+                        case "editFirstName" -> displayPersonalAccInfoController.editFirstName();
+                        case "editLastName" -> displayPersonalAccInfoController.editLastName();
+                        case "editUsername" -> displayPersonalAccInfoController.editUsername();
+                        case "editMail" -> displayPersonalAccInfoController.editEmail();
+                        case "editPhonNum" -> displayPersonalAccInfoController.editPhoneNum();
+                        case "confirmAllEdits" -> displayPersonalAccInfoController.confirmAllEdits();
+                        case "uploadPfp" -> displayPersonalAccInfoController.uploadPfp();
+                    }
+
+                    break;
+
+                case "EditPW":
+                    EditPWController editPWController = new EditPWController();
+                    if(methodName.equals("confirmPasswordEdit"))
+                        editPWController.confirmPasswordEdit();
+
+                    else if (methodName.equals("closeStage"))
+                        editPWController.closeStage();
+
+                    break;
+
+                case "EventCreateOrEditPage":
+                    EventCreateOrEditPageController eventCreateOrEditPageController = new EventCreateOrEditPageController();
+                    switch (methodName) {
+                        case "uploadImg" -> eventCreateOrEditPageController.uploadImg();
+                        case "editTitle" -> eventCreateOrEditPageController.editTitle();
+                        case "editGame" -> eventCreateOrEditPageController.editGame();
+                        case "editStartDate" -> eventCreateOrEditPageController.editStartDate();
+                        case "editEndDate" -> eventCreateOrEditPageController.editEndDate();
+                        case "editCoin" -> eventCreateOrEditPageController.editCoins();
+                        case "editDetails" -> eventCreateOrEditPageController.editDetails();
+                        case "removeEvent" -> eventCreateOrEditPageController.removeEvent();
+                        case "revertEdit" -> eventCreateOrEditPageController.revertEdits();
+                        case "confirmEdits" -> eventCreateOrEditPageController.confirmEdits();
+                        case "closeStage" -> eventCreateOrEditPageController.closeStage();
+                        case "createEvent" -> eventCreateOrEditPageController.createEvent();
+                        case "openEventSettings" -> eventCreateOrEditPageController.openEventSettings();
+                    }
+
+                    break;
+
+                case "EventSettings":
+                    EventSettingsController eventSettingsController = new EventSettingsController();
+                    switch (methodName) {
+                        case "isLoginTime" -> eventSettingsController.isLoginTimes();
+                        case "resetPage" -> eventSettingsController.resetPage();
+                        case "closeStage" -> eventSettingsController.closeStage();
+                        case "isMVPInGame" -> eventSettingsController.isMVPInGame();
+                        case "isPlayTime" -> eventSettingsController.isPlayTimes();
+                        case "isWinTime" -> eventSettingsController.isWinTimes();
+                    }
+
+                    break;
+
+                case"FriendsTab":
+                    FriendsTabController friendsTabController = new FriendsTabController();
+
+                    if (methodName.equals("displayFrndRequests"))
+                        friendsTabController.displayFrndRequests();
+
+                    else if (methodName.equals("updateFrndsList"))
+                        friendsTabController.updateFrndsList();
+
+                    break;
+
+                case "EventsTabController":
+                    EventsTabController eventsTabController = new EventsTabController();
+
+                    if (methodName.equals("mouseIsOut"))
+                        eventsTabController.mouseIsOut();
+
+                    else if (methodName.equals("mouseIsOver"))
+                        eventsTabController.mouseIsOver();
+
+                    break;
+
+                case "FriendRequestManagementPage":
+                    FriendRequestManagementPageController friendRequestManagementPageController = new FriendRequestManagementPageController();
+
+                    switch (methodName) {
+                        case "sendFriendReq" -> friendRequestManagementPageController.sendFriendReq();
+                        case "closeStage" -> friendRequestManagementPageController.closeStage();
+                        case "closeFriendReqSendingWindow" -> friendRequestManagementPageController.closeFriendReqSendingWindow();
+                        case "mouseIsOver" -> friendRequestManagementPageController.mouseIsOver();
+                        case "mouseIsOut" -> friendRequestManagementPageController.mouseIsOut();
+                    }
+
+                    break;
+
+
+                case "GameConclusionWindow":
+                    GameConclusionWindowController gameConclusionWindowController = new GameConclusionWindowController();
+                    switch (methodName) {
+                        case "closeStage" -> gameConclusionWindowController.closeStage();
+                        case "mouseIsOver" -> gameConclusionWindowController.mouseIsOver();
+                        case "mouseIsOut" -> gameConclusionWindowController.mouseIsOut();
+                    }
+
+                case "GameLog":
+                    GameLogController gameLogController = new GameLogController();
+                    switch (methodName) {
+                        case "closeStage" -> gameLogController.closeStage();
+                        case "mouseIsOver" -> gameLogController.mouseIsOver();
+                        case "mouseIsOut" -> gameLogController.mouseIsOut();
+                    }
+
+                case "GameMenu":
+                    GameMenuController gameMenuController = new GameMenuController();
+                    switch (methodName) {
+                        case "newGame" -> gameMenuController.newGame();
+                        case "dontStartGame" -> gameMenuController.dontStartGame();
+                        case "startGame" -> gameMenuController.startGame();
+                        case "changeFaveStatus" -> gameMenuController.changeFaveStatus();
+                        case "closeGame" -> gameMenuController.closeGame();
+                        case "displayScoreboard" -> gameMenuController.displayScoreboard();
+                        case "setTime" -> gameMenuController.setTime();
+                        case "displayLogOfGame" -> gameMenuController.displayLogOfGame();
+                        case "mouseIsOver" -> gameMenuController.mouseIsOver();
+                        case "mouseIsOut" -> gameMenuController.mouseIsOut();
+                    }
+                    break;
+                case "GameScoreboard":
+                    GameScoreboardController gameScoreboardController = new GameScoreboardController();
+                    switch (methodName) {
+                        case "closeStage" -> gameScoreboardController.closeStage();
+                        case "mouseIsOver" -> gameScoreboardController.mouseIsOver();
+                        case "mouseIsOut" -> gameScoreboardController.mouseIsOut();
+                    }
+                    break;
+                case "GamesMenu":
+                    GamesMenuController gamesMenuController = new GamesMenuController();
+                    switch (methodName) {
+                        case "closeStage" -> gamesMenuController.closeStage();
+                        case "mouseIsOver" -> gamesMenuController.mouseIsOver();
+                        case "mouseIsOut" -> gamesMenuController.mouseIsOut();
+                        case "battleSeaMainMenu" -> gamesMenuController.battleSeaMainMenu();
+                        case "reversiMainMenu" -> gamesMenuController.reversiMainMenu();
+                    }
+                    break;
+                case "GamingHistoryTab":
+                    GamingHistoryTabController gamingHistoryTabController = new GamingHistoryTabController();
+                    if(methodName.equals("updateListOfGames")) gamingHistoryTabController.updateListOfGames();
+                    break;
+                case "LoginMenu":
+                    LoginMenuController loginMenuController = new LoginMenuController();
+                    switch (methodName) {
+                        case "login" -> loginMenuController.login();
+                        case "signUp" -> loginMenuController.signUp();
+                        case "deleteAccount" -> loginMenuController.deleteAccount();
+                    }
+                case "MainMenu":
+                    MainMenuController mainMenuController = new MainMenuController();
+                    switch (methodName) {
+                        case "eventsTab" -> mainMenuController.eventsTab();
+                        case "usersTab" -> mainMenuController.usersTab();
+                        case "accountPage" -> mainMenuController.accountPage();
+                        case "gamingHistoryPage" -> mainMenuController.gamingHistoryPage();
+                        case "gamesTab" -> mainMenuController.gamesTab();
+                        case "faveGamesTab" -> mainMenuController.faveGamesTab();
+                        case "friendsPage" -> mainMenuController.friendsPage();
+                        case "messagesTab" -> mainMenuController.messagesTab();
+                        case "mouseIsOut" -> mainMenuController.mouseIsOut();
+                        case "mouseIsOver" -> mainMenuController.mouseIsOver();
+                    }
+                    break;
+                case "RegisterForm":
+                    RegisterFormController registerFormController = new RegisterFormController();
+                    switch (methodName) {
+                        case "signUp" -> registerFormController.signUp();
+                        case "uploadPfp" -> registerFormController.uploadPfp();
+                        case "closeStage" -> registerFormController.closeStage();
+                        case "mouseIsOver" -> registerFormController.mouseIsOver();
+                        case "mouseIsOut" -> registerFormController.mouseIsOut();
+                    }
+                    break;
+                case "RegisterMenu":
+                    RegisterMenuController registerMenuController = new RegisterMenuController();
+                    registerMenuController.signUp();
+                    break;
+                case "ReversiGame":
+                    ReversiGameController reversiGameController = new ReversiGameController();
+                    switch (methodName) {
+                        case "putMarkIfPossible" -> reversiGameController.putMarkIfPossible();
+                        case "confirmMove" -> reversiGameController.confirmMove();
+                        case "showMoves" -> reversiGameController.showMoves();
+                        case "mouseIsOut" -> reversiGameController.mouseIsOut();
+                        case "mouseIsOver" -> reversiGameController.mouseIsOver();
+                        case "closeGame" -> reversiGameController.closeGame();
+                        case "closeMoveHistory" -> reversiGameController.closeMoveHistory();
+                    }
+                    break;
+                case "UserProfileForAdmin":
+                    UserProfileForAdminController userProfileForAdminController = new UserProfileForAdminController();
+                    switch (methodName) {
+                        case "sendMsg" -> userProfileForAdminController.sendMsg();
+                        case "sendMessageDone" -> userProfileForAdminController.sendMessageDone();
+                        case "cancelSending" -> userProfileForAdminController.cancelSendingMsg();
+                        case "mouseIsOver" -> userProfileForAdminController.mouseIsOver();
+                        case "mouseIsOut" -> userProfileForAdminController.mouseIsOut();
+                    }
+                    break;
+            }
 //                System.out.println("Client " + this.socket + " sends exit...");
 //                System.out.println("Closing this connection.");
 //                this.socket.close();
 //                System.out.println("Connection closed");
-            } catch (IOException exception) {
-                exception.printStackTrace();
-                continue;
-            }
 
             try {
                 this.dataInputStream.close();
