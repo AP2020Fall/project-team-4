@@ -42,7 +42,7 @@
         </GridPane.margin>
     </Label>
     <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false"
-            onAction="#closeGen5RandBoard" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut"
+            onAction="#closeGen5RandBoardWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite"
             style="-fx-background-radius: 20; -fx-background-image: url(&quot;&quot;); -fx-background-size: 40; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;"
             GridPane.halignment="LEFT" GridPane.valignment="TOP">
         <GridPane.margin>
@@ -50,7 +50,7 @@
         </GridPane.margin>
     </Button>
     <GridPane fx:id="board1" hgap="2.5" maxHeight="250.0" maxWidth="250.0" minHeight="250.0" minWidth="250.0"
-              onMouseClicked="#selectBoard" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut"
+              onMouseClicked="#selectBoardWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite"
               style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 250; -fx-background-position: center;"
               vgap="2.5" GridPane.rowIndex="1">
         <columnConstraints>
@@ -131,8 +131,8 @@
         </Label>
     </GridPane>
     <GridPane fx:id="board2" hgap="2.5" layoutX="22.0" layoutY="178.0" maxHeight="250.0" maxWidth="250.0"
-              minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoard" onMouseEntered="#mouseIsOver"
-              onMouseExited="#mouseIsOut"
+              minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoardWrite" onMouseEntered="#mouseIsOverWrite"
+              onMouseExited="#mouseIsOutWrite"
               style="-fx-background-image: url(&quot;https://i.imgur.com/G0z1Rx2.png?2&quot;); -fx-background-size: 250; -fx-background-position: center;"
               vgap="2.5" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <columnConstraints>
@@ -209,8 +209,8 @@
         </Label>
     </GridPane>
     <GridPane fx:id="board3" hgap="2.5" layoutX="22.0" layoutY="178.0" maxHeight="250.0" maxWidth="250.0"
-              minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoard" onMouseEntered="#mouseIsOver"
-              onMouseExited="#mouseIsOut"
+              minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoardWrite" onMouseEntered="#mouseIsOverWrite"
+              onMouseExited="#mouseIsOutWrite"
               style="-fx-background-image: url(&quot;https://i.imgur.com/G0z1Rx2.png?2&quot;); -fx-background-size: 250; -fx-background-position: center;"
               vgap="2.5" GridPane.rowIndex="2">
         <columnConstraints>
@@ -287,8 +287,8 @@
         </Label>
     </GridPane>
     <GridPane fx:id="board4" hgap="2.5" layoutX="349.0" layoutY="178.0" maxHeight="250.0" maxWidth="250.0"
-              minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoard" onMouseEntered="#mouseIsOver"
-              onMouseExited="#mouseIsOut"
+              minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoardWrite" onMouseEntered="#mouseIsOverWrite"
+              onMouseExited="#mouseIsOutWrite"
               style="-fx-background-image: url(&quot;https://i.imgur.com/G0z1Rx2.png?2&quot;); -fx-background-size: 250; -fx-background-position: center;"
               vgap="2.5" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <columnConstraints>
@@ -365,8 +365,8 @@
         </Label>
     </GridPane>
     <GridPane fx:id="board5" hgap="2.5" layoutX="349.0" layoutY="487.0" maxHeight="250.0" maxWidth="250.0"
-              minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoard" onMouseEntered="#mouseIsOver"
-              onMouseExited="#mouseIsOut"
+              minHeight="250.0" minWidth="250.0" onMouseClicked="#selectBoardWrite" onMouseEntered="#mouseIsOverWrite"
+              onMouseExited="#mouseIsOutWrite"
               style="-fx-background-image: url(&quot;https://i.imgur.com/G0z1Rx2.png?2&quot;); -fx-background-size: 250; -fx-background-position: center;"
               vgap="2.5" GridPane.columnSpan="2" GridPane.rowIndex="3">
         <columnConstraints>

@@ -25,7 +25,7 @@
         <Insets bottom="12.5" left="12.5" right="12.5" top="12.5"/>
     </padding>
     <Button maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false"
-            onAction="#closeGame" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut"
+            onAction="#closeGameWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite"
             style="-fx-background-radius: 37.5; -fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 75 75; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: transparent;"
             GridPane.halignment="LEFT" GridPane.valignment="TOP">
         <GridPane.margin>
