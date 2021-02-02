@@ -74,7 +74,7 @@
 
     </ImageView>
 
-    <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadPfp" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+    <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadPfpWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
         <GridPane.margin>
 
             <Insets left="190.0" />
@@ -182,7 +182,7 @@
                 <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
             </rowConstraints>
-            <ImageView fitHeight="125.0" fitWidth="115.0" onMouseClicked="#openBattleSeaMainMenu" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+            <ImageView fitHeight="125.0" fitWidth="115.0" onMouseClicked="#openBattleSeaMainMenuWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                 <GridPane.margin>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </GridPane.margin>
@@ -319,7 +319,7 @@
                 <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
             </rowConstraints>
-            <ImageView fitHeight="125.0" fitWidth="115.0" onMouseClicked="#openReversiMainMenu" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+            <ImageView fitHeight="125.0" fitWidth="115.0" onMouseClicked="#openReversiMainMenuWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                 <GridPane.margin>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </GridPane.margin>
@@ -427,13 +427,13 @@
             </HBox>
         </GridPane>
     </VBox>
-    <Label onMouseClicked="#changeDropDownMenuVisibility" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" rotate="90.0" text="..." GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+    <Label onMouseClicked="#changeDropDownMenuVisibilityWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" rotate="90.0" text="..." GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
         <font>
             <Font size="32.0" />
         </font>
 
     </Label>
-    <ImageView fitHeight="70.0" fitWidth="200.0" onMouseClicked="#logout" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+    <ImageView fitHeight="70.0" fitWidth="200.0" onMouseClicked="#logoutWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
         <image>
             <Image url="@../../../Resources/Images/door.png" />
         </image>
@@ -456,8 +456,8 @@
         <GridPane.margin>
             <Insets right="30.0" top="30.0" />
         </GridPane.margin>
-        <Label alignment="CENTER" maxHeight="30.0" maxWidth="110.0" minHeight="30.0" minWidth="110.0" onMouseClicked="#editPassword" text="Edit Password" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-        <Label alignment="CENTER" maxHeight="30.0" maxWidth="110.0" minHeight="30.0" minWidth="110.0" onMouseClicked="#displayPersonalInfo" text="View Personal Info" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Label alignment="CENTER" maxHeight="30.0" maxWidth="110.0" minHeight="30.0" minWidth="110.0" onMouseClicked="#editPasswordWrite" text="Edit Password" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <Label alignment="CENTER" maxHeight="30.0" maxWidth="110.0" minHeight="30.0" minWidth="110.0" onMouseClicked="#displayPersonalInfoWrite" text="View Personal Info" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
 
     </GridPane>
 
