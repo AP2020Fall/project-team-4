@@ -22,6 +22,10 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,30 +38,10 @@ public class GameLogController implements Initializable {
 	public ImageView gamePicture;
 	public ListView<GridPane> gameLogList;
 	public Label gameTitle, playedNum;
-	ActionEvent actionEvent;
-	MouseEvent mouseEvent;
+	private static DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
+	private Socket socket;
 
-	public GameLogController() {
-		this.actionEvent = null;
-		this.mouseEvent = null;
-	}
-
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
 
 	public static void setGameName (String gameName) {
 		GameLogController.gameName = gameName;
@@ -92,11 +76,18 @@ public class GameLogController implements Initializable {
 		gamePicture.setFitWidth(400);
 		gamePicture.setFitHeight(100);
 
-		Controller.GameRelated.GameLogController.getInstance().displayLogOfGame(gameName);
+		try {
+			dataOutputStream.writeUTF("displayLogOfGame_" + gameName);
+			dataOutputStream.flush();
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+		//Controller.GameRelated.GameLogController.getInstance().displayLogOfGame(gameName);
 
 		gameLogList.setStyle("-fx-background-color: #003768;  " +
 				"-fx-control-inner-background: #003768;");
 
+		// TODO: 2/3/2021
 		LinkedList<Game> gameHistory = GameLog.getGameHistory(gameName);
 
 		for (int i = 0; i < gameHistory.size(); i++) {
@@ -232,30 +223,16 @@ public class GameLogController implements Initializable {
 		}};
 	}
 
-	public void closeStage () {
+	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
 
-	public void closeStageWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GameLog.closeStage");
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Label) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOver () {
-		((Label) getMouseEvent().getSource()).setOpacity(0.8);
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((ImageView) mouseEvent.getSource()).setOpacity(1);
 	}
 
-	public void mouseIsOverWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("GameLog.mouseIsOver");
-	}
-
-	public void mouseIsOut () {
-		((ImageView) getMouseEvent().getSource()).setOpacity(1);
-	}
-
-	public void mouseIsOutWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("GameLog.mouseIsOut");
-	}
 }

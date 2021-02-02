@@ -121,8 +121,10 @@ class ClientHandler extends Thread {
                     ReversiController.getInstance().displayPrevMoves();
                     break;
                 case "editAccField" :
-
                     AccountController.getInstance().editAccField (receivedInfo[1],receivedInfo[2]);
+                    break;
+                case "displayLogOfGame" :
+                    Controller.GameRelated.GameLogController.getInstance().displayLogOfGame(receivedInfo[1]);
                     break;
 
 
@@ -135,8 +137,6 @@ class ClientHandler extends Thread {
         } catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
             e.printStackTrace();
 
-        } catch (ReversiController.PlayerHasAlreadyPlacedDiskException e) {
-            e.printStackTrace();
         }
     }
 

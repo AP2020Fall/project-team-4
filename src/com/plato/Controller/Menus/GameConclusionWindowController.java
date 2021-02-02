@@ -1,9 +1,7 @@
 package Controller.Menus;
 
-import Controller.MainController;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -21,29 +19,6 @@ public class GameConclusionWindowController implements Initializable {
 	public ImageView pfp1, pfp2;
 	public Label username1, username2;
 	public Label score1, score2;
-	private ActionEvent actionEvent;
-	private MouseEvent mouseEvent;
-
-	public GameConclusionWindowController() {
-		this.actionEvent = null;
-		this.mouseEvent = null;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
 
 	public static void setGame (Game game) {
 		GameConclusionWindowController.game = game;
@@ -78,30 +53,15 @@ public class GameConclusionWindowController implements Initializable {
 		score2.setText(String.valueOf(game.getInGameScore(2)));
 	}
 
-	public void closeStage () {
+	public void closeStage (MouseEvent mouseEvent) {
 		stage.close();
 	}
 
-	public void closeStageWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GameConclusionWindow.closeStage");
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Label) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOver () {
-		((Label) getMouseEvent().getSource()).setOpacity(0.8);
-	}
-
-	public void mouseIsOverWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("GameConclusionWindow.mouseIsOver");
-	}
-
-	public void mouseIsOut () {
-		((ImageView) getMouseEvent().getSource()).setOpacity(1);
-	}
-
-	public void mouseIsOutWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("GameConclusionWindow.mouseIsOut");
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((Label) mouseEvent.getSource()).setOpacity(1);
 	}
 }
