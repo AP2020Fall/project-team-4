@@ -13,6 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,6 +29,9 @@ public class DeleteAccountController implements Initializable {
 	public TextField pwFieldpwShown;
 	private MouseEvent mouseEvent;
 	private ActionEvent actionEvent;
+	private static DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
+	private static Socket socket;
 
 
 	public DeleteAccountController() {
