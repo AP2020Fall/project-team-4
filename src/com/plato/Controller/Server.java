@@ -107,28 +107,6 @@ class ClientHandler extends Thread {
                     AccountController.getInstance().logout();
                     break;
 
-
-                case "editAccField" :
-
-                    AccountController.getInstance().editAccField (receivedInfo[1],receivedInfo[2]);
-                    break;
-
-
-
-                case "displayAvaiableCoords" :
-                    ReversiController.getInstance().displayAvailableCoords();
-                    break;
-                case "placeDisk":
-                    x = Integer.parseInt(receivedInfo[1]);
-                    y = Integer.parseInt(receivedInfo[2]);
-                    ReversiController.getInstance().placeDisk(x,y);
-                    break;
-                case "ReversinextTurn" :
-                    ReversiController.getInstance().nextTurn();
-                    break;
-                case "ReversiDisplayPrevMoves" :
-                    ReversiController.getInstance().displayPrevMoves();
-                    break;
             }
         }catch (IOException | BombController.CoordinateAlreadyBombedException e){
             System.out.println("connection closed!");
