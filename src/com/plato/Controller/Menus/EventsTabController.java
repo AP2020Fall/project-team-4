@@ -90,7 +90,7 @@ public class EventsTabController implements Initializable {
 	public void filterWrite(ActionEvent actionEvent) {
 		MainController.write("EventsTab.filter");
 	}
-	public void createEvent (ActionEvent actionEvent) {
+	public void createEvent () {
 		try {
 			EventCreateOrEditPageController.setIsForCreateOrInfo(true);
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
@@ -105,7 +105,8 @@ public class EventsTabController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void creatEventWrite(ActionEvent actionEvent) {
+	public void createEventWrite(ActionEvent actionEvent) {
+		setActionEvent(actionEvent);
 		MainController.write("EventsTab.createEvent");
 	}
 	@Override

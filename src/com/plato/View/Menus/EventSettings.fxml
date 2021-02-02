@@ -34,11 +34,11 @@
                 <Font name="AppleMyungjo Regular" size="16.0" />
             </font>
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#isMVPInGame" text="MVP of game " />
-                <MenuItem mnemonicParsing="false" onAction="#isLoginTimes" text="Logged in &quot;N&quot; times" />
-                <MenuItem mnemonicParsing="false" onAction="#isPlayTimes" text="Played a game &quot;N&quot; times" />
-                <MenuItem mnemonicParsing="false" onAction="#isWinTimes" text="Won a game &quot;N&quot; times" />
-                <MenuItem mnemonicParsing="false" onAction="#isWinTimesNonStop" text="&quot;N&quot; Consecutive wins" />
+                <MenuItem mnemonicParsing="false" onAction="#isMVPInGameWrite" text="MVP of game " />
+                <MenuItem mnemonicParsing="false" onAction="#isLoginTimesWrite" text="Logged in &quot;N&quot; times" />
+                <MenuItem mnemonicParsing="false" onAction="#isPlayTimeWrite" text="Played a game &quot;N&quot; times" />
+                <MenuItem mnemonicParsing="false" onAction="#isWinTimesWrite" text="Won a game &quot;N&quot; times" />
+                <MenuItem mnemonicParsing="false" onAction="#isWinTimesNonStopWrite" text="&quot;N&quot; Consecutive wins" />
             </items>
         </MenuButton>
     </VBox>
@@ -56,5 +56,5 @@
             <Font name="AppleMyungjo Regular" size="16.0" />
         </font>
     </MenuButton>
-    <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 40 40; -fx-background-radius: 20;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+    <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#closeStageWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 40 40; -fx-background-radius: 20;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
 </GridPane>
