@@ -9,6 +9,7 @@ import Controller.GameRelated.Reversi.ReversiController;
 import Controller.Menus.*;
 import Model.AccountRelated.Account;
 import Model.GameRelated.BattleSea.Ship;
+import Model.GameRelated.Game;
 import View.Client;
 import View.GameRelated.BattleSea.BattleSeaView;
 import com.google.gson.Gson;
@@ -141,6 +142,11 @@ class ClientHandler extends Thread {
                     break;
                 case "runGame" :
                     GameController.getInstance().runGame(receivedInfo[1] , receivedInfo[2]);
+                    break;
+                case "getAccount":
+                    account = Account.getAccount(receivedInfo[1]);
+                    dataOutputStream.writeUTF(new Gson().toJson(account));
+                    dataOutputStream.flush();
                     break;
 
             }
