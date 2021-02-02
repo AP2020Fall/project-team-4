@@ -20,8 +20,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.Socket;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,30 +48,10 @@ public class EventCreateOrEditPageController implements Initializable {
 	public GridPane mainGridPane;
 	public Label allErrors;
 	public LinkedList<Label> editButtons = new LinkedList<>();
-	private MouseEvent mouseEvent;
-	private  ActionEvent actionEvent;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static Socket socket;
 
-
-	public EventCreateOrEditPageController() {
-		this.mouseEvent = null;
-		this.actionEvent =null;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
 
 	public static void setStage (Stage stage) {
 		EventCreateOrEditPageController.stage = stage;
@@ -87,89 +70,65 @@ public class EventCreateOrEditPageController implements Initializable {
 		EventCreateOrEditPageController.event = event;
 	}
 
-	public void uploadImg () {
+	public void uploadImg (MouseEvent mouseEvent) {
 		// TODO: 1/14/2021 AD
 	}
-	public void uploadImgWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("EventCreateOrEditPage.uploadImg");
-	}
-	public void editTitle () {
+
+	public void editTitle (MouseEvent mouseEvent) {
 		titleTextField.setVisible(!titleTextField.isVisible());
-		((Label) getMouseEvent().getSource()).setText(titleTextField.isVisible() ? "cancel" : "edit");
+		((Label) mouseEvent.getSource()).setText(titleTextField.isVisible() ? "cancel" : "edit");
 		titleTextField.setText(title.getText());
-		editButtons.add(((Label) getMouseEvent().getSource()));
+		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-	public void editTitleWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("EventCreateOrEditPage.editTitle");
-	}
-	public void editGame () {
+
+	public void editGame (MouseEvent mouseEvent) {
 		gameEditMenu.setVisible(!gameEditMenu.isVisible());
-		((Label) getMouseEvent().getSource()).setText(gameEditMenu.isVisible() ? "cancel" : "edit");
+		((Label) mouseEvent.getSource()).setText(gameEditMenu.isVisible() ? "cancel" : "edit");
 		gameEditMenu.setText(event.getGameName());
-		editButtons.add(((Label) getMouseEvent().getSource()));
+		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-	public void editGameWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("EventCreateOrEditPage.editGame");
-	}
-	public void editStartDate () {
+
+	public void editStartDate (MouseEvent mouseEvent) {
 		startDatePicker.setVisible(!startDatePicker.isVisible());
-		((Label) getMouseEvent().getSource()).setText(startDatePicker.isVisible() ? "cancel" : "edit");
+		((Label) mouseEvent.getSource()).setText(startDatePicker.isVisible() ? "cancel" : "edit");
 		startDatePicker.setValue(LocalDate.parse(
 				start.getText(),
 				DateTimeFormatter.ofPattern("d MMM" + (event.getStart().getYear() != event.getEnd().getYear() ? " yyyy" : "")))
 		);
-		editButtons.add(((Label) getMouseEvent().getSource()));
+		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-	public void editStartDateWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("EventCreateOrEditPage.editStartDate");
-	}
-	public void editEndDate () {
+
+	public void editEndDate (MouseEvent mouseEvent) {
 		endDatePicker.setVisible(!endDatePicker.isVisible());
-		((Label) getMouseEvent().getSource()).setText(endDatePicker.isVisible() ? "cancel" : "edit");
+		((Label) mouseEvent.getSource()).setText(endDatePicker.isVisible() ? "cancel" : "edit");
 		endDatePicker.setValue(LocalDate.parse(
 				end.getText(),
 				DateTimeFormatter.ofPattern("d MMM" + (event.getStart().getYear() != event.getEnd().getYear() ? " yyyy" : "")))
 		);
-		editButtons.add(((Label) getMouseEvent().getSource()));
+		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-	public void editEndDateWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("EventCreateOrEditPage.editEndDateWrite");
-	}
-	public void editCoins () {
+
+	public void editCoins (MouseEvent mouseEvent) {
 		coinSplitMenu.setVisible(!coinSplitMenu.isVisible());
-		((Label) getMouseEvent().getSource()).setText(coinSplitMenu.isVisible() ? "cancel" : "edit");
+		((Label) mouseEvent.getSource()).setText(coinSplitMenu.isVisible() ? "cancel" : "edit");
 		coinSplitMenu.setText(coins.getText());
-		editButtons.add(((Label) getMouseEvent().getSource()));
+		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-	public void editCoinsWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("EventCreateOrEditPage.editCoins");
-	}
-	public void editDetails () {
+
+	public void editDetails (MouseEvent mouseEvent) {
 		detailsTextArea.setVisible(!detailsTextArea.isVisible());
-		((Label) getMouseEvent().getSource()).setText(detailsTextArea.isVisible() ? "cancel" : "edit");
+		((Label) mouseEvent.getSource()).setText(detailsTextArea.isVisible() ? "cancel" : "edit");
 		detailsTextArea.setText(details.getText());
-		editButtons.add(((Label) getMouseEvent().getSource()));
+		editButtons.add(((Label) mouseEvent.getSource()));
 	}
-	public void editDetailsWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("EventCreateOrEditPage.editDetails");
-	}
-	public void removeEvent () {
+
+	public void removeEvent (ActionEvent actionEvent) {
 		Event.removeEvent(event.getEventID());
 		mainGridPane.getChildren().clear();
 		mainGridPane.setVisible(false);
 	}
-	public void removeEventWrite(ActionEvent actionEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("EventCreateOrEditPage.removeEvent");
-	}
-	public void revertEdits () {
+
+	public void revertEdits (ActionEvent actionEvent) {
 		titleTextField.setVisible(false);
 		startDatePicker.setVisible(false);
 		endDatePicker.setVisible(false);
@@ -177,20 +136,19 @@ public class EventCreateOrEditPageController implements Initializable {
 		detailsTextArea.setVisible(false);
 		coinSplitMenu.setVisible(false);
 	}
-	public void revertEditsWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("EventCreateOrEditPage.removeEvent");
-	}
-	public void confirmEdits () {
+
+	public void confirmEdits (ActionEvent actionEvent) {
 		try {
 			if (titleTextField.isVisible()) {
-				try {
-					EventController.getInstance().editEvent(event, "title", titleTextField.getText());
-				} catch (EventController.StartDateTimeIsAfterEndException | MainController.InvalidFormatException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException e) {
-					allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
+				try {	dataOutputStream.writeUTF("editEvent");
+					// TODO: 2/2/2021
+					dataOutputStream.flush();
+					//EventController.getInstance().editEvent(event, "title", titleTextField.getText());
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-
 			}
+
 			if (gameEditMenu.isVisible()) {
 				try {
 					EventController.getInstance().editEvent(event, "game menu", gameEditMenu.getText());
@@ -244,17 +202,11 @@ public class EventCreateOrEditPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void confirmEditsWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("EventCreateOrEditPage.confirmEdit");
-	}
-	public void closeStage () {
+
+	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
-	public void closeStageWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("EventCreateOrEditPage.closeStage");
-	}
+
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
 		if (event != null && event.hasStarted())
@@ -395,7 +347,7 @@ public class EventCreateOrEditPageController implements Initializable {
 		detailsTextArea.setVisible(true);
 	}
 
-	public void createEvent () {
+	public void createEvent (ActionEvent actionEvent) {
 		try {
 			EventController.getInstance().createEvent(
 					titleTextField.getText(),
@@ -410,11 +362,8 @@ public class EventCreateOrEditPageController implements Initializable {
 			allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
 		}
 	}
-	public void createEventWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("EventCreateOrEditPage.createEvent");
-	}
-	public void openEventSettings () {
+
+	public void openEventSettings (ActionEvent actionEvent) {
 		try {
 			EventSettingsController.setIsForCreateOrEdit(title.getText().equals("-") || title.getText().isEmpty() || title.getText().isBlank());
 			Stage settingsStage = MainController.getInstance().createAndReturnNewStage(
@@ -428,9 +377,5 @@ public class EventCreateOrEditPageController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	public void openEventSettingsWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("EventCreateOrEditPage.openEventSetting");
 	}
 }

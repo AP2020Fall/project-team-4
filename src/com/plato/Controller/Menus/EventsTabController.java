@@ -26,8 +26,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.Socket;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -43,6 +46,10 @@ public class EventsTabController implements Initializable {
 	public GridPane gridPane;
 	private MouseEvent mouseEvent;
 	private ActionEvent actionEvent;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static Socket socket;
+
 
 	public EventsTabController() {
 		this.mouseEvent = null;
