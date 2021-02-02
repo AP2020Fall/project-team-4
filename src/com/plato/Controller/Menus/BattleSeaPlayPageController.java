@@ -80,7 +80,7 @@ public class BattleSeaPlayPageController implements Initializable {
 				exception.printStackTrace();
 			}
 
-			GameController.getInstance().setCurrentGameInSession(null);
+			//GameController.getInstance().setCurrentGameInSession(null);
 		});
 	}
 
