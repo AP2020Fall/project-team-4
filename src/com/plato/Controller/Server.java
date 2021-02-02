@@ -1,12 +1,15 @@
 package Controller;
 
 import Controller.AccountRelated.AccountController;
+import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.BattleSea.ShipController;
 import Controller.GameRelated.Reversi.ReversiController;
 import Controller.Menus.*;
+import Model.GameRelated.BattleSea.Ship;
 import View.Client;
 import View.GameRelated.BattleSea.BattleSeaView;
+import javafx.scene.layout.GridPane;
 
 import java.io.*;
 import java.net.*;
@@ -85,25 +88,17 @@ class ClientHandler extends Thread {
                    BombController.getInstance().throwBomb(x,y);
                    break;
 
-                //case"displayBoard":
-                    // TODO: 2/2/2021
-                   // BattleSeaView.getInstance().displayBoard();
-                   // break;
-
-              //  case"moveShip":
-
-                //  ShipController.getInstance().moveShip(x,y);
-                  //  break;
-
-                case"getCurrentAccLoggedIn":
-                    AccountController.getInstance().getCurrentAccLoggedIn();
+                case"displayBoard":
+                    BattleSeaView.getInstance().displayBoard(BattleSeaController.getInstance().getBoardAsStringBuilder(BattleSeaEditBoardPageController.getInstance().getCurrentBoard()));
                     break;
 
-                case"logOut":
-                    AccountController.getInstance().logout();
-                    break;
+//                case"moveShip":
+//                    //"moveShip_"+ (newX+1) + "_" + (newY+1))
+//                    x = Integer.parseInt(receivedInfo[1]);
+//                    y = Integer.parseInt(receivedInfo[2]);
+//                  ShipController.getInstance().moveShip(BattleSeaEditBoardPageController.getInstance().getCurrentBoard(),ship,x,y);
+//                    break;
             }
-
         }catch (IOException | BombController.CoordinateAlreadyBombedException e){
             System.out.println("connection closed!");
             e.printStackTrace();
