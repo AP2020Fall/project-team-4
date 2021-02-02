@@ -127,12 +127,15 @@ class ClientHandler extends Thread {
 
                     AccountController.getInstance().editAccField (receivedInfo[1],receivedInfo[2]);
                     break;
+                case "displayLogOfGame" :
+                    Controller.GameRelated.GameLogController.getInstance().displayLogOfGame(receivedInfo[1]);
+                    break;
 
                 case "changePWCommand" :
                     AccountController.getInstance().changePWCommand(receivedInfo[1],receivedInfo[2]);
                     break;
             }
-        }catch (IOException | BombController.CoordinateAlreadyBombedException e){
+        }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){
             System.out.println("connection closed!");
             e.printStackTrace();
         } catch (MainController.InvalidFormatException e) {
