@@ -83,7 +83,11 @@ public class ReversiGameController implements Initializable {
 		currentGame.updatePointProperties();
 
 		currentGame.hasPlayerMoved().addListener((observable, oldValue, newValue) -> {
-			updateAvailableCoordinates();
+			try {
+				updateAvailableCoordinates();
+			} catch (IOException exception) {
+				exception.printStackTrace();
+			}
 		});
 
 		player1 = (PlayerReversi) currentGame.getListOfPlayers().get(0); // b
@@ -100,7 +104,11 @@ public class ReversiGameController implements Initializable {
 
 		updateBoard();
 
-		updateAvailableCoordinates();
+		try {
+			updateAvailableCoordinates();
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
 	}
 
 	private void updatePoints () {
@@ -108,9 +116,9 @@ public class ReversiGameController implements Initializable {
 		pointsB.setText(String.valueOf(currentGame.pointsBProperty().get()));
 	}
 
-	public void updateAvailableCoordinates () {
-		dataOutputStream.writeUTF("displayAvaiableCoords");
-		ReversiController.getInstance().displayAvailableCoords();
+	public void updateAvailableCoordinates () throws IOException {
+		dataOutputStream.writeUTF("displayAvaiableCoords_");
+		//ReversiController.getInstance().displayAvailableCoords();
 
 		String[][] currentGameBoard = currentGame.getBoard();
 		for (int y = 0, currentGameBoardLength = currentGameBoard.length; y < currentGameBoardLength; y++)
@@ -161,14 +169,15 @@ public class ReversiGameController implements Initializable {
 		int index = board.getChildren().indexOf(mouseEvent.getSource());
 		try {
 			dataOutputStream.writeUTF("placeDisk_" + getXFrom1(index) + "_" + getYFrom1(index));
-			ReversiController.getInstance().placeDisk(getXFrom1(index), getYFrom1(index));
+			dataOutputStream.flush();
+			//ReversiController.getInstance().placeDisk(getXFrom1(index), getYFrom1(index));
 
 			showColorChanges();
 
 			confirmMoveBtn.setVisible(true);
 
 			currentGame.updatePointProperties();
-		} catch (ReversiController.PlayerHasAlreadyPlacedDiskException e) {
+		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -225,8 +234,10 @@ public class ReversiGameController implements Initializable {
 		}
 	}
 
-	public void confirmMove (ActionEvent actionEvent) {
-		ReversiController.getInstance().nextTurn();
+	public void confirmMove (ActionEvent actionEvent) throws IOException {
+		dataOutputStream.writeUTF("ReversinextTurn_");
+		dataOutputStream.flush();
+		//ReversiController.getInstance().nextTurn();
 
 		if (currentGame.gameHasEnded()) {
 			MainController.getInstance().saveEverything();
@@ -241,7 +252,9 @@ public class ReversiGameController implements Initializable {
 			updateAvailableCoordinates();
 
 			System.out.println("Move History");
-			ReversiController.getInstance().displayPrevMoves();
+			dataOutputStream.writeUTF("ReversiDisplayPrevMoves_");
+			dataOutputStream.flush();
+			//ReversiController.getInstance().displayPrevMoves();
 		}
 	}
 

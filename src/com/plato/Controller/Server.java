@@ -105,8 +105,22 @@ class ClientHandler extends Thread {
                 case "logOut" :
                     AccountController.getInstance().logout();
                     break;
+                case "displayAvaiableCoords" :
+                    ReversiController.getInstance().displayAvailableCoords();
+                    break;
+                case "placeDisk":
+                    x = Integer.parseInt(receivedInfo[1]);
+                    y = Integer.parseInt(receivedInfo[2]);
+                    ReversiController.getInstance().placeDisk(x,y);
+                    break;
+                case "ReversinextTurn" :
+                    ReversiController.getInstance().nextTurn();
+                    break;
+                case "ReversiDisplayPrevMoves" :
+                    ReversiController.getInstance().displayPrevMoves();
+                    break;
             }
-        }catch (IOException | BombController.CoordinateAlreadyBombedException e){
+        }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){
             System.out.println("connection closed!");
             e.printStackTrace();
         }
