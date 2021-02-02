@@ -60,7 +60,7 @@ public class FriendsTabController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		updateFrndListWrite(new ActionEvent());
+		updateFrndsListWrite(new ActionEvent());
 	}
 
 	public void updateFrndsList () {
@@ -125,7 +125,7 @@ public class FriendsTabController implements Initializable {
 			}});
 		}
 	}
-	public void updateFrndListWrite(ActionEvent actionEvent) {
+	public void updateFrndsListWrite(ActionEvent actionEvent) {
 		setActionEvent(actionEvent);
 		MainController.write("FriendsTab.updateFrndList");
 	}
