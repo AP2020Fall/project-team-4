@@ -156,7 +156,6 @@ class ClientHandler extends Thread {
                 case "removeFriend" :
                  GamerController.getInstance().removeFriend(receivedInfo[1]);
                     break;
-
             }
         }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){
             System.out.println("connection closed!");
