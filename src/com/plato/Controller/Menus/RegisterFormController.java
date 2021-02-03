@@ -16,6 +16,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -31,29 +33,8 @@ public class RegisterFormController implements Initializable {
 	public HBox coinHBox;
 	public GridPane mainGridPane;
 	private boolean isForAdmin;
-	private ActionEvent actionEvent;
-	private MouseEvent mouseEvent;
-
-	public RegisterFormController() {
-		this.actionEvent = null;
-		this.mouseEvent = null;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
+	private DataInputStream dataInputStream;
+	private DataOutputStream dataOutputStream;
 
 	public static void setPassword (String password) {
 		RegisterFormController.password = password;
@@ -98,17 +79,12 @@ public class RegisterFormController implements Initializable {
 		});
 	}
 
-	public void uploadPfp () {
+	public void uploadPfp (MouseEvent mouseEvent) {
 		System.out.println("RegisterFormController.uploadPfp");
 		MainController.openUploadPfpWindow(stage, pfp);
 	}
 
-	public void uploadPfpWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("RegisterForm.uploadPfp");
-	}
-
-	public void signUp () {
+	public void signUp (ActionEvent actionEvent) {
 
 		double money;
 		try {
@@ -151,35 +127,15 @@ public class RegisterFormController implements Initializable {
 		}
 	}
 
-	public void signUpWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("RegisterForm.signUp");
-	}
-
-	public void closeStage () {
+	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
 
-	public void closeStageWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("RegisterForm.closeStage");
-	}
-
-	public void mouseIsOver () {
+	public void mouseIsOver (MouseEvent mouseEvent) {
 		((Label) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOverWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("RegisterForm.mouseIsOver");
-	}
-
-	public void mouseIsOut () {
+	public void mouseIsOut (MouseEvent mouseEvent) {
 		((ImageView) mouseEvent.getSource()).setOpacity(1);
-	}
-
-	public void mouseIsOutWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("RegisterForm.mouseIsOut");
 	}
 }

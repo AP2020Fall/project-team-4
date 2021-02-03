@@ -3,19 +3,23 @@ package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
 import Controller.MainController;
+import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,33 +30,10 @@ public class GamesMenuController implements Initializable {
 	public Button battlseaButton;
 	public Button reversiButton;
 	public GridPane gridpane;
-	private ActionEvent actionEvent;
-	private MouseEvent mouseEvent;
+	private DataOutputStream dataOutputStream;
+	private DataInputStream dataInputStream;
+	private Object Account;
 
-
-	public GamesMenuController(ActionEvent actionEvent, MouseEvent mouseEvent) {
-		this.actionEvent = actionEvent;
-		this.mouseEvent = mouseEvent;
-	}
-
-	public GamesMenuController() {
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
 
 	public static void setIsForFaveGames (boolean forFaveGames) {
 		isForFaveGames = forFaveGames;
@@ -60,13 +41,12 @@ public class GamesMenuController implements Initializable {
 
 
 	public static void setStage (Stage stage) {
-
 		GamesMenuController.stage = stage;
 		GamesMenuController.stage.setOnCloseRequest(e -> GamesMenuController.stage = null);
 	}
 
 
-	public void battleSeaMainMenu () {
+	public void battleSeaMainMenu (ActionEvent actionEvent) {
 		try {
 			GameMenuController.setGameName("BattleSea");
 			Stage battleSeaMainMenu = MainController.getInstance().createAndReturnNewStage(
@@ -91,14 +71,12 @@ public class GamesMenuController implements Initializable {
 	}
 
 
-	public void battleSeaMainMenuWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GamesMenu.battleSeaMainMenu");
+	public void closeStage (ActionEvent actionEvent) {
+		stage.close();
+
 	}
 
-
-
-	public void reversiMainMenu () {
+	public void reversiMainMenu (ActionEvent actionEvent) {
 
 		try {
 
@@ -128,16 +106,22 @@ public class GamesMenuController implements Initializable {
 
 	}
 
-	public void reversiMainMenuWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GamesMenu.reversiMainMenu");
-	}
-
 	@Override
 
 	public void initialize (URL location, ResourceBundle resources) {
 
-		Gamer currentLoggedIn = ((Gamer) AccountController.getInstance().getCurrentAccLoggedIn());
+		try {
+			dataOutputStream.writeUTF("getCurrentAccLoggedIn");
+			dataOutputStream.flush();
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+		Gamer currentLoggedIn = null;
+		try {
+			currentLoggedIn = ((Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account));
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
 
 		if (isForFaveGames) {
 			if (!currentLoggedIn.getFaveGames().contains("BattleSea"))
@@ -150,30 +134,11 @@ public class GamesMenuController implements Initializable {
 		}
 	}
 
-	public void closeStage () {
-		stage.close();
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void closeStageWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("GamesMenu.closeStage");
-	}
-
-	public void mouseIsOver () {
-		((Label) getMouseEvent().getSource()).setOpacity(0.8);
-	}
-
-	public void mouseIsOverWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("GamesMenu.mouseIsOver");
-	}
-
-	public void mouseIsOut () {
-		((ImageView) getMouseEvent().getSource()).setOpacity(1);
-	}
-
-	public void mouseIsOutWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("GamesMenu.mouseIsOut");
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 }

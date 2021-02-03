@@ -1,12 +1,12 @@
 package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
-import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import Model.GameRelated.GameLog;
 import Model.GameRelated.Player;
+import com.google.gson.Gson;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -28,8 +27,11 @@ import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -38,35 +40,13 @@ public class GamingHistoryTabController implements Initializable {
     private static String gameName;
     private static Stage stage;
     private static Account account;
+
     public GridPane gameInfo;
     public ListView<GridPane> gamingHistoryList;
     public GridPane gameStats;
-    private ActionEvent actionEvent;
-    private MouseEvent mouseEvent;
-
-    public GamingHistoryTabController(ActionEvent actionEvent, MouseEvent mouseEvent) {
-        this.actionEvent = actionEvent;
-        this.mouseEvent = mouseEvent;
-    }
-
-    public GamingHistoryTabController() {
-    }
-
-    public ActionEvent getActionEvent() {
-        return actionEvent;
-    }
-
-    public void setActionEvent(ActionEvent actionEvent) {
-        this.actionEvent = actionEvent;
-    }
-
-    public MouseEvent getMouseEvent() {
-        return mouseEvent;
-    }
-
-    public void setMouseEvent(MouseEvent mouseEvent) {
-        this.mouseEvent = mouseEvent;
-    }
+    private DataInputStream dataInputStream;
+    private DataOutputStream dataOutputStream;
+    private Object Account;
 
     public static void setStage(Stage stage){
         GamingHistoryTabController.stage = stage;
@@ -79,12 +59,20 @@ public class GamingHistoryTabController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       updateListOfGamesWrite(new ActionEvent());
+        try {
+            updateListOfGames(new ActionEvent());
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
 
-    public void updateListOfGames(){
+    public void updateListOfGames(ActionEvent actionEvent) throws IOException {
         gamingHistoryList.getItems().clear();
-        Gamer currentAccLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+
+        dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
+        dataOutputStream.flush();
+        Gamer currentAccLoggedIn = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+        // TODO: 2/3/2021
         for(Game game : GameLog.getGameHistory(currentAccLoggedIn)){
             Circle circle = new Circle(40);
 
@@ -101,7 +89,7 @@ public class GamingHistoryTabController implements Initializable {
                     }});
 
 //                    ImageView icon = new ImageView() {{
-//                        if(game.getGameName().equals("Reversi")) setImage(MainController.getImageFromFile("src/com/Resources/Images/eyeVisible.png"));
+//                        if(game.getGameName().equals("Reversi")) setImage(i.imgur.com/lKOxPw8.png);
 //                        else if(game.getGameName().equals("BattleSea")) setImage();
 //                        setSmooth(true);
 //                        setPreserveRatio(true);
@@ -132,13 +120,6 @@ public class GamingHistoryTabController implements Initializable {
                 }});
         }
     }
-
-    public void updateListOfGamesWrite(ActionEvent actionEvent){
-        setActionEvent(actionEvent);
-        MainController.write("GamingHistoryTab.updateListOfGames");
-    }
-
-
 
 
     public void displayGameInfo(Game game){
