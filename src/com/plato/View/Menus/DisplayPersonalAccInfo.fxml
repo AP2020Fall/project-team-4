@@ -29,15 +29,15 @@
     <padding>
         <Insets bottom="12.5" left="12.5" right="12.5" top="12.5" />
     </padding>
-    <Button maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeStageWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+    <Button maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
     <ImageView fx:id="pfp" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-    <ImageView fx:id="uploadPfp" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadPfpWrite" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+    <ImageView fx:id="uploadPfp" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadPfp" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
         <GridPane.margin>
             <Insets left="200.0" />
         </GridPane.margin>
-      <image>
-         <Image url="@../../../Resources/Images/addButton.png" />
-      </image>
+        <image>
+            <Image url="@../../../Resources/Images/addButton.png" />
+        </image>
     </ImageView>
     <HBox alignment="CENTER" spacing="10.0" GridPane.rowIndex="1">
         <VBox alignment="CENTER" layoutX="306.0" layoutY="10.0" spacing="10.0">
@@ -64,7 +64,7 @@
                     </font>
                 </TextField>
             </GridPane>
-            <Label onMouseClicked="#editFirstNameWrite" text="edit" textFill="RED">
+            <Label onMouseClicked="#editFirstName" text="edit" textFill="RED">
                 <font>
                     <Font name="Arial" size="11.0" />
                 </font>
@@ -98,7 +98,7 @@
                     </font>
                 </TextField>
             </GridPane>
-            <Label onMouseClicked="#editLastNameWrite" text="edit" textFill="RED">
+            <Label onMouseClicked="#editLastName" text="edit" textFill="RED">
                 <font>
                     <Font name="Arial" size="11.0" />
                 </font>
@@ -132,7 +132,7 @@
                 </font>
             </TextField>
         </GridPane>
-        <Label onMouseClicked="#editUsernameWrite" text="edit" textFill="RED">
+        <Label onMouseClicked="#editUsername" text="edit" textFill="RED">
             <font>
                 <Font name="Arial" size="11.0" />
             </font>
@@ -166,7 +166,7 @@
                     </font>
                 </TextField>
             </GridPane>
-            <Label onMouseClicked="#editEmailWrite" text="edit" textFill="RED">
+            <Label onMouseClicked="#editEmail" text="edit" textFill="RED">
                 <font>
                     <Font name="Arial" size="11.0" />
                 </font>
@@ -200,7 +200,7 @@
                     </font>
                 </TextField>
             </GridPane>
-            <Label onMouseClicked="#editPhoneNumWrite" text="edit" textFill="RED">
+            <Label onMouseClicked="#editPhoneNum" text="edit" textFill="RED">
                 <font>
                     <Font name="Arial" size="11.0" />
                 </font>
@@ -217,23 +217,23 @@
             </font>
         </Label>
         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Resources/Images/coin.png" />
-         </image>
+            <image>
+                <Image url="@../../../Resources/Images/coin.png" />
+            </image>
         </ImageView>
     </HBox>
-   <HBox alignment="CENTER_RIGHT" spacing="25.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-      <children>
-          <Button mnemonicParsing="false" onAction="#confirmAllEditsWrite" style="-fx-background-radius: 15;" text="Confirm&#10;All Edits" textAlignment="CENTER">
-              <font>
-                  <Font name="Arial Bold" size="19.0" />
-              </font>
-          </Button>
-          <Label fx:id="allError" minHeight="90.0" minWidth="200.0" textFill="#06b5e1">
-              <font>
-                  <Font name="Arial" size="11.0" />
-              </font>
-          </Label>
-      </children>
-   </HBox>
+    <HBox alignment="CENTER_RIGHT" spacing="25.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+        <children>
+            <Button mnemonicParsing="false" onAction="#confirmAllEdits" style="-fx-background-radius: 15;" text="Confirm&#10;All Edits" textAlignment="CENTER">
+                <font>
+                    <Font name="Arial Bold" size="19.0" />
+                </font>
+            </Button>
+            <Label fx:id="allError" minHeight="90.0" minWidth="200.0" textFill="#06b5e1">
+                <font>
+                    <Font name="Arial" size="11.0" />
+                </font>
+            </Label>
+        </children>
+    </HBox>
 </GridPane>

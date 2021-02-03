@@ -46,12 +46,12 @@
         <Label fx:id="usernameError" minHeight="30.0" minWidth="80.0" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
         <Label fx:id="passwordError" minHeight="30.0" minWidth="80.0" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
         <HBox alignment="CENTER" spacing="20.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
-            <Button mnemonicParsing="false" onAction="#closeStageWrite" text="Cancel">
+            <Button mnemonicParsing="false" onAction="#closeStage" text="Cancel">
                 <font>
                     <Font name="Arial" size="15.0" />
                 </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#removeAccountWrite" text="Remove Account">
+            <Button mnemonicParsing="false" onAction="#removeAccount" text="Remove Account">
                 <font>
                     <Font name="Arial" size="15.0" />
                 </font>
