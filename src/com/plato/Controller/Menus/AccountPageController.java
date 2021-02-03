@@ -6,6 +6,7 @@ import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.GameLog;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +22,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,35 +39,11 @@ public class AccountPageController implements Initializable {
 	public Label lvlBattleSea, playedBattlesea, pointsBattlesea, winsBattlesea, drawsBattlesea, lossesBattlesea;
 	public Label lvlReversi, playedReversi, pointsReversi, winsReversi, drawsReversi, lossesReversi;
 	public GridPane mainGridPane;
-	private ActionEvent actionEvent;
-	private MouseEvent mouseEvent;
 	private static DataOutputStream dataOutputStream;
 	private static DataInputStream dataInputStream;
 	private static Socket socket;
+	private Object Account;
 
-	public AccountPageController() {
-		this.actionEvent = null;
-		this.mouseEvent = null;
-	}
-
-
-
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		AccountPageController.gamerOrAdmin = gamerOrAdmin;
@@ -75,17 +53,17 @@ public class AccountPageController implements Initializable {
 
 	public void initialize (URL location, ResourceBundle resources) {
 		try {
-			dataOutputStream.writeUTF("getCurrentAccLoggedIn");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
+			dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
 			dataOutputStream.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Account currentLoggedIn = AccountController.getInstance().getCurrentAccLoggedIn();
-// TODO: 2/2/2021
+		Account currentLoggedIn = null;
+		try {
+			currentLoggedIn = new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
 		pfp.setImage(new Image(currentLoggedIn.getPfpUrl()));
 		username.setText(currentLoggedIn.getUsername());
 
@@ -133,7 +111,7 @@ public class AccountPageController implements Initializable {
 		}
 	}
 
-	public void logout () throws IOException {
+	public void logout (MouseEvent actionEvent) throws IOException {
 		dataOutputStream.writeUTF("logOut");
 		dataOutputStream.flush();
 		//AccountController.getInstance().logout();
@@ -154,19 +132,12 @@ public class AccountPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void logoutWrite(MouseEvent actionEvent) {
 
-		setMouseEvent(mouseEvent);
-		MainController.write("AccountPage.logout");
-	}
-
-	public void uploadPfp () {
+	public void uploadPfp (MouseEvent mouseEvent) {
 		MainController.openUploadPfpWindow(MainController.getInstance().getPrimaryStage(), pfp);
 	}
-	public void uploadPfpWrite(MouseEvent mouseEvent) {setMouseEvent(mouseEvent);
-		MainController.write("AccountPage.uploadPfp");
-	}
-	public void editPassword () {
+
+	public void editPassword (MouseEvent mouseEvent) {
 		try {
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/EditPW.fxml").toURI().toURL()),
@@ -180,11 +151,8 @@ public class AccountPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void editPasswordWrite(MouseEvent actionEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("AccountPage.editPassword");
-	}
-	public void displayPersonalInfo () {
+
+	public void displayPersonalInfo (MouseEvent mouseEvent) {
 		try {
 			DisplayPersonalAccInfoController.setAccount(AccountController.getInstance().getCurrentAccLoggedIn());
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
@@ -199,40 +167,28 @@ public class AccountPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void displayPersonalInfoWrite(MouseEvent actionEvent) {
-		MainController.write("AccountPage.displayPersonalInfo");
-	}
-	public void changeDropDownMenuVisibility () {
+
+	public void changeDropDownMenuVisibility (MouseEvent mouseEvent) {
 		dropDownMenu.setVisible(!dropDownMenu.isVisible());
 	}
-	public void changeDropDownMenuVisibilityWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("AccountPage.changeDropDownMenuVisibility");
-	}
-	public void mouseIsOut () {
-		if (getMouseEvent().getSource() instanceof Label)
-			((Label) getMouseEvent().getSource()).setOpacity(1);
 
-		else if (getMouseEvent().getSource() instanceof ImageView)
-			((ImageView) getMouseEvent().getSource()).setOpacity(1);
-	}
-	public void mouseIsOutWrite() {
-		setMouseEvent(mouseEvent);
-		MainController.write("AccountPage.mouseIsOut");
-	}
-	public void mouseIsOver () {
-		if (getMouseEvent().getSource() instanceof Label)
-			((Label) getMouseEvent().getSource()).setOpacity(0.8);
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Label)
+			((Label) mouseEvent.getSource()).setOpacity(1);
 
-		else if (getMouseEvent().getSource() instanceof ImageView)
-			((ImageView) getMouseEvent().getSource()).setOpacity(0.8);
-	}
-	public void mouseIsOverWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("AccountPage.mouseIsOver");
+		else if (mouseEvent.getSource() instanceof ImageView)
+			((ImageView) mouseEvent.getSource()).setOpacity(1);
 	}
 
-	public void openReversiMainMenu () {
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Label)
+			((Label) mouseEvent.getSource()).setOpacity(0.8);
+
+		else if (mouseEvent.getSource() instanceof ImageView)
+			((ImageView) mouseEvent.getSource()).setOpacity(0.8);
+	}
+
+	public void openReversiMainMenu (MouseEvent mouseEvent) {
 		try {
 			GameMenuController.setGameName("Reversi");
 			Stage reversiMainMenu = MainController.getInstance().createAndReturnNewStage(
@@ -247,10 +203,8 @@ public class AccountPageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void openReversiMainMenuWrite(MouseEvent mouseEvent) {
-		MainController.write("AccountPage.openReversiMainMenu");
-	}
-	public void openBattleSeaMainMenu () {
+
+	public void openBattleSeaMainMenu (MouseEvent mouseEvent) {
 		try {
 			GameMenuController.setGameName("BattleSea");
 			Stage battleSeaMainMenu = MainController.getInstance().createAndReturnNewStage(
@@ -264,8 +218,5 @@ public class AccountPageController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}public void openBattleSeaMainMenuWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("AccountPage.openBattleSeaMainMenu");
 	}
 }

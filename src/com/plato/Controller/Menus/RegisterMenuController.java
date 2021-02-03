@@ -11,10 +11,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -27,29 +28,8 @@ public class RegisterMenuController implements Initializable {
 	public PasswordField pwFieldpwHidden;
 	public TextField pwFieldpwShown, usernameTxtFld;
 	public Label usernameError, AdminGamerTitle, passwordError;
-	private ActionEvent actionEvent;
-	private MouseEvent mouseEvent;
-
-	public RegisterMenuController() {
-		this.actionEvent = null;
-		this.mouseEvent = null;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
+	private DataOutputStream dataOutputStream;
+	private DataInputStream dataInputStream;
 
 	public static Stage getStage () {
 		return stage;
@@ -99,24 +79,12 @@ public class RegisterMenuController implements Initializable {
 		showPwOrNot.toFront();
 	}
 
-	public void signUp () {
+	public void signUp (ActionEvent actionEvent) throws IOException {
 
 		String password = (showPwOrNot.getImage().getUrl().contains("invisible") ? pwFieldpwShown : pwFieldpwHidden).getText();
-		try {
-			AccountController.getInstance().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
-		} catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
-			usernameError.setText(e.getMessage());
-			return;
-		} catch (MainController.InvalidFormatException e) {
-			if (e.getMessage().toLowerCase().startsWith("username")) {
-				usernameError.setText(e.getMessage());
-				return;
-			}
-			if (e.getMessage().toLowerCase().startsWith("password")) {
-				passwordError.setText(e.getMessage());
-				return;
-			}
-		}
+		dataOutputStream.writeUTF("register_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _0");
+		dataOutputStream.flush();
+		//AccountController.getInstance().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
 		try {
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterForm.fxml").toURI().toURL()),
@@ -132,10 +100,5 @@ public class RegisterMenuController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void signUpWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("RegisterMenu.signUp");
 	}
 }
