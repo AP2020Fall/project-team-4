@@ -184,6 +184,6 @@
                 </Label>
             </GridPane>
         </GridPane>
-      <ImageView fx:id="pfp" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <ImageView fx:id="pfp" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
     </GridPane>
 </AnchorPane>

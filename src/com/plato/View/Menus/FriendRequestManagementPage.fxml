@@ -15,8 +15,8 @@
         <RowConstraints vgrow="SOMETIMES"/>
     </rowConstraints>
     <Button layoutX="540.0" layoutY="103.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0"
-            mnemonicParsing="false" onAction="#closeStage" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite"
-            style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 60 60; -fx-background-radius: 30;">
+            mnemonicParsing="false" onAction="#closeStage" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut"
+            style="-fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 60 60; -fx-background-radius: 30;">
         <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
         </GridPane.margin>
@@ -50,7 +50,7 @@
                 <Font name="Arial" size="25.0"/>
             </font>
         </Label>
-        <Label fx:id="clearSearch" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" text="x"
+        <Label fx:id="clearSearch" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" text="x"
                GridPane.columnIndex="2">
             <font>
                 <Font name="System Italic" size="19.0"/>
@@ -62,16 +62,16 @@
         <ListView fx:id="availableForFrndReqList" style="-fx-background-radius: 10;" GridPane.columnSpan="3"
                   GridPane.rowIndex="1"/>
         <Button maxHeight="35.0" maxWidth="35.0" minHeight="35.0" minWidth="35.0" mnemonicParsing="false"
-                onAction="#closeFriendReqSendingWindow" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite"
-                style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-size: 35 35; -fx-background-radius: 17.5;">
+                onAction="#closeFriendReqSendingWindow" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut"
+                style="-fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 35 35; -fx-background-radius: 17.5;">
             <GridPane.margin>
                 <Insets left="5.0" top="5.0"/>
             </GridPane.margin>
         </Button>
     </GridPane>
     <Button maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false"
-            onAction="#sendFriendReq" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite"
-            style="-fx-background-image: url(&quot;https://i.imgur.com/iHRpKIE.png&quot;); -fx-background-size: 60 60; -fx-background-radius: 30;"
+            onAction="#sendFriendReq" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut"
+            style="-fx-background-image: url(&quot;@../../../Resources/Images/addButton.png&quot;); -fx-background-size: 60 60; -fx-background-radius: 30;"
             GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
         <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
