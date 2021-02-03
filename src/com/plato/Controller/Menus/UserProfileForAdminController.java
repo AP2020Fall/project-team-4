@@ -1,7 +1,6 @@
 package Controller.Menus;
 
 import Controller.AccountRelated.MessageController;
-import Controller.MainController;
 import Model.AccountRelated.AdminGameReco;
 import Model.AccountRelated.Gamer;
 import javafx.event.ActionEvent;
@@ -15,6 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,32 +28,22 @@ public class UserProfileForAdminController implements Initializable {
 	public TextArea msg;
 	public GridPane msgGrdPn;
 	public Button backBtn, sendBtn;
-	private ActionEvent actionEvent;
-	private MouseEvent mouseEvent;
+	private static UserProfileForAdminController userProfileForAdminController;
+	private DataInputStream dataInputStream;
+	private DataOutputStream dataOutputStream;
 
-	public UserProfileForAdminController() {
-		this.actionEvent = null;
-		this.mouseEvent = null;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
+	public static UserProfileForAdminController getInstance(){
+		if(userProfileForAdminController == null)
+			userProfileForAdminController = new UserProfileForAdminController();
+		return userProfileForAdminController;
 	}
 
 	public static void setGamer (Gamer gamer) {
 		UserProfileForAdminController.gamer = gamer;
+	}
+
+	public static Gamer getGamer() {
+		return gamer;
 	}
 
 	@Override
@@ -80,54 +72,31 @@ public class UserProfileForAdminController implements Initializable {
 		});
 	}
 
-	public void sendMsg () {
+	public void sendMsg (ActionEvent actionEvent) {
 		msgGrdPn.setVisible(true);
 	}
 
-	public void sendMsgWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("UserProfileForAdmin.sendMsg");
-	}
-
-	public void sendMessageDone () {
+	public void sendMessageDone (ActionEvent actionEvent) {
 		try {
-			MessageController.getInstance().sendMsg(gamer, msg.getText());
-			cancelSendingWrite(getActionEvent());
-		} catch (MessageController.EmptyMessageException e) {
+			dataOutputStream.writeUTF("sendMsg_" + msg.getText());
+			dataOutputStream.flush();
+			//MessageController.getInstance().sendMsg(gamer, msg.getText());
+			cancelSendingMsg(actionEvent);
+		} catch (IOException e) {
 			messageError.setText(e.getMessage());
 		}
 	}
 
-	public void sendMessageDoneWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("UserProfileForAdmin.sendMessageDone");
-	}
-
-	public void cancelSendingMsg () {
+	public void cancelSendingMsg (ActionEvent actionEvent) {
 		msgGrdPn.setVisible(false);
 		msg.setText("");
 	}
 
-	public void cancelSendingWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("UserProfileForAdmin.cancelSending");
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOver () {
-		((Button) getMouseEvent().getSource()).setOpacity(0.8);
-	}
-
-	public void mouseIsOverWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("UserProfileForAdmin.mouseIsOver");
-	}
-
-	public void mouseIsOut () {
-		((Button) getMouseEvent().getSource()).setOpacity(1);
-	}
-
-	public void mouseIsOutWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("UserProfileForAdmin.mouseIsOut");
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 }

@@ -3,6 +3,7 @@ package Controller;
 import Controller.AccountRelated.AccountController;
 import Controller.AccountRelated.EventController;
 import Controller.AccountRelated.GamerController;
+import Controller.AccountRelated.MessageController;
 import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.BattleSea.ShipController;
@@ -15,6 +16,8 @@ import Model.GameRelated.Game;
 import View.Client;
 import View.GameRelated.BattleSea.BattleSeaView;
 import com.google.gson.Gson;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import Controller.AccountRelated.AccountController;
 
@@ -153,7 +156,16 @@ class ClientHandler extends Thread {
                 case "login" :
                     AccountController.getInstance().login(receivedInfo[1] , receivedInfo[2] , receivedInfo[3].equals("true"));
                     break;
-
+                case "register" :
+//                    public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney)
+                    Image pfp = null;
+                    double initMoney = Double.parseDouble(receivedInfo[8]);
+                    if(receivedInfo[1].equals("null")){pfp=null;}
+                    AccountController.getInstance().register(pfp,receivedInfo[2],receivedInfo[3],receivedInfo[4],receivedInfo[5],receivedInfo[6],receivedInfo[7],initMoney);
+                    break;
+                case "sendMsg" :
+                    MessageController.getInstance().sendMsg(UserProfileForAdminController.getGamer(), receivedInfo[1]);
+                    break;
                 case "removeFriend" :
                  GamerController.getInstance().removeFriend(receivedInfo[1]);
 
@@ -164,7 +176,7 @@ class ClientHandler extends Thread {
 
 
 
-            }
+                }
         }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){
             System.out.println("connection closed!");
             e.printStackTrace();
@@ -180,6 +192,8 @@ class ClientHandler extends Thread {
         } catch (GameController.CantPlayWithYourselfException e) {
             e.printStackTrace();
         } catch (GameController.CantPlayWithAdminException e) {
+            e.printStackTrace();
+        } catch (MessageController.EmptyMessageException e) {
             e.printStackTrace();
         }
     }

@@ -2,6 +2,7 @@ package Controller.Menus;
 
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
+import com.google.gson.Gson;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
@@ -21,8 +22,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -31,6 +35,9 @@ public class UsersTabController implements Initializable {
 	public Label clearSearch;
 	public ListView<GridPane> accountsList;
 	public Pane profile;
+	private DataOutputStream dataOutputStream;
+	private DataInputStream dataInputStream;
+	private Object Account;
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
@@ -46,6 +53,7 @@ public class UsersTabController implements Initializable {
 	private void updateAccountsList () {
 		accountsList.getItems().clear();
 
+		// TODO: 2/3/2021
 		for (Gamer gamer : Gamer.getGamers(Gamer.getGamers(), search.getText())) {
 			Circle circle = new Circle(50);
 
@@ -90,7 +98,10 @@ public class UsersTabController implements Initializable {
 	private void displayGamerProfile (String username) {
 		try {
 			profile.getChildren().clear();
-			UserProfileForAdminController.setGamer((Gamer) Account.getAccount(username));
+			dataOutputStream.writeUTF("getAccount_" + username);
+			dataOutputStream.flush();
+			Gamer gamer = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+			UserProfileForAdminController.setGamer(gamer);
 			profile.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/UserProfileForAdmin.fxml").toURI().toURL()));
 			GridPane.setValignment(profile.getChildren().get(0), VPos.CENTER);
 			GridPane.setHalignment(profile.getChildren().get(0), HPos.CENTER);

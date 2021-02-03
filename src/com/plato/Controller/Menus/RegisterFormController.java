@@ -92,6 +92,7 @@ public class RegisterFormController implements Initializable {
 		} catch (NumberFormatException e) { money = 0; }
 
 		try {
+			// TODO: 2/3/2021
 			AccountController.getInstance().register(pfp.getImage(), username, password, firstName.getText(), lastName.getText(), email.getText(), phoneNum.getText(), money);
 		} catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
 			return;
