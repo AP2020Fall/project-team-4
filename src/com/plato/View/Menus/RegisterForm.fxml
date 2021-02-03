@@ -37,7 +37,7 @@
     </Label>
     <TextField fx:id="firstName" promptText="First Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     <Label fx:id="firstNameError" minHeight="30.0" minWidth="80.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-    <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadPfpWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+    <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadPfp" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
         <GridPane.margin>
             <Insets bottom="15.0" />
         </GridPane.margin>
@@ -78,12 +78,12 @@
         <padding>
             <Insets top="20.0" />
         </padding>
-        <Button mnemonicParsing="false" onAction="#closeStageWrite" text="Cancel">
+        <Button mnemonicParsing="false" onAction="#closeStage" text="Cancel">
             <font>
                 <Font name="Arial" size="14.0" />
             </font>
         </Button>
-        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#signUpWrite" text="Sign-up">
+        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#signUp" text="Sign-up">
             <font>
                 <Font name="Arial" size="14.0" />
             </font>
