@@ -3,10 +3,12 @@ package Controller.Menus;
 import Controller.AccountRelated.AccountController;
 import Controller.AccountRelated.EventController;
 import Controller.MainController;
+import Model.AccountRelated.Account;
 import Model.AccountRelated.Admin;
 import Model.AccountRelated.Event;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +26,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.URL;
 import java.time.LocalDate;
@@ -51,6 +54,7 @@ public class EventCreateOrEditPageController implements Initializable {
 	private static DataOutputStream dataOutputStream;
 	private static DataInputStream dataInputStream;
 	private static Socket socket;
+	private Object Account;
 
 
 	public static void setStage (Stage stage) {
@@ -60,6 +64,14 @@ public class EventCreateOrEditPageController implements Initializable {
 
 	public static void setIsForCreateOrInfo (boolean isForCreateOrInfo) {
 		EventCreateOrEditPageController.isForCreateOrInfo = isForCreateOrInfo;
+	}
+
+	public DatePicker getStartDatePicker() {
+		return startDatePicker;
+	}
+
+	public DatePicker getEndDatePicker() {
+		return endDatePicker;
 	}
 
 	public static Event getEvent () {
@@ -122,8 +134,10 @@ public class EventCreateOrEditPageController implements Initializable {
 		editButtons.add(((Label) mouseEvent.getSource()));
 	}
 
-	public void removeEvent (ActionEvent actionEvent) {
-		Event.removeEvent(event.getEventID());
+	public void removeEvent (ActionEvent actionEvent) throws IOException {
+		dataOutputStream.writeUTF("removeEvent_" + event.getEventID());
+		dataOutputStream.flush();
+		//Event.removeEvent(event.getEventID());
 		mainGridPane.getChildren().clear();
 		mainGridPane.setVisible(false);
 	}
@@ -137,70 +151,50 @@ public class EventCreateOrEditPageController implements Initializable {
 		coinSplitMenu.setVisible(false);
 	}
 
-	public void confirmEdits (ActionEvent actionEvent) {
-		try {
-			if (titleTextField.isVisible()) {
-				try {	dataOutputStream.writeUTF("editEvent");
-					// TODO: 2/2/2021
-					dataOutputStream.flush();
-					//EventController.getInstance().editEvent(event, "title", titleTextField.getText());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
-			if (gameEditMenu.isVisible()) {
-				try {
-					EventController.getInstance().editEvent(event, "game menu", gameEditMenu.getText());
-				} catch (EventController.StartDateTimeIsAfterEndException | MainController.InvalidFormatException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException e) {
-					allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
-				}
-			}
-
-			if (coinSplitMenu.isVisible()) {
-				try {
-					EventController.getInstance().editEvent(event, "prize", coinSplitMenu.getText());
-				} catch (EventController.StartDateTimeIsAfterEndException | MainController.InvalidFormatException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException e) {
-					allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
-				}
-			}
-
-			if (detailsTextArea.isVisible()) {
-				try {
-					EventController.getInstance().editEvent(event, "details", detailsTextArea.getText());
-				} catch (EventController.StartDateTimeIsAfterEndException | MainController.InvalidFormatException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException e) {
-					allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
-				}
-			}
-
-			if (startDatePicker.isVisible()) {
-				try {
-					EventController.getInstance().editEvent(
-							event, "start date", startDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy"))
-					);
-				} catch (EventController.StartDateTimeIsAfterEndException | MainController.InvalidFormatException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException e) {
-					allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
-				}
-			}
-
-			if (endDatePicker.isVisible()) {
-				try {
-					EventController.getInstance().editEvent(
-							event, "end date", endDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy"))
-					);
-				} catch (EventController.StartDateTimeIsAfterEndException | MainController.InvalidFormatException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException e) {
-					allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
-				}
-			}
-
+	public void confirmEdits (ActionEvent actionEvent) throws IOException {
+		if (titleTextField.isVisible()) {
 			try {
-				EventController.getInstance().editEvent(event, "pic-url", eventImg.getImage().getUrl());
-			} catch (EventController.StartDateTimeIsAfterEndException | MainController.InvalidFormatException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException e) {
-				allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
+				dataOutputStream.writeUTF("editEvent_title_" + titleTextField.getText());
+				dataOutputStream.flush();
+				//EventController.getInstance().editEvent(event, "title", titleTextField.getText());
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (EventController.CantEditInSessionEventException e) {
-			e.printStackTrace();
 		}
+
+		if (gameEditMenu.isVisible()) {
+			dataOutputStream.writeUTF("editEvent_game menu_" + gameEditMenu.getText());
+			dataOutputStream.flush();
+			//EventController.getInstance().editEvent(event, "game menu", gameEditMenu.getText());
+		}
+
+		if (coinSplitMenu.isVisible()) {
+			dataOutputStream.writeUTF("editEvent_prize_" + coinSplitMenu.getText());
+			dataOutputStream.flush();
+			//EventController.getInstance().editEvent(event, "prize", coinSplitMenu.getText());
+		}
+
+		if (detailsTextArea.isVisible()) {
+			dataOutputStream.writeUTF("editEvent_details_" + detailsTextArea.getText());
+			dataOutputStream.flush();
+			//		EventController.getInstance().editEvent(event, "details", detailsTextArea.getText());
+		}
+
+		if (startDatePicker.isVisible()) {
+			dataOutputStream.writeUTF("editEvent_start date_" + startDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")));
+			dataOutputStream.flush();
+			//EventController.getInstance().editEvent(event, "start date", startDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")));
+		}
+
+		if (endDatePicker.isVisible()) {
+			dataOutputStream.writeUTF("editEvent_end date_" + endDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")));
+			dataOutputStream.flush();
+			//		EventController.getInstance().editEvent(event, "end date", endDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")));
+		}
+
+		dataOutputStream.writeUTF("editEvent_pic-url_" + eventImg.getImage().getUrl());
+		dataOutputStream.flush();
+		//EventController.getInstance().editEvent(event, "pic-url", eventImg.getImage().getUrl());
 	}
 
 	public void closeStage (ActionEvent actionEvent) {
@@ -209,8 +203,13 @@ public class EventCreateOrEditPageController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
-		if (event != null && event.hasStarted())
-			makeEventUnEditableAndUnremovable();
+		if (event != null && event.hasStarted()) {
+			try {
+				makeEventUnEditableAndUnremovable();
+			} catch (IOException exception) {
+				exception.printStackTrace();
+			}
+		}
 
 		if (isForCreateOrInfo || (!isForCreateOrInfo && AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin)) {
 			mainGridPane.getChildren().remove(gameHbox);
@@ -246,7 +245,11 @@ public class EventCreateOrEditPageController implements Initializable {
 			topButtonsHbox.getChildren().removeAll(removeEventBtn, howToWinPrize, eventSettingsBtn);
 			mainGridPane.getRowConstraints().remove(2);
 			displayAllEditableParts();
-			makeEventUnEditableAndUnremovable();
+			try {
+				makeEventUnEditableAndUnremovable();
+			} catch (IOException exception) {
+				exception.printStackTrace();
+			}
 		}
 
 		else {
@@ -258,7 +261,11 @@ public class EventCreateOrEditPageController implements Initializable {
 
 			// gamer cant edit or delete
 			if (isForGamerOrAdmin) {
-				makeEventUnEditableAndUnremovable();
+				try {
+					makeEventUnEditableAndUnremovable();
+				} catch (IOException exception) {
+					exception.printStackTrace();
+				}
 				mainGridPane.getChildren().remove(eventSettingsBtn);
 			}
 			else {
@@ -268,7 +275,7 @@ public class EventCreateOrEditPageController implements Initializable {
 		}
 	}
 
-	private void makeEventUnEditableAndUnremovable () {
+	private void makeEventUnEditableAndUnremovable () throws IOException {
 		downBtnsHbox.getChildren().remove(1, 6);
 		topButtonsHbox.getChildren().removeAll(closeStageBtn, removeEventBtn);
 		mainGridPane.getChildren().remove(uploadEventImg);
@@ -287,19 +294,42 @@ public class EventCreateOrEditPageController implements Initializable {
 								.forEach(vBox -> vBox.getChildren().remove(vBox.getChildren().size() - 1)));
 	}
 
-	private void updateJoinOrDropOutBtn () {
-		if (event.participantExists(AccountController.getInstance().getCurrentAccLoggedIn().getUsername())) {
+	private void updateJoinOrDropOutBtn () throws IOException {
+		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
+		dataOutputStream.flush();
+		Account account = new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+		if (event.participantExists(account.getUsername())) {
 			joinOrDropoutEventBtn.setText("Drop-out");
 			joinOrDropoutEventBtn.setOnAction(e -> {
-				EventController.getInstance().stopParticipatingInEvent(event.getEventID());
-				updateJoinOrDropOutBtn();
+				try {
+					dataOutputStream.writeUTF("stopParticipatingInEvent_" + event.getEventID());
+					dataOutputStream.flush();
+				} catch (IOException exception) {
+					exception.printStackTrace();
+				}
+			//	EventController.getInstance().stopParticipatingInEvent(event.getEventID());
+				try {
+					updateJoinOrDropOutBtn();
+				} catch (IOException exception) {
+					exception.printStackTrace();
+				}
 			});
 		}
 		else {
 			joinOrDropoutEventBtn.setText("Join");
 			joinOrDropoutEventBtn.setOnAction(e -> {
-				EventController.getInstance().participateInEvent(event.getEventID());
-				updateJoinOrDropOutBtn();
+				try {
+					dataOutputStream.writeUTF("participateInEvent_" + event.getEventID());
+					dataOutputStream.flush();
+				} catch (IOException exception) {
+					exception.printStackTrace();
+				}
+			//	EventController.getInstance().participateInEvent(event.getEventID());
+				try {
+					updateJoinOrDropOutBtn();
+				} catch (IOException exception) {
+					exception.printStackTrace();
+				}
 			});
 		}
 	}
@@ -349,16 +379,25 @@ public class EventCreateOrEditPageController implements Initializable {
 
 	public void createEvent (ActionEvent actionEvent) {
 		try {
-			EventController.getInstance().createEvent(
-					titleTextField.getText(),
-					gameEditMenu.getText(),
-					eventImg.getImage().getUrl(),
-					startDatePicker.getValue(),
-					endDatePicker.getValue(),
-					Double.parseDouble(coinSplitMenu.getText()),
-					detailsTextArea.getText()
+		//	String title, String gameName, String picUrl, LocalDate start, LocalDate end, double eventPrize, String details
+			dataOutputStream.writeUTF("createEvent_"
+					+ titleTextField.getText() + "_"
+					+ gameEditMenu.getText() + "_"
+					+ eventImg.getImage().getUrl() + "_"
+					+ coinSplitMenu.getText() + "_"
+					+ detailsTextArea.getText()
 			);
-		} catch (MainController.InvalidFormatException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeIsAfterEndException | EventController.StartDateTimeHasAlreadyPassedException | EventController.GameNameCantBeEmptyException e) {
+			dataOutputStream.flush();
+//			EventController.getInstance().createEvent(
+//					titleTextField.getText(),
+//					gameEditMenu.getText(),
+//					eventImg.getImage().getUrl(),
+//					startDatePicker.getValue(),
+//					endDatePicker.getValue(),
+//					Double.parseDouble(coinSplitMenu.getText()),
+//					detailsTextArea.getText()
+//			);
+		} catch (IOException e) {
 			allErrors.setText(allErrors.getText() + "\n" + e.getMessage());
 		}
 	}

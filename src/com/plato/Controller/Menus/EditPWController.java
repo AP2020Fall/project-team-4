@@ -27,34 +27,11 @@ public class EditPWController implements Initializable {
 	public ImageView newShowPwOrNot, oldShowPwOrNot;
 	public PasswordField newPwFieldpwHidden, oldPwFieldpwHidden;
 	public TextField newPwFieldpwShown, oldPwFieldpwShown;
-	private MouseEvent mouseEvent;
-	private ActionEvent actionEvent;
 	private static DataOutputStream dataOutputStream;
 	private static DataInputStream dataInputStream;
 	private static Socket socket;
 
 
-
-	public EditPWController() {
-		this.mouseEvent = null;
-		this.actionEvent = null;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
 
 	public static void setStage (Stage stage) {
 		EditPWController.stage = stage;
@@ -131,7 +108,7 @@ public class EditPWController implements Initializable {
 		}
 	}
 
-	public void confirmPasswordEdit () {
+	public void confirmPasswordEdit (ActionEvent actionEvent) {
 		String oldPassword = (oldShowPwOrNot.getImage().getUrl().contains("invisible") ? oldPwFieldpwShown : oldPwFieldpwHidden).getText(),
 				newPassword = (newShowPwOrNot.getImage().getUrl().contains("invisible") ? newPwFieldpwShown : newPwFieldpwHidden).getText();
 
@@ -139,23 +116,15 @@ public class EditPWController implements Initializable {
 			dataOutputStream.writeUTF("changePWCommand_"+oldPassword+"_"+newPassword);
 			dataOutputStream.flush();
 		//	AccountController.getInstance().changePWCommand(oldPassword, newPassword);
-			closeStage();
+			closeStage(actionEvent);
 
 		} catch (IOException e) {
 			oldPasswordError.setText(e.getMessage());
 		}
 	}
-	public void confirmPasswordEditWrite(ActionEvent actionEvent)
-	{
-		setActionEvent(actionEvent);
-		MainController.write("EditPW.confirmPasswordEdit");
-	}
-	public void closeStage ()
-	{
+
+	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
-	public void closeStageWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("EditPW.closeStage");
-	}
+
 }

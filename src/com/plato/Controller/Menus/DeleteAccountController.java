@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,33 +28,11 @@ public class DeleteAccountController implements Initializable {
 	public ImageView showPwOrNot;
 	public PasswordField pwFieldpwHidden;
 	public TextField pwFieldpwShown;
-	private MouseEvent mouseEvent;
-	private ActionEvent actionEvent;
 	private static DataInputStream dataInputStream;
 	private static DataOutputStream dataOutputStream;
 	private static Socket socket;
 
 
-	public DeleteAccountController() {
-		this.mouseEvent = null;
-		this.actionEvent = null;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
 
 	public static void setStage (Stage stage) {
 		DeleteAccountController.stage = stage;
@@ -97,14 +76,11 @@ public class DeleteAccountController implements Initializable {
 		showPwOrNot.toFront();
 	}
 
-	public void closeStage () {
+	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
 	}
-	public void closeStageWrite(ActionEvent actionEvent)
-	{setActionEvent(actionEvent);
-		MainController.write("DeletAccount.closeStage");
-	}
-	public void removeAccount () {
+
+	public void removeAccount (ActionEvent actionEvent) throws IOException {
 //		Stage stage = new Stage();
 //		try {
 //			stage = MainController.getInstance().createAndReturnNewStage(
@@ -119,31 +95,12 @@ public class DeleteAccountController implements Initializable {
 
 		String password = (showPwOrNot.getImage().getUrl().contains("invisible") ? pwFieldpwShown : pwFieldpwHidden).getText();
 
-		try {
-			AccountController.getInstance().deleteAccount(username.getText(), password);
-		} catch (MainController.InvalidFormatException e) {
-			if (e.getMessage().toLowerCase().startsWith("username")) {
-				usernameError.setText(e.getMessage());
-				return;
-			}
-			if (e.getMessage().toLowerCase().startsWith("password")) {
-				passwordError.setText(e.getMessage());
-				return;
-			}
-		} catch (AccountController.NoAccountExistsWithUsernameException | AccountController.AdminAccountCantBeDeletedException e) {
-			usernameError.setText(e.getMessage());
-			return;
-		} catch (AccountController.PaswordIncorrectException e) {
-			passwordError.setText(e.getMessage());
-			return;
-		}
+		dataOutputStream.writeUTF("deleteAccount_" + username.getText() + "_" + password);
+		dataOutputStream.flush();
+		//AccountController.getInstance().deleteAccount(username.getText(), password);
 
 		DeleteAccountController.stage.close();
 //		stage.show();
 	}
-	public void removeAccountWrite(ActionEvent actionEvent)
-	{
-		setActionEvent(actionEvent);
-		MainController.write("DeletAccount.removeAccount");
-	}
+
 }
