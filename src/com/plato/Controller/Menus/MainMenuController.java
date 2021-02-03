@@ -14,6 +14,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -25,29 +27,8 @@ public class MainMenuController implements Initializable {
 	private static boolean gamerOrAdmin;
 	public HBox buttons;
 	public GridPane pane;
-	private ActionEvent actionEvent;
-	private MouseEvent mouseEvent;
-
-	public MainMenuController() {
-		this.actionEvent = null;
-		this.mouseEvent = null;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
+	private DataInputStream dataInputStream;
+	private DataOutputStream dataOutputStream;
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		MainMenuController.gamerOrAdmin = gamerOrAdmin;
@@ -87,7 +68,7 @@ public class MainMenuController implements Initializable {
 //		bm.play(0.3);
 	}
 
-	public void eventsTab () {
+	public void eventsTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.eventsTab");
 		playButtonClickSound();
 		try {
@@ -106,12 +87,7 @@ public class MainMenuController implements Initializable {
 		}
 	}
 
-	public void eventsTabWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("MainMenu.eventsTab");
-	}
-
-	public void usersTab () {
+	public void usersTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.usersTab");
 		playButtonClickSound();
 		try {
@@ -124,12 +100,7 @@ public class MainMenuController implements Initializable {
 		}
 	}
 
-	public void usersTabWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("MainMenu.usersTab");
-	}
-
-	public void accountPage () {
+	public void accountPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.accountPage");
 		playButtonClickSound();
 		try {
@@ -143,12 +114,7 @@ public class MainMenuController implements Initializable {
 		}
 	}
 
-	public void accountPageWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("MainMenu.accountPage");
-	}
-
-	public void gamingHistoryPage () {
+	public void gamingHistoryPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.gamingHistoryPage");
 		playButtonClickSound();
 		try {
@@ -161,12 +127,7 @@ public class MainMenuController implements Initializable {
 		}
 	}
 
-	public void gamingHistoryPageWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("MainMenu.gamingHistory");
-	}
-
-	public void gamesTab () {
+	public void gamesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.gamesTab");
 		playButtonClickSound();
 		try {
@@ -184,12 +145,7 @@ public class MainMenuController implements Initializable {
 		}
 	}
 
-	public void gamesTabWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("MainMenu.gamesTab");
-	}
-
-	public void faveGamesTab () {
+	public void faveGamesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.faveGamesTab");
 		playButtonClickSound();
 		try {
@@ -207,12 +163,7 @@ public class MainMenuController implements Initializable {
 		}
 	}
 
-	public void faveGamesTabWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("MainMenu.faveGamesTab");
-	}
-
-	public void friendsPage () {
+	public void friendsPage (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.friendsPage");
 		playButtonClickSound();
 		try {
@@ -225,12 +176,7 @@ public class MainMenuController implements Initializable {
 		}
 	}
 
-	public void friendsPageWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("MainMenu.friendsPageWrite");
-	}
-
-	public void messagesTab () {
+	public void messagesTab (ActionEvent actionEvent) {
 		System.out.println("MainMenuController.messagesTab");
 		playButtonClickSound();
 		try {
@@ -247,26 +193,12 @@ public class MainMenuController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void messagesTabWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("MainMenu.messagesTab");
+
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOver () {
-		((Button) getMouseEvent().getSource()).setOpacity(0.8);
-	}
-
-	public void mouseIsOverWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("MainMenu.mouseIsOver");
-	}
-
-	public void mouseIsOut () {
-		((Button) getMouseEvent().getSource()).setOpacity(1);
-	}
-
-	public void mouseIsOutWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("MainMenu.mouseIsOut");
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 }

@@ -148,6 +148,9 @@ class ClientHandler extends Thread {
                     dataOutputStream.writeUTF(new Gson().toJson(account));
                     dataOutputStream.flush();
                     break;
+                case "login" :
+                    AccountController.getInstance().login(receivedInfo[1] , receivedInfo[2] , receivedInfo[3].equals("true"));
+                    break;
 
             }
         }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){

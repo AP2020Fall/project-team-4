@@ -4,6 +4,7 @@ import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,8 +18,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -31,33 +35,9 @@ public class LoginMenuController implements Initializable {
 	public Label delAccLbl, sgnUpLbl, usernameError, passwordError;
 	public CheckBox rememberMe;
 	public TextField username;
-	private ActionEvent actionEvent;
-	private MouseEvent mouseEvent;
-//	public static String host = "127.0.0.1";
-//	public static int port = 5056;
-//	public static Socket clientSocket;
-
-
-	public LoginMenuController() {
-		this.actionEvent = null;
-		this.mouseEvent = null;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
+	private DataOutputStream dataOutputStream;
+	private DataInputStream dataInputStream;
+	private Object Account;
 
 	public static void setStage (Stage stage) {
 		LoginMenuController.stage = stage;
@@ -105,21 +85,16 @@ public class LoginMenuController implements Initializable {
 		showPwOrNot.toFront();
 	}
 
-	public void login () {
-		try {
-			String password = pwStackPane.getChildren().get(1) instanceof PasswordField ? ((PasswordField) pwStackPane.getChildren().get(1)).getText() : ((TextField) pwStackPane.getChildren().get(1)).getText();
+	public void login (ActionEvent actionEvent) throws IOException {
+		String password = pwStackPane.getChildren().get(1) instanceof PasswordField ? ((PasswordField) pwStackPane.getChildren().get(1)).getText() : ((TextField) pwStackPane.getChildren().get(1)).getText();
 
-			AccountController.getInstance().login(username.getText(), password, rememberMe.isSelected());
+		dataOutputStream.writeUTF("login_" + username.getText() + "_" + password + "_" + "true");
+		dataOutputStream.flush();
+		//AccountController.getInstance().login(username.getText(), password, rememberMe.isSelected());
 
-		} catch (MainController.InvalidFormatException | AccountController.NoAccountExistsWithUsernameException e) {
-			usernameError.setText(e.getMessage());
-			return;
-		} catch (AccountController.PaswordIncorrectException e) {
-			passwordError.setText(e.getMessage());
-			return;
-		}
-
-		Account account = AccountController.getInstance().getCurrentAccLoggedIn();
+		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
+		dataOutputStream.flush();
+		Account account = new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
 
 		stage.close();
 
@@ -134,13 +109,7 @@ public class LoginMenuController implements Initializable {
 		}
 	}
 
-	public void loginWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("LoginMenu.login");
-	}
-
-
-	public void signUp () {
+	public void signUp (MouseEvent mouseEvent) {
 		stage.close();
 		try {
 			Stage regMenuStage = MainController.getInstance().createAndReturnNewStage(FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterMenu.fxml").toURI().toURL()),
@@ -155,11 +124,7 @@ public class LoginMenuController implements Initializable {
 		}
 	}
 
-	public void signUpWrite(MouseEvent mouseEvent){
-		setMouseEvent(mouseEvent);
-		MainController.write("LoginMenu.signUp");}
-
-	public void deleteAccount () {
+	public void deleteAccount (MouseEvent mouseEvent) {
 		try {
 			Stage deleteAccStage = MainController.getInstance().createAndReturnNewStage(FXMLLoader.load(new File("src/com/plato/View/Menus/DeleteAccount.fxml").toURI().toURL()),
 					"Delete Account",
@@ -172,11 +137,4 @@ public class LoginMenuController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
-	public void deleteAccountWrite(ActionEvent actionEvent){
-		setActionEvent(actionEvent);
-		MainController.write("LoginMenu.deleteAccount");
-	}
-
-
 }
