@@ -25,24 +25,24 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-    <Button maxHeight="125.0" maxWidth="125.0" minHeight="125.0" minWidth="125.0" mnemonicParsing="false" onAction="#displayLogOfGameWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-radius: 50; -fx-background-size: 100; -fx-background-repeat: no-repeat; -fx-background-position: top center; -fx-background-image: url(&quot;https://i.imgur.com/1N1DiRG.png&quot;); -fx-background-color: transparent;" text="Log of Game" textFill="WHITE" GridPane.rowIndex="1" GridPane.rowSpan="2">
+    <Button maxHeight="125.0" maxWidth="125.0" minHeight="125.0" minWidth="125.0" mnemonicParsing="false" onAction="#displayLogOfGame" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 50; -fx-background-size: 100; -fx-background-repeat: no-repeat; -fx-background-position: top center; -fx-background-image: url(&quot;@../../../Resources/Images/stats.png&quot;); -fx-background-color: transparent;" text="Log of Game" textFill="WHITE" GridPane.rowIndex="1" GridPane.rowSpan="2">
         <font>
             <Font name="Arial Bold" size="15.0" />
         </font>
         <padding>
             <Insets top="100.0" />
         </padding>
-      <GridPane.margin>
-         <Insets bottom="30.0" />
-      </GridPane.margin>
+        <GridPane.margin>
+            <Insets bottom="30.0" />
+        </GridPane.margin>
     </Button>
     <Label fx:id="gameTitle" alignment="CENTER" text="Reversi" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="3">
         <font>
             <Font name="AppleGothic Regular" size="64.0" />
         </font>
-      <effect>
-         <DropShadow height="15.0" offsetX="2.0" offsetY="2.0" radius="7.0" spread="0.65" width="15.0" />
-      </effect>
+        <effect>
+            <DropShadow height="15.0" offsetX="2.0" offsetY="2.0" radius="7.0" spread="0.65" width="15.0" />
+        </effect>
     </Label>
     <GridPane fx:id="timeBtnGridPane" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <columnConstraints>
@@ -51,7 +51,7 @@
         <rowConstraints>
             <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
-        <Button fx:id="timeBtn" maxHeight="125.0" maxWidth="125.0" minHeight="125.0" minWidth="125.0" mnemonicParsing="false" onAction="#setTimeWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-radius: 50; -fx-background-size: 100; -fx-background-repeat: no-repeat; -fx-background-position: top center; -fx-background-image: url(&quot;https://i.imgur.com/kMdlyvE.png&quot;); -fx-background-color: transparent;" text="Set Time" textFill="WHITE">
+        <Button fx:id="timeBtn" maxHeight="125.0" maxWidth="125.0" minHeight="125.0" minWidth="125.0" mnemonicParsing="false" onAction="#setTime" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 50; -fx-background-size: 100; -fx-background-repeat: no-repeat; -fx-background-position: top center; -fx-background-image: url(&quot;@../../../Resources/Images/timer.png&quot;); -fx-background-color: transparent;" text="Set Time" textFill="WHITE">
             <font>
                 <Font name="Arial Bold" size="15.0" />
             </font>
@@ -60,12 +60,12 @@
             </padding>
         </Button>
         <MenuButton fx:id="timeLimitMenuInGameMenu" alignment="CENTER" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" popupSide="RIGHT" text="Time" textAlignment="CENTER" visible="false">
-           <font>
-               <Font name="AppleMyungjo Regular" size="15.0" />
-           </font>
+            <font>
+                <Font name="AppleMyungjo Regular" size="15.0" />
+            </font>
         </MenuButton>
     </GridPane>
-    <Button layoutX="248.0" layoutY="216.0" maxHeight="125.0" maxWidth="125.0" minHeight="125.0" minWidth="125.0" mnemonicParsing="false" onAction="#newGameWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-radius: 50; -fx-background-size: 100; -fx-background-repeat: no-repeat; -fx-background-position: top center; -fx-background-image: url(&quot;https://i.imgur.com/DiP3S8T.png&quot;); -fx-background-color: transparent;" text="New Game" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+    <Button layoutX="248.0" layoutY="216.0" maxHeight="125.0" maxWidth="125.0" minHeight="125.0" minWidth="125.0" mnemonicParsing="false" onAction="#newGame" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 50; -fx-background-size: 100; -fx-background-repeat: no-repeat; -fx-background-position: top center; -fx-background-image: url(&quot;@../../../Resources/Images/newGame.png&quot;); -fx-background-color: transparent;" text="New Game" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <font>
             <Font name="Arial Bold" size="15.0" />
         </font>
@@ -73,18 +73,18 @@
             <Insets top="100.0" />
         </padding>
     </Button>
-    <Button layoutX="69.0" layoutY="137.0" maxHeight="125.0" maxWidth="125.0" minHeight="125.0" minWidth="125.0" mnemonicParsing="false" onAction="#displayScoreboardWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-radius: 50; -fx-background-size: 100; -fx-background-repeat: no-repeat; -fx-background-position: top center; -fx-background-image: url(&quot;https://i.imgur.com/ycrhHnA.png&quot;); -fx-background-color: transparent;" text="Scoreboard" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
+    <Button layoutX="69.0" layoutY="137.0" maxHeight="125.0" maxWidth="125.0" minHeight="125.0" minWidth="125.0" mnemonicParsing="false" onAction="#displayScoreboard" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 50; -fx-background-size: 100; -fx-background-repeat: no-repeat; -fx-background-position: top center; -fx-background-image: url(&quot;@../../../Resources/Images/scoreboard.png&quot;); -fx-background-color: transparent;" text="Scoreboard" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
         <font>
             <Font name="Arial Bold" size="15.0" />
         </font>
         <padding>
             <Insets top="100.0" />
         </padding>
-      <GridPane.margin>
-         <Insets bottom="30.0" />
-      </GridPane.margin>
+        <GridPane.margin>
+            <Insets bottom="30.0" />
+        </GridPane.margin>
     </Button>
-    <Button fx:id="addToFaveGamesBtn" layoutX="61.0" layoutY="144.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#changeFaveStatusWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-radius: 25; -fx-background-size: 50; -fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+    <Button fx:id="addToFaveGamesBtn" layoutX="61.0" layoutY="144.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#changeFaveStatus" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 25; -fx-background-size: 50; -fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
         <font>
             <Font name="Arial Bold" size="15.0" />
         </font>
@@ -92,7 +92,7 @@
             <Insets />
         </GridPane.margin>
     </Button>
-    <Button layoutX="540.0" layoutY="30.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeGameWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-radius: 25; -fx-background-size: 50; -fx-background-color: transparent; -fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;);" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+    <Button layoutX="540.0" layoutY="30.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeGame" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 25; -fx-background-size: 50; -fx-background-color: transparent; -fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;);" GridPane.halignment="LEFT" GridPane.valignment="TOP">
         <font>
             <Font name="Arial Bold" size="15.0" />
         </font>
@@ -121,11 +121,11 @@
             <font>
                 <Font name="Arial" size="12.0" />
             </font>
-         <GridPane.margin>
-            <Insets bottom="5.0" />
-         </GridPane.margin>
+            <GridPane.margin>
+                <Insets bottom="5.0" />
+            </GridPane.margin>
         </Label>
-        <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#dontStartGameWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-radius: 20; -fx-background-size: 40; -fx-background-color: transparent; -fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;);" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+        <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#dontStartGame" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 20; -fx-background-size: 40; -fx-background-color: transparent; -fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;);" GridPane.halignment="LEFT" GridPane.valignment="TOP">
             <font>
                 <Font name="Arial Bold" size="15.0" />
             </font>
@@ -144,10 +144,10 @@
             </font>
         </Label>
         <MenuButton fx:id="timeLimitMenuInStartGameMenu" alignment="CENTER" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" popupSide="RIGHT" text="Time" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
-         <font>
-            <Font name="AppleMyungjo Regular" size="15.0" />
-         </font></MenuButton>
-        <Button layoutX="21.0" layoutY="21.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#startGameWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-radius: 20; -fx-background-size: 40; -fx-background-color: transparent; -fx-background-image: url(&quot;https://i.imgur.com/v2ihpyg.png&quot;);" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <font>
+                <Font name="AppleMyungjo Regular" size="15.0" />
+            </font></MenuButton>
+        <Button layoutX="21.0" layoutY="21.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#startGame" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-radius: 20; -fx-background-size: 40; -fx-background-color: transparent; -fx-background-image: url(&quot;@../../../Resources/Images/checkButton.png&quot;);" GridPane.columnIndex="2" GridPane.rowIndex="2">
             <font>
                 <Font name="Arial Bold" size="15.0" />
             </font>
