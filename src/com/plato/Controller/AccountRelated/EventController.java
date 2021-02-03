@@ -9,8 +9,9 @@ import java.time.format.DateTimeFormatter;
 
 public class EventController {
 	private static EventController eventController;
+    public Object participateInEvent;
 
-	public static EventController getInstance () {
+    public static EventController getInstance () {
 		if (eventController == null)
 			eventController = new EventController();
 		return eventController;

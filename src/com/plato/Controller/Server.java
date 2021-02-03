@@ -1,6 +1,7 @@
 package Controller;
 
 import Controller.AccountRelated.AccountController;
+import Controller.AccountRelated.EventController;
 import Controller.AccountRelated.GamerController;
 import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.BattleSea.BombController;
@@ -155,7 +156,14 @@ class ClientHandler extends Thread {
 
                 case "removeFriend" :
                  GamerController.getInstance().removeFriend(receivedInfo[1]);
+
                     break;
+                case "participateInEvent" :
+                    EventController.getInstance();
+                    break;
+
+
+
             }
         }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){
             System.out.println("connection closed!");
