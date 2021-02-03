@@ -174,9 +174,13 @@ class ClientHandler extends Thread {
                     EventController.getInstance();
                     break;
 
+                case "stopParticipateInEvent" :
+                    EventController.getInstance().stopParticipatingInEvent();
+                    break;
 
 
-                }
+
+            }
         }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){
             System.out.println("connection closed!");
             e.printStackTrace();

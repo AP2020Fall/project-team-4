@@ -5,6 +5,7 @@ import Controller.AccountRelated.EventController;
 import Controller.MainController;
 import Model.AccountRelated.Event;
 import Model.AccountRelated.Gamer;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,6 +31,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.URL;
 import java.time.LocalDate;
@@ -78,6 +80,7 @@ public class EventsTabController implements Initializable {
 
 	public void filter (ActionEvent actionEvent) {
 		LinkedList<Event> eventsToShow;
+		// TODO: 2/3/2021
 		Gamer gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
 
 		String showWhich = (showInSession.isSelected() ? "y" : "n") + (showUpcoming.isSelected() ? "y" : "n") + (showParticipatingIn.isSelected() ? "y" : "n");
@@ -190,11 +193,34 @@ public class EventsTabController implements Initializable {
 									setRowSpan(this, 2);
 								}},
 								new Button() {{
-									Gamer currentLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+									try {
+										dataOutputStream.writeUTF("getCurrentAccLoggedIn");
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+									try {
+										dataOutputStream.flush();
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+									Gamer currentLoggedIn = null;
+									// TODO: 2/3/2021
+									//	currentLoggedIn = (Gamer) new Gson().fromJson(dataInputStream.readUTF(), (Type) Account);
+									;
 									// is already participating in event
 									if (event.participantExists(currentLoggedIn.getUsername())) {
 										setText("Drop-out");
 										setOnAction(e -> {
+											try {
+												dataOutputStream.writeUTF("stopParticipatingInEvent");
+											} catch (IOException exception) {
+												exception.printStackTrace();
+											}
+											try {
+												dataOutputStream.flush();
+											} catch (IOException exception) {
+												exception.printStackTrace();
+											}
 											EventController.getInstance().stopParticipatingInEvent(event.getEventID());
 											filter(new ActionEvent());
 										});
@@ -202,7 +228,17 @@ public class EventsTabController implements Initializable {
 									else {
 										setText("Join");
 										setOnAction(e -> {
-											EventController.getInstance().participateInEvent(event.getEventID());
+											try {
+												dataOutputStream.writeUTF("participateInEvent");
+											} catch (IOException exception) {
+												exception.printStackTrace();
+											}
+											try {
+												dataOutputStream.flush();
+											} catch (IOException exception) {
+												exception.printStackTrace();
+											}
+											//EventController.getInstance().participateInEvent(event.getEventID());
 											filter(new ActionEvent());
 										});
 									}
@@ -246,7 +282,13 @@ public class EventsTabController implements Initializable {
 											"  -fx-background-repeat: no-repeat;" +
 											"  -fx-background-color: transparent;");
 
-									setOnAction(e -> removeEvent(event));
+									setOnAction(e -> {
+										try {
+											removeEvent(event);
+										} catch (IOException exception) {
+											exception.printStackTrace();
+										}
+									});
 									setRowIndex(this, 0);
 									setColumnIndex(this, 3);
 									setRowSpan(this, 2);
@@ -268,7 +310,8 @@ public class EventsTabController implements Initializable {
 				}}));
 	}
 
-	private void removeEvent (Event event) {
+	private void removeEvent (Event event) throws IOException {
+
 		Event.removeEvent(event.getEventID());
 		filter(new ActionEvent());
 	}

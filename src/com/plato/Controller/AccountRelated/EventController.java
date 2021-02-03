@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 public class EventController {
 	private static EventController eventController;
-    public Object participateInEvent;
+	public Object participateInEvent;
 
     public static EventController getInstance () {
 		if (eventController == null)
@@ -88,6 +88,9 @@ public class EventController {
 			default -> throw new IllegalStateException("Unexpected value: " + field.toLowerCase());
 		}
 		event.editField(field, newVal);
+	}
+
+	public void stopParticipatingInEvent() {
 	}
 
 	public static class StartDateTimeHasAlreadyPassedException extends Exception {

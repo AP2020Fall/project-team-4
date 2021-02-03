@@ -140,6 +140,7 @@ public class EditPWController implements Initializable {
 			dataOutputStream.flush();
 		//	AccountController.getInstance().changePWCommand(oldPassword, newPassword);
 			closeStage();
+
 		} catch (IOException e) {
 			oldPasswordError.setText(e.getMessage());
 		}
