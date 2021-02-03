@@ -25,7 +25,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.awt.event.MouseEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -34,36 +35,15 @@ import java.util.ResourceBundle;
 public class FriendsTabController implements Initializable {
 	public GridPane frndProfile;
 	public ListView<GridPane> frndsList;
-	private MouseEvent mouseEvent;
-	private ActionEvent actionEvent;
-
-	public FriendsTabController() {
-		this.mouseEvent = null;
-		this.actionEvent = null;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
+	private static DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		updateFrndsListWrite(new ActionEvent());
+		updateFrndsList(new ActionEvent());
 	}
 
-	public void updateFrndsList () {
+	public void updateFrndsList (ActionEvent actionEvent) {
 		frndsList.getItems().clear();
 
 		Gamer currentAccLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
@@ -107,7 +87,13 @@ public class FriendsTabController implements Initializable {
 					setFont(Font.font("Arial", 14));
 					setTextAlignment(TextAlignment.CENTER);
 					setPadding(new Insets(5, 5, 5, 5));
-					setOnAction(e -> unfriend(username.getText()));
+					setOnAction(e -> {
+						try {
+							unfriend(username.getText());
+						} catch (IOException exception) {
+							exception.printStackTrace();
+						}
+					});
 					setOnMouseEntered(e -> setOpacity(0.8));
 					setOnMouseExited(e -> setOpacity(1));
 				}};
@@ -125,13 +111,10 @@ public class FriendsTabController implements Initializable {
 			}});
 		}
 	}
-	public void updateFrndsListWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("FriendsTab.updateFrndList");
-	}
 
-
-	private void unfriend (String frndUN) {
+	private void unfriend (String frndUN) throws IOException {
+		dataOutputStream.writeUTF("removeFriend_"+frndUN);
+		dataOutputStream.flush();
 		GamerController.getInstance().removeFriend(frndUN);
 
 		if (FriendProfileController.getFrnd() != null && FriendProfileController.getFrnd().getUsername().equals(frndUN))
@@ -153,7 +136,7 @@ public class FriendsTabController implements Initializable {
 		}
 	}
 
-	public void displayFrndRequests () {
+	public void displayFrndRequests (ActionEvent actionEvent) {
 		Stage stage;
 		try {
 			stage = MainController.getInstance().createAndReturnNewStage(
@@ -168,10 +151,4 @@ public class FriendsTabController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void displayFrndRequestsWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("FriendsTab.displayFrndRequest");
-	}
-
-
 }

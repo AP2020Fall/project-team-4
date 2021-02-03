@@ -1,6 +1,7 @@
 package Controller;
 
 import Controller.AccountRelated.AccountController;
+import Controller.AccountRelated.GamerController;
 import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.BattleSea.ShipController;
@@ -150,6 +151,10 @@ class ClientHandler extends Thread {
                     break;
                 case "login" :
                     AccountController.getInstance().login(receivedInfo[1] , receivedInfo[2] , receivedInfo[3].equals("true"));
+                    break;
+
+                case "removeFriend" :
+                 GamerController.getInstance().removeFriend(receivedInfo[1]);
                     break;
 
             }
