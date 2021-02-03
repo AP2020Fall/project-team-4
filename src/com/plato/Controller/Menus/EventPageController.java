@@ -7,6 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,6 +22,10 @@ public class EventPageController implements Initializable {
 	public ImageView coinImg;
 	public Label eventTitle;
 	public Button joinEventBtn;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static Socket socket;
+
 
 	public static void setEvent (Event event) {
 		EventPageController.event = event;
@@ -25,10 +33,18 @@ public class EventPageController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
-		joinEventBtn.setOnAction(e -> joinEvent(event.getEventID()));
+		joinEventBtn.setOnAction(e -> {
+			try {
+				joinEvent(event.getEventID());
+			} catch (IOException exception) {
+				exception.printStackTrace();
+			}
+		});
 	}
 
-	public void joinEvent (String eventID) {
+	public void joinEvent (String eventID) throws IOException {
+		dataOutputStream.writeUTF("participateInEvent");
+		dataOutputStream.flush();
 		EventController.getInstance().participateInEvent(eventID);
 	}
 }
