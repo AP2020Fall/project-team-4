@@ -59,10 +59,10 @@
                 <padding>
                     <Insets top="5.0" />
                 </padding>
-                <Label fx:id="delAccLbl" onMouseClicked="#deleteAccountWrite" text="← Delete Account" textFill="#8a0000" />
-                <Label fx:id="sgnUpLbl" onMouseClicked="#signUpWrite" text="← Don't have an account" textFill="#8a0000" />
+                <Label fx:id="delAccLbl" onMouseClicked="#deleteAccount" text="← Delete Account" textFill="#8a0000" />
+                <Label fx:id="sgnUpLbl" onMouseClicked="#signUp" text="← Don't have an account" textFill="#8a0000" />
             </VBox>
-            <Button mnemonicParsing="false" onAction="#loginWrite" text="Sign-in">
+            <Button mnemonicParsing="false" onAction="#login" text="Sign-in">
                 <font>
                     <Font name="Arial" size="15.0" />
                 </font>
