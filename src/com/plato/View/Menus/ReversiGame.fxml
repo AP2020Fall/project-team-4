@@ -32,7 +32,7 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-    <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#closeGameWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-color: transparent; -fx-background-size: 40 40; -fx-background-radius: 20;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+    <Button maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#closeGame" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-color: transparent; -fx-background-size: 40 40; -fx-background-radius: 20;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
     <GridPane hgap="5.0" vgap="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" />
@@ -106,525 +106,525 @@
             </ImageView>
         </HBox>
     </GridPane>
-    <TilePane fx:id="board" alignment="CENTER" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefColumns="8" prefRows="8" prefTileHeight="80.0" prefTileWidth="80.0" style="-fx-background-image: url(&quot;https://i.imgur.com/jyxjFJb.png&quot;); -fx-background-repeat: no-repeat; -fx-background-size: 640;" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+    <TilePane fx:id="board" alignment="CENTER" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefColumns="8" prefRows="8" prefTileHeight="80.0" prefTileWidth="80.0" style="-fx-background-image: url(&quot;@../../../Resources/Images/reversiBoard&quot;); -fx-background-repeat: no-repeat; -fx-background-size: 640;" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
         <GridPane.margin>
             <Insets left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
-        <Label maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="307.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="307.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="266.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="266.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="348.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="348.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="184.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="184.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="266.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="266.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="348.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="348.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="430.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="430.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="20.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="20.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="102.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="102.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="184.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="184.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="266.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="266.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="348.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="348.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="430.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="430.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="512.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="512.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="594.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="594.0" layoutY="307.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="20.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="20.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="102.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="102.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="184.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="184.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="266.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="266.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="348.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="348.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="430.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="430.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="512.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="512.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="594.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="594.0" layoutY="348.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="20.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="20.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="102.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="102.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="184.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="184.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="266.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="266.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="348.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="348.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="430.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="430.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="512.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="512.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="594.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="594.0" layoutY="389.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="20.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="20.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="102.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="102.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="184.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="184.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="266.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="266.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="348.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="348.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="430.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="430.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="512.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="512.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="594.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="594.0" layoutY="430.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="20.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="20.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="102.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="102.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="184.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="184.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="266.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="266.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="348.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="348.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="430.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="430.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="512.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="512.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="594.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="594.0" layoutY="471.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="20.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="20.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="102.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="102.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="184.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="184.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="266.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="266.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="348.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="348.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="430.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="430.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="512.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="512.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="594.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="594.0" layoutY="512.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="20.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="20.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="102.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="102.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="184.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="184.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="266.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="266.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="348.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="348.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="430.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="430.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="512.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="512.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
-        <Label layoutX="594.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossibleWrite" onMouseEntered="#mouseIsOverCell">
+        <Label layoutX="594.0" layoutY="553.0" maxHeight="65.0" maxWidth="65.0" minHeight="65.0" minWidth="65.0" onMouseClicked="#putMarkIfPossible" onMouseEntered="#mouseIsOverCell">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
-         <rotationAxis>
-            <Point3D y="1.0" />
-         </rotationAxis>
+            <rotationAxis>
+                <Point3D y="1.0" />
+            </rotationAxis>
         </Label>
     </TilePane>
-    <Button fx:id="confirmMoveBtn" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#confirmMoveWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/v2ihpyg.png&quot;); -fx-background-color: transparent; -fx-background-size: 60; -fx-background-radius: 30; -fx-background-position: center;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-    <Button fx:id="showMovesBtn" layoutX="919.0" layoutY="567.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#showMovesWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/SVKhCKE.png&quot;); -fx-background-color: transparent; -fx-background-size: 75; -fx-background-radius: 37.5; -fx-background-position: center top; -fx-background-repeat: no-repeat;" text="History" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+    <Button fx:id="confirmMoveBtn" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#confirmMove" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;@../../../Resources/Images/checkButton.png&quot;); -fx-background-color: transparent; -fx-background-size: 60; -fx-background-radius: 30; -fx-background-position: center;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+    <Button fx:id="showMovesBtn" layoutX="919.0" layoutY="567.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#showMoves" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;@../../../Resources/Images/historyButton.png&quot;); -fx-background-color: transparent; -fx-background-size: 75; -fx-background-radius: 37.5; -fx-background-position: center top; -fx-background-repeat: no-repeat;" text="History" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
         <font>
             <Font name="Arial Bold" size="13.0" />
         </font>
@@ -753,7 +753,7 @@
     </GridPane>
     <GridPane fx:id="historyGridPane" maxHeight="350.0" maxWidth="250.0" minHeight="350.0" minWidth="250.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false" GridPane.columnSpan="4" GridPane.rowSpan="2">
         <columnConstraints>
-         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="110.0" minWidth="110.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="110.0" minWidth="110.0" />
         </columnConstraints>
@@ -770,25 +770,25 @@
             </DropShadow>
         </effect>
         <Label text="History" GridPane.columnSpan="3">
-           <font>
-               <Font name="Arial Bold" size="17.0" />
-           </font>
+            <font>
+                <Font name="Arial Bold" size="17.0" />
+            </font>
         </Label>
         <Label layoutX="106.0" layoutY="65.0" text="BLACK" textFill="#868686" GridPane.columnIndex="1" GridPane.rowIndex="1">
-           <font>
-               <Font name="Arial Italic" size="13.0" />
-           </font>
+            <font>
+                <Font name="Arial Italic" size="13.0" />
+            </font>
         </Label>
         <Label layoutX="43.0" layoutY="186.0" text="WHITE" textFill="#868686" GridPane.columnIndex="2" GridPane.rowIndex="1">
-           <font>
-               <Font name="Arial Italic" size="13.0" />
-           </font>
+            <font>
+                <Font name="Arial Italic" size="13.0" />
+            </font>
         </Label>
         <ListView fx:id="moveHistoryList" maxHeight="300.0" maxWidth="250.0" minHeight="300.0" minWidth="250.0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-      <Button maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#closeMoveHistoryWrite" onMouseEntered="#mouseIsOverWrite" onMouseExited="#mouseIsOutWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/9ki490h.png&quot;); -fx-background-color: transparent; -fx-background-size: 20; -fx-background-radius: 10;" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </GridPane.margin>
-      </Button>
+        <Button maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#closeMoveHistory" onMouseEntered="#mouseIsOver" onMouseExited="#mouseIsOut" style="-fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-color: transparent; -fx-background-size: 20; -fx-background-radius: 10;" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </GridPane.margin>
+        </Button>
     </GridPane>
 </GridPane>
