@@ -60,9 +60,6 @@ public class BattleSeaEditBoardPageController implements Initializable {
 		return battleSeaEditBoardPageController;
 	}
 
-
-
-
 	public LinkedList<Ship> getCurrentBoard() {
 		return currentBoard;
 	}
@@ -206,7 +203,7 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			ShipController.getInstance().rotateShip(currentBoard, ship);
 
 			setBoard(currentBoard, board);
-			dataOutputStream.writeUTF("displayBoard");
+			dataOutputStream.writeUTF("displayBoard_");
 			dataOutputStream.flush();
 			//BattleSeaView.getInstance().displayBoard(BattleSeaController.getInstance().getBoardAsStringBuilder(currentBoard));
 		} catch (ShipController.CantChangeDirException | IOException e) {
@@ -228,6 +225,8 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 
+
+
 	public void moveShipIfPossible (MouseEvent mouseEvent) {
 		Label shipToMove = (Label) mouseEvent.getSource();
 		Ship ship = currentBoard.stream()
@@ -238,15 +237,17 @@ public class BattleSeaEditBoardPageController implements Initializable {
 				newY = (int) ((mouseEvent.getSceneY() - board.getBoundsInParent().getMinY()) / (board.getBoundsInParent().getHeight() / board.getRowCount()));
 
 		try {
-			dataOutputStream.writeUTF("moveShip_"+ (newX+1) + "_" + (newY+1));
-			dataOutputStream.flush();
-			//ShipController.getInstance().moveShip(currentBoard, ship, newX + 1, newY + 1);
+//			dataOutputStream.writeUTF("moveShip_"+ (newX+1) + "_" + (newY+1));
+//			dataOutputStream.flush();
+			// TODO: 2/3/2021
+			ShipController.getInstance().moveShip(currentBoard, ship, newX + 1, newY + 1);
 
 			GridPane.setColumnIndex(shipToMove, newX);
 			GridPane.setRowIndex(shipToMove, newY);
-
-			BattleSeaView.getInstance().displayBoard(BattleSeaController.getInstance().getBoardAsStringBuilder(currentBoard));
-		} catch (IOException e) {
+			dataOutputStream.writeUTF("displayBoard_");
+			dataOutputStream.flush();
+			//BattleSeaView.getInstance().displayBoard(BattleSeaController.getInstance().getBoardAsStringBuilder(currentBoard));
+		} catch (IOException | ShipController.InvalidCoordinateException e) {
 //			System.out.printf("Cannot move ship to (x,y)=(%d,%d)%n", newX + 1, newY + 1);
 //			BattleSeaView.getInstance().displayBoard(currentBoard);
 		}

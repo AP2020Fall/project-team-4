@@ -128,6 +128,8 @@ class ClientHandler extends Thread {
                     ReversiController.getInstance().placeDisk(x,y);
                     break;
 
+                case "moveShip":
+
                 case "ReversinextTurn" :
                     ReversiController.getInstance().nextTurn();
                     break;
@@ -177,8 +179,11 @@ class ClientHandler extends Thread {
                 case "stopParticipateInEvent" :
                     EventController.getInstance().stopParticipatingInEvent();
                     break;
-
-
+                case "getCurrentGameInSession":
+                    Game game = GameController.getInstance().getCurrentGameInSession();
+                    dataOutputStream.writeUTF(new Gson().toJson(game));
+                    dataOutputStream.flush();
+                    break;
 
             }
         }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){
