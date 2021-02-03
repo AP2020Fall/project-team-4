@@ -30,17 +30,17 @@
         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
     </rowConstraints>
     <ImageView fx:id="eventImg" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP" />
-    <ImageView fx:id="uploadEventImg" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadImgWrite" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
+    <ImageView fx:id="uploadEventImg" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#uploadImg" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
         <GridPane.margin>
             <Insets left="200.0" top="130.0" />
         </GridPane.margin>
-      <image>
-         <Image url="@../../../Resources/Images/addButton.png" />
-      </image>
+        <image>
+            <Image url="@../../../Resources/Images/addButton.png" />
+        </image>
     </ImageView>
     <HBox alignment="CENTER" spacing="10.0" GridPane.rowIndex="1">
         <VBox alignment="CENTER" spacing="10.0">
@@ -128,9 +128,9 @@
             </Label>
         </VBox>
         <Line endX="10.0" strokeWidth="2.0">
-         <HBox.margin>
-            <Insets bottom="20.0" />
-         </HBox.margin></Line>
+            <HBox.margin>
+                <Insets bottom="20.0" />
+            </HBox.margin></Line>
         <VBox alignment="CENTER" layoutX="161.0" layoutY="10.0" spacing="10.0">
             <GridPane>
                 <columnConstraints>
@@ -179,9 +179,9 @@
                     </SplitMenuButton>
                 </GridPane>
                 <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../Resources/Images/coin.png" />
-               </image>
+                    <image>
+                        <Image url="@../../../Resources/Images/coin.png" />
+                    </image>
                 </ImageView>
             </HBox>
             <Label onMouseClicked="#editCoins" text="edit" textFill="RED">
@@ -221,39 +221,39 @@
         </VBox>
     </HBox>
     <HBox fx:id="topButtonsHbox" maxHeight="50.0" maxWidth="100.0" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-        <Button fx:id="closeStageBtn" layoutX="10.0" layoutY="10.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeStageWrite" style="-fx-background-radius: 25; -fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 50 50;" textFill="#ffb200">
+        <Button fx:id="closeStageBtn" layoutX="10.0" layoutY="10.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-radius: 25; -fx-background-image: url(&quot;@../../../Resources/Images/backButton.png&quot;); -fx-background-size: 50 50;" textFill="#ffb200">
             <font>
                 <Font name="Arial Bold Italic" size="27.0" />
             </font>
         </Button>
-        <Button fx:id="removeEventBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#removeEventWrite" style="-fx-background-radius: 25; -fx-background-image: url(&quot;@../../../Resources/Images/removeButton.png&quot;); -fx-background-size: 50 50;" textFill="#ffb200">
+        <Button fx:id="removeEventBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#removeEvent" style="-fx-background-radius: 25; -fx-background-image: url(&quot;@../../../Resources/Images/removeButton.png&quot;); -fx-background-size: 50 50;" textFill="#ffb200">
             <font>
                 <Font name="Arial Bold Italic" size="27.0" />
             </font>
         </Button>
     </HBox>
     <HBox fx:id="downBtnsHbox" alignment="CENTER" spacing="40.0" GridPane.rowIndex="7">
-       <Button fx:id="joinOrDropoutEventBtn" maxHeight="50.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Join" textFill="#ffb200">
-           <font>
-               <Font name="Arial Bold Italic" size="27.0" />
-           </font>
-       </Button>
-      <Button fx:id="createEventBtn" layoutX="10.0" layoutY="35.0" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" onAction="#createEventWrite" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Create" textFill="#ffb200">
-         <font>
-            <Font name="Arial Bold Italic" size="27.0" />
-         </font>
-      </Button>
-      <Button fx:id="cancelBtn" layoutX="160.0" layoutY="35.0" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" onAction="#closeStageWrite" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Cancel" textFill="#ffb200">
-         <font>
-            <Font name="Arial Bold Italic" size="27.0" />
-         </font>
-      </Button>
-        <Button fx:id="confirmEditsBtn" minHeight="100.0" mnemonicParsing="false" onAction="#confirmEditsWrite" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Confirm&#10;Edits" textAlignment="CENTER" textFill="#ffb200">
+        <Button fx:id="joinOrDropoutEventBtn" maxHeight="50.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Join" textFill="#ffb200">
             <font>
                 <Font name="Arial Bold Italic" size="27.0" />
             </font>
         </Button>
-        <Button fx:id="revertEditsBtn" maxHeight="100.0" maxWidth="140.0" minHeight="100.0" minWidth="140.0" mnemonicParsing="false" onAction="#revertEditsWrite" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Revert&#10;Edits" textAlignment="CENTER" textFill="#ffb200">
+        <Button fx:id="createEventBtn" layoutX="10.0" layoutY="35.0" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" onAction="#createEvent" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Create" textFill="#ffb200">
+            <font>
+                <Font name="Arial Bold Italic" size="27.0" />
+            </font>
+        </Button>
+        <Button fx:id="cancelBtn" layoutX="160.0" layoutY="35.0" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="110.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Cancel" textFill="#ffb200">
+            <font>
+                <Font name="Arial Bold Italic" size="27.0" />
+            </font>
+        </Button>
+        <Button fx:id="confirmEditsBtn" minHeight="100.0" mnemonicParsing="false" onAction="#confirmEdits" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Confirm&#10;Edits" textAlignment="CENTER" textFill="#ffb200">
+            <font>
+                <Font name="Arial Bold Italic" size="27.0" />
+            </font>
+        </Button>
+        <Button fx:id="revertEditsBtn" maxHeight="100.0" maxWidth="140.0" minHeight="100.0" minWidth="140.0" mnemonicParsing="false" onAction="#revertEdits" style="-fx-background-radius: 25; -fx-background-color: darkred;" text="Revert&#10;Edits" textAlignment="CENTER" textFill="#ffb200">
             <font>
                 <Font name="Arial Bold Italic" size="27.0" />
             </font>
@@ -264,17 +264,17 @@
             </font>
         </Label>
     </HBox>
-   <Label fx:id="howToWinPrize" text="-" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-      <font>
-         <Font name="Avenir Book" size="17.0" />
-      </font>
-   </Label>
-   <Button fx:id="eventSettingsBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#openEventSettingsWrite" style="-fx-background-image: url(&quot;https://i.imgur.com/RDAVfUp.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-      <GridPane.margin>
-         <Insets right="10.0" top="10.0" />
-      </GridPane.margin>
-   </Button>
-   <padding>
-      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-   </padding>
+    <Label fx:id="howToWinPrize" text="-" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+        <font>
+            <Font name="Avenir Book" size="17.0" />
+        </font>
+    </Label>
+    <Button fx:id="eventSettingsBtn" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#openEventSettings" style="-fx-background-image: url(&quot;@../../../Resources/Images/settingButton.png&quot;); -fx-background-radius: 25; -fx-background-size: 50 50;" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+        <GridPane.margin>
+            <Insets right="10.0" top="10.0" />
+        </GridPane.margin>
+    </Button>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+    </padding>
 </GridPane>
