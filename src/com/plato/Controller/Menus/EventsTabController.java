@@ -3,6 +3,7 @@ package Controller.Menus;
 import Controller.AccountRelated.AccountController;
 import Controller.AccountRelated.EventController;
 import Controller.MainController;
+import Model.AccountRelated.Account;
 import Model.AccountRelated.Event;
 import Model.AccountRelated.Gamer;
 import com.google.gson.Gson;
@@ -46,42 +47,21 @@ public class EventsTabController implements Initializable {
 	public ListView<GridPane> eventsList;
 	public Pane eventInfo;
 	public GridPane gridPane;
-	private MouseEvent mouseEvent;
-	private ActionEvent actionEvent;
 	private static DataOutputStream dataOutputStream;
 	private static DataInputStream dataInputStream;
 	private static Socket socket;
+	private Object Account;
 
-
-	public EventsTabController() {
-		this.mouseEvent = null;
-		this.actionEvent = null;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		EventsTabController.gamerOrAdmin = gamerOrAdmin;
 	}
 
-	public void filter (ActionEvent actionEvent) {
+	public void filter (ActionEvent actionEvent) throws IOException {
 		LinkedList<Event> eventsToShow;
-		// TODO: 2/3/2021
-		Gamer gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
+		dataOutputStream.flush();
+		Gamer gamer = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
 
 		String showWhich = (showInSession.isSelected() ? "y" : "n") + (showUpcoming.isSelected() ? "y" : "n") + (showParticipatingIn.isSelected() ? "y" : "n");
 
@@ -97,10 +77,8 @@ public class EventsTabController implements Initializable {
 
 		updateList(Event.getSortedEvents(eventsToShow));
 	}
-	public void filterWrite(ActionEvent actionEvent) {
-		MainController.write("EventsTab.filter");
-	}
-	public void createEvent () {
+
+	public void createEvent (ActionEvent actionEvent) {
 		try {
 			EventCreateOrEditPageController.setIsForCreateOrInfo(true);
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
@@ -115,10 +93,7 @@ public class EventsTabController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void createEventWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("EventsTab.createEvent");
-	}
+
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
 		if (gamerOrAdmin)
@@ -195,51 +170,51 @@ public class EventsTabController implements Initializable {
 								new Button() {{
 									try {
 										dataOutputStream.writeUTF("getCurrentAccLoggedIn");
-									} catch (IOException e) {
-										e.printStackTrace();
-									}
-									try {
 										dataOutputStream.flush();
 									} catch (IOException e) {
 										e.printStackTrace();
 									}
 									Gamer currentLoggedIn = null;
 									// TODO: 2/3/2021
-									//	currentLoggedIn = (Gamer) new Gson().fromJson(dataInputStream.readUTF(), (Type) Account);
+									try {
+										currentLoggedIn = (Gamer) new Gson().fromJson(dataInputStream.readUTF(), (Type) Account);
+									} catch (IOException exception) {
+										exception.printStackTrace();
+									}
 									;
 									// is already participating in event
 									if (event.participantExists(currentLoggedIn.getUsername())) {
 										setText("Drop-out");
 										setOnAction(e -> {
 											try {
-												dataOutputStream.writeUTF("stopParticipatingInEvent");
-											} catch (IOException exception) {
-												exception.printStackTrace();
-											}
-											try {
+												dataOutputStream.writeUTF("stopParticipatingInEvent_" + event.getEventID());
 												dataOutputStream.flush();
 											} catch (IOException exception) {
 												exception.printStackTrace();
 											}
-											EventController.getInstance().stopParticipatingInEvent(event.getEventID());
-											filter(new ActionEvent());
+											//EventController.getInstance().stopParticipatingInEvent(event.getEventID());
+											try {
+												filter(new ActionEvent());
+											} catch (IOException exception) {
+												exception.printStackTrace();
+											}
 										});
 									}
 									else {
 										setText("Join");
 										setOnAction(e -> {
 											try {
-												dataOutputStream.writeUTF("participateInEvent");
-											} catch (IOException exception) {
-												exception.printStackTrace();
-											}
-											try {
+												dataOutputStream.writeUTF("participateInEvent_");
 												dataOutputStream.flush();
 											} catch (IOException exception) {
 												exception.printStackTrace();
 											}
 											//EventController.getInstance().participateInEvent(event.getEventID());
-											filter(new ActionEvent());
+											try {
+												filter(new ActionEvent());
+											} catch (IOException exception) {
+												exception.printStackTrace();
+											}
 										});
 									}
 
@@ -311,8 +286,9 @@ public class EventsTabController implements Initializable {
 	}
 
 	private void removeEvent (Event event) throws IOException {
-
-		Event.removeEvent(event.getEventID());
+		dataOutputStream.writeUTF("removeEvent_" + event.getEventID());
+		dataOutputStream.flush();
+	//	Event.removeEvent(event.getEventID());
 		filter(new ActionEvent());
 	}
 
@@ -342,20 +318,12 @@ public class EventsTabController implements Initializable {
 		}
 	}
 
-	public void mouseIsOut () {
+	public void mouseIsOut (MouseEvent mouseEvent) {
 		((Button) mouseEvent.getSource()).setOpacity(0.8);
 	}
-	public void mouseIsOutWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("EventsTab.mouseIsOut");
-	}
-	public void mouseIsOver () {
-		((Button) getMouseEvent().getSource()).setOpacity(1);
-	}
 
-	public void mouseIsOverWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("EventsTab.mouseIsOver");
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		((Button) mouseEvent.getSource()).setOpacity(1);
 	}
 }
 

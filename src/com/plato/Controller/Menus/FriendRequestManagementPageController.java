@@ -43,7 +43,6 @@ public class FriendRequestManagementPageController implements Initializable {
 	private static DataOutputStream dataOutputStream;
 	private static DataInputStream dataInputStream;
 	private static Socket socket;
-	private Object Account;
 
 
 	public static void setStage (Stage stage) {
@@ -57,9 +56,9 @@ public class FriendRequestManagementPageController implements Initializable {
 	}
 
 	private void updateAvailableGamersList () throws IOException {
-		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
-		dataOutputStream.flush();
-		Gamer currentLoggedIn = (Gamer)new Gson().fromJson(dataInputStream.readUTF(), (Type) Account);
+//		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
+//		dataOutputStream.flush();
+		Gamer currentLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
 		availableForFrndReqList.getItems().clear();
 
 		for (Gamer gamer : Gamer.getGamers(Gamer.getAvailableGamersForFrndReq(currentLoggedIn), search.getText())) {
@@ -100,7 +99,13 @@ public class FriendRequestManagementPageController implements Initializable {
 					setPadding(new Insets(2.5, 2.5, 2.5, 2.5));
 					setOnMouseEntered(e -> setOpacity(0.8));
 					setOnMouseExited(e -> setOpacity(1));
-					setOnMouseClicked(e -> sendFriendReqDone(username.getText()));
+					setOnMouseClicked(e -> {
+						try {
+							sendFriendReqDone(username.getText());
+						} catch (IOException exception) {
+							exception.printStackTrace();
+						}
+					});
 				}};
 
 				circle.setCenterX(pfp.getFitHeight() / 2);
@@ -113,18 +118,24 @@ public class FriendRequestManagementPageController implements Initializable {
 		}
 	}
 
-	private void sendFriendReqDone (String usernameTo) {
-		FriendRequestController.getInstance().sendFrndRequest(usernameTo);
+	private void sendFriendReqDone (String usernameTo) throws IOException {
+		dataOutputStream.writeUTF("sendFrndRequest_" + usernameTo);
+		dataOutputStream.flush();
+	//	FriendRequestController.getInstance().sendFrndRequest(usernameTo);
 		availableForFrndReqList.getItems().removeIf(item -> ((Label) item.getChildren().get(1)).getText().equals(usernameTo));
 	}
 
-	private void declineFriendReq (String usernameFrom) {
-		FriendRequestController.getInstance().declineFriendReq(usernameFrom);
+	private void declineFriendReq (String usernameFrom) throws IOException {
+		dataOutputStream.writeUTF("declineFriendReq_" + usernameFrom);
+		dataOutputStream.flush();
+		//FriendRequestController.getInstance().declineFriendReq(usernameFrom);
 		frndReqsGottenList.getItems().removeIf(item -> ((Label) item.getChildren().get(1)).getText().equals(usernameFrom));
 	}
 
-	private void acceptFriendReq (String usernameFrom) {
-		FriendRequestController.getInstance().acceptFriendReq(usernameFrom);
+	private void acceptFriendReq (String usernameFrom) throws IOException {
+		dataOutputStream.writeUTF("acceptFriendReq_" + usernameFrom);
+		dataOutputStream.flush();
+		//FriendRequestController.getInstance().acceptFriendReq(usernameFrom);
 		frndReqsGottenList.getItems().removeIf(item -> ((Label) item.getChildren().get(1)).getText().equals(usernameFrom));
 	}
 
@@ -139,8 +150,7 @@ public class FriendRequestManagementPageController implements Initializable {
 
 
 		for (FriendRequest friendRequest : FriendRequest.getFriendReq(AccountController.getInstance().getCurrentAccLoggedIn().getUsername())) {
-			// TODO: 2/3/2021
-			//Gamer gamerFrom = (Gamer) Account.getAccount(friendRequest.getFromUsername());
+			Gamer gamerFrom = (Gamer) Account.getAccount(friendRequest.getFromUsername());
 
 			Circle circle = new Circle(50);
 
@@ -180,7 +190,13 @@ public class FriendRequestManagementPageController implements Initializable {
 					setPadding(new Insets(5, 5, 5, 5));
 					setOnMouseEntered(e -> setOpacity(0.8));
 					setOnMouseExited(e -> setOpacity(1));
-					setOnMouseClicked(e -> acceptFriendReq(username.getText()));
+					setOnMouseClicked(e -> {
+						try {
+							acceptFriendReq(username.getText());
+						} catch (IOException exception) {
+							exception.printStackTrace();
+						}
+					});
 				}};
 				Button declineBtn = new Button() {{
 					setStyle("-fx-background-image: url('https://i.imgur.com/kMFxd9Q.png');" +
@@ -191,7 +207,13 @@ public class FriendRequestManagementPageController implements Initializable {
 					setPadding(new Insets(5, 5, 5, 5));
 					setOnMouseEntered(e -> setOpacity(0.8));
 					setOnMouseExited(e -> setOpacity(1));
-					setOnMouseClicked(e -> declineFriendReq(username.getText()));
+					setOnMouseClicked(e -> {
+						try {
+							declineFriendReq(username.getText());
+						} catch (IOException exception) {
+							exception.printStackTrace();
+						}
+					});
 				}};
 
 				circle.setCenterX(pfp.getFitHeight() / 2);

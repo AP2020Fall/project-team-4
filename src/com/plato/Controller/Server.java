@@ -1,9 +1,6 @@
 package Controller;
 
-import Controller.AccountRelated.AccountController;
-import Controller.AccountRelated.EventController;
-import Controller.AccountRelated.GamerController;
-import Controller.AccountRelated.MessageController;
+import Controller.AccountRelated.*;
 import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.BattleSea.ShipController;
@@ -11,6 +8,7 @@ import Controller.GameRelated.GameController;
 import Controller.GameRelated.Reversi.ReversiController;
 import Controller.Menus.*;
 import Model.AccountRelated.Account;
+import Model.AccountRelated.Event;
 import Model.GameRelated.BattleSea.Ship;
 import Model.GameRelated.Game;
 import View.Client;
@@ -137,7 +135,6 @@ class ClientHandler extends Thread {
                     ReversiController.getInstance().displayPrevMoves();
                     break;
                 case "editAccField" :
-
                     AccountController.getInstance().editAccField (receivedInfo[1],receivedInfo[2]);
                     break;
                 case "displayLogOfGame" :
@@ -173,20 +170,42 @@ class ClientHandler extends Thread {
 
                     break;
                 case "participateInEvent" :
-                    EventController.getInstance();
+                    EventController.getInstance().participateInEvent(receivedInfo[1]);
                     break;
 
                 case "stopParticipateInEvent" :
-                    EventController.getInstance().stopParticipatingInEvent();
+                    EventController.getInstance().stopParticipatingInEvent(receivedInfo[1]);
                     break;
                 case "getCurrentGameInSession":
                     Game game = GameController.getInstance().getCurrentGameInSession();
                     dataOutputStream.writeUTF(new Gson().toJson(game));
                     dataOutputStream.flush();
                     break;
-
+                case "deleteAccount":
+                    AccountController.getInstance().deleteAccount(receivedInfo[1], receivedInfo[2]);
+                    break;
+                case "removeEvent":
+                    Event.removeEvent(receivedInfo[1]);
+                    break;
+                case "editEvent":
+                    EventController.getInstance().editEvent(EventCreateOrEditPageController.getEvent(), receivedInfo[1], receivedInfo[2]);
+                    break;
+                case "createEvent_" :
+                    //String title, String gameName, String picUrl, LocalDate start, LocalDate end, double eventPrize, String details
+                    double prize = Double.parseDouble(receivedInfo[4]);
+                    EventController.getInstance().createEvent(receivedInfo[1],receivedInfo[2],receivedInfo[3],EventCreateOrEditPageController.getEvent().getStart(), EventCreateOrEditPageController.getEvent().getEnd(),prize,receivedInfo[5]);
+                    break;
+                case "sendFrndRequest":
+                    FriendRequestController.getInstance().sendFrndRequest(receivedInfo[1]);
+                    break;
+                case "declineFriendReq" :
+                    FriendRequestController.getInstance().declineFriendReq(receivedInfo[1]);
+                    break;
+                case "acceptFriendReq" :
+                    FriendRequestController.getInstance().acceptFriendReq(receivedInfo[1]);
+                    break;
             }
-        }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException e){
+        }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException | EventController.GameNameCantBeEmptyException e){
             System.out.println("connection closed!");
             e.printStackTrace();
         } catch (MainController.InvalidFormatException e) {
@@ -203,6 +222,16 @@ class ClientHandler extends Thread {
         } catch (GameController.CantPlayWithAdminException e) {
             e.printStackTrace();
         } catch (MessageController.EmptyMessageException e) {
+            e.printStackTrace();
+        } catch (AccountController.AdminAccountCantBeDeletedException e) {
+            e.printStackTrace();
+        } catch (EventController.StartDateTimeIsAfterEndException e) {
+            e.printStackTrace();
+        } catch (EventController.EndDateTimeHasAlreadyPassedException e) {
+            e.printStackTrace();
+        } catch (EventController.StartDateTimeHasAlreadyPassedException e) {
+            e.printStackTrace();
+        } catch (EventController.CantEditInSessionEventException e) {
             e.printStackTrace();
         }
     }
