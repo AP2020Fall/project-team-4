@@ -7,6 +7,7 @@ import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
+import com.google.gson.Gson;
 import javafx.animation.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -28,6 +29,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.URL;
 import java.util.Collections;
@@ -51,6 +53,7 @@ public class BattleSeaPlayPageController implements Initializable {
 	public GridPane opponentBoardGridpane, yourBoardGridpane;
 	public TilePane clickableOpponentBoardTilePane;
 	private PlayerBattleSea player1, player2;
+	private Object Game;
 	private IntegerProperty secondsRemaining = new SimpleIntegerProperty(maxTime);
 	private Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<>() {
 		@Override
@@ -94,7 +97,17 @@ public class BattleSeaPlayPageController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
-		currentGame = (BattleSea) GameController.getInstance().getCurrentGameInSession();
+		try {
+			dataOutputStream.writeUTF("getCurrentGameInSession_");
+			dataOutputStream.flush();
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+		try {
+			currentGame = (BattleSea) new Gson().fromJson(dataInputStream.readUTF() , (Type) Game);
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
 
 		setShipLabelIDs();
 
