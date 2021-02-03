@@ -26,33 +26,10 @@ public class FriendProfileController implements Initializable {
 	public Label reversiDraws, reversiScore, reversiWins, reversiLosses;
 	public Label battleseaScore, battleseaWins, battleseaLosses, battleseaDraws;
 	public ImageView pfp;
-    private MouseEvent mouseEvent;
-    private ActionEvent actionEvent;
 	private static DataOutputStream dataOutputStream;
 	private static DataInputStream dataInputStream;
 	private static Socket socket;
 
-
-	public FriendProfileController() {
-		this.mouseEvent = null;
-		this.actionEvent = null;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
 
 	public static Gamer getFrnd () {
 		return frnd;

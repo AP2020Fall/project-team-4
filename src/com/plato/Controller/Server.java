@@ -1,9 +1,6 @@
 package Controller;
 
-import Controller.AccountRelated.AccountController;
-import Controller.AccountRelated.EventController;
-import Controller.AccountRelated.GamerController;
-import Controller.AccountRelated.MessageController;
+import Controller.AccountRelated.*;
 import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.BattleSea.ShipController;
@@ -197,6 +194,15 @@ class ClientHandler extends Thread {
                     //String title, String gameName, String picUrl, LocalDate start, LocalDate end, double eventPrize, String details
                     double prize = Double.parseDouble(receivedInfo[4]);
                     EventController.getInstance().createEvent(receivedInfo[1],receivedInfo[2],receivedInfo[3],EventCreateOrEditPageController.getEvent().getStart(), EventCreateOrEditPageController.getEvent().getEnd(),prize,receivedInfo[5]);
+                    break;
+                case "sendFrndRequest":
+                    FriendRequestController.getInstance().sendFrndRequest(receivedInfo[1]);
+                    break;
+                case "declineFriendReq" :
+                    FriendRequestController.getInstance().declineFriendReq(receivedInfo[1]);
+                    break;
+                case "acceptFriendReq" :
+                    FriendRequestController.getInstance().acceptFriendReq(receivedInfo[1]);
                     break;
             }
         }catch (IOException | BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException | EventController.GameNameCantBeEmptyException e){

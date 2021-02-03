@@ -39,8 +39,6 @@ public class FriendsTabController implements Initializable {
 	public ListView<GridPane> frndsList;
 	private static DataInputStream dataInputStream;
 	private static DataOutputStream dataOutputStream;
-	private Object Account;
-
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
 		try {
@@ -52,12 +50,11 @@ public class FriendsTabController implements Initializable {
 
 	public void updateFrndsList (ActionEvent actionEvent) throws IOException {
 		frndsList.getItems().clear();
-		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
-		dataOutputStream.flush();
-		Gamer currentAccLoggedIn = (Gamer) new Gson().fromJson(dataInputStream.readUTF(), (Type) Account);
+//		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
+//		dataOutputStream.flush();
+		Gamer currentAccLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
 		for (String frndUN : currentAccLoggedIn.getFrnds()) {
-			// TODO: 2/3/2021
-			//Gamer frndAcc = (Gamer) Account.getAccount(frndUN);
+			Gamer frndAcc = (Gamer) Account.getAccount(frndUN);
 
 			Circle circle = new Circle(40);
 
@@ -124,7 +121,7 @@ public class FriendsTabController implements Initializable {
 	private void unfriend (String frndUN) throws IOException {
 		dataOutputStream.writeUTF("removeFriend_"+frndUN);
 		dataOutputStream.flush();
-		GamerController.getInstance().removeFriend(frndUN);
+		//GamerController.getInstance().removeFriend(frndUN);
 
 		if (FriendProfileController.getFrnd() != null && FriendProfileController.getFrnd().getUsername().equals(frndUN))
 			frndProfile.getChildren().clear();
@@ -136,7 +133,6 @@ public class FriendsTabController implements Initializable {
 	private void displayFriendProfile (String frndUn) {
 		try {
 			frndProfile.getChildren().clear();
-			// TODO: 2/3/2021
 			FriendProfileController.setFrnd((Gamer) Account.getAccount(frndUn));
 			frndProfile.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/FriendProfile.fxml").toURI().toURL()));
 			GridPane.setValignment(frndProfile.getChildren().get(0), VPos.CENTER);
