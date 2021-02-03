@@ -156,7 +156,7 @@ public class FriendRequestManagementPageController implements Initializable {
 				}});
 
 				ImageView pfp = new ImageView() {{
-					// TODO: 2/3/2021  
+					// TODO: 2/3/2021
 					setImage(new Image(gamerFrom.getPfpUrl()));
 					setSmooth(true);
 					setPreserveRatio(true);
