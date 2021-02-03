@@ -5,6 +5,7 @@ import Controller.AccountRelated.GamerController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,6 +30,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -37,18 +39,25 @@ public class FriendsTabController implements Initializable {
 	public ListView<GridPane> frndsList;
 	private static DataInputStream dataInputStream;
 	private static DataOutputStream dataOutputStream;
+	private Object Account;
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		updateFrndsList(new ActionEvent());
+		try {
+			updateFrndsList(new ActionEvent());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void updateFrndsList (ActionEvent actionEvent) {
+	public void updateFrndsList (ActionEvent actionEvent) throws IOException {
 		frndsList.getItems().clear();
-
-		Gamer currentAccLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
+		dataOutputStream.flush();
+		Gamer currentAccLoggedIn = (Gamer) new Gson().fromJson(dataInputStream.readUTF(), (Type) Account);
 		for (String frndUN : currentAccLoggedIn.getFrnds()) {
-			Gamer frndAcc = (Gamer) Account.getAccount(frndUN);
+			// TODO: 2/3/2021
+			//Gamer frndAcc = (Gamer) Account.getAccount(frndUN);
 
 			Circle circle = new Circle(40);
 
@@ -127,6 +136,7 @@ public class FriendsTabController implements Initializable {
 	private void displayFriendProfile (String frndUn) {
 		try {
 			frndProfile.getChildren().clear();
+			// TODO: 2/3/2021
 			FriendProfileController.setFrnd((Gamer) Account.getAccount(frndUn));
 			frndProfile.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/FriendProfile.fxml").toURI().toURL()));
 			GridPane.setValignment(frndProfile.getChildren().get(0), VPos.CENTER);

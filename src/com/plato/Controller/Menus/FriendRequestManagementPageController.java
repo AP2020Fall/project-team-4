@@ -1,11 +1,12 @@
 package Controller.Menus;
 
+
 import Controller.AccountRelated.AccountController;
 import Controller.AccountRelated.FriendRequestController;
-import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.FriendRequest;
 import Model.AccountRelated.Gamer;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -25,6 +26,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -34,45 +40,26 @@ public class FriendRequestManagementPageController implements Initializable {
 	public GridPane sendFrndReqWindow;
 	public TextField search;
 	public Label clearSearch;
-	private  MouseEvent mouseEvent;
-	private  ActionEvent actionEvent;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static Socket socket;
+	private Object Account;
 
-	public FriendRequestManagementPageController() {
-		this.mouseEvent =null;
-		this.actionEvent = null;
-	}
-
-	public MouseEvent getMouseEvent() {
-		return mouseEvent;
-	}
-
-	public ActionEvent getActionEvent() {
-		return actionEvent;
-	}
-
-	public void setMouseEvent(MouseEvent mouseEvent) {
-		this.mouseEvent = mouseEvent;
-	}
-
-	public void setActionEvent(ActionEvent actionEvent) {
-		this.actionEvent = actionEvent;
-	}
 
 	public static void setStage (Stage stage) {
 		FriendRequestManagementPageController.stage = stage;
 		FriendRequestManagementPageController.stage.setOnCloseRequest(e -> FriendRequestManagementPageController.stage = null);
 	}
 
-	public void sendFriendReq () {
+	public void sendFriendReq (ActionEvent actionEvent) throws IOException {
 		sendFrndReqWindow.setVisible(true);
 		updateAvailableGamersList();
 	}
-	public void friendRequestManagementPageWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("FriendRequestManagementPage.sendFriendReq");
-	}
-	private void updateAvailableGamersList () {
-		Gamer currentLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+
+	private void updateAvailableGamersList () throws IOException {
+		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
+		dataOutputStream.flush();
+		Gamer currentLoggedIn = (Gamer)new Gson().fromJson(dataInputStream.readUTF(), (Type) Account);
 		availableForFrndReqList.getItems().clear();
 
 		for (Gamer gamer : Gamer.getGamers(Gamer.getAvailableGamersForFrndReq(currentLoggedIn), search.getText())) {
@@ -141,12 +128,8 @@ public class FriendRequestManagementPageController implements Initializable {
 		frndReqsGottenList.getItems().removeIf(item -> ((Label) item.getChildren().get(1)).getText().equals(usernameFrom));
 	}
 
-	public void closeStage () {
+	public void closeStage (ActionEvent actionEvent) {
 		stage.close();
-	}
-	public void closeStageWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("FriendRequestManagementPage.closeStage");
 	}
 
 	@Override
@@ -156,7 +139,8 @@ public class FriendRequestManagementPageController implements Initializable {
 
 
 		for (FriendRequest friendRequest : FriendRequest.getFriendReq(AccountController.getInstance().getCurrentAccLoggedIn().getUsername())) {
-			Gamer gamerFrom = (Gamer) Account.getAccount(friendRequest.getFromUsername());
+			// TODO: 2/3/2021
+			//Gamer gamerFrom = (Gamer) Account.getAccount(friendRequest.getFromUsername());
 
 			Circle circle = new Circle(50);
 
@@ -172,6 +156,7 @@ public class FriendRequestManagementPageController implements Initializable {
 				}});
 
 				ImageView pfp = new ImageView() {{
+					// TODO: 2/3/2021  
 					setImage(new Image(gamerFrom.getPfpUrl()));
 					setSmooth(true);
 					setPreserveRatio(true);
@@ -220,37 +205,31 @@ public class FriendRequestManagementPageController implements Initializable {
 		}
 		clearSearch.setOnMouseClicked(e -> search.setText(""));
 
-		search.textProperty().addListener((observableValue, s, t1) -> updateAvailableGamersList());
+		search.textProperty().addListener((observableValue, s, t1) -> {
+			try {
+				updateAvailableGamersList();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
-	public void closeFriendReqSendingWindow () {
+	public void closeFriendReqSendingWindow (ActionEvent actionEvent) {
 		sendFrndReqWindow.setVisible(false);
 		search.setText("");
 	}
-	public void closeFriendReqSendingWindowWrite(ActionEvent actionEvent) {
-		setActionEvent(actionEvent);
-		MainController.write("FriendRequestManagementPage.closeFriendRequestSendingWindow");
+
+	public void mouseIsOver (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Button)
+			((Button) mouseEvent.getSource()).setOpacity(0.8);
+		else if (mouseEvent.getSource() instanceof Label)
+			((Label) mouseEvent.getSource()).setOpacity(0.8);
 	}
 
-	public void mouseIsOver () {
-		if (getMouseEvent().getSource() instanceof Button)
-			((Button) getMouseEvent().getSource()).setOpacity(0.8);
-		else if (getMouseEvent().getSource() instanceof Label)
-			((Label) getMouseEvent().getSource()).setOpacity(0.8);
-	}
-	public void mouseIsOverWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("FriendRequestManagementPage.mouseIsOver");
-	}
-
-	public void mouseIsOut () {
-		if (getMouseEvent().getSource() instanceof Button)
-			((Button) getMouseEvent().getSource()).setOpacity(1);
-		else if (getMouseEvent().getSource() instanceof Label)
-			((Label)getMouseEvent().getSource()).setOpacity(1);
-	}
-	public void mouseIsOutWrite(MouseEvent mouseEvent) {
-		setMouseEvent(mouseEvent);
-		MainController.write("FriendRequestManagementPage.mouseIsOut");
+	public void mouseIsOut (MouseEvent mouseEvent) {
+		if (mouseEvent.getSource() instanceof Button)
+			((Button) mouseEvent.getSource()).setOpacity(1);
+		else if (mouseEvent.getSource() instanceof Label)
+			((Label) mouseEvent.getSource()).setOpacity(1);
 	}
 }
