@@ -64,6 +64,8 @@ public class AdminGameReco {
 	}
 
 	public static void setRecommendations (LinkedList<AdminGameReco> recommendations) {
+		if (recommendations == null)
+			recommendations = new LinkedList<>();
 		AdminGameReco.recommendations = recommendations;
 	}
 

@@ -26,6 +26,8 @@ public class IDGenerator {
 	}
 
 	public static void setAllIDsGenerated (LinkedList<String> allIDsGenerated) {
+		if (allIDsGenerated == null)
+			allIDsGenerated = new LinkedList<>();
 		IDGenerator.allIDsGenerated = allIDsGenerated;
 	}
 }

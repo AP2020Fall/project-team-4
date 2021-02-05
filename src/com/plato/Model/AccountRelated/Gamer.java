@@ -1,7 +1,5 @@
 package Model.AccountRelated;
 
-import javafx.scene.image.Image;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
@@ -68,7 +66,8 @@ public class Gamer extends Account {
 	}
 
 	public static void setGamers (LinkedList<Gamer> gamers) {
-		getAccounts().addAll(gamers);
+		if (gamers != null)
+			getAccounts().addAll(gamers);
 	}
 
 	public boolean frndExists (String un) {
@@ -165,6 +164,6 @@ public class Gamer extends Account {
 
 	public void removeFaveGame (String gameName) {
 		if (faveGames.contains(gameName))
-		faveGames.remove(gameName);
+			faveGames.remove(gameName);
 	}
 }

@@ -20,6 +20,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.SecureRandom;
+import java.sql.Connection;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.LinkedList;
@@ -36,6 +37,7 @@ public class Server {
 	}
 
 	public static void main (String[] args) throws IOException {
+		MainController.getInstance().deserializeEverything();
 		System.out.println("Server : server started");
 		serverSocket = new ServerSocket(Client.port);
 		while (true) {
@@ -100,7 +102,6 @@ class ClientHandler extends Thread {
 				//receive from client
 				String received = dataInputStream.readUTF();
 				String[] receivedInfo = received.split("_");
-				System.out.println("received = " + received);
 				System.out.println("receivedInfo = " + Arrays.toString(receivedInfo));
 				switch (receivedInfo[0]) {
 					case "canThrowBomb":
@@ -242,6 +243,7 @@ class ClientHandler extends Thread {
 	private void clientDisconnected () throws IOException {
 		socket.close();
 		System.out.println("connection closed!");
+		MainController.getInstance().saveEverything();
 	}
 }
 

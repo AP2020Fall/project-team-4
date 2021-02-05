@@ -93,18 +93,8 @@ public class BattleSea extends Game {
 	 * only used for gson, to add all the extracted battlesea games
 	 */
 	public static void setAllGames (LinkedList<BattleSea> allGames) {
-		Game.getAllGames().addAll(allGames);
-	}
-
-	/**
-	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended
-	 */
-	@Override
-	public boolean gameEnded () {
-		PlayerBattleSea player1 = (PlayerBattleSea) getListOfPlayers().get(0),
-				player2 = (PlayerBattleSea) getListOfPlayers().get(1);
-
-		return player2.getShips(false).size() == 0 || player1.getShips(false).size() == 0;
+		if (allGames != null)
+			Game.getAllGames().addAll(allGames);
 	}
 
 	@Override
@@ -118,6 +108,17 @@ public class BattleSea extends Game {
 			return listOfPlayers.get(1).getGamer();
 
 		return null; // draw
+	}
+
+	/**
+	 * @return true if board is full or one of the players has 0 disks, etc. in general true if game has ended
+	 */
+	@Override
+	public boolean gameEnded () {
+		PlayerBattleSea player1 = (PlayerBattleSea) getListOfPlayers().get(0),
+				player2 = (PlayerBattleSea) getListOfPlayers().get(1);
+
+		return player2.getShips(false).size() == 0 || player1.getShips(false).size() == 0;
 	}
 
 	@Override

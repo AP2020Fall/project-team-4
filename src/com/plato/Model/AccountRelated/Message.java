@@ -34,6 +34,8 @@ public class Message {
 	}
 
 	public static void setAllMessages (LinkedList<Message> allMessages) {
+		if (allMessages == null)
+			allMessages = new LinkedList<>();
 		Message.allMessages = allMessages;
 	}
 

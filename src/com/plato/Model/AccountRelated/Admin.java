@@ -1,7 +1,5 @@
 package Model.AccountRelated;
 
-import javafx.scene.image.Image;
-
 public class Admin extends Account {
 	protected Admin (String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum) {
 		super(pfp, firstName, lastName, username, password, email, phoneNum);
@@ -21,7 +19,8 @@ public class Admin extends Account {
 	}
 
 	public static void setAdmin (Admin admin) {
-		getAccounts().add(admin);
+		if (admin != null)
+			getAccounts().add(admin);
 	}
 
 	public static boolean adminHasBeenCreated () {
