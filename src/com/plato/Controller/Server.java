@@ -82,6 +82,18 @@ class ClientHandler extends Thread {
 		clients.addLast(this);
 	}
 
+	public static LinkedList<ClientHandler> getClients() {
+		return clients;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
 	public Socket getSocket () {
 		return socket;
 	}
