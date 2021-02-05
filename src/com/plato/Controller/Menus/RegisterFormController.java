@@ -125,7 +125,7 @@ public class RegisterFormController implements Initializable {
 								lastName.getText() + "_" +
 								email.getText() + "_" +
 								phoneNum.getText() + "_" +
-								coinMenu.getText()
+								(coinMenu.getText().equalsIgnoreCase("coins") ? 0 : coinMenu.getText())
 				);
 				dataOutputStream.flush();
 			} catch (IOException ioException) {

@@ -1,6 +1,5 @@
 package Model.GameRelated.Reversi;
 
-import Controller.Menus.ReversiGameController;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import javafx.beans.property.BooleanProperty;
@@ -79,7 +78,12 @@ public class Reversi extends Game {
 	 * only used for gson, to add all the extracted reversi games
 	 */
 	public static void setAllGames (LinkedList<Reversi> allGames) {
-		Game.getAllGames().addAll(allGames);
+		if (allGames != null)
+			Game.getAllGames().addAll(allGames);
+	}
+
+	public static boolean checkCoordinates (int number) {
+		return number >= 1 && number <= 8;
 	}
 
 	/**
@@ -247,8 +251,8 @@ public class Reversi extends Game {
 	}
 
 	/**
-	 * @param x from 1 to 8
-	 * @param y from 1 to 8
+	 * @param x     from 1 to 8
+	 * @param y     from 1 to 8
 	 * @param color disk color
 	 */
 	public void addMove (int x, int y, String color) {
@@ -342,10 +346,6 @@ public class Reversi extends Game {
 					}
 			}
 		return availableCoordinates;
-	}
-
-	public static boolean checkCoordinates (int number) {
-		return number >= 1 && number <= 8;
 	}
 
 	//empties board , blank space is shown with -

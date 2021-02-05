@@ -77,6 +77,8 @@ public abstract class Event {
 
 	// برای deserialize کردن
 	public static void setEvents (LinkedList<Event> events) {
+		if (events == null)
+			events = new LinkedList<>();
 		Event.events = events;
 	}
 
@@ -287,6 +289,16 @@ class MVPEvent extends Event {
 		getParticipants().add(new MVPEventParticipant(gamer.getUsername()));
 	}
 
+	@Override
+	public String getGameName () {
+		return gameName;
+	}
+
+	@Override
+	public String getHowTo () {
+		return "get to the #1 spot on the scoreboard for " + gameName + " until " + getEnd().format(DateTimeFormatter.ofPattern("dth of MMMM")) + " to get the prize";
+	}
+
 	public Gamer getMvp () {
 		return GameLog.getAllGamersWhoPlayedGame(gameName).stream()
 				.sorted((gamer1, gamer2) -> {
@@ -308,16 +320,6 @@ class MVPEvent extends Event {
 				})
 				.collect(Collectors.toCollection(LinkedList::new))
 				.get(0);
-	}
-
-	@Override
-	public String getGameName () {
-		return gameName;
-	}
-
-	@Override
-	public String getHowTo () {
-		return "get to the #1 spot on the scoreboard for " + gameName + " until " + getEnd().format(DateTimeFormatter.ofPattern("dth of MMMM")) + " to get the prize";
 	}
 }
 
@@ -344,13 +346,6 @@ class LoginEvent extends Event {
 				});
 	}
 
-	public LinkedList<LoginEventParticipant> getWinners () {
-		return getParticipants().stream()
-				.map(participant -> ((LoginEventParticipant) participant))
-				.filter(participant -> participant.getNumberOfLogins() >= numberOfRequired)
-				.collect(Collectors.toCollection(LinkedList::new));
-	}
-
 	@Override
 	public void addParticipant (Gamer gamer) {
 		getParticipants().add(new LoginEventParticipant(gamer.getUsername()));
@@ -364,6 +359,13 @@ class LoginEvent extends Event {
 	@Override
 	public String getHowTo () {
 		return "login " + numberOfRequired + " time" + (numberOfRequired == 1 ? "" : "s") + " until " + getEnd().format(DateTimeFormatter.ofPattern("dth of MMMM")) + " to get the prize";
+	}
+
+	public LinkedList<LoginEventParticipant> getWinners () {
+		return getParticipants().stream()
+				.map(participant -> ((LoginEventParticipant) participant))
+				.filter(participant -> participant.getNumberOfLogins() >= numberOfRequired)
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 }
 
@@ -404,13 +406,6 @@ class NumberOfPlayedEvent extends Event {
 				});
 	}
 
-	public LinkedList<NumberOfPlayedEventParticipant> getWinners () {
-		return getParticipants().stream()
-				.map(participant -> ((NumberOfPlayedEventParticipant) participant))
-				.filter(participant -> participant.getNumberOfPlayed() >= numberOfRequired)
-				.collect(Collectors.toCollection(LinkedList::new));
-	}
-
 	@Override
 	public void addParticipant (Gamer gamer) {
 		getParticipants().add(new NumberOfPlayedEventParticipant(gamer.getUsername()));
@@ -424,6 +419,13 @@ class NumberOfPlayedEvent extends Event {
 	@Override
 	public String getHowTo () {
 		return "play " + gameName + " " + numberOfRequired + " time" + (numberOfRequired == 1 ? "" : "s") + " until " + getEnd().format(DateTimeFormatter.ofPattern("dth of MMMM")) + " to get the prize";
+	}
+
+	public LinkedList<NumberOfPlayedEventParticipant> getWinners () {
+		return getParticipants().stream()
+				.map(participant -> ((NumberOfPlayedEventParticipant) participant))
+				.filter(participant -> participant.getNumberOfPlayed() >= numberOfRequired)
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 }
 
@@ -464,13 +466,6 @@ class NumberOfWinsEvent extends Event {
 				});
 	}
 
-	public LinkedList<NumberOfWinsEventParticipant> getWinners () {
-		return getParticipants().stream()
-				.map(participant -> ((NumberOfWinsEventParticipant) participant))
-				.filter(participant -> participant.getNumberOfWins() >= numberOfRequired)
-				.collect(Collectors.toCollection(LinkedList::new));
-	}
-
 	@Override
 	public void addParticipant (Gamer gamer) {
 		getParticipants().add(new NumberOfWinsEventParticipant(gamer.getUsername()));
@@ -484,6 +479,13 @@ class NumberOfWinsEvent extends Event {
 	@Override
 	public String getHowTo () {
 		return "win " + gameName + " " + numberOfRequired + " time" + (numberOfRequired == 1 ? "" : "s") + " until " + getEnd().format(DateTimeFormatter.ofPattern("dth of MMMM")) + " to get the prize";
+	}
+
+	public LinkedList<NumberOfWinsEventParticipant> getWinners () {
+		return getParticipants().stream()
+				.map(participant -> ((NumberOfWinsEventParticipant) participant))
+				.filter(participant -> participant.getNumberOfWins() >= numberOfRequired)
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 }
 
@@ -527,13 +529,6 @@ class WinGameNTimesConsecutiveLyEvent extends Event {
 				});
 	}
 
-	public LinkedList<WinGameNTimesConsecutiveLyEventParticipant> getWinners () {
-		return getParticipants().stream()
-				.map(participant -> ((WinGameNTimesConsecutiveLyEventParticipant) participant))
-				.filter(participant -> participant.getNumberOfWins() >= numberOfRequired)
-				.collect(Collectors.toCollection(LinkedList::new));
-	}
-
 	@Override
 	public void addParticipant (Gamer gamer) {
 		getParticipants().add(new WinGameNTimesConsecutiveLyEventParticipant(gamer.getUsername()));
@@ -547,5 +542,12 @@ class WinGameNTimesConsecutiveLyEvent extends Event {
 	@Override
 	public String getHowTo () {
 		return "win " + gameName + " " + numberOfRequired + " time" + (numberOfRequired == 1 ? "" : "s") + " consecutively until " + getEnd().format(DateTimeFormatter.ofPattern("dth of MMMM")) + " to get the prize";
+	}
+
+	public LinkedList<WinGameNTimesConsecutiveLyEventParticipant> getWinners () {
+		return getParticipants().stream()
+				.map(participant -> ((WinGameNTimesConsecutiveLyEventParticipant) participant))
+				.filter(participant -> participant.getNumberOfWins() >= numberOfRequired)
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 }
