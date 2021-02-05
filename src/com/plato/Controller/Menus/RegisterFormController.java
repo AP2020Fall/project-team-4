@@ -114,15 +114,15 @@ public class RegisterFormController implements Initializable {
 			}
 			return;
 		} catch (MainController.SuccessfulOperationException e) {
-//          public void register (String pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney)
+//				(Class accType, String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money)
 			try {
 				dataOutputStream.writeUTF(
 						"register" + (Admin.adminHasBeenCreated() ? Gamer.class : Admin.class).getSimpleName() + "_" +
 								pfp.getImage().getUrl() + "_" +
-								username + "_" +
-								password + "_" +
 								firstName.getText() + "_" +
 								lastName.getText() + "_" +
+								username + "_" +
+								password + "_" +
 								email.getText() + "_" +
 								phoneNum.getText() + "_" +
 								(coinMenu.getText().equalsIgnoreCase("coins") ? 0 : coinMenu.getText())

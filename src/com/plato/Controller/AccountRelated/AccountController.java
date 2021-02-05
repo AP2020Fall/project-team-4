@@ -18,7 +18,7 @@ public class AccountController {
 		return accountController;
 	}
 
-	public void login (String username, String password, boolean rememberMe) throws MainController.InvalidFormatException, NoAccountExistsWithUsernameException, PaswordIncorrectException, SuccessfulLogin {
+	public void login (String username, String password, boolean rememberMe) throws MainController.InvalidFormatException, NoAccountExistsWithUsernameException, PaswordIncorrectException, MainController.SuccessfulOperationException {
 
 		if (!username.matches("[!-~]+"))
 			throw new MainController.InvalidFormatException("Username");
@@ -29,7 +29,7 @@ public class AccountController {
 		if (!Account.getAccount(username).isPasswordCorrect(password))
 			throw new PaswordIncorrectException();
 
-		throw new SuccessfulLogin();
+		throw new MainController.SuccessfulOperationException();
 //		saveLoginInfo = rememberMe;
 //		currentAccLoggedIn = Account.getAccount(username);
 	}

@@ -10,7 +10,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 
-public abstract class Account {
+public class Account {
 	protected static LinkedList<Account> accounts = new LinkedList<>();
 	private String firstName, lastName, username, password, userID, email, phoneNum;
 	private String pfpUrl;

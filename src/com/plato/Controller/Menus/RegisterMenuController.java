@@ -85,14 +85,6 @@ public class RegisterMenuController implements Initializable {
 	public void signUp (ActionEvent actionEvent) throws IOException {
 
 		String password = (showPwOrNot.getImage().getUrl().contains("invisible") ? pwFieldpwShown : pwFieldpwHidden).getText();
-//		dataOutputStream.writeUTF("register_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _ _0");
-//		dataOutputStream.flush();
-		try {
-			AccountController.getInstance().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
-		} catch (MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException | MainController.SuccessfulOperationException e) {
-			e.printStackTrace();
-		}
-		//AccountController.getClient().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
 		try {
 			AccountController.getInstance().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
 		} catch (AccountController.AccountWithUsernameAlreadyExistsException e) {

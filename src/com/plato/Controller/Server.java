@@ -197,11 +197,13 @@ class ClientHandler extends Thread {
 						break;
 					case "registerAdmin":
 						double initMoney = Double.parseDouble(receivedInfo[8]);
+//						(Class accType, String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money)
 						Account.addAccount(Admin.class, "https://i.imgur.com/IIyNCG4.png", receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
 						MainController.getInstance().serializeAdmin();
 						break;
 					case "registerGamer":
 						initMoney = Double.parseDouble(receivedInfo[8]);
+//						(Class accType, String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money)
 						Account.addAccount(Gamer.class, receivedInfo[1], receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
 						MainController.getInstance().serializeGamers();
 						break;
