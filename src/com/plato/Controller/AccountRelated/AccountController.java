@@ -166,6 +166,12 @@ public class AccountController {
 		}
 	}
 
+	public static class SuccessfulLogin extends MainController.SuccessfulOperationException {
+		public SuccessfulLogin () {
+			super();
+		}
+	}
+
 	public static class AccountWithUsernameAlreadyExistsException extends Exception {
 		public AccountWithUsernameAlreadyExistsException () {
 			super("An Account already exists with this username.");
@@ -178,11 +184,7 @@ public class AccountController {
 		}
 	}
 
-	public static class SuccessfulLogin extends Throwable {
-		public SuccessfulLogin () {
-			super("successfully logged in");
-		}
-	}
+
 
 	public static class AdminAccountCantBeDeletedException extends Exception {
 		public AdminAccountCantBeDeletedException () {
