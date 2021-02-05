@@ -119,7 +119,7 @@ class ClientHandler extends Thread {
 				//System.out.println(token);
 				switch (receivedInfo[0]) {
 					case "getAllAccounts":
-						dataOutputStream.writeUTF(new Gson().toJson(Account.getAccounts()));
+						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(Account.getAccounts()));
 						dataOutputStream.flush();
 					case "canThrowBomb":
 						int x = Integer.parseInt(receivedInfo[1]);
@@ -147,6 +147,12 @@ class ClientHandler extends Thread {
 					case "getCurrentAccLoggedIn":
 						Account account = AccountController.getInstance().getCurrentAccLoggedIn();
 						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(account));
+						dataOutputStream.flush();
+						break;
+
+					case "getCurrentAccLoggedInAsGamer":
+						Gamer gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(gamer));
 						dataOutputStream.flush();
 						break;
 
@@ -248,6 +254,11 @@ class ClientHandler extends Thread {
 						break;
 					case "acceptFriendReq":
 						FriendRequestController.getInstance().acceptFriendReq(receivedInfo[1]);
+						break;
+					case "getFrnds" :
+						gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+						dataOutputStream.writeUTF( MainController.getInstance().getGson().toJson(gamer.getFrnds()));
+						dataOutputStream.flush();
 						break;
 				}
 			} catch (IOException e) {
