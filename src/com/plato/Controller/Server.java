@@ -15,11 +15,13 @@ import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import View.GameRelated.BattleSea.BattleSeaView;
 import com.google.gson.Gson;
+import org.iq80.snappy.Main;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.SecureRandom;
+import java.sql.Connection;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.LinkedList;
@@ -36,6 +38,7 @@ public class Server {
 	}
 
 	public static void main (String[] args) throws IOException {
+		MainController.getInstance().deserializeEverything();
 		System.out.println("Server : server started");
 		serverSocket = new ServerSocket(Client.port);
 		while (true) {
@@ -112,8 +115,8 @@ class ClientHandler extends Thread {
 				//receive from client
 				String received = dataInputStream.readUTF();
 				String[] receivedInfo = received.split("_");
-				System.out.println("received = " + received);
 				System.out.println("receivedInfo = " + Arrays.toString(receivedInfo));
+				//System.out.println(token);
 				switch (receivedInfo[0]) {
 					case "canThrowBomb":
 						int x = Integer.parseInt(receivedInfo[1]);
@@ -194,10 +197,13 @@ class ClientHandler extends Thread {
 					case "registerAdmin":
 						double initMoney = Double.parseDouble(receivedInfo[8]);
 						Account.addAccount(Admin.class, "https://i.imgur.com/IIyNCG4.png", receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
+						MainController.getInstance().serializeAdmin();
 						break;
 					case "registerGamer":
 						initMoney = Double.parseDouble(receivedInfo[8]);
 						Account.addAccount(Gamer.class, receivedInfo[1], receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
+						MainController.getInstance().serializeGamers();
+						break;
 					case "sendMsg":
 						MessageController.getInstance().sendMsg(UserProfileForAdminController.getGamer(), receivedInfo[1]);
 						break;
@@ -256,6 +262,7 @@ class ClientHandler extends Thread {
 	private void clientDisconnected () throws IOException {
 		socket.close();
 		System.out.println("connection closed!");
+		MainController.getInstance().saveEverything();
 	}
 }
 
