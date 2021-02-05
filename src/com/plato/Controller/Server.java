@@ -15,7 +15,6 @@ import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import View.GameRelated.BattleSea.BattleSeaView;
 import com.google.gson.Gson;
-import javafx.scene.image.Image;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -64,10 +63,10 @@ public class Server {
 
 
 class ClientHandler extends Thread {
+	private static LinkedList<ClientHandler> clients = new LinkedList<>();
 	private final Socket socket;
 	private DataOutputStream dataOutputStream;
 	private DataInputStream dataInputStream;
-	private static LinkedList<ClientHandler> clients = new LinkedList<>();
 	private Account account;
 	private String token;
 
@@ -179,12 +178,12 @@ class ClientHandler extends Thread {
 						token = Server.generateTokenForUser(account.getUsername());
 						break;
 					case "registerAdmin":
-						//	Account.addAccount(Admin.class, new Image("https://i.imgur.com/IIyNCG4.png"), firstName, lastName, username, password, email, phoneNum, 0);
+						double initMoney = Double.parseDouble(receivedInfo[8]);
 						Account.addAccount(Admin.class, "https://i.imgur.com/IIyNCG4.png", receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
 						break;
 					case "registerGamer":
-//                    public void register (String pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney)
-						Account.addAccount(Gamer.class, received[1], receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
+						initMoney = Double.parseDouble(receivedInfo[8]);
+						Account.addAccount(Gamer.class, receivedInfo[1], receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
 					case "sendMsg":
 						MessageController.getInstance().sendMsg(UserProfileForAdminController.getGamer(), receivedInfo[1]);
 						break;
@@ -236,7 +235,6 @@ class ClientHandler extends Thread {
 				}
 			} catch (BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException | EventController.GameNameCantBeEmptyException | MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException | AccountController.PaswordIncorrectException | AccountController.NoAccountExistsWithUsernameException | GameController.CantPlayWithYourselfException | GameController.CantPlayWithAdminException | MessageController.EmptyMessageException | AccountController.AdminAccountCantBeDeletedException | EventController.StartDateTimeIsAfterEndException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException | EventController.CantEditInSessionEventException
 					e) {
-				System.out.println(e.getMessage());
 			}
 		}
 	}

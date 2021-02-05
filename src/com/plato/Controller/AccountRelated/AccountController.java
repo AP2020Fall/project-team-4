@@ -49,7 +49,7 @@ public class AccountController {
 		Account.removeAccount(username);
 	}
 
-	public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException {
+	public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException, MainController.SuccessfulOperationException {
 
 		if (!username.matches("[!-~]+"))
 			throw new MainController.InvalidFormatException("Username");

@@ -1,9 +1,10 @@
 package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
+import Controller.Client;
 import Controller.MainController;
 import Model.AccountRelated.Admin;
-import Controller.Client;
+import Model.AccountRelated.Gamer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,6 +28,8 @@ import java.util.ResourceBundle;
 public class RegisterFormController implements Initializable {
 	private static Stage stage;
 	private static String username, password;
+	private static DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
 	public ImageView pfp, coinImg, uploadPfp;
 	public SplitMenuButton coinMenu;
 	public TextField firstName, lastName, email, phoneNum;
@@ -34,8 +37,6 @@ public class RegisterFormController implements Initializable {
 	public HBox coinHBox;
 	public GridPane mainGridPane;
 	private boolean isForAdmin;
-	private static DataInputStream dataInputStream;
-	private static DataOutputStream dataOutputStream;
 
 	public static void setPassword (String password) {
 		RegisterFormController.password = password;
@@ -51,6 +52,12 @@ public class RegisterFormController implements Initializable {
 			username = null;
 			password = null;
 			RegisterFormController.stage = null;
+		});
+	}
+
+	public static void adjustWidthBasedOnTextLength (Label label) {
+		label.textProperty().addListener((observable, oldValue, newValue) -> {
+			label.setPrefWidth(label.getText().length() * 7); // why 7? Totally trial number.
 		});
 	}
 
@@ -76,12 +83,6 @@ public class RegisterFormController implements Initializable {
 		}
 	}
 
-	public static void adjustWidthBasedOnTextLength (Label label) {
-		label.textProperty().addListener((observable, oldValue, newValue) -> {
-			label.setPrefWidth(label.getText().length() * 7); // why 7? Totally trial number.
-		});
-	}
-
 	public void uploadPfp (MouseEvent mouseEvent) {
 		System.out.println("RegisterFormController.uploadPfp");
 		MainController.openUploadPfpWindow(stage, pfp);
@@ -95,7 +96,6 @@ public class RegisterFormController implements Initializable {
 		} catch (NumberFormatException e) { money = 0; }
 
 		try {
-			// TODO: 2/3/2021
 			AccountController.getInstance().register(pfp.getImage(), username, password, firstName.getText(), lastName.getText(), email.getText(), phoneNum.getText(), money);
 		} catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
 			return;
@@ -113,6 +113,24 @@ public class RegisterFormController implements Initializable {
 				phoneNumError.setText(e.getMessage());
 			}
 			return;
+		} catch (MainController.SuccessfulOperationException e) {
+//          public void register (String pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney)
+			try {
+				dataOutputStream.writeUTF(
+						"register" + (Admin.adminHasBeenCreated() ? Gamer.class : Admin.class).getSimpleName() + "_" +
+								pfp.getImage().getUrl() + "_" +
+								username + "_" +
+								password + "_" +
+								firstName.getText() + "_" +
+								lastName.getText() + "_" +
+								email.getText() + "_" +
+								phoneNum.getText() + "_" +
+								coinMenu.getText()
+				);
+				dataOutputStream.flush();
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+			}
 		}
 		stage.close();
 		RegisterMenuController.getStage().close();

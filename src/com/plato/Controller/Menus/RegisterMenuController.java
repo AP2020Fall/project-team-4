@@ -89,18 +89,8 @@ public class RegisterMenuController implements Initializable {
 //		dataOutputStream.flush();
 		try {
 			AccountController.getInstance().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
-		} catch (MainController.InvalidFormatException e) {
+		} catch (MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException | MainController.SuccessfulOperationException e) {
 			e.printStackTrace();
-		} catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
-			e.printStackTrace();
-		} catch (AccountController.SuccessfulRegisterForAdmin successfulRegisterForAdmin) {
-			dataOutputStream.writeUTF("registerAdmin_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _ _0");
-			dataOutputStream.flush();
-			successfulRegisterForAdmin.printStackTrace();
-		} catch (AccountController.SuccessfulRegisterForGamer successfulRegisterForGamer) {
-			dataOutputStream.writeUTF("registerGamer_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _ _0");
-			dataOutputStream.flush();
-			successfulRegisterForGamer.printStackTrace();
 		}
 		//AccountController.getClient().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
 		try {
