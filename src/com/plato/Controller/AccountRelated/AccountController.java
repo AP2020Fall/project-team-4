@@ -49,7 +49,7 @@ public class AccountController {
 		Account.removeAccount(username);
 	}
 
-	public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException {
+	public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException, SuccessfulRegisterForAdmin, SuccessfulRegisterForGamer {
 
 		if (!username.matches("[!-~]+"))
 			throw new MainController.InvalidFormatException("Username");
@@ -72,9 +72,11 @@ public class AccountController {
 
 		if (!firstName.equals(""))
 			if (!Admin.adminHasBeenCreated())
-				Account.addAccount(Admin.class, new Image("https://i.imgur.com/IIyNCG4.png"), firstName, lastName, username, password, email, phoneNum, 0);
+			//	Account.addAccount(Admin.class, new Image("https://i.imgur.com/IIyNCG4.png"), firstName, lastName, username, password, email, phoneNum, 0);
+				throw new SuccessfulRegisterForAdmin();
 			else {
-				Account.addAccount(Gamer.class, pfp, firstName, lastName, username, password, email, phoneNum, initMoney);
+			//	Account.addAccount(Gamer.class, pfp, firstName, lastName, username, password, email, phoneNum, initMoney);
+				throw new SuccessfulRegisterForGamer();
 			}
 	}
 
@@ -197,6 +199,18 @@ public class AccountController {
 	private static class InvalidPhoneNumFormatException extends MainController.InvalidFormatException {
 		public InvalidPhoneNumFormatException () {
 			super("Phone number");
+		}
+	}
+
+	public static class SuccessfulRegisterForAdmin extends Throwable{
+		public SuccessfulRegisterForAdmin() {
+			super("Admin Successfully registered");
+		}
+	}
+
+	public static class SuccessfulRegisterForGamer extends Throwable{
+		public SuccessfulRegisterForGamer() {
+			super("Gamer Successfully registered");
 		}
 	}
 

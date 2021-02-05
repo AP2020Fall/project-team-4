@@ -9,6 +9,7 @@ import Controller.Menus.BattleSeaEditBoardPageController;
 import Controller.Menus.EventCreateOrEditPageController;
 import Controller.Menus.UserProfileForAdminController;
 import Model.AccountRelated.Account;
+import Model.AccountRelated.Admin;
 import Model.AccountRelated.Event;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
@@ -179,12 +180,16 @@ class ClientHandler extends Thread {
 						account = AccountController.getInstance().getCurrentAccLoggedIn();
 						token = Server.generateTokenForUser(account.getUsername());
 						break;
-					case "register":
+					case "registerAdmin":
+						//	Account.addAccount(Admin.class, new Image("https://i.imgur.com/IIyNCG4.png"), firstName, lastName, username, password, email, phoneNum, 0);
+						Account.addAccount(Admin.class , new Image("https://i.imgur.com/IIyNCG4.png"), receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], 0);
+						break;
+					case "registerGamer":
 //                    public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney)
 						Image pfp = null;
 						double initMoney = Double.parseDouble(receivedInfo[8]);
 						if (receivedInfo[1].equals("null")) {pfp = null;}
-						AccountController.getInstance().register(pfp, receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
+						Account.addAccount(Gamer.class , pfp, receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
 						break;
 					case "sendMsg":
 						MessageController.getInstance().sendMsg(UserProfileForAdminController.getGamer(), receivedInfo[1]);
