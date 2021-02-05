@@ -105,7 +105,7 @@ public class LoginMenuController implements Initializable {
 
 		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
 		dataOutputStream.flush();
-		Account account = new Gson().fromJson(dataInputStream.readUTF() , Account.class);
+		Account account = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Account.class);
 
 		stage.close();
 

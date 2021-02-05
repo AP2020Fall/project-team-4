@@ -69,7 +69,7 @@ public class GameMenuController implements Initializable {
 		}
 		Gamer currentGamer = null;
 		try {
-			currentGamer = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
+			currentGamer = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
@@ -205,7 +205,7 @@ public class GameMenuController implements Initializable {
 		}
 		Gamer currentGamer = null;
 		try {
-			currentGamer = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
+			currentGamer = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}

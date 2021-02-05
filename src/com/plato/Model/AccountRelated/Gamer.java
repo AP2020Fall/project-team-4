@@ -70,6 +70,14 @@ public class Gamer extends Account {
 			getAccounts().addAll(gamers);
 	}
 
+	public LocalDate getAccountStartDate () {
+		return accountStartDate;
+	}
+
+	public void setAccountStartDate (LocalDate accountStartDate) {
+		this.accountStartDate = accountStartDate;
+	}
+
 	public boolean frndExists (String un) {
 		return frnds.stream()
 				.anyMatch(gamerUN -> gamerUN.equals(un));
@@ -156,10 +164,6 @@ public class Gamer extends Account {
 
 	public void setAwardsFromEvents (int awardsFromEvents) {
 		this.awardsFromEvents = awardsFromEvents;
-	}
-
-	public void setAccountStartDate (LocalDate accountStartDate) {
-		this.accountStartDate = accountStartDate;
 	}
 
 	public void removeFaveGame (String gameName) {

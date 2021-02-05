@@ -296,7 +296,7 @@ public class EventCreateOrEditPageController implements Initializable {
 	private void updateJoinOrDropOutBtn () throws IOException {
 		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
 		dataOutputStream.flush();
-		Account account = new Gson().fromJson(dataInputStream.readUTF() , Account.class);
+		Account account = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Account.class);
 		if (event.participantExists(account.getUsername())) {
 			joinOrDropoutEventBtn.setText("Drop-out");
 			joinOrDropoutEventBtn.setOnAction(e -> {

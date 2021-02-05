@@ -59,7 +59,7 @@ public class AccountPageController implements Initializable {
 		}
 		Account currentLoggedIn = null;
 		try {
-			currentLoggedIn = new Gson().fromJson(dataInputStream.readUTF() , Account.class);
+			currentLoggedIn = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Account.class);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}

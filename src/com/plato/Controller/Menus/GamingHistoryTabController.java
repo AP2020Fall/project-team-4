@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
@@ -68,7 +69,7 @@ public class GamingHistoryTabController implements Initializable {
 
         dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
         dataOutputStream.flush();
-        Gamer currentAccLoggedIn = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
+        Gamer currentAccLoggedIn = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
         // TODO: 2/3/2021
         for(Game game : GameLog.getGameHistory(currentAccLoggedIn)){
             Circle circle = new Circle(40);

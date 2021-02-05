@@ -114,7 +114,7 @@ public class GamesMenuController implements Initializable {
 		}
 		Gamer currentLoggedIn = null;
 		try {
-			currentLoggedIn = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
+			currentLoggedIn = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}

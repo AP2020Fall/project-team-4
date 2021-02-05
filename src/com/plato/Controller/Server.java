@@ -143,7 +143,7 @@ class ClientHandler extends Thread {
 //                    break;
 					case "getCurrentAccLoggedIn":
 						Account account = AccountController.getInstance().getCurrentAccLoggedIn();
-						dataOutputStream.writeUTF(new Gson().toJson(account));
+						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(account));
 						dataOutputStream.flush();
 						break;
 
@@ -184,7 +184,7 @@ class ClientHandler extends Thread {
 						break;
 					case "getAccount":
 						account = Account.getAccount(receivedInfo[1]);
-						dataOutputStream.writeUTF(new Gson().toJson(account));
+						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(account));
 						dataOutputStream.flush();
 						break;
 					case "login":
@@ -220,7 +220,7 @@ class ClientHandler extends Thread {
 						break;
 					case "getCurrentGameInSession":
 						Game game = GameController.getInstance().getCurrentGameInSession();
-						dataOutputStream.writeUTF(new Gson().toJson(game));
+						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(game));
 						dataOutputStream.flush();
 						break;
 					case "deleteAccount":

@@ -104,7 +104,7 @@ public class BattleSeaPlayPageController implements Initializable {
 			exception.printStackTrace();
 		}
 		try {
-			currentGame = new Gson().fromJson(dataInputStream.readUTF() , BattleSea.class);
+			currentGame = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , BattleSea.class);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}

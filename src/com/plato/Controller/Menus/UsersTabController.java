@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+import Controller.MainController;
 import Model.AccountRelated.Gamer;
 import Controller.Client;
 import com.google.gson.Gson;
@@ -101,7 +102,7 @@ public class UsersTabController implements Initializable {
 			profile.getChildren().clear();
 			dataOutputStream.writeUTF("getAccount_" + username);
 			dataOutputStream.flush();
-			Gamer gamer = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
+			Gamer gamer = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
 			UserProfileForAdminController.setGamer(gamer);
 			profile.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/UserProfileForAdmin.fxml").toURI().toURL()));
 			GridPane.setValignment(profile.getChildren().get(0), VPos.CENTER);

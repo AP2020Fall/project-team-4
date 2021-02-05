@@ -4,6 +4,7 @@ import Controller.AccountRelated.AccountController;
 import Controller.Menus.LoginMenuController;
 import Controller.Menus.MainMenuController;
 import Controller.Menus.RegisterMenuController;
+import Controller.TypeAdapters.Account.AccountAdapter;
 import Model.AccountRelated.*;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
@@ -489,8 +490,9 @@ public class MainController extends Application {
 
 	private void initGsonAndItsBuilder () {
 		gsonBuilder.setDateFormat("yyyy-MMM-dd HH:mm:ss");
-		gsonBuilder.setPrettyPrinting();
+//		gsonBuilder.setPrettyPrinting();
 		gsonBuilder.serializeNulls();
+		gsonBuilder.registerTypeAdapter(Account.class, new AccountAdapter());
 		gson = FxGson.addFxSupport(gsonBuilder)
 				.create();
 	}
@@ -652,6 +654,11 @@ public class MainController extends Application {
 		public InvalidInputException () {
 			super("Invalid Input");
 		}
+	}
+
+	public Gson getGson () {
+		initGsonAndItsBuilder();
+		return gson;
 	}
 
 	public static class InvalidFormatException extends Exception {

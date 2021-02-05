@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+import Controller.MainController;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import Controller.Client;
@@ -92,7 +93,7 @@ public class GameScoreboardController implements Initializable {
 			}
 			Gamer gamer = null;
 			try {
-				gamer = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
+				gamer = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
 			} catch (IOException exception) {
 				exception.printStackTrace();
 			}
