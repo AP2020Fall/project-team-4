@@ -23,13 +23,14 @@ import java.net.Socket;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.LinkedList;
 
 
 public class Server {
 	private static ServerSocket serverSocket;
 	private static Socket socket;
-	private SecureRandom secureRandom = new SecureRandom();
-	private Base64.Encoder base64Encoder = Base64.getUrlEncoder();
+	private static SecureRandom secureRandom = new SecureRandom();
+	private static Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
 	public static Socket getSocket () {
 		return socket;
@@ -51,7 +52,7 @@ public class Server {
 		return serverSocket;
 	}
 
-	public String generateTokenForUser (String username) {
+	public static String generateTokenForUser (String username) {
 		while (true) {
 			byte[] randomBytes = new byte[24];
 			secureRandom.nextBytes(randomBytes);
@@ -66,12 +67,17 @@ class ClientHandler extends Thread {
 	private final Socket socket;
 	private DataOutputStream dataOutputStream;
 	private DataInputStream dataInputStream;
+	private static LinkedList<ClientHandler> clients = new LinkedList<>();
+	private Account account;
+	private String token;
+
 
 	//constructor
 	public ClientHandler (Socket socket) throws IOException {
 		this.socket = socket;
-		dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-		dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+		this.dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+		this.dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+		clients.addLast(this);
 	}
 
 	public Socket getSocket () {
@@ -169,15 +175,16 @@ class ClientHandler extends Thread {
 						break;
 					case "login":
 						AccountController.getInstance().login(receivedInfo[1], receivedInfo[2], receivedInfo[3].equals("true"));
+						account = AccountController.getInstance().getCurrentAccLoggedIn();
+						token = Server.generateTokenForUser(account.getUsername());
 						break;
-					case "register":
-//                    public void register (String pfpUrl, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney)
-						double initMoney = Double.parseDouble(receivedInfo[8]);
-						if (!Admin.adminHasBeenCreated())
-							Account.addAccount(Admin.class, "https://i.imgur.com/IIyNCG4.png", receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
-						else
-							Account.addAccount(Gamer.class, received[1], receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
+					case "registerAdmin":
+						//	Account.addAccount(Admin.class, new Image("https://i.imgur.com/IIyNCG4.png"), firstName, lastName, username, password, email, phoneNum, 0);
+						Account.addAccount(Admin.class, "https://i.imgur.com/IIyNCG4.png", receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
 						break;
+					case "registerGamer":
+//                    public void register (String pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney)
+						Account.addAccount(Gamer.class, received[1], receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
 					case "sendMsg":
 						MessageController.getInstance().sendMsg(UserProfileForAdminController.getGamer(), receivedInfo[1]);
 						break;

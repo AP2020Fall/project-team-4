@@ -85,8 +85,23 @@ public class RegisterMenuController implements Initializable {
 	public void signUp (ActionEvent actionEvent) throws IOException {
 
 		String password = (showPwOrNot.getImage().getUrl().contains("invisible") ? pwFieldpwShown : pwFieldpwHidden).getText();
-		dataOutputStream.writeUTF("register_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _ _0");
-		dataOutputStream.flush();
+//		dataOutputStream.writeUTF("register_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _ _0");
+//		dataOutputStream.flush();
+		try {
+			AccountController.getInstance().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
+		} catch (MainController.InvalidFormatException e) {
+			e.printStackTrace();
+		} catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
+			e.printStackTrace();
+		} catch (AccountController.SuccessfulRegisterForAdmin successfulRegisterForAdmin) {
+			dataOutputStream.writeUTF("registerAdmin_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _ _0");
+			dataOutputStream.flush();
+			successfulRegisterForAdmin.printStackTrace();
+		} catch (AccountController.SuccessfulRegisterForGamer successfulRegisterForGamer) {
+			dataOutputStream.writeUTF("registerGamer_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _ _0");
+			dataOutputStream.flush();
+			successfulRegisterForGamer.printStackTrace();
+		}
 		//AccountController.getClient().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
 		try {
 			AccountController.getInstance().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
