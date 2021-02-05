@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class Client {
 	public static String host = "127.0.0.1";
-	public static int port = 9999;
+	public static int port = 2222;
 	private static Client client;
 	private Socket socket;
 	private DataInputStream dataInputStream;
