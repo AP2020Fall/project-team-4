@@ -118,6 +118,9 @@ class ClientHandler extends Thread {
 				System.out.println("receivedInfo = " + Arrays.toString(receivedInfo));
 				//System.out.println(token);
 				switch (receivedInfo[0]) {
+					case "getAllAccounts":
+						dataOutputStream.writeUTF(new Gson().toJson(Account.getAccounts()));
+						dataOutputStream.flush();
 					case "canThrowBomb":
 						int x = Integer.parseInt(receivedInfo[1]);
 						int y = Integer.parseInt(receivedInfo[2]);
