@@ -27,10 +27,5 @@ public class Admin extends Account {
 		return getAccounts().stream()
 				.anyMatch(account -> account instanceof Admin);
 	}
-
-/*
-	adminPic.setImage(Admin.get.admin()).getAdminPic()
-*/
-
 }
 

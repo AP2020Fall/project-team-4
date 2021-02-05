@@ -14,14 +14,11 @@ import Model.AccountRelated.Event;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import View.GameRelated.BattleSea.BattleSeaView;
-import com.google.gson.Gson;
-import org.iq80.snappy.Main;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.SecureRandom;
-import java.sql.Connection;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.LinkedList;
@@ -82,15 +79,15 @@ class ClientHandler extends Thread {
 		clients.addLast(this);
 	}
 
-	public static LinkedList<ClientHandler> getClients() {
+	public static LinkedList<ClientHandler> getClients () {
 		return clients;
 	}
 
-	public Account getAccount() {
+	public Account getAccount () {
 		return account;
 	}
 
-	public String getToken() {
+	public String getToken () {
 		return token;
 	}
 
@@ -119,8 +116,10 @@ class ClientHandler extends Thread {
 				//System.out.println(token);
 				switch (receivedInfo[0]) {
 					case "getAllAccounts":
-						dataOutputStream.writeUTF(new Gson().toJson(Account.getAccounts()));
+						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(Account.getAccounts()));
+						System.out.println("Account.getAccounts() = " + Account.getAccounts());
 						dataOutputStream.flush();
+						break;
 					case "canThrowBomb":
 						int x = Integer.parseInt(receivedInfo[1]);
 						int y = Integer.parseInt(receivedInfo[2]);

@@ -44,17 +44,7 @@ public class MainController extends Application {
 	private Gson gson;
 
 	public static void main (String[] args) {
-//		startServerAndClient(args);
-		startingMainController(args);
-	}
-
-	public static void startingMainController (String[] args) {
 		launch(args);
-	}
-
-	public static void startServerAndClient (String[] args) throws IOException {
-		Server.main(args);
-		//	Client.main(args);
 	}
 
 	public static MainController getInstance () {
@@ -278,13 +268,6 @@ public class MainController extends Application {
 		primaryStage.setOnCloseRequest(e -> saveEverything());
 		DayPassController.getInstance().start();
 
-		try {
-			getInstance().deserializeEverything();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		// is signed in
 		String path;
 
 		if (!Admin.adminHasBeenCreated()) {
@@ -314,7 +297,8 @@ public class MainController extends Application {
 	public void saveEverything () {
 		try {
 			initGsonAndItsBuilder();
-			serializeEverything();
+			if (Client.getClient() != null)
+				serializeEverything();
 			Client.getClient().clientDisconnected();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -650,15 +634,15 @@ public class MainController extends Application {
 		return primaryStage;
 	}
 
+	public Gson getGson () {
+		initGsonAndItsBuilder();
+		return gson;
+	}
+
 	public static class InvalidInputException extends Exception {
 		public InvalidInputException () {
 			super("Invalid Input");
 		}
-	}
-
-	public Gson getGson () {
-		initGsonAndItsBuilder();
-		return gson;
 	}
 
 	public static class InvalidFormatException extends Exception {

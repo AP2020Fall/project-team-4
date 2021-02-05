@@ -2,9 +2,12 @@ package Model.AccountRelated;
 
 import Controller.Client;
 import Controller.IDGenerator;
+import Controller.MainController;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public abstract class Account {
@@ -65,11 +68,21 @@ public abstract class Account {
 	}
 
 	public static LinkedList<Account> getAccounts () {
-//		DataOutputStream dataOutputStream = Client.getClient().getDataOutputStream();
-//		DataInputStream dataInputStream = Client.getClient().getDataInputStream();
+		if (Client.getClient() != null) {
+			DataOutputStream dataOutputStream = Client.getClient().getDataOutputStream();
+			DataInputStream dataInputStream = Client.getClient().getDataInputStream();
 
-//		dataOutputStream.
-		return accounts;
+			try {
+				dataOutputStream.writeUTF("getAllAccounts_");
+				dataOutputStream.flush();
+
+				String accountsJson = dataInputStream.readUTF();
+				return MainController.getInstance().getGson().fromJson(accountsJson, new TypeToken<LinkedList<Account>>() {}.getType());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return new LinkedList<>();
 	}
 
 	// برای deserialize کردن

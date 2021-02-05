@@ -11,13 +11,13 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class AccountAdapter extends TypeAdapter<Account> {
 
 	@Override
 	public void write (JsonWriter writer, Account account) throws IOException {
+		System.out.println("fuck "+account.getUsername());
 		writer.beginObject();
 		writer.name("firstName");
 		writer.value(account.getFirstName());
@@ -43,14 +43,20 @@ public class AccountAdapter extends TypeAdapter<Account> {
 			writer.value(gamer.getMoney());
 			writer.name("accountStartDate");
 			writer.value(gamer.getAccountStartDate().format(DateTimeFormatter.BASIC_ISO_DATE));
+			writer.name("frnds");
+			System.out.println("fuck " + gamer.getUsername());
+			writer.beginArray();
+			for (String frnd : gamer.getFrnds()) {
+				System.out.println("fuck frnd of " + gamer.getUsername());
+				writer.value(frnd);
+			}
+			writer.endArray();
 			writer.name("faveGames");
 			writer.beginArray();
-			Iterator<String> frnds = gamer.getFrnds().iterator();
-			while (frnds.hasNext()) writer.value(frnds.next());
-			writer.endArray();
-			writer.beginArray();
-			Iterator<String> faveGames = gamer.getFaveGames().iterator();
-			while (faveGames.hasNext()) writer.value(faveGames.next());
+			for (String faveGame : gamer.getFaveGames()) {
+				System.out.println("fuck faveGame of " + gamer.getUsername());
+				writer.value(faveGame);
+			}
 			writer.endArray();
 		}
 		writer.endObject();
@@ -59,7 +65,7 @@ public class AccountAdapter extends TypeAdapter<Account> {
 	@Override
 	public Account read (JsonReader reader) throws IOException {
 		reader.beginObject();
-		Account account = null;
+		Account account;
 
 		if (reader.peek().toString().equals(Admin.class.getSimpleName()))
 			account = new Admin();
