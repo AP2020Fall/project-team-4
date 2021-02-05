@@ -15,7 +15,6 @@ import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import View.GameRelated.BattleSea.BattleSeaView;
 import com.google.gson.Gson;
-import javafx.scene.image.Image;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -64,10 +63,10 @@ public class Server {
 
 
 class ClientHandler extends Thread {
+	private static LinkedList<ClientHandler> clients = new LinkedList<>();
 	private final Socket socket;
 	private DataOutputStream dataOutputStream;
 	private DataInputStream dataInputStream;
-	private static LinkedList<ClientHandler> clients = new LinkedList<>();
 	private Account account;
 	private String token;
 
@@ -129,14 +128,10 @@ class ClientHandler extends Thread {
 //                  ShipController.getClient().moveShip(BattleSeaEditBoardPageController.getClient().getCurrentBoard(),ship,x,y);
 //                    break;
 					case "getCurrentAccLoggedIn":
-					case "getAccount":
-						// TODO: 2/5/2021
+						Account account = AccountController.getInstance().getCurrentAccLoggedIn();
 						dataOutputStream.writeUTF(new Gson().toJson(account));
 						dataOutputStream.flush();
 						break;
-
-					case "getCurrentAccLoggedInAsGamer" :
-						Gamer gamer = (Gamer) account;
 
 					case "logOut":
 						AccountController.getInstance().logout();
@@ -173,6 +168,11 @@ class ClientHandler extends Thread {
 					case "runGame":
 						GameController.getInstance().runGame(receivedInfo[1], receivedInfo[2]);
 						break;
+					case "getAccount":
+						account = Account.getAccount(receivedInfo[1]);
+						dataOutputStream.writeUTF(new Gson().toJson(account));
+						dataOutputStream.flush();
+						break;
 					case "login":
 						//AccountController.getInstance().login(receivedInfo[1], receivedInfo[2], receivedInfo[3].equals("true"));
 						AccountController.getInstance().setSaveLoginInfo(receivedInfo[3].equals("true"));
@@ -181,16 +181,12 @@ class ClientHandler extends Thread {
 						token = Server.generateTokenForUser(account.getUsername());
 						break;
 					case "registerAdmin":
-						//	Account.addAccount(Admin.class, new Image("https://i.imgur.com/IIyNCG4.png"), firstName, lastName, username, password, email, phoneNum, 0);
-						Account.addAccount(Admin.class , new Image("https://i.imgur.com/IIyNCG4.png"), receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], 0);
+						double initMoney = Double.parseDouble(receivedInfo[8]);
+						Account.addAccount(Admin.class, "https://i.imgur.com/IIyNCG4.png", receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
 						break;
 					case "registerGamer":
-//                    public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney)
-						Image pfp = null;
-						double initMoney = Double.parseDouble(receivedInfo[8]);
-						if (receivedInfo[1].equals("null")) {pfp = null;}
-						Account.addAccount(Gamer.class , pfp, receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
-						break;
+						initMoney = Double.parseDouble(receivedInfo[8]);
+						Account.addAccount(Gamer.class, receivedInfo[1], receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
 					case "sendMsg":
 						MessageController.getInstance().sendMsg(UserProfileForAdminController.getGamer(), receivedInfo[1]);
 						break;
@@ -242,7 +238,6 @@ class ClientHandler extends Thread {
 				}
 			} catch (BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException | EventController.GameNameCantBeEmptyException | MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException | AccountController.PaswordIncorrectException | AccountController.NoAccountExistsWithUsernameException | GameController.CantPlayWithYourselfException | GameController.CantPlayWithAdminException | MessageController.EmptyMessageException | AccountController.AdminAccountCantBeDeletedException | EventController.StartDateTimeIsAfterEndException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException | EventController.CantEditInSessionEventException
 					e) {
-				System.out.println(e.getMessage());
 			}
 		}
 	}

@@ -89,20 +89,25 @@ public class RegisterMenuController implements Initializable {
 //		dataOutputStream.flush();
 		try {
 			AccountController.getInstance().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
-		} catch (MainController.InvalidFormatException e) {
+		} catch (MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException | MainController.SuccessfulOperationException e) {
 			e.printStackTrace();
-		} catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
-			e.printStackTrace();
-		} catch (AccountController.SuccessfulRegisterForAdmin successfulRegisterForAdmin) {
-			dataOutputStream.writeUTF("registerAdmin_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _ _0");
-			dataOutputStream.flush();
-			successfulRegisterForAdmin.printStackTrace();
-		} catch (AccountController.SuccessfulRegisterForGamer successfulRegisterForGamer) {
-			dataOutputStream.writeUTF("registerGamer_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _ _0");
-			dataOutputStream.flush();
-			successfulRegisterForGamer.printStackTrace();
 		}
 		//AccountController.getClient().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
+		try {
+			AccountController.getInstance().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
+		} catch (AccountController.AccountWithUsernameAlreadyExistsException e) {
+			usernameError.setText(e.getMessage());
+			return;
+		} catch (MainController.InvalidFormatException e) {
+			if (e.getMessage().toLowerCase().startsWith("username")) {
+				usernameError.setText(e.getMessage());
+				return;
+			}
+			if (e.getMessage().toLowerCase().startsWith("password")) {
+				passwordError.setText(e.getMessage());
+				return;
+			}
+		} catch (MainController.SuccessfulOperationException e) {}
 		try {
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterForm.fxml").toURI().toURL()),

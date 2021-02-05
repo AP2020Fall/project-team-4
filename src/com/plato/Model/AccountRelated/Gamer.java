@@ -15,7 +15,7 @@ public class Gamer extends Account {
 	private LinkedList<String> frnds = new LinkedList<>();
 	private LinkedList<String> faveGames = new LinkedList<>();
 
-	protected Gamer (Image pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
+	protected Gamer (String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
 		super(pfp, firstName, lastName, username, password, email, phoneNum);
 		accountStartDate = LocalDate.now();
 		this.money = money;
