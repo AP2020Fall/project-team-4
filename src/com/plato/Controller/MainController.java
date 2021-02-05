@@ -104,9 +104,9 @@ public class MainController extends Application {
 					to = Paths.get("src/com/Resources/ProfilePics/" + image.getName());
 			Files.copy(from, to);
 			imageViewToUpdate.setImage(new Image(String.valueOf(image.toURI().toURL())));
-		} catch (IOException e) {
+		} catch (IOException | NullPointerException e) {
 			e.printStackTrace();
-		} catch (NullPointerException e) {}
+		}
 	}
 //
 //	private void dealWithInput (int command) {
@@ -464,7 +464,7 @@ public class MainController extends Application {
 			String reversiDetails = Game.getAllGames().stream().filter(game -> game instanceof Reversi).findFirst().get().getDetails();
 			Reversi.setDetailsForReversi(reversiDetails);
 		} catch (NoSuchElementException | NullPointerException e) {
-
+			e.printStackTrace();
 		}
 	}
 
