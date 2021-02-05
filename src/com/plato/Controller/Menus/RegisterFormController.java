@@ -113,25 +113,26 @@ public class RegisterFormController implements Initializable {
 				phoneNumError.setText(e.getMessage());
 			}
 			return;
-		} catch (MainController.SuccessfulOperationException e) {
-//				(Class accType, String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money)
-			try {
-				dataOutputStream.writeUTF(
-						"register_" + (Admin.adminHasBeenCreated() ? Gamer.class : Admin.class).getSimpleName() + "_" +
-								pfp.getImage().getUrl() + "_" +
-								firstName.getText() + "_" +
-								lastName.getText() + "_" +
-								username + "_" +
-								password + "_" +
-								email.getText() + "_" +
-								phoneNum.getText() + "_" +
-								(coinMenu.getText().equalsIgnoreCase("coins") ? 0 : coinMenu.getText())
-				);
-				dataOutputStream.flush();
-			} catch (IOException ioException) {
-				ioException.printStackTrace();
-			}
+		} catch (MainController.SuccessfulOperationException e) {}
+
+//		(Class accType, String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money)
+		try {
+			dataOutputStream.writeUTF(
+					"register_" + (Admin.adminHasBeenCreated() ? Gamer.class : Admin.class).getSimpleName() + "_" +
+							pfp.getImage().getUrl() + "_" +
+							firstName.getText() + "_" +
+							lastName.getText() + "_" +
+							username + "_" +
+							password + "_" +
+							email.getText() + "_" +
+							phoneNum.getText() + "_" +
+							(coinMenu.getText().equalsIgnoreCase("coins") ? 0 : coinMenu.getText())
+			);
+			dataOutputStream.flush();
+		} catch (IOException ioException) {
+			ioException.printStackTrace();
 		}
+
 		stage.close();
 		RegisterMenuController.getStage().close();
 
