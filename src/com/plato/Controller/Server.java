@@ -10,6 +10,7 @@ import Controller.Menus.EventCreateOrEditPageController;
 import Controller.Menus.UserProfileForAdminController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Event;
+import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import View.GameRelated.BattleSea.BattleSeaView;
 import com.google.gson.Gson;
@@ -21,13 +22,14 @@ import java.net.Socket;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.LinkedList;
 
 
 public class Server {
 	private static ServerSocket serverSocket;
 	private static Socket socket;
-	private SecureRandom secureRandom = new SecureRandom();
-	private Base64.Encoder base64Encoder = Base64.getUrlEncoder();
+	private static SecureRandom secureRandom = new SecureRandom();
+	private static Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
 	public static Socket getSocket () {
 		return socket;
@@ -35,7 +37,7 @@ public class Server {
 
 	public static void main (String[] args) throws IOException {
 		System.out.println("Server : server started");
-		serverSocket = new ServerSocket(1111);
+		serverSocket = new ServerSocket(2222);
 		while (true) {
 			System.out.println("Server : Waiting for client...");
 			socket = serverSocket.accept();
@@ -49,7 +51,7 @@ public class Server {
 		return serverSocket;
 	}
 
-	public String generateTokenForUser (String username) {
+	public static String generateTokenForUser (String username) {
 		while (true) {
 			byte[] randomBytes = new byte[24];
 			secureRandom.nextBytes(randomBytes);
@@ -64,12 +66,17 @@ class ClientHandler extends Thread {
 	private final Socket socket;
 	private DataOutputStream dataOutputStream;
 	private DataInputStream dataInputStream;
+	private static LinkedList<ClientHandler> clients = new LinkedList<>();
+	private Account account;
+	private String token;
+
 
 	//constructor
 	public ClientHandler (Socket socket) throws IOException {
 		this.socket = socket;
-		dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-		dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+		this.dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+		this.dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+		clients.addLast(this);
 	}
 
 	public Socket getSocket () {
@@ -123,10 +130,14 @@ class ClientHandler extends Thread {
 //                  ShipController.getClient().moveShip(BattleSeaEditBoardPageController.getClient().getCurrentBoard(),ship,x,y);
 //                    break;
 					case "getCurrentAccLoggedIn":
-						Account account = AccountController.getInstance().getCurrentAccLoggedIn();
+					case "getAccount":
+						// TODO: 2/5/2021
 						dataOutputStream.writeUTF(new Gson().toJson(account));
 						dataOutputStream.flush();
 						break;
+
+					case "getCurrentAccLoggedInAsGamer" :
+						Gamer gamer = (Gamer) account;
 
 					case "logOut":
 						AccountController.getInstance().logout();
@@ -163,13 +174,10 @@ class ClientHandler extends Thread {
 					case "runGame":
 						GameController.getInstance().runGame(receivedInfo[1], receivedInfo[2]);
 						break;
-					case "getAccount":
-						account = Account.getAccount(receivedInfo[1]);
-						dataOutputStream.writeUTF(new Gson().toJson(account));
-						dataOutputStream.flush();
-						break;
 					case "login":
 						AccountController.getInstance().login(receivedInfo[1], receivedInfo[2], receivedInfo[3].equals("true"));
+						account = AccountController.getInstance().getCurrentAccLoggedIn();
+						token = Server.generateTokenForUser(account.getUsername());
 						break;
 					case "register":
 //                    public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney)
