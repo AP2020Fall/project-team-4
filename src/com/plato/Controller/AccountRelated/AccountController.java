@@ -18,7 +18,7 @@ public class AccountController {
 		return accountController;
 	}
 
-	public void login (String username, String password, boolean rememberMe) throws MainController.InvalidFormatException, NoAccountExistsWithUsernameException, PaswordIncorrectException {
+	public void login (String username, String password, boolean rememberMe) throws MainController.InvalidFormatException, NoAccountExistsWithUsernameException, PaswordIncorrectException, SuccessfulLogin {
 
 		if (!username.matches("[!-~]+"))
 			throw new MainController.InvalidFormatException("Username");
@@ -184,11 +184,7 @@ public class AccountController {
 		}
 	}
 
-	public static class SuccessfulLogin extends Throwable {
-		public SuccessfulLogin () {
-			super("successfully logged in");
-		}
-	}
+
 
 	public static class AdminAccountCantBeDeletedException extends Exception {
 		public AdminAccountCantBeDeletedException () {
