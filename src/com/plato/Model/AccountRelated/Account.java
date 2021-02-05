@@ -10,7 +10,7 @@ public abstract class Account {
 	private String firstName, lastName, username, password, userID, email, phoneNum;
 	private String pfpUrl;
 
-	public Account (Image pfp, String firstName, String lastName, String username, String password, String email, String phoneNum) {
+	public Account (String pfpUrl, String firstName, String lastName, String username, String password, String email, String phoneNum) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
@@ -18,7 +18,7 @@ public abstract class Account {
 		this.userID = IDGenerator.generateNext();
 		this.email = email;
 		this.phoneNum = phoneNum;
-		this.pfpUrl = pfp.getUrl();
+		this.pfpUrl = pfpUrl;
 	}
 
 	// for serialization
@@ -26,7 +26,7 @@ public abstract class Account {
 
 	// با توجه به ورودی اکانت-تایپ میاد یه اکانت گیمر یا ادمین با این ویژگی ها رو میسازه
 	@SuppressWarnings("rawtypes")
-	public static void addAccount (Class accType, Image pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
+	public static void addAccount (Class accType, String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
 		if (accType.getSimpleName().equalsIgnoreCase("admin"))
 			accounts.addLast(new Admin(pfp, firstName, lastName, username, password, email, phoneNum));
 		else

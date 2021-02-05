@@ -49,7 +49,7 @@ public class AccountController {
 		Account.removeAccount(username);
 	}
 
-	public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException {
+	public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException, MainController.SuccessfulOperationException {
 
 		if (!username.matches("[!-~]+"))
 			throw new MainController.InvalidFormatException("Username");
@@ -58,6 +58,7 @@ public class AccountController {
 
 		if (Account.accountExists(username))
 			throw new AccountWithUsernameAlreadyExistsException();
+
 
 		if (!firstName.matches("[!-~]+"))
 			throw new MainController.InvalidFormatException("First Name");
@@ -70,12 +71,7 @@ public class AccountController {
 		if (!Account.isPhoneNumOK(phoneNum))
 			throw new InvalidPhoneNumFormatException();
 
-		if (!firstName.equals(""))
-			if (!Admin.adminHasBeenCreated())
-				Account.addAccount(Admin.class, new Image("https://i.imgur.com/IIyNCG4.png"), firstName, lastName, username, password, email, phoneNum, 0);
-			else {
-				Account.addAccount(Gamer.class, pfp, firstName, lastName, username, password, email, phoneNum, initMoney);
-			}
+		throw new MainController.SuccessfulOperationException();
 	}
 
 	public void changePWCommand (String oldPW, String newPW) throws PaswordIncorrectException {
@@ -161,10 +157,10 @@ public class AccountController {
 		return saveLoginInfo;
 	}
 
-    public void editAccFieldCommand() {
-    }
+	public void editAccFieldCommand () {
+	}
 
-    public static class NoAccountExistsWithUsernameException extends Exception {
+	public static class NoAccountExistsWithUsernameException extends Exception {
 		public NoAccountExistsWithUsernameException () {
 			super("No account exists with this username.");
 		}

@@ -9,7 +9,9 @@ import Controller.Menus.BattleSeaEditBoardPageController;
 import Controller.Menus.EventCreateOrEditPageController;
 import Controller.Menus.UserProfileForAdminController;
 import Model.AccountRelated.Account;
+import Model.AccountRelated.Admin;
 import Model.AccountRelated.Event;
+import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import View.GameRelated.BattleSea.BattleSeaView;
 import com.google.gson.Gson;
@@ -21,7 +23,6 @@ import java.net.Socket;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.LinkedList;
 
 
 public class Server {
@@ -170,11 +171,12 @@ class ClientHandler extends Thread {
 						AccountController.getInstance().login(receivedInfo[1], receivedInfo[2], receivedInfo[3].equals("true"));
 						break;
 					case "register":
-//                    public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney)
-						Image pfp = null;
+//                    public void register (String pfpUrl, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney)
 						double initMoney = Double.parseDouble(receivedInfo[8]);
-						if (receivedInfo[1].equals("null")) {pfp = null;}
-						AccountController.getInstance().register(pfp, receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
+						if (!Admin.adminHasBeenCreated())
+							Account.addAccount(Admin.class, "https://i.imgur.com/IIyNCG4.png", receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
+						else
+							Account.addAccount(Gamer.class, received[1], receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
 						break;
 					case "sendMsg":
 						MessageController.getInstance().sendMsg(UserProfileForAdminController.getGamer(), receivedInfo[1]);
