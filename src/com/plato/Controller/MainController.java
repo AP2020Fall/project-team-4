@@ -25,7 +25,6 @@ import org.hildan.fxgson.FxGson;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
@@ -315,6 +314,7 @@ public class MainController extends Application {
 		try {
 			initGsonAndItsBuilder();
 			serialize();
+			Client.getClient().clientDisconnected();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -619,6 +619,12 @@ public class MainController extends Application {
 	public static class InvalidFormatException extends Exception {
 		public InvalidFormatException (String field) {
 			super(field + " format is invalid");
+		}
+	}
+
+	public static class SuccessfulOperationException extends Throwable {
+		public SuccessfulOperationException () {
+			super();
 		}
 	}
 

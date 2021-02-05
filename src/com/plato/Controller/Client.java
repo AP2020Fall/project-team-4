@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class Client {
 	public static String host = "127.0.0.1";
-	public static int port = 1111;
+	public static int port = 9999;
 	private static Client client;
 	private Socket socket;
 	private DataInputStream dataInputStream;
@@ -73,5 +73,10 @@ public class Client {
 			System.out.println("client couldnt connect to server!");
 			e.printStackTrace();
 		}
+	}
+
+	public void clientDisconnected () throws IOException {
+		socket.close();
+		System.out.println("connection closed!");
 	}
 }
