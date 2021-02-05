@@ -145,7 +145,7 @@ class ClientHandler extends Thread {
 //                  ShipController.getClient().moveShip(BattleSeaEditBoardPageController.getClient().getCurrentBoard(),ship,x,y);
 //                    break;
 					case "getCurrentAccLoggedIn":
-						Account account = AccountController.getInstance().getCurrentAccLoggedIn();
+						//Account account = AccountController.getInstance().getCurrentAccLoggedIn();
 						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(account));
 						dataOutputStream.flush();
 						break;
@@ -170,8 +170,7 @@ class ClientHandler extends Thread {
 						ReversiController.getInstance().placeDisk(x, y);
 						break;
 
-					case "moveShip":
-
+					//case "moveShip":
 					case "ReversinextTurn":
 						ReversiController.getInstance().nextTurn();
 						break;

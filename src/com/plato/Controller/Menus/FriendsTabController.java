@@ -58,7 +58,7 @@ public class FriendsTabController implements Initializable {
 		// TODO: 2/5/2021
 		dataOutputStream.writeUTF("getFrnds_" + MainController.getInstance().getGson().toJson(currentAccLoggedIn.getFrnds()));
 		dataOutputStream.flush();
-		for (String frndUN :MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , LinkedList.class)) {
+		for (String frndUN :currentAccLoggedIn.getFrnds()) {
 			Gamer frndAcc = (Gamer) Account.getAccount(frndUN);
 
 			Circle circle = new Circle(40);
