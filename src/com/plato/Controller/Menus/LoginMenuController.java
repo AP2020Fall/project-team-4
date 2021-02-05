@@ -93,21 +93,30 @@ public class LoginMenuController implements Initializable {
 			AccountController.getInstance().login(username.getText(), password, rememberMe.isSelected());
 		} catch (MainController.InvalidFormatException e) {
 			e.printStackTrace();
+			return;
 		} catch (AccountController.NoAccountExistsWithUsernameException e) {
 			e.printStackTrace();
+			return;
 		} catch (AccountController.PaswordIncorrectException e) {
-			e.printStackTrace();
+			System.out.println("password Incorrect");
+			return;
 		} catch (AccountController.SuccessfulLogin successfulLogin) {
-			dataOutputStream.writeUTF("login_" + username.getText() + "_" + password + "_" + "true");
-			dataOutputStream.flush();
+
+			System.out.println("logged In");
 			successfulLogin.printStackTrace();
 		}
+		dataOutputStream.writeUTF("login_" + username.getText() + "_" + password + "_" + "true");
+		dataOutputStream.flush();
+
 
 		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
 		dataOutputStream.flush();
-		Account account = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Account.class);
+
+		Account account = AccountController.getInstance().getCurrentAccLoggedIn();
+
 
 		stage.close();
+
 
 		try {
 			MainMenuController.setGamerOrAdmin(account instanceof Gamer);
