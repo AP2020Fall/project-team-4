@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
@@ -88,9 +89,19 @@ public class LoginMenuController implements Initializable {
 	public void login (ActionEvent actionEvent) throws IOException {
 		String password = pwStackPane.getChildren().get(1) instanceof PasswordField ? ((PasswordField) pwStackPane.getChildren().get(1)).getText() : ((TextField) pwStackPane.getChildren().get(1)).getText();
 
-		dataOutputStream.writeUTF("login_" + username.getText() + "_" + password + "_" + "true");
-		dataOutputStream.flush();
-		//AccountController.getClient().login(username.getText(), password, rememberMe.isSelected());
+		try {
+			AccountController.getInstance().login(username.getText(), password, rememberMe.isSelected());
+		} catch (MainController.InvalidFormatException e) {
+			e.printStackTrace();
+		} catch (AccountController.NoAccountExistsWithUsernameException e) {
+			e.printStackTrace();
+		} catch (AccountController.PaswordIncorrectException e) {
+			e.printStackTrace();
+		} catch (AccountController.SuccessfulLogin successfulLogin) {
+			dataOutputStream.writeUTF("login_" + username.getText() + "_" + password + "_" + "true");
+			dataOutputStream.flush();
+			successfulLogin.printStackTrace();
+		}
 
 		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
 		dataOutputStream.flush();
