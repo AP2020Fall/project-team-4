@@ -15,6 +15,7 @@ import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import View.GameRelated.BattleSea.BattleSeaView;
 import com.google.gson.Gson;
+import org.iq80.snappy.Main;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -181,10 +182,13 @@ class ClientHandler extends Thread {
 					case "registerAdmin":
 						double initMoney = Double.parseDouble(receivedInfo[8]);
 						Account.addAccount(Admin.class, "https://i.imgur.com/IIyNCG4.png", receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
+						MainController.getInstance().serializeAdmin();
 						break;
 					case "registerGamer":
 						initMoney = Double.parseDouble(receivedInfo[8]);
 						Account.addAccount(Gamer.class, receivedInfo[1], receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
+						MainController.getInstance().serializeGamers();
+						break;
 					case "sendMsg":
 						MessageController.getInstance().sendMsg(UserProfileForAdminController.getGamer(), receivedInfo[1]);
 						break;

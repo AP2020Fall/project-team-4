@@ -343,7 +343,7 @@ public class MainController extends Application {
 		}
 	}
 
-	private LinkedList<String> getIDGenerator () throws IOException {
+	public LinkedList<String> getIDGenerator () throws IOException {
 		StringBuilder json = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/IDGenerator.json"))) {
 
@@ -357,7 +357,7 @@ public class MainController extends Application {
 		}
 	}
 
-	private LinkedList<Reversi> getReversiGames () throws IOException {
+	public LinkedList<Reversi> getReversiGames () throws IOException {
 		StringBuilder json = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/GameRelated/Reversi.json"))) {
 
@@ -372,7 +372,7 @@ public class MainController extends Application {
 		return null;
 	}
 
-	private LinkedList<BattleSea> getBattleseaGames () throws IOException {
+	public LinkedList<BattleSea> getBattleseaGames () throws IOException {
 		StringBuilder json = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/GameRelated/BattleSea.json"))) {
 
@@ -386,7 +386,7 @@ public class MainController extends Application {
 		return null;
 	}
 
-	private LinkedList<Message> getMsgs () throws IOException {
+	public LinkedList<Message> getMsgs () throws IOException {
 		StringBuilder json = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/Message.json"))) {
 
@@ -400,7 +400,7 @@ public class MainController extends Application {
 		return null;
 	}
 
-	private LinkedList<FriendRequest> getFrndReqs () throws IOException {
+	public LinkedList<FriendRequest> getFrndReqs () throws IOException {
 		StringBuilder json = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/FriendRequest.json"))) {
 
@@ -414,7 +414,7 @@ public class MainController extends Application {
 		return null;
 	}
 
-	private LinkedList<Event> getEvents () throws IOException {
+	public LinkedList<Event> getEvents () throws IOException {
 		StringBuilder json = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/Event.json"))) {
 
@@ -428,7 +428,7 @@ public class MainController extends Application {
 		return null;
 	}
 
-	private LinkedList<AdminGameReco> getAdminGameRecos () throws IOException {
+	public LinkedList<AdminGameReco> getAdminGameRecos () throws IOException {
 		StringBuilder json = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json"))) {
 
@@ -443,7 +443,7 @@ public class MainController extends Application {
 		return null;
 	}
 
-	private Account getSavedLoginInfo () throws IOException {
+	public Account getSavedLoginInfo () throws IOException {
 		StringBuilder json = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/SavedLoginInfo.json"))) {
 			boolean forAdmin = false;
@@ -460,7 +460,7 @@ public class MainController extends Application {
 		return null;
 	}
 
-	private LinkedList<Gamer> getGamers () throws IOException {
+	public LinkedList<Gamer> getGamers () throws IOException {
 		StringBuilder json = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/Gamer.json"))) {
 
@@ -474,7 +474,7 @@ public class MainController extends Application {
 		return null;
 	}
 
-	private Admin getAdmin () throws IOException {
+	public Admin getAdmin () throws IOException {
 		StringBuilder json = new StringBuilder();
 
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/Admin.json"))) {
@@ -508,7 +508,7 @@ public class MainController extends Application {
 		serializeIDGenerator();
 	}
 
-	private void serializeIDGenerator () throws IOException {
+	public void serializeIDGenerator () throws IOException {
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/IDGenerator.json")) {
 			printWriter.print("");
 		}
@@ -519,7 +519,7 @@ public class MainController extends Application {
 			}
 	}
 
-	private void serializeReversiGames () throws IOException {
+	public void serializeReversiGames () throws IOException {
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/Reversi.json")) {
 			printWriter.print("");
 		}
@@ -530,7 +530,7 @@ public class MainController extends Application {
 			}
 	}
 
-	private void serializeBattleSeaGames () throws IOException {
+	public void serializeBattleSeaGames () throws IOException {
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/BattleSea.json")) {
 			printWriter.print("");
 		}
@@ -541,7 +541,7 @@ public class MainController extends Application {
 			}
 	}
 
-	private void serializeMsgs () throws IOException {
+	public void serializeMsgs () throws IOException {
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Message.json")) {
 			printWriter.print("");
 		}
@@ -552,7 +552,7 @@ public class MainController extends Application {
 			}
 	}
 
-	private void serializeFrndReqs () throws IOException {
+	public void serializeFrndReqs () throws IOException {
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/FriendRequest.json")) {
 			printWriter.print("");
 		}
@@ -563,7 +563,7 @@ public class MainController extends Application {
 			}
 	}
 
-	private void serializeEvents () throws IOException {
+	public void serializeEvents () throws IOException {
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Event.json")) {
 			printWriter.print("");
 		}
@@ -574,7 +574,7 @@ public class MainController extends Application {
 			}
 	}
 
-	private void serializeAdminGameRecos () throws IOException {
+	public void serializeAdminGameRecos () throws IOException {
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json")) {
 			printWriter.print("");
 		}
@@ -585,7 +585,7 @@ public class MainController extends Application {
 			}
 	}
 
-	private void serializeGamers () throws IOException {
+	public void serializeGamers () throws IOException {
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Gamer.json")) {
 			printWriter.print("");
 		}
@@ -596,7 +596,7 @@ public class MainController extends Application {
 			}
 	}
 
-	private void serializeAdmin () throws IOException {
+	public void serializeAdmin () throws IOException {
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Admin.json")) {
 			printWriter.print("");
 		}
@@ -607,7 +607,7 @@ public class MainController extends Application {
 			}
 	}
 
-	private void serializeSavedLoginInfo () throws IOException {
+	public void serializeSavedLoginInfo () throws IOException {
 		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/SavedLoginInfo.json")) {
 			printWriter.print("");
 		}
