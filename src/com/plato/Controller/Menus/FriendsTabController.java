@@ -5,6 +5,7 @@ import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Controller.Client;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,6 +31,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 public class FriendsTabController implements Initializable {
@@ -50,10 +52,13 @@ public class FriendsTabController implements Initializable {
 		dataInputStream = Client.getClient().getDataInputStream();
 		dataOutputStream = Client.getClient().getDataOutputStream();
 		frndsList.getItems().clear();
-//		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
-//		dataOutputStream.flush();
-		Gamer currentAccLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
-		for (String frndUN : currentAccLoggedIn.getFrnds()) {
+		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
+		dataOutputStream.flush();
+		Gamer currentAccLoggedIn = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
+		// TODO: 2/5/2021
+		dataOutputStream.writeUTF("getFrnds_" + MainController.getInstance().getGson().toJson(currentAccLoggedIn.getFrnds()));
+		dataOutputStream.flush();
+		for (String frndUN :currentAccLoggedIn.getFrnds()) {
 			Gamer frndAcc = (Gamer) Account.getAccount(frndUN);
 
 			Circle circle = new Circle(40);

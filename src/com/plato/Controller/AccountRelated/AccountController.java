@@ -23,10 +23,10 @@ public class AccountController {
 		if (!username.matches("[!-~]+"))
 			throw new MainController.InvalidFormatException("Username");
 
-		if (!Account.accountExists(username))
+		else if (!Account.accountExists(username))
 			throw new NoAccountExistsWithUsernameException();
 
-		if (!Account.getAccount(username).isPasswordCorrect(password))
+		else if (!Account.getAccount(username).isPasswordCorrect(password))
 			throw new PaswordIncorrectException();
 
 		throw new MainController.SuccessfulOperationException();

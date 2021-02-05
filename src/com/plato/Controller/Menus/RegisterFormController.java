@@ -117,7 +117,7 @@ public class RegisterFormController implements Initializable {
 //				(Class accType, String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money)
 			try {
 				dataOutputStream.writeUTF(
-						"register" + (Admin.adminHasBeenCreated() ? Gamer.class : Admin.class).getSimpleName() + "_" +
+						"register_" + (Admin.adminHasBeenCreated() ? Gamer.class : Admin.class).getSimpleName() + "_" +
 								pfp.getImage().getUrl() + "_" +
 								firstName.getText() + "_" +
 								lastName.getText() + "_" +

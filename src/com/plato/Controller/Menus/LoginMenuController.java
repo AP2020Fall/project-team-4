@@ -1,10 +1,11 @@
 package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
-import Controller.Client;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
+import Controller.Client;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,8 +28,6 @@ import java.util.ResourceBundle;
 
 public class LoginMenuController implements Initializable {
 	private static Stage stage;
-	private static DataOutputStream dataOutputStream;
-	private static DataInputStream dataInputStream;
 	public StackPane pwStackPane;
 	public ImageView showPwOrNot;
 	public PasswordField pwFieldpwHidden;
@@ -36,6 +35,8 @@ public class LoginMenuController implements Initializable {
 	public Label delAccLbl, sgnUpLbl, usernameError, passwordError;
 	public CheckBox rememberMe;
 	public TextField username;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
 
 	public static void setStage (Stage stage) {
 		LoginMenuController.stage = stage;

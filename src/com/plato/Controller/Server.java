@@ -143,8 +143,14 @@ class ClientHandler extends Thread {
 //                  ShipController.getClient().moveShip(BattleSeaEditBoardPageController.getClient().getCurrentBoard(),ship,x,y);
 //                    break;
 					case "getCurrentAccLoggedIn":
-						Account account = AccountController.getInstance().getCurrentAccLoggedIn();
+						//Account account = AccountController.getInstance().getCurrentAccLoggedIn();
 						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(account));
+						dataOutputStream.flush();
+						break;
+
+					case "getCurrentAccLoggedInAsGamer":
+						Gamer gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(gamer));
 						dataOutputStream.flush();
 						break;
 
@@ -162,8 +168,7 @@ class ClientHandler extends Thread {
 						ReversiController.getInstance().placeDisk(x, y);
 						break;
 
-					case "moveShip":
-
+					//case "moveShip":
 					case "ReversinextTurn":
 						ReversiController.getInstance().nextTurn();
 						break;
@@ -248,6 +253,11 @@ class ClientHandler extends Thread {
 						break;
 					case "acceptFriendReq":
 						FriendRequestController.getInstance().acceptFriendReq(receivedInfo[1]);
+						break;
+					case "getFrnds" :
+						gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+						dataOutputStream.writeUTF( MainController.getInstance().getGson().toJson(gamer.getFrnds()));
+						dataOutputStream.flush();
 						break;
 				}
 			} catch (IOException e) {
