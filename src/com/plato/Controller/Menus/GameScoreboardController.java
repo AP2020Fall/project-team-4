@@ -1,8 +1,8 @@
 package Controller.Menus;
 
-import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
+import Controller.Client;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -28,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -39,8 +38,8 @@ public class GameScoreboardController implements Initializable {
 	private static Stage stage;
 	private static String gameName;
 	public ListView<GridPane> scoreBoard;
-	private DataInputStream dataInputStream;
-	private DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
 	private Object Account;
 
 	public static void setGameName (String gameName) {
@@ -62,6 +61,8 @@ public class GameScoreboardController implements Initializable {
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
 		// TODO: 2/3/2021
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		LinkedList<String> scoreBoardLinkedList = Game.getScoreboard(gameName);
 
 		scoreBoard.setStyle("-fx-background-color: #003768;  " +
@@ -91,7 +92,7 @@ public class GameScoreboardController implements Initializable {
 			}
 			Gamer gamer = null;
 			try {
-				gamer = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+				gamer = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
 			} catch (IOException exception) {
 				exception.printStackTrace();
 			}

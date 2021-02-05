@@ -1,10 +1,9 @@
 package Controller.Menus;
 
 
-import Controller.AccountRelated.AccountController;
 import Controller.MainController;
-import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
+import Controller.Client;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +18,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,21 +28,17 @@ public class GamesMenuController implements Initializable {
 	public Button battlseaButton;
 	public Button reversiButton;
 	public GridPane gridpane;
-	private DataOutputStream dataOutputStream;
-	private DataInputStream dataInputStream;
-	private Object Account;
-
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
 
 	public static void setIsForFaveGames (boolean forFaveGames) {
 		isForFaveGames = forFaveGames;
 	}
 
-
 	public static void setStage (Stage stage) {
 		GamesMenuController.stage = stage;
 		GamesMenuController.stage.setOnCloseRequest(e -> GamesMenuController.stage = null);
 	}
-
 
 	public void battleSeaMainMenu (ActionEvent actionEvent) {
 		try {
@@ -110,6 +104,8 @@ public class GamesMenuController implements Initializable {
 
 	public void initialize (URL location, ResourceBundle resources) {
 
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		try {
 			dataOutputStream.writeUTF("getCurrentAccLoggedIn");
 			dataOutputStream.flush();
@@ -118,7 +114,7 @@ public class GamesMenuController implements Initializable {
 		}
 		Gamer currentLoggedIn = null;
 		try {
-			currentLoggedIn = ((Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account));
+			currentLoggedIn = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}

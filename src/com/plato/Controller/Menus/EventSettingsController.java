@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+import Controller.Client;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -21,8 +22,8 @@ public class EventSettingsController implements Initializable {
 	public MenuButton eventTypeMenu, gameMenu, minReqMenu;
 	public GridPane gridPane;
 	private StringProperty eventSettings;
-	private DataInputStream dataInputStream;
-	private DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
 
 	public static void setStage (Stage stage) {
 		EventSettingsController.stage = stage;
@@ -47,6 +48,8 @@ public class EventSettingsController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		for (int i = 0; i < 2; i++) {
 			int finalI = i;
 			gameMenu.getItems().get(i).setOnAction(e -> gameMenu.setText(gameMenu.getItems().get(finalI).getText()));

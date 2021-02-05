@@ -1,10 +1,10 @@
 package Controller.Menus;
 
 import Controller.GameRelated.GameController;
-import Controller.GameRelated.Reversi.ReversiController;
 import Controller.MainController;
 import Model.GameRelated.Reversi.PlayerReversi;
 import Model.GameRelated.Reversi.Reversi;
+import Controller.Client;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -50,8 +50,8 @@ public class ReversiGameController implements Initializable {
 	public ListView<GridPane> moveHistoryList;
 	private PlayerReversi player1, player2;
 	private Socket socket;
-	private DataOutputStream dataOutputStream;
-	private DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
 
 	public static void setStage (Stage stage) {
 		ReversiGameController.stage = stage;
@@ -75,6 +75,8 @@ public class ReversiGameController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		currentGame = (Reversi) GameController.getInstance().getCurrentGameInSession();
 
 		currentGame.pointsBProperty().addListener(observable -> updatePoints());
@@ -118,7 +120,7 @@ public class ReversiGameController implements Initializable {
 
 	public void updateAvailableCoordinates () throws IOException {
 		dataOutputStream.writeUTF("displayAvaiableCoords_");
-		//ReversiController.getInstance().displayAvailableCoords();
+		//ReversiController.getClient().displayAvailableCoords();
 
 		String[][] currentGameBoard = currentGame.getBoard();
 		for (int y = 0, currentGameBoardLength = currentGameBoard.length; y < currentGameBoardLength; y++)
@@ -170,7 +172,7 @@ public class ReversiGameController implements Initializable {
 		try {
 			dataOutputStream.writeUTF("placeDisk_" + getXFrom1(index) + "_" + getYFrom1(index));
 			dataOutputStream.flush();
-			//ReversiController.getInstance().placeDisk(getXFrom1(index), getYFrom1(index));
+			//ReversiController.getClient().placeDisk(getXFrom1(index), getYFrom1(index));
 
 			showColorChanges();
 
@@ -237,7 +239,7 @@ public class ReversiGameController implements Initializable {
 	public void confirmMove (ActionEvent actionEvent) throws IOException {
 		dataOutputStream.writeUTF("ReversinextTurn_");
 		dataOutputStream.flush();
-		//ReversiController.getInstance().nextTurn();
+		//ReversiController.getClient().nextTurn();
 
 		if (currentGame.gameHasEnded()) {
 			MainController.getInstance().saveEverything();
@@ -254,7 +256,7 @@ public class ReversiGameController implements Initializable {
 			System.out.println("Move History");
 			dataOutputStream.writeUTF("ReversiDisplayPrevMoves_");
 			dataOutputStream.flush();
-			//ReversiController.getInstance().displayPrevMoves();
+			//ReversiController.getClient().displayPrevMoves();
 		}
 	}
 

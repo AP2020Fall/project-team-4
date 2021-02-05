@@ -1,11 +1,10 @@
 package Controller.Menus;
 
-import Controller.AccountRelated.AccountController;
-import Controller.AccountRelated.EventController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Event;
 import Model.AccountRelated.Gamer;
+import Controller.Client;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +31,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.URL;
 import java.time.LocalDate;
@@ -50,8 +48,6 @@ public class EventsTabController implements Initializable {
 	private static DataOutputStream dataOutputStream;
 	private static DataInputStream dataInputStream;
 	private static Socket socket;
-	private Object Account;
-
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		EventsTabController.gamerOrAdmin = gamerOrAdmin;
@@ -61,7 +57,7 @@ public class EventsTabController implements Initializable {
 		LinkedList<Event> eventsToShow;
 		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
 		dataOutputStream.flush();
-		Gamer gamer = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+		Gamer gamer = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class); // fixme add a check for casting if needed
 
 		String showWhich = (showInSession.isSelected() ? "y" : "n") + (showUpcoming.isSelected() ? "y" : "n") + (showParticipatingIn.isSelected() ? "y" : "n");
 
@@ -96,6 +92,8 @@ public class EventsTabController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		if (gamerOrAdmin)
 			gridPane.getChildren().remove(createEventBtn);
 
@@ -174,10 +172,10 @@ public class EventsTabController implements Initializable {
 									} catch (IOException e) {
 										e.printStackTrace();
 									}
-									Gamer currentLoggedIn = null;
+									Account currentLoggedIn = null;
 									// TODO: 2/3/2021
 									try {
-										currentLoggedIn = (Gamer) new Gson().fromJson(dataInputStream.readUTF(), (Type) Account);
+										currentLoggedIn = new Gson().fromJson(dataInputStream.readUTF(), Account.class);
 									} catch (IOException exception) {
 										exception.printStackTrace();
 									}
@@ -192,7 +190,7 @@ public class EventsTabController implements Initializable {
 											} catch (IOException exception) {
 												exception.printStackTrace();
 											}
-											//EventController.getInstance().stopParticipatingInEvent(event.getEventID());
+											//EventController.getClient().stopParticipatingInEvent(event.getEventID());
 											try {
 												filter(new ActionEvent());
 											} catch (IOException exception) {
@@ -209,7 +207,7 @@ public class EventsTabController implements Initializable {
 											} catch (IOException exception) {
 												exception.printStackTrace();
 											}
-											//EventController.getInstance().participateInEvent(event.getEventID());
+											//EventController.getClient().participateInEvent(event.getEventID());
 											try {
 												filter(new ActionEvent());
 											} catch (IOException exception) {

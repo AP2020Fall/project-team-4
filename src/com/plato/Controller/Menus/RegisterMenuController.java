@@ -1,8 +1,8 @@
 package Controller.Menus;
 
-import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import Model.AccountRelated.Admin;
+import Controller.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,8 +28,8 @@ public class RegisterMenuController implements Initializable {
 	public PasswordField pwFieldpwHidden;
 	public TextField pwFieldpwShown, usernameTxtFld;
 	public Label usernameError, AdminGamerTitle, passwordError;
-	private DataOutputStream dataOutputStream;
-	private DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
 
 	public static Stage getStage () {
 		return stage;
@@ -42,6 +42,8 @@ public class RegisterMenuController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		AdminGamerTitle.setText(((Admin.adminHasBeenCreated() ? "gamer" : "admin") + " sign-up").toUpperCase());
 		RegisterFormController.adjustWidthBasedOnTextLength(passwordError);
 		RegisterFormController.adjustWidthBasedOnTextLength(usernameError);
@@ -82,9 +84,9 @@ public class RegisterMenuController implements Initializable {
 	public void signUp (ActionEvent actionEvent) throws IOException {
 
 		String password = (showPwOrNot.getImage().getUrl().contains("invisible") ? pwFieldpwShown : pwFieldpwHidden).getText();
-		dataOutputStream.writeUTF("register_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _0");
+		dataOutputStream.writeUTF("register_null_" + usernameTxtFld.getText() + "_" + password + "_ _ _ _ _0");
 		dataOutputStream.flush();
-		//AccountController.getInstance().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
+		//AccountController.getClient().register(null, usernameTxtFld.getText(), password, "", "", "", "", 0);
 		try {
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/RegisterForm.fxml").toURI().toURL()),

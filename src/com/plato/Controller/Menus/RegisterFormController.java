@@ -3,6 +3,7 @@ package Controller.Menus;
 import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import Model.AccountRelated.Admin;
+import Controller.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,8 +34,8 @@ public class RegisterFormController implements Initializable {
 	public HBox coinHBox;
 	public GridPane mainGridPane;
 	private boolean isForAdmin;
-	private DataInputStream dataInputStream;
-	private DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
 
 	public static void setPassword (String password) {
 		RegisterFormController.password = password;
@@ -55,6 +56,8 @@ public class RegisterFormController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		isForAdmin = !Admin.adminHasBeenCreated();
 		adjustWidthBasedOnTextLength(emailError);
 		adjustWidthBasedOnTextLength(phoneNumError);

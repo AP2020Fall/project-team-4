@@ -1,11 +1,10 @@
 package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
-import Controller.AccountRelated.GamerController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
-import com.google.gson.Gson;
+import Controller.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,7 +29,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -49,6 +47,8 @@ public class FriendsTabController implements Initializable {
 	}
 
 	public void updateFrndsList (ActionEvent actionEvent) throws IOException {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		frndsList.getItems().clear();
 //		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
 //		dataOutputStream.flush();
@@ -121,7 +121,7 @@ public class FriendsTabController implements Initializable {
 	private void unfriend (String frndUN) throws IOException {
 		dataOutputStream.writeUTF("removeFriend_"+frndUN);
 		dataOutputStream.flush();
-		//GamerController.getInstance().removeFriend(frndUN);
+		//GamerController.getClient().removeFriend(frndUN);
 
 		if (FriendProfileController.getFrnd() != null && FriendProfileController.getFrnd().getUsername().equals(frndUN))
 			frndProfile.getChildren().clear();

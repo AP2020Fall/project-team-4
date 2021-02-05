@@ -1,8 +1,8 @@
 package Controller.Menus;
 
-import Controller.AccountRelated.MessageController;
 import Model.AccountRelated.AdminGameReco;
 import Model.AccountRelated.Gamer;
+import Controller.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -29,8 +29,8 @@ public class UserProfileForAdminController implements Initializable {
 	public GridPane msgGrdPn;
 	public Button backBtn, sendBtn;
 	private static UserProfileForAdminController userProfileForAdminController;
-	private DataInputStream dataInputStream;
-	private DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
 
 	public static UserProfileForAdminController getInstance(){
 		if(userProfileForAdminController == null)
@@ -48,6 +48,8 @@ public class UserProfileForAdminController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		pfp.setImage(new Image(gamer.getPfpUrl()));
 
 		username.setText(gamer.getUsername());
@@ -80,7 +82,7 @@ public class UserProfileForAdminController implements Initializable {
 		try {
 			dataOutputStream.writeUTF("sendMsg_" + msg.getText());
 			dataOutputStream.flush();
-			//MessageController.getInstance().sendMsg(gamer, msg.getText());
+			//MessageController.getClient().sendMsg(gamer, msg.getText());
 			cancelSendingMsg(actionEvent);
 		} catch (IOException e) {
 			messageError.setText(e.getMessage());

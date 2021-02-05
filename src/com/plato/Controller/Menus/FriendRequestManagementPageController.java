@@ -2,11 +2,10 @@ package Controller.Menus;
 
 
 import Controller.AccountRelated.AccountController;
-import Controller.AccountRelated.FriendRequestController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.FriendRequest;
 import Model.AccountRelated.Gamer;
-import com.google.gson.Gson;
+import Controller.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -29,7 +28,6 @@ import javafx.stage.Stage;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -56,6 +54,8 @@ public class FriendRequestManagementPageController implements Initializable {
 	}
 
 	private void updateAvailableGamersList () throws IOException {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 //		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
 //		dataOutputStream.flush();
 		Gamer currentLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
@@ -121,21 +121,21 @@ public class FriendRequestManagementPageController implements Initializable {
 	private void sendFriendReqDone (String usernameTo) throws IOException {
 		dataOutputStream.writeUTF("sendFrndRequest_" + usernameTo);
 		dataOutputStream.flush();
-	//	FriendRequestController.getInstance().sendFrndRequest(usernameTo);
+	//	FriendRequestController.getClient().sendFrndRequest(usernameTo);
 		availableForFrndReqList.getItems().removeIf(item -> ((Label) item.getChildren().get(1)).getText().equals(usernameTo));
 	}
 
 	private void declineFriendReq (String usernameFrom) throws IOException {
 		dataOutputStream.writeUTF("declineFriendReq_" + usernameFrom);
 		dataOutputStream.flush();
-		//FriendRequestController.getInstance().declineFriendReq(usernameFrom);
+		//FriendRequestController.getClient().declineFriendReq(usernameFrom);
 		frndReqsGottenList.getItems().removeIf(item -> ((Label) item.getChildren().get(1)).getText().equals(usernameFrom));
 	}
 
 	private void acceptFriendReq (String usernameFrom) throws IOException {
 		dataOutputStream.writeUTF("acceptFriendReq_" + usernameFrom);
 		dataOutputStream.flush();
-		//FriendRequestController.getInstance().acceptFriendReq(usernameFrom);
+		//FriendRequestController.getClient().acceptFriendReq(usernameFrom);
 		frndReqsGottenList.getItems().removeIf(item -> ((Label) item.getChildren().get(1)).getText().equals(usernameFrom));
 	}
 

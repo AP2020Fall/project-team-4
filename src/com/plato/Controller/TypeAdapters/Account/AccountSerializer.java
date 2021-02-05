@@ -15,7 +15,7 @@
 //		return gson;
 //	}
 //
-//	public static AccountSerializer getInstance () {
+//	public static AccountSerializer getClient () {
 //		if (accountSerializer == null)
 //			accountSerializer = new AccountSerializer();
 //		return accountSerializer;

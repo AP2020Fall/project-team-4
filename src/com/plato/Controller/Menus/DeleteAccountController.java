@@ -1,7 +1,7 @@
 package Controller.Menus;
 
-import Controller.AccountRelated.AccountController;
 import Controller.MainController;
+import Controller.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -9,7 +9,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -32,8 +31,6 @@ public class DeleteAccountController implements Initializable {
 	private static DataOutputStream dataOutputStream;
 	private static Socket socket;
 
-
-
 	public static void setStage (Stage stage) {
 		DeleteAccountController.stage = stage;
 		stage.setOnCloseRequest(windowEvent -> DeleteAccountController.stage = null);
@@ -41,6 +38,8 @@ public class DeleteAccountController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		RegisterFormController.adjustWidthBasedOnTextLength(passwordError);
 		RegisterFormController.adjustWidthBasedOnTextLength(usernameError);
 
@@ -83,11 +82,11 @@ public class DeleteAccountController implements Initializable {
 	public void removeAccount (ActionEvent actionEvent) throws IOException {
 //		Stage stage = new Stage();
 //		try {
-//			stage = MainController.getInstance().createAndReturnNewStage(
+//			stage = MainController.getClient().createAndReturnNewStage(
 //					FXMLLoader.load(new File("src/com/plato/View/Menus/LoginMenu.fxml").toURI().toURL()),
 //					"Login Menu",
 //					true,
-//					MainController.getInstance().getPrimaryStage()
+//					MainController.getClient().getPrimaryStage()
 //			);
 //		} catch (IOException e) {
 //			e.printStackTrace();
@@ -97,7 +96,7 @@ public class DeleteAccountController implements Initializable {
 
 		dataOutputStream.writeUTF("deleteAccount_" + username.getText() + "_" + password);
 		dataOutputStream.flush();
-		//AccountController.getInstance().deleteAccount(username.getText(), password);
+		//AccountController.getClient().deleteAccount(username.getText(), password);
 
 		DeleteAccountController.stage.close();
 //		stage.show();

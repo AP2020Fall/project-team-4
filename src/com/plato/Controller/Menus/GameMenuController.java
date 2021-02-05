@@ -1,11 +1,10 @@
 package Controller.Menus;
 
-import Controller.AccountRelated.AccountController;
-import Controller.GameRelated.GameController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
+import Controller.Client;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +18,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.URL;
 import java.util.Arrays;
@@ -46,7 +44,7 @@ public class GameMenuController implements Initializable {
 	private static DataOutputStream dataOutputStream;
 	private static DataInputStream dataInputStream;
 	private Socket socket;
-	private Object Account;
+	private Account account;
 
 	public static void setStage (Stage stage) {
 		GameMenuController.stage = stage;
@@ -60,6 +58,8 @@ public class GameMenuController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		gameTitle.setText(gameName);
 		try {
 			dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
@@ -69,7 +69,7 @@ public class GameMenuController implements Initializable {
 		}
 		Gamer currentGamer = null;
 		try {
-			currentGamer = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+			currentGamer = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
@@ -145,7 +145,7 @@ public class GameMenuController implements Initializable {
 		try {
 			dataOutputStream.writeUTF("runGame_" + username2.getText() + "_" + gameName);
 			dataOutputStream.flush();
-			//GameController.getInstance().runGame(username2.getText(), gameName);
+			//GameController.getClient().runGame(username2.getText(), gameName);
 		} catch (IOException e) {
 			username2Error.setText(e.getMessage());
 			return;
@@ -205,7 +205,7 @@ public class GameMenuController implements Initializable {
 		}
 		Gamer currentGamer = null;
 		try {
-			currentGamer = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+			currentGamer = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}

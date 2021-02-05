@@ -1,12 +1,12 @@
 package Controller.Menus;
 
 import Controller.GameRelated.BattleSea.BombController;
-import Controller.GameRelated.GameController;
 import Controller.MainController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
+import Controller.Client;
 import com.google.gson.Gson;
 import javafx.animation.*;
 import javafx.beans.property.IntegerProperty;
@@ -29,7 +29,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.URL;
 import java.util.Collections;
@@ -53,7 +52,6 @@ public class BattleSeaPlayPageController implements Initializable {
 	public GridPane opponentBoardGridpane, yourBoardGridpane;
 	public TilePane clickableOpponentBoardTilePane;
 	private PlayerBattleSea player1, player2;
-	private Object Game;
 	private IntegerProperty secondsRemaining = new SimpleIntegerProperty(maxTime);
 	private Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<>() {
 		@Override
@@ -83,7 +81,7 @@ public class BattleSeaPlayPageController implements Initializable {
 				exception.printStackTrace();
 			}
 
-			//GameController.getInstance().setCurrentGameInSession(null);
+			//GameController.getClient().setCurrentGameInSession(null);
 		});
 	}
 
@@ -97,6 +95,8 @@ public class BattleSeaPlayPageController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		try {
 			dataOutputStream.writeUTF("getCurrentGameInSession_");
 			dataOutputStream.flush();
@@ -104,7 +104,7 @@ public class BattleSeaPlayPageController implements Initializable {
 			exception.printStackTrace();
 		}
 		try {
-			currentGame = (BattleSea) new Gson().fromJson(dataInputStream.readUTF() , (Type) Game);
+			currentGame = new Gson().fromJson(dataInputStream.readUTF() , BattleSea.class);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}

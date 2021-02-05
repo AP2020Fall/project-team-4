@@ -4,6 +4,7 @@ import Controller.MainController;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import Model.GameRelated.GameLog;
+import Controller.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.*;
@@ -57,6 +58,8 @@ public class GameLogController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		gameTitle.setText(gameName);
 		playedNum.setText(playedNum.getText().replaceAll("-", String.valueOf(GameLog.getPlayedCount(gameName))));
 		switch (gameName) {
@@ -82,7 +85,7 @@ public class GameLogController implements Initializable {
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
-		//Controller.GameRelated.GameLogController.getInstance().displayLogOfGame(gameName);
+		//Controller.GameRelated.GameLogController.getClient().displayLogOfGame(gameName);
 
 		gameLogList.setStyle("-fx-background-color: #003768;  " +
 				"-fx-control-inner-background: #003768;");

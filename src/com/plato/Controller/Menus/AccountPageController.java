@@ -6,8 +6,8 @@ import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.GameLog;
+import Controller.Client;
 import com.google.gson.Gson;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -22,7 +22,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,8 +41,6 @@ public class AccountPageController implements Initializable {
 	private static DataOutputStream dataOutputStream;
 	private static DataInputStream dataInputStream;
 	private static Socket socket;
-	private Object Account;
-
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		AccountPageController.gamerOrAdmin = gamerOrAdmin;
@@ -52,6 +49,8 @@ public class AccountPageController implements Initializable {
 	@Override
 
 	public void initialize (URL location, ResourceBundle resources) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		try {
 			dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
 			dataOutputStream.flush();
@@ -60,7 +59,7 @@ public class AccountPageController implements Initializable {
 		}
 		Account currentLoggedIn = null;
 		try {
-			currentLoggedIn = new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+			currentLoggedIn = new Gson().fromJson(dataInputStream.readUTF() , Account.class);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
@@ -114,7 +113,7 @@ public class AccountPageController implements Initializable {
 	public void logout (MouseEvent actionEvent) throws IOException {
 		dataOutputStream.writeUTF("logOut");
 		dataOutputStream.flush();
-		//AccountController.getInstance().logout();
+		//AccountController.getClient().logout();
 		try {
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/LoginMenu.fxml").toURI().toURL()),

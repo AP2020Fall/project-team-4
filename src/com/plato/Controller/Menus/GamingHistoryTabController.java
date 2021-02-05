@@ -1,11 +1,10 @@
 package Controller.Menus;
 
-import Controller.AccountRelated.AccountController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import Model.GameRelated.GameLog;
-import Model.GameRelated.Player;
+import Controller.Client;
 import com.google.gson.Gson;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,8 +13,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -31,7 +28,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -44,9 +40,8 @@ public class GamingHistoryTabController implements Initializable {
     public GridPane gameInfo;
     public ListView<GridPane> gamingHistoryList;
     public GridPane gameStats;
-    private DataInputStream dataInputStream;
-    private DataOutputStream dataOutputStream;
-    private Object Account;
+    private static DataInputStream dataInputStream;
+    private static DataOutputStream dataOutputStream;
 
     public static void setStage(Stage stage){
         GamingHistoryTabController.stage = stage;
@@ -59,6 +54,8 @@ public class GamingHistoryTabController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        dataInputStream = Client.getClient().getDataInputStream();
+        dataOutputStream = Client.getClient().getDataOutputStream();
         try {
             updateListOfGames(new ActionEvent());
         } catch (IOException exception) {
@@ -71,7 +68,7 @@ public class GamingHistoryTabController implements Initializable {
 
         dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
         dataOutputStream.flush();
-        Gamer currentAccLoggedIn = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+        Gamer currentAccLoggedIn = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
         // TODO: 2/3/2021
         for(Game game : GameLog.getGameHistory(currentAccLoggedIn)){
             Circle circle = new Circle(40);

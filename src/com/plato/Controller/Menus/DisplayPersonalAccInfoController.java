@@ -4,6 +4,7 @@ import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
+import Controller.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -41,7 +42,6 @@ public class DisplayPersonalAccInfoController implements Initializable {
 	private static DataOutputStream dataOutputStream;
 	private static Socket socket;
 
-
 	public static void setStage (Stage stage) {
 		DisplayPersonalAccInfoController.stage = stage;
 		DisplayPersonalAccInfoController.stage.setOnCloseRequest(e -> {
@@ -57,6 +57,8 @@ public class DisplayPersonalAccInfoController implements Initializable {
 
 	@Override
 	public void initialize (URL location, ResourceBundle resources) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		pfp.setImage(new Image(account.getPfpUrl()));
 		updateFieldViews();
 
@@ -126,7 +128,7 @@ public class DisplayPersonalAccInfoController implements Initializable {
 			try {
 				dataOutputStream.writeUTF("editAccField_first name_"+firstNameTextField.getText());
 				dataOutputStream.flush();
-				//AccountController.getInstance().editAccField("first name", firstNameTextField.getText());
+				//AccountController.getClient().editAccField("first name", firstNameTextField.getText());
 				allError.setText("");
 			} catch (IOException e) {
 				allError.setText(allError.getText() + "\n" + e.getMessage());
@@ -137,7 +139,7 @@ public class DisplayPersonalAccInfoController implements Initializable {
 			try {
 				dataOutputStream.writeUTF("editAccField_last name_"+lastNameTextField.getText());
 				dataOutputStream.flush();
-				//AccountController.getInstance().editAccField("last name", lastNameTextField.getText());
+				//AccountController.getClient().editAccField("last name", lastNameTextField.getText());
 				allError.setText("");
 			} catch (IOException e) {
 				allError.setText(allError.getText() + "\n" + e.getMessage());
@@ -148,7 +150,7 @@ public class DisplayPersonalAccInfoController implements Initializable {
 			try {
 				dataOutputStream.writeUTF("editAccField_username_"+usernameTextField.getText());
 				dataOutputStream.flush();
-				//AccountController.getInstance().editAccField("username", usernameTextField.getText());
+				//AccountController.getClient().editAccField("username", usernameTextField.getText());
 				allError.setText("");
 			} catch (IOException e) {
 				allError.setText(allError.getText() + "\n" + e.getMessage());
@@ -170,7 +172,7 @@ public class DisplayPersonalAccInfoController implements Initializable {
 			try {
 				dataOutputStream.writeUTF("editAccField_phone number_"+phoneNumberTextField.getText());
 				dataOutputStream.flush();
-				//AccountController.getInstance().editAccField("phone number", phoneNumberTextField.getText());
+				//AccountController.getClient().editAccField("phone number", phoneNumberTextField.getText());
 				allError.setText("");
 			} catch (IOException e) {
 				allError.setText(allError.getText() + "\n" + e.getMessage());

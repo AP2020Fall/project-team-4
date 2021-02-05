@@ -3,7 +3,7 @@ package Controller.Menus;
 import Controller.MainController;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.GameLog;
-import javafx.event.ActionEvent;
+import Controller.Client;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -30,7 +29,6 @@ public class FriendProfileController implements Initializable {
 	private static DataInputStream dataInputStream;
 	private static Socket socket;
 
-
 	public static Gamer getFrnd () {
 		return frnd;
 	}
@@ -41,6 +39,8 @@ public class FriendProfileController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		pfp.setImage(new Image(frnd.getPfpUrl()));
 
 		username.setText(frnd.getUsername());

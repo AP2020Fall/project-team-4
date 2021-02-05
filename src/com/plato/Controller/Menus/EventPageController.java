@@ -45,6 +45,6 @@ public class EventPageController implements Initializable {
 	public void joinEvent (String eventID) throws IOException {
 		dataOutputStream.writeUTF("participateInEvent_" + eventID);
 		dataOutputStream.flush();
-		//EventController.getInstance().participateInEvent(eventID);
+		//EventController.getClient().participateInEvent(eventID);
 	}
 }

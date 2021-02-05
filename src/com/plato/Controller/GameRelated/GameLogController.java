@@ -22,18 +22,18 @@ public class GameLogController {
 	}
 
 	public void displayPtsLoggedInPlayerEarnedFromGame () {
-//		int points = GameLog.getPoints(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()), ((_11GameMenu) Menu.getMenuIn()).getGameName());
-//		GameLogView.getInstance().displayPtsPlayerEarnedFromGame(points, ((_11GameMenu) Menu.getMenuIn()).getGameName());
+//		int points = GameLog.getPoints(((Gamer) AccountController.getClient().getCurrentAccLoggedIn()), ((_11GameMenu) Menu.getMenuIn()).getGameName());
+//		GameLogView.getClient().displayPtsPlayerEarnedFromGame(points, ((_11GameMenu) Menu.getMenuIn()).getGameName());
 	}
 
 	public void displayPlayedCountOfGameByLoggedInPlayer () {
-//		int count = GameLog.getPlayedCount(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()), ((_11GameMenu) Menu.getMenuIn()).getGameName());
-//		GameLogView.getInstance().displayCountForPlayerPlayingGame(count, ((_11GameMenu) Menu.getMenuIn()).getGameName());
+//		int count = GameLog.getPlayedCount(((Gamer) AccountController.getClient().getCurrentAccLoggedIn()), ((_11GameMenu) Menu.getMenuIn()).getGameName());
+//		GameLogView.getClient().displayCountForPlayerPlayingGame(count, ((_11GameMenu) Menu.getMenuIn()).getGameName());
 	}
 
 	public void displayWinCountOfGameByLoggedInPlayer () {
-//		int count = GameLog.getWinCount(((Gamer) AccountController.getInstance().getCurrentAccLoggedIn()), ((_11GameMenu) Menu.getMenuIn()).getGameName());
-//		GameLogView.getInstance().displayCountForPlayerWinningGame(count, ((_11GameMenu) Menu.getMenuIn()).getGameName());
+//		int count = GameLog.getWinCount(((Gamer) AccountController.getClient().getCurrentAccLoggedIn()), ((_11GameMenu) Menu.getMenuIn()).getGameName());
+//		GameLogView.getClient().displayCountForPlayerWinningGame(count, ((_11GameMenu) Menu.getMenuIn()).getGameName());
 	}
 
 	public void displayLogOfGame (String gameName) {

@@ -1,7 +1,7 @@
 package Controller.Menus;
 
-import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
+import Controller.Client;
 import com.google.gson.Gson;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,7 +26,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -35,12 +34,14 @@ public class UsersTabController implements Initializable {
 	public Label clearSearch;
 	public ListView<GridPane> accountsList;
 	public Pane profile;
-	private DataOutputStream dataOutputStream;
-	private DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
 	private Object Account;
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		updateAccountsList();
 
 		clearSearch.setOnMouseEntered(e -> clearSearch.setOpacity(0.8));
@@ -100,7 +101,7 @@ public class UsersTabController implements Initializable {
 			profile.getChildren().clear();
 			dataOutputStream.writeUTF("getAccount_" + username);
 			dataOutputStream.flush();
-			Gamer gamer = (Gamer) new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+			Gamer gamer = new Gson().fromJson(dataInputStream.readUTF() , Gamer.class);
 			UserProfileForAdminController.setGamer(gamer);
 			profile.getChildren().add(FXMLLoader.load(new File("src/com/plato/View/Menus/UserProfileForAdmin.fxml").toURI().toURL()));
 			GridPane.setValignment(profile.getChildren().get(0), VPos.CENTER);

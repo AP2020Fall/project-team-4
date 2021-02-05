@@ -8,7 +8,6 @@ import Model.AccountRelated.*;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Game;
 import Model.GameRelated.Reversi.Reversi;
-import View.Client;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -26,7 +25,10 @@ import org.hildan.fxgson.FxGson;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.Socket;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,27 +37,24 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class MainController extends Application {
-	static int command;
+	public static Socket clientSocket;
 	private static MainController mainController;
 	private final GsonBuilder gsonBuilder = new GsonBuilder();
-	private Gson gson;
 	public Stage primaryStage;
-	public static String host = "127.0.0.1";
-	public static int port = 5056;
-	public static Socket clientSocket;
+	private Gson gson;
 
-	public static void main (String[] args) throws IOException {
-		startServerAndClient(args);
-		//launch(args);
+	public static void main (String[] args) {
+//		startServerAndClient(args);
+		startingMainController(args);
 	}
 
-	public static void startingMainController(String[] args){
+	public static void startingMainController (String[] args) {
 		launch(args);
 	}
 
-	public static void startServerAndClient(String[] args) throws IOException{
+	public static void startServerAndClient (String[] args) throws IOException {
 		Server.main(args);
-	//	Client.main(args);
+		//	Client.main(args);
 	}
 
 	public static MainController getInstance () {
@@ -64,16 +63,16 @@ public class MainController extends Application {
 		return mainController;
 	}
 
-	public static void write(String message){
-		try{
+	public static void write (String message) {
+		try {
 			InetAddress ip = InetAddress.getByName("localhost");
-			Socket socket = new Socket(ip , 5056);
-			clientSocket = new Socket(ip , 5056);
+			Socket socket = new Socket(ip, Client.port);
+			clientSocket = new Socket(ip, Client.port);
 			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
 			System.out.println(dataInputStream.readUTF());
 			dataOutputStream.writeUTF(message);
-		}catch (Exception e){
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -131,136 +130,136 @@ public class MainController extends Application {
 //			}
 //
 //			// register-login menu
-//		case "Register Gamer", "Register Admin" -> AccountController.getInstance().register();
-//		case "Login" -> AccountController.getInstance().login();
-//			case "Delete Account" -> AccountController.getInstance().deleteAccount();
+//		case "Register Gamer", "Register Admin" -> AccountController.getClient().register();
+//		case "Login" -> AccountController.getClient().login();
+//			case "Delete Account" -> AccountController.getClient().deleteAccount();
 //
 //			// main menu
 //			case "Show Points" -> {
 //				if (Menu.getMenuIn() instanceof _3MainMenu)
 //
-//					GameLogController.getInstance().displayAllPointsOfPlayer();
+//					GameLogController.getClient().displayAllPointsOfPlayer();
 //	if (Menu.getMenuIn() instanceof _11GameMenu)
-//					GameLogController.getInstance().displayPtsLoggedInPlayerEarnedFromGame();
+//					GameLogController.getClient().displayPtsLoggedInPlayerEarnedFromGame();
 //			}
-//			case "View Favorite games" -> GamerController.getInstance().displayFaveGamesForGamer();
-//			case "View Platobot’s messages" -> MessageController.getInstance().displayAdminMessages();case "View last played" -> GameLogController.getInstance().displayLastGamePlayed();
-//			case "View admin’s suggestions" -> AdminGameRecoController.getInstance().displayAdminsRecosToPlayer();
+//			case "View Favorite games" -> GamerController.getClient().displayFaveGamesForGamer();
+//			case "View Platobot’s messages" -> MessageController.getClient().displayAdminMessages();case "View last played" -> GameLogController.getClient().displayLastGamePlayed();
+//			case "View admin’s suggestions" -> AdminGameRecoController.getClient().displayAdminsRecosToPlayer();
 //			case "View Events" -> {
-//				EventController.getInstance().displayInSessionEvents();
+//				EventController.getClient().displayInSessionEvents();
 //				enterAppropriateMenu();
 //		}
-//		case "Add Event" -> EventController.getInstance().createEvent();
-//			case "Add suggestion" -> AdminGameRecoController.getInstance().giveRecommendationToGamer();
+//		case "Add Event" -> EventController.getClient().createEvent();
+//			case "Add suggestion" -> AdminGameRecoController.getClient().giveRecommendationToGamer();
 //			case "View suggestions" -> {
-//				AdminGameRecoController.getInstance().displayAllAdminRecos();
+//				AdminGameRecoController.getClient().displayAllAdminRecos();
 //				enterAppropriateMenu();
 //			}
-//			case "Send message" -> MessageController.getInstance().sendMsg();
+//			case "Send message" -> MessageController.getClient().sendMsg();
 //		case "Edit Details of BattleSea", "Edit Details of Reversi" -> {
 //				String gameName = commandOption.split(" ")[commandOption.split(" ").length - 1];
-//				GameController.getInstance().editDetails(gameName);
+//				GameController.getClient().editDetails(gameName);
 //			}
 //			case "View Users" -> {
-//				GamerController.getInstance().displayAllUsernames();
+//				GamerController.getClient().displayAllUsernames();
 //				enterAppropriateMenu();
 //			}
 //
 //			// suggestions menu
-//			case "Choose suggested game" -> AdminGameRecoController.getInstance().chooseRecoGame();
-//			case "Remove suggestion" -> AdminGameRecoController.getInstance().removeReco();
+//			case "Choose suggested game" -> AdminGameRecoController.getClient().chooseRecoGame();
+//			case "Remove suggestion" -> AdminGameRecoController.getClient().removeReco();
 //
 //			// events menu
-//			case "View event info" -> EventController.getInstance().displayEventInfo();
-//			case "Participate in event" -> EventController.getInstance().participateInEvent();
-//			case "Show Events participating in" -> EventController.getInstance().displayInSessionEventsParticipatingIn();
-//			case "Stop participating in Event" -> EventController.getInstance().stopParticipatingInEvent();
-//		case "Edit Event" -> EventController.getInstance().editEvent();
-//			case "Remove Event" -> EventController.getInstance().removeEvent();
+//			case "View event info" -> EventController.getClient().displayEventInfo();
+//			case "Participate in event" -> EventController.getClient().participateInEvent();
+//			case "Show Events participating in" -> EventController.getClient().displayInSessionEventsParticipatingIn();
+//			case "Stop participating in Event" -> EventController.getClient().stopParticipatingInEvent();
+//		case "Edit Event" -> EventController.getClient().editEvent();
+//			case "Remove Event" -> EventController.getClient().removeEvent();
 //
 //			// friend menu
-//	         case "Show friends" -> GamerController.getInstance().displayFriendsUsernames();
-//			case "Send Friend Request" -> FriendRequestController.getInstance().sendFrndRequest();case "Show Friend Requests" -> FriendRequestController.getInstance().displayFrndReqsPlayerGotten();
+//	         case "Show friends" -> GamerController.getClient().displayFriendsUsernames();
+//			case "Send Friend Request" -> FriendRequestController.getClient().sendFrndRequest();case "Show Friend Requests" -> FriendRequestController.getClient().displayFrndReqsPlayerGotten();
 //
 //			// gamer user management menu
-//			case "View user profile" -> GamerController.getInstance().displayUserProfileToAdmin();
+//			case "View user profile" -> GamerController.getClient().displayUserProfileToAdmin();
 //
 //			// friend management menu
-//            case "View friend profile" -> GamerController.getInstance().displayFriendPersonalInfo();
-//			case "Remove Friend" -> GamerController.getInstance().removeFriend();
+//            case "View friend profile" -> GamerController.getClient().displayFriendPersonalInfo();
+//			case "Remove Friend" -> GamerController.getClient().removeFriend();
 //
 //		// friend request management menu
 //
-//	case "Accept Friend Request" -> FriendRequestController.getInstance().acceptFriendReq();
-//			case "Decline Friend Request" -> FriendRequestController.getInstance().declineFriendReq();
+//	case "Accept Friend Request" -> FriendRequestController.getClient().acceptFriendReq();
+//			case "Decline Friend Request" -> FriendRequestController.getClient().declineFriendReq();
 //
 //		// game menu
-//			case "Show scoreboard" -> GameController.getInstance().displayScoreboardOfGame();
-//			case "Details" -> GameController.getInstance().displayGameHowToPlay();
-//			case "Show log of game" -> GameLogController.getInstance().displayLogOfGame();
-//			case "Show wins count" -> GameLogController.getInstance().displayWinCountOfGameByLoggedInPlayer();
-//			case "Show played count" -> GameLogController.getInstance().displayPlayedCountOfGameByLoggedInPlayer();
-//			case "Add to favorites" -> GameController.getInstance().addFaveGame();
-//			case "Continue previous games" -> GameController.getInstance().displayPrevGamesAndChooseToContinue();
-//			case "Run Game" -> GameController.getInstance().runGame();
+//			case "Show scoreboard" -> GameController.getClient().displayScoreboardOfGame();
+//			case "Details" -> GameController.getClient().displayGameHowToPlay();
+//			case "Show log of game" -> GameLogController.getClient().displayLogOfGame();
+//			case "Show wins count" -> GameLogController.getClient().displayWinCountOfGameByLoggedInPlayer();
+//			case "Show played count" -> GameLogController.getClient().displayPlayedCountOfGameByLoggedInPlayer();
+//			case "Add to favorites" -> GameController.getClient().addFaveGame();
+//			case "Continue previous games" -> GameController.getClient().displayPrevGamesAndChooseToContinue();
+//			case "Run Game" -> GameController.getClient().runGame();
 //
 //			// gameplay battlesea menu
 //				//	phase 1
-//			case "Generate a Random Board" -> BattleSeaController.getInstance().displayRandomlyGeneratedBoard();
-//		case "Choose between 5 randomly generated boards" -> BattleSeaController.getInstance().chooseBetween5RandomlyGeneratedBoards();
-//			case "Display on-trial Board" -> BattleSeaController.getInstance().displayTrialBoard();
-//			case "Move ship" -> ShipController.getInstance().moveShip();
-//			case "Change ship direction" -> ShipController.getInstance().rotateShip();
+//			case "Generate a Random Board" -> BattleSeaController.getClient().displayRandomlyGeneratedBoard();
+//		case "Choose between 5 randomly generated boards" -> BattleSeaController.getClient().chooseBetween5RandomlyGeneratedBoards();
+//			case "Display on-trial Board" -> BattleSeaController.getClient().displayTrialBoard();
+//			case "Move ship" -> ShipController.getClient().moveShip();
+//			case "Change ship direction" -> ShipController.getClient().rotateShip();
 //			case "Finalize Board" -> {
-//				BattleSeaController.getInstance().finalizeTrialBoard();
+//				BattleSeaController.getClient().finalizeTrialBoard();
 //
-//				if (((BattleSea) GameController.getInstance().getCurrentGameInSession()).canStartBombing()) {
+//				if (((BattleSea) GameController.getClient().getCurrentGameInSession()).canStartBombing()) {
 //					((_12_1GameplayBattleSeaMenu) Menu.getMenuIn()).nextPhase();
-//					BattleSeaController.getInstance().initTurnTimerStuff();
+//					BattleSeaController.getClient().initTurnTimerStuff();
 //				}
 //			}
 //				//	phase 2
-//		case "Boom (Throw Bomb)" -> BombController.getInstance().throwBomb();
-//			case "Time?" -> BattleSeaController.getInstance().displayRemainingTime();
-//			case "Whose turn?", "Whose turn now?" -> GameController.getInstance().displayTurn();
-//			case "Display all my ships" -> ShipController.getInstance().displayAllShipsOfCurrentPlayer();
-//			case "Display all my booms" -> BombController.getInstance().displayAllCurrentPlayerBombs();
-//			case "Display all my opponent’s booms" -> BombController.getInstance().displayAllOpponentBombs();
-//			case "Display all my correct booms" -> BombController.getInstance().displayAllSuccessCurrentPlayerBombs();
-//			case "Display all my opponent’s correct booms" -> BombController.getInstance().displayAllSuccessOpponentBombs();
-//			case "Display all my incorrect booms" -> BombController.getInstance().displayAllUnsuccessCurrentPlayerBombs();
-//			case "Display all my opponent’s incorrect booms" -> BombController.getInstance().displayAllUnsuccessOpponentBombs();
-//			case "Display all my boomed ships" -> ShipController.getInstance().displayDestroyedShipsOfCurrentPlayer();
-//			case "Display all my opponent’s boomed ships" -> ShipController.getInstance().displayDestroyedShipsOfOpponent();
-//			case "Display all my unboomed ships" -> ShipController.getInstance().displayHealthyShipsOfCurrentPlayer();
-//			case "Display my board" -> BattleSeaController.getInstance().displayCurrentPlayerBoard();
-//			case "Display my opponent’s board" -> BattleSeaController.getInstance().displayOpponentBoard();
+//		case "Boom (Throw Bomb)" -> BombController.getClient().throwBomb();
+//			case "Time?" -> BattleSeaController.getClient().displayRemainingTime();
+//			case "Whose turn?", "Whose turn now?" -> GameController.getClient().displayTurn();
+//			case "Display all my ships" -> ShipController.getClient().displayAllShipsOfCurrentPlayer();
+//			case "Display all my booms" -> BombController.getClient().displayAllCurrentPlayerBombs();
+//			case "Display all my opponent’s booms" -> BombController.getClient().displayAllOpponentBombs();
+//			case "Display all my correct booms" -> BombController.getClient().displayAllSuccessCurrentPlayerBombs();
+//			case "Display all my opponent’s correct booms" -> BombController.getClient().displayAllSuccessOpponentBombs();
+//			case "Display all my incorrect booms" -> BombController.getClient().displayAllUnsuccessCurrentPlayerBombs();
+//			case "Display all my opponent’s incorrect booms" -> BombController.getClient().displayAllUnsuccessOpponentBombs();
+//			case "Display all my boomed ships" -> ShipController.getClient().displayDestroyedShipsOfCurrentPlayer();
+//			case "Display all my opponent’s boomed ships" -> ShipController.getClient().displayDestroyedShipsOfOpponent();
+//			case "Display all my unboomed ships" -> ShipController.getClient().displayHealthyShipsOfCurrentPlayer();
+//			case "Display my board" -> BattleSeaController.getClient().displayCurrentPlayerBoard();
+//			case "Display my opponent’s board" -> BattleSeaController.getClient().displayOpponentBoard();
 //			//gameplay reversi menu
-//			case "Place Disk" -> ReversiController.getInstance().placeDisk();
-//			case "Next Turn" -> ReversiController.getInstance().nextTurn();
-//			case "Display available coordinates" -> ReversiController.getInstance().displayAvailableCoords();
-//			case "Display Board (Grid)" -> ReversiController.getInstance().displayGrid();
-//			case "Display disks" -> ReversiController.getInstance().displayPrevMoves();
-//			case "Display scores" -> ReversiController.getInstance().displayInGameScores();
-//			case "Display final result" -> GameController.getInstance().displayGameConclusion(GameController.getInstance().getCurrentGameInSession());
+//			case "Place Disk" -> ReversiController.getClient().placeDisk();
+//			case "Next Turn" -> ReversiController.getClient().nextTurn();
+//			case "Display available coordinates" -> ReversiController.getClient().displayAvailableCoords();
+//			case "Display Board (Grid)" -> ReversiController.getClient().displayGrid();
+//			case "Display disks" -> ReversiController.getClient().displayPrevMoves();
+//			case "Display scores" -> ReversiController.getClient().displayInGameScores();
+//			case "Display final result" -> GameController.getClient().displayGameConclusion(GameController.getClient().getCurrentGameInSession());
 //
 //	//	 user editing menu
-//			case "Change password" -> AccountController.getInstance().changePWCommand();
-//			case "Edit Personal info" -> AccountController.getInstance().editAccFieldCommand();
+//			case "Change password" -> AccountController.getClient().changePWCommand();
+//			case "Edit Personal info" -> AccountController.getClient().editAccFieldCommand();
 //
 //	//	 account menu
 //			case "View personal info (w/ money)", "View personal info (w/o money)" -> {
-//				AccountController.getInstance().displayPersonalInfo();
+//				AccountController.getClient().displayPersonalInfo();
 //				enterAppropriateMenu();
 //			}
-//			case "View plato statistics" -> GamerController.getInstance().displayAccountStats();
-//			case "View Gaming History" -> GameLogController.getInstance().displayFullGamingHistoryOfGamer();
-//			case "View Gaming History in BattleSea" -> GameLogController.getInstance().displayGamingHistoryOfGamerInGame("BattleSea");
-//			case "View Gaming History in Reversi" -> GameLogController.getInstance().displayGamingHistoryOfGamerInGame("Reversi");
-//			case "View my BattleSea statistics" -> GameLogController.getInstance().displayPlayerStatsInGame("BattleSea");
-//			case "View my Reversi statistics" -> GameLogController.getInstance().displayPlayerStatsInGame("Reversi");
+//			case "View plato statistics" -> GamerController.getClient().displayAccountStats();
+//			case "View Gaming History" -> GameLogController.getClient().displayFullGamingHistoryOfGamer();
+//			case "View Gaming History in BattleSea" -> GameLogController.getClient().displayGamingHistoryOfGamerInGame("BattleSea");
+//			case "View Gaming History in Reversi" -> GameLogController.getClient().displayGamingHistoryOfGamerInGame("Reversi");
+//			case "View my BattleSea statistics" -> GameLogController.getClient().displayPlayerStatsInGame("BattleSea");
+//			case "View my Reversi statistics" -> GameLogController.getClient().displayPlayerStatsInGame("Reversi");
 //			case "Logout" -> {
-//				AccountController.getInstance().logout();
+//				AccountController.getClient().logout();
 //			//	Menu.getMenu("2").enter();
 //			}
 //		}
@@ -271,8 +270,6 @@ public class MainController extends Application {
 	public static void playButtonClickSound () {
 		new AudioClip(Paths.get("src/com/Resources/Sounds/button.wav").toUri().toString()).play(0.2);
 	}
-
-
 
 	@Override
 	public void start (Stage primaryStage) {
@@ -312,9 +309,6 @@ public class MainController extends Application {
 		}
 
 		primaryStage.show();
-	}
-
-	private void enterAppropriateMenu () {
 	}
 
 	public void saveEverything () {

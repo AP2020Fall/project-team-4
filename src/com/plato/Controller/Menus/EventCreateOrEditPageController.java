@@ -54,7 +54,6 @@ public class EventCreateOrEditPageController implements Initializable {
 	private static DataOutputStream dataOutputStream;
 	private static DataInputStream dataInputStream;
 	private static Socket socket;
-	private Object Account;
 
 
 	public static void setStage (Stage stage) {
@@ -156,7 +155,7 @@ public class EventCreateOrEditPageController implements Initializable {
 			try {
 				dataOutputStream.writeUTF("editEvent_title_" + titleTextField.getText());
 				dataOutputStream.flush();
-				//EventController.getInstance().editEvent(event, "title", titleTextField.getText());
+				//EventController.getClient().editEvent(event, "title", titleTextField.getText());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -165,36 +164,36 @@ public class EventCreateOrEditPageController implements Initializable {
 		if (gameEditMenu.isVisible()) {
 			dataOutputStream.writeUTF("editEvent_game menu_" + gameEditMenu.getText());
 			dataOutputStream.flush();
-			//EventController.getInstance().editEvent(event, "game menu", gameEditMenu.getText());
+			//EventController.getClient().editEvent(event, "game menu", gameEditMenu.getText());
 		}
 
 		if (coinSplitMenu.isVisible()) {
 			dataOutputStream.writeUTF("editEvent_prize_" + coinSplitMenu.getText());
 			dataOutputStream.flush();
-			//EventController.getInstance().editEvent(event, "prize", coinSplitMenu.getText());
+			//EventController.getClient().editEvent(event, "prize", coinSplitMenu.getText());
 		}
 
 		if (detailsTextArea.isVisible()) {
 			dataOutputStream.writeUTF("editEvent_details_" + detailsTextArea.getText());
 			dataOutputStream.flush();
-			//		EventController.getInstance().editEvent(event, "details", detailsTextArea.getText());
+			//		EventController.getClient().editEvent(event, "details", detailsTextArea.getText());
 		}
 
 		if (startDatePicker.isVisible()) {
 			dataOutputStream.writeUTF("editEvent_start date_" + startDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")));
 			dataOutputStream.flush();
-			//EventController.getInstance().editEvent(event, "start date", startDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")));
+			//EventController.getClient().editEvent(event, "start date", startDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")));
 		}
 
 		if (endDatePicker.isVisible()) {
 			dataOutputStream.writeUTF("editEvent_end date_" + endDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")));
 			dataOutputStream.flush();
-			//		EventController.getInstance().editEvent(event, "end date", endDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")));
+			//		EventController.getClient().editEvent(event, "end date", endDatePicker.getValue().format(DateTimeFormatter.ofPattern("d-MMM-yyyy")));
 		}
 
 		dataOutputStream.writeUTF("editEvent_pic-url_" + eventImg.getImage().getUrl());
 		dataOutputStream.flush();
-		//EventController.getInstance().editEvent(event, "pic-url", eventImg.getImage().getUrl());
+		//EventController.getClient().editEvent(event, "pic-url", eventImg.getImage().getUrl());
 	}
 
 	public void closeStage (ActionEvent actionEvent) {
@@ -297,7 +296,7 @@ public class EventCreateOrEditPageController implements Initializable {
 	private void updateJoinOrDropOutBtn () throws IOException {
 		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
 		dataOutputStream.flush();
-		Account account = new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+		Account account = new Gson().fromJson(dataInputStream.readUTF() , Account.class);
 		if (event.participantExists(account.getUsername())) {
 			joinOrDropoutEventBtn.setText("Drop-out");
 			joinOrDropoutEventBtn.setOnAction(e -> {
@@ -307,7 +306,7 @@ public class EventCreateOrEditPageController implements Initializable {
 				} catch (IOException exception) {
 					exception.printStackTrace();
 				}
-			//	EventController.getInstance().stopParticipatingInEvent(event.getEventID());
+			//	EventController.getClient().stopParticipatingInEvent(event.getEventID());
 				try {
 					updateJoinOrDropOutBtn();
 				} catch (IOException exception) {
@@ -324,7 +323,7 @@ public class EventCreateOrEditPageController implements Initializable {
 				} catch (IOException exception) {
 					exception.printStackTrace();
 				}
-			//	EventController.getInstance().participateInEvent(event.getEventID());
+			//	EventController.getClient().participateInEvent(event.getEventID());
 				try {
 					updateJoinOrDropOutBtn();
 				} catch (IOException exception) {
@@ -388,7 +387,7 @@ public class EventCreateOrEditPageController implements Initializable {
 					+ detailsTextArea.getText()
 			);
 			dataOutputStream.flush();
-//			EventController.getInstance().createEvent(
+//			EventController.getClient().createEvent(
 //					titleTextField.getText(),
 //					gameEditMenu.getText(),
 //					eventImg.getImage().getUrl(),

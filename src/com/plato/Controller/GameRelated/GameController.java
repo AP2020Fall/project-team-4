@@ -60,7 +60,7 @@ public class GameController {
 	}
 
 	public void displayGameHowToPlay () {
-//		GameView.getInstance().displayGameHowToPlay(
+//		GameView.getClient().displayGameHowToPlay(
 //				((_11GameMenu) Menu.getMenuIn()).getGameName().equals(BattleSea.class.getSimpleName()) ? BattleSea.getBattleseaDetails() : Reversi.getReversiDetails()
 //		);
 	}
@@ -111,7 +111,7 @@ public class GameController {
 
 	public void displayScoreboardOfGame () {
 //		LinkedList<String> scoreBoard = getScoreboard(((_11GameMenu) Menu.getMenuIn()).getGameName());
-//		GameView.getInstance().displayScoreboardOfGame(((_11GameMenu) Menu.getMenuIn()).getGameName(), scoreBoard);
+//		GameView.getClient().displayScoreboardOfGame(((_11GameMenu) Menu.getMenuIn()).getGameName(), scoreBoard);
 	}
 
 	public void editDetails (String gameName) {

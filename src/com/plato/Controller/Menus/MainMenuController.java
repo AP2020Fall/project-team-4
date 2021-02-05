@@ -3,6 +3,7 @@ package Controller.Menus;
 import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import Model.AccountRelated.Gamer;
+import Controller.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,8 +28,8 @@ public class MainMenuController implements Initializable {
 	private static boolean gamerOrAdmin;
 	public HBox buttons;
 	public GridPane pane;
-	private DataInputStream dataInputStream;
-	private DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static DataOutputStream dataOutputStream;
 
 	public static void setGamerOrAdmin (boolean gamerOrAdmin) {
 		MainMenuController.gamerOrAdmin = gamerOrAdmin;
@@ -36,6 +37,8 @@ public class MainMenuController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		// for admin
 		if (!gamerOrAdmin) {
 			buttons.getChildren().subList(3, 10).clear();

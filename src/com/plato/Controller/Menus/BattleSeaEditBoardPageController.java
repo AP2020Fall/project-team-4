@@ -1,13 +1,12 @@
 package Controller.Menus;
 
-import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.BattleSea.ShipController;
 import Controller.GameRelated.GameController;
 import Controller.MainController;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
 import Model.GameRelated.BattleSea.Ship;
-import View.GameRelated.BattleSea.BattleSeaView;
+import Controller.Client;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
@@ -66,6 +65,8 @@ public class BattleSeaEditBoardPageController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
+				dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		player1 = (PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getListOfPlayers().get(0);
 		player2 = (PlayerBattleSea) GameController.getInstance().getCurrentGameInSession().getListOfPlayers().get(1);
 		// setting the pfp's
@@ -205,7 +206,7 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			setBoard(currentBoard, board);
 			dataOutputStream.writeUTF("displayBoard_");
 			dataOutputStream.flush();
-			//BattleSeaView.getInstance().displayBoard(BattleSeaController.getInstance().getBoardAsStringBuilder(currentBoard));
+			//BattleSeaView.getClient().displayBoard(BattleSeaController.getClient().getBoardAsStringBuilder(currentBoard));
 		} catch (ShipController.CantChangeDirException | IOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -246,10 +247,10 @@ public class BattleSeaEditBoardPageController implements Initializable {
 			GridPane.setRowIndex(shipToMove, newY);
 			dataOutputStream.writeUTF("displayBoard_");
 			dataOutputStream.flush();
-			//BattleSeaView.getInstance().displayBoard(BattleSeaController.getInstance().getBoardAsStringBuilder(currentBoard));
+			//BattleSeaView.getClient().displayBoard(BattleSeaController.getClient().getBoardAsStringBuilder(currentBoard));
 		} catch (IOException | ShipController.InvalidCoordinateException e) {
 //			System.out.printf("Cannot move ship to (x,y)=(%d,%d)%n", newX + 1, newY + 1);
-//			BattleSeaView.getInstance().displayBoard(currentBoard);
+//			BattleSeaView.getClient().displayBoard(currentBoard);
 		}
 	}
 }

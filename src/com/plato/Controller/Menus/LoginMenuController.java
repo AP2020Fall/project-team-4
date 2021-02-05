@@ -1,9 +1,9 @@
 package Controller.Menus;
 
-import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
+import Controller.Client;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +22,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -35,9 +34,8 @@ public class LoginMenuController implements Initializable {
 	public Label delAccLbl, sgnUpLbl, usernameError, passwordError;
 	public CheckBox rememberMe;
 	public TextField username;
-	private DataOutputStream dataOutputStream;
-	private DataInputStream dataInputStream;
-	private Object Account;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
 
 	public static void setStage (Stage stage) {
 		LoginMenuController.stage = stage;
@@ -46,6 +44,8 @@ public class LoginMenuController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
+		dataInputStream = Client.getClient().getDataInputStream();
+		dataOutputStream = Client.getClient().getDataOutputStream();
 		RegisterFormController.adjustWidthBasedOnTextLength(passwordError);
 		RegisterFormController.adjustWidthBasedOnTextLength(usernameError);
 
@@ -90,11 +90,11 @@ public class LoginMenuController implements Initializable {
 
 		dataOutputStream.writeUTF("login_" + username.getText() + "_" + password + "_" + "true");
 		dataOutputStream.flush();
-		//AccountController.getInstance().login(username.getText(), password, rememberMe.isSelected());
+		//AccountController.getClient().login(username.getText(), password, rememberMe.isSelected());
 
 		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
 		dataOutputStream.flush();
-		Account account = new Gson().fromJson(dataInputStream.readUTF() , (Type) Account);
+		Account account = new Gson().fromJson(dataInputStream.readUTF() , Account.class);
 
 		stage.close();
 
