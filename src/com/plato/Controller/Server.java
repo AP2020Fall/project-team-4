@@ -102,6 +102,7 @@ class ClientHandler extends Thread {
 				String[] receivedInfo = received.split("_");
 				System.out.println("received = " + received);
 				System.out.println("receivedInfo = " + Arrays.toString(receivedInfo));
+				//System.out.println(token);
 				switch (receivedInfo[0]) {
 					case "canThrowBomb":
 						int x = Integer.parseInt(receivedInfo[1]);
@@ -173,7 +174,9 @@ class ClientHandler extends Thread {
 						dataOutputStream.flush();
 						break;
 					case "login":
-						AccountController.getInstance().login(receivedInfo[1], receivedInfo[2], receivedInfo[3].equals("true"));
+						//AccountController.getInstance().login(receivedInfo[1], receivedInfo[2], receivedInfo[3].equals("true"));
+						AccountController.getInstance().setSaveLoginInfo(receivedInfo[3].equals("true"));
+						AccountController.getInstance().setCurrentAccLoggedIn(Account.getAccount(receivedInfo[1]));
 						account = AccountController.getInstance().getCurrentAccLoggedIn();
 						token = Server.generateTokenForUser(account.getUsername());
 						break;
