@@ -19,6 +19,8 @@ public class Admin extends Account {
 	}
 
 	public static void setAdmin (Admin admin) {
+		System.out.println("Admin.setAdmin");
+		System.out.println("admin = " + admin);
 		if (admin != null)
 			getAccounts().add(admin);
 	}

@@ -66,6 +66,8 @@ public class Gamer extends Account {
 	}
 
 	public static void setGamers (LinkedList<Gamer> gamers) {
+		System.out.println("Gamer.setGamers");
+		System.out.println("gamers = " + gamers);
 		if (gamers != null)
 			getAccounts().addAll(gamers);
 	}

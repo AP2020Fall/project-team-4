@@ -476,7 +476,7 @@ public class MainController extends Application {
 		gsonBuilder.setDateFormat("yyyy-MMM-dd HH:mm:ss");
 //		gsonBuilder.setPrettyPrinting();
 		gsonBuilder.serializeNulls();
-		gsonBuilder.registerTypeAdapter(Account.class, new AccountAdapter());
+//		gsonBuilder.registerTypeAdapter(Account.class, new AccountAdapter());
 		gson = FxGson.addFxSupport(gsonBuilder)
 				.create();
 	}

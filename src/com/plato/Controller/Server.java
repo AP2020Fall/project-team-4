@@ -117,7 +117,6 @@ class ClientHandler extends Thread {
 				switch (receivedInfo[0]) {
 					case "getAllAccounts":
 						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(Account.getAccounts()));
-						System.out.println("Account.getAccounts() = " + Account.getAccounts());
 						dataOutputStream.flush();
 						break;
 					case "canThrowBomb":

@@ -36,7 +36,7 @@ public abstract class Account {
 			getAccounts().addLast(new Admin(pfp, firstName, lastName, username, password, email, phoneNum));
 		else
 			getAccounts().addLast(new Gamer(pfp, firstName, lastName, username, password, email, phoneNum, money));
-
+		System.out.println("getAccounts().size() = " + getAccounts().size());
 	}
 
 	// اکانت با این نام کاربری رو حذف میکنه
@@ -67,22 +67,23 @@ public abstract class Account {
 				.findAny().get();
 	}
 
-	public static LinkedList<Account> getAccounts () {
+	public static synchronized LinkedList<Account> getAccounts () {
 		if (Client.getClient() != null) {
 			DataOutputStream dataOutputStream = Client.getClient().getDataOutputStream();
 			DataInputStream dataInputStream = Client.getClient().getDataInputStream();
 
 			try {
-				dataOutputStream.writeUTF("getAllAccounts_");
+				dataOutputStream.writeUTF("getAllAccounts");
 				dataOutputStream.flush();
 
 				String accountsJson = dataInputStream.readUTF();
+
 				return MainController.getInstance().getGson().fromJson(accountsJson, new TypeToken<LinkedList<Account>>() {}.getType());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		return new LinkedList<>();
+		return accounts;
 	}
 
 	// برای deserialize کردن
