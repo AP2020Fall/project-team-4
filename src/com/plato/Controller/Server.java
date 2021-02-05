@@ -79,6 +79,18 @@ class ClientHandler extends Thread {
 		clients.addLast(this);
 	}
 
+	public static LinkedList<ClientHandler> getClients() {
+		return clients;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
 	public Socket getSocket () {
 		return socket;
 	}
@@ -173,7 +185,9 @@ class ClientHandler extends Thread {
 						dataOutputStream.flush();
 						break;
 					case "login":
-						AccountController.getInstance().login(receivedInfo[1], receivedInfo[2], receivedInfo[3].equals("true"));
+						//AccountController.getInstance().login(receivedInfo[1], receivedInfo[2], receivedInfo[3].equals("true"));
+						AccountController.getInstance().setSaveLoginInfo(receivedInfo[3].equals("true"));
+						AccountController.getInstance().setCurrentAccLoggedIn(Account.getAccount(receivedInfo[1]));
 						account = AccountController.getInstance().getCurrentAccLoggedIn();
 						token = Server.generateTokenForUser(account.getUsername());
 						break;
