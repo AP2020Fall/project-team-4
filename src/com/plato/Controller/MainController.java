@@ -63,19 +63,19 @@ public class MainController extends Application {
 		return mainController;
 	}
 
-	public static void write (String message) {
-		try {
-			InetAddress ip = InetAddress.getByName("localhost");
-			Socket socket = new Socket(ip, Client.port);
-			clientSocket = new Socket(ip, Client.port);
-			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-			System.out.println(dataInputStream.readUTF());
-			dataOutputStream.writeUTF(message);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
+//	public static void write (String message) {
+//		try {
+//			InetAddress ip = InetAddress.getByName("localhost");
+//			Socket socket = new Socket(ip, Client.port);
+//			clientSocket = new Socket(ip, Client.port);
+//			DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+//			DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+//			System.out.println(dataInputStream.readUTF());
+//			dataOutputStream.writeUTF(message);
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//	}
 
 	public static Image getImageFromFile (String address) {
 		try {
@@ -464,7 +464,7 @@ public class MainController extends Application {
 			String reversiDetails = Game.getAllGames().stream().filter(game -> game instanceof Reversi).findFirst().get().getDetails();
 			Reversi.setDetailsForReversi(reversiDetails);
 		} catch (NoSuchElementException | NullPointerException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 

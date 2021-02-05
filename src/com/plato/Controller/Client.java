@@ -20,6 +20,7 @@ public class Client {
 
 	public static void main (String[] args) {
 		new Client().connect();
+		System.out.println("running the program...");
 		MainController.main(args);
 	}
 
@@ -69,6 +70,7 @@ public class Client {
 			dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 			System.out.println("Successfully connected to server!");
 		} catch (IOException e) {
+			System.out.println("client couldnt connect to server!");
 			e.printStackTrace();
 		}
 	}
