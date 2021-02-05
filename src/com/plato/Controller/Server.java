@@ -37,7 +37,7 @@ public class Server {
 
 	public static void main (String[] args) throws IOException {
 		System.out.println("Server : server started");
-		serverSocket = new ServerSocket(2222);
+		serverSocket = new ServerSocket(Client.port);
 		while (true) {
 			System.out.println("Server : Waiting for client...");
 			socket = serverSocket.accept();
@@ -93,13 +93,10 @@ class ClientHandler extends Thread {
 
 	@Override
 	public void run () {
-		System.out.println("ClientHandler.run");
-//		new Client(socket, dataInputStream, dataOutputStream);
 		while (true) {
 			try {
 				if (dataInputStream.available() == 0) continue;
 				System.out.println("Server : Waiting for client to send request");
-				//  while(received != null) {
 				//receive from client
 				String received = dataInputStream.readUTF();
 				String[] receivedInfo = received.split("_");
@@ -214,7 +211,7 @@ class ClientHandler extends Thread {
 					case "editEvent":
 						EventController.getInstance().editEvent(EventCreateOrEditPageController.getEvent(), receivedInfo[1], receivedInfo[2]);
 						break;
-					case "createEvent_":
+					case "createEvent":
 						//String title, String gameName, String picUrl, LocalDate start, LocalDate end, double eventPrize, String details
 						double prize = Double.parseDouble(receivedInfo[4]);
 						EventController.getInstance().createEvent(receivedInfo[1], receivedInfo[2], receivedInfo[3], EventCreateOrEditPageController.getEvent().getStart(), EventCreateOrEditPageController.getEvent().getEnd(), prize, receivedInfo[5]);
@@ -240,7 +237,6 @@ class ClientHandler extends Thread {
 				System.out.println(e.getMessage());
 			}
 		}
-
 	}
 
 	private void clientDisconnected () throws IOException {

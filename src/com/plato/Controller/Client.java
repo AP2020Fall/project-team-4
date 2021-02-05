@@ -74,4 +74,9 @@ public class Client {
 			e.printStackTrace();
 		}
 	}
+
+	public void clientDisconnected () throws IOException {
+		socket.close();
+		System.out.println("connection closed!");
+	}
 }
