@@ -114,6 +114,7 @@ class ClientHandler extends Thread {
 				String[] receivedInfo = received.split("_");
 				System.out.println("receivedInfo = " + Arrays.toString(receivedInfo));
 				//System.out.println(token);
+				System.out.println(receivedInfo);
 				switch (receivedInfo[0]) {
 					case "getAllAccounts":
 						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(Account.getAccounts()));
