@@ -51,8 +51,6 @@ public class AccountController {
 
 		if (!Account.getAccount(username).isPasswordCorrect(password))
 			throw new PaswordIncorrectException();
-
-		Account.removeAccount(username);
 	}
 
 	public void register (Image pfp, String username, String password, String firstName, String lastName, String email, String phoneNum, double initMoney) throws MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException, MainController.SuccessfulOperationException {
@@ -115,7 +113,6 @@ public class AccountController {
 			case "pfp url" -> {}
 			default -> throw new IllegalStateException("Unexpected value: " + field.toLowerCase());
 		}
-//		getCurrentAccLoggedIn().editField(field.toLowerCase(), newVal);
 		Account.getAccount(getCurrentAccLoggedIn().getUsername()).editField(field.toLowerCase(), newVal);
 	}
 

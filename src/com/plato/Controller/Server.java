@@ -27,6 +27,7 @@ import java.util.LinkedList;
 import static Controller.MyGson.*;
 import static Controller.Server.generateTokenForUser;
 import static Model.AccountRelated.Account.addAccount;
+import static Model.AccountRelated.Account.getAccounts;
 import static Model.AccountRelated.Gamer.getGamers;
 import static java.lang.Boolean.parseBoolean;
 
@@ -221,7 +222,11 @@ class ClientHandler extends Thread {
 						GameLogController.getInstance().displayLogOfGame(receivedInfo[1]);
 						break;
 					case "changePWCommand":
-						AccountController.getInstance().changePWCommand(receivedInfo[1], receivedInfo[2]);
+						LinkedList<Account> accounts = getAccounts();
+						accounts.stream()
+								.filter(account1 -> account1.getUsername().equals(this.account.getUsername()))
+								.
+										AccountController.getInstance().changePWCommand(receivedInfo[1], receivedInfo[2]);
 						break;
 					case "runGame":
 						GameController.getInstance().runGame(receivedInfo[1], receivedInfo[2]);
@@ -270,7 +275,9 @@ class ClientHandler extends Thread {
 						dataOutputStream.flush();
 						break;
 					case "deleteAccount":
-						AccountController.getInstance().deleteAccount(receivedInfo[1], receivedInfo[2]);
+						LinkedList<Gamer> gamers1 = MyGson.getGamers();
+						gamers1.removeIf(account1 -> account1.getUsername().equals(receivedInfo[1]));
+						serializeGamers(gamers1);
 						break;
 					case "removeEvent":
 						Event.removeEvent(receivedInfo[1]);

@@ -1,5 +1,6 @@
 package Controller.Menus;
 
+import Controller.AccountRelated.AccountController;
 import Controller.MainController;
 import Controller.Client;
 import javafx.event.ActionEvent;
@@ -94,7 +95,26 @@ public class DeleteAccountController implements Initializable {
 
 		String password = (showPwOrNot.getImage().getUrl().contains("invisible") ? pwFieldpwShown : pwFieldpwHidden).getText();
 
-		dataOutputStream.writeUTF("deleteAccount_" + username.getText() + "_" + password);
+		try {
+			AccountController.getInstance().deleteAccount(username.getText(), password);
+		} catch (MainController.InvalidFormatException e) {
+			if (e.getMessage().toLowerCase().startsWith("username")) {
+				usernameError.setText(e.getMessage());
+				return;
+			}
+			if (e.getMessage().toLowerCase().startsWith("password")) {
+				passwordError.setText(e.getMessage());
+				return;
+			}
+		} catch (AccountController.NoAccountExistsWithUsernameException | AccountController.AdminAccountCantBeDeletedException e) {
+			usernameError.setText(e.getMessage());
+			return;
+		} catch (AccountController.PaswordIncorrectException e) {
+			passwordError.setText(e.getMessage());
+			return;
+		}
+
+		dataOutputStream.writeUTF("deleteAccount_" + username.getText());
 		dataOutputStream.flush();
 		//AccountController.getClient().deleteAccount(username.getText(), password);
 

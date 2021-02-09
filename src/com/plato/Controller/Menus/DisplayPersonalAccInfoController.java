@@ -126,55 +126,45 @@ public class DisplayPersonalAccInfoController implements Initializable {
 	public void confirmAllEdits (ActionEvent actionEvent) {
 		if (firstNameTextField.isVisible()) {
 			try {
-				dataOutputStream.writeUTF("editAccField_first name_"+firstNameTextField.getText());
-				dataOutputStream.flush();
-				//AccountController.getClient().editAccField("first name", firstNameTextField.getText());
+				AccountController.getInstance().editAccField("first name", firstNameTextField.getText());
 				allError.setText("");
-			} catch (IOException e) {
+			} catch (MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException e) {
 				allError.setText(allError.getText() + "\n" + e.getMessage());
 			}
 		}
 
 		if (lastNameTextField.isVisible()) {
 			try {
-				dataOutputStream.writeUTF("editAccField_last name_"+lastNameTextField.getText());
-				dataOutputStream.flush();
-				//AccountController.getClient().editAccField("last name", lastNameTextField.getText());
+				AccountController.getInstance().editAccField("last name", lastNameTextField.getText());
 				allError.setText("");
-			} catch (IOException e) {
+			} catch (MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException e) {
 				allError.setText(allError.getText() + "\n" + e.getMessage());
 			}
 		}
 
 		if (usernameTextField.isVisible()) {
 			try {
-				dataOutputStream.writeUTF("editAccField_username_"+usernameTextField.getText());
-				dataOutputStream.flush();
-				//AccountController.getClient().editAccField("username", usernameTextField.getText());
+				AccountController.getInstance().editAccField("username", usernameTextField.getText());
 				allError.setText("");
-			} catch (IOException e) {
+			} catch (MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException e) {
 				allError.setText(allError.getText() + "\n" + e.getMessage());
 			}
 		}
 
 		if (emailTextField.isVisible()) {
 			try {
-				dataOutputStream.writeUTF("editAccField_email_"+emailTextField.getText());
-				dataOutputStream.flush();
 				AccountController.getInstance().editAccField("email", emailTextField.getText());
 				allError.setText("");
-			} catch (MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException | IOException e) {
+			} catch (MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException e) {
 				allError.setText(allError.getText() + "\n" + e.getMessage());
 			}
 		}
 
 		if (phoneNumberTextField.isVisible()) {
 			try {
-				dataOutputStream.writeUTF("editAccField_phone number_"+phoneNumberTextField.getText());
-				dataOutputStream.flush();
-				//AccountController.getClient().editAccField("phone number", phoneNumberTextField.getText());
+				AccountController.getInstance().editAccField("phone number", phoneNumberTextField.getText());
 				allError.setText("");
-			} catch (IOException e) {
+			} catch (MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException e) {
 				allError.setText(allError.getText() + "\n" + e.getMessage());
 			}
 		}
