@@ -141,6 +141,10 @@ class ClientHandler extends Thread {
 						dataOutputStream.writeUTF(getGson().toJson(getReversiGames()));
 						dataOutputStream.flush();
 						break;
+					case "getMsgs" :
+						dataOutputStream.writeUTF(getGson().toJson(getMsgs()));
+						dataOutputStream.flush();
+						break;
 					case "getAllBattleSeaGames":
 						dataOutputStream.writeUTF(getGson().toJson(getBattleseaGames()));
 						dataOutputStream.flush();
@@ -293,17 +297,23 @@ class ClientHandler extends Thread {
 					case "sendFrndRequest":
 						FriendRequestController.getInstance().sendFrndRequest(receivedInfo[1]);
 						break;
-					case "declineFriendReq":
-						FriendRequestController.getInstance().declineFriendReq(receivedInfo[1]);
-						break;
-					case "acceptFriendReq":
-						FriendRequestController.getInstance().acceptFriendReq(receivedInfo[1]);
-						break;
+//					case "declineFriendReq":
+//						FriendRequestController.getInstance().declineFriendReq(receivedInfo[1]);
+//						break;
+//					case "acceptFriendReq":
+//						FriendRequestController.getInstance().acceptFriendReq(receivedInfo[1]);
+//						break;
 					case "getFrnds":
 						Gamer gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
 						dataOutputStream.writeUTF(getGson().toJson(gamer.getFrnds()));
 						dataOutputStream.flush();
 						break;
+
+					case "getAdminGameRecos" :
+						dataOutputStream.writeUTF(getGson().toJson(getAdminGameRecos()));
+						dataOutputStream.flush();
+						break;
+
 					default:
 						throw new IllegalStateException("Unexpected value: " + receivedInfo[0]);
 				}

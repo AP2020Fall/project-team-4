@@ -26,13 +26,25 @@ public class FriendRequest {
 
 	public static void concludeFrndReq (String fromUsername, String toUsername, boolean accepted) {
 		FriendRequest.getFriendReq(fromUsername, toUsername).conclude(accepted);
-		getAllfriendRequests().removeIf(friendRequest ->
-				friendRequest.fromUsername.equals(fromUsername) &&
-						friendRequest.toUsername.equals(toUsername));
-		if (accepted)
-			getAllfriendRequests().removeIf(friendRequest ->
-					friendRequest.fromUsername.equals(toUsername) &&
-							friendRequest.toUsername.equals(fromUsername));
+		LinkedList<FriendRequest> friendRequests = new LinkedList<>();
+		DataOutputStream dataOutputStream = Client.getClient().getDataOutputStream();
+		DataInputStream dataInputStream = Client.getClient().getDataInputStream();
+		try {
+			dataOutputStream.writeUTF("getAllFriendRequests");
+			dataOutputStream.flush();
+
+			friendRequests.addAll(getGson().fromJson(dataInputStream.readUTF(), new TypeToken<LinkedList<FriendRequest>>() {}.getType()));
+			friendRequests.removeIf(friendRequest ->
+					friendRequest.fromUsername.equals(fromUsername) &&
+							friendRequest.toUsername.equals(toUsername));
+			if (accepted)
+				getAllfriendRequests().removeIf(friendRequest ->
+						friendRequest.fromUsername.equals(toUsername) &&
+								friendRequest.toUsername.equals(fromUsername));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public static FriendRequest getFriendReq (String fromUsername, String toUsername) {
