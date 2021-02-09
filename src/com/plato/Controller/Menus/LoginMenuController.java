@@ -103,6 +103,7 @@ public class LoginMenuController implements Initializable {
 		} catch (MainController.SuccessfulOperationException e) {}
 
 		Account account = getAccount(username.getText());
+//		System.out.println("getGson().toJson(account) = " + getGson().toJson(account));
 		dataOutputStream.writeUTF("login_" + (account instanceof Gamer) + "_" + getGson().toJson(account));
 		dataOutputStream.flush();
 		Client.getClient().setToken(dataInputStream.readUTF());
