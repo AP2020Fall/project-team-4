@@ -81,8 +81,6 @@ public class AccountController {
 
 		if (!AccountController.getInstance().getCurrentAccLoggedIn().isPasswordCorrect(oldPW))
 			throw new PaswordIncorrectException();
-
-		AccountController.getInstance().getCurrentAccLoggedIn().editField("password", newPW);
 	}
 
 	public void editAccField (String field, String newVal) throws MainController.InvalidFormatException, AccountWithUsernameAlreadyExistsException {

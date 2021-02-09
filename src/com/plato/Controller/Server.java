@@ -27,7 +27,6 @@ import java.util.LinkedList;
 import static Controller.MyGson.*;
 import static Controller.Server.generateTokenForUser;
 import static Model.AccountRelated.Account.addAccount;
-import static Model.AccountRelated.Account.getAccounts;
 import static Model.AccountRelated.Gamer.getGamers;
 import static java.lang.Boolean.parseBoolean;
 
@@ -141,7 +140,7 @@ class ClientHandler extends Thread {
 						dataOutputStream.writeUTF(getGson().toJson(getReversiGames()));
 						dataOutputStream.flush();
 						break;
-					case "getMsgs" :
+					case "getMsgs":
 						dataOutputStream.writeUTF(getGson().toJson(getMsgs()));
 						dataOutputStream.flush();
 						break;
@@ -149,7 +148,7 @@ class ClientHandler extends Thread {
 						dataOutputStream.writeUTF(getGson().toJson(getBattleseaGames()));
 						dataOutputStream.flush();
 						break;
-					case "getAllFriendRequests" :
+					case "getAllFriendRequests":
 						dataOutputStream.writeUTF(getGson().toJson(getFrndReqs()));
 						dataOutputStream.flush();
 						break;
@@ -226,11 +225,15 @@ class ClientHandler extends Thread {
 						GameLogController.getInstance().displayLogOfGame(receivedInfo[1]);
 						break;
 					case "changePWCommand":
-						LinkedList<Account> accounts = getAccounts();
-						accounts.stream()
-								.filter(account1 -> account1.getUsername().equals(this.account.getUsername()))
-								.
-										AccountController.getInstance().changePWCommand(receivedInfo[1], receivedInfo[2]);
+						getAccount().editField("password", receivedInfo[1]);
+						if (getAccount() instanceof Gamer) {
+							LinkedList<Gamer> gamers = MyGson.getGamers();
+							gamers.stream().filter(gamer -> gamer.getUsername().equals(getAccount().getUsername())).forEach(gamer -> gamer.setPassword(getAccount().getPassword()));
+							serializeGamers(gamers);
+						}
+						else {
+							serializeAdmin((Admin) getAccount());
+						}
 						break;
 					case "runGame":
 						GameController.getInstance().runGame(receivedInfo[1], receivedInfo[2]);
@@ -309,7 +312,7 @@ class ClientHandler extends Thread {
 						dataOutputStream.flush();
 						break;
 
-					case "getAdminGameRecos" :
+					case "getAdminGameRecos":
 						dataOutputStream.writeUTF(getGson().toJson(getAdminGameRecos()));
 						dataOutputStream.flush();
 						break;
@@ -324,7 +327,7 @@ class ClientHandler extends Thread {
 					ioException.printStackTrace();
 				}
 			} catch
-			(BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException | EventController.GameNameCantBeEmptyException | MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException | AccountController.PaswordIncorrectException | AccountController.NoAccountExistsWithUsernameException | GameController.CantPlayWithYourselfException | GameController.CantPlayWithAdminException | MessageController.EmptyMessageException | AccountController.AdminAccountCantBeDeletedException | EventController.StartDateTimeIsAfterEndException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException | EventController.CantEditInSessionEventException
+			(BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException | EventController.GameNameCantBeEmptyException | MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException | AccountController.NoAccountExistsWithUsernameException | GameController.CantPlayWithYourselfException | GameController.CantPlayWithAdminException | MessageController.EmptyMessageException | EventController.StartDateTimeIsAfterEndException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException | EventController.CantEditInSessionEventException
 							e) {
 			}
 		}

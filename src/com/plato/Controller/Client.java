@@ -13,7 +13,7 @@ import static java.lang.Boolean.parseBoolean;
 
 public class Client {
 	public static String host = "127.0.0.1";
-	public static int port = 6666;
+	public static int port = 5059;
 	private static Client client;
 	private Socket socket;
 	private DataInputStream dataInputStream;

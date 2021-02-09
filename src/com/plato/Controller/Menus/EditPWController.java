@@ -1,7 +1,7 @@
 package Controller.Menus;
 
-import Controller.MainController;
 import Controller.Client;
+import Controller.MainController;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -21,14 +21,14 @@ import java.util.ResourceBundle;
 
 public class EditPWController implements Initializable {
 	private static Stage stage;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
+	private static Socket socket;
 	public StackPane oldPwStackPane, newPwStackPane;
 	public Label oldPasswordError;
 	public ImageView newShowPwOrNot, oldShowPwOrNot;
 	public PasswordField newPwFieldpwHidden, oldPwFieldpwHidden;
 	public TextField newPwFieldpwShown, oldPwFieldpwShown;
-	private static DataOutputStream dataOutputStream;
-	private static DataInputStream dataInputStream;
-	private static Socket socket;
 
 	public static void setStage (Stage stage) {
 		EditPWController.stage = stage;
@@ -112,9 +112,8 @@ public class EditPWController implements Initializable {
 				newPassword = (newShowPwOrNot.getImage().getUrl().contains("invisible") ? newPwFieldpwShown : newPwFieldpwHidden).getText();
 
 		try {
-			dataOutputStream.writeUTF("changePWCommand_"+oldPassword+"_"+newPassword);
+			dataOutputStream.writeUTF("changePWCommand_"+ newPassword);
 			dataOutputStream.flush();
-		//	AccountController.getClient().changePWCommand(oldPassword, newPassword);
 			closeStage(actionEvent);
 
 		} catch (IOException e) {
