@@ -55,6 +55,7 @@ public class AccountPageController implements Initializable {
 		dataInputStream = Client.getClient().getDataInputStream();
 		dataOutputStream = Client.getClient().getDataOutputStream();
 		Account currentLoggedIn = Client.getClient().getCurrentAccLoggedIn();
+		System.out.println("(currentLoggedIn) = " + getGson().toJson(currentLoggedIn));
 		pfp.setImage(new Image(currentLoggedIn.getPfpUrl()));
 		username.setText(currentLoggedIn.getUsername());
 
