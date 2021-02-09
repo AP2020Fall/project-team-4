@@ -8,6 +8,7 @@ import java.io.*;
 import java.net.Socket;
 
 import static Controller.MyGson.getGson;
+import static java.lang.Boolean.parseBoolean;
 
 
 public class Client {
@@ -47,7 +48,7 @@ public class Client {
 		try {
 			dataOutputStream.writeUTF("getCurrentAccLoggedIn_" + token);
 			dataOutputStream.flush();
-			boolean gamerOrAdmin = dataInputStream.readBoolean();
+			boolean gamerOrAdmin = parseBoolean(dataInputStream.readUTF());
 
 			return getGson().fromJson(dataInputStream.readUTF(), gamerOrAdmin ? Gamer.class : Admin.class);
 		} catch (IOException e) {

@@ -192,7 +192,7 @@ class ClientHandler extends Thread {
 						dataOutputStream.flush();
 						break;
 
-					case "logOut":
+					case "logout":
 						getClientHandler(receivedInfo[1]).account = null;
 						getClientHandler(receivedInfo[1]).token = null;
 						break;
