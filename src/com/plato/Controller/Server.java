@@ -27,8 +27,8 @@ import java.util.LinkedList;
 import static Controller.MyGson.*;
 import static Controller.Server.generateTokenForUser;
 import static Model.AccountRelated.Account.addAccount;
-import static Model.AccountRelated.Admin.getAdmin;
 import static Model.AccountRelated.Gamer.getGamers;
+import static java.lang.Boolean.parseBoolean;
 
 
 public class Server {
@@ -63,6 +63,7 @@ public class Server {
 			byte[] randomBytes = new byte[24];
 			secureRandom.nextBytes(randomBytes);
 			String token = base64Encoder.encodeToString(randomBytes);
+			token = token.replaceAll("_", "-");
 			return token;
 		}
 	}
@@ -130,11 +131,21 @@ class ClientHandler extends Thread {
 				String received = dataInputStream.readUTF();
 				String[] receivedInfo = received.split("_");
 				System.out.println("receivedInfo = " + Arrays.toString(receivedInfo));
-				//System.out.println(token);
-				System.out.println(receivedInfo);
 				switch (receivedInfo[0]) {
 					case "getAllGamers":
 						dataOutputStream.writeUTF(getGson().toJson(getGamers()));
+						dataOutputStream.flush();
+						break;
+					case "getAllReversiGames":
+						dataOutputStream.writeUTF(getGson().toJson(getReversiGames()));
+						dataOutputStream.flush();
+						break;
+					case "getAllBattleSeaGames":
+						dataOutputStream.writeUTF(getGson().toJson(getBattleseaGames()));
+						dataOutputStream.flush();
+						break;
+					case "getAllFriendRequests" :
+						dataOutputStream.writeUTF(getGson().toJson(getFrndReqs()));
 						dataOutputStream.flush();
 						break;
 					case "getAdmin":
@@ -142,9 +153,7 @@ class ClientHandler extends Thread {
 						dataOutputStream.flush();
 						break;
 					case "adminHasBeenCreated":
-						System.out.println("MyGson.getAdmin() = " + MyGson.getAdmin());
-						System.out.println("adminHasBeenCreated = " + (MyGson.getAdmin() != null));
-						dataOutputStream.writeUTF(String.valueOf(MyGson.getAdmin() != null));
+						dataOutputStream.writeUTF(String.valueOf(getAdmin() != null));
 						dataOutputStream.flush();
 						break;
 					case "canThrowBomb":
@@ -183,10 +192,9 @@ class ClientHandler extends Thread {
 						dataOutputStream.flush();
 						break;
 
-					case "logOut":
-						token = receivedInfo[1];
-						getClientHandler(token).account = null;
-						getClientHandler(token).token = null;
+					case "logout":
+						getClientHandler(receivedInfo[1]).account = null;
+						getClientHandler(receivedInfo[1]).token = null;
 						break;
 
 					case "displayAvaiableCoords":
@@ -212,7 +220,6 @@ class ClientHandler extends Thread {
 					case "displayLogOfGame":
 						GameLogController.getInstance().displayLogOfGame(receivedInfo[1]);
 						break;
-
 					case "changePWCommand":
 						AccountController.getInstance().changePWCommand(receivedInfo[1], receivedInfo[2]);
 						break;
@@ -225,11 +232,10 @@ class ClientHandler extends Thread {
 						dataOutputStream.flush();
 						break;
 					case "login":
-						AccountController.getInstance().setSaveLoginInfo(receivedInfo[3].equals("true"));
-						boolean gamerOrAdmin = Boolean.parseBoolean(receivedInfo[1]);
-						account = getGson().fromJson(receivedInfo[2], gamerOrAdmin ? Gamer.class : Admin.class);
-						token = generateTokenForUser(account.getUsername());
-						dataOutputStream.writeUTF(token);
+						boolean gamerOrAdmin = parseBoolean(receivedInfo[1]);
+						this.account = getGson().fromJson(receivedInfo[2], gamerOrAdmin ? Gamer.class : Admin.class);
+						this.token = generateTokenForUser(this.account.getUsername());
+						dataOutputStream.writeUTF(this.token);
 						dataOutputStream.flush();
 						break;
 					case "registerAdmin":
@@ -250,7 +256,6 @@ class ClientHandler extends Thread {
 						break;
 					case "removeFriend":
 						GamerController.getInstance().removeFriend(receivedInfo[1]);
-
 						break;
 					case "participateInEvent":
 						EventController.getInstance().participateInEvent(receivedInfo[1]);
@@ -307,8 +312,9 @@ class ClientHandler extends Thread {
 				} catch (IOException ioException) {
 					ioException.printStackTrace();
 				}
-			} catch (BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException | EventController.GameNameCantBeEmptyException | MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException | AccountController.PaswordIncorrectException | AccountController.NoAccountExistsWithUsernameException | GameController.CantPlayWithYourselfException | GameController.CantPlayWithAdminException | MessageController.EmptyMessageException | AccountController.AdminAccountCantBeDeletedException | EventController.StartDateTimeIsAfterEndException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException | EventController.CantEditInSessionEventException
-					e) {
+			} catch
+			(BombController.CoordinateAlreadyBombedException | ReversiController.PlayerHasAlreadyPlacedDiskException | EventController.GameNameCantBeEmptyException | MainController.InvalidFormatException | AccountController.AccountWithUsernameAlreadyExistsException | AccountController.PaswordIncorrectException | AccountController.NoAccountExistsWithUsernameException | GameController.CantPlayWithYourselfException | GameController.CantPlayWithAdminException | MessageController.EmptyMessageException | AccountController.AdminAccountCantBeDeletedException | EventController.StartDateTimeIsAfterEndException | EventController.EndDateTimeHasAlreadyPassedException | EventController.StartDateTimeHasAlreadyPassedException | EventController.CantEditInSessionEventException
+							e) {
 			}
 		}
 	}

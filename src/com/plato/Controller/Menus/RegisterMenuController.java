@@ -28,9 +28,9 @@ public class RegisterMenuController implements Initializable {
 	public ImageView showPwOrNot;
 	public PasswordField pwFieldpwHidden;
 	public TextField pwFieldpwShown, usernameTxtFld;
-	public Label usernameError, AdminGamerTitle, passwordError;
-	private static DataOutputStream dataOutputStream;
-	private static DataInputStream dataInputStream;
+	public Label usernameError, adminGamerTitle, passwordError;
+	DataInputStream dataInputStream;
+	DataOutputStream dataOutputStream;
 
 	public static Stage getStage () {
 		return stage;
@@ -45,10 +45,10 @@ public class RegisterMenuController implements Initializable {
 	public void initialize (URL url, ResourceBundle resourceBundle) {
 		dataInputStream = Client.getClient().getDataInputStream();
 		dataOutputStream = Client.getClient().getDataOutputStream();
-		AdminGamerTitle.setText(((Admin.adminHasBeenCreated() ? "gamer" : "admin") + " sign-up").toUpperCase());
+		adminGamerTitle.setText(((Admin.adminHasBeenCreated() ? "gamer" : "admin") + " sign-up").toUpperCase());
 		RegisterFormController.adjustWidthBasedOnTextLength(passwordError);
 		RegisterFormController.adjustWidthBasedOnTextLength(usernameError);
-		RegisterFormController.adjustWidthBasedOnTextLength(AdminGamerTitle);
+		RegisterFormController.adjustWidthBasedOnTextLength(adminGamerTitle);
 
 		pwFieldpwShown = (TextField) pwStackPane.getChildren().get(0);
 		pwFieldpwHidden = (PasswordField) pwStackPane.getChildren().get(1);

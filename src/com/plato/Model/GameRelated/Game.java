@@ -1,20 +1,29 @@
 package Model.GameRelated;
 
+import Controller.Client;
 import Controller.IDGenerator;
+import Model.AccountRelated.Account;
+import Model.AccountRelated.Admin;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.Reversi.Reversi;
+import com.google.gson.reflect.TypeToken;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import static Controller.MyGson.getGson;
+
 public abstract class Game {
 
-	private static final LinkedList<Game> allGames = new LinkedList<>();
+	//private static final LinkedList<Game> allGames = new LinkedList<>();
 	private final String gameID;
 	protected String details = "";
 	private int turn = 0;
@@ -93,16 +102,31 @@ public abstract class Game {
 	}
 
 	public static void startGame (Game game) {
-		allGames.addLast(game);
+		getAllGames().addLast(game);
 		game.dateGameStarted = LocalDateTime.now();
 	}
 
 	public static LinkedList<Game> getAllGames () {
-		return allGames;
+		LinkedList<Game> games = new LinkedList<>();
+		DataOutputStream dataOutputStream = Client.getClient().getDataOutputStream();
+		DataInputStream dataInputStream = Client.getClient().getDataInputStream();
+		try {
+			dataOutputStream.writeUTF("getAllReversiGames_");
+			dataOutputStream.flush();
+			games.addAll(getGson().fromJson(dataInputStream.readUTF(), new TypeToken<LinkedList<Reversi>>() {}.getType()));
+
+			dataOutputStream.writeUTF("getAllBattleSeaGames_");
+			dataOutputStream.flush();
+			games.addAll(getGson().fromJson(dataInputStream.readUTF(), new TypeToken<LinkedList<BattleSea>>() {}.getType()));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return games;
 	}
 
 	public static LinkedList<Game> getAllFinishedGames () {
-		return allGames.stream().filter(Game::gameHasEnded).collect(Collectors.toCollection(LinkedList::new));
+		return getAllGames().stream().filter(Game::gameHasEnded).collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public boolean gameHasEnded () {

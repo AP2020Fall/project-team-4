@@ -22,7 +22,7 @@
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
     </padding>
-    <Label fx:id="AdminGamerTitle" alignment="CENTER" minWidth="300.0" text="SIGN-UP" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+    <Label fx:id="adminGamerTitle" alignment="CENTER" minWidth="300.0" text="SIGN-UP" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
         <font>
             <Font name="Arial Bold" size="46.0" />
         </font>

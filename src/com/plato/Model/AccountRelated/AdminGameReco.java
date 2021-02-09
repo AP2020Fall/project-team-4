@@ -75,6 +75,7 @@ public class AdminGameReco {
 			dataOutputStream.flush();
 
 			adminGameRecos.addAll(getGson().fromJson(dataInputStream.readUTF(), new TypeToken<LinkedList<AdminGameReco>>() {}.getType()));
+	}
 
 
 		} catch (IOException e) {
