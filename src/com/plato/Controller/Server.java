@@ -140,6 +140,10 @@ class ClientHandler extends Thread {
 						dataOutputStream.writeUTF(getGson().toJson(getReversiGames()));
 						dataOutputStream.flush();
 						break;
+					case "getMsgs" :
+						dataOutputStream.writeUTF(getGson().toJson(getMsgs()));
+						dataOutputStream.flush();
+						break;
 					case "getAllBattleSeaGames":
 						dataOutputStream.writeUTF(getGson().toJson(getBattleseaGames()));
 						dataOutputStream.flush();
