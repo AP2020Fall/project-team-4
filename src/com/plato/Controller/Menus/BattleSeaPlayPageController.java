@@ -2,6 +2,7 @@ package Controller.Menus;
 
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.MainController;
+import Controller.MyGson;
 import Model.GameRelated.BattleSea.BattleSea;
 import Model.GameRelated.BattleSea.Bomb;
 import Model.GameRelated.BattleSea.PlayerBattleSea;
@@ -35,6 +36,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import static Controller.MyGson.*;
 
 public class BattleSeaPlayPageController implements Initializable {
 	private static Stage stage;
@@ -104,7 +107,7 @@ public class BattleSeaPlayPageController implements Initializable {
 			exception.printStackTrace();
 		}
 		try {
-			currentGame = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , BattleSea.class);
+			currentGame = getGson().fromJson(dataInputStream.readUTF() , BattleSea.class);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}

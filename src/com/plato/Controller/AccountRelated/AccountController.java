@@ -1,5 +1,6 @@
 package Controller.AccountRelated;
 
+import Controller.Client;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Admin;
@@ -7,9 +8,13 @@ import Model.AccountRelated.Gamer;
 import View.AccountRelated.AccountView;
 import javafx.scene.image.Image;
 
+import java.io.IOException;
+
+import static Controller.Client.getClient;
+
 public class AccountController {
 	private static AccountController accountController;
-	private Account currentAccLoggedIn = null;
+	//	private Account currentAccLoggedIn = null;
 	private boolean saveLoginInfo = false; // ask at login. also set to false when logout
 
 	public static AccountController getInstance () {
@@ -111,7 +116,7 @@ public class AccountController {
 			default -> throw new IllegalStateException("Unexpected value: " + field.toLowerCase());
 		}
 //		getCurrentAccLoggedIn().editField(field.toLowerCase(), newVal);
-		Account.getAccount(currentAccLoggedIn.getUsername()).editField(field.toLowerCase(), newVal);
+		Account.getAccount(getCurrentAccLoggedIn().getUsername()).editField(field.toLowerCase(), newVal);
 	}
 
 	public void displayPersonalInfo () {
@@ -137,17 +142,21 @@ public class AccountController {
 	}
 
 	public void logout () {
-		currentAccLoggedIn = null;
-		saveLoginInfo = false;
+		try {
+			getClient().getDataOutputStream().writeUTF("logout_" + getClient().getToken());
+			getClient().getDataOutputStream().flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Account getCurrentAccLoggedIn () {
-		return currentAccLoggedIn;
+		return getClient().getCurrentAccLoggedIn();
 	}
 
-	public void setCurrentAccLoggedIn (Account currentAccLoggedIn) {
-		this.currentAccLoggedIn = currentAccLoggedIn;
-	}
+//	public void setCurrentAccLoggedIn (Account currentAccLoggedIn) {
+//		this.currentAccLoggedIn = currentAccLoggedIn;
+//	}
 
 	public void setSaveLoginInfo (boolean saveLoginInfo) {
 		this.saveLoginInfo = saveLoginInfo;
@@ -157,10 +166,10 @@ public class AccountController {
 		return saveLoginInfo;
 	}
 
-    public void editAccFieldCommand() {
-    }
+	public void editAccFieldCommand () {
+	}
 
-    public static class NoAccountExistsWithUsernameException extends Exception {
+	public static class NoAccountExistsWithUsernameException extends Exception {
 		public NoAccountExistsWithUsernameException () {
 			super("No account exists with this username.");
 		}
@@ -183,7 +192,6 @@ public class AccountController {
 			super("Password incorrect.");
 		}
 	}
-
 
 
 	public static class AdminAccountCantBeDeletedException extends Exception {

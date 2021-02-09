@@ -2,6 +2,7 @@ package Controller.Menus;
 
 
 import Controller.MainController;
+import Controller.MyGson;
 import Model.AccountRelated.Gamer;
 import Controller.Client;
 import com.google.gson.Gson;
@@ -20,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static Controller.MyGson.*;
 
 
 public class GamesMenuController implements Initializable {
@@ -106,18 +109,7 @@ public class GamesMenuController implements Initializable {
 
 		dataInputStream = Client.getClient().getDataInputStream();
 		dataOutputStream = Client.getClient().getDataOutputStream();
-		try {
-			dataOutputStream.writeUTF("getCurrentAccLoggedIn");
-			dataOutputStream.flush();
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
-		Gamer currentLoggedIn = null;
-		try {
-			currentLoggedIn = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
+		Gamer currentLoggedIn = (Gamer) Client.getClient().getCurrentAccLoggedIn();
 
 		if (isForFaveGames) {
 			if (!currentLoggedIn.getFaveGames().contains("BattleSea"))

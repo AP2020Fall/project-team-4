@@ -4,6 +4,7 @@ import Controller.AccountRelated.*;
 import Controller.GameRelated.BattleSea.BattleSeaController;
 import Controller.GameRelated.BattleSea.BombController;
 import Controller.GameRelated.GameController;
+import Controller.GameRelated.GameLogController;
 import Controller.GameRelated.Reversi.ReversiController;
 import Controller.Menus.BattleSeaEditBoardPageController;
 import Controller.Menus.EventCreateOrEditPageController;
@@ -23,6 +24,12 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.LinkedList;
 
+import static Controller.MyGson.*;
+import static Controller.Server.generateTokenForUser;
+import static Model.AccountRelated.Account.addAccount;
+import static Model.AccountRelated.Admin.getAdmin;
+import static Model.AccountRelated.Gamer.getGamers;
+
 
 public class Server {
 	private static ServerSocket serverSocket;
@@ -35,7 +42,7 @@ public class Server {
 	}
 
 	public static void main (String[] args) throws IOException {
-		MainController.getInstance().deserializeEverything();
+//		MainController.getInstance().deserializeEverything();
 		System.out.println("Server : server started");
 		serverSocket = new ServerSocket(Client.port);
 		while (true) {
@@ -83,6 +90,16 @@ class ClientHandler extends Thread {
 		return clients;
 	}
 
+	public static ClientHandler getClientHandler (String token) {
+		return clients.stream()
+				.filter(clientHandler -> clientHandler.token != null && clientHandler.token.equals(token))
+				.findAny().get();
+	}
+
+	public static boolean clientHandlerExists (String token) {
+		return clients.stream().anyMatch(clientHandler -> clientHandler.token != null && clientHandler.token.equals(token));
+	}
+
 	public Account getAccount () {
 		return account;
 	}
@@ -116,8 +133,18 @@ class ClientHandler extends Thread {
 				//System.out.println(token);
 				System.out.println(receivedInfo);
 				switch (receivedInfo[0]) {
-					case "getAllAccounts":
-						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(Account.getAccounts()));
+					case "getAllGamers":
+						dataOutputStream.writeUTF(getGson().toJson(getGamers()));
+						dataOutputStream.flush();
+						break;
+					case "getAdmin":
+						dataOutputStream.writeUTF(getGson().toJson(getAdmin()));
+						dataOutputStream.flush();
+						break;
+					case "adminHasBeenCreated":
+						System.out.println("MyGson.getAdmin() = " + MyGson.getAdmin());
+						System.out.println("adminHasBeenCreated = " + (MyGson.getAdmin() != null));
+						dataOutputStream.writeUTF(String.valueOf(MyGson.getAdmin() != null));
 						dataOutputStream.flush();
 						break;
 					case "canThrowBomb":
@@ -144,19 +171,22 @@ class ClientHandler extends Thread {
 //                  ShipController.getClient().moveShip(BattleSeaEditBoardPageController.getClient().getCurrentBoard(),ship,x,y);
 //                    break;
 					case "getCurrentAccLoggedIn":
-						//Account account = AccountController.getInstance().getCurrentAccLoggedIn();
-						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(account));
+						String token = receivedInfo[1];
+						Account account = getClientHandler(token).account;
+						dataOutputStream.writeUTF(String.valueOf(account instanceof Gamer));
+						dataOutputStream.flush();
+						dataOutputStream.writeUTF(getGson().toJson(account));
 						dataOutputStream.flush();
 						break;
-
-					case "getCurrentAccLoggedInAsGamer":
-						Gamer gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
-						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(gamer));
+					case "isAccLoggedIn":
+						dataOutputStream.writeUTF(String.valueOf(clientHandlerExists(receivedInfo[1])));
 						dataOutputStream.flush();
 						break;
 
 					case "logOut":
-						AccountController.getInstance().logout();
+						token = receivedInfo[1];
+						getClientHandler(token).account = null;
+						getClientHandler(token).token = null;
 						break;
 
 					case "displayAvaiableCoords":
@@ -180,7 +210,7 @@ class ClientHandler extends Thread {
 						AccountController.getInstance().editAccField(receivedInfo[1], receivedInfo[2]);
 						break;
 					case "displayLogOfGame":
-						Controller.GameRelated.GameLogController.getInstance().displayLogOfGame(receivedInfo[1]);
+						GameLogController.getInstance().displayLogOfGame(receivedInfo[1]);
 						break;
 
 					case "changePWCommand":
@@ -191,27 +221,29 @@ class ClientHandler extends Thread {
 						break;
 					case "getAccount":
 						account = Account.getAccount(receivedInfo[1]);
-						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(account));
+						dataOutputStream.writeUTF(getGson().toJson(account));
 						dataOutputStream.flush();
 						break;
 					case "login":
-						//AccountController.getInstance().login(receivedInfo[1], receivedInfo[2], receivedInfo[3].equals("true"));
 						AccountController.getInstance().setSaveLoginInfo(receivedInfo[3].equals("true"));
-						AccountController.getInstance().setCurrentAccLoggedIn(Account.getAccount(receivedInfo[1]));
-						account = AccountController.getInstance().getCurrentAccLoggedIn();
-						token = Server.generateTokenForUser(account.getUsername());
+						boolean gamerOrAdmin = Boolean.parseBoolean(receivedInfo[1]);
+						account = getGson().fromJson(receivedInfo[2], gamerOrAdmin ? Gamer.class : Admin.class);
+						token = generateTokenForUser(account.getUsername());
+						dataOutputStream.writeUTF(token);
+						dataOutputStream.flush();
 						break;
 					case "registerAdmin":
 						double initMoney = Double.parseDouble(receivedInfo[8]);
 //						(Class accType, String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money)
-						Account.addAccount(Admin.class, "https://i.imgur.com/IIyNCG4.png", receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
-						MainController.getInstance().serializeAdmin();
+						Admin admin = (Admin) addAccount(Admin.class, "https://i.imgur.com/IIyNCG4.png", receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
+						serializeAdmin(admin);
 						break;
 					case "registerGamer":
 						initMoney = Double.parseDouble(receivedInfo[8]);
+						LinkedList<Gamer> gamers = new LinkedList<>();
 //						(Class accType, String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money)
-						Account.addAccount(Gamer.class, receivedInfo[1], receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney);
-						MainController.getInstance().serializeGamers();
+						gamers.add((Gamer) addAccount(Gamer.class, receivedInfo[1], receivedInfo[2], receivedInfo[3], receivedInfo[4], receivedInfo[5], receivedInfo[6], receivedInfo[7], initMoney));
+						serializeGamers(gamers);
 						break;
 					case "sendMsg":
 						MessageController.getInstance().sendMsg(UserProfileForAdminController.getGamer(), receivedInfo[1]);
@@ -229,7 +261,7 @@ class ClientHandler extends Thread {
 						break;
 					case "getCurrentGameInSession":
 						Game game = GameController.getInstance().getCurrentGameInSession();
-						dataOutputStream.writeUTF(MainController.getInstance().getGson().toJson(game));
+						dataOutputStream.writeUTF(getGson().toJson(game));
 						dataOutputStream.flush();
 						break;
 					case "deleteAccount":
@@ -255,11 +287,13 @@ class ClientHandler extends Thread {
 					case "acceptFriendReq":
 						FriendRequestController.getInstance().acceptFriendReq(receivedInfo[1]);
 						break;
-					case "getFrnds" :
-						gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
-						dataOutputStream.writeUTF( MainController.getInstance().getGson().toJson(gamer.getFrnds()));
+					case "getFrnds":
+						Gamer gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
+						dataOutputStream.writeUTF(getGson().toJson(gamer.getFrnds()));
 						dataOutputStream.flush();
 						break;
+					default:
+						throw new IllegalStateException("Unexpected value: " + receivedInfo[0]);
 				}
 			} catch (IOException e) {
 				try {

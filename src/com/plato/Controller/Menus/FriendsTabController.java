@@ -2,6 +2,7 @@ package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
 import Controller.MainController;
+import Controller.MyGson;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Controller.Client;
@@ -34,6 +35,8 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+import static Controller.MyGson.*;
+
 public class FriendsTabController implements Initializable {
 	public GridPane frndProfile;
 	public ListView<GridPane> frndsList;
@@ -52,11 +55,9 @@ public class FriendsTabController implements Initializable {
 		dataInputStream = Client.getClient().getDataInputStream();
 		dataOutputStream = Client.getClient().getDataOutputStream();
 		frndsList.getItems().clear();
-		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
-		dataOutputStream.flush();
-		Gamer currentAccLoggedIn = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
+		Gamer currentAccLoggedIn = (Gamer) Client.getClient().getCurrentAccLoggedIn();
 		// TODO: 2/5/2021
-		dataOutputStream.writeUTF("getFrnds_" + MainController.getInstance().getGson().toJson(currentAccLoggedIn.getFrnds()));
+		dataOutputStream.writeUTF("getFrnds_" + getGson().toJson(currentAccLoggedIn.getFrnds()));
 		dataOutputStream.flush();
 		for (String frndUN :currentAccLoggedIn.getFrnds()) {
 			Gamer frndAcc = (Gamer) Account.getAccount(frndUN);

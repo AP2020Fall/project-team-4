@@ -56,8 +56,6 @@ public class FriendRequestManagementPageController implements Initializable {
 	private void updateAvailableGamersList () throws IOException {
 		dataInputStream = Client.getClient().getDataInputStream();
 		dataOutputStream = Client.getClient().getDataOutputStream();
-//		dataOutputStream.writeUTF("getCurrentAccLoggedIn");
-//		dataOutputStream.flush();
 		Gamer currentLoggedIn = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
 		availableForFrndReqList.getItems().clear();
 

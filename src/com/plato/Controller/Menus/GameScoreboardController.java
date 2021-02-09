@@ -1,6 +1,7 @@
 package Controller.Menus;
 
 import Controller.MainController;
+import Controller.MyGson;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
 import Controller.Client;
@@ -34,6 +35,8 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static Controller.MyGson.*;
 
 public class GameScoreboardController implements Initializable {
 	private static Stage stage;
@@ -93,7 +96,7 @@ public class GameScoreboardController implements Initializable {
 			}
 			Gamer gamer = null;
 			try {
-				gamer = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
+				gamer = getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
 			} catch (IOException exception) {
 				exception.printStackTrace();
 			}

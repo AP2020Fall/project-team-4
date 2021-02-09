@@ -1,6 +1,7 @@
 package Controller.Menus;
 
 import Controller.MainController;
+import Controller.MyGson;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
@@ -25,6 +26,8 @@ import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static Controller.MyGson.*;
 
 public class GameMenuController implements Initializable {
 	private static String gameName;
@@ -61,18 +64,7 @@ public class GameMenuController implements Initializable {
 		dataInputStream = Client.getClient().getDataInputStream();
 		dataOutputStream = Client.getClient().getDataOutputStream();
 		gameTitle.setText(gameName);
-		try {
-			dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
-			dataOutputStream.flush();
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
-		Gamer currentGamer = null;
-		try {
-			currentGamer = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
+		Gamer currentGamer = (Gamer) Client.getClient().getCurrentAccLoggedIn();
 
 		if (currentGamer.getFaveGames().contains(gameName))
 			addToFaveGamesBtn.setStyle(addToFaveGamesBtn.getStyle() + "-fx-background-image:url('https://i.imgur.com/UODKjrB.png')");
@@ -197,18 +189,8 @@ public class GameMenuController implements Initializable {
 	}
 
 	public void changeFaveStatus (ActionEvent actionEvent) {
-		try {
-			dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
-			dataOutputStream.flush();
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
-		Gamer currentGamer = null;
-		try {
-			currentGamer = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
+		Gamer currentGamer = (Gamer) Client.getClient().getCurrentAccLoggedIn();
+
 		AtomicReference<String> noBgImgStyle = new AtomicReference<>("");
 		Arrays.asList(addToFaveGamesBtn.getStyle().split(";")).subList(0, addToFaveGamesBtn.getStyle().split(";").length - 1)
 				.forEach(style -> noBgImgStyle.set("%s;%s".formatted(noBgImgStyle.get(), style)));

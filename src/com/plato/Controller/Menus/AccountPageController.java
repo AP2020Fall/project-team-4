@@ -3,6 +3,7 @@ package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
 import Controller.MainController;
+import Controller.MyGson;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.GameLog;
@@ -25,6 +26,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static Controller.MyGson.*;
 
 
 public class AccountPageController implements Initializable {
@@ -51,18 +54,7 @@ public class AccountPageController implements Initializable {
 	public void initialize (URL location, ResourceBundle resources) {
 		dataInputStream = Client.getClient().getDataInputStream();
 		dataOutputStream = Client.getClient().getDataOutputStream();
-		try {
-			dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
-			dataOutputStream.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Account currentLoggedIn = null;
-		try {
-			currentLoggedIn = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Account.class);
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
+		Account currentLoggedIn = Client.getClient().getCurrentAccLoggedIn();
 		pfp.setImage(new Image(currentLoggedIn.getPfpUrl()));
 		username.setText(currentLoggedIn.getUsername());
 
@@ -111,9 +103,7 @@ public class AccountPageController implements Initializable {
 	}
 
 	public void logout (MouseEvent actionEvent) throws IOException {
-		dataOutputStream.writeUTF("logOut");
-		dataOutputStream.flush();
-		//AccountController.getClient().logout();
+		AccountController.getInstance().logout();
 		try {
 			Stage stage = MainController.getInstance().createAndReturnNewStage(
 					FXMLLoader.load(new File("src/com/plato/View/Menus/LoginMenu.fxml").toURI().toURL()),

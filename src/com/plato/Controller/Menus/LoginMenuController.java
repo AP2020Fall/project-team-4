@@ -1,11 +1,10 @@
 package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
+import Controller.Client;
 import Controller.MainController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
-import Controller.Client;
-import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,8 +25,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static Controller.MyGson.getGson;
+import static Model.AccountRelated.Account.getAccount;
+
 public class LoginMenuController implements Initializable {
 	private static Stage stage;
+	private static DataOutputStream dataOutputStream;
+	private static DataInputStream dataInputStream;
 	public StackPane pwStackPane;
 	public ImageView showPwOrNot;
 	public PasswordField pwFieldpwHidden;
@@ -35,8 +39,6 @@ public class LoginMenuController implements Initializable {
 	public Label delAccLbl, sgnUpLbl, usernameError, passwordError;
 	public CheckBox rememberMe;
 	public TextField username;
-	private static DataOutputStream dataOutputStream;
-	private static DataInputStream dataInputStream;
 
 	public static void setStage (Stage stage) {
 		LoginMenuController.stage = stage;
@@ -100,12 +102,10 @@ public class LoginMenuController implements Initializable {
 			return;
 		} catch (MainController.SuccessfulOperationException e) {}
 
-		dataOutputStream.writeUTF("login_" + username.getText() + "_" + password + "_" + "true");
+		Account account = getAccount(username.getText());
+		dataOutputStream.writeUTF("login_" + (account instanceof Gamer) + "_" + getGson().toJson(account));
 		dataOutputStream.flush();
-
-		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
-		dataOutputStream.flush();
-		Account account = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF(), Account.class);
+		Client.getClient().setToken(dataInputStream.readUTF());
 
 		stage.close();
 

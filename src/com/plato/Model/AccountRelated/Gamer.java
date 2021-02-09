@@ -1,5 +1,8 @@
 package Model.AccountRelated;
 
+import Controller.MyGson;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
@@ -18,9 +21,6 @@ public class Gamer extends Account {
 		accountStartDate = LocalDate.now();
 		this.money = money;
 	}
-
-	// for serialization
-	public Gamer () {}
 
 	public static LinkedList<Gamer> getGamers (LinkedList<Gamer> gamerList, String usernameSearch) {
 		if (usernameSearch.length() == 0) return gamerList;
@@ -59,10 +59,16 @@ public class Gamer extends Account {
 	}
 
 	public static LinkedList<Gamer> getGamers () {
-		return getAccounts().stream()
-				.filter(account -> account instanceof Gamer)
-				.map(account -> ((Gamer) account))
-				.collect(Collectors.toCollection(LinkedList::new));
+		try {
+			return MyGson.getGamers();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+//		return getAccounts().stream()
+//				.filter(account -> account instanceof Gamer)
+//				.map(account -> ((Gamer) account))
+//				.collect(Collectors.toCollection(LinkedList::new));
+		return null;
 	}
 
 	public static void setGamers (LinkedList<Gamer> gamers) {

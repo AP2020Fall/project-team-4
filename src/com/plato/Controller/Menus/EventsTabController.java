@@ -1,6 +1,7 @@
 package Controller.Menus;
 
 import Controller.MainController;
+import Controller.MyGson;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Event;
 import Model.AccountRelated.Gamer;
@@ -38,6 +39,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+import static Controller.MyGson.*;
+
 public class EventsTabController implements Initializable {
 	private static boolean gamerOrAdmin;
 	public CheckBox showUpcoming, showInSession, showParticipatingIn;
@@ -55,9 +58,7 @@ public class EventsTabController implements Initializable {
 
 	public void filter (ActionEvent actionEvent) throws IOException {
 		LinkedList<Event> eventsToShow;
-		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
-		dataOutputStream.flush();
-		Gamer gamer = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class); // fixme add a check for casting if needed
+		Gamer gamer = (Gamer) Client.getClient().getCurrentAccLoggedIn(); // fixme add a check for casting if needed
 
 		String showWhich = (showInSession.isSelected() ? "y" : "n") + (showUpcoming.isSelected() ? "y" : "n") + (showParticipatingIn.isSelected() ? "y" : "n");
 
@@ -166,20 +167,8 @@ public class EventsTabController implements Initializable {
 									setRowSpan(this, 2);
 								}},
 								new Button() {{
-									try {
-										dataOutputStream.writeUTF("getCurrentAccLoggedIn");
-										dataOutputStream.flush();
-									} catch (IOException e) {
-										e.printStackTrace();
-									}
-									Account currentLoggedIn = null;
-									// TODO: 2/3/2021
-									try {
-										currentLoggedIn = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF(), Account.class);
-									} catch (IOException exception) {
-										exception.printStackTrace();
-									}
-									;
+									Account currentLoggedIn = Client.getClient().getCurrentAccLoggedIn();
+
 									// is already participating in event
 									if (event.participantExists(currentLoggedIn.getUsername())) {
 										setText("Drop-out");

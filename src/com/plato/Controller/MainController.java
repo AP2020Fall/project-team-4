@@ -4,14 +4,10 @@ import Controller.AccountRelated.AccountController;
 import Controller.Menus.LoginMenuController;
 import Controller.Menus.MainMenuController;
 import Controller.Menus.RegisterMenuController;
-import Controller.TypeAdapters.Account.AccountAdapter;
-import Model.AccountRelated.*;
-import Model.GameRelated.BattleSea.BattleSea;
-import Model.GameRelated.Game;
-import Model.GameRelated.Reversi.Reversi;
-import com.google.gson.Gson;
+import Model.AccountRelated.Admin;
+import Model.AccountRelated.Event;
+import Model.AccountRelated.Gamer;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,10 +18,9 @@ import javafx.scene.media.AudioClip;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.hildan.fxgson.FxGson;
 
-import java.io.*;
-import java.lang.reflect.Type;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
@@ -33,15 +28,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
 public class MainController extends Application {
 	public static Socket clientSocket;
 	private static MainController mainController;
 	private final GsonBuilder gsonBuilder = new GsonBuilder();
 	public Stage primaryStage;
-	private Gson gson;
 
 	public static void main (String[] args) {
 		launch(args);
@@ -296,314 +288,12 @@ public class MainController extends Application {
 
 	public void saveEverything () {
 		try {
-			initGsonAndItsBuilder();
-			if (Client.getClient() != null)
-				serializeEverything();
+//			if (Client.getClient() != null)
+//				serializeEverything();
 			Client.getClient().clientDisconnected();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void deserializeEverything () throws IOException {
-		initGsonAndItsBuilder();
-		Admin.setAdmin(getAdmin());
-		Gamer.setGamers(getGamers());
-		AccountController.getInstance().setCurrentAccLoggedIn(getSavedLoginInfo());
-		AdminGameReco.setRecommendations(getAdminGameRecos());
-		Event.setEvents(getEvents());
-		FriendRequest.setAllfriendRequests(getFrndReqs());
-		Message.setAllMessages(getMsgs());
-		BattleSea.setAllGames(getBattleseaGames());
-		Reversi.setAllGames(getReversiGames());
-		IDGenerator.setAllIDsGenerated(getIDGenerator());
-		try {
-			String battleSeaDetails = Game.getAllGames().stream().filter(game -> game instanceof BattleSea).findFirst().get().getDetails();
-			BattleSea.setDetailsForBattlesea(battleSeaDetails);
-
-			String reversiDetails = Game.getAllGames().stream().filter(game -> game instanceof Reversi).findFirst().get().getDetails();
-			Reversi.setDetailsForReversi(reversiDetails);
-		} catch (NoSuchElementException | NullPointerException e) {
-			//e.printStackTrace();
-		}
-	}
-
-	public LinkedList<String> getIDGenerator () throws IOException {
-		StringBuilder json = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/IDGenerator.json"))) {
-
-			while (reader.ready())
-				json.append(reader.readLine());
-
-			if (json.length() > 2)
-				return gson.fromJson(json.toString(), new TypeToken<LinkedList<String>>() {
-				}.getType());
-			return null;
-		}
-	}
-
-	public LinkedList<Reversi> getReversiGames () throws IOException {
-		StringBuilder json = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/GameRelated/Reversi.json"))) {
-
-			while (reader.ready())
-				json.append(reader.readLine());
-
-
-			if (json.length() > 2)
-				return gson.fromJson(json.toString(), new TypeToken<LinkedList<Reversi>>() {
-				}.getType());
-		}
-		return null;
-	}
-
-	public LinkedList<BattleSea> getBattleseaGames () throws IOException {
-		StringBuilder json = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/GameRelated/BattleSea.json"))) {
-
-			while (reader.ready())
-				json.append(reader.readLine());
-
-			if (json.length() > 2)
-				return gson.fromJson(json.toString(), new TypeToken<LinkedList<BattleSea>>() {
-				}.getType());
-		}
-		return null;
-	}
-
-	public LinkedList<Message> getMsgs () throws IOException {
-		StringBuilder json = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/Message.json"))) {
-
-			while (reader.ready())
-				json.append(reader.readLine());
-
-			if (json.length() > 2)
-				return gson.fromJson(json.toString(), new TypeToken<LinkedList<Message>>() {
-				}.getType());
-		}
-		return null;
-	}
-
-	public LinkedList<FriendRequest> getFrndReqs () throws IOException {
-		StringBuilder json = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/FriendRequest.json"))) {
-
-			while (reader.ready())
-				json.append(reader.readLine());
-
-			if (json.length() > 2)
-				return gson.fromJson(json.toString(), new TypeToken<LinkedList<FriendRequest>>() {
-				}.getType());
-		}
-		return null;
-	}
-
-	public LinkedList<Event> getEvents () throws IOException {
-		StringBuilder json = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/Event.json"))) {
-
-			while (reader.ready())
-				json.append(reader.readLine());
-
-			if (json.length() > 2)
-				return gson.fromJson(json.toString(), new TypeToken<LinkedList<Event>>() {
-				}.getType());
-		}
-		return null;
-	}
-
-	public LinkedList<AdminGameReco> getAdminGameRecos () throws IOException {
-		StringBuilder json = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json"))) {
-
-			while (reader.ready())
-				json.append(reader.readLine());
-
-
-			if (json.length() > 2)
-				return gson.fromJson(json.toString(), new TypeToken<LinkedList<AdminGameReco>>() {
-				}.getType());
-		}
-		return null;
-	}
-
-	public Account getSavedLoginInfo () throws IOException {
-		StringBuilder json = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/SavedLoginInfo.json"))) {
-			boolean forAdmin = false;
-			if (reader.ready()) forAdmin = reader.readLine().equalsIgnoreCase("a");
-
-			while (reader.ready())
-				json.append(reader.readLine());
-
-			if (json.length() > 2) {
-				AccountController.getInstance().setSaveLoginInfo(true);
-				return gson.fromJson(json.toString(), forAdmin ? Admin.class : Gamer.class);
-			}
-		}
-		return null;
-	}
-
-	public LinkedList<Gamer> getGamers () throws IOException {
-		StringBuilder json = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/Gamer.json"))) {
-
-			while (reader.ready())
-				json.append(reader.readLine());
-
-			if (json.length() > 2)
-				return gson.fromJson(json.toString(), new TypeToken<LinkedList<Gamer>>() {
-				}.getType());
-		}
-		return null;
-	}
-
-	public Admin getAdmin () throws IOException {
-		StringBuilder json = new StringBuilder();
-
-		try (BufferedReader reader = new BufferedReader(new FileReader("src/com/Resources/JSONs/AccountRelated/Admin.json"))) {
-			while (reader.ready())
-				json.append(reader.readLine());
-
-			if (json.length() > 2)
-				return gson.fromJson(json.toString(), (Type) Admin.class);
-		}
-		return null;
-	}
-
-	private void initGsonAndItsBuilder () {
-		gsonBuilder.setDateFormat("yyyy-MMM-dd HH:mm:ss");
-//		gsonBuilder.setPrettyPrinting();
-		gsonBuilder.serializeNulls();
-//		gsonBuilder.registerTypeAdapter(Account.class, new AccountAdapter());
-		gson = FxGson.addFxSupport(gsonBuilder)
-				.create();
-	}
-
-	public void serializeEverything () throws IOException {
-		serializeSavedLoginInfo();
-		serializeAdmin();
-		serializeGamers();
-		serializeAdminGameRecos();
-		serializeEvents();
-		serializeFrndReqs();
-		serializeMsgs();
-		serializeBattleSeaGames();
-		serializeReversiGames();
-		serializeIDGenerator();
-	}
-
-	public void serializeIDGenerator () throws IOException {
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/IDGenerator.json")) {
-			printWriter.print("");
-		}
-		if (IDGenerator.getAllIDsGenerated().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/IDGenerator.json"))) {
-
-				writer.write(gson.toJson(IDGenerator.getAllIDsGenerated()));
-			}
-	}
-
-	public void serializeReversiGames () throws IOException {
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/Reversi.json")) {
-			printWriter.print("");
-		}
-		if (Reversi.getAllReversiGames().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/GameRelated/Reversi.json"))) {
-
-				writer.write(gson.toJson(Reversi.getAllReversiGames()));
-			}
-	}
-
-	public void serializeBattleSeaGames () throws IOException {
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/GameRelated/BattleSea.json")) {
-			printWriter.print("");
-		}
-		if (BattleSea.getAllBattleSeaGames().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/GameRelated/BattleSea.json"))) {
-
-				writer.write(gson.toJson(BattleSea.getAllBattleSeaGames()));
-			}
-	}
-
-	public void serializeMsgs () throws IOException {
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Message.json")) {
-			printWriter.print("");
-		}
-		if (Message.getAllMessages().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Message.json"))) {
-
-				writer.write(gson.toJson(Message.getAllMessages()));
-			}
-	}
-
-	public void serializeFrndReqs () throws IOException {
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/FriendRequest.json")) {
-			printWriter.print("");
-		}
-		if (FriendRequest.getAllfriendRequests().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/FriendRequest.json"))) {
-
-				writer.write(gson.toJson(FriendRequest.getAllfriendRequests()));
-			}
-	}
-
-	public void serializeEvents () throws IOException {
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Event.json")) {
-			printWriter.print("");
-		}
-		if (Event.getAllEvents().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Event.json"))) {
-
-				writer.write(gson.toJson(Event.getAllEvents()));
-			}
-	}
-
-	public void serializeAdminGameRecos () throws IOException {
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json")) {
-			printWriter.print("");
-		}
-		if (AdminGameReco.getRecommendations().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/AdminGameReco.json"))) {
-
-				writer.write(gson.toJson(AdminGameReco.getRecommendations()));
-			}
-	}
-
-	public void serializeGamers () throws IOException {
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Gamer.json")) {
-			printWriter.print("");
-		}
-		if (Gamer.getGamers().size() > 0)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Gamer.json"))) {
-
-				writer.write(gson.toJson(Gamer.getGamers()));
-			}
-	}
-
-	public void serializeAdmin () throws IOException {
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/AccountRelated/Admin.json")) {
-			printWriter.print("");
-		}
-		if (Admin.adminHasBeenCreated())
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/AccountRelated/Admin.json"))) {
-
-				writer.write(gson.toJson(Admin.getAdmin()));
-			}
-	}
-
-	public void serializeSavedLoginInfo () throws IOException {
-		try (PrintWriter printWriter = new PrintWriter("src/com/Resources/JSONs/SavedLoginInfo.json")) {
-			printWriter.print("");
-		}
-		if (AccountController.getInstance().getCurrentAccLoggedIn() != null) // if is logged-in
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/Resources/JSONs/SavedLoginInfo.json"))) {
-				if (AccountController.getInstance().saveLoginInfo()) { // skip if said no to remember me
-					writer.write((AccountController.getInstance().getCurrentAccLoggedIn() instanceof Admin ? "a" : "g") + "\n");
-					writer.write(gson.toJson(AccountController.getInstance().getCurrentAccLoggedIn()));
-				}
-			}
 	}
 
 	/**
@@ -632,11 +322,6 @@ public class MainController extends Application {
 
 	public Stage getPrimaryStage () {
 		return primaryStage;
-	}
-
-	public Gson getGson () {
-		initGsonAndItsBuilder();
-		return gson;
 	}
 
 	public static class InvalidInputException extends Exception {

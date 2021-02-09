@@ -1,6 +1,7 @@
 package Controller.Menus;
 
 import Controller.MainController;
+import Controller.MyGson;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Gamer;
 import Model.GameRelated.Game;
@@ -31,6 +32,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static Controller.MyGson.*;
 
 public class GamingHistoryTabController implements Initializable {
 
@@ -67,10 +70,7 @@ public class GamingHistoryTabController implements Initializable {
     public void updateListOfGames(ActionEvent actionEvent) throws IOException {
         gamingHistoryList.getItems().clear();
 
-        dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
-        dataOutputStream.flush();
-        Gamer currentAccLoggedIn = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Gamer.class);
-        // TODO: 2/3/2021
+        Gamer currentAccLoggedIn = (Gamer) Client.getClient().getCurrentAccLoggedIn();
         for(Game game : GameLog.getGameHistory(currentAccLoggedIn)){
             Circle circle = new Circle(40);
 

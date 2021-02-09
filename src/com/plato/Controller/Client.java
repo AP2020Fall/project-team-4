@@ -1,9 +1,13 @@
 package Controller;
 
+import Model.AccountRelated.Account;
+import Model.AccountRelated.Admin;
+import Model.AccountRelated.Gamer;
+
 import java.io.*;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.util.Arrays;
+
+import static Controller.MyGson.getGson;
 
 
 public class Client {
@@ -13,6 +17,7 @@ public class Client {
 	private Socket socket;
 	private DataInputStream dataInputStream;
 	private DataOutputStream dataOutputStream;
+	private String token;
 
 	public Client () {
 		Client.client = this;
@@ -26,6 +31,29 @@ public class Client {
 
 	public static Client getClient () {
 		return client;
+	}
+
+	public String getToken () {
+		return token;
+	}
+
+	public void setToken (String token) {
+		this.token = token;
+	}
+
+	public Account getCurrentAccLoggedIn () {
+		if (token == null)
+			return null;
+		try {
+			dataOutputStream.writeUTF("getCurrentAccLoggedIn_" + token);
+			dataOutputStream.flush();
+			boolean gamerOrAdmin = dataInputStream.readBoolean();
+
+			return getGson().fromJson(dataInputStream.readUTF(), gamerOrAdmin ? Gamer.class : Admin.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	//    public static void main (String[] args) throws IOException {

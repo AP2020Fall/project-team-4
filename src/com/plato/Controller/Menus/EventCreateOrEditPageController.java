@@ -2,7 +2,9 @@ package Controller.Menus;
 
 import Controller.AccountRelated.AccountController;
 import Controller.AccountRelated.EventController;
+import Controller.Client;
 import Controller.MainController;
+import Controller.MyGson;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.Admin;
 import Model.AccountRelated.Event;
@@ -34,6 +36,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+
+import static Controller.MyGson.*;
 
 public class EventCreateOrEditPageController implements Initializable {
 	private static Stage stage;
@@ -294,9 +298,7 @@ public class EventCreateOrEditPageController implements Initializable {
 	}
 
 	private void updateJoinOrDropOutBtn () throws IOException {
-		dataOutputStream.writeUTF("getCurrentAccLoggedIn_");
-		dataOutputStream.flush();
-		Account account = MainController.getInstance().getGson().fromJson(dataInputStream.readUTF() , Account.class);
+		Account account = Client.getClient().getCurrentAccLoggedIn();
 		if (event.participantExists(account.getUsername())) {
 			joinOrDropoutEventBtn.setText("Drop-out");
 			joinOrDropoutEventBtn.setOnAction(e -> {

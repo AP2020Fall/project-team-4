@@ -2,7 +2,6 @@ package Model.AccountRelated;
 
 import Controller.Client;
 import Controller.IDGenerator;
-import Controller.MainController;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.DataInputStream;
@@ -10,8 +9,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import static Controller.MyGson.getGson;
+
 public class Account {
-	protected static LinkedList<Account> accounts = new LinkedList<>();
+	//	protected static LinkedList<Account> accounts = new LinkedList<>();
 	private String firstName, lastName, username, password, userID, email, phoneNum;
 	private String pfpUrl;
 
@@ -26,17 +27,15 @@ public class Account {
 		this.pfpUrl = pfpUrl;
 	}
 
-	// for serialization
-	public Account () {}
-
 	// با توجه به ورودی اکانت-تایپ میاد یه اکانت گیمر یا ادمین با این ویژگی ها رو میسازه
 	@SuppressWarnings("rawtypes")
-	public static void addAccount (Class accType, String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
+	public static Account addAccount (Class accType, String pfp, String firstName, String lastName, String username, String password, String email, String phoneNum, double money) {
+		Account account;
 		if (accType.getSimpleName().equalsIgnoreCase("admin"))
-			getAccounts().addLast(new Admin(pfp, firstName, lastName, username, password, email, phoneNum));
+			account = new Admin(pfp, firstName, lastName, username, password, email, phoneNum);
 		else
-			getAccounts().addLast(new Gamer(pfp, firstName, lastName, username, password, email, phoneNum, money));
-		System.out.println("getAccounts().size() = " + getAccounts().size());
+			account = new Gamer(pfp, firstName, lastName, username, password, email, phoneNum, money);
+		return account;
 	}
 
 	// اکانت با این نام کاربری رو حذف میکنه
@@ -67,28 +66,26 @@ public class Account {
 				.findAny().get();
 	}
 
-	public static synchronized LinkedList<Account> getAccounts () {
-		if (Client.getClient() != null) {
-			DataOutputStream dataOutputStream = Client.getClient().getDataOutputStream();
-			DataInputStream dataInputStream = Client.getClient().getDataInputStream();
+	public static LinkedList<Account> getAccounts () {
+		LinkedList<Account> accounts = new LinkedList<>();
+		DataOutputStream dataOutputStream = Client.getClient().getDataOutputStream();
+		DataInputStream dataInputStream = Client.getClient().getDataInputStream();
 
-			try {
-				dataOutputStream.writeUTF("getAllAccounts");
-				dataOutputStream.flush();
+		try {
+			dataOutputStream.writeUTF("getAllGamers");
+			dataOutputStream.flush();
 
-				String accountsJson = dataInputStream.readUTF();
+			accounts.addAll(getGson().fromJson(dataInputStream.readUTF(), new TypeToken<LinkedList<Gamer>>() {}.getType()));
 
-				return MainController.getInstance().getGson().fromJson(accountsJson, new TypeToken<LinkedList<Account>>() {}.getType());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			dataOutputStream.writeUTF("getAdmin");
+			dataOutputStream.flush();
+			Admin admin = getGson().fromJson(dataInputStream.readUTF(), Admin.class);
+			if (admin != null)
+				accounts.add(admin);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return accounts;
-	}
-
-	// برای deserialize کردن
-	public static void setAccounts (LinkedList<Account> accounts) {
-		Account.accounts = getAccounts();
 	}
 
 	public String getUserID () {
