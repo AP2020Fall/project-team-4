@@ -2,6 +2,7 @@ package Model.AccountRelated;
 
 import Controller.Client;
 import Controller.IDGenerator;
+import Controller.MainController;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.DataInputStream;
@@ -26,6 +27,9 @@ public class Account {
 		this.phoneNum = phoneNum;
 		this.pfpUrl = pfpUrl;
 	}
+
+	// for serialization
+	public Account () {}
 
 	// با توجه به ورودی اکانت-تایپ میاد یه اکانت گیمر یا ادمین با این ویژگی ها رو میسازه
 	@SuppressWarnings("rawtypes")
