@@ -1,9 +1,16 @@
 package Controller.AccountRelated;
 
+import Controller.Client;
+import Controller.MyGson;
+import Model.AccountRelated.Account;
 import Model.AccountRelated.FriendRequest;
 import Model.AccountRelated.Gamer;
 import View.AccountRelated.FriendRequestView;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class FriendRequestController {
@@ -32,17 +39,31 @@ public class FriendRequestController {
 	}
 
 	public void acceptFriendReq (String usernameFrom) {
-		FriendRequest.concludeFrndReq(
-				usernameFrom,
-				AccountController.getInstance().getCurrentAccLoggedIn().getUsername(),
-				true);
+		DataOutputStream dataOutputStream = Client.getClient().getDataOutputStream();
+		DataInputStream dataInputStream = Client.getClient().getDataInputStream();
+		try {
+			Account loggedIn = MyGson.getGson().fromJson(dataInputStream.readUTF() , new TypeToken<Account>() {}.getType());
+			FriendRequest.concludeFrndReq(
+					usernameFrom,loggedIn.getUsername() ,
+					true);
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+
 	}
 
 	public void declineFriendReq (String usernameFrom) {
-		FriendRequest.concludeFrndReq(
-				usernameFrom,
-				AccountController.getInstance().getCurrentAccLoggedIn().getUsername(),
-				false);
+		DataOutputStream dataOutputStream = Client.getClient().getDataOutputStream();
+		DataInputStream dataInputStream = Client.getClient().getDataInputStream();
+		try {
+			Account loggedIn = MyGson.getGson().fromJson(dataInputStream.readUTF() , new TypeToken<Account>() {}.getType());
+			FriendRequest.concludeFrndReq(
+					usernameFrom,loggedIn.getUsername() ,
+					false);
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+
 	}
 
 	private static class FriendRequestDoesntExistException extends Exception {

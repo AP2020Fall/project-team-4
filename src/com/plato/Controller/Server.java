@@ -290,12 +290,12 @@ class ClientHandler extends Thread {
 					case "sendFrndRequest":
 						FriendRequestController.getInstance().sendFrndRequest(receivedInfo[1]);
 						break;
-					case "declineFriendReq":
-						FriendRequestController.getInstance().declineFriendReq(receivedInfo[1]);
-						break;
-					case "acceptFriendReq":
-						FriendRequestController.getInstance().acceptFriendReq(receivedInfo[1]);
-						break;
+//					case "declineFriendReq":
+//						FriendRequestController.getInstance().declineFriendReq(receivedInfo[1]);
+//						break;
+//					case "acceptFriendReq":
+//						FriendRequestController.getInstance().acceptFriendReq(receivedInfo[1]);
+//						break;
 					case "getFrnds":
 						Gamer gamer = (Gamer) AccountController.getInstance().getCurrentAccLoggedIn();
 						dataOutputStream.writeUTF(getGson().toJson(gamer.getFrnds()));

@@ -2,6 +2,7 @@ package Controller.Menus;
 
 
 import Controller.AccountRelated.AccountController;
+import Controller.AccountRelated.FriendRequestController;
 import Model.AccountRelated.Account;
 import Model.AccountRelated.FriendRequest;
 import Model.AccountRelated.Gamer;
@@ -124,16 +125,13 @@ public class FriendRequestManagementPageController implements Initializable {
 	}
 
 	private void declineFriendReq (String usernameFrom) throws IOException {
-		dataOutputStream.writeUTF("declineFriendReq_" + usernameFrom);
-		dataOutputStream.flush();
-		//FriendRequestController.getClient().declineFriendReq(usernameFrom);
+
+		FriendRequestController.getInstance().declineFriendReq(usernameFrom);
 		frndReqsGottenList.getItems().removeIf(item -> ((Label) item.getChildren().get(1)).getText().equals(usernameFrom));
 	}
 
 	private void acceptFriendReq (String usernameFrom) throws IOException {
-		dataOutputStream.writeUTF("acceptFriendReq_" + usernameFrom);
-		dataOutputStream.flush();
-		//FriendRequestController.getClient().acceptFriendReq(usernameFrom);
+		FriendRequestController.getInstance().acceptFriendReq(usernameFrom);
 		frndReqsGottenList.getItems().removeIf(item -> ((Label) item.getChildren().get(1)).getText().equals(usernameFrom));
 	}
 
