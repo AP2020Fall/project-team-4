@@ -12,7 +12,7 @@ import static Controller.MyGson.getGson;
 
 public class Client {
 	public static String host = "127.0.0.1";
-	public static int port = 4444;
+	public static int port = 6666;
 	private static Client client;
 	private Socket socket;
 	private DataInputStream dataInputStream;

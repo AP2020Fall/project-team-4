@@ -60,7 +60,6 @@ public class AdminGameReco {
 	}
 
 	public static LinkedList<AdminGameReco> getRecommendations () {
-
 		return recommendations;
 	}
 

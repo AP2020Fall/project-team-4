@@ -1,10 +1,18 @@
 package Model.AccountRelated;
 
+import Controller.Client;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
+import static Controller.MyGson.getGson;
+
 public class FriendRequest {
-	private static LinkedList<FriendRequest> allfriendRequests = new LinkedList<>();
+	//private static LinkedList<FriendRequest> allfriendRequests = new LinkedList<>();
 	private final String fromUsername, toUsername;
 
 	private FriendRequest (String fromUsername, String toUsername) {
@@ -13,22 +21,22 @@ public class FriendRequest {
 	}
 
 	public static void addFriendReq (String fromUsername, String toUsername) {
-		allfriendRequests.add(new FriendRequest(fromUsername, toUsername));
+		getAllfriendRequests().add(new FriendRequest(fromUsername, toUsername));
 	}
 
 	public static void concludeFrndReq (String fromUsername, String toUsername, boolean accepted) {
 		FriendRequest.getFriendReq(fromUsername, toUsername).conclude(accepted);
-		allfriendRequests.removeIf(friendRequest ->
+		getAllfriendRequests().removeIf(friendRequest ->
 				friendRequest.fromUsername.equals(fromUsername) &&
 						friendRequest.toUsername.equals(toUsername));
 		if (accepted)
-			allfriendRequests.removeIf(friendRequest ->
+			getAllfriendRequests().removeIf(friendRequest ->
 					friendRequest.fromUsername.equals(toUsername) &&
 							friendRequest.toUsername.equals(fromUsername));
 	}
 
 	public static FriendRequest getFriendReq (String fromUsername, String toUsername) {
-		return allfriendRequests.stream()
+		return getAllfriendRequests().stream()
 				.filter(friendRequest ->
 						friendRequest.toUsername.equals(toUsername) &&
 								friendRequest.fromUsername.equals(fromUsername)
@@ -37,32 +45,44 @@ public class FriendRequest {
 	}
 
 	public static LinkedList<FriendRequest> getFriendReq (String toUsername) {
-		return allfriendRequests.stream()
+		return getAllfriendRequests().stream()
 				.filter(friendRequest -> friendRequest.toUsername.equals(toUsername))
 				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	public static boolean frndReqExists (String usernameFrom) {
-		return allfriendRequests.stream()
+		return getAllfriendRequests().stream()
 				.anyMatch(friendRequest -> friendRequest.fromUsername.equals(usernameFrom));
 	}
 
 	public static boolean frndReqExists (String fromUsername, String toUsername) {
-		return allfriendRequests.stream()
+		return getAllfriendRequests().stream()
 				.anyMatch(friendRequest ->
 						friendRequest.fromUsername.equals(fromUsername) &&
 								friendRequest.toUsername.equals(toUsername));
 	}
 
 	public static LinkedList<FriendRequest> getAllfriendRequests () {
-		return allfriendRequests;
+		LinkedList<FriendRequest> allFriendRequests = new LinkedList<>();
+		DataOutputStream dataOutputStream = Client.getClient().getDataOutputStream();
+		DataInputStream dataInputStream = Client.getClient().getDataInputStream();
+
+		try {
+			dataOutputStream.writeUTF("getAllFriendRequests_");
+			dataOutputStream.flush();
+			allFriendRequests.addAll(getGson().fromJson(dataInputStream.readUTF(), new TypeToken<LinkedList<FriendRequest>>() {}.getType()));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return allFriendRequests;
 	}
 
-	public static void setAllfriendRequests (LinkedList<FriendRequest> allfriendRequests) {
-		if (allfriendRequests == null)
-			allfriendRequests = new LinkedList<>();
-		FriendRequest.allfriendRequests = allfriendRequests;
-	}
+//	public static void setAllfriendRequests (LinkedList<FriendRequest> allfriendRequests) {
+//		if (allfriendRequests == null)
+//			allfriendRequests = new LinkedList<>();
+//		FriendRequest.allfriendRequests = allfriendRequests;
+//	}
 
 	private void conclude (boolean accepted) {
 		if (accepted) {
